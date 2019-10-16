@@ -1,0 +1,47 @@
+#!/bin/bash
+# Requires: xprop
+
+##################################
+# Adjust values to suit
+PANEL=top
+PANEL_ALPHA_REGULAR=0
+PANEL_ALPHA_MAXIMUM=1
+##################################
+##################################
+# don't change anything below here
+
+gsettings set org.mate.panel.toplevel.background:/org/mate/panel/toplevels/top/background/ type "color"
+
+CURR=0
+while true
+do
+	MAX_FND=0
+	for w in $(xprop -notype -root _NET_CLIENT_LIST 2>/dev/null | cut -d'#' -f2 | tr ',' '\n' | awk '{print $1}')
+   	do 
+                if [[ "$(xprop -id $w -notype _NET_WM_DESKTOP 2>/dev/null | cut -d' ' -f3)" -eq "$(xprop -root -notype _NET_CURRENT_DESKTOP 2>/dev/null | cut -d' ' -f3)" ]]
+                then
+
+		   if xprop -id $w _NET_WM_STATE | grep -E "MAXIMIZED_HORZ.*MAXIMIZED_VERT" > /dev/null 2>&1
+		   then
+			if xprop -id $w WM_STATE | grep -E "window state: Normal" > /dev/null 2>&1
+			then
+				MAX_FND=1
+				break
+			fi
+		   fi
+                fi
+	done
+
+	if [[ $MAX_FND -eq 1 && $CURR -eq 0 ]]
+	then
+		gsettings set org.mate.panel.toplevel.background:/org/mate/panel/toplevels/${PANEL}/background/ color "rgba(60,59,55,$PANEL_ALPHA_MAXIMUM)"
+		CURR=1			
+	elif [[ $MAX_FND -eq 0 && $CURR -eq 1 ]]
+	then
+		gsettings set org.mate.panel.toplevel.background:/org/mate/panel/toplevels/${PANEL}/background/ color "rgba(60,59,55,$PANEL_ALPHA_REGULAR)"
+		CURR=0
+	fi
+
+	sleep 1
+done
+exit 0

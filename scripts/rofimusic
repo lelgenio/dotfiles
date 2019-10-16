@@ -1,0 +1,9 @@
+#!/bin/sh
+
+ music=$(mpc listall --format '%artist% : %title% ' | rofi -i -dmenu)
+artist=$(echo "$music" | cut -d: -f1)
+ title=$(echo "$music" | cut -d: -f2)
+
+echo title "$title" artist "$artist"
+mpc searchplay title "$title"
+#artist "$artist"

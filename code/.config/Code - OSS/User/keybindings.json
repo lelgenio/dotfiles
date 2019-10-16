@@ -1,0 +1,16 @@
+[
+    {
+        "key": "ctrl+shift+c",
+        "command": "workbench.action.terminal.new"
+    },
+    {
+        "key":"ctrl+,",
+        "command":"workbench.action.openSettingsJson"
+    },{
+        "key":"ctrl+shift+,",
+        "command":"workbench.action.openGlobalKeybindingsFile"
+    },{
+        "key": "ctrl+b",
+        "command":"workbench.action.toggleSidebarVisibility"
+    }
+]

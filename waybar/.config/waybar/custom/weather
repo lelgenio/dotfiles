@@ -1,0 +1,54 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+    1)i3-msg 'termite -e curl wttr.in';;
+esac
+
+CITY=$(curl -s ipinfo.io/city)
+APPID="fd68c0fe7951f5ab7e24a240eb0942b8"
+ 
+OUTPUT=$(http get http://api.openweathermap.org/data/2.5/weather\?APPID\=${APPID}\&q\="${CITY}"\&units\=metric)
+
+# echo $APPID
+# echo $OUTPUT
+
+TEMP=$(echo $OUTPUT | jq -r ".main.temp")
+WEATHER=$(echo $OUTPUT | jq -r ".weather[0].main")
+case $WEATHER in
+ "Clear"*)
+     WEATHER=""
+     ;;
+ "Clouds"*)
+     WEATHER=""
+     ;;
+ "Rain"*)
+     WEATHER=""
+     ;;
+ "Snow"*)
+     WEATHER=""
+     ;;
+ "Thunderstorm"*)
+     WEATHER=""
+     ;;
+esac
+
+# case $WEATHER in
+#  "Clear"*)
+#      WEATHER="Limpo :)"
+#      ;;
+#  "Clouds"*)
+#      WEATHER="Nublado :/"
+#      ;;
+#  "Rain"*)
+#      WEATHER="Chuva °~°"
+#      ;;
+#  "Snow"*)
+#      WEATHER="Neve ºUº"
+#      ;;
+#  "Thunderstorm"*)
+#      WEATHER="Tempestade *-*"
+#      ;;
+# esac
+
+echo "$TEMP°C $WEATHER"
+#echo "$TEMP°C"
