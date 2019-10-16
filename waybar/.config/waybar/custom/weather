@@ -1,9 +1,5 @@
 #!/bin/sh
 
-case $BLOCK_BUTTON in
-    1)i3-msg 'termite -e curl wttr.in';;
-esac
-
 CITY=$(curl -s ipinfo.io/city)
 APPID="fd68c0fe7951f5ab7e24a240eb0942b8"
  
@@ -11,6 +7,11 @@ OUTPUT=$(http get http://api.openweathermap.org/data/2.5/weather\?APPID\=${APPID
 
 # echo $APPID
 # echo $OUTPUT
+
+if [ $? ]
+then
+    exit 1
+fi
 
 TEMP=$(echo $OUTPUT | jq -r ".main.temp")
 WEATHER=$(echo $OUTPUT | jq -r ".weather[0].main")
