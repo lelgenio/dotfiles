@@ -1,4 +1,5 @@
 export QT_QPA_PLATFORMTHEME=qt5ct
+export QPA_PLATFORM=wayland
 export PATH=$PATH:~/.local/bin
 
 export EDITOR=nvim
