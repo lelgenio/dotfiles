@@ -1,9 +1,4 @@
 export QT_QPA_PLATFORMTHEME=qt5ct
-export QPA_PLATFORM=wayland
-export MOZ_ENABLE_WAYLAND=1
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export XCURSOR_THEME=capitaine-cursors
-export XDG_CURRENT_DESKTOP=Unity
 export PATH=$PATH:~/.local/bin
 
 export EDITOR=nvim
