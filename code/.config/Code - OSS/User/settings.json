@@ -19,7 +19,7 @@
     // Rendering
     "terminal.integrated.rendererType": "dom",
     "editor.renderWhitespace": "boundary",
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 0.2,
     "vim.foldfix": true,
 
     // Fonts
