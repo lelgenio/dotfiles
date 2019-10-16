@@ -227,8 +227,8 @@
     exec swayidle -w \
        before-sleep 'swaylock -f' \
        lock swaylock \
-       timeout 300 'swaylock -f' \
-       timeout 600 'swaymsg "output * dpms off"' \
+       timeout 900 'swaylock -f' \
+       timeout 1800 'swaymsg "output * dpms off"' \
             resume 'swaymsg "output * dpms on;reload"' \
 
 include /etc/sway/config.d/*
