@@ -1,9 +1,24 @@
 (require 'package)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+
+(setq package-list '(evil lsp-mode lsp-ui yasnippet))
+
+; list the repositories containing them
+(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+			 ("org" . "http://orgmode.org/elpa/")
+                         ("melpa" . "http://melpa.org/packages/")
+                         ("melpa-stable" . "http://stable.melpa.org/packages/")))
 (package-initialize)
 
+; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
+
+; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
 (require 'evil)
 (evil-mode 1)
 
@@ -34,7 +49,7 @@
     (global-set-key (kbd "C-,") (lambda() (interactive)
 			      (find-file "~/.emacs.d/init.el")))
 
-(set-face-attribute 'default nil :height 200)
+(set-face-attribute 'default nil :height 60)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -47,10 +62,14 @@
  '(fringe-mode 0 nil (fringe))
  '(global-whitespace-mode t)
  '(global-whitespace-newline-mode t)
+ '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(menu-bar-mode nil)
  '(package-selected-packages (quote (yasnippet lsp-ui lsp-mode evil)))
  '(scroll-bar-mode nil)
+ '(standard-indent 4)
+ '(tab-stop-list (quote (4 8 12)))
+ '(tab-width 4)
  '(tool-bar-mode nil)
  '(tooltip-mode nil))
 (custom-set-faces
@@ -58,12 +77,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#202020" :foreground "#f6f3e8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 200 :width normal :foundry "default" :family "default"))))
+ '(default ((t (:inherit nil :stipple nil :background "#202020" :foreground "#f6f3e8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
  '(line-number ((t (:inherit (shadow default) :foreground "#cc5757"))))
  '(line-number-current-line ((t (:inherit line-number :foreground "white"))))
  '(whitespace-big-indent ((t (:foreground "dark gray"))))
  '(whitespace-space ((t (:foreground "darkgray"))))
  '(whitespace-tab ((t (:foreground "dim gray")))))
-
- (set-frame-parameter (selected-frame) 'alpha 10 )
- (add-to-list 'default-frame-alist '(alpha . 10))
