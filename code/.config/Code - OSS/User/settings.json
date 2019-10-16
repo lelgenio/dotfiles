@@ -1,28 +1,36 @@
 {
+    // Remove clutter
     "window.titleBarStyle": "native",
-    "terminal.integrated.rendererType": "dom",
-    "explorer.confirmDelete": false,
-    "window.menuBarVisibility": "hidden",
+    "window.menuBarVisibility": "toggle",
+    "workbench.activityBar.visible": false,
+    "workbench.editor.showTabs": false,
+    "editor.minimap.renderCharacters": false,
+    "workbench.editor.closeEmptyGroups": true,
+    "workbench.editor.tabCloseButton": "off",
+
+    // Don't ask
     "git.autofetch": true,
     "git.confirmSync": false,
     "explorer.confirmDragAndDrop": false,
-    "editor.renderWhitespace": "boundary",
-    "workbench.activityBar.visible": false,
-    "workbench.editor.showTabs": false,
+    "explorer.confirmDelete": false,
     "files.autoSave": "off",
-    "workbench.editor.tabCloseButton": "off",
     "window.closeWhenEmpty": true,
-    "workbench.editor.closeEmptyGroups": true,
-    "editor.minimap.renderCharacters": false,
+
+    // Rendering
+    "terminal.integrated.rendererType": "dom",
+    "editor.renderWhitespace": "boundary",
     "window.zoomLevel": 0.2,
     "vim.foldfix": true,
-    "materialTheme.accent": "Red",
-    "material-icon-theme.folders.color": "#cc5757",
-    "editor.fontFamily": "'Roboto Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+
+    // Fonts
     "terminal.integrated.fontFamily": "Roboto Mono",
+    "editor.fontFamily": "'Roboto Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 15,
+    // Gay colors
     "workbench.colorTheme": "Material Theme Darker High Contrast",
+    "materialTheme.accent": "Red",
     "workbench.iconTheme": "material-icon-theme",
+    "material-icon-theme.folders.color": "#cc5757",
     "workbench.colorCustomizations": {
         "statusBar.foreground": "#ffffff",
         "statusBar.background": "#cc5757",
