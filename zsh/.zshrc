@@ -14,7 +14,7 @@ export PAGER=less
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]
 then
     clear
-    exec sway
+    exec sway > /dev/null
 fi
 
 man() {
@@ -73,7 +73,7 @@ SAVEHIST=1000
 abbrev-alias -g v=nvim
 abbrev-alias -g rv="sudo nvim"
 abbrev-alias  es="nvim ~/.config/sway/config"
-abbrev-alias  ez="nvim ~/.config/zsh/.zshrc"
+abbrev-alias  ez="nvim ~/.zshrc"
 abbrev-alias  ev="nvim ~/.config/nvim/init.vim"
 abbrev-alias  r=ranger
 abbrev-alias  rm=trash
