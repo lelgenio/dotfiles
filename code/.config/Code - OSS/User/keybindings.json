@@ -12,5 +12,8 @@
     },{
         "key": "ctrl+b",
         "command":"workbench.action.toggleSidebarVisibility"
+    },{
+        "key": "ctrl+n",
+        "command":"notifications.clearAll"
     }
 ]
