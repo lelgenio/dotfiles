@@ -217,7 +217,7 @@ EOF
 "
 "Hide statusbar
 "
-    let s:hidden_all = 0
+    let s:hidden_all = 1
     function! ToggleHiddenAll()
         if s:hidden_all  == 0
             let s:hidden_all = 1
