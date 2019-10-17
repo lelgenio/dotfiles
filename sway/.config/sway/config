@@ -183,8 +183,7 @@
     # Volume controll
     bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
     bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-    # Mute
-    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioMute        exec pactl set-sink-mute   @DEFAULT_SINK@ toggle
 
     # Media player controls
     bindsym XF86AudioPlay  exec  mpc -q toggle                  
@@ -200,6 +199,7 @@
     set $bg_color   #202020
     set $bg_darker  #252525
     set $alert      #000000
+
     #                       border      background  text        indicator   child_border
     client.focused          $accent     $accent     $fg_color   $accent     $accent
     client.focused_inactive $bg_color   $bg_color   $fg_color   $bg_color   $bg_color
