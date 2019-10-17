@@ -22,7 +22,7 @@ window#waybar.hidden {
 
 
 window#waybar.empty {
-    background-color: rgba(0,0,0,.2);
+    background-color: transparent;
     border:none;
 }
 
