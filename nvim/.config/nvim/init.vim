@@ -30,10 +30,11 @@
 
     " Completions
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'jiangmiao/auto-pairs'
 
     " Comments
     Plug 'tpope/vim-commentary'
-
+    
     " Status bar
     "Plug 'vim-airline/vim-airline'
     "Plug 'vim-airline/vim-airline-themes'
