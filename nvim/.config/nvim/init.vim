@@ -70,6 +70,10 @@
 
     " Notes
     "Plug 'xolox/vim-notes'
+
+    " Latex
+    Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+
 call plug#end()
 
 "
@@ -201,3 +205,33 @@ if 'VIRTUAL_ENV' in os.environ:
   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
   execfile(activate_this, dict(__file__=activate_this))
 EOF
+
+
+
+"
+" Latex
+"
+
+    let g:livepreview_previewer = 'zathura'
+
+"
+"Hide statusbar
+"
+    let s:hidden_all = 0
+    function! ToggleHiddenAll()
+        if s:hidden_all  == 0
+            let s:hidden_all = 1
+            set noshowmode
+            set noruler
+            set laststatus=0
+            set noshowcmd
+        else
+            let s:hidden_all = 0
+            set showmode
+            set ruler
+            set laststatus=2
+            set showcmd
+        endif
+    endfunction
+
+    nnoremap <S-h> :call ToggleHiddenAll()<CR>
