@@ -74,7 +74,7 @@
 
     " Latex
     Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
-
+    Plug 'vim-latex/vim-latex', { 'for': 'tex' }
 call plug#end()
 
 "
@@ -188,6 +188,7 @@ call plug#end()
         \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
         \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
         \ 'python': ['/usr/bin/pyls'],
+        \ 'tex': ['/usr/bin/texlab'],
         \ }
 
     let g:deoplete#enable_at_startup = 1
@@ -214,6 +215,7 @@ EOF
 "
 
     let g:livepreview_previewer = 'zathura'
+    autocmd FileType tex LLPStartPreview
 
 "
 "Hide statusbar

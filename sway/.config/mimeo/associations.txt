@@ -1,0 +1,8 @@
+/usr/bin/deluge-console add %U
+  ^magnet:
+/usr/bin/mpv %U
+  ^https?://(www.)?youtube.com/watch\?.*v=
+  ^https?://(www.)?youtu.be/
+
+/usr/bin/qutebrowser %U
+  ^https?://
