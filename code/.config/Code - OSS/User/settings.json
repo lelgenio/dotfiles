@@ -48,6 +48,7 @@
     "vim.statusBarColors.visualline": ["#5757cc", "#fff"],
     "vim.statusBarColors.replace": ["#DD2020", "#fff"],
     "workbench.colorCustomizations": {
+        "minimap.selectionHighlight": "#CC5757",
         "editorCursor.background": "#fff",
         "editor.background": "#202020",
         "editorWhitespace.foreground": "#303030",
