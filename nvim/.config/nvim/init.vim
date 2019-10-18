@@ -220,7 +220,7 @@ EOF
 "
 "Hide statusbar
 "
-    let s:hidden_all = 1
+    let s:hidden_all = 0
     function! ToggleHiddenAll()
         if s:hidden_all  == 0
             let s:hidden_all = 1
@@ -238,3 +238,4 @@ EOF
     endfunction
 
     nnoremap <S-h> :call ToggleHiddenAll()<CR>
+    call ToggleHiddenAll()
