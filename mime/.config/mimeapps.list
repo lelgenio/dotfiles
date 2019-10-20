@@ -222,6 +222,7 @@ video/x-theora+ogg=video.desktop;
 x-scheme-handler/http=browser.desktop;
 x-scheme-handler/https=browser.desktop;
 x-scheme-handler/magnet=deluge-console.desktop;
+text/plain=nvim.desktop;
 
 [Default Applications]
 text/html=browser.desktop
