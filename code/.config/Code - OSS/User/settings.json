@@ -19,7 +19,7 @@
     // Rendering
     "terminal.integrated.rendererType": "dom",
     "editor.renderWhitespace": "boundary",
-    "window.zoomLevel": 0.2,
+    "window.zoomLevel": 0,
     "vim.foldfix": true,
 
     // Fonts
@@ -32,6 +32,9 @@
         {
             "before":["g", "c"],
             "commands": ["editor.action.commentLine"]
+        },{
+            "before":["space"],
+            "commands": ["workbench.action.showCommands"]
         }    
     ],
 
@@ -79,4 +82,5 @@
         "statusBar.debuggingBackground": "#202020",
         "statusBar.foreground": "#fff"
     },
+    "git.enableSmartCommit": true,
 }
