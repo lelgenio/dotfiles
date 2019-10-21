@@ -216,6 +216,8 @@
 
     smart_gaps on
 	smart_borders on
+
+    for_window [class=code] opacity .98
 # }}}
 # Daemons {{{
 #

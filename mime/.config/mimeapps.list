@@ -228,3 +228,4 @@ text/plain=nvim.desktop;
 text/html=browser.desktop
 x-scheme-handler/http=browser.desktop
 x-scheme-handler/https=browser.desktop
+application/pdf=org.pwmt.zathura.desktop
