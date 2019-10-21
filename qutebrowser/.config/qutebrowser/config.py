@@ -206,35 +206,35 @@ c.fonts.completion.entry = '16px Inter'
 
 # Font used in the completion categories.
 # Type: Font
-c.fonts.completion.category = '16px FiraCode'
+c.fonts.completion.category = '16px Hack'
 
 # Font used for the debugging console.
 # Type: QtFont
-c.fonts.debug_console = '16px FiraCode'
+c.fonts.debug_console = '16px Hack'
 
 # Font used for the downloadbar.
 # Type: Font
-c.fonts.downloads = '16px FiraCode'
+c.fonts.downloads = '16px Hack'
 
 # Font used for the hints.
 # Type: Font
-c.fonts.hints = 'bold 16px FiraCode'
+c.fonts.hints = 'bold 16px Hack'
 
 # Font used in the keyhint widget.
 # Type: Font
-c.fonts.keyhint = '16px FiraCode'
+c.fonts.keyhint = '16px Hack'
 
 # Font used for error messages.
 # Type: Font
-c.fonts.messages.error = '16px FiraCode'
+c.fonts.messages.error = '16px Hack'
 
 # Font used for info messages.
 # Type: Font
-c.fonts.messages.info = '16px FiraCode'
+c.fonts.messages.info = '16px Hack'
 
 # Font used for warning messages.
 # Type: Font
-c.fonts.messages.warning = '16px FiraCode'
+c.fonts.messages.warning = '16px Hack'
 
 # Font used for prompts.
 # Type: Font
@@ -242,7 +242,7 @@ c.fonts.prompts = '16px Inter'
 
 # Font used in the statusbar.
 # Type: Font
-c.fonts.statusbar = '16px FiraCode'
+c.fonts.statusbar = '16px Hack'
 
 # Font used in the tab bar.
 # Type: QtFont
