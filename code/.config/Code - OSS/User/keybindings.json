@@ -4,16 +4,23 @@
         "command": "workbench.action.terminal.new"
     },
     {
-        "key":"ctrl+,",
-        "command":"workbench.action.openSettingsJson"
-    },{
-        "key":"ctrl+shift+,",
-        "command":"workbench.action.openGlobalKeybindingsFile"
-    },{
+        "key": "ctrl+,",
+        "command": "workbench.action.openSettingsJson"
+    },
+    {
+        "key": "ctrl+shift+,",
+        "command": "workbench.action.openGlobalKeybindingsFile"
+    },
+    {
         "key": "ctrl+b",
-        "command":"workbench.action.toggleSidebarVisibility"
-    },{
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
         "key": "ctrl+n",
-        "command":"notifications.clearAll"
+        "command": "notifications.clearAll"
+    },
+    {
+        "key": "ctrl+s",
+        "command": "saveAll"
     }
 ]

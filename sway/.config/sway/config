@@ -1,8 +1,8 @@
 # LEL
 
-#
-# Variables
-#   # Logo key.
+# Variables {{{
+#   
+    # Logo key.
     set $mod Mod4
     # Home row direction keys, like vim
     set $left h
@@ -14,8 +14,8 @@
     set $menu swaymsg exec 'rofi -show drun -display-drun Iniciar:'
 	font pango:Hack 14px
 
-#
-# Output configuration
+# }}}
+# Output configuration {{{
 #
     output * bg ~/.config/sway/minimalistic_interjection.jpg fill
 
@@ -31,8 +31,8 @@
     bindsym XF86MonBrightnessUp   exec sudo light -A 5
     bindsym XF86MonBrightnessDown exec sudo light -U 5
 
-#
-# Input configuration
+# }}}
+# Input configuration {{{
 #   
     input "1739:30966:Synaptics_TM3096-006" {
         dwt enabled
@@ -44,9 +44,10 @@
         xkb_layout br
         xkb_numlock enabled
     }
-#
-# Key bindings:
-#
+# }}}
+# Key bindings: {{{
+    # Basic {{{
+    #
     # Start a terminal
     bindsym $mod+Return exec $term 
     
@@ -74,9 +75,9 @@
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?' -b 'Yes, exit sway' 'swaymsg exit'
 
-#
-# Moving around:
-#
+    # }}}
+    # Moving around: {{{
+    #
     # Move your focus around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
@@ -99,9 +100,9 @@
     bindsym $mod+Control+$up resize shrink height 10px
     bindsym $mod+Control+$right resize grow width 10px
 
-#
-# Workspaces:
-#
+    # }}}
+    # Workspaces: {{{
+    #
     # Switch to workspace
     bindsym $mod+1 workspace 1
     bindsym $mod+2 workspace 2
@@ -129,9 +130,10 @@
     assign [class=qutebrowser] workspace 2
     assign [class=TelegramDesktop] workspace 10
     assign [class=discord] workspace 10
-#
-# Layout stuff:
-#
+
+    # }}}
+    # Layout stuff: {{{
+    # 
     # Splits
     bindsym $mod+b splith
     bindsym $mod+v splitv
@@ -150,16 +152,16 @@
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
-#
-# Scratchpad:
-#
+    # }}}
+    # Scratchpad: {{{
+    #
     # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
     # Show the next scratchpad window
     bindsym $mod+minus scratchpad show
-#
-# Screenshots:
-#
+    #}}}
+    # Screenshots: {{{
+    # 
 
     # Screens to file
     bindsym Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
@@ -174,9 +176,9 @@
     bindsym Control+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
 
 
-#
-# PulseAudio:
-#
+    # }}}
+    # PulseAudio: {{{
+    #
     bindsym $mod+p exec ~/.config/scripts/pulse-sink
     for_window [app_id="pavucontrol"] floating enable
 
@@ -190,8 +192,9 @@
     bindsym XF86AudioNext  exec  mpc -q next                    
     bindsym XF86AudioPrev  exec  mpc -q prev                    
 
-#
-# Visual:
+    # }}}
+# }}}
+# Visual: {{{
 #
     set $accent     #CC575D
     set $aclite     #CC575D50
@@ -213,8 +216,8 @@
 
     smart_gaps on
 	smart_borders on
-#
-# Daemons
+# }}}
+# Daemons {{{
 #
     #Notification Daemon
     exec mako
@@ -230,5 +233,7 @@
        timeout 900 'swaylock -f' \
        timeout 1800 'swaymsg "output * dpms off"' \
             resume 'swaymsg "output * dpms on;reload"' \
+#}}}
 
 include /etc/sway/config.d/*
+# vim:filetype=conf:foldmethod=marker

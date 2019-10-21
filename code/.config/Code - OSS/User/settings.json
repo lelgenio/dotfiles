@@ -7,7 +7,6 @@
     "editor.minimap.renderCharacters": false,
     "workbench.editor.closeEmptyGroups": true,
     "workbench.editor.tabCloseButton": "off",
-
     // Don't ask
     "git.autofetch": true,
     "git.confirmSync": false,
@@ -16,42 +15,66 @@
     "explorer.confirmDelete": false,
     "files.autoSave": "off",
     "window.closeWhenEmpty": true,
-
     // Rendering
     "terminal.integrated.rendererType": "dom",
     "editor.renderWhitespace": "boundary",
     "window.zoomLevel": 0,
     "vim.foldfix": true,
-
     // Fonts
     "terminal.integrated.fontFamily": "Hack",
     "editor.fontFamily": "'Hack', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 15,
     "editor.fontLigatures": true,
-
     // Vim
     "vim.normalModeKeyBindings": [
         {
-            "before":["g", "c"],
-            "commands": ["editor.action.commentLine"]
-        },{
-            "before":["space"],
-            "commands": ["workbench.action.showCommands"]
-        }    
+            "before": [
+                "g",
+                "c"
+            ],
+            "commands": [
+                "editor.action.commentLine"
+            ]
+        },
+        {
+            "before": [
+                "space"
+            ],
+            "commands": [
+                "workbench.action.showCommands"
+            ]
+        }
     ],
-
     // Gay colors
     "workbench.colorTheme": "Material Theme Darker High Contrast",
     "materialTheme.accent": "Red",
     "workbench.iconTheme": "material-icon-theme",
     "material-icon-theme.folders.color": "#cc5757",
     "vim.statusBarColorControl": true,
-    "vim.statusBarColors.insert": ["#cc5757", "#fff"],
-    "vim.statusBarColors.normal": ["#202020", "#fff"],
-    "vim.statusBarColors.visual": ["#5757cc", "#fff"],
-    "vim.statusBarColors.visualblock": ["#5757cc", "#fff"],
-    "vim.statusBarColors.visualline": ["#5757cc", "#fff"],
-    "vim.statusBarColors.replace": ["#DD2020", "#fff"],
+    "vim.statusBarColors.insert": [
+        "#cc5757",
+        "#fff"
+    ],
+    "vim.statusBarColors.normal": [
+        "#202020",
+        "#fff"
+    ],
+    "vim.statusBarColors.visual": [
+        "#5757cc",
+        "#fff"
+    ],
+    "vim.statusBarColors.visualblock": [
+        "#5757cc",
+        "#fff"
+    ],
+    "vim.statusBarColors.visualline": [
+        "#5757cc",
+        "#fff"
+    ],
+    "vim.statusBarColors.replace": [
+        "#DD2020",
+        "#fff"
+    ],
     "workbench.colorCustomizations": {
         "minimap.selectionHighlight": "#CC5757",
         "editorCursor.background": "#fff",
@@ -84,4 +107,7 @@
         "statusBar.debuggingBackground": "#202020",
         "statusBar.foreground": "#fff"
     },
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
 }
