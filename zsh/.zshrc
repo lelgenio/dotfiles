@@ -1,3 +1,6 @@
+# LEL
+# Environment Vairables {{{
+#
 export QT_QPA_PLATFORMTHEME=qt5ct
 export QT_SCALE_FACTOR=1
 export QPA_PLATFORM=wayland
@@ -8,8 +11,8 @@ export VISUAL=nvim
 export BROWSER=qutebrowser
 export PAGER=less
 
-#
-# set window title
+#}}}
+# set window title {{{
 #
     autoload -Uz add-zsh-hook
 
@@ -27,8 +30,8 @@ export PAGER=less
         add-zsh-hook -Uz precmd xterm_title_precmd
         add-zsh-hook -Uz preexec xterm_title_preexec
     fi
-#
-# start sway if using tty1
+# }}}
+# start sway if using tty1 {{{
 #
     if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]
     then
@@ -36,8 +39,8 @@ export PAGER=less
         exec sway > /dev/null
     fi
 
-#
-# Plugins
+# }}}
+# Plugins {{{
 #
 	export ZPLUG_HOME=~/.local/share/zplug
 	if [ ! -d $ZPLUG_HOME ]
@@ -76,8 +79,8 @@ export PAGER=less
 
     zplug load
 
-#
-# Aliases
+# }}}
+# Aliases {{{
 #
     abbrev-alias -g v=nvim
     abbrev-alias -g rv="sudo nvim"
@@ -107,8 +110,8 @@ export PAGER=less
         command man "$@"
     }
 
-#
-# Keys.
+# }}}
+# Keys. {{{
 #
     autoload -z edit-command-line
     zle -N edit-command-line
@@ -149,8 +152,8 @@ export PAGER=less
     esac
 
 
-#
-# Completions
+# }}}
+# Completions {{{
 #
     HYPHEN_INSENSITIVE="true"
     ENABLE_CORRECTION="true"
@@ -170,4 +173,6 @@ export PAGER=less
 
     autoload -Uz compinit
     compinit
+#}}}
 
+# vim:foldmethod=marker
