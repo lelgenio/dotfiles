@@ -11,6 +11,7 @@
     // Don't ask
     "git.autofetch": true,
     "git.confirmSync": false,
+    "git.enableSmartCommit": true,
     "explorer.confirmDragAndDrop": false,
     "explorer.confirmDelete": false,
     "files.autoSave": "off",
@@ -23,9 +24,10 @@
     "vim.foldfix": true,
 
     // Fonts
-    "terminal.integrated.fontFamily": "Roboto Mono",
-    "editor.fontFamily": "'Roboto Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "terminal.integrated.fontFamily": "FiraCode",
+    "editor.fontFamily": "'FiraCode', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 15,
+    "editor.fontLigatures": true,
 
     // Vim
     "vim.normalModeKeyBindings": [
@@ -82,5 +84,4 @@
         "statusBar.debuggingBackground": "#202020",
         "statusBar.foreground": "#fff"
     },
-    "git.enableSmartCommit": true,
 }

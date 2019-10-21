@@ -10,9 +10,9 @@
     set $up k
     set $right l
 
-    set $term termite
+    set $term kitty
     set $menu swaymsg exec 'rofi -show drun -display-drun Iniciar:'
-	font pango:Roboto 14px
+	font pango:FiraCode 14px
 
 #
 # Output configuration
