@@ -236,4 +236,4 @@
 #}}}
 
 include /etc/sway/config.d/*
-# vim:filetype=conf:foldmethod=marker
+# vim:filetype=i3config:foldmethod=marker
