@@ -12,7 +12,7 @@
 
     set $term kitty
     set $menu swaymsg exec 'rofi -show drun -display-drun Iniciar:'
-	font pango:FiraCode 14px
+	font pango:Hack 14px
 
 #
 # Output configuration

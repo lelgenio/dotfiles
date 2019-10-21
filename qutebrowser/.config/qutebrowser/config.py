@@ -202,7 +202,7 @@ c.colors.tabs.pinned.selected.even.bg = '#303030'
 
 # Font used in the completion widget.
 # Type: Font
-c.fonts.completion.entry = '16px Roboto'
+c.fonts.completion.entry = '16px Inter'
 
 # Font used in the completion categories.
 # Type: Font
@@ -238,7 +238,7 @@ c.fonts.messages.warning = '16px FiraCode'
 
 # Font used for prompts.
 # Type: Font
-c.fonts.prompts = '16px Roboto'
+c.fonts.prompts = '16px Inter'
 
 # Font used in the statusbar.
 # Type: Font
@@ -246,7 +246,7 @@ c.fonts.statusbar = '16px FiraCode'
 
 # Font used in the tab bar.
 # Type: QtFont
-c.fonts.tabs = '14px Roboto'
+c.fonts.tabs = '14px Inter'
 
 # Bindings for normal mode
 config.bind(',m', 'spawn mpv {url}')

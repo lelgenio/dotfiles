@@ -24,8 +24,8 @@
     "vim.foldfix": true,
 
     // Fonts
-    "terminal.integrated.fontFamily": "FiraCode",
-    "editor.fontFamily": "'FiraCode', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "terminal.integrated.fontFamily": "Hack",
+    "editor.fontFamily": "'Hack', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 15,
     "editor.fontLigatures": true,
 
