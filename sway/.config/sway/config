@@ -23,8 +23,8 @@
 
     #Disable laptop screen if closed, --reload is important
     set $laptop eDP-1
-    bindswitch --reload lid:on output $laptop disable
-    bindswitch --reload lid:off output $laptop enable
+    bindswitch --reload lid:on output $laptop disable; reload
+    bindswitch --reload lid:off output $laptop enable; reload
 
     # Backlight settings for laptops
     exec sudo light -N 1

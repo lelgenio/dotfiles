@@ -1,4 +1,5 @@
 export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_SCALE_FACTOR=1
 export QPA_PLATFORM=wayland
 export PATH=$PATH:~/.local/bin
 
