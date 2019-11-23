@@ -1,7 +1,9 @@
+" LEL
 "
-" Plugins
+" NVIM
 "
-
+" Plugins{{{
+"
     " Install plug if it isn't already
     if empty(glob('~/.config/nvim/autoload/plug.vim'))
         silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -76,14 +78,12 @@
     Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
     Plug 'vim-latex/vim-latex', { 'for': 'tex' }
 call plug#end()
-
-"
-" Syntax options
+"}}}
+" Syntax options{{{
 "
 
     " Enable syntax and set color scheme
     syntax on
-
 
     set tabstop=4
     set shiftwidth=4
@@ -104,10 +104,9 @@ call plug#end()
     set mouse =a
     set clipboard +=unnamedplus
     set title
+"}}}
+" Gay colors{{{
 
-    "
-    " Gay colors
-    "
     if (empty($TMUX))
       if (has('nvim'))
         let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
@@ -119,14 +118,17 @@ call plug#end()
 
     colorscheme minimalist
 
-    set       background=dark
+    " set       background=dark
+    
     "background color is transparent
     highlight Normal      guibg=None
     highlight EndOfBuffer guibg=None
     highlight SpecialKey  guibg=None guifg=#cc5757
+
     "Line numers
     highlight LineNr      term=bold     ctermfg=9 guifg=#cc5757 guibg=None
-    "Make whitespace is dark
+
+    "Make whitespace dark
     highlight NonText     ctermfg=black guifg=#303030
     highlight SpecialKey  ctermfg=black guifg=#303030
 
@@ -134,10 +136,8 @@ call plug#end()
     set cursorline
     highlight CursorLine   term=bold      cterm=bold gui=Bold guibg=#303030
     highlight CursorLineNr term=bold      cterm=bold gui=Bold guibg=None guifg=white
-
-
-"
-" Keys
+"}}}
+" Keys{{{
 "
 
     " Easy comment toggle
@@ -164,9 +164,8 @@ call plug#end()
     nnoremap <silent> gr        :call LanguageClient#textDocument_references()<CR>
     nnoremap <silent> gs        :call LanguageClient#textDocument_documentSymbol()<CR>
     nnoremap <silent> gR        :call LanguageClient#textDocument_rename()<CR>
-
-"
-" Lanugage Server
+"}}}
+" Lanugage Server{{{
 "
 
 
@@ -196,8 +195,7 @@ call plug#end()
     call deoplete#custom#source('LanguageClient',
         \ 'min_pattern_length',
         \ 2)
-
-"python env
+"python env{{{
 " MUST NOT BE INDENTED!
 py3 << EOF
 import os
@@ -207,19 +205,13 @@ if 'VIRTUAL_ENV' in os.environ:
   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
   execfile(activate_this, dict(__file__=activate_this))
 EOF
-
-
-
-"
-" Latex
-"
-
+"}}}
+" Latex{{{
     let g:livepreview_previewer = 'zathura'
     autocmd FileType tex LLPStartPreview
-
-"
-"Hide statusbar
-"
+"}}}
+"}}}
+"Hide statusbar{{{
     let s:hidden_all = 0
     function! ToggleHiddenAll()
         if s:hidden_all  == 0
@@ -239,3 +231,5 @@ EOF
 
     nnoremap <S-h> :call ToggleHiddenAll()<CR>
     call ToggleHiddenAll()
+"}}}
+" vim:foldmethod=marker 
