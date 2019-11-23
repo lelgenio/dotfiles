@@ -11,6 +11,10 @@
 # Type: Dict
 c.aliases = {'q': 'close', 'qa': 'quit', 'w': 'session-save', 'wq': 'quit --save', 'wqa': 'quit --save'}
 
+# Always restore open sites when qutebrowser is reopened.
+# Type: Bool
+c.auto_save.session = True
+
 # User agent to send. Unset to send the default. Note that the value
 # read from JavaScript is always the global value.
 # Type: String
@@ -275,7 +279,7 @@ c.fonts.tabs = '14px Inter'
 
 # Bindings for normal mode
 config.bind(',m', 'spawn --userscript view_in_mpv')
-config.bind(';m', 'hint links spawn mpv {hint-url}')
+config.bind(';m', 'hint links spawn mpv --fs {hint-url}')
 config.bind('J', 'tab-prev')
 config.bind('K', 'tab-next')
 config.bind('j', 'scroll down')
