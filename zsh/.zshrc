@@ -1,14 +1,15 @@
 # LEL
-# Environment Vairables {{{
 #
+# ZSH
+#
+# Environment Vairables {{{
+# Allow qt5
 export QT_QPA_PLATFORMTHEME=qt5ct
-export QT_SCALE_FACTOR=1
-export QPA_PLATFORM=wayland
 export PATH=$PATH:~/.local/bin
 
 export EDITOR=nvim
 export VISUAL=nvim
-export BROWSER=qutebrowser
+# export BROWSER=qutebrowser
 export PAGER=less
 
 #}}}
@@ -18,12 +19,10 @@ export PAGER=less
 
     function xterm_title_precmd () {
         print -Pn -- '\e]2;%n@%m %~\a'
-        [[ "$TERM" == 'screen'* ]] && print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-}\e\\'
     }
 
     function xterm_title_preexec () {
         print -Pn -- '\e]2;%n@%m %~ %# ' && print -n -- "${(q)1}\a"
-        [[ "$TERM" == 'screen'* ]] && { print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-} %# ' && print -n -- "${(q)1}\e\\"; }
     }
 
     if [[ "$TERM" == (screen*|xterm*|rxvt*|tmux*|putty*|konsole*|gnome*) ]]; then
@@ -33,12 +32,35 @@ export PAGER=less
 # }}}
 # start sway if using tty1 {{{
 #
-    if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]
+    if [[ $XDG_VTNR -eq 1 ]] #faster like this
     then
-        clear
-        exec sway > /dev/null
+        if systemctl -q is-active graphical.target && [[ ! $DISPLAY ]]
+        then
+            clear
+            export XDG_CURRENT_DESKTOP=Unity
+            export QT_SCALE_FACTOR=1
+            export QPA_PLATFORM=wayland
+            export QT_QPA_PLATFORM=wayland
+            export GTK_CSD=0
+            export _JAVA_AWT_WM_NONREPARENTING=1
+            export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
+            exec sway
+        fi
     fi
 
+# }}}
+# use tmux{{{
+if [ -z "$TMUX" ]; then
+    attach_session=$(tmux 2> /dev/null ls -F \
+        '#{session_attached} #{?#{==:#{session_last_attached},},1,#{session_last_attached}} #{session_id}' |
+        awk '/^0/ { if ($2 > t) { t = $2; s = $3 } }; END { if (s) printf "%s", s }')
+    if [ -n "$attach_session" ]
+    then
+        exec tmux attach -t "$attach_session"
+    else
+        exec tmux
+    fi
+fi
 # }}}
 # Plugins {{{
 #
@@ -174,5 +196,6 @@ export PAGER=less
     autoload -Uz compinit
     compinit
 #}}}
+setopt GLOBSTARSHORT
 
 # vim:foldmethod=marker
