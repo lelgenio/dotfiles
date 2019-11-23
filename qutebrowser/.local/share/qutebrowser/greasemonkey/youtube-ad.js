@@ -90,21 +90,21 @@ const config = GM_config([
     key: 'secWaitBanner',
     label: 'Banner ad close delay (seconds)',
     type: 'number',
-    default: 0,
+    default: 1,
     min: 0
   },
   {
     key: 'secWaitVideo',
     label: 'Video ad skip delay (seconds)',
     type: 'number',
-    default: 0,
+    default: 1,
     min: 0
   },
   {
     key: 'minAdLengthForSkip',
     label: 'Dont skip video shorter than this (seconds)',
     type: 'number',
-    default: 0,
+    default: 1,
     min: 0
   },
   {
