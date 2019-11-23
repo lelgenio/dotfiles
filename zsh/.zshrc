@@ -50,17 +50,19 @@ export PAGER=less
 
 # }}}
 # use tmux{{{
-if [ -z "$TMUX" ]; then
-    attach_session=$(tmux 2> /dev/null ls -F \
-        '#{session_attached} #{?#{==:#{session_last_attached},},1,#{session_last_attached}} #{session_id}' |
-        awk '/^0/ { if ($2 > t) { t = $2; s = $3 } }; END { if (s) printf "%s", s }')
-    if [ -n "$attach_session" ]
-    then
-        exec tmux attach -t "$attach_session"
-    else
-        exec tmux
-    fi
-fi
+
+# if [ -z "$TMUX" ]; then
+#     attach_session=$(tmux 2> /dev/null ls -F \
+#         '#{session_attached} #{?#{==:#{session_last_attached},},1,#{session_last_attached}} #{session_id}' |
+#         awk '/^0/ { if ($2 > t) { t = $2; s = $3 } }; END { if (s) printf "%s", s }')
+#     if [ -n "$attach_session" ]
+#     then
+#         exec tmux attach -t "$attach_session"
+#     else
+#         exec tmux
+#     fi
+# fi
+
 # }}}
 # Plugins {{{
 #
@@ -195,7 +197,8 @@ fi
 
     autoload -Uz compinit
     compinit
+
+    setopt GLOBSTARSHORT
 #}}}
-setopt GLOBSTARSHORT
 
 # vim:foldmethod=marker

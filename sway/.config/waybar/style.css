@@ -11,7 +11,8 @@
 }
 
 window#waybar {
-    background-color: rgba(30, 30, 30, 0.9);
+    background-color: #202020;
+    border-bottom: 1px solid #191919;
     color: #ffffff;
     transition: background-color .3s;
 }
@@ -26,23 +27,12 @@ window#waybar.empty {
     border:none;
 }
 
-window#waybar.solo{
-    background-color: #202020;
-    border: none;
-}
-
-
-window#waybar.termite {
-    background-color: rgba(30,30,30,0.97);
-    border: none;
-}
-
 
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
     color: #ffffff;
-	transition: .3s border-top-width;
+	transition: .3s border;
 }
 
 #workspaces button:hover {

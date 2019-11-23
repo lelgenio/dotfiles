@@ -25,6 +25,9 @@ case $WEATHER in
  "Rain"*)
      WEATHER=""
      ;;
+ "Mist"*)
+     WEATHER=" "
+     ;;
  "Snow"*)
      WEATHER=""
      ;;

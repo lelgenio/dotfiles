@@ -1,7 +1,7 @@
 #!/bin/bash
 
 opts="Fone\nSpeaker\nHDMI"
-out=$(echo -e $opts | rofi -p "Saida:" -no-custom -only-matching -dmenu)
+out=$(echo -e $opts | wofi -p "Saida:" --dmenu)
 
 if [ "$out" == "HDMI" ]
 then

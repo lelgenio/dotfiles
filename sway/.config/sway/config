@@ -14,7 +14,7 @@
     set $right l
 
     set $term kitty
-    set $menu swaymsg exec 'wofi --show drun -i -p Iniciar:'
+    set $menu swaymsg exec 'wofi --show drun -i -t kitty -p Iniciar:'
 	font pango:Hack 14px
 
 # }}}
@@ -58,6 +58,9 @@
     
     #start web browser
     bindsym $mod+q exec qutebrowser
+
+    #start file manager
+    bindsym $mod+m exec nemo
 
     # Kill focused window
     bindsym $mod+x kill 
@@ -215,8 +218,8 @@
     client.urgent           $alert      $alert      $fg_color   $alert      $alert
 
     # this is borked ↓
-    # bar swaybar_command waybar
-    exec_always pkill waybar; waybar
+    bar swaybar_command waybar
+    # exec_always pkill waybar; waybar
 
     default_border pixel 2px
     gaps inner 5px

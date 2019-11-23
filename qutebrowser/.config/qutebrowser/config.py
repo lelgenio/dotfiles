@@ -36,6 +36,14 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 #   - ask
 config.set('content.notifications', False, 'https://www.1337x.to')
 
+# Allow websites to show notifications.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.notifications', True, 'https://www.reddit.com')
+
 # Shrink the completion to be smaller than the configured size if there
 # are no scrollbars.
 # Type: Bool
@@ -44,6 +52,11 @@ c.completion.shrink = True
 # CSS border value for hints.
 # Type: String
 c.hints.border = '2px solid #cc5757'
+
+# Enable smooth scrolling for web pages. Note smooth scrolling does not
+# work with the `:scroll-px` command.
+# Type: Bool
+c.scrolling.smooth = True
 
 # Hide the statusbar unless a message is shown.
 # Type: Bool
@@ -74,7 +87,7 @@ c.tabs.last_close = 'close'
 #   - never: Always hide the tab bar.
 #   - multiple: Hide the tab bar if only one tab is open.
 #   - switching: Show the tab bar when switching tabs.
-c.tabs.show = 'multiple'
+c.tabs.show = 'switching'
 
 # Duration (in milliseconds) to show the tab bar before hiding it when
 # tabs.show is set to 'switching'.
@@ -130,6 +143,18 @@ c.colors.completion.item.selected.match.fg = 'white'
 # Color of the scrollbar in the completion view.
 # Type: QssColor
 c.colors.completion.scrollbar.bg = '#303030'
+
+# Background color for the download bar.
+# Type: QssColor
+c.colors.downloads.bar.bg = '#202020'
+
+# Color gradient start for download backgrounds.
+# Type: QtColor
+c.colors.downloads.start.bg = '#5757cc'
+
+# Color gradient stop for download backgrounds.
+# Type: QtColor
+c.colors.downloads.stop.bg = '#57cc57'
 
 # Font color for hints.
 # Type: QssColor
@@ -249,9 +274,10 @@ c.fonts.statusbar = '16px Hack'
 c.fonts.tabs = '14px Inter'
 
 # Bindings for normal mode
-config.bind(',m', 'spawn mpv {url}')
-config.bind(';m', 'hint url spawn mpv {url}')
+config.bind(',m', 'spawn --userscript view_in_mpv')
+config.bind(';m', 'hint links spawn mpv {hint-url}')
 config.bind('J', 'tab-prev')
 config.bind('K', 'tab-next')
 config.bind('j', 'scroll down')
 config.bind('k', 'scroll up')
+config.bind('spawn', '--userscript view_in_mpv')
