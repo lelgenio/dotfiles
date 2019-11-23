@@ -8,8 +8,10 @@ makepkg -si
 # Install a lot of things
 yay -Syu --noconfirm --needed \
     # DE
-    sway light mako pulseaudio udiskie\
+    sway light mako pulseaudio udiskie wofi\
     httpie jq keepmenu\
+    # Screenshots
+    grim slurp wl-clipboard\
     # Theming
     materia-custom-accent papirus-icon-theme-git papirus-folders-git capitaine-cursors \
     # Terminal stuff
@@ -23,11 +25,6 @@ yay -Syu --noconfirm --needed \
     # Media
     gimp kdenlive mpv mpd mpc ncmpcpp 
 
-
+systemctl --user enable mpd.service
 #useradd -mG wheel lelgenio
 su -u lelgenio -c 'cd ~;git clone http://github.com/lelgenio/dotfiles.git .config;.config;scripts/install-user'
-if [ ! -f /etc/zsh/zshenv ] 
-then
-    mkdir -p /etc/zsh
-    .dots/myetc/etc/zsh/zshenv /etc/zsh/zshenv
-fi
