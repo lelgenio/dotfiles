@@ -20,7 +20,7 @@
 # }}}
 # Output configuration {{{
 #
-    output * bg '#303030' solid_color
+    output * bg '#252525' solid_color
 
     # output HDMI-A-1 resolution 720x576
 
@@ -237,8 +237,8 @@
     exec udiskie
     # Blue light filter
     exec redshift
-    # Bluetooth Daemon
-    # exec blueberry-tray
+    # kde connect daemon
+    exec /usr/lib/kdeconnectd
     # lock screen after a period of inactivity execp for fullscreen
     for_window [class=.*] inhibit_idle fullscreen
     exec swayidle -w \
