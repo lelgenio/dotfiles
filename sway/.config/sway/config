@@ -214,7 +214,9 @@
     client.unfocused        $bg_color   $bg_color   $fg_color   $bg_color   $bg_color
     client.urgent           $alert      $alert      $fg_color   $alert      $alert
 
-    bar swaybar_command waybar
+    # this is borked ↓
+    # bar swaybar_command waybar
+    exec_always pkill waybar; waybar
 
     default_border pixel 2px
     gaps inner 5px
@@ -233,7 +235,7 @@
     # Blue light filter
     exec redshift
     # Bluetooth Daemon
-    exec blueberry-tray
+    # exec blueberry-tray
     # lock screen after a period of inactivity execp for fullscreen
     for_window [class=.*] inhibit_idle fullscreen
     exec swayidle -w \
