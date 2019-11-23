@@ -1,0 +1,12 @@
+code
+
+mpd/.config/mpd/database
+mpd/.config/mpd/pid
+mpd/.config/mpd/state
+neomutt/.config/neomutt/password.gpg
+nvim/.config/nvim/autoload/
+nvim/.config/nvim/plugged/
+qutebrowser/.config/qutebrowser/autoconfig.yml
+qutebrowser/.config/qutebrowser/qsettings/
+qutebrowser/.config/qutebrowser/quickmarks
+qutebrowser/.local/

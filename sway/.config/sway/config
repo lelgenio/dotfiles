@@ -227,7 +227,7 @@
     smart_gaps on
 	smart_borders on
 
-    for_window [class=code] opacity .98
+    for_window [app_id=mpv] floating toggle
 # }}}
 # Daemons {{{
 #
