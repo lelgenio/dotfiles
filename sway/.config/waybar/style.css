@@ -80,6 +80,7 @@ window#waybar.termite {
 #pulseaudio,
 #custom-media,
 #custom-weather,
+#custom-mail,
 #tray,
 #mode,
 #idle_inhibitor {
@@ -152,6 +153,11 @@ label:focus {
 
 #custom-weather {
     border-top: 2px solid #2980b9;
+    /*background-color: #2980b9;*/
+}
+
+#custom-mail {
+    border-top: 2px solid #67334d;
     /*background-color: #2980b9;*/
 }
 

@@ -8,7 +8,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["mpd", "pulseaudio", "network", "battery","custom/weather", "tray"],
+    "modules-right": ["mpd", "pulseaudio", "network", "battery","custom/weather","custom/mail", "tray"],
     //Modules configuration
      "sway/workspaces": {
     //     "disable-scroll": true,
@@ -82,7 +82,7 @@
     },
     "battery": {
         "states": {
-            // "good": 95,
+            "good": 95,
             "warning": 30,
             "critical": 15
         },
@@ -90,7 +90,7 @@
         "format-charging": "{capacity}% ",
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
+        "format-good": "",
         "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
@@ -127,6 +127,13 @@
         "tooltip":false,
         "exec": "$HOME/.config/waybar/custom/weather",
         "interval": 1800
+    },
+    "custom/mail": {
+        "format":"{} ",
+        "tooltip":false,
+        "exec": "$HOME/.config/waybar/custom/mail",
+        "interval": 1800
     }
 
 }
+# vim:ft=json

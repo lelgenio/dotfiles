@@ -1,4 +1,7 @@
 # LEL
+#
+# SWAY
+#
 
 # Variables {{{
 #   
@@ -11,20 +14,22 @@
     set $right l
 
     set $term kitty
-    set $menu swaymsg exec 'rofi -show drun -display-drun Iniciar:'
+    set $menu swaymsg exec 'wofi --show drun -i -p Iniciar:'
 	font pango:Hack 14px
 
 # }}}
 # Output configuration {{{
 #
-    output * bg ~/.config/sway/minimalistic_interjection.jpg fill
+    output * bg '#303030' solid_color
 
     # output HDMI-A-1 resolution 720x576
 
     #Disable laptop screen if closed, --reload is important
     set $laptop eDP-1
-    bindswitch --reload lid:on output $laptop disable; reload
-    bindswitch --reload lid:off output $laptop enable; reload
+    bindswitch --reload lid:on output $laptop disable
+    bindswitch --reload lid:off output $laptop enable
+    # output $laptop disable
+    # bindsym $mod+o output eDP-1 toggle
 
     # Backlight settings for laptops
     exec sudo light -N 1
@@ -127,8 +132,8 @@
     bindsym $mod+Shift+0 move container to workspace 10
 
     # Assign programs to their workspace
-    assign [class=qutebrowser] workspace 2
-    assign [class=TelegramDesktop] workspace 10
+    assign [app_id=org.qutebrowser.qutebrowser] workspace 2
+    assign [app_id=telegramdesktop] workspace 10
     assign [class=discord] workspace 10
 
     # }}}
@@ -227,14 +232,16 @@
     exec udiskie
     # Blue light filter
     exec redshift
+    # Bluetooth Daemon
+    exec blueberry-tray
     # lock screen after a period of inactivity execp for fullscreen
     for_window [class=.*] inhibit_idle fullscreen
     exec swayidle -w \
        before-sleep 'swaylock -f' \
        lock swaylock \
        timeout 900 'swaylock -f' \
-       timeout 1800 'swaymsg "output * dpms off"' \
-            resume 'swaymsg "output * dpms on;reload"' \
+       # timeout 1800 'swaymsg "output * dpms off"' \
+       #      resume 'swaymsg "output * dpms on;reload"' \
 #}}}
 
 include /etc/sway/config.d/*
