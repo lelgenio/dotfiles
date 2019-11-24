@@ -363,7 +363,8 @@ set_timezone() {
 
     ln -sT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
 }#}}}
-set_locale() {#{{{
+# set_locale() {#{{{
+set_locale() {
     # echo "LANG=$LANG" >> /etc/locale.conf
     echo "LANG=$LANG" >> /etc/locale.
     echo "LC_COLLATE=C" >> /etc/locale.conf
