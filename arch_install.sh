@@ -69,7 +69,7 @@ TIMEZONE='America/Sao_Paulo'
 # Only leave this blank on systems with very little RAM.
 TMP_ON_TMPFS='TRUE'
 
-KEYMAP='br'
+KEYMAP='br-abnt2'
 # KEYMAP='dvorak'
 
 LANG=pt_BR.UTF-8
@@ -205,7 +205,7 @@ mount_filesystems() {
 install_base() {
     pacstrap /mnt base base-devel\
         linux-zen linux-firmware\
-        networkmanager git
+        networkmanager cronie git
 
     local packages=''
 
@@ -247,50 +247,8 @@ configure() {
     local boot_dev="$DRIVE"1
     local lvm_dev="$DRIVE"2
 
-    echo 'Building locate database'
-    update_locate
-
-    echo 'Clearing package tarballs'
-    clean_packages
-
     echo 'Updating pkgfile database'
     update_pkgfile
-
-    echo 'Setting hostname'
-    set_hostname "$HOSTNAME"
-
-    echo 'Setting timezone'
-    set_timezone "$TIMEZONE"
-
-    echo 'Setting locale'
-    set_localet
-
-    echo 'Setting console keymap'
-    set_keymap
-
-    echo 'Setting hosts file'
-    set_hosts "$HOSTNAME"
-
-    echo 'Setting fstab'
-    set_fstab "$TMP_ON_TMPFS" "$boot_dev"
-
-    echo 'Setting initial modules to load'
-    set_modules_load
-
-    echo 'Configuring initial ramdisk'
-    set_initcpio
-
-    echo 'Setting initial daemons'
-    set_daemons "$TMP_ON_TMPFS"
-
-    echo 'Configuring bootloader'
-    set_syslinux "$lvm_dev"
-
-    echo 'Configuring sudo'
-    set_sudoers
-
-    echo 'Configuring slim'
-    set_slim
 
     if [ -z "$ROOT_PASSWORD" ]
     then
@@ -313,7 +271,43 @@ configure() {
     create_user "$USER_NAME" "$USER_PASSWORD"
 
     echo 'Installing AUR packages'
-    install_aur_packages
+    # install_aur_packages
+
+    echo 'Setting hostname'
+    set_hostname "$HOSTNAME"
+
+    echo 'Setting timezone'
+    set_timezone "$TIMEZONE"
+
+    echo 'Setting locale'
+    set_locale
+
+    echo 'Setting console keymap'
+    set_keymap
+
+    echo 'Setting fstab'
+    set_fstab "$TMP_ON_TMPFS" "$boot_dev"
+
+    echo 'Setting initial modules to load'
+    set_modules_load
+
+    echo 'Configuring initial ramdisk'
+    set_initcpio
+
+    echo 'Setting initial daemons'
+    set_daemons "$TMP_ON_TMPFS"
+
+    echo 'Configuring bootloader'
+    set_syslinux "$lvm_dev"
+
+    echo 'Configuring sudo'
+    set_sudoers
+
+    echo 'Configuring slim'
+    set_slim
+
+    echo 'Clearing package tarballs'
+    clean_packages
 
     rm /setup.sh
 }
@@ -392,7 +386,7 @@ set_locale() {
 #}}}
 # set_keymap() {#{{{
 set_keymap() {
-    echo "KEYMAP=$KEYMAP" > /etc/vconsole.conf
+    localectl set-keymap $KEYMAP
 }
 #}}}
 # set_fstab() {#{{{
@@ -667,11 +661,6 @@ create_user() {
 
     useradd -m -s /bin/zsh -G adm,systemd-journal,wheel,rfkill,games,network,video,audio,optical,floppy,storage,scanner,power,adbusers,wireshark "$name"
     echo -en "$password\n$password" | passwd "$name"
-}
-#}}}
-# update_locate() {#{{{
-update_locate() {
-    updatedb
 }
 #}}}
 # get_uuid() {#{{{
