@@ -42,10 +42,10 @@
 DRIVE='/dev/sda'
 
 # Hostname of the installed machine.
-HOSTNAME='host100'
+HOSTNAME='arch'
 
 # Encrypt everything (except /boot).  Leave blank to disable.
-ENCRYPT_DRIVE='FALSE'
+ENCRYPT_DRIVE=''
 
 # Passphrase used to encrypt the drive (leave blank to be prompted).
 DRIVE_PASSPHRASE=''
@@ -69,6 +69,8 @@ TMP_ON_TMPFS='TRUE'
 KEYMAP='br'
 # KEYMAP='dvorak'
 
+LANG=pt_BR.UTF-8
+
 # Choose your video driver
 # For Intel
 VIDEO_DRIVER="i915"
@@ -79,12 +81,8 @@ VIDEO_DRIVER="i915"
 # For generic stuff
 #VIDEO_DRIVER="vesa"
 
-# Wireless device, leave blank to not use wireless and use DHCP instead.
-WIRELESS_DEVICE="wlan0"
-# For tc4200's
-#WIRELESS_DEVICE="eth1"
-
-setup() {
+# Setup{{{
+setup() {#{{{
     local boot_dev="$DRIVE"1
     local lvm_dev="$DRIVE"2
 
@@ -135,20 +133,102 @@ setup() {
         unmount_filesystems
         echo 'Done! Reboot system.'
     fi
-}
+}#}}}
+partition_drive() {#{{{
+    local dev="$1"; shift
 
-configure() {
+    # 100 MB /boot partition, everything else under LVM
+    parted -s "$dev" \
+        mklabel gpt \
+        mkpart boot 1    100M \
+        mkpart lvm  100M 100% \
+        set 1 boot on\
+        set 2 lvm  on
+}#}}}
+encrypt_drive() {#{{{
+    local dev="$1"; shift
+    local passphrase="$1"; shift
+    local name="$1"; shift
+
+    echo -en "$passphrase" | cryptsetup luksFormat "$dev"
+    echo -en "$passphrase" | cryptsetup luksOpen "$dev" lvm
+}#}}}
+setup_lvm() {#{{{
+    local partition="$1"; shift
+    local volgroup="$1"; shift
+
+    pvcreate "$partition"
+    vgcreate "$volgroup" "$partition"
+
+    # Create a 1GB swap partition
+    lvcreate -C y -L1G "$volgroup" -n swap
+
+    # Use the rest of the space for root
+    lvcreate -L '30G' "$volgroup" -n root
+    lvcreate -l '+100%FREE' "$volgroup" -n home
+
+    # Enable the new volumes
+    vgchange -ay
+}#}}}
+format_filesystems() {#{{{
+    local boot_dev="$1"; shift
+
+    mkfs.fat  -L boot "$boot_dev"
+    mkfs.ext4 -L root /dev/vg00/root
+    mkfs.ext4 -L home /dev/vg00/home
+    mkswap /dev/vg00/swap
+}#}}}
+mount_filesystems() {#{{{
+    local boot_dev="$1"; shift
+
+    mount /dev/vg00/root /mnt
+    mkdir /mnt/boot
+    mount "$boot_dev" /mnt/boot
+    swapon /dev/vg00/swap
+}#}}}
+install_base() {#{{{
+    pacstrap /mnt base base-devel\
+        linux-zen linux-firmware\
+        networkmanager git
+
+    local packages=''
+
+    # On Intel processors
+    packages+=' intel-ucode'
+    if [ "$VIDEO_DRIVER" = "i915" ]
+    then
+        packages+=' xf86-video-intel libva-intel-driver'
+    elif [ "$VIDEO_DRIVER" = "nouveau" ]
+    then
+        packages+=' xf86-video-nouveau'
+    elif [ "$VIDEO_DRIVER" = "radeon" ]
+    then
+        packages+=' xf86-video-ati'
+    elif [ "$VIDEO_DRIVER" = "vesa" ]
+    then
+        packages+=' xf86-video-vesa'
+    fi
+
+    pacstrap /mnt $packages
+}#}}}
+unmount_filesystems() {#{{{
+    umount /mnt/boot
+    umount /mnt
+    swapoff /dev/vg00/swap
+    vgchange -an
+    if [ -n "$ENCRYPT_DRIVE" ]
+    then
+        cryptsetup luksClose lvm
+    fi
+}#}}}
+#}}}
+# Configuration{{{
+configure() {#{{{
     local boot_dev="$DRIVE"1
     local lvm_dev="$DRIVE"2
 
-    echo 'Installing additional packages'
-    install_packages
-
-    echo 'Installing packer'
-    install_packer
-
-    echo 'Installing AUR packages'
-    install_aur_packages
+    echo 'Building locate database'
+    update_locate
 
     echo 'Clearing package tarballs'
     clean_packages
@@ -163,7 +243,7 @@ configure() {
     set_timezone "$TIMEZONE"
 
     echo 'Setting locale'
-    set_locale
+    set_localet
 
     echo 'Setting console keymap'
     set_keymap
@@ -192,12 +272,6 @@ configure() {
     echo 'Configuring slim'
     set_slim
 
-    if [ -n "$WIRELESS_DEVICE" ]
-    then
-        echo 'Configuring netcfg'
-        set_netcfg
-    fi
-
     if [ -z "$ROOT_PASSWORD" ]
     then
         echo 'Enter the root password:'
@@ -218,204 +292,74 @@ configure() {
     echo 'Creating initial user'
     create_user "$USER_NAME" "$USER_PASSWORD"
 
-    echo 'Building locate database'
-    update_locate
+    echo 'Installing AUR packages'
+    install_aur_packages
 
     rm /setup.sh
-}
+}#}}}
+install_aur_packages() {#{{{
 
-partition_drive() {
-    local dev="$1"; shift
+    sudo pacman -S --needed \
+        git pacman-contrib \
+        base base-devel \
+        linux-zen linux-firmware 
 
-    # 100 MB /boot partition, everything else under LVM
-    parted -s "$dev" \
-        mklabel msdos \
-        mkpart primary ext2 1 100M \
-        mkpart primary ext2 100M 100% \
-        set 1 boot on \
-        set 2 LVM on
-}
-
-encrypt_drive() {
-    local dev="$1"; shift
-    local passphrase="$1"; shift
-    local name="$1"; shift
-
-    echo -en "$passphrase" | cryptsetup -c aes-xts-plain -y -s 512 luksFormat "$dev"
-    echo -en "$passphrase" | cryptsetup luksOpen "$dev" lvm
-}
-
-setup_lvm() {
-    local partition="$1"; shift
-    local volgroup="$1"; shift
-
-    pvcreate "$partition"
-    vgcreate "$volgroup" "$partition"
-
-    # Create a 1GB swap partition
-    lvcreate -C y -L1G "$volgroup" -n swap
-
-    # Use the rest of the space for root
-    lvcreate -L '30G' "$volgroup" -n root
-    lvcreate -l '+100%FREE' "$volgroup" -n home
-
-    # Enable the new volumes
-    vgchange -ay
-}
-
-format_filesystems() {
-    local boot_dev="$1"; shift
-
-    mkfs.ext2 -L boot "$boot_dev"
-    mkfs.ext4 -L root /dev/vg00/root
-    mkfs.ext4 -L home /dev/vg00/root
-    mkswap /dev/vg00/swap
-}
-
-mount_filesystems() {
-    local boot_dev="$1"; shift
-
-    mount /dev/vg00/root /mnt
-    mkdir /mnt/boot
-    mount "$boot_dev" /mnt/boot
-    swapon /dev/vg00/swap
-}
-
-install_base() {
-    echo 'Server = http://mirrors.kernel.org/archlinux/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
-
-    pacstrap /mnt base base-devel
-    pacstrap /mnt syslinux
-}
-
-unmount_filesystems() {
-    umount /mnt/boot
-    umount /mnt
-    swapoff /dev/vg00/swap
-    vgchange -an
-    if [ -n "$ENCRYPT_DRIVE" ]
+    # getting yay
+    if [ ! -x /bin/yay ];
     then
-        cryptsetup luksClose lvm
-    fi
-}
-
-install_packages() {
-    local packages=''
-
-    # General utilities/libraries
-    packages+=' alsa-utils cpupower gvim mlocate net-tools ntp openssh p7zip pkgfile powertop python python2 rfkill rsync sudo unrar unzip wget zip systemd-sysvcompat zsh grml-zsh-config'
-
-    # Development packages
-    packages+=' apache-ant cmake gdb git maven mercurial subversion tcpdump valgrind wireshark-gtk'
-
-    # Netcfg
-    if [ -n "$WIRELESS_DEVICE" ]
-    then
-        packages+=' netcfg ifplugd dialog wireless_tools wpa_actiond wpa_supplicant'
+        git clone http://aur.archlinux.org/yay.git ~/yay
+        cd ~/yay
+        makepkg -si
+        cd -
     fi
 
-    # Java stuff
-    packages+=' icedtea-web-java7 jdk7-openjdk jre7-openjdk'
+    # Install a lot of things
+    yay -Syu --noconfirm --needed \
+        sway light mako pulseaudio pavolume-git udiskie wofi-hg \
+        httpie jq python-keepmenu-git\
+        ttf-hack inter-font\
+        grim slurp wl-clipboard\
+        materia-custom-accent papirus-icon-theme-git\
+        papirus-folders-git capitaine-cursors \
+        termite neovim ranger mimeo atool\
+        zsh powerline-fonts\
+        qutebrowser \
+        steam lutris \
+        gimp kdenlive mpv mpd mpc ncmpcpp 
 
-    # Libreoffice
-    packages+=' libreoffice-calc libreoffice-en-US libreoffice-gnome libreoffice-impress libreoffice-writer hunspell-en hyphen-en mythes-en'
-
-    # Misc programs
-    packages+=' mpv dosfstools ntfsprogs'
-
-    # Fonts
-    packages+=' ttf-dejavu ttf-liberation'
-
-    # On Intel processors
-    packages+=' intel-ucode'
-
-    # For laptops
-    packages+=' xf86-input-synaptics'
-
-    # Extra packages for tc4200 tablet
-    #packages+=' ipw2200-fw xf86-input-wacom'
-
-    if [ "$VIDEO_DRIVER" = "i915" ]
-    then
-        packages+=' xf86-video-intel libva-intel-driver'
-    elif [ "$VIDEO_DRIVER" = "nouveau" ]
-    then
-        packages+=' xf86-video-nouveau'
-    elif [ "$VIDEO_DRIVER" = "radeon" ]
-    then
-        packages+=' xf86-video-ati'
-    elif [ "$VIDEO_DRIVER" = "vesa" ]
-    then
-        packages+=' xf86-video-vesa'
-    fi
-
-    pacman -Sy --noconfirm $packages
-}
-
-install_packer() {
-    mkdir /foo
-    cd /foo
-    curl https://aur.archlinux.org/packages/pa/packer/packer.tar.gz | tar xzf -
-    cd packer
-    makepkg -si --noconfirm --asroot
-
-    cd /
-    rm -rf /foo
-}
-
-install_aur_packages() {
-    mkdir /foo
-    export TMPDIR=/foo
-
-
-    packer -S --noconfirm android-udev
-    packer -S --noconfirm chromium-pepper-flash-stable
-    packer -S --noconfirm chromium-libpdf-stable
-    unset TMPDIR
-    rm -rf /foo
-}
-
-clean_packages() {
+}#}}}
+clean_packages() {#{{{
     yes | pacman -Scc
-}
-
-update_pkgfile() {
+}#}}}
+update_pkgfile() {#{{{
     pkgfile -u
-}
-
-set_hostname() {
+}#}}}
+set_hostname() {#{{{
     local hostname="$1"; shift
 
     echo "$hostname" > /etc/hostname
-}
-
-set_timezone() {
-    local timezone="$1"; shift
-
-    ln -sT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
-}
-
-set_locale() {
-    echo 'LANG="en_US.UTF-8"' >> /etc/locale.conf
-    echo 'LC_COLLATE="C"' >> /etc/locale.conf
-    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-    locale-gen
-}
-
-set_keymap() {
-    echo "KEYMAP=$KEYMAP" > /etc/vconsole.conf
-}
-
-set_hosts() {
-    local hostname="$1"; shift
 
     cat > /etc/hosts <<EOF
 127.0.0.1 localhost.localdomain localhost $hostname
 ::1       localhost.localdomain localhost $hostname
 EOF
-}
+}#}}}
+set_timezone() {#{{{
+    local timezone="$1"; shift
 
-set_fstab() {
+    ln -sT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
+}#}}}
+set_locale() {#{{{
+    echo "LANG=$LANG" >> /etc/locale.conf
+    echo "LC_COLLATE=C" >> /etc/locale.conf
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+    echo "$LANG       UTF-8" >> /etc/locale.gen
+    locale-gen
+}#}}}
+set_keymap() {#{{{
+    echo "KEYMAP=$KEYMAP" > /etc/vconsole.conf
+}#}}}
+set_fstab() {#{{{
     local tmp_on_tmpfs="$1"; shift
     local boot_dev="$1"; shift
 
@@ -427,18 +371,14 @@ set_fstab() {
 #
 # <file system> <dir>    <type> <options>    <dump> <pass>
 
-/dev/vg00/swap none swap  sw                0 0
-/dev/vg00/root /    ext4  defaults,relatime 0 1
+/dev/vg00/swap none     swap  sw                0 0
+/dev/vg00/root /        ext4  rw,relatime 0 1
+/dev/vg00/home /home    ext4  rw,relatime 0 2
 
 UUID=$boot_uuid /boot ext2 defaults,relatime 0 2
 EOF
-}
-
-set_modules_load() {
-    echo 'microcode' > /etc/modules-load.d/intel-ucode.conf
-}
-
-set_initcpio() {
+}#}}}
+set_initcpio() {#{{{
     local vid
 
     if [ "$VIDEO_DRIVER" = "i915" ]
@@ -458,31 +398,26 @@ set_initcpio() {
         encrypt="encrypt"
     fi
 
-
-    # Set MODULES with your video driver
     cat > /etc/mkinitcpio.conf <<EOF
 # vim:set ft=sh
 # MODULES
 # The following modules are loaded before any boot hooks are
 # run.  Advanced users may wish to specify all system modules
 # in this array.  For instance:
-#     MODULES="piix ide_disk reiserfs"
-MODULES="ext4 $vid"
+#     MODULES=(piix ide_disk reiserfs)
+MODULES=(ext4 $vid)
 
 # BINARIES
 # This setting includes any additional binaries a given user may
 # wish into the CPIO image.  This is run last, so it may be used to
 # override the actual binaries included by a given hook
 # BINARIES are dependency parsed, so you may safely ignore libraries
-BINARIES=""
+BINARIES=()
 
 # FILES
 # This setting is similar to BINARIES above, however, files are added
 # as-is and are not parsed in any way.  This is useful for config files.
-# Some users may wish to include modprobe.conf for custom module options
-# like so:
-#    FILES="/etc/modprobe.d/modprobe.conf"
-FILES=""
+FILES=()
 
 # HOOKS
 # This is the most important setting in this file.  The HOOKS control the
@@ -496,30 +431,26 @@ FILES=""
 # Examples:
 ##   This setup specifies all modules in the MODULES setting above.
 ##   No raid, lvm2, or encrypted root is needed.
-#    HOOKS="base"
+#    HOOKS=(base)
 #
 ##   This setup will autodetect all modules for your system and should
 ##   work as a sane default
-#    HOOKS="base udev autodetect pata scsi sata filesystems"
-#
-##   This is identical to the above, except the old ide subsystem is
-##   used for IDE devices instead of the new pata subsystem.
-#    HOOKS="base udev autodetect ide scsi sata filesystems"
+#    HOOKS=(base udev autodetect block filesystems)
 #
 ##   This setup will generate a 'full' image which supports most systems.
 ##   No autodetection is done.
-#    HOOKS="base udev pata scsi sata usb filesystems"
+#    HOOKS=(base udev block filesystems)
 #
 ##   This setup assembles a pata mdadm array with an encrypted root FS.
 ##   Note: See 'mkinitcpio -H mdadm' for more information on raid devices.
-#    HOOKS="base udev pata mdadm encrypt filesystems"
+#    HOOKS=(base udev block mdadm encrypt filesystems)
 #
 ##   This setup loads an lvm2 volume group on a usb device.
-#    HOOKS="base udev usb lvm2 filesystems"
+#    HOOKS=(base udev block lvm2 filesystems)
 #
 ##   NOTE: If you have /usr on a separate partition, you MUST include the
 #    usr, fsck and shutdown hooks.
-HOOKS="base udev autodetect modconf block keymap keyboard $encrypt lvm2 resume filesystems fsck"
+HOOKS=(base udev autodetect modconf block $encrypt lvm2 filesystems keyboard fsck)
 
 # COMPRESSION
 # Use this to compress the initramfs image. By default, gzip compression
@@ -529,34 +460,26 @@ HOOKS="base udev autodetect modconf block keymap keyboard $encrypt lvm2 resume f
 #COMPRESSION="lzma"
 #COMPRESSION="xz"
 #COMPRESSION="lzop"
+#COMPRESSION="lz4"
 
 # COMPRESSION_OPTIONS
 # Additional options for the compressor
-#COMPRESSION_OPTIONS=""
+#COMPRESSION_OPTIONS=()
 EOF
 
-    mkinitcpio -p linux
-}
-
-set_daemons() {
+    mkinitcpio -P
+}#}}}
+set_daemons() {#{{{
     local tmp_on_tmpfs="$1"; shift
 
-    systemctl enable cronie.service cpupower.service ntpd.service slim.service
-
-    if [ -n "$WIRELESS_DEVICE" ]
-    then
-        systemctl enable net-auto-wired.service net-auto-wireless.service
-    else
-        systemctl enable dhcpcd@eth0.service
-    fi
+    systemctl enable cronie.service NetworkManager.service
 
     if [ -z "$tmp_on_tmpfs" ]
     then
         systemctl mask tmp.mount
     fi
-}
-
-set_syslinux() {
+}#}}}
+set_bootctl() {#{{{
     local lvm_dev="$1"; shift
 
     local lvm_uuid=$(get_uuid "$lvm_dev")
@@ -565,90 +488,23 @@ set_syslinux() {
     if [ -n "$ENCRYPT_DRIVE" ]
     then
         # Load in resources
-        crypt="cryptdevice=/dev/disk/by-uuid/$lvm_uuid:lvm"
+        crypt="root=UUID=$lvm_uuid"
     fi
 
-    cat > /boot/syslinux/syslinux.cfg <<EOF
-# Config file for Syslinux -
-# /boot/syslinux/syslinux.cfg
-#
-# Comboot modules:
-#   * menu.c32 - provides a text menu
-#   * vesamenu.c32 - provides a graphical menu
-#   * chain.c32 - chainload MBRs, partition boot sectors, Windows bootloaders
-#   * hdt.c32 - hardware detection tool
-#   * reboot.c32 - reboots the system
-#   * poweroff.com - shutdown the system
-#
-# To Use: Copy the respective files from /usr/lib/syslinux to /boot/syslinux.
-# If /usr and /boot are on the same file system, symlink the files instead
-# of copying them.
-#
-# If you do not use a menu, a 'boot:' prompt will be shown and the system
-# will boot automatically after 5 seconds.
-#
-# Please review the wiki: https://wiki.archlinux.org/index.php/Syslinux
-# The wiki provides further configuration examples
+    cat > /boot/loader/entries/arch.conf <<EOF
+title arch
 
-DEFAULT arch
-PROMPT 0        # Set to 1 if you always want to display the boot: prompt 
-TIMEOUT 50
-# You can create syslinux keymaps with the keytab-lilo tool
-#KBDMAP de.ktl
+linux vmlinuz-linux-zen
+initrd intel-ucode.img
+initrd initramfs-linux-zen.img
 
-# Menu Configuration
-# Either menu.c32 or vesamenu32.c32 must be copied to /boot/syslinux 
-UI menu.c32
-#UI vesamenu.c32
-
-# Refer to http://syslinux.zytor.com/wiki/index.php/Doc/menu
-MENU TITLE Arch Linux
-#MENU BACKGROUND splash.png
-MENU COLOR border       30;44   #40ffffff #a0000000 std
-MENU COLOR title        1;36;44 #9033ccff #a0000000 std
-MENU COLOR sel          7;37;40 #e0ffffff #20ffffff all
-MENU COLOR unsel        37;44   #50ffffff #a0000000 std
-MENU COLOR help         37;40   #c0ffffff #a0000000 std
-MENU COLOR timeout_msg  37;40   #80ffffff #00000000 std
-MENU COLOR timeout      1;37;40 #c0ffffff #00000000 std
-MENU COLOR msg07        37;40   #90ffffff #a0000000 std
-MENU COLOR tabmsg       31;40   #30ffffff #00000000 std
-
-# boot sections follow
-#
-# TIP: If you want a 1024x768 framebuffer, add "vga=773" to your kernel line.
-#
-#-*
-
-LABEL arch
-	MENU LABEL Arch Linux
-	LINUX ../vmlinuz-linux
-	APPEND root=/dev/vg00/root ro $crypt resume=/dev/vg00/swap quiet
-	INITRD ../initramfs-linux.img
-
-LABEL archfallback
-	MENU LABEL Arch Linux Fallback
-	LINUX ../vmlinuz-linux
-	APPEND root=/dev/vg00/root ro $crypt resume=/dev/vg00/swap
-	INITRD ../initramfs-linux-fallback.img
-
-LABEL hdt
-        MENU LABEL HDT (Hardware Detection Tool)
-        COM32 hdt.c32
-
-LABEL reboot
-        MENU LABEL Reboot
-        COM32 reboot.c32
-
-LABEL off
-        MENU LABEL Power Off
-        COMBOOT poweroff.com
+options $crypt
+#options quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0 $crypt
 EOF
 
-    syslinux-install_update -iam
-}
-
-set_sudoers() {
+    bootctl install
+}#}}}
+set_sudoers() {#{{{
     cat > /etc/sudoers <<EOF
 ## sudoers file.
 ##
@@ -679,6 +535,7 @@ set_sudoers() {
 ## Groups of commands.  Often used to group related commands together.
 # Cmnd_Alias	PROCESSES = /usr/bin/nice, /bin/kill, /usr/bin/renice, \
 # 			    /usr/bin/pkill, /usr/bin/top
+# Cmnd_Alias	REBOOT = /sbin/halt, /sbin/reboot, /sbin/poweroff
 
 ##
 ## Defaults specification
@@ -707,12 +564,18 @@ set_sudoers() {
 ## this may allow users to subvert the command being run via sudo.
 # Defaults env_keep += "XMODIFIERS GTK_IM_MODULE QT_IM_MODULE QT_IM_SWITCHER"
 ##
+## Uncomment to use a hard-coded PATH instead of the user's to find commands
+# Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+##
+## Uncomment to send mail if the user does not enter the correct password.
+# Defaults mail_badpass
+##
 ## Uncomment to enable logging of a command's output, except for
 ## sudoreplay and reboot.  Use sudoreplay to play back logged sessions.
 # Defaults log_output
 # Defaults!/usr/bin/sudoreplay !log_output
 # Defaults!/usr/local/bin/sudoreplay !log_output
-# Defaults!/sbin/reboot !log_output
+# Defaults!REBOOT !log_output
 
 ##
 ## Runas alias specification
@@ -724,21 +587,18 @@ set_sudoers() {
 root ALL=(ALL) ALL
 
 ## Uncomment to allow members of group wheel to execute any command
-%wheel ALL=(ALL) ALL
+# %wheel ALL=(ALL) ALL
 
 ## Same thing without a password
-# %wheel ALL=(ALL) NOPASSWD: ALL
+%wheel ALL=(ALL) NOPASSWD: ALL
 
 ## Uncomment to allow members of group sudo to execute any command
-# %sudo ALL=(ALL) ALL
+# %sudo	ALL=(ALL) ALL
 
 ## Uncomment to allow any user to run sudo if they know the password
 ## of the user they are running the command as (root by default).
 # Defaults targetpw  # Ask for the password of the target user
 # ALL ALL=(ALL) ALL  # WARNING: only use this together with 'Defaults targetpw'
-
-%rfkill ALL=(ALL) NOPASSWD: /usr/sbin/rfkill
-%network ALL=(ALL) NOPASSWD: /usr/bin/netcfg, /usr/bin/wifi-menu
 
 ## Read drop-in files from /etc/sudoers.d
 ## (the '#' here does not indicate a comment)
@@ -746,160 +606,36 @@ root ALL=(ALL) ALL
 EOF
 
     chmod 440 /etc/sudoers
-}
-
-set_slim() {
-    cat > /etc/slim.conf <<EOF
-# Path, X server and arguments (if needed)
-# Note: -xauth $authfile is automatically appended
-default_path        /bin:/usr/bin:/usr/local/bin
-default_xserver     /usr/bin/X
-xserver_arguments -nolisten tcp vt07
-
-# Commands for halt, login, etc.
-halt_cmd            /sbin/poweroff
-reboot_cmd          /sbin/reboot
-console_cmd         /usr/bin/xterm -C -fg white -bg black +sb -T "Console login" -e /bin/sh -c "/bin/cat /etc/issue; exec /bin/login"
-suspend_cmd         /usr/bin/systemctl hybrid-sleep
-
-# Full path to the xauth binary
-xauth_path         /usr/bin/xauth 
-
-# Xauth file for server
-authfile           /var/run/slim.auth
-
-# Activate numlock when slim starts. Valid values: on|off
-# numlock             on
-
-# Hide the mouse cursor (note: does not work with some WMs).
-# Valid values: true|false
-# hidecursor          false
-
-# This command is executed after a succesful login.
-# you can place the %session and %theme variables
-# to handle launching of specific commands in .xinitrc
-# depending of chosen session and slim theme
-#
-# NOTE: if your system does not have bash you need
-# to adjust the command according to your preferred shell,
-# i.e. for freebsd use:
-# login_cmd           exec /bin/sh - ~/.xinitrc %session
-# login_cmd           exec /bin/bash -login ~/.xinitrc %session
-login_cmd           exec /bin/zsh -l ~/.xinitrc %session
-
-# Commands executed when starting and exiting a session.
-# They can be used for registering a X11 session with
-# sessreg. You can use the %user variable
-#
-# sessionstart_cmd	some command
-# sessionstop_cmd	some command
-
-# Start in daemon mode. Valid values: yes | no
-# Note that this can be overriden by the command line
-# options "-d" and "-nodaemon"
-# daemon	yes
-
-# Available sessions (first one is the default).
-# The current chosen session name is replaced in the login_cmd
-# above, so your login command can handle different sessions.
-# see the xinitrc.sample file shipped with slim sources
-sessions            foo
-
-# Executed when pressing F11 (requires imagemagick)
-#screenshot_cmd      import -window root /slim.png
-
-# welcome message. Available variables: %host, %domain
-welcome_msg         %host
-
-# Session message. Prepended to the session name when pressing F1
-# session_msg         Session: 
-
-# shutdown / reboot messages
-shutdown_msg       The system is shutting down...
-reboot_msg         The system is rebooting...
-
-# default user, leave blank or remove this line
-# for avoid pre-loading the username.
-#default_user        simone
-
-# Focus the password field on start when default_user is set
-# Set to "yes" to enable this feature
-#focus_password      no
-
-# Automatically login the default user (without entering
-# the password. Set to "yes" to enable this feature
-#auto_login          no
-
-# current theme, use comma separated list to specify a set to 
-# randomly choose from
-#current_theme       default
-current_theme       archlinux-simplyblack
-
-# Lock file
-lockfile            /run/lock/slim.lock
-
-# Log file
-logfile             /var/log/slim.log
-EOF
-}
-
-set_netcfg() {
-    cat > /etc/network.d/wired <<EOF
-CONNECTION='ethernet'
-DESCRIPTION='Ethernet with DHCP'
-INTERFACE='eth0'
-IP='dhcp'
-EOF
-
-    chmod 600 /etc/network.d/wired
-
-    cat > /etc/conf.d/netcfg <<EOF
-# Enable these netcfg profiles at boot time.
-#   - prefix an entry with a '@' to background its startup
-#   - set to 'last' to restore the profiles running at the last shutdown
-#   - set to 'menu' to present a menu (requires the dialog package)
-# Network profiles are found in /etc/network.d
-NETWORKS=()
-
-# Specify the name of your wired interface for net-auto-wired
-WIRED_INTERFACE="eth0"
-
-# Specify the name of your wireless interface for net-auto-wireless
-WIRELESS_INTERFACE="$WIRELESS_DEVICE"
-
-# Array of profiles that may be started by net-auto-wireless.
-# When not specified, all wireless profiles are considered.
-#AUTO_PROFILES=("profile1" "profile2")
-EOF
-}
-
-set_root_password() {
+}#}}}
+set_root_password() {#{{{
     local password="$1"; shift
 
     echo -en "$password\n$password" | passwd
-}
-
-create_user() {
+}#}}}
+create_user() {#{{{
     local name="$1"; shift
     local password="$1"; shift
 
     useradd -m -s /bin/zsh -G adm,systemd-journal,wheel,rfkill,games,network,video,audio,optical,floppy,storage,scanner,power,adbusers,wireshark "$name"
     echo -en "$password\n$password" | passwd "$name"
-}
-
-update_locate() {
+}#}}}
+update_locate() {#{{{
     updatedb
-}
-
-get_uuid() {
+}#}}}
+get_uuid() {#{{{
     blkid -o export "$1" | grep UUID | awk -F= '{print $2}'
-}
-
+}#}}}
+#}}}
 set -ex
 
 if [ "$1" == "chroot" ]
 then
     configure
+elif [ "$1" == "pkg" ]
+then
+    install_aur_packages
 else
     setup
 fi
+
+# vim:foldmethod=marker
