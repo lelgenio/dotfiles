@@ -663,6 +663,7 @@ then
     echo "You almost lost your stuff!!"
     exit 1
 fi
+
 if [ "$1" == "chroot" ]
 then
     configure
