@@ -137,7 +137,8 @@ setup() {
         unmount_filesystems
         echo 'Done! Reboot system.'
     fi
-}#}}}
+}
+#}}}
 # Partition Drive{{{
 partition_drive() { 
     local dev="$1"; shift
@@ -149,7 +150,8 @@ partition_drive() {
         mkpart lvm  100M 100% \
         set 1 boot on\
         set 2 lvm  on
-}#}}}
+}
+#}}}
 encrypt_drive #{{{
 encrypt_drive() {
     local dev="$1"; shift
@@ -158,7 +160,8 @@ encrypt_drive() {
 
     echo -en "$passphrase" | cryptsetup luksFormat "$dev"
     echo -en "$passphrase" | cryptsetup luksOpen "$dev" lvm
-}#}}}
+}
+#}}}
 # setup_lvm{{{
 setup_lvm() {
     local partition="$1"; shift
@@ -176,7 +179,8 @@ setup_lvm() {
 
     # Enable the new volumes
     vgchange -ay
-}#}}}
+}
+#}}}
 # format_filesystems #{{{
 format_filesystems() {
     local boot_dev="$1"; shift
@@ -185,7 +189,8 @@ format_filesystems() {
     mkfs.ext4 -L root /dev/vg00/root
     mkfs.ext4 -L home /dev/vg00/home
     mkswap /dev/vg00/swap
-}#}}}
+}
+#}}}
 # mount_filesystems #{{{
 mount_filesystems() {
     local boot_dev="$1"; shift
@@ -194,7 +199,8 @@ mount_filesystems() {
     mkdir /mnt/boot
     mount "$boot_dev" /mnt/boot
     swapon /dev/vg00/swap
-}#}}}
+}
+#}}}
 # install_base #{{{
 install_base() {
     pacstrap /mnt base base-devel\
@@ -220,7 +226,8 @@ install_base() {
     fi
 
     pacstrap /mnt $packages
-}#}}}
+}
+#}}}
 # unmount_filesystems #{{{
 unmount_filesystems() {
     umount /mnt/boot
@@ -231,7 +238,8 @@ unmount_filesystems() {
     then
         cryptsetup luksClose lvm
     fi
-}#}}}
+}
+#}}}
 #}}}
 # Configuration{{{
 # configure() {#{{{
@@ -308,7 +316,8 @@ configure() {
     install_aur_packages
 
     rm /setup.sh
-}#}}}
+}
+#}}}
 # install_aur_packages() {#{{{
 install_aur_packages() {
 
@@ -340,15 +349,18 @@ install_aur_packages() {
         steam lutris \
         gimp kdenlive mpv mpd mpc ncmpcpp 
 
-}#}}}
+}
+#}}}
 # clean_packages() {#{{{
 clean_packages() {
     yes | pacman -Scc
-}#}}}
+}
+#}}}
 # update_pkgfile() {#{{{
 update_pkgfile() {
     pkgfile -u
-}#}}}
+}
+#}}}
 # set_hostname() {#{{{
 set_hostname() {
     local hostname="$1"; shift
@@ -359,13 +371,15 @@ set_hostname() {
 127.0.0.1 localhost.localdomain localhost $hostname
 ::1       localhost.localdomain localhost $hostname
 EOF
-}#}}}
+}
+#}}}
 # set_timezone() {#{{{
 set_timezone() {
     local timezone="$1"; shift
 
     ln -sT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
-}#}}}
+}
+#}}}
 # set_locale() {#{{{
 set_locale() {
     # echo "LANG=$LANG" >> /etc/locale.conf
@@ -374,11 +388,13 @@ set_locale() {
     echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
     echo "$LANG       UTF-8" >> /etc/locale.gen
     locale-gen
-}#}}}
+}
+#}}}
 # set_keymap() {#{{{
 set_keymap() {
     echo "KEYMAP=$KEYMAP" > /etc/vconsole.conf
-}#}}}
+}
+#}}}
 # set_fstab() {#{{{
 set_fstab() {
     local tmp_on_tmpfs="$1"; shift
@@ -398,7 +414,8 @@ set_fstab() {
 
 UUID=$boot_uuid /boot ext2 defaults,relatime 0 2
 EOF
-}#}}}
+}
+#}}}
 # set_initcpio() {#{{{
 set_initcpio() {
     local vid
@@ -490,7 +507,8 @@ HOOKS=(base udev autodetect modconf block $encrypt lvm2 filesystems keyboard fsc
 EOF
 
     mkinitcpio -P
-}#}}}
+}
+#}}}
 # set_daemons() {#{{{
 set_daemons() {
     local tmp_on_tmpfs="$1"; shift
@@ -501,7 +519,8 @@ set_daemons() {
     then
         systemctl mask tmp.mount
     fi
-}#}}}
+}
+#}}}
 # set_bootctl() {#{{{
 set_bootctl() {
     local lvm_dev="$1"; shift
@@ -527,7 +546,8 @@ options $crypt
 EOF
 
     bootctl install
-}#}}}
+}
+#}}}
 # set_sudoers() {#{{{
 set_sudoers() {
     cat > /etc/sudoers <<EOF
@@ -631,13 +651,15 @@ root ALL=(ALL) ALL
 EOF
 
     chmod 440 /etc/sudoers
-}#}}}
+}
+#}}}
 # set_root_password() {#{{{
 set_root_password() {
     local password="$1"; shift
 
     echo -en "$password\n$password" | passwd
-}#}}}
+}
+#}}}
 # create_user() {#{{{
 create_user() {
     local name="$1"; shift
@@ -645,15 +667,18 @@ create_user() {
 
     useradd -m -s /bin/zsh -G adm,systemd-journal,wheel,rfkill,games,network,video,audio,optical,floppy,storage,scanner,power,adbusers,wireshark "$name"
     echo -en "$password\n$password" | passwd "$name"
-}#}}}
+}
+#}}}
 # update_locate() {#{{{
 update_locate() {
     updatedb
-}#}}}
+}
+#}}}
 # get_uuid() {#{{{
 get_uuid() {
     blkid -o export "$1" | grep UUID | awk -F= '{print $2}'
-}#}}}
+}
+#}}}
 #}}}
 set -ex
 
