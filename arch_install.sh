@@ -380,11 +380,16 @@ set_timezone() {
 #}}}
 # set_locale() {#{{{
 set_locale() {
-    # echo "LANG=$LANG" >> /etc/locale.conf
-    echo "LANG=$LANG" >> /etc/locale.
-    echo "LC_COLLATE=C" >> /etc/locale.conf
-    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-    echo "$LANG       UTF-8" >> /etc/locale.gen
+    cat > /etc/locale.conf <<EOF
+LANG=$LANG
+LC_COLLATE=C
+EOF
+
+    cat > /etc/locale.gen <<EOF
+en_US.UTF-8 UTF-8
+$LANG       UTF-8
+EOF
+
     locale-gen
 }
 #}}}
@@ -659,6 +664,7 @@ set_bootctl() {
         crypt="root=UUID=$lvm_uuid"
     fi
 
+    bootctl install
     cat > /boot/loader/entries/arch.conf <<EOF
 title arch
 
@@ -670,7 +676,6 @@ options $crypt
 #options quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0 $crypt
 EOF
 
-    bootctl install
 }
 #}}}
 # set_sudoers() {#{{{
