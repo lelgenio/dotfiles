@@ -628,6 +628,12 @@ get_uuid() {#{{{
 #}}}
 set -ex
 
+if [ ! "$USER" == "root"  ]
+then
+    echo whoa there cowboy(girl)
+    echo You almost lost your stuff!!
+    exit 1
+fi
 if [ "$1" == "chroot" ]
 then
     configure
