@@ -41,9 +41,10 @@ export PAGER=less
             export QT_SCALE_FACTOR=1
             export QPA_PLATFORM=wayland
             export QT_QPA_PLATFORM=wayland
-            export GTK_CSD=0
             export _JAVA_AWT_WM_NONREPARENTING=1
+            export GTK_CSD=0
             export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
+            export XCURSOR_THEME=capitaine-cursors
             exec sway
         fi
     fi

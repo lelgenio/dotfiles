@@ -191,9 +191,9 @@
     for_window [app_id="pavucontrol"] floating enable
 
     # Volume controll
-    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-    bindsym XF86AudioMute        exec pactl set-sink-mute   @DEFAULT_SINK@ toggle
+    bindsym XF86AudioRaiseVolume exec  pavolume volup   5
+    bindsym XF86AudioLowerVolume exec  pavolume voldown 5
+    bindsym XF86AudioMute        exec  pavolume mutetoggle
 
     # Media player controls
     bindsym XF86AudioPlay  exec  mpc -q toggle                  
@@ -228,6 +228,16 @@
 	smart_borders on
 
     for_window [app_id=mpv] floating toggle
+
+    # set theme
+    set $gnome-schema org.gnome.desktop.interface
+    exec_always {
+        gsettings set $gnome-schema gtk-theme 'materia-custom-accent-dark'
+        gsettings set $gnome-schema icon-theme 'Papirus-Dark'
+        # gsettings set $gnome-schema cursor-theme 'capitaine-cursors-light'
+        kvantummanager --set MateriaDark
+    }
+
 # }}}
 # Daemons {{{
 #
