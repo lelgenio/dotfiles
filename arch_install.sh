@@ -1,5 +1,6 @@
 #!/bin/bash
 #
+pacman -Sy 
 #LICENSE#{{{
 # Copyright (c) 2012 Tom Wambold
 # 
@@ -39,8 +40,6 @@
 #    set_netcfg - Preload netcfg profiles
 #}}}
 # CONFIGURE THESE VARIABLES{{{
-## ALSO LOOK AT THE install_packages FUNCTION TO SEE WHAT IS ACTUALLY INSTALLED
-
 # Drive to install to.
 DRIVE='/dev/sda'
 
@@ -58,6 +57,8 @@ ROOT_PASSWORD=''
 
 # Main user to create (by default, added to wheel group, and others).
 USER_NAME='lelgenio'
+DOTFILES_URL='https://gitlab.com/lelgenio/dotfiles.git'
+USER_SHELL='zsh'
 
 # The main user's password (leave blank to be prompted).
 USER_PASSWORD=''
@@ -83,6 +84,71 @@ VIDEO_DRIVER="i915"
 #VIDEO_DRIVER="radeon"
 # For generic stuff
 #VIDEO_DRIVER="vesa"
+
+REMOVE_PKGS='TRUE'
+# PACKAGES{{{
+    pkgs=''
+
+    pkgs+=' base linux-zen linux-firmware intel-ucode networkmanager cronie git'
+    pkgs+=" $(pacman -Qqg base-devel)"
+    # DE
+    pkgs+=' sway light mako udiskie wofi-hg stow yay pamac-aur'
+    pkgs+=' nemo redshift-wlr-gamma-control-git '
+    pkgs+=' htop-vim-git'
+    # Screenshot
+    pkgs+=' grim slurp wl-clipboard wf-recorder-git'
+    # Audio
+    pkgs+=' pulseaudio pavolume-git'
+    pkgs+=' httpie jq python-keepmenu-git'
+    # Fonts
+    pkgs+=' ttf-hack inter-font'
+    # Theme
+    pkgs+=' materia-custom-accent papirus-icon-theme'
+    pkgs+=' papirus-folders-git capitaine-cursors '
+    # Terminal
+    pkgs+=' kitty neovim tmux ranger atool p7zip tree'
+    pkgs+=' zsh neofetch powerline-fonts'
+    pkgs+=' lolcat cmatrix'
+    # Network
+    pkgs+=' rsync rclone nmap gnu-netcat tor mtr speedtest-cli'
+    # Browser
+    pkgs+=' qutebrowser youtube-dl'
+    # Email
+    pkgs+=' evolution mutt-wizard-git neomutt' 
+    # Files
+    pkgs+=' syncthing nextcloud-client ' 
+    pkgs+=' deluge deezloader-remix-bin smloadr' 
+    # Media
+    pkgs+=' mpv mpd mpc ncmpcpp '
+    pkgs+=' blender gimp kdenlive picard image_optim' 
+    # Office
+    pkgs+=' libreoffice-fresh libreoffice-fresh-pt-br papirus-libreoffice-theme'
+    # Programing
+    pkgs+=' code neovim python-pynvim neovim-symlinks ipython how2'
+    # Virt
+    pkgs+=' qemu'
+    # Gtk
+    pkgs+=' gtk3-nocsd-git'
+    # Qt
+    pkgs+=' qt5-base qt5-wayland qt5ct kvantum-qt5'
+    # Chat
+    pkgs+=' discord telegram-desktop telegram-cli-git'
+    # Gaming
+    pkgs+=' steam lutris gamemode lutris-wine-meta wine-mono winetricks'
+    if [ "$VIDEO_DRIVER" == "i915" ];then
+        pkgs+=' xf86-video-intel '
+        pkgs+=' lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader'
+    elif [ "$VIDEO_DRIVER" == "radeon" ];then
+        pkgs+=' xf86-video-ati'
+        pkgs+='  lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader'
+    elif [ "$VIDEO_DRIVER" == "nouveau" ];then
+        pkgs+=' xf86-video-nouveau'
+        pkgs+=' nvidia nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader'
+    elif [ "$VIDEO_DRIVER" = "vesa" ];then
+        packages+=' xf86-video-vesa'
+    fi
+
+#}}}
 #}}}
 # Initial Setup{{{
 # Base install{{{
@@ -203,27 +269,9 @@ mount_filesystems() {
 #}}}
 # install_base #{{{
 install_base() {
-    pacstrap /mnt base base-devel\
-        linux-zen linux-firmware\
-        networkmanager cronie git
+    local packages='base base-devel linux-zen linux-firmware networkmanager cronie git'
 
-    local packages=''
-
-    # On Intel processors
     packages+=' intel-ucode'
-    if [ "$VIDEO_DRIVER" = "i915" ]
-    then
-        packages+=' xf86-video-intel libva-intel-driver'
-    elif [ "$VIDEO_DRIVER" = "nouveau" ]
-    then
-        packages+=' xf86-video-nouveau'
-    elif [ "$VIDEO_DRIVER" = "radeon" ]
-    then
-        packages+=' xf86-video-ati'
-    elif [ "$VIDEO_DRIVER" = "vesa" ]
-    then
-        packages+=' xf86-video-vesa'
-    fi
 
     pacstrap /mnt $packages
 }
@@ -246,32 +294,6 @@ unmount_filesystems() {
 configure() {
     local boot_dev="$DRIVE"1
     local lvm_dev="$DRIVE"2
-
-    echo 'Updating pkgfile database'
-    update_pkgfile
-
-    if [ -z "$ROOT_PASSWORD" ]
-    then
-        echo 'Enter the root password:'
-        stty -echo
-        read ROOT_PASSWORD
-        stty echo
-    fi
-    echo 'Setting root password'
-    set_root_password "$ROOT_PASSWORD"
-
-    if [ -z "$USER_PASSWORD" ]
-    then
-        echo "Enter the password for user $USER_NAME"
-        stty -echo
-        read USER_PASSWORD
-        stty echo
-    fi
-    echo 'Creating initial user'
-    create_user "$USER_NAME" "$USER_PASSWORD"
-
-    echo 'Installing AUR packages'
-    # install_aur_packages
 
     echo 'Setting hostname'
     set_hostname "$HOSTNAME"
@@ -297,62 +319,48 @@ configure() {
     echo 'Setting initial daemons'
     set_daemons "$TMP_ON_TMPFS"
 
+    echo 'Configuring Bluetooth'
+    set_bluetooth 
+
     echo 'Configuring bootloader'
-    set_syslinux "$lvm_dev"
+    set_bootctl "$lvm_dev"
 
     echo 'Configuring sudo'
     set_sudoers
 
-    echo 'Configuring slim'
-    set_slim
+    echo 'Configuring PAM'
+    set_pam
 
-    echo 'Clearing package tarballs'
-    clean_packages
+    if [ -z "$ROOT_PASSWORD" ]
+    then
+        echo 'Enter the root password:'
+        stty -echo
+        read ROOT_PASSWORD
+        stty echo
+    fi
+    echo 'Setting root password'
+    set_root_password "$ROOT_PASSWORD"
+
+    if [ -z "$USER_PASSWORD" ]
+    then
+        echo "Enter the password for user $USER_NAME"
+        stty -echo
+        read USER_PASSWORD
+        stty echo
+    fi
+    echo 'Creating initial user'
+    create_user "$USER_NAME" "$USER_PASSWORD"
+
+    echo 'setting up user'
+    cp $0 /home/$USER_NAME/setup.sh
+    chown $USER_NAME /home/$USER_NAME/setup.sh
+    su $USER_NAME -c /home/$USER_NAME/setup.sh
+    rm /home/$USER_NAME/setup.sh
+
+    echo 'Updating pkgfile database'
+    update_pkgfile
 
     rm /setup.sh
-}
-#}}}
-# install_aur_packages() {#{{{
-install_aur_packages() {
-
-    sudo pacman -S --needed \
-        git pacman-contrib \
-        base base-devel \
-        linux-zen linux-firmware 
-
-    # getting yay
-    if [ ! -x /bin/yay ];
-    then
-        git clone http://aur.archlinux.org/yay.git ~/yay
-        cd ~/yay
-        makepkg -si
-        cd -
-    fi
-
-    # Install a lot of things
-    yay -Syu --noconfirm --needed \
-        sway light mako pulseaudio pavolume-git udiskie wofi-hg \
-        httpie jq python-keepmenu-git\
-        ttf-hack inter-font\
-        grim slurp wl-clipboard\
-        materia-custom-accent papirus-icon-theme-git\
-        papirus-folders-git capitaine-cursors \
-        termite neovim ranger mimeo atool\
-        zsh powerline-fonts\
-        qutebrowser \
-        steam lutris \
-        gimp kdenlive mpv mpd mpc ncmpcpp 
-
-}
-#}}}
-# clean_packages() {#{{{
-clean_packages() {
-    yes | pacman -Scc
-}
-#}}}
-# update_pkgfile() {#{{{
-update_pkgfile() {
-    pkgfile -u
 }
 #}}}
 # set_hostname() {#{{{
@@ -515,6 +523,133 @@ set_daemons() {
     fi
 }
 #}}}
+# set_bluetooth{{{
+set_bluetooth() {
+    cat >> /etc/bluetooth/main.conf <<EOF
+
+[General]
+
+# Default adapter name
+# Defaults to 'BlueZ X.YZ'
+#Name = BlueZ
+
+# Default device class. Only the major and minor device class bits are
+# considered. Defaults to '0x000000'.
+#Class = 0x000100
+
+# How long to stay in discoverable mode before going back to non-discoverable
+# The value is in seconds. Default is 180, i.e. 3 minutes.
+# 0 = disable timer, i.e. stay discoverable forever
+DiscoverableTimeout = 0
+Discoverable = true
+
+# Always allow pairing even if there are no agent registered
+# Possible values: true, false
+# Default: false
+AlwaysPairable = true
+
+# How long to stay in pairable mode before going back to non-discoverable
+# The value is in seconds. Default is 0.
+# 0 = disable timer, i.e. stay pairable forever
+#PairableTimeout = 0
+
+# Use vendor id source (assigner), vendor, product and version information for
+# DID profile support. The values are separated by ":" and assigner, VID, PID
+# and version.
+# Possible vendor id source values: bluetooth, usb (defaults to usb)
+#DeviceID = bluetooth:1234:5678:abcd
+
+# Do reverse service discovery for previously unknown devices that connect to
+# us. For BR/EDR this option is really only needed for qualification since the
+# BITE tester doesn't like us doing reverse SDP for some test cases, for LE
+# this disables the GATT client functionally so it can be used in system which
+# can only operate as peripheral.
+# Defaults to 'true'.
+#ReverseServiceDiscovery = true
+
+# Enable name resolving after inquiry. Set it to 'false' if you don't need
+# remote devices name and want shorter discovery cycle. Defaults to 'true'.
+#NameResolving = true
+
+# Enable runtime persistency of debug link keys. Default is false which
+# makes debug link keys valid only for the duration of the connection
+# that they were created for.
+#DebugKeys = false
+
+# Restricts all controllers to the specified transport. Default value
+# is "dual", i.e. both BR/EDR and LE enabled (when supported by the HW).
+# Possible values: "dual", "bredr", "le"
+#ControllerMode = dual
+
+# Enables Multi Profile Specification support. This allows to specify if
+# system supports only Multiple Profiles Single Device (MPSD) configuration
+# or both Multiple Profiles Single Device (MPSD) and Multiple Profiles Multiple
+# Devices (MPMD) configurations.
+# Possible values: "off", "single", "multiple"
+#MultiProfile = off
+
+# Permanently enables the Fast Connectable setting for adapters that
+# support it. When enabled other devices can connect faster to us,
+# however the tradeoff is increased power consumptions. This feature
+# will fully work only on kernel version 4.1 and newer. Defaults to
+# 'false'.
+#FastConnectable = false
+
+# Default privacy setting.
+# Enables use of private address.
+# Possible values: "off", "device", "network"
+# "network" option not supported currently
+# Defaults to "off"
+# Privacy = off
+
+[GATT]
+# GATT attribute cache.
+# Possible values:
+# always: Always cache attributes even for devices not paired, this is
+# recommended as it is best for interoperability, with more consistent
+# reconnection times and enables proper tracking of notifications for all
+# devices.
+# yes: Only cache attributes of paired devices.
+# no: Never cache attributes
+# Default: always
+#Cache = always
+
+# Minimum required Encryption Key Size for accessing secured characteristics.
+# Possible values: 0 and 7-16. 0 means don't care.
+# Defaults to 0
+#KeySize = 0
+
+# Exchange MTU size.
+# Possible values: 23-517
+# Defaults to 517
+#ExchangeMTU = 517
+
+[Policy]
+#
+# The ReconnectUUIDs defines the set of remote services that should try
+# to be reconnected to in case of a link loss (link supervision
+# timeout). The policy plugin should contain a sane set of values by
+# default, but this list can be overridden here. By setting the list to
+# empty the reconnection feature gets disabled.
+#ReconnectUUIDs=00001112-0000-1000-8000-00805f9b34fb,0000111f-0000-1000-8000-00805f9b34fb,0000110a-0000-1000-8000-00805f9b34fb
+
+# ReconnectAttempts define the number of attempts to reconnect after a link
+# lost. Setting the value to 0 disables reconnecting feature.
+#ReconnectAttempts=7
+
+# ReconnectIntervals define the set of intervals in seconds to use in between
+# attempts.
+# If the number of attempts defined in ReconnectAttempts is bigger than the
+# set of intervals the last interval is repeated until the last attempt.
+#ReconnectIntervals=1,2,4,8,16,32,64
+
+# AutoEnable defines option to enable all controllers when they are found.
+# This includes adapters present on start as well as adapters that are plugged
+# in later on. Defaults to 'false'.
+AutoEnable=true
+EOF
+}
+#}}}
 # set_bootctl() {#{{{
 set_bootctl() {
     local lvm_dev="$1"; shift
@@ -647,6 +782,13 @@ EOF
     chmod 440 /etc/sudoers
 }
 #}}}
+# set_pam{{{
+set_pam() {
+    cat >> /etc/pam.d/login <<EOF
+session    optional     pam_gnome_keyring.so auto_start
+EOF
+}
+#}}}
 # set_root_password() {#{{{
 set_root_password() {
     local password="$1"; shift
@@ -659,8 +801,13 @@ create_user() {
     local name="$1"; shift
     local password="$1"; shift
 
-    useradd -m -s /bin/zsh -G adm,systemd-journal,wheel,rfkill,games,network,video,audio,optical,floppy,storage,scanner,power,adbusers,wireshark "$name"
+    useradd -m -s =$USER_SHELL -G adm,systemd-journal,wheel,rfkill,games,network,video,audio,optical,floppy,storage,scanner,power,adbusers,wireshark "$name"
     echo -en "$password\n$password" | passwd "$name"
+}
+#}}}
+# update_pkgfile() {#{{{
+update_pkgfile() {
+    pkgfile -u
 }
 #}}}
 # get_uuid() {#{{{
@@ -669,21 +816,67 @@ get_uuid() {
 }
 #}}}
 #}}}
+# User setup{{{
+user_setup() {
+
+    echo 'Installing packages'
+    install_aur_packages
+
+    if [ "$REMOVE_PKGS" == "TRUE" ];then
+        echo 'Cleaning packages'
+        clean_packages
+    fi
+
+    echo 'Stowing dotfiles'
+    stow_dots
+}
+# Install AUR packages #{{{
+install_aur_packages() {
+
+    sudo pacman -S --needed git
+
+    # getting yay
+    if [ ! -x /bin/yay ];
+    then
+        git clone http://aur.archlinux.org/yay.git ~/yay
+        cd ~/yay
+        makepkg -si --noconfirm
+        cd -
+    fi
+
+    yay -Syu --noconfirm --needed $pkgs
+}
+#}}}
+# Clean up packages #{{{
+clean_packages() {
+    yay -D --asdeps $(yay -Qqe)
+    yay -D --asexplicit $pkgs
+    TO_REMOVE=$(yay -Qtdq)
+    if [ -n "$TO_REMOVE" ];then
+        yay -Rns --noconfirm $TO_REMOVE
+    fi
+    yay -Scc --noconfirm
+}
+#}}}
+# Stow dotfiles{{{
+stow_dots() {
+    if [ ! -d  ~/.dotfiles ];then
+        git clone $DOTFILES_URL ~/.dotfiles
+    fi
+    cd ~/.dotfiles
+    rm ~/.config/mimeapps.list
+    stow */
+    cp mime/.config/mimeapps.list ~/.config/mimeapps.list
+    cd -
+}
+#}}}
+#}}}
 set -ex
 
-if [ ! "$USER" == "root"  ]
-then
-    echo "whoa there cowboy(girl)"
-    echo "You almost lost your stuff!!"
-    exit 1
-fi
-
-if [ "$1" == "chroot" ]
-then
+if [ ! "$USER" == "root"  ];then
+    user_setup
+elif [ "$1" == "chroot" ];then
     configure
-elif [ "$1" == "pkg" ]
-then
-    install_aur_packages
 else
     setup
 fi
