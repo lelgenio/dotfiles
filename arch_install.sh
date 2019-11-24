@@ -81,8 +81,9 @@ VIDEO_DRIVER="i915"
 # For generic stuff
 #VIDEO_DRIVER="vesa"
 
-# Setup{{{
-setup() {#{{{
+# Initial Setup{{{
+# Base install{{{
+setup() { 
     local boot_dev="$DRIVE"1
     local lvm_dev="$DRIVE"2
 
@@ -134,7 +135,8 @@ setup() {#{{{
         echo 'Done! Reboot system.'
     fi
 }#}}}
-partition_drive() {#{{{
+# Partition Drive{{{
+partition_drive() { 
     local dev="$1"; shift
 
     # 100 MB /boot partition, everything else under LVM
@@ -145,7 +147,8 @@ partition_drive() {#{{{
         set 1 boot on\
         set 2 lvm  on
 }#}}}
-encrypt_drive() {#{{{
+encrypt_drive #{{{
+encrypt_drive() {
     local dev="$1"; shift
     local passphrase="$1"; shift
     local name="$1"; shift
@@ -153,7 +156,8 @@ encrypt_drive() {#{{{
     echo -en "$passphrase" | cryptsetup luksFormat "$dev"
     echo -en "$passphrase" | cryptsetup luksOpen "$dev" lvm
 }#}}}
-setup_lvm() {#{{{
+# setup_lvm{{{
+setup_lvm() {
     local partition="$1"; shift
     local volgroup="$1"; shift
 
@@ -170,7 +174,8 @@ setup_lvm() {#{{{
     # Enable the new volumes
     vgchange -ay
 }#}}}
-format_filesystems() {#{{{
+# format_filesystems #{{{
+format_filesystems() {
     local boot_dev="$1"; shift
 
     mkfs.fat  -L boot "$boot_dev"
@@ -178,7 +183,8 @@ format_filesystems() {#{{{
     mkfs.ext4 -L home /dev/vg00/home
     mkswap /dev/vg00/swap
 }#}}}
-mount_filesystems() {#{{{
+# mount_filesystems #{{{
+mount_filesystems() {
     local boot_dev="$1"; shift
 
     mount /dev/vg00/root /mnt
@@ -186,7 +192,8 @@ mount_filesystems() {#{{{
     mount "$boot_dev" /mnt/boot
     swapon /dev/vg00/swap
 }#}}}
-install_base() {#{{{
+# install_base #{{{
+install_base() {
     pacstrap /mnt base base-devel\
         linux-zen linux-firmware\
         networkmanager git
@@ -211,7 +218,8 @@ install_base() {#{{{
 
     pacstrap /mnt $packages
 }#}}}
-unmount_filesystems() {#{{{
+# unmount_filesystems #{{{
+unmount_filesystems() {
     umount /mnt/boot
     umount /mnt
     swapoff /dev/vg00/swap
@@ -223,7 +231,8 @@ unmount_filesystems() {#{{{
 }#}}}
 #}}}
 # Configuration{{{
-configure() {#{{{
+# configure() {#{{{
+configure() {
     local boot_dev="$DRIVE"1
     local lvm_dev="$DRIVE"2
 
@@ -297,7 +306,8 @@ configure() {#{{{
 
     rm /setup.sh
 }#}}}
-install_aur_packages() {#{{{
+# install_aur_packages() {#{{{
+install_aur_packages() {
 
     sudo pacman -S --needed \
         git pacman-contrib \
@@ -328,13 +338,16 @@ install_aur_packages() {#{{{
         gimp kdenlive mpv mpd mpc ncmpcpp 
 
 }#}}}
-clean_packages() {#{{{
+# clean_packages() {#{{{
+clean_packages() {
     yes | pacman -Scc
 }#}}}
-update_pkgfile() {#{{{
+# update_pkgfile() {#{{{
+update_pkgfile() {
     pkgfile -u
 }#}}}
-set_hostname() {#{{{
+# set_hostname() {#{{{
+set_hostname() {
     local hostname="$1"; shift
 
     echo "$hostname" > /etc/hostname
@@ -344,22 +357,26 @@ set_hostname() {#{{{
 ::1       localhost.localdomain localhost $hostname
 EOF
 }#}}}
-set_timezone() {#{{{
+# set_timezone() {#{{{
+set_timezone() {
     local timezone="$1"; shift
 
     ln -sT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
 }#}}}
 set_locale() {#{{{
-    echo "LANG=$LANG" >> /etc/locale.conf
+    # echo "LANG=$LANG" >> /etc/locale.conf
+    echo "LANG=$LANG" >> /etc/locale.
     echo "LC_COLLATE=C" >> /etc/locale.conf
     echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
     echo "$LANG       UTF-8" >> /etc/locale.gen
     locale-gen
 }#}}}
-set_keymap() {#{{{
+# set_keymap() {#{{{
+set_keymap() {
     echo "KEYMAP=$KEYMAP" > /etc/vconsole.conf
 }#}}}
-set_fstab() {#{{{
+# set_fstab() {#{{{
+set_fstab() {
     local tmp_on_tmpfs="$1"; shift
     local boot_dev="$1"; shift
 
@@ -378,7 +395,8 @@ set_fstab() {#{{{
 UUID=$boot_uuid /boot ext2 defaults,relatime 0 2
 EOF
 }#}}}
-set_initcpio() {#{{{
+# set_initcpio() {#{{{
+set_initcpio() {
     local vid
 
     if [ "$VIDEO_DRIVER" = "i915" ]
@@ -469,7 +487,8 @@ EOF
 
     mkinitcpio -P
 }#}}}
-set_daemons() {#{{{
+# set_daemons() {#{{{
+set_daemons() {
     local tmp_on_tmpfs="$1"; shift
 
     systemctl enable cronie.service NetworkManager.service
@@ -479,7 +498,8 @@ set_daemons() {#{{{
         systemctl mask tmp.mount
     fi
 }#}}}
-set_bootctl() {#{{{
+# set_bootctl() {#{{{
+set_bootctl() {
     local lvm_dev="$1"; shift
 
     local lvm_uuid=$(get_uuid "$lvm_dev")
@@ -504,7 +524,8 @@ EOF
 
     bootctl install
 }#}}}
-set_sudoers() {#{{{
+# set_sudoers() {#{{{
+set_sudoers() {
     cat > /etc/sudoers <<EOF
 ## sudoers file.
 ##
@@ -607,27 +628,37 @@ EOF
 
     chmod 440 /etc/sudoers
 }#}}}
-set_root_password() {#{{{
+# set_root_password() {#{{{
+set_root_password() {
     local password="$1"; shift
 
     echo -en "$password\n$password" | passwd
 }#}}}
-create_user() {#{{{
+# create_user() {#{{{
+create_user() {
     local name="$1"; shift
     local password="$1"; shift
 
     useradd -m -s /bin/zsh -G adm,systemd-journal,wheel,rfkill,games,network,video,audio,optical,floppy,storage,scanner,power,adbusers,wireshark "$name"
     echo -en "$password\n$password" | passwd "$name"
 }#}}}
-update_locate() {#{{{
+# update_locate() {#{{{
+update_locate() {
     updatedb
 }#}}}
-get_uuid() {#{{{
+# get_uuid() {#{{{
+get_uuid() {
     blkid -o export "$1" | grep UUID | awk -F= '{print $2}'
 }#}}}
 #}}}
 set -ex
 
+if [ ! "$USER" == "root"  ]
+then
+    echo whoa there cowboy(girl)
+    echo You almost lost your stuff!!
+    exit 1
+fi
 if [ "$1" == "chroot" ]
 then
     configure
