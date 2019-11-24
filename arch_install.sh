@@ -185,7 +185,7 @@ setup_lvm() {
 format_filesystems() {
     local boot_dev="$1"; shift
 
-    mkfs.fat  -L boot "$boot_dev"
+    mkfs.fat  "$boot_dev"
     mkfs.ext4 -L root /dev/vg00/root
     mkfs.ext4 -L home /dev/vg00/home
     mkswap /dev/vg00/swap
