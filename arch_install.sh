@@ -1,4 +1,6 @@
 #!/bin/bash
+#
+#LICENSE#{{{
 # Copyright (c) 2012 Tom Wambold
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,7 +20,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
+#}}}
+#ABOUT#{{{
 # This script will set up an Arch installation with a 100 MB /boot partition
 # and an encrypted LVM partition with swap and / inside.  It also installs
 # and configures systemd as the init system (removing sysvinit).
@@ -34,8 +37,8 @@
 #    install_aur_packages - More packages after packer (AUR helper) is
 #                           installed
 #    set_netcfg - Preload netcfg profiles
-
-## CONFIGURE THESE VARIABLES
+#}}}
+# CONFIGURE THESE VARIABLES{{{
 ## ALSO LOOK AT THE install_packages FUNCTION TO SEE WHAT IS ACTUALLY INSTALLED
 
 # Drive to install to.
@@ -80,7 +83,7 @@ VIDEO_DRIVER="i915"
 #VIDEO_DRIVER="radeon"
 # For generic stuff
 #VIDEO_DRIVER="vesa"
-
+#}}}
 # Initial Setup{{{
 # Base install{{{
 setup() { 
@@ -656,8 +659,8 @@ set -ex
 
 if [ ! "$USER" == "root"  ]
 then
-    echo whoa there cowboy(girl)
-    echo You almost lost your stuff!!
+    echo "whoa there cowboy(girl)"
+    echo "You almost lost your stuff!!"
     exit 1
 fi
 if [ "$1" == "chroot" ]
