@@ -87,10 +87,13 @@ VIDEO_DRIVER="i915"
 
 REMOVE_PKGS='TRUE'
 # PACKAGES{{{
-    pkgs=''
+    pkgs_base=''
+    pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 networkmanager bluez cronie git'
+    pkgs_base+=" $(pacman -Qqg base-devel)"
 
-    pkgs+=' base linux-zen linux-firmware intel-ucode networkmanager cronie git'
-    pkgs+=" $(pacman -Qqg base-devel)"
+
+    pkgs=''
+    pkgs+=" $pkgs_base"
     # DE
     pkgs+=' sway light mako udiskie wofi-hg stow yay pamac-aur'
     pkgs+=' nemo redshift-wlr-gamma-control-git '
@@ -269,11 +272,7 @@ mount_filesystems() {
 #}}}
 # install_base #{{{
 install_base() {
-    local packages='base base-devel linux-zen linux-firmware networkmanager cronie git'
-
-    packages+=' intel-ucode'
-
-    pacstrap /mnt $packages
+    pacstrap /mnt $pkgs_base
 }
 #}}}
 # unmount_filesystems #{{{
@@ -309,9 +308,6 @@ configure() {
 
     echo 'Setting fstab'
     set_fstab "$TMP_ON_TMPFS" "$boot_dev"
-
-    echo 'Setting initial modules to load'
-    set_modules_load
 
     echo 'Configuring initial ramdisk'
     set_initcpio
@@ -379,7 +375,7 @@ EOF
 set_timezone() {
     local timezone="$1"; shift
 
-    ln -sT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
+    ln -sfT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
 }
 #}}}
 # set_locale() {#{{{
