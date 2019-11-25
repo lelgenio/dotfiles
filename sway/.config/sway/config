@@ -217,10 +217,6 @@
     client.unfocused        $bg_color   $bg_color   $fg_color   $bg_color   $bg_color
     client.urgent           $alert      $alert      $fg_color   $alert      $alert
 
-    # this is borked ↓
-    bar swaybar_command waybar
-    # exec_always pkill waybar; waybar
-
     default_border pixel 2px
     gaps inner 5px
 
@@ -241,6 +237,8 @@
 # }}}
 # Daemons {{{
 #
+
+    exec bash -c 'while true;do waybar;done'
     #Notification Daemon
     exec mako
     # Block device Mounter to /run/media/<username>
