@@ -39,7 +39,7 @@
 #    set_netcfg - Preload netcfg profiles
 #}}}
 # PACKAGES{{{
-    pacman -Sy 
+    sudo pacman -Sy 
 
     pkgs_base=''
     pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
