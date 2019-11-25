@@ -1,6 +1,5 @@
 #!/bin/bash
 #
-pacman -Sy 
 #LICENSE#{{{
 # Copyright (c) 2012 Tom Wambold
 # 
@@ -39,57 +38,12 @@ pacman -Sy
 #                           installed
 #    set_netcfg - Preload netcfg profiles
 #}}}
-# CONFIGURE THESE VARIABLES{{{
-# Drive to install to.
-DRIVE='/dev/sda'
-
-# Hostname of the installed machine.
-HOSTNAME='arch'
-
-# Encrypt everything (except /boot).  Leave blank to disable.
-ENCRYPT_DRIVE=''
-
-# Passphrase used to encrypt the drive (leave blank to be prompted).
-DRIVE_PASSPHRASE=''
-
-# Root password (leave blank to be prompted).
-ROOT_PASSWORD=''
-
-# Main user to create (by default, added to wheel group, and others).
-USER_NAME='lelgenio'
-DOTFILES_URL='https://gitlab.com/lelgenio/dotfiles.git'
-USER_SHELL='zsh'
-
-# The main user's password (leave blank to be prompted).
-USER_PASSWORD=''
-
-# System timezone.
-TIMEZONE='America/Sao_Paulo'
-
-# Have /tmp on a tmpfs or not.  Leave blank to disable.
-# Only leave this blank on systems with very little RAM.
-TMP_ON_TMPFS='TRUE'
-
-KEYMAP='br-abnt2'
-# KEYMAP='dvorak'
-
-LANG=pt_BR.UTF-8
-
-# Choose your video driver
-# For Intel
-VIDEO_DRIVER="i915"
-# For nVidia
-#VIDEO_DRIVER="nouveau"
-# For ATI
-#VIDEO_DRIVER="radeon"
-# For generic stuff
-#VIDEO_DRIVER="vesa"
-
-REMOVE_PKGS='FALSE'
 # PACKAGES{{{
+    pacman -Sy 
+
     pkgs_base=''
     pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
-    pkgs_base+=' zsh networkmanager bluez cronie git'
+    pkgs_base+=' zsh networkmanager bluez cronie git man-db'
     pkgs_base+=" $(pacman -Qqg base-devel)"
 
 
@@ -153,6 +107,53 @@ REMOVE_PKGS='FALSE'
     fi
 
 #}}}
+# CONFIGURE THESE VARIABLES{{{
+# Drive to install to.
+DRIVE='/dev/sda'
+
+# Hostname of the installed machine.
+HOSTNAME='arch'
+
+# Encrypt everything (except /boot).  Leave blank to disable.
+ENCRYPT_DRIVE=''
+
+# Passphrase used to encrypt the drive (leave blank to be prompted).
+DRIVE_PASSPHRASE=''
+
+# Root password (leave blank to be prompted).
+ROOT_PASSWORD=''
+
+# Main user to create (by default, added to wheel group, and others).
+USER_NAME='lelgenio'
+DOTFILES_URL='https://gitlab.com/lelgenio/dotfiles.git'
+USER_SHELL='zsh'
+
+# The main user's password (leave blank to be prompted).
+USER_PASSWORD=''
+
+# System timezone.
+TIMEZONE='America/Sao_Paulo'
+
+# Have /tmp on a tmpfs or not.  Leave blank to disable.
+# Only leave this blank on systems with very little RAM.
+TMP_ON_TMPFS='TRUE'
+
+KEYMAP='br-abnt2'
+# KEYMAP='dvorak'
+
+LANG=pt_BR.UTF-8
+
+# Choose your video driver
+# For Intel
+VIDEO_DRIVER="i915"
+# For nVidia
+#VIDEO_DRIVER="nouveau"
+# For ATI
+#VIDEO_DRIVER="radeon"
+# For generic stuff
+#VIDEO_DRIVER="vesa"
+
+REMOVE_PKGS='FALSE'
 #}}}
 # Initial Setup{{{
 # Base install{{{
