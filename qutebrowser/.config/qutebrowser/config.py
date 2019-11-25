@@ -285,3 +285,6 @@ config.bind('K', 'tab-next')
 config.bind('j', 'scroll down')
 config.bind('k', 'scroll up')
 config.bind('spawn', '--userscript view_in_mpv')
+
+# Bindings for insert mode
+config.bind('<Ctrl+i>', 'spawn --userscript qute-keepass -p ~/Nextcloud/Senhas/Senhas.kdbx', mode='insert')
