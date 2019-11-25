@@ -232,10 +232,10 @@
     # set theme
     set $gnome-schema org.gnome.desktop.interface
     exec_always {
+        kvantummanager --set MateriaDark
         gsettings set $gnome-schema gtk-theme 'materia-custom-accent-dark'
         gsettings set $gnome-schema icon-theme 'Papirus-Dark'
-        # gsettings set $gnome-schema cursor-theme 'capitaine-cursors-light'
-        kvantummanager --set MateriaDark
+        gsettings set $gnome-schema cursor-theme 'capitaine-cursors'
     }
 
 # }}}
