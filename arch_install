@@ -697,11 +697,7 @@ stow_dots() {
         git clone $DOTFILES_URL ~/.dotfiles
     fi
     cd ~/.dotfiles
-    if [ -f "~/.config/mimeapps.list" ];then
-        rm ~/.config/mimeapps.list
-    fi
     stow */
-    cp mime/.config/mimeapps.list ~/.config/mimeapps.list
     cd -
 }
 #}}}
