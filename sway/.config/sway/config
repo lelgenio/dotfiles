@@ -253,6 +253,9 @@
     exec kdeconnect-indicator
     # Telegram
     exec telegram-desktop
+    # Music Player Daemon
+    exec 'mpd --no-daemon'
+    exec mpDris2
     # lock screen after a period of inactivity execp for fullscreen
     for_window [class=.*] inhibit_idle fullscreen
     exec swayidle -w \

@@ -128,7 +128,7 @@ FULL_INSTALL=false
         pkgs+=' syncthing nextcloud-client ' 
         pkgs+=' deluge deezloader-remix-bin smloadr' 
         # Media
-        pkgs+=' mpv mpd mpc ncmpcpp '
+        pkgs+=' mpv mpd mpdris2 mpc ncmpcpp '
         pkgs+=' blender gimp kdenlive picard image_optim' 
         # Office
         pkgs+=' libreoffice-fresh libreoffice-fresh-pt-br papirus-libreoffice-theme'
