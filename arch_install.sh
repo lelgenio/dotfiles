@@ -375,35 +375,11 @@ set_repos() {
     # /etc/pacman.conf{{{
     cat > /etc/pacman.conf <<EOF
 #
-# /etc/pacman.conf
-#
-# See the pacman.conf(5) manpage for option and repository directives
-
-#
 # GENERAL OPTIONS
 #
 [options]
-# The following paths are commented out with their default values listed.
-# If you wish to use different paths, uncomment and update the paths.
-#RootDir     = /
-#DBPath      = /var/lib/pacman/
-#CacheDir    = /var/cache/pacman/pkg/
-#LogFile     = /var/log/pacman.log
-#GPGDir      = /etc/pacman.d/gnupg/
-#HookDir     = /etc/pacman.d/hooks/
 HoldPkg     = pacman glibc
-#XferCommand = /usr/bin/curl -L -C - -f -o %o %u
-#XferCommand = /usr/bin/wget --passive-ftp -c -O %o %u
-#CleanMethod = KeepInstalled
-#UseDelta    = 0.7
 Architecture = auto
-
-# Pacman won't upgrade packages listed in IgnorePkg and members of IgnoreGroup
-#IgnorePkg   =
-#IgnoreGroup =
-
-#NoUpgrade   =
-#NoExtract   =
 
 # Misc options
 #UseSyslog
@@ -412,38 +388,13 @@ Color
 CheckSpace
 #VerbosePkgLists
 
-# By default, pacman accepts packages signed by keys that its local keyring
-# trusts (see pacman-key and its man page), as well as unsigned packages.
 SigLevel    = Required DatabaseOptional
 LocalFileSigLevel = Optional
 #RemoteFileSigLevel = Required
 
-# NOTE: You must run `pacman-key --init` before first using pacman; the local
-# keyring can then be populated with the keys of all official Arch Linux
-# packagers with `pacman-key --populate archlinux`.
-
 #
 # REPOSITORIES
-#   - can be defined here or included from another file
-#   - pacman will search repositories in the order defined here
-#   - local/custom mirrors can be added here or in separate files
-#   - repositories listed first will take precedence when packages
-#     have identical names, regardless of version number
-#   - URLs will have $repo replaced by the name of the current repo
-#   - URLs will have $arch replaced by the name of the architecture
 #
-# Repository entries are of the format:
-#       [repo-name]
-#       Server = ServerName
-#       Include = IncludePath
-#
-# The header [repo-name] is crucial - it must be present and
-# uncommented to enable the repo.
-#
-
-# The testing repositories are disabled by default. To enable, uncomment the
-# repo name header and Include lines. You can add preferred servers immediately
-# after the header, and they will be used before the default mirrors.
 
 #[testing]
 #Include = /etc/pacman.d/mirrorlist
@@ -460,8 +411,6 @@ Include = /etc/pacman.d/mirrorlist
 [community]
 Include = /etc/pacman.d/mirrorlist
 
-# If you want to run 32 bit applications on your x86_64 system,
-# enable the multilib repositories as required here.
 
 #[multilib-testing]
 #Include = /etc/pacman.d/mirrorlist
@@ -469,11 +418,6 @@ Include = /etc/pacman.d/mirrorlist
 [multilib]
 Include = /etc/pacman.d/mirrorlist
 
-# An example of a custom package repository.  See the pacman manpage for
-# tips on creating your own repositories.
-#[custom]
-#SigLevel = Optional TrustAll
-#Server = file:///home/custompkgs
 EOF
 #}}}
 # /etc/mirrorlist{{{
@@ -578,71 +522,14 @@ set_initcpio() {
 
     cat > /etc/mkinitcpio.conf <<EOF
 # vim:set ft=sh
-# MODULES
-# The following modules are loaded before any boot hooks are
-# run.  Advanced users may wish to specify all system modules
-# in this array.  For instance:
-#     MODULES=(piix ide_disk reiserfs)
 MODULES=(ext4 $vid)
 
-# BINARIES
-# This setting includes any additional binaries a given user may
-# wish into the CPIO image.  This is run last, so it may be used to
-# override the actual binaries included by a given hook
-# BINARIES are dependency parsed, so you may safely ignore libraries
 BINARIES=()
 
-# FILES
-# This setting is similar to BINARIES above, however, files are added
-# as-is and are not parsed in any way.  This is useful for config files.
 FILES=()
 
-# HOOKS
-# This is the most important setting in this file.  The HOOKS control the
-# modules and scripts added to the image, and what happens at boot time.
-# Order is important, and it is recommended that you do not change the
-# order in which HOOKS are added.  Run 'mkinitcpio -H <hook name>' for
-# help on a given hook.
-# 'base' is _required_ unless you know precisely what you are doing.
-# 'udev' is _required_ in order to automatically load modules
-# 'filesystems' is _required_ unless you specify your fs modules in MODULES
-# Examples:
-##   This setup specifies all modules in the MODULES setting above.
-##   No raid, lvm2, or encrypted root is needed.
-#    HOOKS=(base)
-#
-##   This setup will autodetect all modules for your system and should
-##   work as a sane default
-#    HOOKS=(base udev autodetect block filesystems)
-#
-##   This setup will generate a 'full' image which supports most systems.
-##   No autodetection is done.
-#    HOOKS=(base udev block filesystems)
-#
-##   This setup assembles a pata mdadm array with an encrypted root FS.
-##   Note: See 'mkinitcpio -H mdadm' for more information on raid devices.
-#    HOOKS=(base udev block mdadm encrypt filesystems)
-#
-##   This setup loads an lvm2 volume group on a usb device.
-#    HOOKS=(base udev block lvm2 filesystems)
-#
-##   NOTE: If you have /usr on a separate partition, you MUST include the
-#    usr, fsck and shutdown hooks.
 HOOKS=(base udev autodetect modconf block $encrypt lvm2 filesystems keyboard fsck)
 
-# COMPRESSION
-# Use this to compress the initramfs image. By default, gzip compression
-# is used. Use 'cat' to create an uncompressed image.
-#COMPRESSION="gzip"
-#COMPRESSION="bzip2"
-#COMPRESSION="lzma"
-#COMPRESSION="xz"
-#COMPRESSION="lzop"
-#COMPRESSION="lz4"
-
-# COMPRESSION_OPTIONS
-# Additional options for the compressor
-#COMPRESSION_OPTIONS=()
 EOF
 
     mkinitcpio -P
@@ -665,125 +552,14 @@ set_bluetooth() {
     cat >> /etc/bluetooth/main.conf <<EOF
 
 [General]
-
-# Default adapter name
-# Defaults to 'BlueZ X.YZ'
-#Name = BlueZ
-
-# Default device class. Only the major and minor device class bits are
-# considered. Defaults to '0x000000'.
-#Class = 0x000100
-
-# How long to stay in discoverable mode before going back to non-discoverable
-# The value is in seconds. Default is 180, i.e. 3 minutes.
-# 0 = disable timer, i.e. stay discoverable forever
 DiscoverableTimeout = 0
 Discoverable = true
 
-# Always allow pairing even if there are no agent registered
-# Possible values: true, false
-# Default: false
 AlwaysPairable = true
 
-# How long to stay in pairable mode before going back to non-discoverable
-# The value is in seconds. Default is 0.
-# 0 = disable timer, i.e. stay pairable forever
-#PairableTimeout = 0
-
-# Use vendor id source (assigner), vendor, product and version information for
-# DID profile support. The values are separated by ":" and assigner, VID, PID
-# and version.
-# Possible vendor id source values: bluetooth, usb (defaults to usb)
-#DeviceID = bluetooth:1234:5678:abcd
-
-# Do reverse service discovery for previously unknown devices that connect to
-# us. For BR/EDR this option is really only needed for qualification since the
-# BITE tester doesn't like us doing reverse SDP for some test cases, for LE
-# this disables the GATT client functionally so it can be used in system which
-# can only operate as peripheral.
-# Defaults to 'true'.
-#ReverseServiceDiscovery = true
-
-# Enable name resolving after inquiry. Set it to 'false' if you don't need
-# remote devices name and want shorter discovery cycle. Defaults to 'true'.
-#NameResolving = true
-
-# Enable runtime persistency of debug link keys. Default is false which
-# makes debug link keys valid only for the duration of the connection
-# that they were created for.
-#DebugKeys = false
-
-# Restricts all controllers to the specified transport. Default value
-# is "dual", i.e. both BR/EDR and LE enabled (when supported by the HW).
-# Possible values: "dual", "bredr", "le"
-#ControllerMode = dual
-
-# Enables Multi Profile Specification support. This allows to specify if
-# system supports only Multiple Profiles Single Device (MPSD) configuration
-# or both Multiple Profiles Single Device (MPSD) and Multiple Profiles Multiple
-# Devices (MPMD) configurations.
-# Possible values: "off", "single", "multiple"
-#MultiProfile = off
-
-# Permanently enables the Fast Connectable setting for adapters that
-# support it. When enabled other devices can connect faster to us,
-# however the tradeoff is increased power consumptions. This feature
-# will fully work only on kernel version 4.1 and newer. Defaults to
-# 'false'.
-#FastConnectable = false
-
-# Default privacy setting.
-# Enables use of private address.
-# Possible values: "off", "device", "network"
-# "network" option not supported currently
-# Defaults to "off"
-# Privacy = off
-
-[GATT]
-# GATT attribute cache.
-# Possible values:
-# always: Always cache attributes even for devices not paired, this is
-# recommended as it is best for interoperability, with more consistent
-# reconnection times and enables proper tracking of notifications for all
-# devices.
-# yes: Only cache attributes of paired devices.
-# no: Never cache attributes
-# Default: always
-#Cache = always
-
-# Minimum required Encryption Key Size for accessing secured characteristics.
-# Possible values: 0 and 7-16. 0 means don't care.
-# Defaults to 0
-#KeySize = 0
-
-# Exchange MTU size.
-# Possible values: 23-517
-# Defaults to 517
-#ExchangeMTU = 517
-
 [Policy]
-#
-# The ReconnectUUIDs defines the set of remote services that should try
-# to be reconnected to in case of a link loss (link supervision
-# timeout). The policy plugin should contain a sane set of values by
-# default, but this list can be overridden here. By setting the list to
-# empty the reconnection feature gets disabled.
-#ReconnectUUIDs=00001112-0000-1000-8000-00805f9b34fb,0000111f-0000-1000-8000-00805f9b34fb,0000110a-0000-1000-8000-00805f9b34fb
-
-# ReconnectAttempts define the number of attempts to reconnect after a link
-# lost. Setting the value to 0 disables reconnecting feature.
-#ReconnectAttempts=7
-
-# ReconnectIntervals define the set of intervals in seconds to use in between
-# attempts.
-# If the number of attempts defined in ReconnectAttempts is bigger than the
-# set of intervals the last interval is repeated until the last attempt.
-#ReconnectIntervals=1,2,4,8,16,32,64
-
-# AutoEnable defines option to enable all controllers when they are found.
-# This includes adapters present on start as well as adapters that are plugged
-# in later on. Defaults to 'false'.
 AutoEnable=true
+
 EOF
 }
 #}}}
@@ -817,81 +593,6 @@ EOF
 # set_sudoers() {#{{{
 set_sudoers() {
     cat > /etc/sudoers <<EOF
-## sudoers file.
-##
-## This file MUST be edited with the 'visudo' command as root.
-## Failure to use 'visudo' may result in syntax or file permission errors
-## that prevent sudo from running.
-##
-## See the sudoers man page for the details on how to write a sudoers file.
-##
-
-##
-## Host alias specification
-##
-## Groups of machines. These may include host names (optionally with wildcards),
-## IP addresses, network numbers or netgroups.
-# Host_Alias	WEBSERVERS = www1, www2, www3
-
-##
-## User alias specification
-##
-## Groups of users.  These may consist of user names, uids, Unix groups,
-## or netgroups.
-# User_Alias	ADMINS = millert, dowdy, mikef
-
-##
-## Cmnd alias specification
-##
-## Groups of commands.  Often used to group related commands together.
-# Cmnd_Alias	PROCESSES = /usr/bin/nice, /bin/kill, /usr/bin/renice, \
-# 			    /usr/bin/pkill, /usr/bin/top
-# Cmnd_Alias	REBOOT = /sbin/halt, /sbin/reboot, /sbin/poweroff
-
-##
-## Defaults specification
-##
-## You may wish to keep some of the following environment variables
-## when running commands via sudo.
-##
-## Locale settings
-# Defaults env_keep += "LANG LANGUAGE LINGUAS LC_* _XKB_CHARSET"
-##
-## Run X applications through sudo; HOME is used to find the
-## .Xauthority file.  Note that other programs use HOME to find   
-## configuration files and this may lead to privilege escalation!
-# Defaults env_keep += "HOME"
-##
-## X11 resource path settings
-# Defaults env_keep += "XAPPLRESDIR XFILESEARCHPATH XUSERFILESEARCHPATH"
-##
-## Desktop path settings
-# Defaults env_keep += "QTDIR KDEDIR"
-##
-## Allow sudo-run commands to inherit the callers' ConsoleKit session
-# Defaults env_keep += "XDG_SESSION_COOKIE"
-##
-## Uncomment to enable special input methods.  Care should be taken as
-## this may allow users to subvert the command being run via sudo.
-# Defaults env_keep += "XMODIFIERS GTK_IM_MODULE QT_IM_MODULE QT_IM_SWITCHER"
-##
-## Uncomment to use a hard-coded PATH instead of the user's to find commands
-# Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-##
-## Uncomment to send mail if the user does not enter the correct password.
-# Defaults mail_badpass
-##
-## Uncomment to enable logging of a command's output, except for
-## sudoreplay and reboot.  Use sudoreplay to play back logged sessions.
-# Defaults log_output
-# Defaults!/usr/bin/sudoreplay !log_output
-# Defaults!/usr/local/bin/sudoreplay !log_output
-# Defaults!REBOOT !log_output
-
-##
-## Runas alias specification
-##
-
 ##
 ## User privilege specification
 ##
@@ -903,13 +604,6 @@ root ALL=(ALL) ALL
 ## Same thing without a password
 %wheel ALL=(ALL) NOPASSWD: ALL
 
-## Uncomment to allow members of group sudo to execute any command
-# %sudo	ALL=(ALL) ALL
-
-## Uncomment to allow any user to run sudo if they know the password
-## of the user they are running the command as (root by default).
-# Defaults targetpw  # Ask for the password of the target user
-# ALL ALL=(ALL) ALL  # WARNING: only use this together with 'Defaults targetpw'
 
 ## Read drop-in files from /etc/sudoers.d
 ## (the '#' here does not indicate a comment)
