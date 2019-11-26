@@ -265,8 +265,8 @@ setup_lvm() {
     lvcreate -C y -L1G "$volgroup" -n swap
 
     # Use the rest of the space for root
-    lvcreate -L --yes '30G' "$volgroup" -n root
-    lvcreate -l --yes '+100%FREE' "$volgroup" -n home
+    lvcreate --yes -L '30G' "$volgroup" -n root
+    lvcreate --yes -l '+100%FREE' "$volgroup" -n home
 
     # Enable the new volumes
     vgchange -ay
