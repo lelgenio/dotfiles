@@ -1,5 +1,5 @@
 {
-    "layer": "top", // Waybar at top layer
+    "layer": "bottom", // Waybar at top layer
 	//"margin":"5 5 0 5",
 	//"margin-bottom":10,
     //"position": "bottom", // Waybar position (top|bottom|left|right)

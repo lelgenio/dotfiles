@@ -208,14 +208,18 @@
     set $aclite     #CC575D50
     set $fg_color   #ffffff
     set $bg_color   #202020
-    set $bg_darker  #252525
+    set $bg_darker  #151515
     set $alert      #000000
 
     #                       border      background  text        indicator   child_border
     client.focused          $accent     $accent     $fg_color   $accent     $accent
-    client.focused_inactive $bg_color   $bg_color   $fg_color   $bg_color   $bg_color
-    client.unfocused        $bg_color   $bg_color   $fg_color   $bg_color   $bg_color
+    client.focused_inactive $bg_darker  $bg_darker  $fg_color   $bg_color   $bg_color
+    client.unfocused        $bg_darker  $bg_darker  $fg_color   $bg_color   $bg_color
     client.urgent           $alert      $alert      $fg_color   $alert      $alert
+
+    bar swaybar_command waybar
+    # bar mode hide
+    # bar position top
 
     default_border pixel 2px
     gaps inner 5px
@@ -238,15 +242,17 @@
 # Daemons {{{
 #
 
-    exec bash -c 'while true;do waybar;done'
     #Notification Daemon
     exec mako
     # Block device Mounter to /run/media/<username>
     exec udiskie
     # Blue light filter
     exec redshift
-    # kde connect daemon
+    # kde connect
     exec /usr/lib/kdeconnectd
+    exec kdeconnect-indicator
+    # Telegram
+    exec telegram-desktop
     # lock screen after a period of inactivity execp for fullscreen
     for_window [class=.*] inhibit_idle fullscreen
     exec swayidle -w \
