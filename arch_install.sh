@@ -38,75 +38,6 @@
 #                           installed
 #    set_netcfg - Preload netcfg profiles
 #}}}
-# PACKAGES{{{
-    sudo pacman -Sy 
-
-    pkgs_base=''
-    pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
-    pkgs_base+=' zsh networkmanager bluez cronie git man-db'
-    pkgs_base+=" $(pacman -Qqg base-devel)"
-
-
-    pkgs=''
-    pkgs+=" $pkgs_base"
-    # DE
-    pkgs+=' sway light mako udiskie wofi-hg stow yay pamac-aur'
-    pkgs+=' nemo redshift-wlr-gamma-control-git '
-    pkgs+=' htop-vim-git'
-    # Screenshot
-    pkgs+=' grim slurp wl-clipboard wf-recorder-git'
-    # Audio
-    pkgs+=' pulseaudio pavolume-git'
-    pkgs+=' httpie jq python-keepmenu-git'
-    # Fonts
-    pkgs+=' ttf-hack inter-font'
-    # Theme
-    pkgs+=' materia-custom-accent papirus-icon-theme'
-    pkgs+=' papirus-folders-git capitaine-cursors '
-    # Terminal
-    pkgs+=' kitty neovim tmux ranger atool p7zip tree'
-    pkgs+=' zsh neofetch powerline-fonts'
-    pkgs+=' lolcat cmatrix'
-    # Network
-    pkgs+=' rsync rclone nmap gnu-netcat tor mtr speedtest-cli'
-    # Browser
-    pkgs+=' qutebrowser youtube-dl'
-    # Email
-    pkgs+=' evolution mutt-wizard-git neomutt' 
-    # Files
-    pkgs+=' syncthing nextcloud-client ' 
-    pkgs+=' deluge deezloader-remix-bin smloadr' 
-    # Media
-    pkgs+=' mpv mpd mpc ncmpcpp '
-    pkgs+=' blender gimp kdenlive picard image_optim' 
-    # Office
-    pkgs+=' libreoffice-fresh libreoffice-fresh-pt-br papirus-libreoffice-theme'
-    # Programing
-    pkgs+=' code neovim python-pynvim neovim-symlinks ipython how2'
-    # Virt
-    pkgs+=' qemu'
-    # Gtk
-    pkgs+=' gtk3-nocsd-git'
-    # Qt
-    pkgs+=' qt5-base qt5-wayland qt5ct kvantum-qt5'
-    # Chat
-    pkgs+=' discord telegram-desktop telegram-cli-git'
-    # Gaming
-    pkgs+=' steam lutris gamemode lutris-wine-meta wine wine-mono winetricks'
-    if [ "$VIDEO_DRIVER" == "i915" ];then
-        pkgs+=' xf86-video-intel '
-        pkgs+=' lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader'
-    elif [ "$VIDEO_DRIVER" == "radeon" ];then
-        pkgs+=' xf86-video-ati'
-        pkgs+='  lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader'
-    elif [ "$VIDEO_DRIVER" == "nouveau" ];then
-        pkgs+=' xf86-video-nouveau'
-        pkgs+=' nvidia nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader'
-    elif [ "$VIDEO_DRIVER" = "vesa" ];then
-        packages+=' xf86-video-vesa'
-    fi
-
-#}}}
 # CONFIGURE THESE VARIABLES{{{
 # Drive to install to.
 DRIVE='/dev/sda'
@@ -153,7 +84,80 @@ VIDEO_DRIVER="i915"
 # For generic stuff
 #VIDEO_DRIVER="vesa"
 
-REMOVE_PKGS='FALSE'
+REMOVE_PKGS= false
+FULL_INSTALL= false
+#}}}
+# PACKAGES{{{
+    # sudo to allow to run as a user later
+    sudo pacman -Sy 
+
+    pkgs_base=''
+    pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
+    pkgs_base+=' zsh networkmanager bluez cronie git man-db'
+    pkgs_base+=" $(pacman -Qqg base-devel)"
+
+
+    pkgs=''
+    pkgs+=" $pkgs_base"
+    # DE
+    pkgs+=' sway waybar python-keyring light mako udiskie wofi-hg stow yay'
+    pkgs+=' nemo redshift-wlr-gamma-control-git '
+    pkgs+=' kitty neovim htop-vim-git'
+    # Audio
+    pkgs+=' pulseaudio pavolume-git'
+    # Fonts
+    pkgs+=' ttf-hack inter-font'
+    if $FULL_INSTALL; then
+        # Screenshot
+        pkgs+=' grim slurp wl-clipboard wf-recorder-git'
+        pkgs+=' httpie jq python-keepmenu-git'
+        # Theme
+        pkgs+=' materia-custom-accent papirus-icon-theme'
+        pkgs+=' papirus-folders-git capitaine-cursors '
+        # Terminal
+        pkgs+=' tmux ranger atool p7zip tree'
+        pkgs+=' neofetch powerline-fonts'
+        pkgs+=' lolcat cmatrix'
+        # Network
+        pkgs+=' rsync rclone nmap gnu-netcat tor mtr speedtest-cli'
+        # Browser
+        pkgs+=' qutebrowser youtube-dl'
+        # Email
+        pkgs+=' evolution mutt-wizard-git neomutt' 
+        # Files
+        pkgs+=' syncthing nextcloud-client ' 
+        pkgs+=' deluge deezloader-remix-bin smloadr' 
+        # Media
+        pkgs+=' mpv mpd mpc ncmpcpp '
+        pkgs+=' blender gimp kdenlive picard image_optim' 
+        # Office
+        pkgs+=' libreoffice-fresh libreoffice-fresh-pt-br papirus-libreoffice-theme'
+        # Programing
+        pkgs+=' code neovim python-pynvim neovim-symlinks ipython how2'
+        # Virt
+        pkgs+=' qemu'
+        # Gtk
+        pkgs+=' gtk3-nocsd-git'
+        # Qt
+        pkgs+=' qt5-base qt5-wayland qt5ct kvantum-qt5'
+        # Chat
+        pkgs+=' discord telegram-desktop telegram-cli-git'
+        # Gaming
+        pkgs+=' steam lutris gamemode lutris-wine-meta wine wine-mono winetricks'
+        if [ "$VIDEO_DRIVER" == "i915" ];then
+            pkgs+=' xf86-video-intel '
+            pkgs+=' lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader'
+        elif [ "$VIDEO_DRIVER" == "radeon" ];then
+            pkgs+=' xf86-video-ati'
+            pkgs+='  lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader'
+        elif [ "$VIDEO_DRIVER" == "nouveau" ];then
+            pkgs+=' xf86-video-nouveau'
+            pkgs+=' nvidia nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader'
+        elif [ "$VIDEO_DRIVER" = "vesa" ];then
+            packages+=' xf86-video-vesa'
+        fi
+    fi
+
 #}}}
 # Initial Setup{{{
 # Base install{{{
@@ -267,6 +271,8 @@ mount_filesystems() {
     local boot_dev="$1"; shift
 
     mount /dev/vg00/root /mnt
+    mkdir /mnt/home
+    mount /dev/vg00/home /mnt/home
     mkdir /mnt/boot
     mount "$boot_dev" /mnt/boot
     swapon /dev/vg00/swap
@@ -279,8 +285,7 @@ install_base() {
 #}}}
 # unmount_filesystems #{{{
 unmount_filesystems() {
-    umount /mnt/boot
-    umount /mnt
+    umount -R /mnt
     swapoff /dev/vg00/swap
     vgchange -an
     if [ -n "$ENCRYPT_DRIVE" ]
@@ -954,7 +959,7 @@ user_setup() {
     echo 'Installing packages'
     install_aur_packages
 
-    if [ "$REMOVE_PKGS" == "TRUE" ];then
+    if $REMOVE_PKGS;then
         echo 'Cleaning packages'
         clean_packages
     fi
