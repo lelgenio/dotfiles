@@ -165,6 +165,22 @@ setup() {
     local boot_dev="$DRIVE"1
     local lvm_dev="$DRIVE"2
 
+    if [ -z "$ROOT_PASSWORD" ]
+    then
+        echo 'Enter the root password:'
+        stty -echo
+        read ROOT_PASSWORD
+        stty echo
+    fi
+
+    if [ -z "$USER_PASSWORD" ]
+    then
+        echo "Enter the password for user $USER_NAME"
+        stty -echo
+        read USER_PASSWORD
+        stty echo
+    fi
+
     echo 'Creating partitions'
     partition_drive "$DRIVE"
 
@@ -337,23 +353,9 @@ configure() {
     echo 'Configuring PAM'
     set_pam
 
-    if [ -z "$ROOT_PASSWORD" ]
-    then
-        echo 'Enter the root password:'
-        stty -echo
-        read ROOT_PASSWORD
-        stty echo
-    fi
     echo 'Setting root password'
     set_root_password "$ROOT_PASSWORD"
 
-    if [ -z "$USER_PASSWORD" ]
-    then
-        echo "Enter the password for user $USER_NAME"
-        stty -echo
-        read USER_PASSWORD
-        stty echo
-    fi
     echo 'Creating initial user'
     create_user "$USER_NAME" "$USER_PASSWORD"
 
