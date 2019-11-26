@@ -102,7 +102,7 @@ FULL_INSTALL=false
     # DE
     pkgs+=' sway waybar python-keyring light mako udiskie wofi-hg stow yay'
     pkgs+=' nemo redshift-wlr-gamma-control-git '
-    pkgs+=' kitty neovim htop-vim-git'
+    pkgs+=' pkgfile kitty neovim htop-vim-git'
     # Audio
     pkgs+=' pulseaudio pavolume-git'
     # Fonts
@@ -681,13 +681,16 @@ install_aur_packages() {
 #}}}
 # Clean up packages #{{{
 clean_packages() {
+    # Mark every package as dependency
     yay -D --asdeps $(yay -Qqe)
+    # Mark some packages as explicit
     yay -D --asexplicit $pkgs
+    # Query orphan dependencies
     TO_REMOVE=$(yay -Qtdq)
     if [ -n "$TO_REMOVE" ];then
+        # Remove queried packages
         yay -Rns --noconfirm $TO_REMOVE
     fi
-    yay -Scc --noconfirm
 }
 #}}}
 # Stow dotfiles{{{
