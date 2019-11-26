@@ -84,8 +84,8 @@ VIDEO_DRIVER="i915"
 # For generic stuff
 #VIDEO_DRIVER="vesa"
 
-REMOVE_PKGS= false
-FULL_INSTALL= false
+REMOVE_PKGS=false
+FULL_INSTALL=false
 #}}}
 # PACKAGES{{{
     # sudo to allow to run as a user later
@@ -249,8 +249,8 @@ setup_lvm() {
     lvcreate -C y -L1G "$volgroup" -n swap
 
     # Use the rest of the space for root
-    lvcreate -L '30G' "$volgroup" -n root
-    lvcreate -l '+100%FREE' "$volgroup" -n home
+    lvcreate -L --yes '30G' "$volgroup" -n root
+    lvcreate -l --yes '+100%FREE' "$volgroup" -n home
 
     # Enable the new volumes
     vgchange -ay
