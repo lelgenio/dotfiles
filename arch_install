@@ -359,7 +359,6 @@ configure() {
     echo 'Creating initial user'
     create_user "$USER_NAME" "$USER_PASSWORD"
 
-    pacman -Syu 
     echo 'setting up user'
     cp $0 /home/$USER_NAME/setup.sh
     chown $USER_NAME /home/$USER_NAME/setup.sh
