@@ -94,7 +94,7 @@ FULL_INSTALL= false
     pkgs_base=''
     pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
     pkgs_base+=' zsh networkmanager bluez cronie git man-db'
-    pkgs_base+=" $(pacman -Qqg base-devel)"
+    pkgs_base+=" $(pacman -Sgq base-devel)"
 
 
     pkgs=''
