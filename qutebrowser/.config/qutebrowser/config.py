@@ -11,6 +11,10 @@
 # Type: Dict
 c.aliases = {'q': 'close', 'qa': 'quit', 'w': 'session-save', 'wq': 'quit --save', 'wqa': 'quit --save'}
 
+# Load a restored tab as soon as it takes focus.
+# Type: Bool
+c.session.lazy_restore = True
+
 # Always restore open sites when qutebrowser is reopened.
 # Type: Bool
 c.auto_save.session = True
