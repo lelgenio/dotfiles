@@ -38,7 +38,7 @@ export PAGER=less
 #
     esway() {
         clear
-        export XDG_CURRENT_DESKTOP=Unity
+        # export XDG_CURRENT_DESKTOP=Unity
         export QT_SCALE_FACTOR=1
         export QPA_PLATFORM=wayland
         export QT_QPA_PLATFORM=wayland

@@ -9,7 +9,7 @@ CertificateFile /etc/ssl/certs/ca-certificates.crt
 MaildirStore disroot-local
 Subfolders Verbatim
 Path ~/.mail/
-Inbox ~/.mail/INBOX/
+Inbox ~/.mail/INBOX
 Flatten .
 
 Channel disroot-remote
