@@ -2,7 +2,7 @@ IMAPStore disroot-remote
 Host disroot.org
 Port  993
 User lelgenio@disroot.org
-PassCmd "pass mutt-wizard-disroot"
+PassCmd "gpg -dq $HOME/.config/neomutt/password.gpg"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 

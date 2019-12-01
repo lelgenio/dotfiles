@@ -9,8 +9,7 @@
 
 set my_user='lelgenio'
 set my_host='disroot.org'
-#set my_pass 
-source "gpg -dq $HOME/.config/neomutt/password.gpg |"
+set my_pass=`gpg -dq $HOME/.config/neomutt/password.gpg`
 
 # Main settings{{{
 
