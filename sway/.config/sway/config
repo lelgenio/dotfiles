@@ -17,7 +17,7 @@
     set $right l
 
     set $term kitty
-    set $menu swaymsg exec 'wofi --show drun -i -t kitty -p Iniciar:'
+    set $menu 'j4-dmenu-desktop --dmenu="bmenu -p Iniciar:" --term kitty'
 	font pango:Hack 14px
 
 # }}}
