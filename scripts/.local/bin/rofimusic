@@ -1,0 +1,9 @@
+#!/bin/sh
+set -ex
+
+ music=$(mpc listall --format '%artist% : %title%' | bmenu)
+ artist=$(echo "$music" | perl -pe 's/(.*) : (.*)/\1/')
+ title=$(echo "$music"  | perl -pe 's/(.*) : (.*)/\2/')
+
+echo title "'$title'" artist "'$artist'"
+mpc searchplay artist "$artist" title "$title"

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+BEMENU_BACKEND=w
+
+bemenu \
+    --ignorecase\
+    --bottom\
+    --list 20\
+    --prefix '->'\
+    --fn "pango:Inter 12"\
+    --tb "#202020" --tf "#cc5757" \
+    --fb "#202020" --ff "#cccccc" \
+    --nb "#202020" --nf "#cccccc" \
+    --hb "#303030" --hf "#cc5757" \
+    $@
