@@ -1,9 +1,37 @@
 #!/bin/sh
-set -ex
+set -e
 
- music=$(mpc listall --format '%artist% : %title%' | bmenu)
- artist=$(echo "$music" | perl -pe 's/(.*) : (.*)/\1/')
- title=$(echo "$music"  | perl -pe 's/(.*) : (.*)/\2/')
+search(){
+    music=$(mpc playlist --format '%artist% : %title%' | sed '/^ : $/d' | bmenu)
+    artist=$(echo "$music" | perl -pe 's/(.*) : (.*)/\1/')
+    title=$(echo "$music"  | perl -pe 's/(.*) : (.*)/\2/')
 
-echo title "'$title'" artist "'$artist'"
-mpc searchplay artist "$artist" title "$title"
+    mpc searchplay artist "$artist" title "$title"
+}
+
+delete(){
+    current=~/Música/"$(mpc current -f %file%)"
+    answer=$(echo -e "nothing\n$current" | bmenu -p"delete?" )
+    if [ "$answer" != "nothing" ]
+    then
+        trash "$current"
+        mpc next
+        mpc update
+    fi
+}
+
+usage(){
+    echo "Commands: "
+    echo "  $0 search     -- searches the current playlist for songs and plays it"
+    echo "  $0 delete     --  prompts to delete the current song"
+}
+
+if [ "$1" == "delete" ]
+then
+    delete
+elif [ "$1" == "search" ]
+then
+    search
+else
+    usage
+fi

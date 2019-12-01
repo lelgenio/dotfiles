@@ -199,9 +199,10 @@
     bindsym XF86AudioMute        exec  pavolume mutetoggle
 
     # Media player controls
-    bindsym XF86AudioPlay  exec  playerctl play-pause                  
-    bindsym XF86AudioNext  exec  playerctl next                    
-    bindsym XF86AudioPrev  exec  playerctl previous                    
+    bindsym XF86AudioPlay   exec    playerctl   play-pause
+    bindsym XF86AudioNext   exec    plplayerctl next
+    bindsym XF86AudioPrev   exec    plplayerctl previous
+    bindsym $mod+alt+x      exec    musmenu     delete
 
     # }}}
 # }}}
