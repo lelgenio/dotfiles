@@ -1,58 +1,31 @@
 #!/bin/sh
-
+set -e
 CITY=$(curl -s ipinfo.io/city)
 APPID="fd68c0fe7951f5ab7e24a240eb0942b8"
  
 OUTPUT=$(http get http://api.openweathermap.org/data/2.5/weather\?APPID\=${APPID}\&q\="${CITY}"\&units\=metric)
 
-# echo $APPID
-# echo $OUTPUT
-
-if [ $? -ne 0 ]
-then
-    exit 1
-fi
-
 TEMP=$(echo $OUTPUT | jq -r ".main.temp")
 WEATHER=$(echo $OUTPUT | jq -r ".weather[0].main")
 case $WEATHER in
- "Clear"*)
+ "Clear")
      WEATHER=""
      ;;
- "Clouds"*)
+ "Clouds")
      WEATHER=""
      ;;
- "Rain"*)
+ "Rain"|"Drizzle")
      WEATHER=""
      ;;
- "Mist"*)
+ "Mist")
      WEATHER=" "
      ;;
- "Snow"*)
+ "Snow")
      WEATHER=""
      ;;
- "Thunderstorm"*)
+ "Thunderstorm")
      WEATHER=""
      ;;
 esac
 
-# case $WEATHER in
-#  "Clear"*)
-#      WEATHER="Limpo :)"
-#      ;;
-#  "Clouds"*)
-#      WEATHER="Nublado :/"
-#      ;;
-#  "Rain"*)
-#      WEATHER="Chuva °~°"
-#      ;;
-#  "Snow"*)
-#      WEATHER="Neve ºUº"
-#      ;;
-#  "Thunderstorm"*)
-#      WEATHER="Tempestade *-*"
-#      ;;
-# esac
-
 echo "$TEMP°C $WEATHER"
-#echo "$TEMP°C"

@@ -1,4 +1,4 @@
-font=Roboto 12
+font=Inter 12
 background-color=#202020f8
 border-color=#cc5757
 progress-color=#cc5757
@@ -6,3 +6,4 @@ icons=1
 default-timeout=3000
 markup=1
 actions=1
+layer=overlay

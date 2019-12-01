@@ -114,26 +114,28 @@ FULL_INSTALL=false
         # Theme
         pkgs+=' materia-custom-accent papirus-icon-theme'
         pkgs+=' papirus-folders-git capitaine-cursors '
+        pkgs+=' flashfocus-git '
         # Terminal
         pkgs+=' tmux ranger atool p7zip tree'
         pkgs+=' neofetch powerline-fonts'
         pkgs+=' lolcat cmatrix'
         # Network
-        pkgs+=' rsync rclone nmap gnu-netcat tor mtr speedtest-cli'
+        pkgs+=' bluez-utils rsync rclone nmap gnu-netcat tor mtr speedtest-cli'
         # Browser
         pkgs+=' qutebrowser youtube-dl'
         # Email
-        pkgs+=' evolution mutt-wizard-git neomutt' 
+        pkgs+=' evolution mutt-wizard-git neomutt isync' 
         # Files
         pkgs+=' syncthing nextcloud-client ' 
         pkgs+=' deluge deezloader-remix-bin smloadr' 
         # Media
-        pkgs+=' mpv mpv-mpris mpd mpdris2 mpc ncmpcpp '
+        pkgs+=' mpv mpd mpc ncmpcpp mpv-mpris mpdris2 playerctl'
         pkgs+=' blender gimp kdenlive picard image_optim' 
         # Office
-        pkgs+=' libreoffice-fresh libreoffice-fresh-pt-br papirus-libreoffice-theme'
+        pkgs+=' libreoffice-fresh libreoffice-fresh-pt-br hunspell-pt-br papirus-libreoffice-theme'
         # Programing
         pkgs+=' code neovim python-pynvim neovim-symlinks ipython how2'
+        pkgs+=' gdb clang'
         # Virt
         pkgs+=' qemu'
         # Gtk
@@ -196,6 +198,9 @@ setup() {
     echo 'Mounting filesystems'
     mount_filesystems "$boot_dev"
 
+    echo 'Setting timezone'
+    set_timezone
+
     echo 'Installing base system'
     install_base
 
@@ -225,6 +230,11 @@ partition_drive() {
         mkpart lvm  100M 100% \
         set 1 boot on\
         set 2 lvm  on
+
+    if $IS_BIOS;then
+        parted -s "$dev" \
+            set 1 bios_grub on 
+    fi
 }
 #}}}
 encrypt_drive #{{{
@@ -294,6 +304,14 @@ unmount_filesystems() {
     fi
 }
 #}}}
+# is_bios{{{
+    if ls /sys/firmware/efi/efivars/
+    then
+        IS_BIOS=false
+    else
+        IS_BIOS=true
+    fi
+#}}}
 #}}}
 # Configuration{{{
 # configure() {#{{{
@@ -329,7 +347,7 @@ configure() {
     set_bluetooth 
 
     echo 'Configuring bootloader'
-    set_bootctl "$lvm_dev"
+    set_bootctl "$boot_dev" "$lvm_dev"
 
     echo 'Configuring sudo'
     set_sudoers
@@ -457,6 +475,10 @@ set_timezone() {
     local timezone="$1"; shift
 
     ln -sfT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
+
+    timedatectl set-ntp on
+
+    hwclock --systohc
 }
 #}}}
 # set_locale() {#{{{
@@ -564,8 +586,9 @@ AutoEnable=true
 EOF
 }
 #}}}
-# set_bootctl() {#{{{
+# set_boot_loader() {#{{{
 set_bootctl() {
+    local boot_dev="$1"; shift
     local lvm_dev="$1"; shift
 
     local lvm_uuid=$(get_uuid "$lvm_dev")
@@ -576,9 +599,14 @@ set_bootctl() {
         # Load in resources
         crypt="root=UUID=$lvm_uuid"
     fi
+    
+    if $IS_BIOS;then
+        grub install "$boot_dev"
+        grub
+    else
 
-    bootctl install
-    cat > /boot/loader/entries/arch.conf <<EOF
+        bootctl install
+        cat > /boot/loader/entries/arch.conf <<EOF
 title arch
 
 linux vmlinuz-linux-zen
@@ -586,7 +614,7 @@ initrd intel-ucode.img
 initrd initramfs-linux-zen.img
 
 options $crypt
-#options quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0 $crypt
+#options quiet splash loglevel=3 vga=current rd.udev.log_priority=3 rd.systemd.show_status=auto vt.global_cursor_default=0 nmi_watchdog=0  $crypt
 EOF
 
 }

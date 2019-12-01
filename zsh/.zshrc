@@ -1,7 +1,11 @@
 # LEL
-#
-# ZSH
-#
+
+#          _     
+#  _______| |__  
+# |_  / __| '_ \ 
+#  / /\__ \ | | |
+# /___|___/_| |_|
+               
 # Environment Vairables {{{
 # Allow qt5
 export QT_QPA_PLATFORMTHEME=qt5ct
@@ -42,6 +46,7 @@ export PAGER=less
         export GTK_CSD=0
         export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
         export XCURSOR_THEME=capitaine-cursors
+        export SWAY=1
         exec sway
     }
     if [[ $XDG_VTNR -eq 1 ]] #faster like this
@@ -55,17 +60,17 @@ export PAGER=less
 # }}}
 # use tmux{{{
 
-# if [ -z "$TMUX" ]; then
-#     attach_session=$(tmux 2> /dev/null ls -F \
-#         '#{session_attached} #{?#{==:#{session_last_attached},},1,#{session_last_attached}} #{session_id}' |
-#         awk '/^0/ { if ($2 > t) { t = $2; s = $3 } }; END { if (s) printf "%s", s }')
-#     if [ -n "$attach_session" ]
-#     then
-#         exec tmux attach -t "$attach_session"
-#     else
-#         exec tmux
-#     fi
-# fi
+if [ -z "$TMUX" ] && [ -z "$SWAY" ]; then
+    attach_session=$(tmux 2> /dev/null ls -F \
+        '#{session_attached} #{?#{==:#{session_last_attached},},1,#{session_last_attached}} #{session_id}' |
+        awk '/^0/ { if ($2 > t) { t = $2; s = $3 } }; END { if (s) printf "%s", s }')
+    if [ -n "$attach_session" ]
+    then
+        exec tmux attach -t "$attach_session"
+    else
+        exec tmux
+    fi
+fi
 
 # }}}
 # Plugins {{{
@@ -98,11 +103,13 @@ export PAGER=less
     # Promp config
 	bindkey -e 
     SPACESHIP_PROMPT_ADD_NEWLINE=false
+    SPACESHIP_CHAR_SYMBOL='$ '
+    SPACESHIP_CHAR_SYMBOL_ROOT='# '
 	zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 	
     if ! zplug check
     then
-    zplug install
+        zplug install
     fi
 
     zplug load

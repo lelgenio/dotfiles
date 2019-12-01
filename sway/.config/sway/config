@@ -1,7 +1,10 @@
 # LEL
-#
-# SWAY
-#
+
+#  _____      ____ _ _   _ 
+# / __\ \ /\ / / _` | | | |
+# \__ \\ V  V / (_| | |_| |
+# |___/ \_/\_/ \__,_|\__, |
+#                    |___/ 
 
 # Variables {{{
 #   
@@ -196,14 +199,16 @@
     bindsym XF86AudioMute        exec  pavolume mutetoggle
 
     # Media player controls
-    bindsym XF86AudioPlay  exec  mpc -q toggle                  
-    bindsym XF86AudioNext  exec  mpc -q next                    
-    bindsym XF86AudioPrev  exec  mpc -q prev                    
+    bindsym XF86AudioPlay  exec  playerctl play-pause                  
+    bindsym XF86AudioNext  exec  playerctl next                    
+    bindsym XF86AudioPrev  exec  playerctl previous                    
 
     # }}}
 # }}}
 # Visual: {{{
 #
+    exec flashfocus -o .5
+
     set $accent     #CC575D
     set $aclite     #CC575D50
     set $fg_color   #ffffff
@@ -232,9 +237,9 @@
     # set theme
     set $gnome-schema org.gnome.desktop.interface
     exec_always {
-        kvantummanager --set MateriaDark
-        gsettings set $gnome-schema gtk-theme 'materia-custom-accent-dark'
-        gsettings set $gnome-schema icon-theme 'Papirus-Dark'
+        kvantummanager --set Materia
+        gsettings set $gnome-schema gtk-theme 'materia-custom-accent'
+        gsettings set $gnome-schema icon-theme 'Papirus'
         gsettings set $gnome-schema cursor-theme 'capitaine-cursors'
     }
 
