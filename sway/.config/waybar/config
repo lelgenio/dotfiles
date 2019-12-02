@@ -8,7 +8,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["mpd", "pulseaudio", "network", "battery","custom/weather","custom/mail", "tray"],
+    "modules-right": ["mpd", "pulseaudio", "network", "battery","custom/weather","custom/mail", "custom/updates", "tray"],
     //Modules configuration
      "sway/workspaces": {
     //     "disable-scroll": true,
@@ -125,7 +125,7 @@
         "on-click": "pavucontrol"
     },
     "custom/weather": {
-        "tooltip":false,
+        "return-type":"json",
         "exec": "$HOME/.config/waybar/custom/weather",
         "interval": 1800
     },
@@ -134,6 +134,14 @@
         "tooltip":false,
         "exec": "$HOME/.config/waybar/custom/mail",
         "interval": 1800
+    },
+    "custom/updates": {
+        "format": "{} ",
+        "interval": 3600,                     // every hour
+        "return-type":"json",
+        "exec": "yay -Sy > /dev/null; yay -Qqu | wc -l | sed 's/^0$//'",
+        "on-click": "kitty yay; pkill -SIGRTMIN+8 waybar", // update system
+        "signal": 8
     }
 
 }

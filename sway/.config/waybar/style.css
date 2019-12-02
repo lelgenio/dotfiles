@@ -71,6 +71,7 @@ window#waybar.empty {
 #custom-media,
 #custom-weather,
 #custom-mail,
+#custom-updates,
 #tray,
 #mode,
 #idle_inhibitor {
@@ -148,6 +149,11 @@ label:focus {
 
 #custom-mail {
     border-top: 2px solid #67334d;
+    /*background-color: #2980b9;*/
+}
+
+#custom-updates {
+    border-top: 2px solid #ee9957;
     /*background-color: #2980b9;*/
 }
 

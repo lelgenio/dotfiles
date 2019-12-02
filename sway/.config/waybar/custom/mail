@@ -1,10 +1,8 @@
+set -e
 mbsync -aq
 NEW=$(find .mail/INBOX{,.{Contas,Faculdade,Git,Trabalhos}}/{cur,new} -type f |
     grep -vE ',[^,]*S[^,]*$' | wc -l)
 
-if (( "$NEW" > 0 ))
-then
-    echo $NEW
-fi
+echo $NEW | sed 's/^0$//'
 
 # vim:ft=sh

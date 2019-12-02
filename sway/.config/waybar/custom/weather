@@ -3,29 +3,37 @@ set -e
 CITY=$(curl -s ipinfo.io/city)
 APPID="fd68c0fe7951f5ab7e24a240eb0942b8"
  
-OUTPUT=$(http get http://api.openweathermap.org/data/2.5/weather\?APPID\=${APPID}\&q\="${CITY}"\&units\=metric)
+FORECAST=$(http get http://api.openweathermap.org/data/2.5/forecast\?APPID\=${APPID}\&q\="${CITY}"\&units\=metric)
 
-TEMP=$(echo $OUTPUT | jq -r ".main.temp")
-WEATHER=$(echo $OUTPUT | jq -r ".weather[0].main")
+TEMP=$(echo $FORECAST | jq -r ".list[0].main.temp")
+WEATHER=$(echo $FORECAST | jq -r ".list[0].weather[0].main")
+
+MIN=$(echo $FORECAST | jq -r ".list[2].main.temp_min" | 
+    perl -pe 's/(\d*)\.\d*/\1/')
+MAX=$(echo $FORECAST | jq -r ".list[2].main.temp_max" |
+    perl -pe 's/(\d*)\.\d*/\1/')
 case $WEATHER in
  "Clear")
-     WEATHER=""
+     WEATHER=" "
      ;;
  "Clouds")
-     WEATHER=""
+     WEATHER=" "
      ;;
  "Rain"|"Drizzle")
-     WEATHER=""
+     WEATHER=" "
      ;;
  "Mist")
      WEATHER=" "
      ;;
  "Snow")
-     WEATHER=""
+     WEATHER=" "
      ;;
  "Thunderstorm")
      WEATHER=""
      ;;
 esac
 
-echo "$TEMP°C $WEATHER"
+text="$MIN $MAX  $TEMP°C $WEATHER"
+# tooltip="$(curl -s wttr.in | paste -d'\\n' -s )"
+tooltip=""
+printf '{"text":"%s","tooltip":"%s"}' "$text" "$tooltip"
