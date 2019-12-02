@@ -100,7 +100,7 @@ FULL_INSTALL=false
     pkgs=''
     pkgs+=" $pkgs_base"
     # DE
-    pkgs+=' sway waybar python-keyring light mako udiskie wofi-hg stow yay'
+    pkgs+=' sway waybar gnome-keyring python-keyring light mako udiskie wofi-hg stow yay'
     pkgs+=' nemo redshift-wlr-gamma-control-git '
     pkgs+=' pkgfile kitty neovim htop-vim-git'
     # Audio
@@ -644,7 +644,15 @@ EOF
 #}}}
 # set_pam{{{
 set_pam() {
-    cat >> /etc/pam.d/login <<EOF
+    cat > /etc/pam.d/login <<EOF
+#%PAM-1.0
+
+auth       required     pam_securetty.so
+auth       requisite    pam_nologin.so
+auth       include      system-local-login
+auth       optional     pam_gnome_keyring.so
+account    include      system-local-login
+session    include      system-local-login
 session    optional     pam_gnome_keyring.so auto_start
 EOF
 }
