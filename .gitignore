@@ -10,3 +10,7 @@ qutebrowser/.config/qutebrowser/autoconfig.yml
 qutebrowser/.config/qutebrowser/qsettings/
 qutebrowser/.config/qutebrowser/quickmarks
 qutebrowser/.local/
+
+
+emacs/.emacs.d
+!emacs/.emacs.d/init.el~
