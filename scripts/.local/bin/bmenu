@@ -1,6 +1,11 @@
 #!/bin/sh
 
-BEMENU_BACKEND=w
+BEMENU_BACKEND=wayland
+if [ "$1" == "run" ]
+then
+    j4-dmenu-desktop --dmenu="bmenu -p Iniciar:" --term "$2"
+    exit
+fi
 
 bemenu \
     --ignorecase\

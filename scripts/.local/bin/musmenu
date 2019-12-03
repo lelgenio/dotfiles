@@ -2,7 +2,12 @@
 set -e
 
 search(){
-    music=$(mpc playlist --format '%artist% : %title%' | sed '/^ : $/d' | bmenu)
+    music=$(mpc playlist --format '%artist% : %title%' | sed '/^ : $/d' | wofi -dk/dev/null)
+    if [ "$music" == "" ]
+    then
+        exit 1
+    fi
+
     artist=$(echo "$music" | perl -pe 's/(.*) : (.*)/\1/')
     title=$(echo "$music"  | perl -pe 's/(.*) : (.*)/\2/')
 
@@ -11,10 +16,10 @@ search(){
 
 delete(){
     current=~/Música/"$(mpc current -f %file%)"
-    answer=$(echo -e "nothing\n$current" | bmenu -p"delete?" )
-    if [ "$answer" != "nothing" ]
+    answer=$(echo -e "nothing\n$current" | wofi -dk/dev/null -p"delete?" )
+    if [ "$answer" == "$current" ]
     then
-        trash "$current"
+        trash "$answer"
         mpc next
         mpc update
     fi

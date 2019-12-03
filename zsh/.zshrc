@@ -52,7 +52,7 @@ export PAGER=less
     then
         if systemctl -q is-active graphical.target && [[ ! $DISPLAY ]]
         then
-            esway
+            esway > .swaylog
         fi
     fi
 

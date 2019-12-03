@@ -133,12 +133,13 @@
         "format":"{} ",
         "tooltip":false,
         "exec": "$HOME/.config/waybar/custom/mail",
+        "on-click": "kitty neomutt; pkill -SIGRTMIN+4 waybar", // update system
+        "signal": 4,
         "interval": 1800
     },
     "custom/updates": {
         "format": "{} ",
         "interval": 3600,                     // every hour
-        "return-type":"json",
         "exec": "yay -Sy > /dev/null; yay -Qqu | wc -l | sed 's/^0$//'",
         "on-click": "kitty yay; pkill -SIGRTMIN+8 waybar", // update system
         "signal": 8

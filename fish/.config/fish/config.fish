@@ -28,12 +28,11 @@ set -x PAGER less
         export GTK_CSD=0
         export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
         export XCURSOR_THEME=capitaine-cursors
-        export SWAY=1
         exec sway
     end
     if test $XDG_VTNR -eq 1 #faster like this
         if systemctl -q is-active graphical.target && test ! $DISPLAY
-            esway
+            esway > .swaylog
         end
     end
 
@@ -65,15 +64,13 @@ set -x PAGER less
     set SPACEFISH_CHAR_SYMBOL_ROOT '#'
 #}}}
 # Color man pages{{{
-# function man
-#     env \
-#     LESS_TERMCAP_md='\e[01;31m' \
-#     LESS_TERMCAP_me='\e[0m' \
-#     LESS_TERMCAP_se='\e[0m' \
-#     LESS_TERMCAP_so='\e[01;44;33m' \
-#     LESS_TERMCAP_ue='\e[0m' \
-#     LESS_TERMCAP_us='\e[01;32m' \
-#     command man "$argv"
-# end
+
+set -xU LESS_TERMCAP_md (printf "\e[01;31m")
+set -xU LESS_TERMCAP_me (printf "\e[0m")
+set -xU LESS_TERMCAP_se (printf "\e[0m")
+set -xU LESS_TERMCAP_so (printf "\e[01;44;33m")
+set -xU LESS_TERMCAP_ue (printf "\e[0m")
+set -xU LESS_TERMCAP_us (printf "\e[01;32m")
+
 #}}}
 # vim:foldmethod=marker

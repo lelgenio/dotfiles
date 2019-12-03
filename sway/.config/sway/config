@@ -17,7 +17,7 @@
     set $right l
 
     set $term kitty
-    set $menu 'j4-dmenu-desktop --dmenu="bmenu -p Iniciar:" --term kitty'
+    set $menu wofi --show drun -i -p'Iniciar: '
 	font pango:Hack 14px
 
 # }}}
@@ -216,14 +216,14 @@
     set $accent     #CC575D
     set $aclite     #CC575D50
     set $fg_color   #ffffff
-    set $bg_color   #202020
+    set $bg_color   #191919
     set $bg_darker  #151515
     set $alert      #000000
 
     #                       border      background  text        indicator   child_border
     client.focused          $accent     $accent     $fg_color   $accent     $accent
-    client.focused_inactive $bg_darker  $bg_darker  $fg_color   $bg_color   $bg_color
-    client.unfocused        $bg_darker  $bg_darker  $fg_color   $bg_color   $bg_color
+    client.focused_inactive $bg_color   $bg_color   $fg_color   $bg_color   $bg_color
+    client.unfocused        $bg_color   $bg_color   $fg_color   $bg_color   $bg_color
     client.urgent           $alert      $alert      $fg_color   $alert      $alert
 
     bar swaybar_command waybar
