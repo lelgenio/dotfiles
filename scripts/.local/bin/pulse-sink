@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MENU(){
-    rofi -dmenu $@
+    rofi -dmenu -i $@
 }
 opts="Fone\nSpeaker\nHDMI"
 out=$(echo -e $opts | MENU -p "Saida:")
