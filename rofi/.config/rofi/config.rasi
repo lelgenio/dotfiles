@@ -6,6 +6,7 @@ configuration {
   	show-icons: true;
   	modi: "drun";
 	terminal: "termite";
+    display-drun: "Iniciar: ";
 }
 
 * {

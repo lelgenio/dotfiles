@@ -45,14 +45,22 @@ export PAGER=less
         export GTK_CSD=0
         export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
         export XCURSOR_THEME=capitaine-cursors
-        export SWAY=1
         exec sway
+    }
+    ei3() {
+        clear
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        export GTK_CSD=0
+        export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
+        export XCURSOR_THEME=capitaine-cursors
+        exec startx i3
     }
     if [[ $XDG_VTNR -eq 1 ]] #faster like this
     then
         if systemctl -q is-active graphical.target && [[ ! $DISPLAY ]]
         then
-            esway > .swaylog
+            # esway > .swaylog
+            ei3 > .i3log
         fi
     fi
 

@@ -16,7 +16,7 @@ set -x VISUAL nvim
 set -x PAGER less
 
 #}}}
-# start sway if using tty1 {{{
+# start window manager if using tty1 {{{
 #
     function esway
         clear
@@ -30,16 +30,25 @@ set -x PAGER less
         export XCURSOR_THEME=capitaine-cursors
         exec sway
     end
+    function ei3
+        clear
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        export GTK_CSD=0
+        export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
+        export XCURSOR_THEME=capitaine-cursors
+        exec startx i3
+    end
     if test $XDG_VTNR -eq 1 #faster like this
         if systemctl -q is-active graphical.target && test ! $DISPLAY
-            esway > .swaylog
+            # esway > .swaylog
+            ei3 > .i3log
         end
     end
 
 # }}}
 # use tmux{{{
-
-    if test -z "$TMUX" && test "$TERM" != "xterm-kitty"
+set TMUX 1
+    if test -z "$TMUX" && test "$TERM" != "xterm-kitty" && test -n "$DISPLAY"
         set attach_session (tmux 2> /dev/null ls -F \
             '#{session_attached} #{?#{==:#{session_last_attached},},1,#{session_last_attached}} #{session_id}' |
             awk '/^0/ { if ($2 > t) { t = $2; s = $3 } }; END { if (s) printf "%s", s }')

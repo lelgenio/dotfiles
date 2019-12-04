@@ -101,8 +101,9 @@ FULL_INSTALL=false
     pkgs+=" $pkgs_base"
     # DE
     pkgs+=' sway waybar gnome-keyring python-keyring light mako udiskie wofi-hg stow yay'
+    pkgs+=' i3 termite scrot pamixer'
     pkgs+=' nemo redshift-wlr-gamma-control-git '
-    pkgs+=' pkgfile kitty neovim htop-vim-git'
+    pkgs+=' pkgfile kitty neovim moreutils htop-vim-git'
     # Audio
     pkgs+=' pulseaudio pavolume-git'
     # Fonts
@@ -332,7 +333,7 @@ configure() {
     set_locale
 
     echo 'Setting console keymap'
-    set_keymap
+    set_inputs
 
     echo 'Setting fstab'
     set_fstab "$TMP_ON_TMPFS" "$boot_dev"
@@ -496,9 +497,22 @@ EOF
     locale-gen
 }
 #}}}
-# set_keymap() {#{{{
-set_keymap() {
+# set_inputs() {#{{{
+set_inputs() {
     localectl set-keymap $KEYMAP
+    mkdir -p /etc/X11/xorg.conf.d/
+    cat > /etc/X11/xorg.conf.d/30-touchpad.conf <<EOF
+Section "InputClass"
+    MatchIsTouchpad "on"
+    Identifier "devname"
+    Driver "libinput"
+    Option "Tapping" "on"
+    Option "ClickMethod" "clickfinger"
+    Option "NaturalScrolling" "true"
+EndSection
+EOF
+
+/etc/X11/xorg.conf.d/00-keyboard.conf
 }
 #}}}
 # set_fstab() {#{{{

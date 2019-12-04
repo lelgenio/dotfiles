@@ -46,7 +46,7 @@ cursor_shape = block
 foreground      = #aaaaaa
 foreground_bold = #afafaf
 cursor          = #CC5757
-background      = rgba(30,30,30,0.95)
+background      = #202020
 # 303030
 
 # black
