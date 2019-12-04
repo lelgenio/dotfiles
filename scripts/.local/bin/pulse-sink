@@ -1,7 +1,11 @@
 #!/bin/bash
 
+MENU(){
+    rofi -dmenu $@
+}
 opts="Fone\nSpeaker\nHDMI"
-out=$(echo -e $opts | wofi -dk ~/.cache/wofi-pulse-sink -p "Saida:")
+out=$(echo -e $opts | MENU -p "Saida:")
+vol=$(pamixer --get-volume)
 
 if [ "$out" == "HDMI" ]
 then
@@ -17,4 +21,4 @@ then
 		pacmd set-sink-port @DEFAULT_SINK@ analog-output-headphones
 	fi
 fi
-
+pamixer --set-volume "$vol"

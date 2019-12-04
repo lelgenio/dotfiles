@@ -1,8 +1,12 @@
 #!/bin/sh
 set -e
 
+MENU(){
+    rofi -dmenu -i $@
+}
+
 search(){
-    music=$(mpc playlist --format '%artist% : %title%' | sed '/^ : $/d' | wofi -dk/dev/null)
+    music=$(mpc playlist --format '%artist% : %title%' | sed '/^ : $/d' | MENU)
     if [ "$music" == "" ]
     then
         exit 1
@@ -16,7 +20,7 @@ search(){
 
 delete(){
     current=~/Música/"$(mpc current -f %file%)"
-    answer=$(echo -e "nothing\n$current" | wofi -dk/dev/null -p"delete?" )
+    answer=$(echo -e "nothing\n$current" | MENU -p"delete?" )
     if [ "$answer" == "$current" ]
     then
         trash "$answer"

@@ -204,8 +204,8 @@
     bindsym XF86AudioPlay   exec    mpc     toggle
     bindsym XF86AudioNext   exec    mpc     next
     bindsym XF86AudioPrev   exec    mpc     prev
-    bindsym $mod+alt+x      exec    musmenu delete
-    bindsym $mod+alt+s      exec    musmenu search
+    bindsym $mod+Shift+x    exec    musmenu delete
+    bindsym $mod+Shift+s    exec    musmenu search
 
     # }}}
 # }}}
