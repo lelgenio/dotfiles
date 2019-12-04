@@ -47,7 +47,6 @@ foreground      = #aaaaaa
 foreground_bold = #afafaf
 cursor          = #CC5757
 background      = #202020
-# 303030
 
 # black
 color0  = #555555

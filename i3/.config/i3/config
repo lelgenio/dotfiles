@@ -187,10 +187,8 @@
     exec flashfocus -o .5
 
     set $accent     #CC575D
-    set $aclite     #CC575D50
     set $fg_color   #ffffff
     set $bg_color   #191919
-    set $bg_darker  #151515
     set $alert      #000000
 
     #                       border      background  text        indicator   child_border
