@@ -150,6 +150,7 @@ label-urgent-padding = 2
 [module/mpd]
 type = internal/mpd
 format-online = <label-song>
+format-paused =
 
 format-online-overline = #66cc99
 
