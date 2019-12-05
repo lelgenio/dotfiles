@@ -1,9 +1,13 @@
 font=Inter 12
-background-color=#202020f8
+background-color=#202020
 border-color=#cc5757
 progress-color=#cc5757
 icons=1
-default-timeout=3000
+default-timeout=10000
 markup=1
 actions=1
 layer=overlay
+
+[app-name=pavolume]
+group-by=app-name
+format=<b>%s</b>\n%b
