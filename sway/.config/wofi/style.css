@@ -1,0 +1,42 @@
+/* window { */ 
+/*     border-radius:5px; */
+/* } */ 
+window { 
+/* margin: 5px; */ 
+/* border: 2px solid red; */ 
+background-color: #cc5757; 
+} 
+
+#input { 
+margin: 5px; 
+/* border: 2px solid blue; */ 
+background-color: #252525; 
+color:white;
+} 
+
+/* #inner-box { */ 
+/* margin: 20px; */ 
+/* border: 2px solid yellow; */ 
+/* background-color: #303030; */ 
+/* } */ 
+
+#outer-box { 
+margin: 2px; 
+padding: 10px 10px 0 10px; 
+/* border: 2px solid green; */ 
+/* background-color: green; */ 
+background-color: #303030; 
+} 
+
+/* #scroll { */ 
+/* margin: 5px; */ 
+/* border: 2px solid orange; */ 
+/* background-color: orange; */ 
+/* } */ 
+
+/* #text { */ 
+/* /1* margin: 5px; *1/ */ 
+/* /1* border: 2px solid cyan; *1/ */ 
+/* /1* background-color: cyan; *1/ */ 
+/*     color:white; */
+/* } */

@@ -1,8 +1,13 @@
+#!/bin/sh
 set -e
 mbsync -aq
 NEW=$(find .mail/INBOX{,.{Contas,Faculdade,Git,Trabalhos}}/{cur,new} -type f |
     grep -vE ',[^,]*S[^,]*$' | wc -l)
 
 echo $NEW | sed 's/^0$//'
+
+if [ "$(ps -o comm= $PPID)" != "waybar" ] && pgrep waybar>/dev/null;then
+    pkill -SIGRTMIN+4 waybar
+fi
 
 # vim:ft=sh

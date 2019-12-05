@@ -2,7 +2,11 @@
 set -e
 
 MENU(){
-    rofi -dmenu -i $@
+    if [ -n "$SWAYSOCK" ];then
+        wofi -dIk/dev/null "$@"
+    else
+        rofi -dmenu -i $@
+    fi
 }
 
 search(){
@@ -15,7 +19,7 @@ search(){
     artist=$(echo "$music" | perl -pe 's/(.*) : (.*)/\1/')
     title=$(echo "$music"  | perl -pe 's/(.*) : (.*)/\2/')
 
-    mpc searchplay artist "$artist" title "$title"
+    mpc --quiet searchplay artist "$artist" title "$title"
 }
 
 delete(){
@@ -24,8 +28,8 @@ delete(){
     if [ "$answer" == "$current" ]
     then
         trash "$answer"
-        mpc next
-        mpc update
+        mpc --quiet next
+        mpc --quiet update
     fi
 }
 

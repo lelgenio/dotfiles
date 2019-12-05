@@ -58,6 +58,9 @@
     bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
 
     # }}}
+
+    bindsym XF86MonBrightnessUp   exec xbacklight -inc 5
+    bindsym XF86MonBrightnessDown exec xbacklight -dec 5
     # Moving around: {{{
     #
     # Move your focus around
@@ -175,8 +178,8 @@
     bindsym XF86AudioPlay   exec    mpc     toggle
     bindsym XF86AudioNext   exec    mpc     next
     bindsym XF86AudioPrev   exec    mpc     prev
-    bindsym $mod+Shift+x      exec    musmenu delete
-    bindsym $mod+Shift+s      exec    musmenu search
+    bindsym $mod+Shift+x    exec    musmenu delete
+    bindsym $mod+Shift+s    exec    musmenu search
 
     # }}}
 # }}}
@@ -230,7 +233,7 @@
     # Telegram
     exec --no-startup-id telegram-desktop
     # Music Player Daemon
-    exec 'mpd --no-daemon'
+    exec mpd --no-daemon
     exec mpDris2
     # Use i3lock
     exec xss-lock --transfer-sleep-lock -- i3lock --nofork
@@ -239,7 +242,7 @@
     # PulseAudio icon
     exec pasystray --notify=all --volume-max=100 --volume-inc=5 
     # Ouput manager
-    exec autoranr --change
+    exec autorandr --change
 #}}}
 
 # vim:filetype=i3config:foldmethod=marker

@@ -68,7 +68,6 @@ window#waybar.empty {
 #backlight,
 #network,
 #pulseaudio,
-#custom-media,
 #custom-weather,
 #custom-mail,
 #custom-updates,
@@ -155,6 +154,11 @@ label:focus {
 #custom-updates {
     border-top: 2px solid #ee9957;
     /*background-color: #2980b9;*/
+}
+
+#custom-recording {
+    border-top: 2px solid #ee9957;
+    color: #ee4040;
 }
 
 #tray {

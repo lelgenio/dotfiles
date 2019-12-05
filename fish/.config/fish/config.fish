@@ -40,8 +40,8 @@ set -x PAGER less
     end
     if test $XDG_VTNR -eq 1 #faster like this
         if systemctl -q is-active graphical.target && test ! $DISPLAY
-            # esway > .swaylog
-            ei3 > .i3log
+            esway > .swaylog
+            # ei3 > .i3log
         end
     end
 

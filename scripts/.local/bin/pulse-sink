@@ -1,8 +1,13 @@
 #!/bin/bash
 
 MENU(){
-    rofi -dmenu -i $@
+    if [ -n "$SWAYSOCK" ];then
+        wofi -dIk/dev/null "$@"
+    else
+        rofi -dmenu -i $@
+    fi
 }
+
 opts="Fone\nSpeaker\nHDMI"
 out=$(echo -e $opts | MENU -p "Saida:")
 vol=$(pamixer --get-volume)

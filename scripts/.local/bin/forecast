@@ -36,4 +36,4 @@ esac
 text="$MIN $MAX  $TEMP°C $WEATHER"
 # tooltip="$(curl -s wttr.in | paste -d'\\n' -s )"
 tooltip=""
-printf '{"text":"%s","tooltip":"%s"}' "$text" "$tooltip"
+echo "$text"
