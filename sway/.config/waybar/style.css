@@ -157,7 +157,7 @@ label:focus {
 }
 
 #custom-recording {
-    border-top: 2px solid #ee9957;
+    /* border-top: 2px solid #ee9957; */
     color: #ee4040;
 }
 

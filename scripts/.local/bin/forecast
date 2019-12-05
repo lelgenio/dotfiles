@@ -1,39 +1,56 @@
 #!/bin/sh
 set -e
-CITY=$(curl -s ipinfo.io/city)
-APPID="fd68c0fe7951f5ab7e24a240eb0942b8"
- 
-FORECAST=$(http get http://api.openweathermap.org/data/2.5/forecast\?APPID\=${APPID}\&q\="${CITY}"\&units\=metric)
 
-TEMP=$(echo $FORECAST | jq -r ".list[0].main.temp")
-WEATHER=$(echo $FORECAST | jq -r ".list[0].weather[0].main")
+short(){
+    CITY=$(curl -s ipinfo.io/city)
+    APPID="fd68c0fe7951f5ab7e24a240eb0942b8"
+     
+    FORECAST=$(http get http://api.openweathermap.org/data/2.5/forecast\?APPID\=${APPID}\&q\="${CITY}"\&units\=metric)
 
-MIN=$(echo $FORECAST | jq -r ".list[2].main.temp_min" | 
-    perl -pe 's/(\d*)\.\d*/\1/')
-MAX=$(echo $FORECAST | jq -r ".list[2].main.temp_max" |
-    perl -pe 's/(\d*)\.\d*/\1/')
-case $WEATHER in
- "Clear")
-     WEATHER=" "
-     ;;
- "Clouds")
-     WEATHER=" "
-     ;;
- "Rain"|"Drizzle")
-     WEATHER=" "
-     ;;
- "Mist")
-     WEATHER=" "
-     ;;
- "Snow")
-     WEATHER=" "
-     ;;
- "Thunderstorm")
-     WEATHER=""
-     ;;
-esac
+    TEMP=$(echo $FORECAST | jq -r ".list[0].main.temp")
+    WEATHER=$(echo $FORECAST | jq -r ".list[0].weather[0].main")
 
-text="$MIN $MAX  $TEMP°C $WEATHER"
-# tooltip="$(curl -s wttr.in | paste -d'\\n' -s )"
-tooltip=""
-echo "$text"
+    MIN=$(echo $FORECAST | jq -r ".list[2].main.temp_min" | 
+        perl -pe 's/(\d*)\.\d*/\1/')
+    MAX=$(echo $FORECAST | jq -r ".list[2].main.temp_max" |
+        perl -pe 's/(\d*)\.\d*/\1/')
+    case $WEATHER in
+     "Clear")
+         WEATHER=" "
+         ;;
+     "Clouds")
+         WEATHER=" "
+         ;;
+     "Rain"|"Drizzle")
+         WEATHER=" "
+         ;;
+     "Mist")
+         WEATHER=" "
+         ;;
+     "Snow")
+         WEATHER=" "
+         ;;
+     "Thunderstorm")
+         WEATHER=""
+         ;;
+    esac
+
+    text="$MIN $MAX  $TEMP°C $WEATHER"
+    # tooltip="$(curl -s wttr.in | paste -d'\\n' -s )"
+    tooltip=""
+    echo "$text"
+}
+
+full(){
+    local request="wttr.in/${1-Caxias}"
+    [ "$(tput cols)" -lt 125 ] && request+='?n'
+    curl -sH "Accept-Language: ${LANG%_*}" --compressed "$request" | 
+        head -n-3 | tail -n+3
+}
+
+if [ "$1" == "full" ]
+then
+    full
+else
+    short
+fi

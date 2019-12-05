@@ -126,7 +126,8 @@
     },
     "custom/weather": {
         "exec": "forecast",
-        "interval": 1800
+        "interval": 1800,
+        "on-click": "kitty --class weather sh -c 'forecast full;read -n1 -p\"Press Any key to quit \"'"
     },
     "custom/mail": {
         "format":"{} ",
@@ -144,9 +145,10 @@
         "signal": 8
     },
     "custom/recording": {
-        "exec": "echo ",
-        "exec-if": "pgrep wf-recorder",
-        "interval": 2
+        "exec": "pgrep wf-recorder > /dev/null && echo  || echo",
+        "interval": 1,
+        "on-click": "pkill wf-recorder; pkill -SIGRTMIN+5 waybar", // update system
+        "signal": 5
     }
 
 }
