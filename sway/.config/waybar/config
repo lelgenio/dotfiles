@@ -3,43 +3,38 @@
 	//"margin":"5 5 0 5",
 	//"margin-bottom":10,
     //"position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 26, // Waybar height (to be removed for auto height)
+    //"height": 26, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-    "modules-center": ["clock"],
-    "modules-right": ["custom/recording","mpd", "pulseaudio", "network", "battery","custom/weather","custom/mail", "custom/updates", "tray"],
-    //Modules configuration
+    "modules-left": ["sway/workspaces","sway/window"],
+    "modules-center": ["clock","custom/weather"],
+    "modules-right": ["custom/recording","mpd", "pulseaudio", "network", "battery","custom/mail", "custom/updates", "tray"],
      "sway/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
-         "format": "{name}: {icon}",
+         "enable-bar-scroll":true,
+         "format": "{icon}",
          "format-icons": {
-             "1": "",
-             "2": "",
-             "3": "",
-    //         "4": "",
+             "1":  "",
+             "2":  "",
+             "3":  "",
              "10": "",
              "urgent": "",
              "focused": "",
              "default": ""
          }
      },
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
-    },
-    "sway/window":{
-        "tooltip":false,
-        "format": " {} "
-    },
+     "sway/window":{
+         "max-length":40
+     },
     "mpd": {
+        "tooltip":false,
         "format": " {stateIcon} {title} - {artist} 🎜 ",
         "format-disconnected": " Disconnected  🎜 ",
         "format-stopped": " Stopped  🎜 ",
-        "timeout":15,
+        "timeout":5,
         "unknown-tag": " N/A ",
         "tooltip":false,
         "interval": 2,
+         "max-length":40,
         "state-icons": {
             "paused": "",
             "playing": ""
@@ -53,34 +48,20 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
+        "tooltip":false,
         "spacing": 10
     },
     "clock": {
+        "tooltip":false,
         "tooltip-format": "{:%Y-%m-%d | %H:%M}",
         "format-alt": "{:%Y-%m-%d}"
     },
-    "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
-    },
-    "memory": {
-        "format": "{}% "
-    },
-    "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
-    },
     "backlight": {
-        // "device": "acpi_video1",
         "format": "{percent}% {icon}",
         "format-icons": ["", ""]
     },
     "battery": {
+        "tooltip":false,
         "states": {
             "full":100,
             "good": 95,
@@ -99,20 +80,19 @@
         "tooltip":false,
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "on-click": "termite -e nmtui",
-        "format-wifi": "{essid} ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
+        "format-wifi": "",
+        "format-ethernet": "",
+        "format-linked": "",
+        "format-disconnected": "⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
+        "tooltip":false,
         "scroll-step": 10,
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
+        "format": "{icon}",
+        "format-bluetooth": "",
+        "format-bluetooth-muted": "",
+        "format-muted": "",
         "format-icons": {
             "headphones": "",
             "handsfree": "",
@@ -125,29 +105,33 @@
         "on-click": "pavucontrol"
     },
     "custom/weather": {
-        "exec": "forecast",
+        "tooltip":false,
+        "exec": "forecast short",
         "interval": 1800,
-        "on-click": "kitty --class weather sh -c 'forecast full;read -n1 -p\"Press Any key to quit \"'"
+        "on-click": "kitty --class weather sh -c 'forecast full;read -n1 -p\"Press Any key to quit \"'",
+        "on-click-right": "xdg-open https://openweathermap.org"
     },
     "custom/mail": {
-        "format":"{} ",
         "tooltip":false,
-        "exec": "checkmail",
-        "on-click": "kitty neomutt; pkill -SIGRTMIN+4 waybar", // update system
+        "format":"{} ",
+        "exec": "sleep 10s; checkmail",
+        "on-click": "kitty neomutt; pkill -SIGRTMIN+4 waybar",
         "signal": 4,
         "interval": 1800
     },
     "custom/updates": {
+        "tooltip":false,
         "format": "{} ",
-        "interval": 3600,                     // every hour
-        "exec": "yay -Sy > /dev/null; yay -Qqu | wc -l | sed 's/^0$//'",
-        "on-click": "kitty yay; pkill -SIGRTMIN+8 waybar", // update system
+        "interval": 3600,
+        "exec": "sleep 30s; yay -Syuw --noconfirm> /dev/null; yay -Qqu | wc -l | sed 's/^0$//'",
+        "on-click": "[ ping -qc1 archlinux.org ] && kitty yay -Syu || kitty yay -Su; pkill -SIGRTMIN+8 waybar",
         "signal": 8
     },
     "custom/recording": {
+        "tooltip":false,
         "exec": "pgrep wf-recorder > /dev/null && echo  || echo",
         "interval": 1,
-        "on-click": "pkill wf-recorder; pkill -SIGRTMIN+5 waybar", // update system
+        "on-click": "pkill wf-recorder; pkill -SIGRTMIN+5 waybar",
         "signal": 5
     }
 

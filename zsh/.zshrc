@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # LEL
 
 #          _     
@@ -5,7 +12,7 @@
 # |_  / __| '_ \ 
 #  / /\__ \ | | |
 # /___|___/_| |_|
-               
+
 # Environment Vairables {{{
 export QT_QPA_PLATFORMTHEME=qt5ct
 export PATH=$PATH:~/.local/bin
@@ -59,14 +66,15 @@ export PAGER=less
     then
         if systemctl -q is-active graphical.target && [[ ! $DISPLAY ]]
         then
-            # esway > .swaylog
-            ei3 > .i3log
+            esway > .swaylog
+            # ei3 > .i3log
         fi
     fi
 
 # }}}
 # use tmux{{{
 
+TMUX=1
 if [ -z "$TMUX" ] && [ "$TERM" != "xterm-kitty" ]; then
     attach_session=$(tmux 2> /dev/null ls -F \
         '#{session_attached} #{?#{==:#{session_last_attached},},1,#{session_last_attached}} #{session_id}' |
@@ -91,6 +99,7 @@ fi
 	zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
     zplug "zsh-users/zsh-completions"
+    zplug "hlissner/zsh-autopair", defer:2
 
     # History
     zplug "scripts/dirhistory", from:oh-my-zsh
@@ -108,12 +117,13 @@ fi
     zplug "zsh-users/zsh-autosuggestions"
 
     # Promp config
-	bindkey -e 
-    SPACESHIP_PROMPT_ADD_NEWLINE=false
-    SPACESHIP_CHAR_SYMBOL='$ '
-    SPACESHIP_CHAR_SYMBOL_ROOT='# '
-	zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+	# bindkey -e 
+    # SPACESHIP_PROMPT_ADD_NEWLINE=false
+    # SPACESHIP_CHAR_SYMBOL='$ '
+    # SPACESHIP_CHAR_SYMBOL_ROOT='# '
+	# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 	
+    zplug "romkatv/powerlevel10k", as:theme, depth:1
     if ! zplug check
     then
         zplug install
@@ -157,7 +167,35 @@ fi
 #
     autoload -z edit-command-line
     zle -N edit-command-line
-    bindkey "^X^E" edit-command-line
+    bindkey "^X" edit-command-line
+
+    # typeset -g -A key
+
+    # key[Home]="${terminfo[khome]}"
+    # key[End]="${terminfo[kend]}"
+    # key[Insert]="${terminfo[kich1]}"
+    # key[Backspace]="${terminfo[kbs]}"
+    # key[Delete]="${terminfo[kdch1]}"
+    # key[Up]="${terminfo[kcuu1]}"
+    # key[Down]="${terminfo[kcud1]}"
+    # key[Left]="${terminfo[kcub1]}"
+    # key[Right]="${terminfo[kcuf1]}"
+    # key[PageUp]="${terminfo[kpp]}"
+    # key[PageDown]="${terminfo[knp]}"
+    # key[ShiftTab]="${terminfo[kcbt]}"
+
+    # ${key[Home]}       
+    # ${key[End]}
+    # ${key[Delete]}
+    # ${key[Insert]}
+    # ${key[Backspace]}
+    # ${key[Up]}
+    # ${key[Down]}
+    # ${key[Left]}
+    # ${key[Right]}
+    # ${key[PageUp]}
+    # ${key[PageDown]}
+    # ${key[ShiftTab]}
 
     case $TERM in
         rxvt*|xterm*)
@@ -168,7 +206,7 @@ fi
             bindkey "^[[B" history-substring-search-down #Down Arrow
             bindkey "^[Oc" forward-word # control + right arrow
             bindkey "^[Od" backward-word # control + left arrow
-            bindkey "^H" backward-kill-word # control + backspace
+            bindkey "^H"   backward-kill-word # control + backspace
             bindkey "^[[3^" kill-word # control + delete
         ;;
         linux)
@@ -220,3 +258,6 @@ fi
 #}}}
 
 # vim:foldmethod=marker
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

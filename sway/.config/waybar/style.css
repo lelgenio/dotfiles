@@ -1,26 +1,19 @@
 * {
-    border: none;
-    border-radius: 0;
-    font-family: Inter;
-    font-size: 14px;
-    min-height: 0;
-	/*
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-	*/
+    font: 14px Inter;
+    font-weight:bold;
+    /* border: none; */
+    border-radius:0;
+    margin:0;
+    padding: 0;
+    transition-duration:0;
+    /* font-size: ; */
+    /* min-height: 0; */
 }
 
 window#waybar {
     background-color: #202020;
     border-bottom: 2px solid #191919;
-    color: #ffffff;
-    transition: background-color .3s;
 }
-
-window#waybar.hidden {
-    opacity: 0.2;
-}
-
 
 window#waybar.empty {
     background-color: transparent;
@@ -29,20 +22,22 @@ window#waybar.empty {
 
 
 #workspaces button {
-    padding: 0 5px;
     background-color: transparent;
-    color: #ffffff;
-	transition: .3s border;
+    border: 3px solid transparent;
+    color: #aaaaaa;
 }
-
+/*
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
     border-top: 1px solid white;
 }
-
+*/
 #workspaces button.focused {
-    background-color: rgba(255,255,255,.01);
+    /* padding: 0 2px; */
+    /* background-color: rgba(255,255,255,.01); */
     border-top: 3px solid #cc5757;
+    border-bottom: 3px solid transparent;
+    color: #ffffff;
 }
 
 #workspaces button.urgent {
@@ -51,56 +46,59 @@ window#waybar.empty {
 
 /*Window Title*/
 #window{
-	color:#ccc;
-	margin:0 4px;
-}
-#mode {
-    background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    color:#aaa;
+    margin:0 4px;
+    /* width:15px; */
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#temperature,
 #mpd,
-#backlight,
+#tray
+#clock,
 #network,
+#battery,
+#backlight,
 #pulseaudio,
-#custom-weather,
 #custom-mail,
 #custom-updates,
-#tray,
-#mode,
-#idle_inhibitor {
-    padding: 0 10px;
-    margin: 0 4px;
+#custom-weather
+{
+    margin: 0 7px;
     color: #ffffff;
+    opacity:.7;
 }
 
-#clock {
-    /*border-top: 2px solid #64727D;*/
-	font:15px bold;
+#mpd,
+#window,
+#workspaces
+{
+    font-weight:normal;
 }
 
-#battery {
-    border-top: 2px solid #ffffff;
-    /*background-color: #ffffff;*/
+#tray
+{
+    margin-right:7px;
 }
 
-#battery.charging {
-    border-top: 2px solid #26A65B;
-    /*background-color: #26A65B;*/
-    color: #ffffff;
+/*
+label:focus {
+    border-top: 2px solid #000000;
+    background-color: #000000;
 }
 
 @keyframes blink {
     to {
     border-top: 2px solid #ffffff;
-        /*background-color: #ffffff;*/
         color: #000000;
     }
+}
+
+#battery {
+    border-top: 2px solid #ffffff;
+}
+
+#battery.charging {
+    border-top: 2px solid #26A65B;
+    color: #ffffff;
 }
 
 #battery.critical:not(.charging) {
@@ -112,82 +110,62 @@ window#waybar.empty {
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
-
-label:focus {
-    border-top: 2px solid #000000;
-    background-color: #000000;
-}
-
 #network {
     border-top: 2px solid #66cc99;
-    /*background-color: #66cc99;*/
-    /*color: #2a5c45;*/
 }
 
 #network.disconnected {
     border-top: 2px solid #f53c3c;
-    /*background-color: #f53c3c;*/
 }
 
 #pulseaudio {
     border-top: 2px solid #f1c40f;
-    /*background-color: #f1c40f;*/
-    /*color: #000000;*/
 }
 
 #pulseaudio.muted {
     border-top: 2px solid #90b1b1;
-    /*background-color: #90b1b1;*/
-    /*color: #2a5c45;*/
 }
 
 #custom-weather {
     border-top: 2px solid #2980b9;
-    /*background-color: #2980b9;*/
 }
 
 #custom-mail {
     border-top: 2px solid #67334d;
-    /*background-color: #2980b9;*/
 }
 
 #custom-updates {
     border-top: 2px solid #ee9957;
-    /*background-color: #2980b9;*/
+}
+
+
+#tray {
+    border-top: 2px solid #2980b9;
+}
+
+#mpd {
+    border-top: 2px solid #66cc99;
+}
+
+#mpd.disconnected {
+    border-top: 2px solid #f53c3c;
+}
+
+#mpd.stopped {
+    border-top: 2px solid #90b1b1;
+}
+
+*/
+
+#mpd.paused {
+    font-size: 0;
+    border: none;
 }
 
 #custom-recording {
     /* border-top: 2px solid #ee9957; */
     color: #ee4040;
 }
-
-#tray {
-    border-top: 2px solid #2980b9;
-    /*background-color: #2980b9;*/
-}
-
-#mpd {
-    border-top: 2px solid #66cc99;
-    /*background-color: #66cc99;*/
-    /*color: #2a5c45;*/
-}
-
-#mpd.disconnected {
-    border-top: 2px solid #f53c3c;
-    /*background-color: #f53c3c;*/
-}
-
-#mpd.stopped {
-    border-top: 2px solid #90b1b1;
-    /*background-color: #90b1b1;*/
-}
-
-#mpd.paused {
-    font-size: 0;
-    border: none;
-    /*background-color: #51a37a;*/
-}
-
 /*
  * UNUSED
  *

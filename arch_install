@@ -2,17 +2,17 @@
 #
 #LICENSE#{{{
 # Copyright (c) 2012 Tom Wambold
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -89,7 +89,7 @@ FULL_INSTALL=false
 #}}}
 # PACKAGES{{{
     # sudo to allow to run as a user later
-    sudo pacman -Sy 
+    sudo pacman -Sy
 
     pkgs_base=''
     pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
@@ -100,8 +100,8 @@ FULL_INSTALL=false
     pkgs=''
     pkgs+=" $pkgs_base"
     # DE
-    pkgs+=' sway waybar gnome-keyring python-keyring light mako udiskie wofi-hg stow yay'
-    pkgs+=' i3 termite scrot pamixer'
+    pkgs+=' sway waybar ruby-fusuma light mako udiskie wofi-hg stow yay'
+    # pkgs+=' i3 termite scrot pamixer'
     pkgs+=' nemo redshift-wlr-gamma-control-git '
     pkgs+=' pkgfile kitty neovim moreutils htop-vim-git'
     # Audio
@@ -118,20 +118,20 @@ FULL_INSTALL=false
         pkgs+=' flashfocus-git '
         # Terminal
         pkgs+=' tmux ranger atool p7zip tree'
-        pkgs+=' neofetch powerline-fonts'
+        pkgs+=' neofetch powerline-fonts otf-fira-code'
         pkgs+=' lolcat cmatrix'
         # Network
         pkgs+=' bluez-utils rsync rclone nmap gnu-netcat tor mtr speedtest-cli'
         # Browser
         pkgs+=' qutebrowser youtube-dl'
         # Email
-        pkgs+=' evolution mutt-wizard-git neomutt isync' 
+        pkgs+=' evolution mutt-wizard-git neomutt isync'
         # Files
-        pkgs+=' syncthing nextcloud-client ' 
-        pkgs+=' deluge deezloader-remix-bin smloadr' 
+        pkgs+=' syncthing nextcloud-client '
+        pkgs+=' deluge deezloader-remix-bin smloadr'
         # Media
         pkgs+=' sxiv mpv mpd mpc ncmpcpp mpv-mpris mpdris2 playerctl'
-        pkgs+=' blender gimp kdenlive picard image_optim' 
+        pkgs+=' blender gimp kdenlive picard image_optim'
         # Office
         pkgs+=' libreoffice-fresh libreoffice-fresh-pt-br hunspell-pt-br papirus-libreoffice-theme'
         # Programing
@@ -164,7 +164,7 @@ FULL_INSTALL=false
 #}}}
 # Initial Setup{{{
 # Base install{{{
-setup() { 
+setup() {
     local boot_dev="$DRIVE"1
     local lvm_dev="$DRIVE"2
 
@@ -221,7 +221,7 @@ setup() {
 }
 #}}}
 # Partition Drive{{{
-partition_drive() { 
+partition_drive() {
     local dev="$1"; shift
 
     # 100 MB /boot partition, everything else under LVM
@@ -234,7 +234,7 @@ partition_drive() {
 
     if $IS_BIOS;then
         parted -s "$dev" \
-            set 1 bios_grub on 
+            set 1 bios_grub on
     fi
 }
 #}}}
@@ -345,7 +345,7 @@ configure() {
     set_daemons "$TMP_ON_TMPFS"
 
     echo 'Configuring Bluetooth'
-    set_bluetooth 
+    set_bluetooth
 
     echo 'Configuring bootloader'
     set_bootctl "$boot_dev" "$lvm_dev"
@@ -554,7 +554,7 @@ set_initcpio() {
     local encrypt=""
     if [ -n "$ENCRYPT_DRIVE" ]
     then
-        encrypt="encrypt"
+        encrypt="encrypt keyboard"
     fi
 
     cat > /etc/mkinitcpio.conf <<EOF
@@ -565,7 +565,7 @@ BINARIES=()
 
 FILES=()
 
-HOOKS=(base udev autodetect modconf block $encrypt lvm2 filesystems keyboard fsck)
+HOOKS=(base udev autodetect block $encrypt lvm2 filesystems fsck)
 
 EOF
 
@@ -613,7 +613,7 @@ set_bootctl() {
         # Load in resources
         crypt="root=UUID=$lvm_uuid"
     fi
-    
+
     if $IS_BIOS;then
         grub install "$boot_dev"
         grub

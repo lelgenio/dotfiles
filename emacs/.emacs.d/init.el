@@ -2,8 +2,7 @@
 ;;; Commentary:
 (require 'package)
 
-(setq package-list '(
-                     evil
+(setq package-list '(evil
                      lsp-mode
                      lsp-ui
                      yasnippet
@@ -60,7 +59,7 @@
         (add-hook 'before-save-hook 'tide-format-before-save)
 
         (add-hook 'typescript-mode-hook #'setup-tide-mode)
-    ;; Python
+        ;; Python
 
 ;; Completion
     (add-hook 'after-init-hook 'global-company-mode)
@@ -86,7 +85,7 @@
     (global-set-key (kbd "C-,") (lambda() (interactive)
 			      (find-file "~/.emacs.d/init.el")))
 
-(set-face-attribute 'default nil :height 110)
+(set-face-attribute 'default nil :height 200)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -116,7 +115,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#202020" :foreground "#f6f3e8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :foundry "pyrs" :family "Roboto Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "#202020" :foreground "#f6f3e8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :foundry "pyrs" :family "Fira Code"))))
  '(line-number ((t (:inherit (shadow default) :foreground "#cc5757"))))
  '(line-number-current-line ((t (:inherit line-number :foreground "white"))))
  '(whitespace-big-indent ((t (:foreground "dark gray"))))

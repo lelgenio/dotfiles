@@ -3,7 +3,7 @@ set -e
 
 MENU(){
     if [ -n "$SWAYSOCK" ];then
-        wofi -dIk/dev/null "$@"
+        wofi -dIk/dev/null $@
     else
         rofi -dmenu -i $@
     fi
@@ -47,4 +47,5 @@ then
     search
 else
     usage
+    search
 fi

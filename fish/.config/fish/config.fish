@@ -24,22 +24,20 @@ set -x PAGER less
         export QT_SCALE_FACTOR=1
         export QPA_PLATFORM=wayland
         export QT_QPA_PLATFORM=wayland
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        export GTK_CSD=0
-        export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
-        export XCURSOR_THEME=capitaine-cursors
         exec sway
     end
     function ei3
         clear
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        export GTK_CSD=0
-        export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
-        export XCURSOR_THEME=capitaine-cursors
         exec startx i3
     end
-    if test $XDG_VTNR -eq 1 #faster like this
-        if systemctl -q is-active graphical.target && test ! $DISPLAY
+    if test "$XDG_VTNR"=1 -a ! "$DISPLAY" -a "$XDG_SESSION_TYPE"="tty" #faster like this
+        if systemctl -q is-active graphical.target 
+            export _JAVA_AWT_WM_NONREPARENTING=1
+            export GTK_CSD=0
+            export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
+            export XCURSOR_THEME=capitaine-cursors
+            export GTK_THEME=materia-custom-accent:dark
+
             esway > .swaylog
             # ei3 > .i3log
         end

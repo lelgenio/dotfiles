@@ -1,6 +1,6 @@
 {
     // Remove clutter
-    // "window.titleBarStyle": "custom",
+    //"window.titleBarStyle": "custom",
     "window.menuBarVisibility": "toggle",
     "workbench.activityBar.visible": false,
     "workbench.editor.showTabs": false,
@@ -21,8 +21,8 @@
     "window.zoomLevel": 0,
     "vim.foldfix": true,
     // Fonts
-    "terminal.integrated.fontFamily": "'Hack', 'Roboto Mono'",
-    "editor.fontFamily": "'Hack','Roboto Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "terminal.integrated.fontFamily": "'Fira Code', 'Hack', 'Roboto Mono'",
+    "editor.fontFamily": "'Fira Code', 'Hack','Roboto Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 15,
     "editor.fontLigatures": true,
     // Vim

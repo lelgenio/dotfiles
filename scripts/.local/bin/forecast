@@ -1,19 +1,17 @@
 #!/bin/sh
 set -e
 
-short(){
+owm(){
+    # IPINFO=$(curl -s ipinfo.io/loc)
+    # LAT=$(echo $IPINFO | cut -d, -f1 | cut -d. -f1)
+    # LON=$(echo $IPINFO | cut -d, -f2 | cut -d. -f1)
     CITY=$(curl -s ipinfo.io/city)
     APPID="fd68c0fe7951f5ab7e24a240eb0942b8"
-     
-    FORECAST=$(http get http://api.openweathermap.org/data/2.5/forecast\?APPID\=${APPID}\&q\="${CITY}"\&units\=metric)
 
-    TEMP=$(echo $FORECAST | jq -r ".list[0].main.temp")
-    WEATHER=$(echo $FORECAST | jq -r ".list[0].weather[0].main")
+    http get http://api.openweathermap.org/data/2.5/forecast\?APPID\=${APPID}\&q="${CITY}"\&units\=metric
+}
 
-    MIN=$(echo $FORECAST | jq -r ".list[2].main.temp_min" | 
-        perl -pe 's/(\d*)\.\d*/\1/')
-    MAX=$(echo $FORECAST | jq -r ".list[2].main.temp_max" |
-        perl -pe 's/(\d*)\.\d*/\1/')
+format_weather(){
     case $WEATHER in
      "Clear")
          WEATHER=" "
@@ -34,23 +32,48 @@ short(){
          WEATHER=""
          ;;
     esac
+}
+
+owm_long(){
+    FORECAST=$(owm)
+    TEMP=$(echo $FORECAST | jq -r ".list[0].main.temp")
+    WEATHER=$(echo $FORECAST | jq -r ".list[0].weather[0].main")
+    format_weather
+
+    MIN=$(echo $FORECAST | jq -r ".list[2].main.temp_min" |
+        perl -pe 's/(\d*)\.\d*/\1/')
+    MAX=$(echo $FORECAST | jq -r ".list[2].main.temp_max" |
+        perl -pe 's/(\d*)\.\d*/\1/')
 
     text="$MIN $MAX  $TEMP°C $WEATHER"
-    # tooltip="$(curl -s wttr.in | paste -d'\\n' -s )"
-    tooltip=""
+
     echo "$text"
 }
 
-full(){
-    local request="wttr.in/${1-Caxias}"
-    [ "$(tput cols)" -lt 125 ] && request+='?n'
-    curl -sH "Accept-Language: ${LANG%_*}" --compressed "$request" | 
-        head -n-3 | tail -n+3
+owm_short(){
+    FORECAST=$(owm)
+    TEMP=$(echo $FORECAST | jq -r ".list[0].main.temp" |
+        perl -pe 's/(\d*)\.\d*/\1/')
+    WEATHER=$(echo $FORECAST | jq -r ".list[0].weather[0].main")
+    format_weather
+
+    text="$TEMP°C $WEATHER"
+
+    echo "$text"
+}
+
+wttrin(){
+    local request="wttr.in/${1-Caxias}?QF"
+    [ "$(tput cols)" -lt 125 ] && request+='n'
+    curl -sH "Accept-Language: ${LANG%_*}" --compressed "$request"
 }
 
 if [ "$1" == "full" ]
 then
-    full
+    wttrin
+elif [ "$1" == "short" ]
+then
+    owm_short
 else
-    short
+    owm_long
 fi
