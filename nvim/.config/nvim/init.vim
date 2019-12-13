@@ -27,7 +27,7 @@
 
     " Language server support
     " Plug 'sheerun/vim-polyglot'
-    Plug 'dense-analysis/ale'
+    " Plug 'dense-analysis/ale'
     " Plug 'davidhalter/jedi-vim'
     Plug 'autozimu/LanguageClient-neovim', {
         \ 'branch': 'next',
@@ -81,7 +81,7 @@
     " Latex
     Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
     Plug 'vim-latex/vim-latex', { 'for': 'tex' }
-    Plug 'vim-scripts/AnsiEsc.vim'
+    Plug 'vim-scripts/AnsiEsc.vim', { 'for': 'man' }
      " Plug 'powerman/vim-plugin-AnsiEsc'
     Plug 'mboughaba/i3config.vim'
 call plug#end()
@@ -126,7 +126,7 @@ call plug#end()
 
     colorscheme minimalist
 
-    " set       background=dark
+    set       background=dark
 
     "background color is transparent
     highlight Normal      guibg=None
