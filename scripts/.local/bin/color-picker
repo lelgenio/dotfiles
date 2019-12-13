@@ -2,20 +2,13 @@
 
 set -e
 
-if pgrep redshift;then 
-    echo r true
-    pkill redshift
-    red=true
-else
-    echo r false
-    red=false
-fi
+RED_ON="$(pgrep redshift)" && pkill redshift
 
-grim -g "$(slurp -p)" - |
-    convert - -format '%[pixel:p{0,0}]' txt:- | 
+grim -g "$(slurp -b aabbcc00 -p)" - |
+    convert - txt:- | 
     grep -oE '#[0-9a-f]{6}' | 
     wl-copy
 
 notify-send "$(wl-paste)" "Copied to clipboard"
 
-$red && redshift &> /dev/null &
+[ "$RED_ON" ] && redshift &> /dev/null &

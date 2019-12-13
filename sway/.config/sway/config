@@ -202,6 +202,9 @@
     # Screen recorder
     bindsym Control+Alt+Shift+r exec wf-recorder -a
 
+    # Color picker
+    bindsym $mod+c exec color-picker
+
     # }}}
     # Audio: {{{
     #
