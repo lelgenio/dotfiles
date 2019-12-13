@@ -10,12 +10,12 @@
     "modules-right": [
         "mpd",
         "custom/recording",
+        "tray",
         "custom/mail",
         "custom/updates",
         "pulseaudio",
         "network",
-        "battery",
-        "tray"
+        "battery"
     ],
     "sway/workspaces": {
         "enable-bar-scroll":true,
@@ -51,12 +51,12 @@
         }
     },
     "tray": {
-        "tooltip":false,
-        "spacing": 10
+        "spacing": 10,
+        "icon-size":18
     },
     "clock": {
         "interval":60,
-        "format":"{:%H:%M %a}",
+        "format":"{:%H:%M %a %d}",
         "tooltip":false
     },
     "battery": {
@@ -81,8 +81,7 @@
         "format-wifi": "",
         "format-ethernet": "",
         "format-linked": "",
-        "format-disconnected": "⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-disconnected": "⚠"
     },
     "pulseaudio": {
         "tooltip":false,

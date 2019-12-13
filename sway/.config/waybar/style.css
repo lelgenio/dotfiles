@@ -40,7 +40,7 @@ window#waybar.empty {
 }
 
 #mpd,
-#tray
+#tray,
 #clock,
 #network,
 #battery,
@@ -60,10 +60,6 @@ window#waybar.empty {
 #clock
 {
     font-size:15px;
-    padding: 0 5px;
-    margin: 0 2px;
-    color: #ffffff;
-    opacity:.7;
 }
 
 #mpd,

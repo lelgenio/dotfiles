@@ -59,7 +59,7 @@ owm_short(){
     WEATHER=$(echo $FORECAST | jq -r ".list[0].weather[0].main")
     format_weather
 
-    text="$TEMP°C $WEATHER"
+    text="$WEATHER $TEMP°C"
 
     echo "$text"
 }
