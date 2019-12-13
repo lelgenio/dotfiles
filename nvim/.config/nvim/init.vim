@@ -26,10 +26,13 @@
     Plug 'junegunn/vim-easy-align'
 
     " Language server support
-    " Plug 'autozimu/LanguageClient-neovim', {
-    "     \ 'branch': 'next',
-    "     \ 'do': 'bash install.sh',
-    "     \}
+    " Plug 'sheerun/vim-polyglot'
+    Plug 'dense-analysis/ale'
+    " Plug 'davidhalter/jedi-vim'
+    Plug 'autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
+        \ 'do': 'bash install.sh',
+        \}
 
     " Fuzzy find
     Plug 'junegunn/fzf'
@@ -52,10 +55,6 @@
     " Color scheme
     Plug 'dikiaap/minimalist'
 
-    " Language support
-    " Plug 'sheerun/vim-polyglot'
-    Plug 'dense-analysis/ale'
-    " Plug 'davidhalter/jedi-vim'
 
     " Simplify movement
     "Plug 'easymotion/vim-easymotion'
@@ -84,7 +83,7 @@
     Plug 'vim-latex/vim-latex', { 'for': 'tex' }
     Plug 'vim-scripts/AnsiEsc.vim'
      " Plug 'powerman/vim-plugin-AnsiEsc'
-    Plug 'mboughaba/i3config.vim'     
+    Plug 'mboughaba/i3config.vim'
 call plug#end()
 
 "}}}
@@ -130,7 +129,7 @@ call plug#end()
     " set       background=dark
 
     "background color is transparent
-    highlight Normal      guibg=None 
+    highlight Normal      guibg=None
     highlight EndOfBuffer guibg=None guifg=#303030
     highlight SpecialKey  guibg=None guifg=#cc5757
 
@@ -168,42 +167,41 @@ call plug#end()
 
     " Interact with language server
     " map      <silent> <C-Space> :<CR>
-    nnoremap <silent> gd        :ALEGoToDefinition<CR>
+    " nnoremap <silent> gd        :ALEGoToDefinition<CR>
     " nnoremap <silent> gh        :call LanguageClient#textDocument_hover()<CR>
     " nnoremap <silent> gd        :call LanguageClient#textDocument_definition()<CR>
     " nnoremap <silent> gr        :call LanguageClient#textDocument_references()<CR>
     " nnoremap <silent> gs        :call LanguageClient#textDocument_documentSymbol()<CR>
     " nnoremap <silent> gR        :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+    " Or map each action separately
+    nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR> 
+    inoremap  <C-space> :call LanguageClient#complete()<CR> 
+
 "}}}
 " Lanugage Server{{{
 "
     " Set this variable to 1 to fix files when you save them.
-    let g:ale_fix_on_save = 1
+    " let g:ale_fix_on_save = 1
     set hidden
-    let g:ale_linters = {
-        \ 'python': ['pyls'],
-        \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-        \ 'tex': ['/usr/bin/texlab'],
-        \}
 
-        " \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
-        " \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
-        " \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-
-    let g:ale_fixers = {
-        \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'javascript': ['prettier', 'eslint'],
-        \   'python': ['black'],
-        \}
+    let g:LanguageClient_serverCommands = {
+        \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+        \ 'python': ['/usr/bin/pyls'],
+        \ 'tex': ['texlab'],
+        \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
+        \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
+        \ }
 
     let g:deoplete#enable_at_startup = 1
-    " Configure deoplete to use language server
-    call deoplete#custom#option('sources', {
-        \ '_': ['ale'],
-        \})
 
-    " let g:ale_completion_enabled = 1
-    " set omnifunc=ale#completion#OmniFunc
+    call deoplete#custom#source('LanguageClient',
+            \ 'min_pattern_length',
+            \ 2)
+    " Configure deoplete to use language server
+
 "python env{{{
 " MUST NOT BE INDENTED!
 py3 << EOF

@@ -10,7 +10,8 @@ qutebrowser/.config/qutebrowser/autoconfig.yml
 qutebrowser/.config/qutebrowser/qsettings/
 qutebrowser/.config/qutebrowser/quickmarks
 qutebrowser/.local/
+theme/.config/gtk-3.0/bookmarks
 
 
 emacs/.emacs.d
-!emacs/.emacs.d/init.el~
+!emacs/.emacs.d/init.el

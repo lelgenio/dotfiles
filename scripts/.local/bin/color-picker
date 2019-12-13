@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+if pgrep redshift;then 
+    echo r true
+    pkill redshift
+    red=true
+else
+    echo r false
+    red=false
+fi
+
+grim -g "$(slurp -p)" - |
+    convert - -format '%[pixel:p{0,0}]' txt:- | 
+    grep -oE '#[0-9a-f]{6}' | 
+    wl-copy
+
+notify-send "$(wl-paste)" "Copied to clipboard"
+
+$red && redshift &> /dev/null &

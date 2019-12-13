@@ -14,19 +14,21 @@ owm(){
 format_weather(){
     case $WEATHER in
      "Clear")
-         WEATHER=" "
+         [ $(date +%H) -gt 06 -a $(date +%H) -lt 18 ] &&
+         WEATHER="" ||
+         WEATHER=""
          ;;
      "Clouds")
-         WEATHER=" "
+         WEATHER=""
          ;;
      "Rain"|"Drizzle")
-         WEATHER=" "
+         WEATHER=""
          ;;
      "Mist")
-         WEATHER=" "
+         WEATHER=""
          ;;
      "Snow")
-         WEATHER=" "
+         WEATHER=""
          ;;
      "Thunderstorm")
          WEATHER=""

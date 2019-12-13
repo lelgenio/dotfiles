@@ -1,36 +1,46 @@
 {
-    "layer": "bottom", // Waybar at top layer
-	//"margin":"5 5 0 5",
-	//"margin-bottom":10,
-    //"position": "bottom", // Waybar position (top|bottom|left|right)
-    //"height": 26, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    // Choose the order of the modules
-    "modules-left": ["sway/workspaces","sway/window"],
-    "modules-center": ["clock","custom/weather"],
-    "modules-right": ["custom/recording","mpd", "pulseaudio", "network", "battery","custom/mail", "custom/updates", "tray"],
-     "sway/workspaces": {
-         "enable-bar-scroll":true,
-         "format": "{icon}",
-         "format-icons": {
-             "1":  "",
-             "2":  "",
-             "3":  "",
-             "10": "",
-             "urgent": "",
-             "focused": "",
-             "default": ""
-         }
-     },
-     "sway/window":{
-         "max-length":40
-     },
+    "modules-left": [
+        "sway/workspaces",
+        "sway/window"
+    ],
+    "modules-center": [
+        "clock",
+        "custom/weather"
+    ],
+    "modules-right": [
+        "mpd",
+        "custom/recording",
+        "custom/mail",
+        "custom/updates",
+        "pulseaudio",
+        "network",
+        "battery",
+        "tray"
+    ],
+    "sway/workspaces": {
+        "enable-bar-scroll":true,
+        "format": "{icon}",
+        "format-icons": {
+            "1":  "",
+            "2":  "",
+            "3":  "",
+            "8":  "",
+            "9": "",
+            "10": "",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
+    "sway/window":{
+        "max-length":40
+    },
     "mpd": {
         "tooltip":false,
         "format": " {stateIcon} {title} - {artist} 🎜 ",
         "format-disconnected": " Disconnected  🎜 ",
         "format-stopped": " Stopped  🎜 ",
-        "timeout":5,
+        "timeout":60,
         "unknown-tag": " N/A ",
         "tooltip":false,
         "interval": 2,
@@ -40,25 +50,14 @@
             "playing": ""
         }
     },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
     "tray": {
         "tooltip":false,
         "spacing": 10
     },
     "clock": {
-        "tooltip":false,
-        "tooltip-format": "{:%Y-%m-%d | %H:%M}",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-    "backlight": {
-        "format": "{percent}% {icon}",
-        "format-icons": ["", ""]
+        "interval":60,
+        "format":"{:%H:%M %a}",
+        "tooltip":false
     },
     "battery": {
         "tooltip":false,
@@ -78,7 +77,6 @@
     },
     "network": {
         "tooltip":false,
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
         "on-click": "termite -e nmtui",
         "format-wifi": "",
         "format-ethernet": "",
@@ -114,7 +112,8 @@
     "custom/mail": {
         "tooltip":false,
         "format":"{} ",
-        "exec": "sleep 10s; checkmail",
+        "exec-if":"sleep 30s",
+        "exec": "checkmail",
         "on-click": "kitty neomutt; pkill -SIGRTMIN+4 waybar",
         "signal": 4,
         "interval": 1800
@@ -123,8 +122,9 @@
         "tooltip":false,
         "format": "{} ",
         "interval": 3600,
-        "exec": "sleep 30s; yay -Syuw --noconfirm> /dev/null; yay -Qqu | wc -l | sed 's/^0$//'",
-        "on-click": "[ ping -qc1 archlinux.org ] && kitty yay -Syu || kitty yay -Su; pkill -SIGRTMIN+8 waybar",
+        "exec-if":"sleep 60s",
+        "exec": "yay -Syuw --noconfirm> /dev/null; yay -Qqu | wc -l | sed 's/^0$//'",
+        "on-click": "kitty sh -c 'ping -qc1 archlinux.org >/dev/null && yay -Syu || yay -Su && pkill -SIGRTMIN+8 waybar'",
         "signal": 8
     },
     "custom/recording": {

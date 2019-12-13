@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # LEL
 
 #          _     
@@ -48,24 +41,21 @@ export PAGER=less
         export QT_SCALE_FACTOR=1
         export QPA_PLATFORM=wayland
         export QT_QPA_PLATFORM=wayland
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        export GTK_CSD=0
-        export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
-        export XCURSOR_THEME=capitaine-cursors
         exec sway
     }
     ei3() {
         clear
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        export GTK_CSD=0
-        export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
-        export XCURSOR_THEME=capitaine-cursors
         exec startx i3
     }
     if [[ $XDG_VTNR -eq 1 ]] #faster like this
     then
         if systemctl -q is-active graphical.target && [[ ! $DISPLAY ]]
         then
+            export _JAVA_AWT_WM_NONREPARENTING=1
+            export GTK_CSD=0
+            export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
+            export XCURSOR_THEME=capitaine-cursors
+            export GTK_THEME=materia-custom-accent:dark
             esway > .swaylog
             # ei3 > .i3log
         fi
@@ -87,6 +77,42 @@ if [ -z "$TMUX" ] && [ "$TERM" != "xterm-kitty" ]; then
     fi
 fi
 
+# }}}
+# Instant Prompt{{{
+
+# Use beam shape cursor on startup.
+echo -ne '\e[5 q'
+
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# }}}
+# Cursor shape{{{
+# Change cursor shape for different vi modes.
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+
+# Use beam shape cursor for each new prompt.
+preexec() { echo -ne '\e[5 q' ;}
 # }}}
 # Plugins {{{
 #
@@ -117,7 +143,6 @@ fi
     zplug "zsh-users/zsh-autosuggestions"
 
     # Promp config
-	# bindkey -e 
     # SPACESHIP_PROMPT_ADD_NEWLINE=false
     # SPACESHIP_CHAR_SYMBOL='$ '
     # SPACESHIP_CHAR_SYMBOL_ROOT='# '
@@ -144,10 +169,10 @@ fi
     abbrev-alias  suspend="systemctl suspend"
     abbrev-alias  tlsave='telegram-cli -We "send_document @lelgenio "'
 
-    alias         emacs='env TERM=xterm-256color /usr/bin/emacs -nw'
-    abbrev-alias  em='emacs -nw'
-
+    # alias         emacs='env TERM=xterm-256color /usr/bin/emacs -nw'
+    # abbrev-alias  em='emacs -nw'
     abbrev-alias -i 
+
     alias ls='ls --color=auto --human-readable --group-directories-first --classify'
     alias ll='ls --color=auto --human-readable --group-directories-first --classify -l'
     alias lla='ls --color=auto --human-readable --group-directories-first --classify -la'
@@ -162,75 +187,56 @@ fi
         command man "$@"
     }
 
+    rcd () {
+        tmp="$(mktemp)"
+        ranger --choosedir="$tmp" "$@"
+        cd "$(cat $tmp)"
+        rm -f "$tmp"
+    }
+    bindkey -s '^o' 'rcd\n'
+
 # }}}
 # Keys. {{{
 #
+    # Vim keys
+    bindkey -v 
+
     autoload -z edit-command-line
     zle -N edit-command-line
     bindkey "^X" edit-command-line
 
-    # typeset -g -A key
+    typeset -g -A key
+    key[Home]="${terminfo[khome]}"
+    key[End]="${terminfo[kend]}"
+    key[Delete]="${terminfo[kdch1]}"
+    key[Up]="${terminfo[kcuu1]}"
+    key[Down]="${terminfo[kcud1]}"
 
-    # key[Home]="${terminfo[khome]}"
-    # key[End]="${terminfo[kend]}"
     # key[Insert]="${terminfo[kich1]}"
     # key[Backspace]="${terminfo[kbs]}"
-    # key[Delete]="${terminfo[kdch1]}"
-    # key[Up]="${terminfo[kcuu1]}"
-    # key[Down]="${terminfo[kcud1]}"
     # key[Left]="${terminfo[kcub1]}"
     # key[Right]="${terminfo[kcuf1]}"
     # key[PageUp]="${terminfo[kpp]}"
     # key[PageDown]="${terminfo[knp]}"
     # key[ShiftTab]="${terminfo[kcbt]}"
+    
+    bindkey -- "${key[Home]}"    beginning-of-line
+    bindkey -- ${key[End]}       end-of-line #End key
+    bindkey -- ${key[Delete]}    delete-char #Del key
+    bindkey -- ${key[Up]}        history-substring-search-up #Up Arrow
+    bindkey -- ${key[Down]}      history-substring-search-down #Down Arrow
 
-    # ${key[Home]}       
-    # ${key[End]}
-    # ${key[Delete]}
-    # ${key[Insert]}
-    # ${key[Backspace]}
-    # ${key[Up]}
-    # ${key[Down]}
-    # ${key[Left]}
-    # ${key[Right]}
-    # ${key[PageUp]}
-    # ${key[PageDown]}
-    # ${key[ShiftTab]}
-
-    case $TERM in
-        rxvt*|xterm*)
-            bindkey "^[[H" beginning-of-line #Home key
-            bindkey "^[[F" end-of-line #End key
-            bindkey "^[[3~" delete-char #Del key
-            bindkey "^[[A" history-substring-search-up #Up Arrow
-            bindkey "^[[B" history-substring-search-down #Down Arrow
-            bindkey "^[Oc" forward-word # control + right arrow
-            bindkey "^[Od" backward-word # control + left arrow
-            bindkey "^H"   backward-kill-word # control + backspace
-            bindkey "^[[3^" kill-word # control + delete
-        ;;
-        linux)
-            bindkey "^[[1~" beginning-of-line #Home key
-            bindkey "^[[4~" end-of-line #End key
-            bindkey "^[[3~" delete-char #Del key
-            bindkey "^[[A" history-beginning-search-backward
-            bindkey "^[[B" history-beginning-search-forward
-        ;;
-        screen|screen-*)
-            bindkey "^[[1~" beginning-of-line #Home key
-            bindkey "^[[4~" end-of-line #End key
-            bindkey "^[[3~" delete-char #Del key
-            bindkey "^[[A" history-beginning-search-backward #Up Arrow
-            bindkey "^[[B" history-beginning-search-forward #Down Arrow
-            bindkey "^[Oc" forward-word # control + right arrow
-            bindkey "^[OC" forward-word # control + right arrow
-            bindkey "^[Od" backward-word # control + left arrow
-            bindkey "^[OD" backward-word # control + left arrow
-            bindkey "^H" backward-kill-word # control + backspace
-            bindkey "^[[3^" kill-word # control + delete
-        ;;
-    esac
-
+    if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+        autoload -Uz add-zle-hook-widget
+        function zle_application_mode_start {
+            echoti smkx
+        }
+        function zle_application_mode_stop {
+            echoti rmkx
+        }
+        add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+        add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+    fi
 
 # }}}
 # Completions {{{
@@ -256,8 +262,4 @@ fi
 
     setopt GLOBSTARSHORT
 #}}}
-
 # vim:foldmethod=marker
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

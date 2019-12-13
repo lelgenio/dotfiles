@@ -91,6 +91,8 @@
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?' -b 'Yes, exit sway' 'swaymsg exit'
 
+    bindsym Control+Shift+BackSpace exit
+
     # }}}
     # Moving around: {{{
 
@@ -145,7 +147,9 @@
     bindsym $mod+Shift+0 move container to workspace 10
 
     # Assign programs to their workspace
-    assign [app_id=org.qutebrowser.qutebrowser] workspace 2
+    assign [app_id=.*qutebrowser.*] workspace 2
+    assign [app_id=.*keepass.*] workspace 8
+    assign [class=Steam] workspace 9
     assign [app_id=telegramdesktop] workspace 10
     assign [class=discord] workspace 10
 
@@ -209,10 +213,11 @@
     bindsym --locked    XF86AudioLowerVolume exec  pavolume voldown 5
     bindsym --locked    XF86AudioMute        exec  pavolume mutetoggle
 
-    # Media player controls
-    bindsym --locked    XF86AudioPlay   exec    mpc     toggle
-    bindsym --locked    XF86AudioNext   exec    mpc     next
-    bindsym --locked    XF86AudioPrev   exec    mpc     prev
+    # Media player controls 
+    # playerctl for notifications
+    bindsym --locked    XF86AudioPlay   exec    playerctl -p mpd play-pause
+    bindsym --locked    XF86AudioNext   exec    playerctl -p mpd next
+    bindsym --locked    XF86AudioPrev   exec    playerctl -p mpd previous
     bindsym             $mod+Shift+x    exec    musmenu delete
     bindsym             $mod+Shift+s    exec    musmenu search
 
@@ -268,7 +273,7 @@
     # Block device Mounter to /run/media/<username>
     exec udiskie
     # gesture daemon
-    exec fusuma
+    exec pkill fusuma && fusuma
     # Blue light filter
     exec redshift
     # kde connect
@@ -277,7 +282,7 @@
     # Telegram
     exec telegram-desktop
     # Music Player Daemon
-    exec mpd --no-daemon
+    exec pkill mpd && mpd --no-daemon
     exec mpDris2
     # lock screen after a period of inactivity execp for fullscreen
     for_window [class=.*] inhibit_idle fullscreen

@@ -10,5 +10,6 @@ actions=1
 layer=overlay
 
 [app-name=pavolume]
+default-timeout=5000
 group-by=app-name
 format=<b>%s</b>\n%b

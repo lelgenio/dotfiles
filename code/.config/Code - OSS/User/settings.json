@@ -102,10 +102,9 @@
         "menubar.selectionForeground": "#cc5757",
         "editor.findMatchBorder": "#cc5757",
         "selection.background": "#cc575740",
-        "statusBar.background": "#202020",
-        "statusBar.noFolderBackground": "#202020",
-        "statusBar.debuggingBackground": "#202020",
-        "statusBar.foreground": "#fff"
+        "statusBar.background": "#007acc",
+        "statusBar.noFolderBackground": "#007acc",
+        "statusBar.debuggingBackground": "#007acc"
     },
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
