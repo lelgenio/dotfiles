@@ -44,15 +44,15 @@
         "unknown-tag": " N/A ",
         "tooltip":false,
         "interval": 2,
-         "max-length":40,
+        "max-length":40,
         "state-icons": {
             "paused": "",
             "playing": ""
         }
     },
     "tray": {
-        "spacing": 10,
-        "icon-size":18
+        "spacing": 7,
+        "icon-size":19
     },
     "clock": {
         "interval":60,
@@ -120,16 +120,16 @@
     "custom/updates": {
         "tooltip":false,
         "format": "{} ",
-        "interval": 3600,
+        "interval": 43200,
         "exec-if":"sleep 60s",
         "exec": "yay -Syuw --noconfirm> /dev/null; yay -Qqu | wc -l | sed 's/^0$//'",
-        "on-click": "kitty sh -c 'ping -qc1 archlinux.org >/dev/null && yay -Syu || yay -Su && pkill -SIGRTMIN+8 waybar'",
+        "on-click": "kitty sh -c 'ping -qc1 archlinux.org >/dev/null && yay -Syu || yay -Su; pkill -SIGRTMIN+8 waybar'",
         "signal": 8
     },
     "custom/recording": {
         "tooltip":false,
         "exec": "pgrep wf-recorder > /dev/null && echo  || echo",
-        "interval": 1,
+        "interval": 5,
         "on-click": "pkill wf-recorder; pkill -SIGRTMIN+5 waybar",
         "signal": 5
     }

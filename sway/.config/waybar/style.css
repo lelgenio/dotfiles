@@ -50,8 +50,7 @@ window#waybar.empty {
 #custom-updates,
 #custom-weather
 {
-    padding: 0 5px;
-    margin: 0 2px;
+    margin: 0 7px;
     color: #ffffff;
     opacity:.7;
 }
@@ -77,9 +76,4 @@ window#waybar.empty {
 #mpd.paused {
     font-size: 0;
     border: none;
-}
-
-#tray
-{
-    margin-right:7px;
 }

@@ -276,7 +276,7 @@
     # Block device Mounter to /run/media/<username>
     exec udiskie
     # gesture daemon
-    exec pkill fusuma && fusuma
+    exec fusuma
     # Blue light filter
     exec redshift
     # kde connect
@@ -285,7 +285,7 @@
     # Telegram
     exec telegram-desktop
     # Music Player Daemon
-    exec pkill mpd && mpd --no-daemon
+    exec mpd --no-daemon
     exec mpDris2
     # lock screen after a period of inactivity execp for fullscreen
     for_window [class=.*] inhibit_idle fullscreen
