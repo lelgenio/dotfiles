@@ -255,7 +255,9 @@ preexec() { echo -ne '\e[5 q' ;}
     zstyle ':completion:*' rehash true
     zstyle :compinstall filename '/home/lelgenio/.config//zsh//.zshrc'
     zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-    source /usr/share/doc/pkgfile/command-not-found.zsh
+
+    [ -f /usr/share/doc/pkgfile/command-not-found.zsh ] &&
+        source /usr/share/doc/pkgfile/command-not-found.zsh
 
     autoload -Uz compinit
     compinit
