@@ -5,7 +5,11 @@ owm(){
     # IPINFO=$(curl -s ipinfo.io/loc)
     # LAT=$(echo $IPINFO | cut -d, -f1 | cut -d. -f1)
     # LON=$(echo $IPINFO | cut -d, -f2 | cut -d. -f1)
-    CITY=$(curl -s ipinfo.io/city)
+    INFO=$(curl -s ipinfo.io)
+    CITY=$(echo $INFO | jq -r '.city')
+    REGI=$(echo $INFO | jq -r '.region')
+    COUN=$(echo $INFO | jq -r '.country')
+    QUERY="$CITY, $REGI, $COUN"
     APPID="fd68c0fe7951f5ab7e24a240eb0942b8"
 
     http get http://api.openweathermap.org/data/2.5/forecast\?APPID\=${APPID}\&q="${CITY}"\&units\=metric

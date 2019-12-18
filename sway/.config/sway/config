@@ -225,6 +225,14 @@
     bindsym             $mod+Shift+s    exec    musmenu search
 
     # }}}
+    # Special Keys{{{
+
+    bindsym XF86Calculator  exec $term ipython
+    bindsym XF86Mail        exec $term neomutt
+    bindsym XF86Explorer    exec nemo
+    bindsym XF86HomePage    exec xdg-open http://start.duckduckgo.com
+
+    # }}}
 # }}}
 # Visual: {{{
 #
