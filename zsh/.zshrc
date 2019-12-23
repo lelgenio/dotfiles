@@ -51,13 +51,16 @@ export PAGER=less
     then
         if systemctl -q is-active graphical.target && [[ ! $DISPLAY ]]
         then
+            if [ -f /usr/lib/libgtk3-nocsd.so.0 ];then
+                export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
+                export GTK_CSD=0
+            fi
             export _JAVA_AWT_WM_NONREPARENTING=1
-            export GTK_CSD=0
-            export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
+            export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
             export XCURSOR_THEME=capitaine-cursors
             export GTK_THEME=materia-custom-accent:dark
-            esway > .swaylog
-            # ei3 > .i3log
+            esway &> .swaylog
+            # ei3 &> .i3log
         fi
     fi
 
@@ -116,7 +119,7 @@ preexec() { echo -ne '\e[5 q' ;}
 # }}}
 # Plugins {{{
 #
-	export ZPLUG_HOME=~/.local/share/zplug
+	ZPLUG_HOME=$HOME/.local/share/zplug
 	if [ ! -d $ZPLUG_HOME ]
 	then
 		git clone https://github.com/zplug/zplug $ZPLUG_HOME
@@ -149,6 +152,7 @@ preexec() { echo -ne '\e[5 q' ;}
 	# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 	
     zplug "romkatv/powerlevel10k", as:theme, depth:1
+
     if ! zplug check
     then
         zplug install

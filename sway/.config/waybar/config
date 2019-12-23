@@ -10,6 +10,7 @@
     "modules-right": [
         "mpd",
         "custom/recording",
+        "custom/spigot",
         "tray",
         "custom/mail",
         "custom/updates",
@@ -132,6 +133,12 @@
         "interval": 5,
         "on-click": "pkill wf-recorder; pkill -SIGRTMIN+5 waybar",
         "signal": 5
+    },
+    "custom/spigot":{
+        "format":"{}",
+        "exec":"pgrep -f spigot.jar>/dev/null && spigot command list | awk '/There are/ {if ($6) print $6}'",
+        "interval":30,
+        "on-click":"kitty spigot console"
     }
 
 }

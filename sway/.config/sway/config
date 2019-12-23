@@ -17,7 +17,7 @@
     set $right l
 
     set $term kitty
-    set $menu wofi --show drun -i -p'Iniciar: '
+    set $menu wofi --show drun --allow-images --insensitive -p'Iniciar: '
 	font pango:Hack 14px
 
 # }}}
@@ -261,7 +261,7 @@
     smart_gaps on
 	smart_borders on
 
-    for_window [app_id=mpv] floating enable
+    # for_window [app_id=mpv] floating enable
     for_window [app_id=weather] floating enable
     # for_window [app_id=weather] resize set 635px 700px
     for_window [app_id=weather] resize set 1280px 700px
