@@ -227,5 +227,5 @@ application/pdf=org.pwmt.zathura.desktop;
 text/html=org.qutebrowser.qutebrowser.desktop
 x-scheme-handler/http=org.qutebrowser.qutebrowser.desktop
 x-scheme-handler/https=org.qutebrowser.qutebrowser.desktop
-application/x-bittorrent=deluge-console.desktop;
-x-scheme-handler/magnet=deluge-console.desktop;
+application/x-bittorrent=deluge.desktop;
+x-scheme-handler/magnet=deluge.desktop;
