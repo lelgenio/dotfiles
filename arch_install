@@ -201,9 +201,6 @@ setup() {
     echo 'Mounting filesystems'
     mount_filesystems "$boot_dev"
 
-    echo 'Setting timezone'
-    set_timezone
-
     echo 'Installing base system'
     install_base
 
