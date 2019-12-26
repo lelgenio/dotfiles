@@ -1,5 +1,6 @@
 #!/bin/bash
 #
+set -ex
 #LICENSE#{{{
 # Copyright (c) 2012 Tom Wambold
 #
@@ -91,18 +92,18 @@ FULL_INSTALL=false
     # sudo to allow to run as a user later
     sudo pacman -Sy
 
-    pkgs_base=''
     pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
     pkgs_base+=' zsh networkmanager bluez cronie git man-db'
     pkgs_base+=" $(pacman -Sgq base-devel)"
 
 
-    pkgs=''
     pkgs+=" $pkgs_base"
     # DE
-    pkgs+=' sway waybar ruby-fusuma light mako udiskie wofi-hg stow yay'
+    pkgs+=' sway waybar ruby-fusuma light mako udiskie bemenu wofi-hg stow yay'
+    pkgs+=' bemenu wofi-hg j4-dmenu-desktop'
+
     # pkgs+=' i3 termite scrot pamixer'
-    pkgs+=' nemo redshift-wlr-gamma-control-git '
+    pkgs+=' nemo redshift-wlr-gamma-control '
     pkgs+=' pkgfile kitty neovim moreutils htop-vim-git'
     # Audio
     pkgs+=' pulseaudio pavolume-git'
@@ -121,11 +122,12 @@ FULL_INSTALL=false
         pkgs+=' neofetch powerline-fonts otf-fira-code'
         pkgs+=' lolcat cmatrix'
         # Network
-        pkgs+=' bluez-utils rsync rclone nmap gnu-netcat tor mtr speedtest-cli'
+        pkgs+=' wget curl bluez-utils rsync rclone nmap gnu-netcat tor mtr speedtest-cli'
+        pkgs+=' openssh sshfs fail2ban'
         # Browser
         pkgs+=' qutebrowser youtube-dl'
         # Email
-        pkgs+=' evolution mutt-wizard-git neomutt isync'
+        pkgs+=' neomutt isync'
         # Files
         pkgs+=' syncthing nextcloud-client '
         pkgs+=' deluge deezloader-remix-bin smloadr'
@@ -238,7 +240,7 @@ partition_drive() {
     fi
 }
 #}}}
-encrypt_drive #{{{
+# Encrypt_drive {{{
 encrypt_drive() {
     local dev="$1"; shift
     local passphrase="$1"; shift
@@ -306,7 +308,7 @@ unmount_filesystems() {
 }
 #}}}
 # is_bios{{{
-    if ls /sys/firmware/efi/efivars/
+    if ls /sys/firmware/efi/efivars/ > /dev/null
     then
         IS_BIOS=false
     else
@@ -600,7 +602,7 @@ AutoEnable=true
 EOF
 }
 #}}}
-# set_boot_loader() {#{{{
+# set_boot_loader() {{{
 set_bootctl() {
     local boot_dev="$1"; shift
     local lvm_dev="$1"; shift
@@ -630,7 +632,7 @@ initrd initramfs-linux-zen.img
 options $crypt
 #options quiet splash loglevel=3 vga=current rd.udev.log_priority=3 rd.systemd.show_status=auto vt.global_cursor_default=0 nmi_watchdog=0  $crypt
 EOF
-
+    fi
 }
 #}}}
 # set_sudoers() {#{{{
@@ -718,7 +720,7 @@ install_aur_packages() {
     sudo pacman -S --needed git
 
     # getting yay
-    if [ ! -x /bin/yay ];
+    if ! command -v yay
     then
         git clone http://aur.archlinux.org/yay.git ~/yay
         cd ~/yay
@@ -726,15 +728,15 @@ install_aur_packages() {
         cd -
     fi
 
-    yay -Syu --noconfirm --needed $pkgs
+    yay -Syu --needed --noconfirm $pkgs
 }
 #}}}
 # Clean up packages #{{{
 clean_packages() {
     # Mark every package as dependency
-    yay -D --asdeps $(yay -Qqe)
+    yay -D --asdeps $(yay -Qqe) > /dev/null
     # Mark some packages as explicit
-    yay -D --asexplicit $pkgs
+    yay -D --asexplicit $pkgs > /dev/null
     # Query orphan dependencies
     TO_REMOVE=$(yay -Qtdq)
     if [ -n "$TO_REMOVE" ];then
