@@ -633,13 +633,13 @@ set_bootctl() {
     local k_args="root=UUID=$lvm_uuid"
 
     if $IS_BIOS;then
-        grub-install "$DRIVE"
-        grub-mkconfig -o /boot/grub/grub.cfg
-
         cat >> /etc/default/grub <<EOF
 GRUB_CMDLINE_LINUX_DEFAULT="$k_args"
 # GRUB_CMDLINE_LINUX_DEFAULT="quiet splash loglevel=3 vga=current rd.udev.log_priority=3 rd.systemd.show_status=auto vt.global_cursor_default=0 nmi_watchdog=0 $k_args"
 EOF
+
+        grub-install "$DRIVE"
+        grub-mkconfig -o /boot/grub/grub.cfg
     else
         bootctl install
         cat > /boot/loader/entries/arch.conf <<EOF
