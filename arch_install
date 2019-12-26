@@ -772,9 +772,9 @@ update_installer(){
     INSTALLER=$(mktemp)
     wget -qO $INSTALLER $DOTFILES_URL/raw/master/arch_install
     chmod +x $INSTALLER
-    exec $INSTALLER updated "$@"
+    exec $INSTALLER updated $@
 }
-[ "$1" == "updated" ] && shift || update_installer
+[ "$1" == "updated" ] && shift || update_installer $@
 echo "Installer updated :D"
 #}}}
 # Remove old LVMs{{{
