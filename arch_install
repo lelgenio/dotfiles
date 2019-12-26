@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-set -ex
+set -e
 #LICENSE#{{{
 # Copyright (c) 2012 Tom Wambold
 #
@@ -229,7 +229,7 @@ partition_drive() {
     # 100 MB /boot partition, everything else under LVM
     if $IS_BIOS;then
         parted -s "$dev" \
-            mklabel dos \
+            mklabel msdos \
             mkpart primary fat32 1M   100M \
             mkpart primary ext4  100M 100% \
             set 1 boot on \
