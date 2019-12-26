@@ -1,10 +1,10 @@
 #!/bin/sh
 
-BEMENU_BACKEND=wayland
+# BEMENU_BACKEND=wayland
 if [ "$1" == "run" ]
 then
-    j4-dmenu-desktop --dmenu="bmenu -p Iniciar:" --term "$2"
-    exit
+    [ -n "$2" ] && t="$2" || t="kitty"
+    exec j4-dmenu-desktop --dmenu="bmenu -p Iniciar:" --term "$t"
 fi
 
 bemenu \
@@ -12,9 +12,9 @@ bemenu \
     --bottom\
     --list 20\
     --prefix '->'\
-    --fn "pango:Inter 12"\
-    --tb "#222222" --tf "#cc5757" \
-    --fb "#202020" --ff "#cccccc" \
+    --fn "Fira Code 12"\
+    --tb "#242424" --tf "#cc5757" \
+    --fb "#242424" --ff "#cccccc" \
     --nb "#202020" --nf "#cccccc" \
     --hb "#303030" --hf "#cc5757" \
     $@

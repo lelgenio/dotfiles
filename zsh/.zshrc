@@ -51,12 +51,11 @@ export PAGER=less
     then
         if systemctl -q is-active graphical.target && [[ ! $DISPLAY ]]
         then
-            if [ -f /usr/lib/libgtk3-nocsd.so.0 ];then
-                export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
-                export GTK_CSD=0
-            fi
+            [ -f /etc/X11/xinit/xinitrc.d/30-gtk3-nocsd.sh ] &&
+                source /etc/X11/xinit/xinitrc.d/30-gtk3-nocsd.sh
+
             export _JAVA_AWT_WM_NONREPARENTING=1
-            export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+            # export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
             export XCURSOR_THEME=capitaine-cursors
             export GTK_THEME=materia-custom-accent:dark
             esway &> .swaylog

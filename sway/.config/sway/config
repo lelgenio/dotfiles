@@ -17,8 +17,10 @@
     set $right l
 
     set $term kitty
-    set $menu wofi --show drun --allow-images --insensitive -p'Iniciar: '
-	font pango:Hack 14px
+    # set $menu wofi --show drun --allow-images --insensitive -p'Iniciar: '
+    set $menu  bmenu run $term
+    # set $menu  j4-dmenu-desktop --dmenu 'bmenu -p Iniciar:' --term $term
+	font Fira Code 14px
 
 # }}}
 # Output configuration {{{
@@ -32,7 +34,7 @@
     bindswitch --reload lid:on output $laptop disable
     bindswitch --reload lid:off output $laptop enable
     # output $laptop disable
-    # bindsym $mod+o output eDP-1 toggle
+    bindsym $mod+o output eDP-1 toggle
 
     # Backlight settings for laptops
     exec sudo light -N 1
@@ -239,7 +241,6 @@
     exec flashfocus -o .5
 
     set $accent     #CC575D
-    set $aclite     #CC575D50
     set $fg_color   #ffffff
     set $bg_color   #191919
     set $bg_darker  #151515
@@ -252,8 +253,16 @@
     client.urgent           $alert      $alert      $fg_color   $alert      $alert
 
     bar swaybar_command waybar
-    # bar mode hide
-    # bar position top
+
+    # bar {
+    #     icon_theme Papirus
+    #     position top
+    #     gaps 5px
+    #     colors {
+    #         background $bg_color
+    #         focused_workspace $accent $bg_color $fg_color 
+    #     }
+    # }
 
     default_border pixel 2px
     gaps inner 5px
@@ -285,6 +294,7 @@
     exec udiskie
     # gesture daemon
     exec fusuma
+    exec sh -c 'pkill fusuma; fusuma'
     # Blue light filter
     exec redshift
     # kde connect
@@ -293,8 +303,8 @@
     # Telegram
     exec telegram-desktop
     # Music Player Daemon
-    exec mpd --no-daemon
-    exec mpDris2
+    exec sh -c 'pkill mpd; mpd'
+    exec sh -c 'pkill mpDris2; mpDris2'
     # lock screen after a period of inactivity execp for fullscreen
     for_window [class=.*] inhibit_idle fullscreen
     exec swayidle -w \

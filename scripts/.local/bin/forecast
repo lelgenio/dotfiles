@@ -5,7 +5,7 @@ owm(){
     # IPINFO=$(curl -s ipinfo.io/loc)
     # LAT=$(echo $IPINFO | cut -d, -f1 | cut -d. -f1)
     # LON=$(echo $IPINFO | cut -d, -f2 | cut -d. -f1)
-    INFO=$(curl -s ipinfo.io)
+    INFO=$(wget -qO- ipinfo.io)
     CITY=$(echo $INFO | jq -r '.city')
     REGI=$(echo $INFO | jq -r '.region')
     COUN=$(echo $INFO | jq -r '.country')

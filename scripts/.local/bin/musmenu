@@ -3,7 +3,8 @@ set -e
 
 MENU(){
     if [ -n "$SWAYSOCK" ];then
-        wofi -dIk/dev/null $@
+        bmenu -i $@
+        # wofi -dIk/dev/null $@
     else
         rofi -dmenu -i $@
     fi

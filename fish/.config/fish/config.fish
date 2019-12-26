@@ -80,4 +80,5 @@ set -xU LESS_TERMCAP_ue (printf "\e[0m")
 set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 
 #}}}
+source  /usr/share/doc/pkgfile/command-not-found.fish
 # vim:foldmethod=marker
