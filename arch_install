@@ -1,6 +1,11 @@
 #!/bin/bash
 #
 set -e
+echo (){
+    /bin/echo "#########################################"
+    /bin/echo "$@"
+    /bin/echo "#########################################"
+}
 #LICENSE#{{{
 # Copyright (c) 2012 Tom Wambold
 #
@@ -93,7 +98,7 @@ FULL_INSTALL=false
 # PACKAGES{{{
 set_pkgs() {
     # sudo to allow to run as a user later
-    sudo pacman -Sy
+    sudo pacman -Sy &> /dev/null
 
     pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
     pkgs_base+=' zsh networkmanager bluez cronie git man-db'
@@ -175,6 +180,9 @@ setup() {
     local boot_dev="$DRIVE"1
     local lvm_dev="$DRIVE"2
 
+    echo 'Cleaning disk'
+    disk_clean
+    
     echo 'Creating partitions'
     partition_drive "$DRIVE"
 
@@ -228,6 +236,17 @@ setup() {
     fi
 }
 #}}}
+# Remove old LVMs{{{
+disk_clean(){
+    echo 'cleaning disk'
+    swapoff -a
+    umount -R /mnt || true
+    for vg in $(pvs -o vg_name --nohead "$DRIVE"2)
+    do
+        vgremove "$vg"
+    done
+}
+#}}}
 # Partition Drive{{{
 partition_drive() {
     local dev="$1"; shift
@@ -256,8 +275,8 @@ encrypt_drive() {
     local passphrase="$1"; shift
     local name="$1"; shift
 
-    echo -en "$passphrase" | cryptsetup luksFormat "$dev"
-    echo -en "$passphrase" | cryptsetup luksOpen "$dev" lvm
+    /bin/echo -en "$passphrase" | cryptsetup luksFormat "$dev"
+    /bin/echo -en "$passphrase" | cryptsetup luksOpen "$dev" lvm
 }
 #}}}
 # setup_lvm{{{
@@ -488,7 +507,7 @@ EOF
 set_hostname() {
     local hostname="$1"; shift
 
-    echo "$hostname" > /etc/hostname
+    /bin/echo "$hostname" > /etc/hostname
 
     cat > /etc/hosts <<EOF
 127.0.0.1 localhost.localdomain localhost $hostname
@@ -679,7 +698,7 @@ EOF
 set_root_password() {
     local password="$1"; shift
 
-    echo -en "$password\n$password" | passwd
+    /bin/echo -en "$password\n$password" | passwd
 }
 #}}}
 # create_user() {#{{{
@@ -688,7 +707,7 @@ create_user() {
     local password="$1"; shift
 
     useradd -m -s /usr/bin/$USER_SHELL -G adm,systemd-journal,wheel,rfkill,games,network,video,audio,optical,floppy,storage,scanner,power "$name"
-    echo -en "$password\n$password" | passwd "$name"
+    /bin/echo -en "$password\n$password" | passwd "$name"
 }
 #}}}
 # update_pkgfile() {#{{{
@@ -776,20 +795,6 @@ update_installer(){
 }
 [ "$1" == "updated" ] && shift || update_installer $@
 echo "Installer updated :D"
-#}}}
-# Remove old LVMs{{{
-disk_clean(){
-    echo 'cleaning disk'
-    set +e
-    swapoff -a
-    umount -R /mnt
-    for vg in $(pvs -o vg_name --nohead "$DRIVE"2)
-    do
-        vgremove "$vg"
-    done
-}
-
-[ "$1" == "clean" ] && disk_clean || true
 #}}}
 set_pkgs
 if [ ! "$USER" == "root"  ];then
