@@ -221,11 +221,11 @@ setup() {
     set_fstab
 
     echo 'Chrooting into installed system to continue setup...'
-    cp "$0" "/mnt/$0"
-    chmod +x "/mnt/$0"
-    arch-chroot /mnt "./$0"
+    cp "$0" "/mnt/setup.sh"
+    chmod +x "/mnt/setup.sh"
+    arch-chroot /mnt "./setup.sh"
 
-    if [ -f  "/mnt/$0" ]
+    if [ -f  "/mnt/setup.sh" ]
     then
         echo 'ERROR: Something failed inside the chroot, not unmounting filesystems so you can investigate.'
         echo 'Make sure you unmount everything before you try to run this script again.'
@@ -429,9 +429,9 @@ configure() {
     create_user "$USER_NAME" "$USER_PASSWORD"
 
     echo 'setting up user'
-    cp $0 "/home/$USER_NAME/$0"
-    chown $USER_NAME "/home/$USER_NAME/$0"
-    su $USER_NAME -c "/home/$USER_NAME/$0"
+    cp $0 "/home/$USER_NAME/setup.sh"
+    chown $USER_NAME "/home/$USER_NAME/setup.sh"
+    su $USER_NAME -c "/home/$USER_NAME/setup.sh"
 
     echo 'Updating pkgfile database'
     update_pkgfile
