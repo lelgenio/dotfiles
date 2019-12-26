@@ -243,7 +243,7 @@ disk_clean(){
     umount -R /mnt || true
     swapoff -a
 
-    pvs "$DRIVE"2 || return
+    pvs "$DRIVE"2 || return 0
 
     for vg in $(pvs -o vg_name --nohead "$DRIVE"2)
     do
