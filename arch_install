@@ -245,6 +245,7 @@ disk_clean(){
     do
         vgremove "$vg" --yes
     done
+    pvremove "$DRIVE"2 || true
 }
 #}}}
 # Partition Drive{{{
