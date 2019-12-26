@@ -227,16 +227,20 @@ partition_drive() {
     local dev="$1"; shift
 
     # 100 MB /boot partition, everything else under LVM
-    parted -s "$dev" \
-        mklabel gpt \
-        mkpart boot 1    100M \
-        mkpart lvm  100M 100% \
-        set 1 boot on\
-        set 2 lvm  on
-
     if $IS_BIOS;then
         parted -s "$dev" \
-            set 1 bios_grub on
+            mklabel dos \
+            mkpart primary fat32 1M   100M \
+            mkpart primary ext4  100M 100% \
+            set 1 boot on \
+            set 2 lvm  on
+    else
+        parted -s "$dev" \
+            mklabel gpt \
+            mkpart boot 1    100M \
+            mkpart lvm  100M 100% \
+            set 1 boot on\
+            set 2 lvm  on
     fi
 }
 #}}}
@@ -262,7 +266,7 @@ setup_lvm() {
     lvcreate --yes -C y -L1G "$volgroup" -n swap
 
     # Use the rest of the space for root
-    lvcreate --yes -L '30G' "$volgroup" -n root
+    lvcreate --yes -L '50G' "$volgroup" -n root
     lvcreate --yes -l '+100%FREE' "$volgroup" -n home
 
     # Enable the new volumes
@@ -617,10 +621,10 @@ set_bootctl() {
     fi
 
     if $IS_BIOS;then
-        grub install "$boot_dev"
-        grub
-    else
+        grub-install "$boot_dev"
+        grub-mkconfig -o /boot/grub/grub.cfg
 
+    else
         bootctl install
         cat > /boot/loader/entries/arch.conf <<EOF
 title arch
@@ -632,6 +636,7 @@ initrd initramfs-linux-zen.img
 options $crypt
 #options quiet splash loglevel=3 vga=current rd.udev.log_priority=3 rd.systemd.show_status=auto vt.global_cursor_default=0 nmi_watchdog=0  $crypt
 EOF
+
     fi
 }
 #}}}
