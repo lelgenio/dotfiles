@@ -193,9 +193,7 @@ setup() {
         if [ -z "$DRIVE_PASSPHRASE" ]
         then
             echo 'Enter a passphrase to encrypt the disk:'
-            stty -echo
-            read DRIVE_PASSPHRASE
-            stty echo
+            read -s DRIVE_PASSPHRASE
         fi
 
         echo 'Encrypting partition'
@@ -342,12 +340,12 @@ install_base() {
     pacstrap /mnt $pkgs_base
 }
 #}}}
-# set_fstab() {#{{{
+# Set fstab {{{
 set_fstab() {
     genfstab -Up /mnt > /mnt/etc/fstab
 }
 #}}}
-# unmount_filesystems #{{{
+# Unmount filesystems #{{{
 unmount_filesystems() {
     umount -R /mnt
     swapoff /dev/vg00/swap
@@ -409,9 +407,7 @@ configure() {
     if [ -z "$ROOT_PASSWORD" ]
     then
         echo 'Enter the root password:'
-        stty -echo
-        read ROOT_PASSWORD
-        stty echo
+        read -s ROOT_PASSWORD
     fi
 
     echo 'Setting root password'
@@ -420,9 +416,7 @@ configure() {
     if [ -z "$USER_PASSWORD" ]
     then
         echo "Enter the password for user $USER_NAME"
-        stty -echo
-        read USER_PASSWORD
-        stty echo
+        read -s USER_PASSWORD
     fi
 
     echo 'Creating initial user'
