@@ -515,7 +515,6 @@ Section "InputClass"
 EndSection
 EOF
 
-/etc/X11/xorg.conf.d/00-keyboard.conf
 }
 #}}}
 # set_fstab() {#{{{
