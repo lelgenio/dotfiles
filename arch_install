@@ -239,12 +239,17 @@ setup() {
 # Remove old LVMs{{{
 disk_clean(){
     echo 'cleaning disk'
-    swapoff -a
+
     umount -R /mnt || true
+    swapoff -a
+
+    pvs "$DRIVE"2 || exit
+
     for vg in $(pvs -o vg_name --nohead "$DRIVE"2)
     do
         vgremove "$vg" --yes
     done
+
     pvremove "$DRIVE"2
 }
 #}}}
