@@ -262,6 +262,8 @@ encrypt_drive() {
 setup_lvm() {
     local partition="$1"; shift
     local volgroup="$1"; shift
+    
+    local d_size=$(lsblk --noheadings --nodeps --bytes --raw $DISK)
 
     pvcreate "$partition"
     vgcreate "$volgroup" "$partition"
@@ -269,12 +271,21 @@ setup_lvm() {
     # Create a 1GB swap partition
     lvcreate --yes -C y -L1G "$volgroup" -n swap
 
-    # Use the rest of the space for root
-    lvcreate --yes -L '50G' "$volgroup" -n root
+    # if the disk has more than 
+    if [ $d_size -gt $(( 50*10**9 )) ]
+    then
+        # Create a 50GB root partition
+        lvcreate --yes -L '50G' "$volgroup" -n root
+    else
+        # Create root partition on 50% of free space
+        lvcreate --yes -l '+50%FREE' "$volgroup" -n root
+    fi
+    # Use the rest of the space for home
     lvcreate --yes -l '+100%FREE' "$volgroup" -n home
 
     # Enable the new volumes
     vgchange -ay
+
 }
 #}}}
 # format_filesystems #{{{
@@ -327,6 +338,11 @@ unmount_filesystems() {
     else
         IS_BIOS=true
     fi
+#}}}
+# get_root_size(){{{{
+get_root_size(){
+
+}
 #}}}
 #}}}
 # Configuration{{{
