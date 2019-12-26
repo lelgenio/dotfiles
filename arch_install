@@ -791,7 +791,8 @@ update_installer(){
     INSTALLER=$(mktemp)
     wget -qO $INSTALLER $DOTFILES_URL/raw/master/arch_install
     chmod +x $INSTALLER
-    exec $INSTALLER updated $@ | tee arch_install.log
+    $INSTALLER updated $@ > arch_install.log
+    exec tail -F arch_install.log
 }
 [ "$1" == "updated" ] && shift || update_installer $@
 echo "Installer updated :D"
