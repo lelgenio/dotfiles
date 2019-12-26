@@ -339,11 +339,6 @@ unmount_filesystems() {
         IS_BIOS=true
     fi
 #}}}
-# get_root_size(){{{{
-get_root_size(){
-
-}
-#}}}
 #}}}
 # Configuration{{{
 # configure() {#{{{
