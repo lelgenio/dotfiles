@@ -265,7 +265,7 @@ setup_lvm() {
     local partition="$1"; shift
     local volgroup="$1"; shift
     
-    local d_size=$(lsblk --noheadings --nodeps --bytes --raw $DISK)
+    local d_size=$(lsblk --noheadings --nodeps --bytes --raw $DRIVE)
 
     pvcreate "$partition"
     vgcreate "$volgroup" "$partition"
@@ -783,7 +783,7 @@ disk_clean(){
     set +e
     swapoff -a
     umount -R /mnt
-    for vg in $(pvs -o vg_name --nohead "$DISK"2)
+    for vg in $(pvs -o vg_name --nohead "$DRIVE"2)
     do
         vgremove "$vg"
     done
