@@ -789,7 +789,6 @@ disk_clean(){
 }
 
 [ "$1" == "clean" ] && disk_clean || true
-false
 #}}}
 set_pkgs
 if [ ! "$USER" == "root"  ];then
