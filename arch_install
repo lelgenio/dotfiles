@@ -775,6 +775,7 @@ update_installer(){
     echo "pre install $@"
     exec $INSTALLER updated $@
 }
+echo "pre update $@"
 [ "$1" == "updated" ] && shift || update_installer $@
 echo "pos install $@"
 echo "Installer updated :D"
