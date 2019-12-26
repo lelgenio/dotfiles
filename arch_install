@@ -804,7 +804,7 @@ update_installer(){
     exit 0
 }
 
-[ "$1" == "updated" ] && shift || update_installer $@
+[ "$1" == "updated" ] && shift || is_chroot || update_installer $@
 echo "Installer updated :D"
 
 #}}}
