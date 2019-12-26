@@ -89,13 +89,16 @@ REMOVE_PKGS=false
 FULL_INSTALL=false
 #}}}
 # PACKAGES{{{
+set_pkgs() {
     # sudo to allow to run as a user later
     sudo pacman -Sy
 
     pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
     pkgs_base+=' zsh networkmanager bluez cronie git man-db'
     pkgs_base+=" $(pacman -Sgq base-devel)"
-
+    if $IS_BIOS;then
+        pkgs_base+=' grub'
+    fi
 
     pkgs+=" $pkgs_base"
     # DE
@@ -162,7 +165,7 @@ FULL_INSTALL=false
             packages+=' xf86-video-vesa'
         fi
     fi
-
+}
 #}}}
 # Initial Setup{{{
 # Base install{{{
@@ -203,6 +206,9 @@ setup() {
 
     echo 'Installing base system'
     install_base
+
+    echo 'Setting fstab'
+    set_fstab
 
     echo 'Chrooting into installed system to continue setup...'
     cp $0 /mnt/setup.sh
@@ -297,6 +303,11 @@ install_base() {
     pacstrap /mnt $pkgs_base
 }
 #}}}
+# set_fstab() {#{{{
+set_fstab() {
+    genfstab -Up /mnt > /mnt/etc/fstab
+}
+#}}}
 # unmount_filesystems #{{{
 unmount_filesystems() {
     umount -R /mnt
@@ -337,9 +348,6 @@ configure() {
 
     echo 'Setting console keymap'
     set_inputs
-
-    echo 'Setting fstab'
-    set_fstab "$TMP_ON_TMPFS" "$boot_dev"
 
     echo 'Configuring initial ramdisk'
     set_initcpio
@@ -517,27 +525,6 @@ EOF
 
 }
 #}}}
-# set_fstab() {#{{{
-set_fstab() {
-    local tmp_on_tmpfs="$1"; shift
-    local boot_dev="$1"; shift
-
-    local boot_uuid=$(get_uuid "$boot_dev")
-
-    cat > /etc/fstab <<EOF
-#
-# /etc/fstab: static file system information
-#
-# <file system> <dir>    <type> <options>    <dump> <pass>
-
-/dev/vg00/swap none     swap  sw                0 0
-/dev/vg00/root /        ext4  rw,relatime 0 1
-/dev/vg00/home /home    ext4  rw,relatime 0 2
-
-UUID=$boot_uuid /boot ext2 defaults,relatime 0 2
-EOF
-}
-#}}}
 # set_initcpio() {#{{{
 set_initcpio() {
     local vid
@@ -617,7 +604,7 @@ set_bootctl() {
     fi
 
     if $IS_BIOS;then
-        grub-install "$boot_dev"
+        grub-install "$DRIVE"
         grub-mkconfig -o /boot/grub/grub.cfg
 
     else
@@ -697,7 +684,7 @@ update_pkgfile() {
 #}}}
 # get_uuid() {#{{{
 get_uuid() {
-    blkid -o export "$1" | grep UUID | awk -F= '{print $2}'
+    lsblk -no UUID "$1"
 }
 #}}}
 #}}}
@@ -759,6 +746,7 @@ stow_dots() {
 #}}}
 set -ex
 
+set_pkgs
 if [ ! "$USER" == "root"  ];then
     user_setup
 elif [ "$1" == "chroot" ];then
