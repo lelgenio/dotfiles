@@ -779,6 +779,7 @@ echo "Installer updated :D"
 #}}}
 # Remove old LVMs{{{
 disk_clean(){
+    echo 'cleaning disk'
     set +e
     swapoff -a
     umount -R /mnt
