@@ -211,10 +211,11 @@ setup() {
     set_fstab
 
     echo 'Chrooting into installed system to continue setup...'
-    cp $0 /mnt/setup.sh
-    arch-chroot /mnt ./setup.sh chroot
+    cp "$0" "/mnt/$0"
+    chmod +x "/mnt/$0"
+    arch-chroot /mnt "./$0"
 
-    if [ -f /mnt/setup.sh ]
+    if [ -f  "/mnt/$0" ]
     then
         echo 'ERROR: Something failed inside the chroot, not unmounting filesystems so you can investigate.'
         echo 'Make sure you unmount everything before you try to run this script again.'
@@ -687,6 +688,11 @@ get_uuid() {
     lsblk -no UUID "$1"
 }
 #}}}
+# is_chroot(){{{{
+is_chroot(){
+    [ "$(ls -id / | cut -d' ' -f1)" == "2" ]
+}
+#}}}
 #}}}
 # User setup{{{
 user_setup() {
@@ -749,7 +755,7 @@ set -ex
 set_pkgs
 if [ ! "$USER" == "root"  ];then
     user_setup
-elif [ "$1" == "chroot" ];then
+elif is_chroot;then
     configure
 else
     setup
