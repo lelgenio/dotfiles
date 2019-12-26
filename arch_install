@@ -57,7 +57,9 @@ ROOT_PASSWORD=''
 
 # Main user to create (by default, added to wheel group, and others).
 USER_NAME='lelgenio'
-DOTFILES_URL='https://gitlab.com/lelgenio/dotfiles'
+# Link to users dotfiles repo(git) 
+# Assumed to have stow-able modules on its root(cd .dotfiles;stow*/)
+DOTFILES_URL="https://gitlab.com/$USER_NAME/dotfiles"
 USER_SHELL='zsh'
 
 # The main user's password (leave blank to be prompted).
@@ -409,6 +411,7 @@ configure() {
     echo 'Updating pkgfile database'
     update_pkgfile
 
+    shred "$0"
     rm "$0"
 }
 #}}}
@@ -718,6 +721,7 @@ user_setup() {
     echo 'Stowing dotfiles'
     stow_dots
 
+    shred "$0"
     rm "$0"
 }
 # Install AUR packages #{{{
@@ -762,14 +766,31 @@ stow_dots() {
 }
 #}}}
 #}}}
-# update_installer(){{{{
+# Update installer {{{
 update_installer(){
+    shift
+    echo "Updating installer..."
     INSTALLER=$(mktemp)
-    wget -O $INSTALLER $DOTFILES_URL/raw/master/arch_install
+    wget -qO $INSTALLER $DOTFILES_URL/raw/master/arch_install
     chmod +x $INSTALLER
-    bash $INSTALLER updated
+    exec $INSTALLER updated "$@"
 }
-[ "$1" == "updated" ] && shift || update_installer
+[ "$1" == "updated" ] || update_installer
+echo "Installer updated :D"
+#}}}
+# Remove old LVMs{{{
+disk_clean(){
+    set +e
+    swapoff -a
+    umount -R /mnt
+    for vg in $(pvs -o vg_name --nohead "$DISK")
+    do
+        vgremove "$vg"
+    done
+}
+
+[ "$1" == "clean" ] && disk_clean || true
+false
 #}}}
 set_pkgs
 if [ ! "$USER" == "root"  ];then
