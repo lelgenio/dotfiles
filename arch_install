@@ -783,7 +783,7 @@ disk_clean(){
     set +e
     swapoff -a
     umount -R /mnt
-    for vg in $(pvs -o vg_name --nohead "$DISK")
+    for vg in $(pvs -o vg_name --nohead "$DISK"2)
     do
         vgremove "$vg"
     done
