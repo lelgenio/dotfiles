@@ -57,7 +57,7 @@ ROOT_PASSWORD=''
 
 # Main user to create (by default, added to wheel group, and others).
 USER_NAME='lelgenio'
-DOTFILES_URL='https://gitlab.com/lelgenio/dotfiles.git'
+DOTFILES_URL='https://gitlab.com/lelgenio/dotfiles'
 USER_SHELL='zsh'
 
 # The main user's password (leave blank to be prompted).
@@ -402,15 +402,14 @@ configure() {
     create_user "$USER_NAME" "$USER_PASSWORD"
 
     echo 'setting up user'
-    cp $0 /home/$USER_NAME/setup.sh
-    chown $USER_NAME /home/$USER_NAME/setup.sh
-    su $USER_NAME -c /home/$USER_NAME/setup.sh
-    rm /home/$USER_NAME/setup.sh
+    cp $0 "/home/$USER_NAME/$0"
+    chown $USER_NAME "/home/$USER_NAME/$0"
+    su $USER_NAME -c "/home/$USER_NAME/$0"
 
     echo 'Updating pkgfile database'
     update_pkgfile
 
-    rm /setup.sh
+    rm "$0"
 }
 #}}}
 # set_repos() {{{{
@@ -718,6 +717,8 @@ user_setup() {
 
     echo 'Stowing dotfiles'
     stow_dots
+
+    rm "$0"
 }
 # Install AUR packages #{{{
 install_aur_packages() {
@@ -761,8 +762,15 @@ stow_dots() {
 }
 #}}}
 #}}}
-set -ex
-
+# update_installer(){{{{
+update_installer(){
+    INSTALLER=$(mktemp)
+    wget -O $INSTALLER $DOTFILES_URL/raw/master/arch_install
+    chmod +x $INSTALLER
+    bash $INSTALLER updated
+}
+[ "$1" == "updated" ] && shift || update_installer
+#}}}
 set_pkgs
 if [ ! "$USER" == "root"  ];then
     user_setup
