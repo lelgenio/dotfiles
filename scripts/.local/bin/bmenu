@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# BEMENU_BACKEND=x11
 # BEMENU_BACKEND=wayland
 if [ "$1" == "run" ]
 then

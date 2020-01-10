@@ -17,17 +17,17 @@
     set $right l
 
     set $term kitty
-    # set $menu wofi --show drun --allow-images --insensitive -p'Iniciar: '
-    set $menu  bmenu run $term
+    set $menu wofi --show drun --allow-images --insensitive -p'Iniciar: '
+    # set $menu  bmenu run $term
     # set $menu  j4-dmenu-desktop --dmenu 'bmenu -p Iniciar:' --term $term
 	font Fira Code 14px
 
 # }}}
 # Output configuration {{{
 #
-    output * bg '#252525' solid_color
+    output * bg '#212121' solid_color
 
-    # output HDMI-A-1 resolution 720x576
+    # output HDMI-A-1 resolution 1280x720
 
     #Disable laptop screen if closed, --reload is important
     set $laptop eDP-1
@@ -220,6 +220,7 @@
 
     # Media player controls 
     # playerctl for notifications
+    # bindsym --locked    XF86AudioPlay   exec    playerctl -p mpd play-pause
     bindsym --locked    XF86AudioPlay   exec    playerctl -p mpd play-pause
     bindsym --locked    XF86AudioNext   exec    playerctl -p mpd next
     bindsym --locked    XF86AudioPrev   exec    playerctl -p mpd previous
@@ -273,7 +274,7 @@
     # for_window [app_id=mpv] floating enable
     for_window [app_id=weather] floating enable
     # for_window [app_id=weather] resize set 635px 700px
-    for_window [app_id=weather] resize set 1280px 700px
+    for_window [app_id=weather] resize set 1280px 750px
 
     # set theme
     set $gnome-schema org.gnome.desktop.interface
@@ -310,7 +311,7 @@
     exec swayidle -w \
        before-sleep 'swaylock -f' \
        lock swaylock \
-       timeout 900 'swaylock -f' \
+       timeout 1800 'swaylock -f' \
        # timeout 1800 'swaymsg "output * dpms off"' \
        #      resume 'swaymsg "output * dpms on;reload"' \
 #}}}

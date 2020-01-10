@@ -164,6 +164,7 @@ preexec() { echo -ne '\e[5 q' ;}
 #
     abbrev-alias -g v=nvim
     abbrev-alias -g rv="sudo nvim"
+    abbrev-alias  se='nvim $(fzf)'
     abbrev-alias  es="nvim ~/.config/sway/config"
     abbrev-alias  ez="nvim ~/.zshrc"
     abbrev-alias  ev="nvim ~/.config/nvim/init.vim"

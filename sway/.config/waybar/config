@@ -57,7 +57,7 @@
     },
     "clock": {
         "interval":60,
-        "format":"{:%H:%M %a %d}",
+        "format":"<b>{:%H:%M %a %d}</b>",
         "tooltip":false
     },
     "battery": {
@@ -104,7 +104,7 @@
     },
     "custom/weather": {
         "tooltip":false,
-        "exec": "forecast short",
+        "exec": "forecast pango",
         "interval": 1800,
         "on-click": "kitty --class weather sh -c 'forecast full;read -n1 -p\"Press Any key to quit \"'",
         "on-click-right": "xdg-open https://openweathermap.org"
@@ -124,7 +124,7 @@
         "interval": 43200,
         "exec-if":"sleep 60s",
         "exec": "yay -Syuw --noconfirm> /dev/null; yay -Qqu | wc -l | sed 's/^0$//'",
-        "on-click": "kitty sh -c 'ping -qc1 archlinux.org >/dev/null && yay -Syu || yay -Su; pkill -SIGRTMIN+8 waybar'",
+        "on-click": "kitty sh -c 'ping -qc1 archlinux.org >/dev/null && yay -Syu || yay -Su; pkill -SIGRTMIN+8 waybar; read'",
         "signal": 8
     },
     "custom/recording": {

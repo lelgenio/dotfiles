@@ -1,6 +1,6 @@
 {
     // Remove clutter
-    //"window.titleBarStyle": "custom",
+    // "window.titleBarStyle": "custom",
     "window.menuBarVisibility": "toggle",
     "workbench.activityBar.visible": false,
     "workbench.editor.showTabs": false,
@@ -109,4 +109,12 @@
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
 }

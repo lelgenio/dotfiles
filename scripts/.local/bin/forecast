@@ -12,7 +12,11 @@ owm(){
     QUERY="$CITY, $REGI, $COUN"
     APPID="fd68c0fe7951f5ab7e24a240eb0942b8"
 
-    http get http://api.openweathermap.org/data/2.5/forecast\?APPID\=${APPID}\&q="${CITY}"\&units\=metric
+    FORECAST=$(http get http://api.openweathermap.org/data/2.5/forecast\?APPID\=${APPID}\&q="${CITY}"\&units\=metric)
+    TEMP=$(echo $FORECAST | jq -r ".list[0].main.temp")
+    WEATHER=$(echo $FORECAST | jq -r ".list[0].weather[0].main")
+
+    format_weather
 }
 
 format_weather(){
@@ -41,11 +45,7 @@ format_weather(){
 }
 
 owm_long(){
-    FORECAST=$(owm)
-    TEMP=$(echo $FORECAST | jq -r ".list[0].main.temp")
-    WEATHER=$(echo $FORECAST | jq -r ".list[0].weather[0].main")
-    format_weather
-
+    owm
     MIN=$(echo $FORECAST | jq -r ".list[2].main.temp_min" |
         perl -pe 's/(\d*)\.\d*/\1/')
     MAX=$(echo $FORECAST | jq -r ".list[2].main.temp_max" |
@@ -57,13 +57,17 @@ owm_long(){
 }
 
 owm_short(){
-    FORECAST=$(owm)
-    TEMP=$(echo $FORECAST | jq -r ".list[0].main.temp" |
-        perl -pe 's/(\d*)\.\d*/\1/')
-    WEATHER=$(echo $FORECAST | jq -r ".list[0].weather[0].main")
-    format_weather
+    owm
 
     text="$WEATHER $TEMP°C"
+
+    echo "$text"
+}
+
+owm_pango(){
+    owm
+
+    text="$WEATHER <b>$TEMP°C</b>"
 
     echo "$text"
 }
@@ -80,6 +84,9 @@ then
 elif [ "$1" == "short" ]
 then
     owm_short
+elif [ "$1" == "pango" ]
+then
+    owm_pango
 else
     owm_long
 fi
