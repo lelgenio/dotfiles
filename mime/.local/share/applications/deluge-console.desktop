@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Deluge Console
-Exec=deluge-console add %U
-MimeType=x-scheme-handler/magnet;application/x-bittorrent
-Terminal=true
-NoDisplay=true
-Comment=Created by Mimeo
