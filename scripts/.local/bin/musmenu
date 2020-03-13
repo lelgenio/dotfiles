@@ -1,17 +1,8 @@
 #!/bin/sh
 set -e
 
-MENU(){
-    if [ -n "$SWAYSOCK" ];then
-        # bmenu -i $@
-        wofi -dIk/dev/null $@
-    else
-        rofi -dmenu -i $@
-    fi
-}
-
 search(){
-    music=$(mpc playlist --format '%artist% : %title%' | sed '/^ : $/d' | MENU)
+    music=$(mpc playlist --format '%artist% : %title%' | sed '/^ : $/d' | wdmenu)
     if [ "$music" == "" ]
     then
         exit 1
@@ -25,7 +16,7 @@ search(){
 
 delete(){
     current=~/Música/"$(mpc current -f %file%)"
-    answer=$(echo -e "nothing\n$current" | MENU -p"delete?" )
+    answer=$(echo -e "nothing\n$current" | wdmenu -p"delete?" )
     if [ "$answer" == "$current" ]
     then
         trash "$answer"

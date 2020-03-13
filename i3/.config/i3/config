@@ -17,7 +17,7 @@
     set $right l
 
     set $term termite
-    set $menu rofi -show drun -p'Iniciar: '
+    set $menu bmenu run $term
 	font pango:Hack 14px
 
 # }}}
@@ -138,13 +138,6 @@
     # Move focus to the parent container
     bindsym $mod+a focus parent
     # }}}
-    # Scratchpad: {{{
-    #
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
-    # Show the next scratchpad window
-    bindsym $mod+minus scratchpad show
-    #}}}
     # Screenshots: {{{
     # 
 
@@ -170,14 +163,14 @@
     for_window [class=pavucontrol] floating enable
 
     # Volume controll
-    bindsym XF86AudioRaiseVolume exec  pamixer -i 5
-    bindsym XF86AudioLowerVolume exec  pamixer -d 5
-    bindsym XF86AudioMute        exec  pamixer -t
+    bindsym XF86AudioRaiseVolume exec  pavolume volup 5
+    bindsym XF86AudioLowerVolume exec  pavolume voldown 5
+    bindsym XF86AudioMute        exec  pavolume mutetoggle
 
     # Media player controls
-    bindsym XF86AudioPlay   exec    mpc     toggle
-    bindsym XF86AudioNext   exec    mpc     next
-    bindsym XF86AudioPrev   exec    mpc     prev
+    bindsym XF86AudioPlay   exec    playerctl -p mpd play-pause  
+    bindsym XF86AudioNext   exec    playerctl -p mpd next        
+    bindsym XF86AudioPrev   exec    playerctl -p mpd previous    
     bindsym $mod+Shift+x    exec    musmenu delete
     bindsym $mod+Shift+s    exec    musmenu search
 
@@ -200,10 +193,10 @@
     client.unfocused        $bg_color   $bg_color   $fg_color   $bg_color   $bg_color
     client.urgent           $alert      $alert      $fg_color   $alert      $alert
 
-    exec_always polybar_run
+    # exec_always polybar_run
 
     default_border pixel 2
-    gaps inner 5
+    gaps inner 10
 
     smart_gaps on
 	smart_borders on
@@ -221,6 +214,8 @@
 # Daemons {{{
 #
 
+    #Compositor
+    exec picom
     #Notification Daemon
     exec dunst
     # Block device Mounter to /run/media/<username>

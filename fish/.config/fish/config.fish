@@ -30,7 +30,7 @@ set -x PAGER less
         clear
         exec startx i3
     end
-    if test "$XDG_VTNR"=1 -a ! "$DISPLAY" -a "$XDG_SESSION_TYPE"="tty" #faster like this
+    if test "$XDG_VTNR" = 1 -a -z "$DISPLAY" #faster like this
         if systemctl -q is-active graphical.target 
             export _JAVA_AWT_WM_NONREPARENTING=1
             export GTK_CSD=0

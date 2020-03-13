@@ -34,6 +34,9 @@
         \ 'do': 'bash install.sh',
         \}
 
+    " Debugger
+    Plug 'vim-vdebug/vdebug'
+
     " Fuzzy find
     Plug 'junegunn/fzf'
 
@@ -194,6 +197,9 @@ call plug#end()
         \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
         \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
         \ }
+
+    " Auto format on save
+    autocmd BufWritePre *.py call LanguageClient#textDocument_formatting_sync()
 
     let g:deoplete#enable_at_startup = 1
 

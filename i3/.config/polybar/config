@@ -332,11 +332,11 @@ exec = ~/.local/bin/forecast
 ; [settings]{{{
 [settings]
 format-padding = 1
-screenchange-reload = true
+; screenchange-reload = true
 ;compositing-background = xor
 ;compositing-background = screen
 ;compositing-foreground = source
-;compositing-border = over
+; compositing-border = over
 ;pseudo-transparency = false
 ; }}}
 ; [global/wm]{{{

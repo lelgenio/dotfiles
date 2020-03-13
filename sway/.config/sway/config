@@ -25,16 +25,17 @@
 # }}}
 # Output configuration {{{
 #
-    output * bg '#212121' solid_color
+    output * bg '#252525' solid_color
+    # output * bg /usr/share/backgrounds/gnome/adwaita-night.jpg                                    fill 
+    # Output HDMI-A-1 resolution 1280x720
 
-    # output HDMI-A-1 resolution 1280x720
-
-    #Disable laptop screen if closed, --reload is important
+    # Disable laptop screen if closed, --reload is important
     set $laptop eDP-1
     bindswitch --reload lid:on output $laptop disable
     bindswitch --reload lid:off output $laptop enable
     # output $laptop disable
     bindsym $mod+o output eDP-1 toggle
+    exec_always swaymsg -t get_outputs | grep HDMI && swaymsg 'output eDP-1 disable'
 
     # Backlight settings for laptops
     exec sudo light -N 1
@@ -297,15 +298,15 @@
     exec fusuma
     exec sh -c 'pkill fusuma; fusuma'
     # Blue light filter
-    exec redshift
+    exec_always sh -c 'pkill redshift; redshift'
     # kde connect
     exec /usr/lib/kdeconnectd
     exec kdeconnect-indicator
     # Telegram
-    exec telegram-desktop
+    exec telegram-desktop-bin || telegram-desktop
     # Music Player Daemon
-    exec sh -c 'pkill mpd; mpd'
-    exec sh -c 'pkill mpDris2; mpDris2'
+    exec sh -c 'pgrep mpd || mpd'
+    exec sh -c 'pgrep mpDris2|| mpDris2'
     # lock screen after a period of inactivity execp for fullscreen
     for_window [class=.*] inhibit_idle fullscreen
     exec swayidle -w \

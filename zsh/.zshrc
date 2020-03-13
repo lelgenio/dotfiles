@@ -45,11 +45,15 @@ export PAGER=less
     }
     ei3() {
         clear
-        exec startx i3
+        exec startx /usr/bin/i3
+    }
+    ebsp(){
+        clear
+        exec startx /usr/bin/bspwm
     }
     if [[ $XDG_VTNR -eq 1 ]] #faster like this
     then
-        if systemctl -q is-active graphical.target && [[ ! $DISPLAY ]]
+        if systemctl -q is-active graphical.target && [[ -z "$DISPLAY" ]]
         then
             [ -f /etc/X11/xinit/xinitrc.d/30-gtk3-nocsd.sh ] &&
                 source /etc/X11/xinit/xinitrc.d/30-gtk3-nocsd.sh
@@ -58,8 +62,10 @@ export PAGER=less
             # export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
             export XCURSOR_THEME=capitaine-cursors
             export GTK_THEME=materia-custom-accent:dark
+
             esway &> .swaylog
             # ei3 &> .i3log
+            # ebsp &> .bsplog
         fi
     fi
 
@@ -269,3 +275,5 @@ preexec() { echo -ne '\e[5 q' ;}
     setopt GLOBSTARSHORT
 #}}}
 # vim:foldmethod=marker
+
+source /home/lelgenio/.config/broot/launcher/bash/br

@@ -1,12 +1,19 @@
 {
     // Remove clutter
-    // "window.titleBarStyle": "custom",
-    "window.menuBarVisibility": "toggle",
-    "workbench.activityBar.visible": false,
-    "workbench.editor.showTabs": false,
-    "editor.minimap.renderCharacters": false,
-    "workbench.editor.closeEmptyGroups": true,
-    "workbench.editor.tabCloseButton": "off",
+    "window.titleBarStyle": "custom",
+    // "window.menuBarVisibility": "toggle",
+    // "workbench.activityBar.visible": false,
+    // "workbench.editor.showTabs": false,
+    // "workbench.editor.enablePreview": false,
+    // "workbench.editor.enablePreviewFromQuickOpen": true,
+    // "breadcrumbs.enabled": false,
+    // "editor.minimap.renderCharacters": false,
+    // "workbench.editor.closeEmptyGroups": true,
+    // "workbench.editor.tabCloseButton": "off",
+    // "workbench.statusBar.visible": false,
+    // "explorer.openEditors.visible": 0,
+    "debug.openDebug": "openOnDebugBreak",
+    // "debug.internalConsoleOptions": "none",
     // Don't ask
     "git.autofetch": true,
     "git.confirmSync": false,
@@ -17,7 +24,7 @@
     "window.closeWhenEmpty": true,
     // Rendering
     "terminal.integrated.rendererType": "dom",
-    "editor.renderWhitespace": "boundary",
+    "editor.renderWhitespace": "none",
     "window.zoomLevel": 0,
     "vim.foldfix": true,
     // Fonts
@@ -26,6 +33,9 @@
     "editor.fontSize": 15,
     "editor.fontLigatures": true,
     // Vim
+    "vim.useSystemClipboard": true,
+    "vim.enableNeovim": true,
+    "vim.neovimPath": "/usr/bin/nvim",
     "vim.normalModeKeyBindings": [
         {
             "before": [
@@ -43,6 +53,15 @@
             "commands": [
                 "workbench.action.showCommands"
             ]
+        },
+        {
+            "before": [
+                "t",
+                "t"
+            ],
+            "commands": [
+                "workbench.action.terminal.focus"
+            ]
         }
     ],
     // Gay colors
@@ -50,31 +69,6 @@
     "materialTheme.accent": "Red",
     "workbench.iconTheme": "material-icon-theme",
     "material-icon-theme.folders.color": "#cc5757",
-    "vim.statusBarColorControl": true,
-    "vim.statusBarColors.insert": [
-        "#cc5757",
-        "#fff"
-    ],
-    "vim.statusBarColors.normal": [
-        "#202020",
-        "#fff"
-    ],
-    "vim.statusBarColors.visual": [
-        "#5757cc",
-        "#fff"
-    ],
-    "vim.statusBarColors.visualblock": [
-        "#5757cc",
-        "#fff"
-    ],
-    "vim.statusBarColors.visualline": [
-        "#5757cc",
-        "#fff"
-    ],
-    "vim.statusBarColors.replace": [
-        "#DD2020",
-        "#fff"
-    ],
     "workbench.colorCustomizations": {
         "minimap.selectionHighlight": "#CC5757",
         "editorCursor.background": "#fff",
@@ -102,19 +96,27 @@
         "menubar.selectionForeground": "#cc5757",
         "editor.findMatchBorder": "#cc5757",
         "selection.background": "#cc575740",
-        "statusBar.background": "#007acc",
-        "statusBar.noFolderBackground": "#007acc",
-        "statusBar.debuggingBackground": "#007acc"
+        "statusBar.background": "#202020",
+        "statusBar.noFolderBackground": "#202020",
+        "statusBar.debuggingBackground": "#202020",
+        "statusBar.foreground": "#fff"
     },
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "debug.allowBreakpointsEverywhere": true,
     "files.exclude": {
         "**/.classpath": true,
         "**/.project": true,
         "**/.settings": true,
-        "**/.factorypath": true
+        "**/.factorypath": true,
+        "**/__pycache__": true
     },
+    // "[jsonc]": {
+    //     "editor.defaultFormatter": "HookyQR.beautify"
+    // },
+    "python.testing.unittestEnabled": true,
+    "python.dataScience.enabled": true,
+    "python.dataScience.sendSelectionToInteractiveWindow": true
 }
