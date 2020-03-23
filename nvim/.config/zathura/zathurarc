@@ -1,5 +1,11 @@
+set recolor
+set recolor-keephue
+set recolor-lightcolor "#202020"
+set recolor-darkcolor "#AAAAAA"
+
 set adjust-open width
-set font "Roboto 11"
+
+set font "FiraCode 11"
 set guioptions ""
 
 set default-bg "#202020"
