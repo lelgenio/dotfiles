@@ -66,9 +66,24 @@ set TMUX 1
     end
 #}}}
 # Prompt customization{{{
+    set SPACEFISH_USER_SHOW always
+    set SPACEFISH_USER_COLOR "#cc5757"
+    set SPACEFISH_DIR_COLOR "#cc5757"
+    
     set SPACEFISH_PROMPT_ADD_NEWLINE false
-    set SPACEFISH_CHAR_SYMBOL '$'
-    set SPACEFISH_CHAR_SYMBOL_ROOT '#'
+
+    set SPACEFISH_CHAR_PREFIX ""
+    set SPACEFISH_CHAR_SYMBOL ">"
+    set SPACEFISH_CHAR_SYMBOL_ROOT ">"
+
+    set SPACEFISH_VI_MODE_PREFIX ""
+    set SPACEFISH_VI_MODE_SUFIX ""
+    set SPACEFISH_VI_MODE_INSERT "I"
+    set SPACEFISH_VI_MODE_NORMAL "N"
+    set SPACEFISH_VI_MODE_VISUAL "V"
+    set SPACEFISH_VI_MODE_REPLACE "R"
+    set SPACEFISH_VI_MODE_REPLACE_ONE 	"S"
+
 #}}}
 # Color man pages{{{
 
