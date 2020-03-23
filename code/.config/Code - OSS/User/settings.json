@@ -12,7 +12,7 @@
     // "workbench.editor.tabCloseButton": "off",
     // "workbench.statusBar.visible": false,
     // "explorer.openEditors.visible": 0,
-    "debug.openDebug": "openOnDebugBreak",
+    // "debug.openDebug": "openOnDebugBreak",
     // "debug.internalConsoleOptions": "none",
     // Don't ask
     "git.autofetch": true,
@@ -65,17 +65,16 @@
         }
     ],
     // Gay colors
-    "workbench.colorTheme": "Material Theme Darker High Contrast",
+    "workbench.colorTheme": "Community Material Theme Darker High Contrast",
     "materialTheme.accent": "Red",
     "workbench.iconTheme": "material-icon-theme",
     "material-icon-theme.folders.color": "#cc5757",
     "workbench.colorCustomizations": {
         "minimap.selectionHighlight": "#CC5757",
         "editorCursor.background": "#fff",
-        "editor.background": "#202020",
-        "editorWhitespace.foreground": "#303030",
         "editorCursor.foreground": "#cc5757dd",
         "activityBarBadge.background": "#cc5757",
+        "activityBar.activeBorder": "#cc5757",
         "list.activeSelectionForeground": "#cc5757",
         "list.inactiveSelectionForeground": "#cc5757",
         "list.highlightForeground": "#cc5757",
@@ -96,6 +95,8 @@
         "menubar.selectionForeground": "#cc5757",
         "editor.findMatchBorder": "#cc5757",
         "selection.background": "#cc575740",
+        "editor.background": "#202020",
+        "editorWhitespace.foreground": "#303030",
         "statusBar.background": "#202020",
         "statusBar.noFolderBackground": "#202020",
         "statusBar.debuggingBackground": "#202020",
@@ -113,10 +114,25 @@
         "**/.factorypath": true,
         "**/__pycache__": true
     },
+    "files.associations": {
+        "**/*.html": "html",
+        "**/templates/**/*.html": "django-html",
+        "**/templates/**/*": "django-txt",
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+    },
+    "emmet.includeLanguages": {
+        "django-html": "html"
+    },
     // "[jsonc]": {
     //     "editor.defaultFormatter": "HookyQR.beautify"
     // },
-    "python.testing.unittestEnabled": true,
-    "python.dataScience.enabled": true,
-    "python.dataScience.sendSelectionToInteractiveWindow": true
+    // "python.testing.unittestEnabled": true,
+    // "python.dataScience.enabled": true,
+    // "python.dataScience.sendSelectionToInteractiveWindow": true,
+    // "python.linting.mypyEnabled": true,
+    // "python.linting.pycodestyleEnabled": true,
+    "python.linting.pylintEnabled": true,
+    "vim.debug.silent": true,
+    "python.jediEnabled": true,
+    "python.formatting.provider": "black"
 }

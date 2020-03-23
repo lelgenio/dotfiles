@@ -22,9 +22,5 @@
     {
         "key": "ctrl+s",
         "command": "saveAll"
-    },
-    {
-        "key": "f11",
-        "command": "workbench.action.toggleZenMode"
     }
 ]
