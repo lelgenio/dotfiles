@@ -1,0 +1,94 @@
+#!/bin/sh
+set -e
+
+comment(){
+    local file="$1";shift
+    sudo perl -i -pe "s/^#* */# / if /$@/" $file
+}
+
+uncomment(){
+    local file="$1";shift
+    sudo perl -i -pe "s/^#* *// if /$@/" $file
+}
+
+gui_off (){
+    sudo chsh -s /usr/bin/zsh $(whoami)
+
+    rm ~/.config/mimeapps.list
+    cd .dotfiles
+    stow mime
+
+    uncomment /etc/mkinitcpio.conf "HOOKS.* (?!plymouth)"
+    comment   /etc/mkinitcpio.conf "HOOKS.* plymouth"
+    sudo mkinitcpio -P
+
+    comment /boot/loader/entries/arch.conf "options quiet"
+
+    sudo systemctl restart getty@tty1 &
+
+    systemctl -q is-active gdm && 
+        sudo systemctl disable --now gdm &
+    systemctl -q is-active gdm-plymouth && 
+        sudo systemctl disable --now gdm-plymouth &
+
+
+
+}
+
+gui_on (){
+    sudo chsh -s /usr/bin/fish $(whoami)
+
+    rm ~/.config/mimeapps.list
+    cp /usr/share/applications/gnome-mimeapps.list ~/.config/mimeapps.list
+
+    kvantummanager --set Materia
+    gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
+
+    comment     /etc/mkinitcpio.conf "HOOKS.* (!?plymouth)"
+    uncomment   /etc/mkinitcpio.conf "HOOKS.* plymouth"
+    sudo mkinitcpio -P
+
+    uncomment /boot/loader/entries/arch.conf "options quiet"
+
+    sudo systemctl enable --now gdm-plymouth
+}
+
+restart_gdm(){
+    if systemctl -q is-active gdm-plymouth
+    then
+        sudo systemctl restart gdm-plymouth
+    fi
+
+    if systemctl -q is-active gdm
+    then
+        sudo systemctl restart gdm
+    fi
+}
+
+x11_on(){
+    uncomment   /etc/gdm/custom.conf "Wayland"
+    perl -i -pe 's/false/true/ if /layers.acceleration.force-enable/' ~/.mozilla/firefox/*default-release*/prefs*js
+    restart_gdm
+}
+
+x11_off(){
+    comment     /etc/gdm/custom.conf "Wayland"
+    perl -i -pe 's/true/false/ if /layers.acceleration.force-enable/' ~/.mozilla/firefox/*default-release*/prefs*js
+    restart_gdm
+}
+
+if [ "$1" = "on" ];then
+    gui_on
+elif [ "$1" = "off" ];then
+    gui_off
+elif [ "$1" = "x11" ];then
+    if [ "$2" = "on" ];then
+        x11_on
+    elif [ "$2" = "off" ];then
+        x11_off
+    fi
+else
+    echo "Usage: "
+    echo "  $0      <on|off>"
+    echo "  $0 x11  <on|off>"
+fi
