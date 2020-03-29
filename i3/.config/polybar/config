@@ -1,25 +1,15 @@
-;==========================================================
-;
-;
-;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
-;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
-;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
-;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
-;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
-;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
-;
-;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/polybar/polybar
-;
-;   The README contains a lot of information
-;
-;==========================================================
+;LEL
+;  ____       _       _                
+; |  _ \ ___ | |_   _| |__   __ _ _ __ 
+; | |_) / _ \| | | | | '_ \ / _` | '__|
+; |  __/ (_) | | |_| | |_) | (_| | |   
+; |_|   \___/|_|\__, |_.__/ \__,_|_|   
+;              |___/                  
 
-; [colors]{{{
+; colors{{{
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #222
+background = #202020
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -27,131 +17,148 @@ foreground-alt = #555
 primary = #cc5757
 secondary = #e60053
 alert = #bd2c40
-transparent = #00000000
 ; }}}
-; [bar/main]{{{
+; main {{{
 [bar/main]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 27
+height = 26
+;offset-x = 1%
+;offset-y = 1%
 ; radius = 6.0
 fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-border-bottom-color = #191919
-border-bottom-size = 2
-line-size = 2
+line-size = 3
 line-color = #f00
+
+border-bottom-size = 2
+border-bottom-color = #191919
 
 padding-left = 0
 padding-right = 2
 
-; module-margin-left = 100
-; module-margin-right = 1
+module-margin-left = 1
+module-margin-right = 2
 
-font-0 = Inter:pixelsize=11.5;3
-font-1 = Inter:pixelsize=12.5;3
-font-2 = "Font Awesome 5 Free:pixelsize=11;3"
-font-3 = "Font Awesome 5 Free Solid:pixelsize=11;3"
-font-4 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-5 = siji:pixelsize=10;1
+font-0 = Inter: size=12;3
+font-1 = "Material:size=12;2"
+font-2 = Font Awesome 5 Free: pixelsize=11;2
+font-3 = Font Awesome 5 Free Solid: pixelsize=11;2
+font-4 = Inter:style=Bold;2
 
-modules-left = i3
-modules-center =  date
-modules-right = mpd weather xbacklight battery pulseaudio-control
+modules-left = bspwm i3 xwindow
+modules-center = date tempMin tempMax tempCur
+modules-right = mpd xbacklight pulseaudio wlan eth battery
 
 tray-position = right
-tray-padding = 1
+tray-padding = 10
 ;tray-background = #0063ff
 
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
+;wm-restack = bspwm
+;wm-restack = i3
 
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
 ; }}}
-; [module/xkeyboard]{{{
-[module/xkeyboard]
-type = internal/xkeyboard
-blacklist-0 = num lock
+; temp{{{
+[module/tempMax]
+type = custom/script
+exec = jq -r ".max" .forecast.json
+format = <label>
+format-suffix = 
+interval = 60
 
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-overline = ${colors.secondary}
-
-label-layout = %layout%
-label-layout-overline = ${colors.secondary}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-overline = ${colors.secondary}
+[module/tempMin]
+type = custom/script
+exec = jq -r ".min" .forecast.json
+format = <label>
+format-suffix = 
+interval = 60
+;
+[module/tempCur]
+type = custom/script
+exec = jq -r '.temp + .weather' .forecast.json
+format = <label>
+interval = 60
 ; }}}
-; i3 WS{{{
-[module/i3]
+; xwindow {{{
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:50:...%
+; }}}
+; bspwm{{{
+[module/bspwm]
+type = internal/bspwm
 
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
-format-padding = 0
-
-ws-icon-0 = 1;
-ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;b
-ws-icon-4 = 10;
-ws-icon-default = 
-
-; Only show workspaces on the same output as the bar
-;pin-workspaces = true
-
-label-mode-padding = 0
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
-
-; focused = Active workspace on focused monitor
-label-focused = %index%: %icon%
+label-focused = %index%
 label-focused-background = ${colors.background-alt}
-label-focused-overline= ${colors.primary}
-label-focused-padding = 3
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
 
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%: %icon%
-label-unfocused-padding = 2
+label-occupied = %index%
+label-occupied-padding = 2
 
-; visible = Active workspace on unfocused monitor
-label-visible = %index%: %icon%
-label-visible-background = ${self.label-focused-background}
-label-visible-overline = ${self.label-focused-overline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
-label-urgent = %index%: %icon%
+label-urgent = %index%!
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
 
 ; Separator in between workspaces
 ; label-separator = |
 ; }}}
-; [module/mpd]{{{
+; i3{{{
+[module/i3]
+
+type = internal/i3
+format = <label-state> <label-mode>
+
+index-sort = true
+wrapping-scroll = false
+
+label-focused = %icon%
+label-unfocused = %icon%
+label-visible = %icon%
+label-urgent = %icon%
+
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+
+label-focused-padding = 3
+label-unfocused-padding = 2
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 8;
+ws-icon-4 = 9;
+ws-icon-5 = 10;
+ws-icon-default = 
+; }}}
+; mpd {{{
 [module/mpd]
 type = internal/mpd
 format-online = <label-song>
-format-paused =
-
-format-online-overline = #66cc99
-
-; icon-prev = 
-; icon-stop = 
-; icon-play = 
-; icon-pause = 
-; icon-next = 
+format-paused = 
+format-stoped = 
 
 ; label-song-maxlen = 25
 label-song-ellipsis = true
 ; }}}
-; [module/xbacklight]{{{
+; xbacklight{{{
 [module/xbacklight]
 type = internal/xbacklight
 
@@ -161,119 +168,110 @@ label = BL
 bar-width = 10
 bar-indicator = |
 bar-indicator-foreground = #fff
-; bar-indicator-font = 5
+bar-indicator-font = 2
 bar-fill = ─
-; bar-fill-font = 5
+bar-fill-font = 2
 bar-fill-foreground = #9f78e1
 bar-empty = ─
-; bar-empty-font = 5
+bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
-; }}}
-; [module/backlight-acpi]{{{
+
 [module/backlight-acpi]
 inherit = module/xbacklight
 type = internal/backlight
 card = intel_backlight
 ; }}}
-; [module/cpu]{{{
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-overline = #f90000
-label = %percentage:2%%
-; }}}
-; [module/memory]{{{
-[module/memory]
-type = internal/memory
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-overline = #4bffdc
-label = %percentage_used%%
-; }}}
-; [module/eth]{{{
+;net{{{
+[module/wlan]
+type = internal/network
+interface = wlp1s0
+interval = 3.0
+
+format-connected = <ramp-signal>
+; format-connected-underline = #9f78e1
+label-connected = %essid%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+
+label-disconnected = 
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+
 [module/eth]
 type = internal/network
 interface = enp2s0
 interval = 3.0
 
-format-connected-overline = #55aa55
+format-connected-underline = #55aa55
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
-;format-disconnected-overline = ${self.format-connected-underline}
+;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 ; }}}
-; [module/date]{{{
+;date {{{
 [module/date]
 type = internal/date
 interval = 5
-format-font = 2
 
-date =
-date-alt = " %Y/%m/%d"
-
+date = %d de %b
 time = %H:%M
-time-alt = %H:%M:%S
-
-; format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-overline = #0a6cf5
 
 label = %date% %time%
+label-font = 5
 ; }}}
-; [module/pulseaudio]{{{
+;audio {{{
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume> 
-format-volume-overline = #f1c40f
-label-volume = VOL %percentage%%
-label-volume-foreground = ${root.foreground}
+format-volume = <ramp-volume>
+; label-volume = VOL %percentage%%
+; label-volume-foreground = ${root.foreground}
 
-label-muted = 🔇 muted
-label-muted-foreground = #666
+; label-muted = 🔇 muted
+; label-muted-foreground = #666
 
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+label-muted = ""
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+ramp-headphones-0 = 
+ramp-headphones-1 = 
+
+click-right = pavucontrol &
 ; }}}
-; [module/battery]{{{
+; battery {{{
 [module/battery]
 type = internal/battery
 battery = BAT0
 adapter = AC
-full-at = 98
+full-at = 90
 
 format-charging = <animation-charging> <label-charging>
-format-charging-overline = #ffb52a
+; format-charging-underline = #ffb52a
 
 format-discharging = <animation-discharging> <label-discharging>
-format-discharging-overline = ${self.format-charging-overline}
+; format-discharging-underline = ${self.format-charging-underline}
 
-label-full =
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-overline = ${self.format-charging-overline}
+format-full = 
+; format-full-prefix-foreground = ${colors.foreground-alt}
+; format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -292,57 +290,18 @@ animation-discharging-2 = 
 animation-discharging-foreground = ${colors.foreground-alt}
 animation-discharging-framerate = 750
 ; }}}
-; [module/powermenu]{{{
-[module/powermenu]
-type = custom/menu
-
-expand-right = true
-
-format-spacing = 1
-
-label-open =P
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
-; }}}
-[module/weather]
-type = custom/script
-exec = ~/.local/bin/forecast
-; interval = 100
-; label = %output%
-; format-overline = #ff0000
-
-; [settings]{{{
+; config {{{
 [settings]
-format-padding = 1
-; screenchange-reload = true
+screenchange-reload = true
 ;compositing-background = xor
 ;compositing-background = screen
 ;compositing-foreground = source
-; compositing-border = over
+;compositing-border = over
 ;pseudo-transparency = false
-; }}}
-; [global/wm]{{{
+
 [global/wm]
 margin-top = 5
 margin-bottom = 5
 ; }}}
-
+;
 ; vim:ft=dosini:foldmethod=marker
