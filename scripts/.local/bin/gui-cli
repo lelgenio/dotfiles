@@ -20,18 +20,18 @@ gui_off (){
 
     uncomment /etc/mkinitcpio.conf "HOOKS.* (?!plymouth)"
     comment   /etc/mkinitcpio.conf "HOOKS.* plymouth"
+    yay -Rcs plymouth --noconfirm
     sudo mkinitcpio -P
 
     comment /boot/loader/entries/arch.conf "options quiet"
 
-    sudo systemctl restart getty@tty1 &
 
     systemctl -q is-active gdm && 
         sudo systemctl disable --now gdm &
     systemctl -q is-active gdm-plymouth && 
         sudo systemctl disable --now gdm-plymouth &
 
-
+    sudo systemctl start getty@tty1
 
 }
 
@@ -46,6 +46,8 @@ gui_on (){
 
     comment     /etc/mkinitcpio.conf "HOOKS.* (!?plymouth)"
     uncomment   /etc/mkinitcpio.conf "HOOKS.* plymouth"
+    yay -S plymouth --noconfirm
+    sudo plymouth-set-default-theme arch-glow
     sudo mkinitcpio -P
 
     uncomment /boot/loader/entries/arch.conf "options quiet"
