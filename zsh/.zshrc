@@ -63,8 +63,8 @@ export PAGER=less
             export XCURSOR_THEME=capitaine-cursors
             export GTK_THEME=materia-custom-accent:dark
 
-            esway &> .swaylog
-            # ei3 &> .i3log
+            # esway &> .swaylog
+            ei3 &> .i3log
             # ebsp &> .bsplog
         fi
     fi
@@ -204,6 +204,13 @@ preexec() { echo -ne '\e[5 q' ;}
         rm -f "$tmp"
     }
     bindkey -s '^o' 'rcd\n'
+
+    ec(){
+        cd ~/.config
+        TMP=$(fzf)
+        [ -n "$TMP" ] && nvim $TMP
+        cd -
+    }
 
 # }}}
 # Keys. {{{
