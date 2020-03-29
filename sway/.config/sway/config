@@ -240,8 +240,6 @@
 # }}}
 # Visual: {{{
 #
-    exec flashfocus -o .5
-
     set $accent     #CC575D
     set $fg_color   #ffffff
     set $bg_color   #191919
