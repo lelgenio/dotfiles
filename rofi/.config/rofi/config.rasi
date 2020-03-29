@@ -1,36 +1,48 @@
 /*
 vim: filetype=css
 */
+
 configuration {
-	fullscreen: true;
-  	show-icons: true;
-  	modi: "drun";
-	terminal: "termite";
-    display-drun: "Iniciar: ";
+  /* fullscreen: true; */
+  show-icons: true;
+  modi: "drun";
+  terminal: "termite";
+  display-drun: "Iniciar: ";
 }
 
 * {
-	// Default bg is transparent.
-	background-color: transparent;
-	// Default text is white
-	text-color:       white;
-	spacing:          30;
+  // Default bg is transparent.
+  background-color: transparent;
+  // Default text is white
+  text-color: white;
+  spacing: 30;
 }
 
 #window {
-    font: "Roboto 16";
-    fullscreen: true;
-    transparency: "background";
-    background-color: #303030CC;
-
-    children: [ dummy1, hdum, dummy2 ];
+  font: "Roboto 16";
+  fullscreen: false;
+  background-color: #202020;
+  height:80%;
+  width:50%;
 }
 
-#hdum {
-    orientation: horizontal;
-    children: [ dummy3, mainbox, dummy4 ];
+
+#inputbar {
+    margin:10px 0 -20px 10px;
+}
+
+#listview {
+    fixed-height: 0;
+    border:       2px dash 0px 0px ;
+    border-color: @separatorcolor;
+    spacing:      0 ;
+}
+
+#element{
+    padding:10px;
 }
 
 #element selected {
-    text-color: #cc5757;
+  text-color: #cc5757;
+  background-color: #252525;
 }
