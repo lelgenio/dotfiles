@@ -17,7 +17,8 @@
     set $right l
 
     set $term termite
-    set $menu bmenu run $term
+    # set $menu bmenu run $term
+    set $menu rofi -show drun
 	font pango:Hack 14px
 
 # }}}
@@ -61,6 +62,8 @@
 
     bindsym XF86MonBrightnessUp   exec xbacklight -inc 5
     bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+
+    bindsym mod1+Tab exec rofi -show window
     # Moving around: {{{
     #
     # Move your focus around
@@ -113,6 +116,10 @@
 
     # Assign programs to their workspace
     assign [class=qutebrowser] workspace 2
+
+    assign [class=keepassxc] workspace 8
+    assign [class=Steam] workspace 9
+
     assign [class=TelegramDesktop] workspace 10
     assign [class=discord] workspace 10
 
@@ -180,7 +187,6 @@
 #
     
     exec hsetroot -solid '#252525'
-    exec flashfocus -o .5
 
     set $accent     #CC575D
     set $fg_color   #ffffff
@@ -193,17 +199,13 @@
     client.unfocused        $bg_color   $bg_color   $fg_color   $bg_color   $bg_color
     client.urgent           $alert      $alert      $fg_color   $alert      $alert
 
-    # exec_always while pgrep polybar;\
-    #     do \
-    #     pkill polybar;\
-    #     done;\
-    # polybar -r main
+    exec_always ~/.config/polybar/launch.sh
 
     default_border pixel 2
     gaps inner 10
 
-    smart_gaps on
-	smart_borders on
+    # smart_gaps on
+	# smart_borders on
 
     for_window [class=mpv] floating toggle
 

@@ -126,7 +126,6 @@ set_pkgs() {
         # Theme
         pkgs+=' materia-custom-accent papirus-icon-theme'
         pkgs+=' papirus-folders-git capitaine-cursors '
-        pkgs+=' flashfocus-git '
         # Terminal
         pkgs+=' tmux ranger atool p7zip tree'
         pkgs+=' neofetch powerline-fonts otf-fira-code'
