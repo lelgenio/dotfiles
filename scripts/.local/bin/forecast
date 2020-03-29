@@ -13,8 +13,14 @@ owm(){
     APPID="fd68c0fe7951f5ab7e24a240eb0942b8"
 
     FORECAST=$(http get http://api.openweathermap.org/data/2.5/forecast\?APPID\=${APPID}\&q="${CITY}"\&units\=metric)
-    TEMP=$(echo $FORECAST | jq -r ".list[0].main.temp")
+    TEMP=$(echo $FORECAST | jq -r ".list[0].main.temp" |
+        perl -pe 's/(\d*)\.\d*/\1/')
     WEATHER=$(echo $FORECAST | jq -r ".list[0].weather[0].main")
+
+    MIN=$(echo $FORECAST | jq -r ".list[2].main.temp_min" |
+        perl -pe 's/(\d*)\.\d*/\1/')
+    MAX=$(echo $FORECAST | jq -r ".list[2].main.temp_max" |
+        perl -pe 's/(\d*)\.\d*/\1/')
 
     format_weather
 }
@@ -30,7 +36,7 @@ format_weather(){
          WEATHER=""
          ;;
      "Rain"|"Drizzle")
-         WEATHER=""
+         WEATHER=""
          ;;
      "Mist")
          WEATHER=""
@@ -46,10 +52,6 @@ format_weather(){
 
 owm_long(){
     owm
-    MIN=$(echo $FORECAST | jq -r ".list[2].main.temp_min" |
-        perl -pe 's/(\d*)\.\d*/\1/')
-    MAX=$(echo $FORECAST | jq -r ".list[2].main.temp_max" |
-        perl -pe 's/(\d*)\.\d*/\1/')
 
     text="$MIN $MAX  $TEMP°C $WEATHER"
 
@@ -72,6 +74,19 @@ owm_pango(){
     echo "$text"
 }
 
+owm_json(){
+    owm
+
+    cat > .forecast.json <<EOF
+{ 
+    "min":"$MIN",
+    "max":"$MAX",
+    "temp":"$TEMP",
+    "weather":"$WEATHER"
+}
+EOF
+}
+
 wttrin(){
     local request="wttr.in/${1-Caxias}?QF"
     [ "$(tput cols)" -lt 125 ] && request+='n'
@@ -87,6 +102,10 @@ then
 elif [ "$1" == "pango" ]
 then
     owm_pango
-else
+elif [ "$1" == "json" ]
+then
+    owm_json
+elif [ "$1" == "long" ]
+then
     owm_long
 fi
