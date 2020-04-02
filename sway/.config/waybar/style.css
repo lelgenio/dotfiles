@@ -32,10 +32,6 @@ window#waybar.empty {
     color: #ffffff;
 }
 
-#workspaces button.urgent {
-    border-top: 3px solid #eb4deb;
-}
-
 /*Window Title*/
 #window{
     color:#aaa;
