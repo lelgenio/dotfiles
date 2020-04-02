@@ -141,7 +141,7 @@ set_pkgs() {
         pkgs+=' syncthing nextcloud-client '
         pkgs+=' deluge deezloader-remix-bin smloadr'
         # Media
-        pkgs+=' sxiv mpv mpd mpc ncmpcpp mpv-mpris mpdris2 playerctl'
+        pkgs+=' imv mpv mpd mpc ncmpcpp mpv-mpris mpdris2 playerctl'
         pkgs+=' blender gimp kdenlive picard image_optim'
         # Office
         pkgs+=' libreoffice-fresh libreoffice-fresh-pt-br hunspell-pt-br papirus-libreoffice-theme'
