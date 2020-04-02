@@ -59,12 +59,12 @@ export PAGER=less
                 source /etc/X11/xinit/xinitrc.d/30-gtk3-nocsd.sh
 
             export _JAVA_AWT_WM_NONREPARENTING=1
-            # export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+            export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
             export XCURSOR_THEME=capitaine-cursors
             export GTK_THEME=materia-custom-accent:dark
 
-            # esway &> .swaylog
-            ei3 &> .i3log
+            esway &> .swaylog
+            # ei3 &> .i3log
             # ebsp &> .bsplog
         fi
     fi
