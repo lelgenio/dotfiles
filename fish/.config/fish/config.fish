@@ -18,7 +18,31 @@ set -x PAGER less
 #}}}
 # start window manager if using tty1 {{{
 #
-    sh ~/.local/bin/etwm
+    function esway
+        clear
+        # export XDG_CURRENT_DESKTOP=Unity
+        export QT_SCALE_FACTOR=1
+        export QPA_PLATFORM=wayland
+        export QT_QPA_PLATFORM=wayland
+        exec sway
+    end
+    function ei3
+        clear
+        exec startx i3
+    end
+    if test "$XDG_VTNR" = 1 -a -z "$DISPLAY" #faster like this
+        if command -v systemctl -a systemctl -q is-active graphical.target 
+            export _JAVA_AWT_WM_NONREPARENTING=1
+            export GTK_CSD=0
+            export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
+            export XCURSOR_THEME=capitaine-cursors
+            export GTK_THEME=materia-custom-accent:dark
+
+            esway > .swaylog
+            # ei3 > .i3log
+        end
+    end
+
 # }}}
 # use tmux{{{
 set TMUX 1
