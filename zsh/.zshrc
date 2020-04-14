@@ -34,41 +34,7 @@ export PAGER=less
     fi
 # }}}
 # start sway if using tty1 {{{
-#
-    esway() {
-        clear
-        # export XDG_CURRENT_DESKTOP=Unity
-        export QT_SCALE_FACTOR=1
-        export QPA_PLATFORM=wayland
-        export QT_QPA_PLATFORM=wayland
-        exec sway
-    }
-    ei3() {
-        clear
-        exec startx /usr/bin/i3
-    }
-    ebsp(){
-        clear
-        exec startx /usr/bin/bspwm
-    }
-    if [[ $XDG_VTNR -eq 1 ]] #faster like this
-    then
-        if systemctl -q is-active graphical.target && [[ -z "$DISPLAY" ]]
-        then
-            [ -f /etc/X11/xinit/xinitrc.d/30-gtk3-nocsd.sh ] &&
-                source /etc/X11/xinit/xinitrc.d/30-gtk3-nocsd.sh
-
-            export _JAVA_AWT_WM_NONREPARENTING=1
-            export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
-            export XCURSOR_THEME=capitaine-cursors
-            export GTK_THEME=materia-custom-accent:dark
-
-            esway &> .swaylog
-            # ei3 &> .i3log
-            # ebsp &> .bsplog
-        fi
-    fi
-
+    sh ~/.local/bin/etwm
 # }}}
 # use tmux{{{
 
@@ -282,5 +248,3 @@ preexec() { echo -ne '\e[5 q' ;}
     setopt GLOBSTARSHORT
 #}}}
 # vim:foldmethod=marker
-
-source /home/lelgenio/.config/broot/launcher/bash/br
