@@ -16,7 +16,7 @@
     set $up k
     set $right l
 
-    set $term kitty
+    set $term alacritty
     set $menu wofi --show drun --allow-images --insensitive -p'Iniciar: '
     # set $menu  bmenu run $term
     # set $menu  j4-dmenu-desktop --dmenu 'bmenu -p Iniciar:' --term $term
@@ -47,6 +47,7 @@
 
     #hide the mouse after 10 seconds
     seat * hide_cursor 10000
+    seat * xcursor_theme capitaine-cursors
 
     input "type:touchpad" {
         #disable while typing
@@ -80,7 +81,7 @@
     bindsym $mod+d exec $menu
 
     # Fill passwords
-    bindsym Control+$mod+p exec keepmenu
+    bindsym Control+$mod+p exec wpass
 
     # mouse button for dragging.
     floating_modifier $mod normal
@@ -267,8 +268,8 @@
     default_border pixel 2px
     gaps inner 5px
 
-    smart_gaps on
-	smart_borders on
+    # smart_gaps on
+	# smart_borders on
 
     # for_window [app_id=mpv] floating enable
     for_window [app_id=weather] floating enable
