@@ -38,9 +38,9 @@
     },
     "mpd": {
         "tooltip":false,
-        "format": " {stateIcon} {title} - {artist} 🎜 ",
-        "format-disconnected": " Disconnected  🎜 ",
-        "format-stopped": " Stopped  🎜 ",
+        "format": " {stateIcon} {title} - {artist}",
+        "format-disconnected": " Disconnected",
+        "format-stopped": "",
         "timeout":60,
         "unknown-tag": " N/A ",
         "tooltip":false,
@@ -68,18 +68,17 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        "format-good": "{time} {icon}",
+        "format": "{icon}",
+        "format-charging": "",
+        "format-plugged": "",
         "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
         "tooltip":false,
         "on-click": "termite -e nmtui",
-        "format-wifi": "",
+        "format-wifi": "{icon}",
+        "format-icons":["","","",""],
         "format-ethernet": "",
         "format-linked": "",
         "format-disconnected": "⚠"
@@ -104,19 +103,20 @@
     },
     "custom/weather": {
         "tooltip":false,
-        "exec": "forecast pango",
-        "interval": 1800,
+        "format": "<b>{}</b>",
+        "exec": "jq -r '.temp +\"°C \"+ .weather' .forecast.json",
+        "interval": 30,
         "on-click": "kitty --class weather sh -c 'forecast full;read -n1 -p\"Press Any key to quit \"'",
         "on-click-right": "xdg-open https://openweathermap.org"
     },
     "custom/mail": {
         "tooltip":false,
-        "format":"{} ",
+        "format":"{} <b></b>",
         "exec-if":"sleep 30s",
         "exec": "checkmail",
         "on-click": "kitty neomutt; pkill -SIGRTMIN+4 waybar",
         "signal": 4,
-        "interval": 1800
+        "interval": 30
     },
     "custom/updates": {
         "tooltip":false,

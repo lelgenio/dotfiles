@@ -28,7 +28,11 @@ set -x PAGER less
     end
     function ei3
         clear
-        exec startx i3
+        exec startx /bin/i3
+    end
+    function ebsp
+        clear
+        exec startx /bin/bspwm
     end
     if test "$XDG_VTNR" = 1 -a -z "$DISPLAY" #faster like this
         if command -v systemctl -a systemctl -q is-active graphical.target 
@@ -38,8 +42,9 @@ set -x PAGER less
             export XCURSOR_THEME=capitaine-cursors
             export GTK_THEME=materia-custom-accent:dark
 
-            esway > .swaylog
-            # ei3 > .i3log
+            esway &> .swaylog
+            # ei3 &> .i3log
+            # ebsp &> .bsplog
         end
     end
 

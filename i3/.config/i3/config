@@ -16,7 +16,7 @@
     set $up k
     set $right l
 
-    set $term termite
+    set $term alacritty
     # set $menu bmenu run $term
     set $menu rofi -show drun
 	font pango:Hack 14px

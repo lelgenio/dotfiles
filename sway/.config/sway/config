@@ -17,9 +17,8 @@
     set $right l
 
     set $term alacritty
-    set $menu wofi --show drun --allow-images --insensitive -p'Iniciar: '
-    # set $menu  bmenu run $term
-    # set $menu  j4-dmenu-desktop --dmenu 'bmenu -p Iniciar:' --term $term
+    # set $menu wofi --show drun --allow-images --insensitive -p'Iniciar: '
+    set $menu  bmenu run $term
 	font Fira Code 14px
 
 # }}}
@@ -33,9 +32,10 @@
     set $laptop eDP-1
     bindswitch --reload lid:on output $laptop disable
     bindswitch --reload lid:off output $laptop enable
-    # output $laptop disable
-    bindsym $mod+o output eDP-1 toggle
-    exec_always swaymsg -t get_outputs | grep HDMI && swaymsg 'output eDP-1 disable'
+
+    output $laptop disable
+    # bindsym $mod+o output eDP-1 toggle
+    # exec_always swaymsg -t get_outputs | grep HDMI || swaymsg 'output eDP-1 enable'
 
     # Backlight settings for laptops
     exec sudo light -N 1
@@ -87,7 +87,7 @@
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+Shift+c reload
+    bindsym $mod+Shift+c reload; exec kanshi
 
     # Lock Sway
     bindsym $mod+Control+s exec swaylock
@@ -117,16 +117,16 @@
     bindsym $mod+Shift+$right move right
 
     #       Resizing containers:
-    bindsym $mod+Control+$left resize shrink width 10px
-    bindsym $mod+Control+$down resize grow height 10px
-    bindsym $mod+Control+$up resize shrink height 10px
-    bindsym $mod+Control+$right resize grow width 10px
+    bindsym $mod+Control+$left  resize shrink   width 10px
+    bindsym $mod+Control+$down  resize grow     height 10px
+    bindsym $mod+Control+$up    resize shrink   height 10px
+    bindsym $mod+Control+$right resize grow     width 10px
 
     #}}}
     # Workspaces: {{{
 
-    bindsym $mod+Next   workspace next
-    bindsym $mod+Prior  workspace prev
+    bindsym $mod+period workspace next
+    bindsym $mod+comma  workspace prev
     #       Switch to workspace
     bindsym $mod+1 workspace 1
     bindsym $mod+2 workspace 2
@@ -151,10 +151,15 @@
     bindsym $mod+Shift+0 move container to workspace 10
 
     # Assign programs to their workspace
-    assign [app_id=.*qutebrowser.*] workspace 2
-    assign [app_id=.*keepass.*] workspace 8
+    assign [app_id=qutebrowser] workspace 2
+    assign [class=qutebrowser] workspace 2
+    assign [app_id=keepass.*] workspace 8
+    assign [class=KeePass.*] workspace 8
     assign [class=Steam] workspace 9
+
     assign [app_id=telegramdesktop] workspace 10
+    assign [class=TelegramDesktop] workspace 10
+
     assign [class=discord] workspace 10
 
     # }}}
@@ -181,13 +186,6 @@
     bindsym $mod+z focus child
 
     # }}}
-    # Scratchpad: {{{
-    #
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
-    # Show the next scratchpad window
-    bindsym $mod+minus scratchpad show
-    #}}}
     # Screenshots: {{{
     #
 
@@ -293,11 +291,13 @@
     exec mako
     # Block device Mounter to /run/media/<username>
     exec udiskie
+    # Screen manager
+    exec kanshi
     # gesture daemon
     exec fusuma
     exec sh -c 'pkill fusuma; fusuma'
     # Blue light filter
-    exec_always sh -c 'pkill redshift; redshift'
+    exec_always sh -c 'pkill redshift;redshift'
     # kde connect
     exec /usr/lib/kdeconnectd
     exec kdeconnect-indicator

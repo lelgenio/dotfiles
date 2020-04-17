@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
-mbsync -aq
+
+[ "$1" = "update" ] && mbsync -a
+
 NEW=$(find ~/.mail/INBOX{,.{Contas,Faculdade,Git,Trabalhos}}/new -type f | wc -l)
 
 echo $NEW | sed 's/^0$//'

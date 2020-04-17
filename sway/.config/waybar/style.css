@@ -55,10 +55,14 @@ window#waybar.empty {
     opacity:.7;
 }
 
-#custom-weather,
-#clock
+#clock,
+#custom-weather
 {
     font-size:15px;
+}
+#network{
+    margin-top:-1;
+    font-size:16px;
 }
 
 #mpd,

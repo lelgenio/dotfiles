@@ -2,7 +2,7 @@
 set -e
 
 search(){
-    music=$(mpc playlist --format '%artist% : %title%' | sed '/^ : $/d' | wdmenu)
+    music=$(mpc playlist --format '%artist% : %title%' | sed '/^ : $/d' | bmenu)
     if [ "$music" == "" ]
     then
         exit 1
@@ -16,7 +16,7 @@ search(){
 
 delete(){
     current=~/Música/"$(mpc current -f %file%)"
-    answer=$(echo -e "nothing\n$current" | wdmenu -p"delete?" )
+    answer=$(echo -e "nothing\n$current" | bmenu -p"delete?" )
     if [ "$answer" == "$current" ]
     then
         trash "$answer"

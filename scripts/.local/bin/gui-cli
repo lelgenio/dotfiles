@@ -1,5 +1,6 @@
 #!/bin/sh
-set -e
+# set -e
+# set -x
 
 comment(){
     local file="$1";shift
@@ -12,7 +13,7 @@ uncomment(){
 }
 
 gui_off (){
-    sudo chsh -s /usr/bin/zsh $(whoami)
+    # sudo chsh -s /usr/bin/zsh $(whoami)
 
     rm ~/.config/mimeapps.list
     cd .dotfiles
@@ -20,25 +21,30 @@ gui_off (){
 
     uncomment /etc/mkinitcpio.conf "HOOKS.* (?!plymouth)"
     comment   /etc/mkinitcpio.conf "HOOKS.* plymouth"
-    yay -Rcs plymouth --noconfirm
+    yay -Rcs plymouth --noconfirm || true
     sudo mkinitcpio -P
 
     comment /boot/loader/entries/arch.conf "options quiet"
 
+    sudo systemctl disable NetworkManager
+    sudo systemctl enable  netctl-auto@wlp1s0
+    sudo systemctl enable  netctl-ifplugd@enp2s0
+    sudo systemctl enable  netctl
+
 
     systemctl -q is-active gdm && 
-        sudo systemctl disable --now gdm &
+        sudo systemctl disable gdm &
     systemctl -q is-active gdm-plymouth && 
-        sudo systemctl disable --now gdm-plymouth &
+        sudo systemctl disable gdm-plymouth &
 
     sudo systemctl start getty@tty1
 
 }
 
 gui_on (){
-    sudo chsh -s /usr/bin/fish $(whoami)
+    # sudo chsh -s /usr/bin/fish $(whoami)
 
-    rm ~/.config/mimeapps.list
+    rm -f ~/.config/mimeapps.list
     cp /usr/share/applications/gnome-mimeapps.list ~/.config/mimeapps.list
 
     kvantummanager --set Materia
@@ -46,13 +52,18 @@ gui_on (){
 
     comment     /etc/mkinitcpio.conf "HOOKS.* (!?plymouth)"
     uncomment   /etc/mkinitcpio.conf "HOOKS.* plymouth"
-    yay -S plymouth --noconfirm
+    yay -S plymouth plymouth-theme-arch-glow --noconfirm --needed
     sudo plymouth-set-default-theme arch-glow
     sudo mkinitcpio -P
 
     uncomment /boot/loader/entries/arch.conf "options quiet"
 
-    sudo systemctl enable --now gdm-plymouth
+    sudo systemctl disable  netctl-auto@wlp1s0
+    sudo systemctl disable  netctl-ifplugd@enp2s0
+    sudo systemctl disable  netctl
+    sudo systemctl enable  NetworkManager
+
+    sudo systemctl enable gdm-plymouth
 }
 
 restart_gdm(){

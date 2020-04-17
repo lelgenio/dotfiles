@@ -27,7 +27,7 @@
   "vim.foldfix": true,
   "editor.minimap.renderCharacters": false,
   // Fonts
-  "terminal.integrated.fontFamily": "'Fira Code', 'Hack', 'Roboto Mono'",
+  "terminal.integrated.fontFamily": "'Fira Code',  'Hack', 'Roboto Mono'",
   "editor.fontFamily": "'Fira Code', 'Hack','Roboto Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
   "editor.fontSize": 15,
   "editor.fontLigatures": true,
@@ -63,8 +63,6 @@
       ]
     }
   ],
-  // Gay colors
-  "workbench.colorTheme": "Community Material Theme Darker High Contrast",
   "materialTheme.accent": "Red",
   "workbench.iconTheme": "material-icon-theme",
   "material-icon-theme.folders.color": "#cc5757",
@@ -144,5 +142,7 @@
   "python.linting.mypyEnabled": true,
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.colorTheme": "Community Material Theme Darker High Contrast"
 }

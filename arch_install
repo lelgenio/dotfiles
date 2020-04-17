@@ -118,7 +118,7 @@ set_pkgs() {
     # Audio
     pkgs+=' pulseaudio pavolume-git'
     # Fonts
-    pkgs+=' ttf-hack inter-font'
+    pkgs+=' ttf-hack inter-font ttf-material-wifi-icons-git'
     if $FULL_INSTALL; then
         # Screenshot
         pkgs+=' grim slurp wl-clipboard wf-recorder-git'
@@ -253,18 +253,22 @@ partition_drive() {
 
     # 100 MB /boot partition, everything else under LVM
     if $IS_BIOS;then
-        parted -s "$dev" \
+        parted  \
+            --align optimal \
+            --script "$dev" \
             mklabel msdos \
             mkpart primary fat32 1M   100M \
             mkpart primary ext4  100M 100% \
             set 1 boot on \
             set 2 lvm  on
     else
-        parted -s "$dev" \
+        parted \
+            --align optimal \
+            --script "$dev" \
             mklabel gpt \
             mkpart boot 1    100M \
             mkpart lvm  100M 100% \
-            set 1 boot on\
+            set 1 boot on \
             set 2 lvm  on
     fi
 }
@@ -289,14 +293,18 @@ setup_lvm() {
     pvcreate "$partition"
     vgcreate "$volgroup" "$partition"
 
-    # Create a 1GB swap partition
-    lvcreate --yes -C y -L1G "$volgroup" -n swap
 
     # if the disk has more than 
     if [ "$d_size" -gt $(( 50*10**9 )) ]; then
+        # Create a 4GB swap partition
+        lvcreate --yes -C y -L4G "$volgroup" -n swap
+
         # Create a 50GB root partition
         lvcreate --yes -L '50G' "$volgroup" -n root
     else
+        # Create a swap partition of 10% the disk
+        lvcreate --yes -C y -l '+10%FREE' "$volgroup" -n swap
+
         # Create root partition on 50% of free space
         lvcreate --yes -l '+50%FREE' "$volgroup" -n root
     fi
@@ -615,7 +623,7 @@ set_bootctl() {
     local boot_dev="$1"; shift
     local lvm_dev="$1"; shift
 
-    local lvm_uuid=$(get_uuid "$lvm_dev")
+    local lvm_uuid=$(get_uuid "/dev/vg00/root")
 
     local k_args="root=UUID=$lvm_uuid"
 
@@ -637,7 +645,7 @@ initrd intel-ucode.img
 initrd initramfs-linux-zen.img
 
 options $k_args
-# options quiet splash loglevel=3 vga=current rd.udev.log_priority=3 rd.systemd.show_status=auto vt.global_cursor_default=0 nmi_watchdog=0 $k_args
+# options quiet splash loglevel=3 vga=current rd.udev.log_priority=3 rd.systemd.show_status=auto vt.global_cursor_default=0 nmi_watchdog=0
 EOF
 
     fi
@@ -771,22 +779,6 @@ stow_dots() {
     cd -
 }
 #}}}
-#}}}
-# Update installer {{{
-update_installer(){
-    echo "Updating installer..."
-
-    INSTALLER=$(mktemp)
-
-    wget -qO $INSTALLER $DOTFILES_URL/raw/master/arch_install
-
-    chmod +x $INSTALLER
-    exec $INSTALLER updated $@
-}
-
-[ "$1" == "updated" ] && shift || is_chroot || update_installer $@
-echo "Installer updated :D"
-
 #}}}
 
 set_pkgs

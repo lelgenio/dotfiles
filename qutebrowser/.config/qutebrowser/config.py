@@ -291,4 +291,4 @@ config.bind('k', 'scroll up')
 config.bind('spawn', '--userscript view_in_mpv')
 
 # Bindings for insert mode
-config.bind('<Ctrl+i>', 'spawn --userscript qute-keepass -p ~/Nextcloud/Senhas/Senhas.kdbx', mode='insert')
+config.bind('<Ctrl+i>', 'spawn --userscript qute-keepass -p ~/Documentos/senhas/Senhas.kdbx', mode='insert')

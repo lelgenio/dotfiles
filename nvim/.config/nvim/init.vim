@@ -26,23 +26,29 @@
     Plug 'junegunn/vim-easy-align'
 
     " Language server support
+    "
     " Plug 'sheerun/vim-polyglot'
     " Plug 'dense-analysis/ale'
+    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Plug 'davidhalter/jedi-vim'
-    Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-        \}
+
+    " Plug 'autozimu/LanguageClient-neovim', {
+    "     \ 'branch': 'next',
+    "     \ 'do': 'bash install.sh',
+    "     \}
 
     " Debugger
-    Plug 'vim-vdebug/vdebug'
+    " Plug 'vim-vdebug/vdebug'
 
     " Fuzzy find
-    Plug 'junegunn/fzf'
+    " Plug 'junegunn/fzf'
 
     " Completions
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+    " Pais
     Plug 'jiangmiao/auto-pairs'
+    Plug 'tpope/vim-surround'
 
     " Comments
     Plug 'tpope/vim-commentary'
@@ -168,45 +174,41 @@ call plug#end()
     nnoremap <silent> <C-k> <C-w><C-k>
     nnoremap <silent> <C-l> <C-w><C-l>
 
+
     " Interact with language server
-    " map      <silent> <C-Space> :<CR>
-    " nnoremap <silent> gd        :ALEGoToDefinition<CR>
-    " nnoremap <silent> gh        :call LanguageClient#textDocument_hover()<CR>
-    " nnoremap <silent> gd        :call LanguageClient#textDocument_definition()<CR>
-    " nnoremap <silent> gr        :call LanguageClient#textDocument_references()<CR>
-    " nnoremap <silent> gs        :call LanguageClient#textDocument_documentSymbol()<CR>
-    " nnoremap <silent> gR        :call LanguageClient#textDocument_rename()<CR>
-    nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-    " Or map each action separately
-    nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
     nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR> 
-    inoremap  <C-space> :call LanguageClient#complete()<CR> 
+    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 "}}}
 " Lanugage Server{{{
 "
-    " Set this variable to 1 to fix files when you save them.
-    " let g:ale_fix_on_save = 1
+
     set hidden
+    " let g:deoplete#enable_at_startup = 1
 
-    let g:LanguageClient_serverCommands = {
-        \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-        \ 'python': ['/usr/bin/pyls'],
-        \ 'tex': ['texlab'],
-        \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
-        \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
-        \ }
 
-    " Auto format on save
-    autocmd BufWritePre *.py call LanguageClient#textDocument_formatting_sync()
+    " let g:LanguageClient_serverCommands = {
+    "     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    "     \ 'python': ['/usr/bin/pyls'],
+    "     \ 'tex': ['/usr/bin/texlab'],
+    "     \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
+    "     \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
+    "     \ }
 
-    let g:deoplete#enable_at_startup = 1
 
-    call deoplete#custom#source('LanguageClient',
-            \ 'min_pattern_length',
-            \ 2)
-    " Configure deoplete to use language server
+    " call deoplete#custom#source('LanguageClient',
+    "         \ 'min_pattern_length',
+    "         \ 2)
+    " " Configure deoplete to use language server
+
+
+    " let g:ale_fix_on_save = 1
+    " let g:ale_fixers = {
+    "     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    "     \   'javascript': ['eslint'],
+    "     \   'python': ['black'],
+    "     \}
 
 "python env{{{
 " MUST NOT BE INDENTED!
@@ -222,6 +224,9 @@ EOF
 " Latex{{{
     let g:livepreview_previewer = 'zathura'
     autocmd FileType tex LLPStartPreview
+"}}}
+"groff{{{
+autocmd BufWritePost *.ms silent !compile %
 "}}}
 "}}}
 "Hide statusbar{{{
