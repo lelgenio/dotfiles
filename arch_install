@@ -116,7 +116,7 @@ set_pkgs() {
     pkgs+=' bemenu wofi-hg j4-dmenu-desktop'
 
     # pkgs+=' i3 termite scrot pamixer'
-    pkgs+=' nemo redshift-wlr-gamma-control '
+    pkgs+=' nemo redshift-wlr-gamma-control-git '
     pkgs+=' pkgfile kitty neovim moreutils htop-vim-git'
     # Audio
     pkgs+=' pulseaudio pavolume-git'
