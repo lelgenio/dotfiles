@@ -750,7 +750,7 @@ install_aur_packages() {
         cd -
     fi
 
-    yay -Syu --needed --noconfirm $pkgs
+    yay -Syu --needed --noconfirm $pkgs || true
 }
 #}}}
 # Clean up packages #{{{
