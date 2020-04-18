@@ -494,11 +494,12 @@ configure() {
     chown $USER_NAME "/home/$USER_NAME/setup.sh"
     su $USER_NAME -c "/home/$USER_NAME/setup.sh"
 
+    shred   "/home/$USER_NAME/setup.sh"
+    rm      "/home/$USER_NAME/setup.sh"
+
     echo 'Updating pkgfile database'
     update_pkgfile
 
-    shred "$0"
-    rm "$0"
 }
 #}}}
 # set_hostname() {#{{{
@@ -732,9 +733,6 @@ user_setup() {
 
     echo 'Stowing dotfiles'
     stow_dots
-
-    shred "$0"
-    rm "$0"
 }
 # Install AUR packages #{{{
 install_aur_packages() {
