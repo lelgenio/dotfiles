@@ -396,7 +396,7 @@ Include = /etc/pacman.d/mirrorlist
 EOF
 #}}}
 # /etc/pacman.d/mirrorlist{{{
-pacman -S pacman-contrib --needed --noconfirm
+pacman -Sy pacman-contrib --needed --noconfirm
 wget -O- \
     "https://www.archlinux.org/mirrorlist/?country=$COUNTRY&protocol=http&protocol=https&ip_version=4" |
     sed 's/^#//;s/^#/##/' |
