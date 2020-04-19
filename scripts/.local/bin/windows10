@@ -1,0 +1,19 @@
+#!/usr/bin/fish
+
+if not command -v qemu-system-x86_64 > /dev/null
+    echo qemu not installed 
+    exit 1
+end
+
+# -cdrom ~/Downloads/win10.iso \
+# -boot order=d \
+# -nic none\
+# -usb -device usb-tablet \
+
+qemu-system-x86_64 \
+    -enable-kvm \
+    -m 2G \
+    -display sdl,gl=on \
+    -audiodev pa,id=pa\
+    -drive file="$HOME/.local/share/windows10.img",format=raw \
+    & disown

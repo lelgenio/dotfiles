@@ -65,7 +65,7 @@ USER_NAME='lelgenio'
 # Link to users dotfiles repo(git) 
 # Assumed to have stow-able modules on its root(cd .dotfiles;stow*/)
 DOTFILES_URL="https://gitlab.com/$USER_NAME/dotfiles"
-USER_SHELL='zsh'
+USER_SHELL='fish'
 
 # The main user's password (leave blank to be prompted).
 USER_PASSWORD=''
@@ -104,7 +104,7 @@ set_pkgs() {
     sudo pacman -Sy
 
     pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
-    pkgs_base+=' zsh networkmanager bluez cronie git man-db'
+    pkgs_base+=' fish networkmanager bluez cronie git man-db'
     pkgs_base+=" $(pacman -Sgq base-devel)"
     if $IS_BIOS;then
         pkgs_base+=' grub'
@@ -114,10 +114,12 @@ set_pkgs() {
     # DE
     pkgs+=' sway waybar ruby-fusuma light mako udiskie bemenu wofi-hg stow yay'
     pkgs+=' bemenu wofi-hg j4-dmenu-desktop'
+    # passwords and auth
+    pkgs+=' pass gnupg pam-gnupg'
 
     # pkgs+=' i3 termite scrot pamixer'
-    pkgs+=' nemo redshift-wlr-gamma-control-git '
-    pkgs+=' pkgfile kitty neovim moreutils htop-vim-git'
+    pkgs+=' thunar redshift-wlr-gamma-control-git '
+    pkgs+=' pkgfile alacritty neovim moreutils htop-vim-git'
     # Audio
     pkgs+=' pulseaudio pavolume-git'
     # Fonts
@@ -125,7 +127,7 @@ set_pkgs() {
     if $FULL_INSTALL; then
         # Screenshot
         pkgs+=' grim slurp wl-clipboard wf-recorder-git'
-        pkgs+=' httpie jq python-keepmenu-git'
+        pkgs+=' httpie jq'
         # Theme
         pkgs+=' materia-custom-accent papirus-icon-theme'
         pkgs+=' papirus-folders-git capitaine-cursors '
@@ -473,6 +475,9 @@ configure() {
     echo 'Configuring PAM'
     set_pam
 
+    echo 'Configuring logind'
+    set_logind
+
     if [ -z "$ROOT_PASSWORD" ];then
         echo 'Enter the root password:'
         read -s ROOT_PASSWORD
@@ -681,10 +686,34 @@ set_pam() {
 auth       required     pam_securetty.so
 auth       requisite    pam_nologin.so
 auth       include      system-local-login
-auth       optional     pam_gnome_keyring.so
 account    include      system-local-login
 session    include      system-local-login
-session    optional     pam_gnome_keyring.so auto_start
+
+auth       optional  	pam_gnupg.so
+session    optional  	pam_gnupg.so
+EOF
+
+    cat > /etc/pam.d/system-local-login <<EOF
+#%PAM-1.0
+
+auth      include   system-login
+account   include   system-login
+password  include   system-login
+session   include   system-login
+
+auth       optional  	pam_gnupg.so
+session    optional  	pam_gnupg.so
+EOF
+}
+#}}}
+# set_logind{{{
+set_logind(){
+    mkdir -p /etc/systemd
+    cat > /etc/systemd <<EOF
+[Login]
+HandlePowerKey=suspend
+HandleSuspendKey=suspend
+HandleLidSwitch=ignore
 EOF
 }
 #}}}

@@ -17,7 +17,7 @@
     set $right l
 
     set $term alacritty
-    # set $menu wofi --show drun --allow-images --insensitive -p'Iniciar: '
+    # set $menu wofi --show drun --allow-images --insensitive --term $term -p'Iniciar: '
     set $menu  bmenu run $term
 	font Fira Code 14px
 
@@ -33,7 +33,7 @@
     bindswitch --reload lid:on output $laptop disable
     bindswitch --reload lid:off output $laptop enable
 
-    output $laptop disable
+    # output $laptop disable
     # bindsym $mod+o output eDP-1 toggle
     # exec_always swaymsg -t get_outputs | grep HDMI || swaymsg 'output eDP-1 enable'
 
@@ -72,7 +72,7 @@
     bindsym $mod+q exec qutebrowser
 
     #start file manager
-    bindsym $mod+m exec nemo
+    bindsym $mod+m exec thunar
 
     # Kill focused window
     bindsym $mod+x kill
@@ -232,7 +232,7 @@
 
     bindsym XF86Calculator  exec $term ipython
     bindsym XF86Mail        exec $term neomutt
-    bindsym XF86Explorer    exec nemo
+    bindsym XF86Explorer    exec thunar
     bindsym XF86HomePage    exec xdg-open http://start.duckduckgo.com
 
     # }}}
@@ -295,9 +295,10 @@
     exec kanshi
     # gesture daemon
     exec fusuma
-    exec sh -c 'pkill fusuma; fusuma'
+    # exec sh -c 'pkill fusuma; fusuma'
     # Blue light filter
-    exec_always sh -c 'pkill redshift;redshift'
+    exec redshift
+    # exec_always sh -c 'pkill redshift;redshift'
     # kde connect
     exec /usr/lib/kdeconnectd
     exec kdeconnect-indicator

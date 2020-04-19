@@ -121,9 +121,9 @@
     "custom/updates": {
         "tooltip":false,
         "format": "{} ",
-        "interval": 43200,
+        "interval": 60,
         "exec-if":"sleep 60s",
-        "exec": "yay -Syuw --noconfirm> /dev/null; yay -Qqu | wc -l | sed 's/^0$//'",
+        "exec": "yay -Qqu | wc -l | sed 's/^0$//'",
         "on-click": "kitty sh -c 'ping -qc1 archlinux.org >/dev/null && yay -Syu || yay -Su; pkill -SIGRTMIN+8 waybar; read'",
         "signal": 8
     },

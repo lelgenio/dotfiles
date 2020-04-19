@@ -16,6 +16,28 @@ set -x VISUAL nvim
 set -x PAGER less
 
 #}}}
+# Aliases{{{
+abbr rv sudo nvim
+
+command -qs exa && 
+    alias ls exa
+
+abbr gs git status
+abbr gp 'git pull; git push'
+
+function edit-config
+    cd ~/.config
+    set file ~/.config/( fzf )
+    cd -
+
+    if test -f "$file"
+        nvim $file
+    end
+end
+
+abbr ec edit-config
+
+# }}}
 # start window manager if using tty1 {{{
 #
     function esway
@@ -50,7 +72,7 @@ set -x PAGER less
 
 # }}}
 # use tmux{{{
-set TMUX 1
+    # set TMUX 1
     if test -z "$TMUX" && test "$TERM" != "xterm-kitty" && test -n "$DISPLAY"
         set attach_session (tmux 2> /dev/null ls -F \
             '#{session_attached} #{?#{==:#{session_last_attached},},1,#{session_last_attached}} #{session_id}' |

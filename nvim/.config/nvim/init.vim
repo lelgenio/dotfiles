@@ -124,14 +124,14 @@ call plug#end()
 "}}}
 " Gay colors{{{
 
-    if (empty($TMUX))
+    " if (empty($TMUX))
       if (has('nvim'))
         let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
       endif
       if (has('termguicolors'))
        set termguicolors
       endif
-    endif
+    " endif
 
     colorscheme minimalist
 
@@ -146,7 +146,7 @@ call plug#end()
     highlight LineNr      term=bold     ctermfg=9 guifg=#cc5757 guibg=None
 
     "Make whitespace dark
-    highlight NonText     ctermfg=black guifg=#252525 guibg=None
+    highlight NonText     ctermfg=darkgray guifg=#252525 guibg=None
     " highlight SpecialKey  ctermfg=black guifg=#252525 guibg=None
 
     "Current line
@@ -183,7 +183,7 @@ call plug#end()
 "}}}
 " Lanugage Server{{{
 "
-
+    set foldmethod=marker
     set hidden
     " let g:deoplete#enable_at_startup = 1
 
@@ -226,7 +226,16 @@ EOF
     autocmd FileType tex LLPStartPreview
 "}}}
 "groff{{{
-autocmd BufWritePost *.ms silent !compile %
+augroup filetrype_groff
+    autocmd VimEnter        *.ms        set ft=groff
+
+    autocmd VimEnter        *.ms        silent !zathura (string replace --regex .ms\$ .pdf "%" ) & jobs -lp > /tmp/groff-preview 
+    autocmd VimLeave        *.ms        silent !kill (cat /tmp/groff-preview )
+
+    autocmd BufWritePost    *.ms        silent !compile %
+
+    " autocmd FileType        groff       setlocal commentstring=\\\"\ %s
+augroup END
 "}}}
 "}}}
 "Hide statusbar{{{

@@ -13,7 +13,7 @@ bemenu \
     --bottom\
     --list 20\
     --prefix '->'\
-    --fn "Hack 12"\
+    --fn "FiraCode 12"\
     --tb "#242424" --tf "#cc5757" \
     --fb "#242424" --ff "#cccccc" \
     --nb "#202020" --nf "#cccccc" \
