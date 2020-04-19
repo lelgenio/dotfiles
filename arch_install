@@ -106,7 +106,7 @@ set_pkgs() {
     pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
     pkgs_base+=' fish bluez cronie git man-db'
     # netctl
-    pkgs_base+=' netctl dhclient ifplugged wpa_supplicant dialog'
+    pkgs_base+=' netctl dhcpd ifplugged wpa_supplicant dialog'
 
     pkgs_base+=" $(pacman -Sgq base-devel)"
     if $IS_BIOS;then
