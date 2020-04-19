@@ -287,6 +287,9 @@
 # Daemons {{{
 #
 
+
+    # Autostart a terminal
+    exec $term
     #Notification Daemon
     exec mako
     # Block device Mounter to /run/media/<username>

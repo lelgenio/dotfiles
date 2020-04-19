@@ -104,7 +104,10 @@ set_pkgs() {
     sudo pacman -Sy
 
     pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
-    pkgs_base+=' fish networkmanager bluez cronie git man-db'
+    pkgs_base+=' fish bluez cronie git man-db'
+    # netctl
+    pkgs_base+=' netctl dhclient ifplugged wpa_supplicant dialog'
+
     pkgs_base+=" $(pacman -Sgq base-devel)"
     if $IS_BIOS;then
         pkgs_base+=' grub'
@@ -123,7 +126,7 @@ set_pkgs() {
     # Audio
     pkgs+=' pulseaudio pavolume-git'
     # Fonts
-    pkgs+=' ttf-hack inter-font ttf-material-wifi-icons-git'
+    pkgs+=' ttf-hack inter-font otf-fira-code ttf-material-wifi-icons-git'
     if $FULL_INSTALL; then
         # Screenshot
         pkgs+=' grim slurp wl-clipboard wf-recorder-git'
@@ -133,7 +136,7 @@ set_pkgs() {
         pkgs+=' papirus-folders-git capitaine-cursors '
         # Terminal
         pkgs+=' tmux ranger atool p7zip tree'
-        pkgs+=' neofetch powerline-fonts otf-fira-code'
+        pkgs+=' neofetch powerline-fonts'
         pkgs+=' lolcat cmatrix'
         # Network
         pkgs+=' wget curl bluez-utils rsync rclone nmap gnu-netcat tor mtr speedtest-cli'
@@ -597,12 +600,37 @@ EOF
 # set_daemons() {#{{{
 set_daemons() {
     local tmp_on_tmpfs="$1"; shift
-
-    systemctl enable cronie.service NetworkManager.service
-
     if [ -z "$tmp_on_tmpfs" ];then
         systemctl mask tmp.mount
     fi
+
+    systemctl enable cronie.service netctl.service
+
+    for interface in $(ls /sys/class/net/en*);do
+        systemctl enable netctl-ifpluged@$interface
+    done
+    for interface in $(ls /sys/class/net/wl*);do
+        systemctl enable netctl-auto@$interface
+    done
+
+
+    cat > /etc/netctl/interfaces/en-any <<EOF
+Description='A basic dhcp ethernet connection'
+Interface=en-any
+Connection=ethernet
+IP=dhcp
+EOF
+    mkdir -p /etc/netctl/interfaces/
+    cat > /etc/netctl/interfaces/en-any <<EOF
+#!/bin/bash
+for interface in /sys/class/net/en*; do
+        break;
+done
+Interface=$(basename $interface)
+echo "en-any: using interface $Interface";
+EOF
+    chmod +x /etc/netctl/interfaces/en-any
+
 }
 #}}}
 # set_bluetooth{{{
