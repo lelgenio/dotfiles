@@ -1,5 +1,5 @@
-# LEL
 #
+# LEL
 #  _____      ____ _ _   _
 # / __\ \ /\ / / _` | | | |
 # \__ \\ V  V / (_| | |_| |
@@ -190,10 +190,10 @@
     #
 
     # Screens to file
-    bindsym Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
+    bindsym Print exec grim $(xdg-user-dir PICTURES || Imagens)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 
     # Screen area to file
-    bindsym Shift+Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim-slurp.png')
+    bindsym Shift+Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES || Imagens)/$(date +'%Y-%m-%d-%H%M%S_grim-slurp.png')
 
     # Screen area to clipboard
     bindsym Control+Shift+Print exec grim -g "$(slurp)" - | wl-copy
@@ -318,7 +318,7 @@
        timeout 1800 'swaylock -f' \
        # timeout 1800 'swaymsg "output * dpms off"' \
        #      resume 'swaymsg "output * dpms on;reload"' \
-#}}}
 
-include /etc/sway/config.d/
+    include /etc/sway/config.d/
+#}}}
 # vim:filetype=i3config:foldmethod=marker

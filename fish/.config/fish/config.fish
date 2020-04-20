@@ -72,8 +72,8 @@ abbr ec edit-config
 
 # }}}
 # use tmux{{{
-    # set TMUX 1
-    if test -z "$TMUX" && test "$TERM" != "xterm-kitty" && test -n "$DISPLAY"
+    set TMUX 1
+    if test -z "$argv" -a -z "$TMUX" -a -n "$DISPLAY"
         set attach_session (tmux 2> /dev/null ls -F \
             '#{session_attached} #{?#{==:#{session_last_attached},},1,#{session_last_attached}} #{session_id}' |
             awk '/^0/ { if ($2 > t) { t = $2; s = $3 } }; END { if (s) printf "%s", s }')
@@ -111,6 +111,10 @@ abbr ec edit-config
     set SPACEFISH_VI_MODE_REPLACE "R"
     set SPACEFISH_VI_MODE_REPLACE_ONE 	"S"
 
+    set -l cnf /usr/share/doc/pkgfile/command-not-found.fish
+    test -f "$cnf" &&
+        source $cnf
+    
 #}}}
 # Color man pages{{{
 
@@ -122,5 +126,4 @@ set -xU LESS_TERMCAP_ue (printf "\e[0m")
 set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 
 #}}}
-source  /usr/share/doc/pkgfile/command-not-found.fish
 # vim:foldmethod=marker

@@ -43,7 +43,6 @@
         "format-stopped": "",
         "timeout":60,
         "unknown-tag": " N/A ",
-        "tooltip":false,
         "interval": 2,
         "max-length":40,
         "state-icons": {
@@ -72,13 +71,13 @@
         "format-charging": "",
         "format-plugged": "",
         "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["", "", "", "", "", ""]
     },
     "network": {
         "tooltip":false,
         "on-click": "termite -e nmtui",
         "format-wifi": "{icon}",
-        "format-icons":["","","",""],
+        "format-icons":[ "", "", "", "", "" ],
         "format-ethernet": "",
         "format-linked": "",
         "format-disconnected": "⚠"

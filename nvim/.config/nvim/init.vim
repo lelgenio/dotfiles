@@ -1,5 +1,5 @@
+"
 " LEL
-
 "             _
 "  _ ____   _(_)_ __ ___
 " | '_ \ \ / / | '_ ` _ \
@@ -93,6 +93,7 @@
     Plug 'vim-scripts/AnsiEsc.vim', { 'for': 'man' }
      " Plug 'powerman/vim-plugin-AnsiEsc'
     Plug 'mboughaba/i3config.vim'
+    Plug 'dag/vim-fish'
 call plug#end()
 
 "}}}
