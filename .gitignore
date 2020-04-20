@@ -6,12 +6,11 @@ mpd/.config/mpd/state
 neomutt/.config/neomutt/password.gpg
 nvim/.config/nvim/autoload/
 nvim/.config/nvim/plugged/
-qutebrowser/.config/qutebrowser/autoconfig.yml
-qutebrowser/.config/qutebrowser/qsettings/
-qutebrowser/.config/qutebrowser/quickmarks
-qutebrowser/.local/
 theme/.config/gtk-3.0/bookmarks
 
+qutebrowser/
+!qutebrowser/.config/qutebrowser/config.py
+!qutebrowser/.local/share/qutebrowser/greasemonkey/youtube-ad.js
 
 fish/
 !fish/.config/fish/config.fish
