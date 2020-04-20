@@ -606,10 +606,10 @@ set_daemons() {
 
     systemctl enable cronie.service netctl.service
 
-    for interface in $(ls /sys/class/net/en*);do
+    for interface in $(ls -d /sys/class/net/en*);do
         systemctl enable netctl-ifpluged@$interface
     done
-    for interface in $(ls /sys/class/net/wl*);do
+    for interface in $(ls -d /sys/class/net/wl*);do
         systemctl enable netctl-auto@$interface
     done
 
