@@ -121,7 +121,7 @@ set_pkgs() {
     pkgs+=' pass gnupg pam-gnupg'
 
     # pkgs+=' i3 termite scrot pamixer'
-    pkgs+=' thunar redshift-wlr-gamma-control-git '
+    pkgs+=' nemo cinnamon-translations thunar redshift-wlr-gamma-control-git '
     pkgs+=' pkgfile alacritty neovim moreutils htop-vim-git'
     # Audio
     pkgs+=' pulseaudio pavolume-git'

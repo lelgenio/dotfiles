@@ -18,13 +18,7 @@ password_files=( "${password_files[@]%.gpg}" )
 
 [ -f $CACHE ] || touch $CACHE
 for line in $(cat $CACHE); do
-    for password_file in "${password_files[@]}"; do
-        echo "$line" = "$password_file" 
-        if [ "$line" = "$password_file" ];then
-            echo added
-            password_files+=( $line )
-        fi
-    done
+    password_files+=( $line )
 done
 
 entry=$(printf '%s\n' "${password_files[@]}" | 

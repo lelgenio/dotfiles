@@ -38,11 +38,14 @@ window#waybar.empty {
     margin:0 4px;
 }
 
+
 #mpd,
 #tray,
 #clock,
 #network,
 #battery,
+#delugeD,
+#delugeS,
 #backlight,
 #pulseaudio,
 #custom-mail,
@@ -61,7 +64,7 @@ window#waybar.empty {
     font-size:15px;
 }
 #network{
-    margin-top:-1;
+    margin-top:-1px;
     font-size:16px;
 }
 

@@ -72,7 +72,7 @@
     bindsym $mod+q exec qutebrowser
 
     #start file manager
-    bindsym $mod+m exec thunar
+    bindsym $mod+m exec nemo
 
     # Kill focused window
     bindsym $mod+x kill
@@ -90,7 +90,7 @@
     bindsym $mod+Shift+c reload; exec kanshi
 
     # Lock Sway
-    bindsym $mod+Control+s exec swaylock
+    bindsym $mod+Control+s exec systemctl suspend
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?' -b 'Yes, exit sway' 'swaymsg exit'

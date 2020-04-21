@@ -37,6 +37,12 @@ end
 
 abbr ec edit-config
 
+function mutt --wraps=neomutt --description 'alias mutt=neomutt'
+  neomutt  $argv;
+  pkill -SIGRTMIN+4 waybar
+end
+abbr neomutt mutt
+
 # }}}
 # start window manager if using tty1 {{{
 #
@@ -46,7 +52,7 @@ abbr ec edit-config
         export QT_SCALE_FACTOR=1
         export QPA_PLATFORM=wayland
         export QT_QPA_PLATFORM=wayland
-        exec sway
+        pgrep sway || exec sway
     end
     function ei3
         clear
@@ -72,8 +78,7 @@ abbr ec edit-config
 
 # }}}
 # use tmux{{{
-    set TMUX 1
-    if test -z "$argv" -a -z "$TMUX" -a -n "$DISPLAY"
+    if test -z "$TMUX" -a -n "$DISPLAY" ;and status is-interactive
         set attach_session (tmux 2> /dev/null ls -F \
             '#{session_attached} #{?#{==:#{session_last_attached},},1,#{session_last_attached}} #{session_id}' |
             awk '/^0/ { if ($2 > t) { t = $2; s = $3 } }; END { if (s) printf "%s", s }')

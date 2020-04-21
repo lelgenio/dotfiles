@@ -373,6 +373,7 @@ c.fonts.tabs = '14px Inter'
 
 # Bindings for normal mode
 config.bind(',m', 'spawn --userscript view_in_mpv')
+config.bind(',r', 'spawn --userscript readability')
 config.bind(';m', 'hint links spawn mpv --fs {hint-url}')
 config.bind('J', 'tab-prev')
 config.bind('K', 'tab-next')

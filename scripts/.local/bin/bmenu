@@ -4,7 +4,7 @@
 # BEMENU_BACKEND=wayland
 if [ "$1" == "run" ]
 then
-    [ -n "$2" ] && t="$2" || t="kitty"
+    [ -n "$2" ] && t="$2" || t="alacritty"
     exec j4-dmenu-desktop --dmenu="bmenu -p Iniciar:" --term "$t"
 fi
 

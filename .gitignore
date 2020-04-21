@@ -8,9 +8,10 @@ nvim/.config/nvim/autoload/
 nvim/.config/nvim/plugged/
 theme/.config/gtk-3.0/bookmarks
 
-qutebrowser/
+qutebrowser/**
 !qutebrowser/.config/qutebrowser/config.py
 !qutebrowser/.local/share/qutebrowser/greasemonkey/youtube-ad.js
+!qutebrowser/.local/share/qutebrowser/userscripts/readability
 
 fish/
 !fish/.config/fish/config.fish
