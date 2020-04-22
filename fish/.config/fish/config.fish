@@ -39,7 +39,7 @@ abbr ec edit-config
 
 function mutt --wraps=neomutt --description 'alias mutt=neomutt'
   neomutt  $argv;
-  pkill -SIGRTMIN+4 waybar
+  pkill -RTMIN+4 waybar
 end
 abbr neomutt mutt
 

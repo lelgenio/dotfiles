@@ -107,7 +107,7 @@
         "format": "<b>{}</b>",
         "exec": "jq -r '.temp +\"°C \"+ .weather' .forecast.json",
         "interval": 30,
-        "on-click": "alacritty --class weather -e sh -c 'forecast full;read -n1 -p\"Press Any key to quit \"'",
+        "on-click": "terminal --class weather sh -c 'forecast full;read -n1 -p\"Press Any key to quit \"'",
         "on-click-right": "xdg-open https://openweathermap.org"
     },
     "custom/mail": {
@@ -115,7 +115,7 @@
         "format":"{} <b></b>",
         "exec-if":"sleep 30s",
         "exec": "checkmail",
-        "on-click": "alacritty -e neomutt; pkill -SIGRTMIN+4 waybar",
+        "on-click": "terminal neomutt; pkill -SIGRTMIN+4 waybar",
         "signal": 4,
         "interval": 30
     },
@@ -125,7 +125,7 @@
         "interval": 60,
         "exec-if":"sleep 60s",
         "exec": "yay -Qqu | wc -l | sed 's/^0$//'",
-        "on-click": "alacritty -e sh -c 'ping -qc1 archlinux.org >/dev/null && yay -Syu || yay -Su; pkill -SIGRTMIN+8 waybar; read'",
+        "on-click": "terminal sh -c 'ping -qc1 archlinux.org >/dev/null && yay -Syu || yay -Su; pkill -SIGRTMIN+8 waybar; read'",
         "signal": 8
     },
     "custom/recording": {
@@ -139,7 +139,7 @@
         "format":"{}",
         "exec":"pgrep -f spigot.jar>/dev/null && spigot command list | awk '/There are/ {if ($6) print $6}'",
         "interval":30,
-        "on-click":"alacritty -e spigot console"
+        "on-click":"terminal spigot console"
     },
     "custom/delugeD":{
         "format":"{}",

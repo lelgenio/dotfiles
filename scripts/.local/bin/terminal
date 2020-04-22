@@ -1,0 +1,6 @@
+#!/bin/sh
+
+command -v kitty > /dev/null &&
+    exec kitty $@
+command -v alacritty > /dev/null &&
+    exec alacritty -e $@
