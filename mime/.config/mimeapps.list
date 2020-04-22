@@ -1,4 +1,4 @@
-[Added Associations]
+[Default Applications]
 image/bmp=imv.desktop;
 image/cgm=imv.desktop;
 image/dicom-rle=imv.desktop;
@@ -219,10 +219,6 @@ video/x-ogm+ogg=mpv.desktop;
 video/x-sgi-movie=mpv.desktop;
 video/x-theora=mpv.desktop;
 video/x-theora+ogg=mpv.desktop;
-x-scheme-handler/sms=org.gnome.Shell.Extensions.GSConnect.desktop;
-x-scheme-handler/tel=org.gnome.Shell.Extensions.GSConnect.desktop;
-
-[Default Applications]
 application/pdf=org.pwmt.zathura.desktop;
 text/html=org.qutebrowser.qutebrowser.desktop
 x-scheme-handler/http=org.qutebrowser.qutebrowser.desktop
@@ -230,3 +226,4 @@ x-scheme-handler/https=org.qutebrowser.qutebrowser.desktop
 application/x-bittorrent=deluge.desktop;
 x-scheme-handler/magnet=deluge.desktop;
 x-scheme-handler/lbry=lbry.desktop
+image/jpeg=imv.desktop
