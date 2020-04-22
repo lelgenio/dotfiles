@@ -78,7 +78,11 @@ abbr neomutt mutt
 
 # }}}
 # use tmux{{{
-    if test -z "$TMUX" -a -n "$DISPLAY"; and not string match -qr kitty "$TERM"  ;and status is-interactive
+    set TMUX 1
+    if test -z "$TMUX" -a -n "$DISPLAY" &&
+        not string match -qr kitty "$TERM" &&
+        test -z "$GNOME_TERMINAL_SCREEN" &&
+        status is-interactive
         set attach_session (tmux 2> /dev/null ls -F \
             '#{session_attached} #{?#{==:#{session_last_attached},},1,#{session_last_attached}} #{session_id}' |
             awk '/^0/ { if ($2 > t) { t = $2; s = $3 } }; END { if (s) printf "%s", s }')
