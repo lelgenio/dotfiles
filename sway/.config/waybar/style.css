@@ -44,8 +44,8 @@ window#waybar.empty {
 #clock,
 #network,
 #battery,
-#delugeD,
-#delugeS,
+#torrentD,
+#torrentS,
 #backlight,
 #pulseaudio,
 #custom-mail,
@@ -54,7 +54,7 @@ window#waybar.empty {
 #custom-weather
 {
     margin: 0 7px;
-    color: #ffffff;
+    color: #FFFFFF;
     opacity:.7;
 }
 

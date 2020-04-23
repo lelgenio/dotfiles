@@ -1,4 +1,5 @@
 {
+    "layer":"top",
     "modules-left": [
         "sway/workspaces",
         "sway/window"
@@ -13,8 +14,8 @@
         "custom/spigot",
         "tray",
         "custom/mail",
-        "custom/delugeD",
-        "custom/delugeS",
+        "custom/torrentD",
+        "custom/torrentS",
         "custom/updates",
         "pulseaudio",
         "network",
@@ -141,16 +142,14 @@
         "interval":30,
         "on-click":"terminal spigot console"
     },
-    "custom/delugeD":{
-        "format":"{}",
-        "exec":"timeout 10s deluge-console info | grep '\\[D\\]' | wc -l | sed s/^0\\$//",
-        "exec-if":"pgrep deluge",
+    "custom/torrentD":{
+        "format":" {} ",
+        "exec":"transmission-remote -l | tail -n+2 | grep Down | wc -l | sed 's/^0$//'",
         "interval":180
     },
-    "custom/delugeS":{
-        "format":"{}",
-        "exec":"timeout 10s deluge-console info | grep '\\[S\\]' | wc -l | sed s/^0\\$//",
-        "exec-if":"pgrep deluge",
+    "custom/torrentS":{
+        "format":" {} ",
+        "exec":"transmission-remote -l | grep Seeding| wc -l | sed 's/^0$//'",
         "interval":180
     }
 
