@@ -78,7 +78,7 @@ abbr neomutt mutt
 
 # }}}
 # use tmux{{{
-    set TMUX 1
+    # set TMUX 1
     if test -z "$TMUX" -a -n "$DISPLAY" &&
         not string match -qr kitty "$TERM" &&
         test -z "$GNOME_TERMINAL_SCREEN" &&
