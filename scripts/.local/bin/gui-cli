@@ -16,7 +16,7 @@ gui_off (){
     # sudo chsh -s /usr/bin/zsh $(whoami)
 
     rm ~/.config/mimeapps.list
-    cd .dotfiles
+    cd ~/.dotfiles
     stow mime
 
     uncomment /etc/mkinitcpio.conf "HOOKS.* (?!plymouth)"
