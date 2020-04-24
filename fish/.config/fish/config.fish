@@ -42,6 +42,18 @@ function mutt --wraps=neomutt --description 'alias mutt=neomutt'
 end
 abbr neomutt mutt
 
+
+function rcd
+    set file (mktemp)
+
+    ranger $argv --choosedir=$file
+    cd (cat $file)
+
+    rm $file
+end
+
+abbr r rcd
+
 # }}}
 # start window manager if using tty1 {{{
 #

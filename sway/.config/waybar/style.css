@@ -44,17 +44,17 @@ window#waybar.empty {
 #clock,
 #network,
 #battery,
-#torrentD,
-#torrentS,
 #backlight,
 #pulseaudio,
 #custom-mail,
 #custom-spigot,
 #custom-updates,
-#custom-weather
+#custom-weather,
+#custom-torrentD,
+#custom-torrentS
 {
     margin: 0 7px;
-    color: #FFFFFF;
+    color: #ffffff;
     opacity:.7;
 }
 
