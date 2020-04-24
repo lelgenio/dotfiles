@@ -34,7 +34,6 @@ function edit-config
         nvim $file
     end
 end
-
 abbr ec edit-config
 
 function mutt --wraps=neomutt --description 'alias mutt=neomutt'
@@ -122,8 +121,8 @@ abbr neomutt mutt
 
     set -l cnf /usr/share/doc/pkgfile/command-not-found.fish
     test -f "$cnf" &&
-        source $cnf
-    
+        source "$cnf"
+
 #}}}
 # Color man pages{{{
 

@@ -138,6 +138,8 @@ set_pkgs() {
         pkgs+=' tmux ranger atool p7zip tree'
         pkgs+=' neofetch powerline-fonts'
         pkgs+=' lolcat cmatrix'
+        # extra font for ranger
+        pkgs+=' otf-nerd-fonts-fira-code'
         # Network
         pkgs+=' wget curl bluez-utils rsync rclone nmap gnu-netcat tor mtr speedtest-cli'
         pkgs+=' openssh sshfs fail2ban'

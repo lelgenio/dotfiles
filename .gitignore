@@ -21,3 +21,5 @@ emacs/.emacs.d
 
 neomutt/.gnupg/
 !neomutt/.gnupg/gpg-agent.conf
+
+__pycache__

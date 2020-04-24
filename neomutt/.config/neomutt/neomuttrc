@@ -213,15 +213,18 @@ color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-
 # color	message		        brightred		default
 # color	error		        brightwhite		brightred
 color	indicator	        brightwhite		red
+# prompt
 color	status		        brightwhite		default
 # color	tree		        black			white
 # color	markers		        red				white
 # color	search		        white			black
 # color	tilde		        brightmagenta	default
 color	index		        blue			white "~F"
+# new messages
 color	index		        brightgreen		default "~N|~O"
-color   index_author        brightred       black "~N"
-color   index_subject       brightcyan      black "~N"
+color   index_author        brightred       default "~N"
+color   index_subject       brightcyan      default "~N"
+#sidebar
 color   sidebar_new         green           default
 color   sidebar_highlight   default         brightred
 color   sidebar_indicator   default         red
