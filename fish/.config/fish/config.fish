@@ -25,35 +25,56 @@ command -qs exa &&
 abbr gs git status
 abbr gp 'git pull; git push'
 
-function edit-config
+
+function fish_edit_commandline #{{{
+    set file (mktemp)
+    commandline -b > $file 
+    nvim +'set ft=fish' $file 
+    commandline -r (cat $file)
+end
+bind -M insert \cx fish_edit_commandline
+#}}}
+function edit-config #{{{
     cd ~/.config
     set file ~/.config/( fzf )
     cd -
 
     if test -f "$file"
-        nvim $file
+        commandline -r nvim\ $file
     end
 end
 abbr ec edit-config
-
+#}}}
+# alias mutt #{{{
 function mutt --wraps=neomutt --description 'alias mutt=neomutt'
   neomutt  $argv;
   pkill -RTMIN+4 waybar
 end
 abbr neomutt mutt
-
-
-function rcd
+#}}}
+function rcd #{{{
     set file (mktemp)
 
     ranger $argv --choosedir=$file
     cd (cat $file)
 
     rm $file
+    clear
+    ls
+    fish_prompt
 end
 
-abbr r rcd
-
+# force-repaint to redraw prompt
+bind -M insert \co rcd
+#}}}
+function etc #{{{
+    cd /etc/
+    set file /etc/(fzf)
+    cd -
+    test -f "$file"
+    and sudo nvim $file
+end
+#}}}
 # }}}
 # start window manager if using tty1 {{{
 #
@@ -123,13 +144,18 @@ abbr r rcd
     set SPACEFISH_CHAR_SYMBOL '$'
     set SPACEFISH_CHAR_SYMBOL_ROOT '#'
 
-    set SPACEFISH_VI_MODE_PREFIX ""
+    set SPACEFISH_VI_MODE_PREFIX "\e[1 q"
     set SPACEFISH_VI_MODE_SUFIX ""
-    set SPACEFISH_VI_MODE_INSERT "I"
+    set SPACEFISH_VI_MODE_INSERT "I\e[5 q"
     set SPACEFISH_VI_MODE_NORMAL "N"
     set SPACEFISH_VI_MODE_VISUAL "V"
     set SPACEFISH_VI_MODE_REPLACE "R"
     set SPACEFISH_VI_MODE_REPLACE_ONE 	"S"
+
+    set fish_cursor_default     block      blink
+    set fish_cursor_insert      line       blink
+    set fish_cursor_replace_one underscore blink
+    set fish_cursor_visual      block
 
     set -l cnf /usr/share/doc/pkgfile/command-not-found.fish
     test -f "$cnf" &&
