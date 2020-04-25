@@ -24,3 +24,4 @@ neomutt/.gnupg/
 
 __pycache__
 *.db
+*.tmp

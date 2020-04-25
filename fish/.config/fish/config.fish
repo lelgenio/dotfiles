@@ -15,6 +15,16 @@ set -x VISUAL nvim
 # set -x BROWSER=qutebrowser
 set -x PAGER less
 
+export _JAVA_AWT_WM_NONREPARENTING=1
+export GTK_CSD=0
+export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
+export XCURSOR_THEME=capitaine-cursors
+export GTK_THEME=materia-custom-accent:dark
+
+# export XDG_CURRENT_DESKTOP=Unity
+export QT_SCALE_FACTOR=1
+export QPA_PLATFORM=wayland
+export QT_QPA_PLATFORM=wayland
 #}}}
 # Aliases{{{
 abbr rv sudo nvim
@@ -157,7 +167,7 @@ end
     set fish_cursor_replace_one underscore blink
     set fish_cursor_visual      block
 
-    set -l cnf /usr/share/doc/pkgfile/command-not-found.fish
+    # set -l cnf /usr/share/doc/pkgfile/command-not-found.fish
     test -f "$cnf" &&
         source "$cnf"
 

@@ -90,7 +90,7 @@
     bindsym $mod+Shift+c reload; exec kanshi
 
     # Lock Sway
-    bindsym $mod+Control+s exec systemctl suspend
+    bindsym $mod+Control+s exec sudo systemctl suspend
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?' -b 'Yes, exit sway' 'swaymsg exit'
