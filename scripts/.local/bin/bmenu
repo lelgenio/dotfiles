@@ -1,10 +1,16 @@
-#!/bin/sh
+#!/bin/fish
+# wrapper around bemenu
+# bmenu *       - use as dmenu, -p for custom prompt (man bemenu)
+# bmenu run     - select from .desktop files and run it
+# bmenu start   - internal option
+if test "$argv[1]" != "start" || test "$argv[1]" = "run" 
+    test -n "$SWAYSOCK" && swaymsg fullscreen off
+end
 
-if [ "$1" == "run" ]
-then
-    [ -n "$2" ] && t="$2" || t="alacritty"
-    exec j4-dmenu-desktop --dmenu="bmenu -p Iniciar:" --term "$t"
-fi
+if test "$argv[1]" = "run" 
+    test -n "$2" && set t "$2" || set t "terminal"
+    exec j4-dmenu-desktop --dmenu="bmenu start -p Iniciar:" --term "$t"
+end
 
 # t  title
 # f  filter
@@ -24,4 +30,4 @@ bemenu \
     --fb "#242424" --ff "#cccccc" \
     --nb "#202020" --nf "#cccccc" \
     --hb "#303030" --hf "#cc5757" \
-    $@
+    $argv
