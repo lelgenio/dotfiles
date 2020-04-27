@@ -5,12 +5,6 @@ set -e
 
 shopt -s nullglob globstar
 
-typeit=0
-if [ "$1" = "--type" ]; then
-	typeit=1
-	shift
-fi
-
 prefix=${PASSWORD_STORE_DIR-~/.password-store}
 password_files=( "$prefix"/**/*.gpg )
 password_files=( "${password_files[@]#"$prefix"/}" )
@@ -22,7 +16,8 @@ for line in $(cat $CACHE); do
 done
 
 entry=$(printf '%s\n' "${password_files[@]}" | 
-    sort | uniq -c | sort -r | sed 's/ *[0-9]* //'|
+        sort | uniq -c | sort -r | 
+        sed 's/ *[0-9]* //'|
         bmenu "$@")
 
 [ -n "$entry" ] && echo "$entry" >> $CACHE || exit
@@ -30,7 +25,6 @@ entry=$(printf '%s\n' "${password_files[@]}" |
 username=$( pass show "$entry" 2>/dev/null | perl -ne 'print $1 if /^login: (.*)/' )
 password=$( pass show "$entry" 2>/dev/null | head -n 1 )
 
-# | grep 'username'&&
 case $(echo -e "Autotype\nUsername -> $username\nPassword" | bmenu) in
     Autotype)
         ydotool type "$username"

@@ -4,7 +4,7 @@
 # bmenu run     - select from .desktop files and run it
 # bmenu start   - internal option
 if test "$argv[1]" != "start" || test "$argv[1]" = "run" 
-    test -n "$SWAYSOCK" && swaymsg fullscreen off
+    test -n "$SWAYSOCK" && swaymsg fullscreen off > /dev/null
 end
 
 if test "$argv[1]" = "run" 
