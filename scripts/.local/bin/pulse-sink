@@ -1,7 +1,7 @@
 #!/bin/sh
 
 opts="Fone\nSpeaker\nHDMI"
-out=$(echo -e $opts | bmenu -p "Saida:")
+out=$(echo -e $opts | wdmenu -p "Saida:")
 vol=$(pamixer --get-volume)
 
 if [ "$out" == "HDMI" ]
