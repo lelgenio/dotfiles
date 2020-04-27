@@ -18,7 +18,8 @@
 
     set $term terminal
     # set $menu wofi --show drun --allow-images --insensitive --term $term -p'Iniciar: '
-    set $menu  bmenu run $term
+    # set $menu  bmenu run $term
+    set $menu  launcher
 	font Fira Code 14px
 
 # }}}

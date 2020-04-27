@@ -1,0 +1,6 @@
+#!/bin/fish
+
+command -qs wofi &&
+    exec wofi --show drun --allow-images --prompt 'Iniciar: '
+command -qs bmenu &&
+    exec bmenu run

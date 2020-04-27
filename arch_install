@@ -745,7 +745,7 @@ create_user() {
     local name="$1"; shift
     local password="$1"; shift
 
-    useradd -m -s /usr/bin/$USER_SHELL -G adm,systemd-journal,wheel,rfkill,games,network,video,audio,optical,floppy,storage,scanner,power "$name"
+    useradd -m -s /usr/bin/$USER_SHELL -G adm,systemd-journal,wheel,rfkill,games,network,video,audio,optical,floppy,storage,scanner,power,input "$name"
     /bin/echo -en "$password\n$password" | passwd "$name"
 }
 #}}}

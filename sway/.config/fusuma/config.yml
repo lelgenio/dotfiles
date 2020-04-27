@@ -7,7 +7,7 @@ swipe:
     up:
       command: 'swaymsg fullscreen toggle'
     down:
-        command: 'wofi -S drun -ip"Iniciar: "'
+      command: 'launcher'
 # pinch:
 #   in:
 #     command: 'xdotool key ctrl+shift+plus'
