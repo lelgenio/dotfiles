@@ -35,15 +35,6 @@ command -qs exa &&
 abbr gs git status
 abbr gp 'git pull; git push'
 
-
-function fish_edit_commandline #{{{
-    set file (mktemp)
-    commandline -b > $file 
-    nvim +'set ft=fish' $file 
-    commandline -r (cat $file)
-end
-bind -M insert \cx fish_edit_commandline
-#}}}
 function edit-config #{{{
     cd ~/.config
     set file ~/.config/( fzf )
