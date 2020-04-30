@@ -31,13 +31,9 @@ gui_off (){
     sudo systemctl enable  netctl-ifplugd@enp2s0
     sudo systemctl enable  netctl
 
+    sudo systemctl disable display-manager.service
 
-    systemctl -q is-active gdm && 
-        sudo systemctl disable gdm &
-    systemctl -q is-active gdm-plymouth && 
-        sudo systemctl disable gdm-plymouth &
-
-    sudo systemctl start getty@tty1
+    sudo systemctl enable ly
 
 }
 
@@ -45,6 +41,7 @@ gui_on (){
     # sudo chsh -s /usr/bin/fish $(whoami)
 
     rm -f ~/.config/mimeapps.list
+    yay -S --noconfirm --needed gnome-defaults-list
     cp /usr/share/applications/gnome-mimeapps.list ~/.config/mimeapps.list
 
     kvantummanager --set Materia
@@ -62,6 +59,8 @@ gui_on (){
     sudo systemctl disable  netctl-ifplugd@enp2s0
     sudo systemctl disable  netctl
     sudo systemctl enable  NetworkManager
+
+    sudo systemctl disable display-manager.service
 
     sudo systemctl enable gdm-plymouth
 }

@@ -13,7 +13,7 @@ qutebrowser/**
 !qutebrowser/.local/share/qutebrowser/greasemonkey/youtube-ad.js
 !qutebrowser/.local/share/qutebrowser/userscripts/readability
 
-fish/
+fish/**
 !fish/.config/fish/config.fish
 
 emacs/.emacs.d
