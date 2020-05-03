@@ -1,0 +1,6 @@
+#!/bin/fish
+set cvol (pamixer --get-volume)
+
+set nvol (math round\($cvol/5\)*5)
+
+pamixer --set-volume $nvol
