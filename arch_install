@@ -115,7 +115,7 @@ set_pkgs() {
 
     pkgs+=" $pkgs_base"
     # DE
-    pkgs+=' sway waybar ruby-fusuma light mako udiskie bemenu wofi-hg stow yay'
+    pkgs+=' ly sway waybar ruby-fusuma light mako udiskie stow yay'
     pkgs+=' bemenu wofi-hg j4-dmenu-desktop'
     # passwords and auth
     pkgs+=' pass gnupg pam-gnupg'
@@ -149,7 +149,7 @@ set_pkgs() {
         pkgs+=' neomutt isync'
         # Files
         pkgs+=' syncthing nextcloud-client '
-        pkgs+=' deluge deezloader-remix-bin smloadr'
+        pkgs+=' deluge deezloader-remix-git smloadr'
         # Media
         pkgs+=' imv mpv mpd mpc ncmpcpp mpv-mpris mpdris2 playerctl'
         pkgs+=' blender gimp kdenlive picard image_optim'
@@ -603,17 +603,22 @@ set_daemons() {
         systemctl mask tmp.mount
     fi
 
-    systemctl enable cronie.service netctl.service
+    systemctl enable \
+        cronie.service \
+        netctl.service \
+        ly.service
 
-    for interface in $(ls -d /sys/class/net/en*);do
+    # Netctl{{{
+    cd /sys/class/net/
+    for interface in $(ls -d en*);do
         systemctl enable netctl-ifpluged@$interface
     done
-    for interface in $(ls -d /sys/class/net/wl*);do
+    for interface in $(ls -d wl*);do
         systemctl enable netctl-auto@$interface
     done
+    cd -
 
-
-    cat > /etc/netctl/interfaces/en-any <<EOF
+    cat > /etc/netctl/ethernet-dhcp <<EOF
 Description='A basic dhcp ethernet connection'
 Interface=en-any
 Connection=ethernet
@@ -629,7 +634,16 @@ Interface=$(basename $interface)
 echo "en-any: using interface $Interface";
 EOF
     chmod +x /etc/netctl/interfaces/en-any
-
+#}}}
+# Ly{{{
+    mkdir -p /etc/ly/
+    cat > /etc/ly/config.ini << EOF
+animate = true
+blank_box = true
+hide_borders = true
+lang = br
+EOF
+#}}}
 }
 #}}}
 # set_bluetooth{{{
@@ -722,7 +736,7 @@ EOF
 # set_logind{{{
 set_logind(){
     mkdir -p /etc/systemd
-    cat > /etc/systemd <<EOF
+    cat > /etc/systemd/logind.conf <<EOF
 [Login]
 HandlePowerKey=suspend
 HandleSuspendKey=suspend
