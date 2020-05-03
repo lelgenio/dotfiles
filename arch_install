@@ -310,13 +310,13 @@ setup_lvm() {
     # if the disk has more than 
     if [ "$d_size" -gt $(( 50*10**9 )) ]; then
         # Create a 4GB swap partition
-        lvcreate --yes -C y -L4G "$volgroup" -n swap
+        lvcreate --yes -L4G "$volgroup" -n swap
 
         # Create a 50GB root partition
         lvcreate --yes -L '50G' "$volgroup" -n root
     else
         # Create a swap partition of 10% the disk
-        lvcreate --yes -C y -l '+10%FREE' "$volgroup" -n swap
+        lvcreate --yes -l '+10%FREE' "$volgroup" -n swap
 
         # Create root partition on 50% of free space
         lvcreate --yes -l '+50%FREE' "$volgroup" -n root
