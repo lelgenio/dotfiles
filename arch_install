@@ -301,7 +301,7 @@ setup_lvm() {
     local partition="$1"; shift
     local volgroup="$1"; shift
     
-    local d_size=$(lsblk --noheadings --nodeps --bytes --raw $DRIVE)
+    local d_size=$(lsblk --noheadings --nodeps --bytes --raw --output SIZE $DRIVE)
 
     pvcreate "$partition"
     vgcreate "$volgroup" "$partition"
