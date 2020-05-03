@@ -236,6 +236,11 @@
     bindsym XF86Explorer    exec thunar
     bindsym XF86HomePage    exec xdg-open http://start.duckduckgo.com
 
+    mode ignore {
+        bindsym $mod+escape mode default
+    }
+    bindsym $mod+i mode ignore
+
     # }}}
 # }}}
 # Visual: {{{
