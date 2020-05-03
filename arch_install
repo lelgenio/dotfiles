@@ -74,7 +74,7 @@ USER_PASSWORD=''
 TIMEZONE='America/Sao_Paulo'
 
 # Country code for pacman repos
-COUNTRY='BR'
+COUNTRY='brazil'
 
 # Have /tmp on a tmpfs or not.  Leave blank to disable.
 # Only leave this blank on systems with very little RAM.
@@ -403,12 +403,9 @@ Include = /etc/pacman.d/mirrorlist
 EOF
 #}}}
 # /etc/pacman.d/mirrorlist{{{
-pacman -Sy pacman-contrib --needed --noconfirm
-wget -O- \
-    "https://www.archlinux.org/mirrorlist/?country=$COUNTRY&protocol=http&protocol=https&ip_version=4" |
-    sed 's/^#//;s/^#/##/' |
-    rankmirrors  - | 
-    tee /etc/pacman.d/mirrorlist
+    pacman -Sy reflector --noconfirm
+
+    reflector -c $COUNTRY -f 10 -p http -p https
 #}}}
 
 mkdir -p /mnt/etc/pacman.d
