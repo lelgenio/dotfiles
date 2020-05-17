@@ -142,6 +142,10 @@ c.completion.shrink = True
 # Type: String
 c.hints.border = '2px solid #cc5757'
 
+# Characters used for hint strings.
+# Type: UniqueCharString
+c.hints.chars = 'aoeuidnths'
+
 # Enable smooth scrolling for web pages. Note smooth scrolling does not
 # work with the `:scroll-px` command.
 # Type: Bool
@@ -375,11 +379,19 @@ c.fonts.tabs = '14px Inter'
 config.bind(',m', 'spawn --userscript view_in_mpv')
 config.bind(',r', 'spawn --userscript readability')
 config.bind(';m', 'hint links spawn mpv --fs {hint-url}')
-config.bind('J', 'tab-prev')
-config.bind('K', 'tab-next')
-config.bind('j', 'scroll down')
-config.bind('k', 'scroll up')
-config.bind('spawn', '--userscript view_in_mpv')
+
+config.bind('H', 'back')
+config.bind('N', 'tab-next')
+config.bind('S', 'forward')
+config.bind('T', 'tab-prev')
+
+config.bind('n', 'scroll up')
+config.bind('t', 'scroll down')
+config.bind('h', 'scroll left')
+config.bind('s', 'scroll right')
+
+config.bind('e', 'hint all')
+config.bind('E', 'hint all tab')
 
 # Bindings for insert mode
 config.bind('<Ctrl+i>', 'spawn --userscript qute-keepass -p ~/Documentos/senhas/Senhas.kdbx', mode='insert')

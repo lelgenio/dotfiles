@@ -11,22 +11,26 @@
     # Logo key.
     set $mod Mod4
     # Home row direction keys, like vim
-    set $left h
-    set $down j
-    set $up k
-    set $right l
+    set $left       h
+    set $down       t
+    set $up         n
+    set $right      s
+    set $menu       e
+    set $suspend    o
+    set $kill       k
+    set $mus        r
 
     set $term terminal
     # set $menu wofi --show drun --allow-images --insensitive --term $term -p'Iniciar: '
     # set $menu  bmenu run $term
-    set $menu  launcher
 	font Fira Code 14px
 
 # }}}
 # Output configuration {{{
 #
     output * bg '#252525' solid_color
-    # output * bg /usr/share/backgrounds/gnome/adwaita-night.jpg                                    fill 
+    # output * bg /usr/share/backgrounds/gnome/adwaita-night.jpg fill
+    # output * bg ~/.teclado-dvorak-br.png fit
     # Output HDMI-A-1 resolution 1280x720
 
     # Disable laptop screen if closed, --reload is important
@@ -58,7 +62,7 @@
     }
 
     input * {
-        xkb_layout br
+        xkb_layout br(dvorak)
         xkb_numlock enabled
     }
 
@@ -70,16 +74,16 @@
     bindsym $mod+Return exec $term
 
     #start web browser
-    bindsym $mod+q exec qutebrowser
+    bindsym $mod+b exec qutebrowser
 
     #start file manager
     bindsym $mod+m exec nemo
 
     # Kill focused window
-    bindsym $mod+x kill
+    bindsym $mod+$kill kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+$menu exec launcher
 
     # Fill passwords
     bindsym Control+$mod+p exec wpass
@@ -88,10 +92,10 @@
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+Shift+c reload; exec kanshi
+    bindsym $mod+Shift+c reload; exec pkill kanshi && kanshi
 
     # Lock Sway
-    bindsym $mod+Control+s exec sudo systemctl suspend
+    bindsym $mod+Control+$suspend exec sudo systemctl suspend
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?' -b 'Yes, exit sway' 'swaymsg exit'
@@ -102,20 +106,20 @@
     # Moving around: {{{
 
     #       Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
+    bindsym $mod+$left  focus left
+    bindsym $mod+$down  focus down
+    bindsym $mod+$up    focus up
     bindsym $mod+$right focus right
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+    bindsym $mod+Left   focus left
+    bindsym $mod+Down   focus down
+    bindsym $mod+Up     focus up
+    bindsym $mod+Right  focus right
 
     #       Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+    bindsym $mod+Shift+$left    move left
+    bindsym $mod+Shift+$down    move down
+    bindsym $mod+Shift+$up      move up
+    bindsym $mod+Shift+$right   move right
 
     #       Resizing containers:
     bindsym $mod+Control+$left  resize shrink   width 10px
@@ -126,8 +130,8 @@
     #}}}
     # Workspaces: {{{
 
-    bindsym $mod+period workspace next
-    bindsym $mod+comma  workspace prev
+    bindsym $mod+j workspace next
+    bindsym $mod+q  workspace prev
     #       Switch to workspace
     bindsym $mod+1 workspace 1
     bindsym $mod+2 workspace 2
@@ -167,13 +171,12 @@
     # Layout stuff: {{{
     #
     # Splits
-    bindsym $mod+b splith
+    # bindsym $mod+b splith
     bindsym $mod+v splitv
 
     # Layout styles
-    bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    bindsym $mod+o layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
@@ -225,8 +228,8 @@
     bindsym --locked    XF86AudioPlay   exec    playerctl -p mpd play-pause
     bindsym --locked    XF86AudioNext   exec    playerctl -p mpd next
     bindsym --locked    XF86AudioPrev   exec    playerctl -p mpd previous
-    bindsym             $mod+Shift+x    exec    musmenu delete
-    bindsym             $mod+Shift+s    exec    musmenu search
+    bindsym             $mod+Shift+$mus  exec    musmenu delete
+    bindsym             $mod+Control+$mus  exec    musmenu search
 
     # }}}
     # Special Keys{{{
@@ -239,7 +242,7 @@
     mode ignore {
         bindsym $mod+escape mode default
     }
-    bindsym $mod+i mode ignore
+    bindsym $mod+escape mode ignore
 
     # }}}
 # }}}

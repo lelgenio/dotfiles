@@ -157,6 +157,32 @@ call plug#end()
 "}}}
 " Keys{{{
 "
+"
+    " dvorak
+
+    " noremap s l
+    " noremap n k
+    " noremap t j
+    " noremap h h "h keeps it's meaning
+
+" Dvorak it!
+no h h
+no t j
+no n k
+no s l
+" no s :
+" no S :
+no j d
+no l n
+no L N
+" Added benefits
+no - $
+no _ ^
+no N <C-w><C-w>
+no T <C-w><C-r>
+no H 8<Down>
+no T 8<Up>
+no D <C-w><C-r>
 
     " Easy comment toggle
     nmap     <silent> gc        :Commentary<CR>
