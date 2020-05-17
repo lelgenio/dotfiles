@@ -8,7 +8,7 @@ icons=1
 default-timeout=10000
 markup=1
 actions=1
-# layer=overlay
+layer=overlay
 
 [app-name=pavolume]
 default-timeout=5000
