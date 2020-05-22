@@ -140,7 +140,7 @@ c.completion.shrink = True
 
 # CSS border value for hints.
 # Type: String
-c.hints.border = '2px solid #cc5757'
+c.hints.border = '2px solid #D9534F'
 
 # Characters used for hint strings.
 # Type: UniqueCharString
@@ -219,7 +219,7 @@ c.colors.completion.category.bg = '#303030'
 
 # Background color of the selected completion item.
 # Type: QssColor
-c.colors.completion.item.selected.bg = '#cc5757'
+c.colors.completion.item.selected.bg = '#D9534F'
 
 # Top border color of the selected completion item.
 # Type: QssColor
@@ -260,11 +260,11 @@ c.colors.hints.bg = '#303030'
 
 # Font color for the matched part of hints.
 # Type: QtColor
-c.colors.hints.match.fg = '#cc5757'
+c.colors.hints.match.fg = '#D9534F'
 
 # Highlight color for keys to complete the current keychain.
 # Type: QssColor
-c.colors.keyhint.suffix.fg = '#cc5757'
+c.colors.keyhint.suffix.fg = '#D9534F'
 
 # Background color of the keyhint widget.
 # Type: QssColor
@@ -284,7 +284,7 @@ c.colors.statusbar.command.bg = '#202020'
 
 # Background color of the statusbar in caret mode with a selection.
 # Type: QssColor
-c.colors.statusbar.caret.selection.bg = '#cc5757'
+c.colors.statusbar.caret.selection.bg = '#D9534F'
 
 # Foreground color of the URL in the statusbar on successful load
 # (https).
@@ -309,7 +309,7 @@ c.colors.tabs.selected.odd.fg = 'white'
 
 # Background color of selected odd tabs.
 # Type: QtColor
-c.colors.tabs.selected.odd.bg = '#cc5757'
+c.colors.tabs.selected.odd.bg = '#D9534F'
 
 # Foreground color of selected even tabs.
 # Type: QtColor
@@ -317,7 +317,7 @@ c.colors.tabs.selected.even.fg = 'white'
 
 # Background color of selected even tabs.
 # Type: QtColor
-c.colors.tabs.selected.even.bg = '#cc5757'
+c.colors.tabs.selected.even.bg = '#D9534F'
 
 # Background color of pinned selected odd tabs.
 # Type: QtColor

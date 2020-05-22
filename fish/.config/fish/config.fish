@@ -12,19 +12,20 @@ set -x PATH $PATH ~/.local/bin
 
 set -x EDITOR nvim
 set -x VISUAL nvim
-# set -x BROWSER=qutebrowser
+set -x BROWSER qutebrowser
 set -x PAGER less
 
 if test -n "$XDG_VTRN"; and test -z "$DISPLAY"
     or command -qs systemctl;and systemctl -q is-enabled ly
+
     export _JAVA_AWT_WM_NONREPARENTING=1
     export GTK_CSD=0
-    export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
+    export LD_PRELOAD='/usr/lib/libgtk3-nocsd.so.0'
     export XCURSOR_THEME=capitaine-cursors
     export GTK_THEME=materia-custom-accent:dark
 
     # export XDG_CURRENT_DESKTOP=Unity
-    export QT_SCALE_FACTOR=1
+    export QT_WAYLAND_FORCE_DPI=physical
     export QPA_PLATFORM=wayland
     export QT_QPA_PLATFORM=wayland
 end
@@ -124,6 +125,9 @@ end
     set SPACEFISH_USER_SHOW always
     set SPACEFISH_USER_COLOR "#cc5757"
     set SPACEFISH_DIR_COLOR "#cc5757"
+    set SPACEFISH_USER_COLOR "#D9534F"
+    set SPACEFISH_DIR_COLOR "#D9534F"
+    
     set SPACEFISH_PROMPT_ADD_NEWLINE false
 
     set SPACEFISH_CHAR_COLOR_SUCCESS white

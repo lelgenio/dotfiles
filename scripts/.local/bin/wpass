@@ -25,7 +25,11 @@ entry=$(printf '%s\n' "${password_files[@]}" |
 username=$( pass show "$entry" 2>/dev/null | perl -ne 'print $1 if /^login: (.*)/' )
 password=$( pass show "$entry" 2>/dev/null | head -n 1 )
 
-case $(echo -e "Autotype\nUsername -> $username\nPassword" | wdmenu -p Action) in
+action=$(echo -e "Autotype\nUsername -> $username\nPassword" | wdmenu -p Action)
+
+swaymsg input \* xkb_layout 'us'
+
+case $action in
     Autotype)
         ydotool type "$username"
         ydotool key tab
@@ -36,3 +40,5 @@ case $(echo -e "Autotype\nUsername -> $username\nPassword" | wdmenu -p Action) i
     Password)
         printf '%s' "$password" | wl-copy;;
 esac
+
+swaymsg input \* xkb_layout 'br(dvorak)'

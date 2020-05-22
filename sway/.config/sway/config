@@ -248,7 +248,7 @@
 # }}}
 # Visual: {{{
 #
-    set $accent     #CC575D
+    set $accent     #D9534F
     set $fg_color   #ffffff
     set $bg_color   #191919
     set $bg_darker  #151515
@@ -264,13 +264,13 @@
 
     # bar {
     #     icon_theme Papirus
-    #     position top
-    #     gaps 5px
-    #     colors {
-    #         background $bg_color
-    #         focused_workspace $accent $bg_color $fg_color 
-    #     }
-    # }
+    #      position top
+    #      gaps 5px
+    #      colors {
+    #          background $bg_color
+    #          focused_workspace $accent $bg_color $fg_color 
+    #      }
+    #  }
 
     default_border pixel 2px
     gaps inner 5px

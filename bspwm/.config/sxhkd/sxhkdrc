@@ -7,11 +7,11 @@ super + Return
 	alacritty
 
 # program launcher
-super + d
-	rofi -show drun
+super + e
+	launcher
 
 # make sxhkd reload its configuration files:
-super + Escape
+super + alt + s
 	pkill -USR1 -x sxhkd
 
 #
@@ -42,9 +42,11 @@ super + g
 # state/flags
 #
 
-# set the window state
-super + {t,shift + t,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+# # set the window state
+# super + {t,shift + t,s,f}
+# 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+super + {space,f}
+    bspc node -t ~{floating,fullscreen}
 
 # set the node flags
 super + ctrl + {m,x,y,z}
@@ -55,7 +57,7 @@ super + ctrl + {m,x,y,z}
 #
 
 # focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
+super + {_,shift + }{h,t,n,s}
 	bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
@@ -88,21 +90,21 @@ super + {_,shift + }{1-9,0}
 # preselect
 #
 
-# preselect the direction
-super + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
+# # preselect the direction
+# super + ctrl + {h,j,k,l}
+# 	bspc node -p {west,south,north,east}
 
-# preselect the ratio
-super + ctrl + {1-9}
-	bspc node -o 0.{1-9}
+# # preselect the ratio
+# super + ctrl + {1-9}
+# 	bspc node -o 0.{1-9}
 
-# cancel the preselection for the focused node
-super + ctrl + space
-	bspc node -p cancel
+# # cancel the preselection for the focused node
+# super + ctrl + space
+# 	bspc node -p cancel
 
-# cancel the preselection for the focused desktop
-super + ctrl + shift + space
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+# # cancel the preselection for the focused desktop
+# super + ctrl + shift + space
+# 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 #
 # move/resize

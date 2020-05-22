@@ -1,9 +1,19 @@
 #!/bin/sh
 set -e
 
+getnew(){
+    find ~/.mail/INBOX{,.{Contas,Faculdade,Git,Trabalhos}}/new -type f | wc -l
+}
+
+OLD=$(getnew)
+
 [ "$1" = "update" ] && mbsync -a
 
-NEW=$(find ~/.mail/INBOX{,.{Contas,Faculdade,Git,Trabalhos}}/new -type f | wc -l)
+NEW=$(getnew)
+
+if [ "$NEW" -gt "$OLD" ];then
+    notify-send "Novos Emails!"
+fi
 
 echo $NEW | sed 's/^0$//'
 
