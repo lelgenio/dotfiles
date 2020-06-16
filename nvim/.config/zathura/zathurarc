@@ -1,3 +1,12 @@
+map h scroll left
+map t scroll down
+map n scroll up
+map s scroll right
+
+map l search forward
+
+map i set recolor
+
 set recolor
 set recolor-keephue
 set recolor-lightcolor "#202020"

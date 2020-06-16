@@ -20,6 +20,8 @@
 
     call plug#begin('~/.config/nvim/plugged')
 
+    Plug 'arrufat/vala.vim'
+    Plug 'NLKNguyen/c-syntax.vim'
     Plug 'airblade/vim-gitgutter'
     Plug 'chrisbra/Colorizer'
 
@@ -29,7 +31,7 @@
     "
     " Plug 'sheerun/vim-polyglot'
     " Plug 'dense-analysis/ale'
-    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Plug 'davidhalter/jedi-vim'
 
     " Plug 'autozimu/LanguageClient-neovim', {
@@ -166,23 +168,23 @@ call plug#end()
     " noremap h h "h keeps it's meaning
 
 " Dvorak it!
-no h h
-no t j
-no n k
-no s l
+noremap h h
+noremap t j
+noremap n k
+noremap s l
 " no s :
 " no S :
-no j d
-no l n
-no L N
+noremap j d
+noremap l n
+noremap L N
 " Added benefits
-no - $
-no _ ^
-no N <C-w><C-w>
-no T <C-w><C-r>
-no H 8<Down>
-no T 8<Up>
-no D <C-w><C-r>
+noremap - $
+noremap _ ^
+noremap N <C-w><C-w>
+noremap T <C-w><C-r>
+noremap H 8<Down>
+noremap T 8<Up>
+noremap D <C-w><C-r>
 
     " Easy comment toggle
     nmap     <silent> gc        :Commentary<CR>

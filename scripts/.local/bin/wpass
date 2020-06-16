@@ -27,6 +27,7 @@ password=$( pass show "$entry" 2>/dev/null | head -n 1 )
 
 action=$(echo -e "Autotype\nUsername -> $username\nPassword" | wdmenu -p Action)
 
+sleep 1s
 swaymsg input \* xkb_layout 'us'
 
 case $action in

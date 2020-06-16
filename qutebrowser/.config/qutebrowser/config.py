@@ -9,7 +9,7 @@
 # Aliases for commands. The keys of the given dictionary are the
 # aliases, while the values are the commands they map to.
 # Type: Dict
-c.aliases = {'q': 'close', 'qa': 'quit', 'w': 'session-save', 'wq': 'quit --save', 'wqa': 'quit --save'}
+c.aliases = {'q': 'close', 'qa': 'quit', 'w': 'session-save', 'wq': 'quit --save', 'wqa': 'quit --save', 'cw': 'config-write-py -f'}
 
 # Load a restored tab as soon as it takes focus.
 # Type: Bool
@@ -18,6 +18,36 @@ c.session.lazy_restore = True
 # Always restore open sites when qutebrowser is reopened.
 # Type: Bool
 c.auto_save.session = True
+
+# Which cookies to accept. With QtWebEngine, this setting also controls
+# other features with tracking capabilities similar to those of cookies;
+# including IndexedDB, DOM storage, filesystem API, service workers, and
+# AppCache. Note that with QtWebKit, only `all` and `never` are
+# supported as per-domain values. Setting `no-3rdparty` or `no-
+# unknown-3rdparty` per-domain on QtWebKit will have the same effect as
+# `all`.
+# Type: String
+# Valid values:
+#   - all: Accept all cookies.
+#   - no-3rdparty: Accept cookies from the same origin only. This is known to break some sites, such as GMail.
+#   - no-unknown-3rdparty: Accept cookies from the same origin only, unless a cookie is already set for the domain. On QtWebEngine, this is the same as no-3rdparty.
+#   - never: Don't accept cookies at all.
+config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
+
+# Which cookies to accept. With QtWebEngine, this setting also controls
+# other features with tracking capabilities similar to those of cookies;
+# including IndexedDB, DOM storage, filesystem API, service workers, and
+# AppCache. Note that with QtWebKit, only `all` and `never` are
+# supported as per-domain values. Setting `no-3rdparty` or `no-
+# unknown-3rdparty` per-domain on QtWebKit will have the same effect as
+# `all`.
+# Type: String
+# Valid values:
+#   - all: Accept all cookies.
+#   - no-3rdparty: Accept cookies from the same origin only. This is known to break some sites, such as GMail.
+#   - no-unknown-3rdparty: Accept cookies from the same origin only, unless a cookie is already set for the domain. On QtWebEngine, this is the same as no-3rdparty.
+#   - never: Don't accept cookies at all.
+config.set('content.cookies.accept', 'all', 'devtools://*')
 
 # User agent to send.  The following placeholders are defined:  *
 # `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
@@ -89,6 +119,20 @@ config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/53
 # Type: FormatString
 config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://docs.google.com/*')
 
+# User agent to send.  The following placeholders are defined:  *
+# `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
+# The underlying WebKit version (set to a fixed value   with
+# QtWebEngine). * `{qt_key}`: "Qt" for QtWebKit, "QtWebEngine" for
+# QtWebEngine. * `{qt_version}`: The underlying Qt version. *
+# `{upstream_browser_key}`: "Version" for QtWebKit, "Chrome" for
+# QtWebEngine. * `{upstream_browser_version}`: The corresponding
+# Safari/Chrome version. * `{qutebrowser_version}`: The currently
+# running qutebrowser version.  The default value is equal to the
+# unchanged user agent of QtWebKit/QtWebEngine.  Note that the value
+# read from JavaScript is always the global value.
+# Type: FormatString
+config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://drive.google.com/*')
+
 # Load images automatically in web pages.
 # Type: Bool
 config.set('content.images', True, 'chrome-devtools://*')
@@ -117,6 +161,14 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 # Type: Bool
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
+# Allow websites to record audio/video.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.media_capture', True, 'https://ca.bbcollab.com')
+
 # Allow websites to show notifications.
 # Type: BoolAsk
 # Valid values:
@@ -132,6 +184,44 @@ config.set('content.notifications', False, 'https://www.1337x.to')
 #   - false
 #   - ask
 config.set('content.notifications', True, 'https://www.reddit.com')
+
+# Allow websites to show notifications.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.notifications', True, 'https://dev.lemmy.ml')
+
+# Allow websites to show notifications.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.notifications', False, 'https://www.duolingo.com')
+
+# Allow websites to show notifications.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.notifications', False, 'https://www.jornalcontabil.com.br')
+
+# Proxy to use. In addition to the listed values, you can use a
+# `socks://...` or `http://...` URL.
+# Type: Proxy
+# Valid values:
+#   - system: Use the system wide proxy.
+#   - none: Don't use any proxy
+c.content.proxy = 'system'
+
+# Automatically mute tabs. Note that if the `:tab-mute` command is used,
+# the mute status for the affected tab is now controlled manually, and
+# this setting doesn't have any effect.
+# Type: Bool
+c.content.mute = True
 
 # Shrink the completion to be smaller than the configured size if there
 # are no scrollbars.
@@ -155,13 +245,36 @@ c.scrolling.smooth = True
 # Type: Bool
 c.statusbar.hide = False
 
+# Position of the status bar.
+# Type: VerticalPosition
+# Valid values:
+#   - top
+#   - bottom
+c.statusbar.position = 'top'
+
+# List of widgets displayed in the statusbar.
+# Type: List of String
+# Valid values:
+#   - url: Current page URL.
+#   - scroll: Percentage of the current page position like `10%`.
+#   - scroll_raw: Raw percentage of the current page position like `10`.
+#   - history: Display an arrow when possible to go back/forward in history.
+#   - tabs: Current active tab, e.g. `2`.
+#   - keypress: Display pressed keys when composing a vi command.
+#   - progress: Progress bar for the current page loading.
+c.statusbar.widgets = ['keypress', 'url', 'scroll', 'history', 'tabs']
+
+# Open new tabs (middleclick/ctrl+click) in the background.
+# Type: Bool
+c.tabs.background = False
+
 # When to show favicons in the tab bar.
 # Type: String
 # Valid values:
 #   - always: Always show favicons.
 #   - never: Always hide favicons.
 #   - pinned: Show favicons only on pinned tabs.
-c.tabs.favicons.show = 'never'
+c.tabs.favicons.show = 'always'
 
 # How to behave when the last tab is closed.
 # Type: String
@@ -171,7 +284,15 @@ c.tabs.favicons.show = 'never'
 #   - startpage: Load the start page.
 #   - default-page: Load the default page.
 #   - close: Close the window.
-c.tabs.last_close = 'close'
+c.tabs.last_close = 'startpage'
+
+# Which tab to select when the focused tab is removed.
+# Type: SelectOnRemove
+# Valid values:
+#   - prev: Select the tab which came before the closed one (left in horizontal, above in vertical).
+#   - next: Select the tab which came after the closed one (right in horizontal, below in vertical).
+#   - last-used: Select the previously selected tab.
+c.tabs.select_on_remove = 'last-used'
 
 # When to show the tab bar.
 # Type: String
@@ -204,6 +325,35 @@ c.tabs.title.format = '{current_title}'
 # Width (in pixels) of the progress indicator (0 to disable).
 # Type: Int
 c.tabs.indicator.width = 0
+
+# Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
+# for a blank page.
+# Type: FuzzyUrl
+c.url.default_page = 'https://search.disroot.org'
+
+# Search engines which can be used via the address bar.  Maps a search
+# engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
+# placeholder. The placeholder will be replaced by the search term, use
+# `{{` and `}}` for literal `{`/`}` braces.  The following further
+# placeholds are defined to configure how special characters in the
+# search terms are replaced by safe characters (called 'quoting'):  *
+# `{}` and `{semiquoted}` quote everything except slashes; this is the
+# most   sensible choice for almost all search engines (for the search
+# term   `slash/and&amp` this placeholder expands to `slash/and%26amp`).
+# * `{quoted}` quotes all characters (for `slash/and&amp` this
+# placeholder   expands to `slash%2Fand%26amp`). * `{unquoted}` quotes
+# nothing (for `slash/and&amp` this placeholder   expands to
+# `slash/and&amp`).  The search engine named `DEFAULT` is used when
+# `url.auto_search` is turned on and something else than a URL was
+# entered to be opened. Other search engines can be used by prepending
+# the search engine name to the search term, e.g. `:open google
+# qutebrowser`.
+# Type: Dict
+c.url.searchengines = {'DEFAULT': 'search.disroot.org?q={}', '!aw': 'wiki.archlinux.org?search={}', '!w': 'pt.wikipedia.org/w?search={}'}
+
+# Page(s) to open at the start.
+# Type: List of FuzzyUrl, or FuzzyUrl
+c.url.start_pages = 'https://search.disroot.org'
 
 # Background color of the completion widget for odd rows.
 # Type: QssColor
@@ -278,6 +428,14 @@ c.colors.statusbar.normal.fg = 'gray'
 # Type: QssColor
 c.colors.statusbar.normal.bg = '#202020'
 
+# Foreground color of the statusbar in insert mode.
+# Type: QssColor
+c.colors.statusbar.insert.fg = '#aaffaa'
+
+# Background color of the statusbar in insert mode.
+# Type: QssColor
+c.colors.statusbar.insert.bg = '#202020'
+
 # Background color of the statusbar in command mode.
 # Type: QssColor
 c.colors.statusbar.command.bg = '#202020'
@@ -289,7 +447,7 @@ c.colors.statusbar.caret.selection.bg = '#D9534F'
 # Foreground color of the URL in the statusbar on successful load
 # (https).
 # Type: QssColor
-c.colors.statusbar.url.success.https.fg = 'gray'
+c.colors.statusbar.url.success.https.fg = 'white'
 
 # Background color of the tab bar.
 # Type: QssColor
@@ -378,20 +536,20 @@ c.fonts.tabs = '14px Inter'
 # Bindings for normal mode
 config.bind(',m', 'spawn --userscript view_in_mpv')
 config.bind(',r', 'spawn --userscript readability')
+config.bind(';e', "hint links spawn deemix '{hint-url}'")
 config.bind(';m', 'hint links spawn mpv --fs {hint-url}')
-
+config.bind('E', 'hint all tab')
 config.bind('H', 'back')
+config.bind('L', 'search-prev')
 config.bind('N', 'tab-next')
 config.bind('S', 'forward')
 config.bind('T', 'tab-prev')
-
-config.bind('n', 'scroll up')
-config.bind('t', 'scroll down')
-config.bind('h', 'scroll left')
-config.bind('s', 'scroll right')
-
 config.bind('e', 'hint all')
-config.bind('E', 'hint all tab')
+config.bind('h', 'scroll left')
+config.bind('l', 'search-next')
+config.bind('n', 'scroll up')
+config.bind('s', 'scroll right')
+config.bind('t', 'scroll down')
 
 # Bindings for insert mode
 config.bind('<Ctrl+i>', 'spawn --userscript qute-keepass -p ~/Documentos/senhas/Senhas.kdbx', mode='insert')

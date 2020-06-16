@@ -16,7 +16,8 @@ geometry(){
 }
 
 {
-if [ "$1" == "stop" ]; then
+if pgrep wf-recorder > /dev/null && pgrep ffplay > /dev/null
+then
 	if pgrep ffplay > /dev/null; then
 		pkill ffplay > /dev/null
 	fi
@@ -24,24 +25,21 @@ if [ "$1" == "stop" ]; then
 		pkill wf-recorder > /dev/null
 	fi
 	notify-send -t 2000 "Wayland recording has been stopped"
-elif [ "$1" == "is-recording" ]; then
-	if pgrep wf-recorder > /dev/null && pgrep ffplay > /dev/null; then
-		notify-send -t 2000 "Wayland recording is up"
-	else
-		notify-send -t 2000 "No Wayland recording"
-	fi
 else
 	if ! pgrep wf-recorder > /dev/null; then
 		geometry=$(geometry) || exit $?
 		wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video2 --geometry="$geometry" &
 	fi
 	if ! pgrep ffplay; then
+		swaymsg assign [class=ffplay] workspace 11
+
 		unset SDL_VIDEODRIVER
-		ffplay /dev/video2 &
+		ffplay /dev/video2 -fflags nobuffer &
 		sleep 0.5
 		# a hack so FPS is not dropping
-		swaymsg [class=ffplay] move position 1915 1050
-		swaymsg focus tiling
+		swaymsg [class=ffplay] floating enable
+		# swaymsg [class=ffplay] move position 1900 1000
+		# swaymsg focus tiling
 	fi
 	notify-send -t 2000 "Wayland recording has been started"
 fi

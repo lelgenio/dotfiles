@@ -28,9 +28,9 @@
 # }}}
 # Output configuration {{{
 #
-    output * bg '#252525' solid_color
+    # output * bg '#252525' solid_color
     # output * bg /usr/share/backgrounds/gnome/adwaita-night.jpg fill
-    # output * bg ~/.teclado-dvorak-br.png fit
+    output * bg ~/.config/sway/assembly.png fit
     # Output HDMI-A-1 resolution 1280x720
 
     # Disable laptop screen if closed, --reload is important
@@ -158,8 +158,6 @@
     # Assign programs to their workspace
     assign [app_id=qutebrowser] workspace 2
     assign [class=qutebrowser] workspace 2
-    assign [app_id=keepass.*] workspace 8
-    assign [class=KeePass.*] workspace 8
     assign [class=Steam] workspace 9
 
     assign [app_id=telegramdesktop] workspace 10
@@ -275,8 +273,8 @@
     default_border pixel 2px
     gaps inner 5px
 
-    # smart_gaps on
-	# smart_borders on
+    smart_gaps on
+	smart_borders on
 
     # for_window [app_id=mpv] floating enable
     for_window [app_id=weather] floating enable

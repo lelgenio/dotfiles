@@ -12,9 +12,10 @@ end
 
 qemu-system-x86_64                                              \
     -enable-kvm                                                 \
-    -m 4G                                                       \
+    -m 2G                                                       \
     -cpu host                                                   \
     -smp (nproc)                                                \
     -display sdl,gl=on                                          \
+    -vga qxl                                                    \
     -audiodev pa,id=pa                                          \
     -drive file="$HOME/.local/share/windows10.img",format=raw

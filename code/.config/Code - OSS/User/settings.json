@@ -6,11 +6,12 @@
   "workbench.editor.showTabs": false,
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": true,
-  "breadcrumbs.enabled": false,
+  "breadcrumbs.enabled": true,
   "workbench.editor.closeEmptyGroups": true,
   "workbench.editor.tabCloseButton": "off",
   "explorer.openEditors.visible": 0,
   "debug.openDebug": "openOnDebugBreak",
+  "debug.console.closeOnEnd": true,
   // Don't ask
   "git.autofetch": true,
   "git.confirmSync": false,
@@ -297,5 +298,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "workbench.startupEditor": "newUntitledFile",
-  "workbench.colorTheme": "Community Material Theme Darker High Contrast"
+  "workbench.colorTheme": "Community Material Theme Darker High Contrast",
+  "mesonbuild.configureOnOpen": false
 }

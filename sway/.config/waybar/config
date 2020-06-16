@@ -28,7 +28,6 @@
             "1":  "",
             "2":  "",
             "3":  "",
-            "8":  "",
             "9": "",
             "10": "",
             "urgent": "",
@@ -63,14 +62,14 @@
         "tooltip":false
     },
     "battery": {
-        "tooltip":false,
+        "tooltip":true,
         "states": {
             "full":100,
             "good": 95,
             "warning": 25
         },
         "format": "{icon}",
-        "format-charging": "",
+        "format-charging": "",
         "format-plugged": "",
         "format-full": "",
         "format-warning":"{icon} {time}",
@@ -78,12 +77,12 @@
     },
     "network": {
         "tooltip":false,
-        "on-click": "termite -e nmtui",
+        "on-click": "terminal nmtui",
         "format-wifi": "{icon}",
         "format-icons":[ "", "", "", "", "" ],
-        "format-ethernet": "",
-        "format-linked": "",
-        "format-disconnected": "⚠"
+        "format-ethernet": "",
+        "format-linked": "",
+        "format-disconnected": ""
     },
     "pulseaudio": {
         "tooltip":false,
