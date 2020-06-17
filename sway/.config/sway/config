@@ -228,6 +228,7 @@
     bindsym --locked    XF86AudioPrev   exec    playerctl -p mpd previous
     bindsym             $mod+Shift+$mus  exec    musmenu delete
     bindsym             $mod+Control+$mus  exec    musmenu search
+    bindsym             $mod+Control+Shift+$mus  exec    dzadd
 
     # }}}
     # Special Keys{{{
