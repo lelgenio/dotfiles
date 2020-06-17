@@ -236,6 +236,10 @@ c.hints.border = '2px solid #D9534F'
 # Type: UniqueCharString
 c.hints.chars = 'aoeuidnths'
 
+# Leave insert mode if a non-editable element is clicked.
+# Type: Bool
+c.input.insert_mode.auto_leave = False
+
 # Enable smooth scrolling for web pages. Note smooth scrolling does not
 # work with the `:scroll-px` command.
 # Type: Bool
@@ -320,7 +324,7 @@ c.tabs.show_switching_delay = 2000
 # `{protocol}`: Protocol (http/https/...) of the current web page. *
 # `{audio}`: Indicator for audio/mute status.
 # Type: FormatString
-c.tabs.title.format = '{current_title}'
+c.tabs.title.format = '{audio}{index}: {current_title}'
 
 # Width (in pixels) of the progress indicator (0 to disable).
 # Type: Int

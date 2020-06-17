@@ -4,6 +4,7 @@ map n scroll up
 map s scroll right
 
 map l search forward
+map L search backward
 
 map i set recolor
 

@@ -160,32 +160,39 @@ call plug#end()
 " Keys{{{
 "
 "
-    " dvorak
 
-    " noremap s l
-    " noremap n k
-    " noremap t j
-    " noremap h h "h keeps it's meaning
+    " Dvorak it!
+    noremap h h
+    noremap t j
+    noremap n k
+    noremap s l
 
-" Dvorak it!
-noremap h h
-noremap t j
-noremap n k
-noremap s l
-" no s :
-" no S :
-noremap j d
-noremap l n
-noremap L N
-" Added benefits
-noremap - $
-noremap _ ^
-noremap N <C-w><C-w>
-noremap T <C-w><C-r>
-noremap H 8<Down>
-noremap T 8<Up>
-noremap D <C-w><C-r>
+    noremap j d
+    noremap l n
+    noremap L N
+    " Added benefits
+    noremap - $
+    noremap _ ^
+    noremap N <C-w><C-w>
+    noremap T <C-w><C-r>
+    noremap H 8<Down>
+    noremap T 8<Up>
+    noremap D <C-w><C-r>
 
+    " Single charater traversal
+    imap <C-t> <Left>
+    imap <C-n> <Right>
+
+    " Quickly exit insert mode
+    imap jj <ESC>
+
+    "I deserve the death sentence
+    nmap <C-s>      :w<CR>
+
+    "open and close folds
+    nmap <silent> s       <right>:silent! foldopen<CR>
+    nmap <silent> <right> <right>:silent! foldopen<CR>
+    
     " Easy comment toggle
     nmap     <silent> gc        :Commentary<CR>
     xmap     <silent> gc        :Commentary<CR>
@@ -198,16 +205,26 @@ noremap D <C-w><C-r>
     nmap     ga <Plug>(EasyAlign)
 
     " Simplify window navigation
-    nnoremap <silent> <C-h> <C-w><C-h>
-    nnoremap <silent> <C-j> <C-w><C-j>
-    nnoremap <silent> <C-k> <C-w><C-k>
-    nnoremap <silent> <C-l> <C-w><C-l>
+    " nnoremap <silent> <C-h> <C-w><C-h>
+    " nnoremap <silent> <C-t> <C-w><C-j>
+    " nnoremap <silent> <C-n> <C-w><C-k>
+    " nnoremap <silent> <C-s> <C-w><C-l>
 
+    " use <tab> for trigger completion and navigate to the next complete item
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction
 
-    " Interact with language server
-    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+    inoremap <silent><expr> <Tab>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<Tab>" :
+          \ coc#refresh()
+
+    " " Interact with language server
+    " nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+    " nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    " nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 "}}}
 " Lanugage Server{{{
@@ -285,7 +302,7 @@ augroup END
         endif
     endfunction
 
-    nnoremap <S-h> :call ToggleHiddenAll()<CR>
+    " nnoremap <S-h> :call ToggleHiddenAll()<CR>
     call ToggleHiddenAll()
 "}}}
 " vim:foldmethod=marker

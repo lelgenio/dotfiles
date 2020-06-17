@@ -77,7 +77,7 @@ owm_pango(){
 owm_json(){
     owm
 
-    cat > .forecast.json <<EOF
+    tee > .forecast.json <<EOF
 { 
     "min":"$MIN",
     "max":"$MAX",
@@ -93,19 +93,15 @@ wttrin(){
     curl -sH "Accept-Language: ${LANG%_*}" --compressed "$request"
 }
 
-if [ "$1" == "full" ]
-then
-    wttrin
-elif [ "$1" == "short" ]
-then
-    owm_short
-elif [ "$1" == "pango" ]
-then
-    owm_pango
-elif [ "$1" == "json" ]
-then
-    owm_json
-elif [ "$1" == "long" ]
-then
-    owm_long
-fi
+case "$1" in
+    short)
+        owm_short;;
+    pango)
+        owm_pango;;
+    json)
+        owm_json;;
+    long)
+        owm_long;;
+    full|*)
+        wttrin;;
+esac
