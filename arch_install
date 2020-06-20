@@ -62,7 +62,7 @@ ROOT_PASSWORD=''
 
 # Main user to create (by default, added to wheel group, and others).
 USER_NAME='lelgenio'
-# Link to users dotfiles repo(git) 
+# Link to users dotfiles repo(git)
 # Assumed to have stow-able modules on its root(cd .dotfiles;stow*/)
 DOTFILES_URL="https://gitlab.com/$USER_NAME/dotfiles"
 USER_SHELL='fish'
@@ -115,7 +115,7 @@ set_pkgs() {
 
     pkgs+=" $pkgs_base"
     # DE
-    pkgs+=' ly sway waybar ruby-fusuma light mako udiskie stow yay'
+    pkgs+=' ly sway waybar ruby-fusuma light mako udiskie dotdrop yay'
     pkgs+=' bemenu wofi-hg j4-dmenu-desktop'
     # passwords and auth
     pkgs+=' pass gnupg pam-gnupg'
@@ -191,7 +191,7 @@ setup() {
 
     echo 'Cleaning disk'
     disk_clean
-    
+
     echo 'Creating partitions'
     partition_drive "$DRIVE"
 
@@ -300,14 +300,14 @@ encrypt_drive() {
 setup_lvm() {
     local partition="$1"; shift
     local volgroup="$1"; shift
-    
+
     local d_size=$(lsblk --noheadings --nodeps --bytes --raw --output SIZE $DRIVE)
 
     pvcreate "$partition"
     vgcreate "$volgroup" "$partition"
 
 
-    # if the disk has more than 
+    # if the disk has more than
     if [ "$d_size" -gt $(( 50*10**9 )) ]; then
         # Create a 4GB swap partition
         lvcreate --yes -L4G "$volgroup" -n swap
@@ -821,14 +821,12 @@ clean_packages() {
     fi
 }
 #}}}
-# Stow dotfiles{{{
+# Install dotfiles{{{
 stow_dots() {
     if [ ! -d  ~/.dotfiles ];then
         git clone $DOTFILES_URL ~/.dotfiles
     fi
-    cd ~/.dotfiles
-    stow */
-    cd -
+    dotdrop --cfg ./dotfiles/config.yml install --force --no-banner
 }
 #}}}
 #}}}
