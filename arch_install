@@ -303,24 +303,24 @@ setup_lvm() {
 
     local d_size=$(lsblk --noheadings --nodeps --bytes --raw --output SIZE $DRIVE)
 
+    local swap_size=$(free -b | awk '/^Mem/ { printf "%.0fG", 2*$2*10**-9}')
+
     pvcreate "$partition"
     vgcreate "$volgroup" "$partition"
 
+    # Create a swap partition that is twice the amount of RAM
+    lvcreate --yes -L$swap_size "$volgroup" -n swap
 
-    # if the disk has more than
-    if [ "$d_size" -gt $(( 50*10**9 )) ]; then
-        # Create a 4GB swap partition
-        lvcreate --yes -L4G "$volgroup" -n swap
-
+    # if the disk has more than 100Gb
+    if [ "$d_size" -gt $( echo "100*10^9" | bc ) ]
+    then
         # Create a 50GB root partition
         lvcreate --yes -L '50G' "$volgroup" -n root
     else
-        # Create a swap partition of 10% the disk
-        lvcreate --yes -l '+10%FREE' "$volgroup" -n swap
-
         # Create root partition on 50% of free space
         lvcreate --yes -l '+50%FREE' "$volgroup" -n root
     fi
+
     # Use the rest of the space for home
     lvcreate --yes -l '+100%FREE' "$volgroup" -n home
 
