@@ -1,7 +1,7 @@
 #!/usr/bin/fish
 
 if not command -v qemu-system-x86_64 > /dev/null
-    echo qemu not installed 
+    echo qemu not installed
     exit 1
 end
 
@@ -9,6 +9,7 @@ end
 # -boot order=d \
 # -nic none\
 # -usb -device usb-tablet \
+# -vga qxl                                                    \
 
 qemu-system-x86_64                                              \
     -enable-kvm                                                 \
@@ -16,6 +17,7 @@ qemu-system-x86_64                                              \
     -cpu host                                                   \
     -smp (nproc)                                                \
     -display sdl,gl=on                                          \
-    -vga qxl                                                    \
-    -audiodev pa,id=pa                                          \
+    -audiodev pa,id=snd0                                    \
+    -device ich9-intel-hda \
+    -device hda-output,audiodev=snd0\
     -drive file="$HOME/.local/share/windows10.img",format=raw

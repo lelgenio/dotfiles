@@ -1,7 +1,6 @@
 config:
   backup: true
   banner: false
-  create: false
   dotpath: dotfiles
   keepdot: false
   link_dotfile_default: nolink
@@ -27,6 +26,7 @@ profiles:
     - d_zathura
     - d_wallpapers
     - mime
+    - fusuma.yml
     variables:
       key:
         left: h
@@ -56,7 +56,7 @@ dotfiles:
     src: teste
     dst: ~/teste
   f_fish:
-    src: config/config.fish
+    src: config/fish.fish
     dst: ~/.config/fish/config.fish
   f_mako:
     src: config/mako.conf
@@ -97,6 +97,9 @@ dotfiles:
   mime:
     src: mime/
     dst: ~/
+  fusuma.yml:
+    src: config/fusuma.yml
+    dst: ~/.config/fusuma/config.yml
 actions:
   notify: notify-send "Updating dotfiles"
   makoreload: makoctl reload

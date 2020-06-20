@@ -30,7 +30,7 @@ echo (){
 #ABOUT#{{{
 # This script will set up an Arch installation with a 100 MB /boot partition
 # and an encrypted LVM partition with swap and / inside.  It also installs
-# and configures systemd as the init system (removing sysvinit).
+# and configures systemd as the init system.
 #
 # You should read through this script before running it in case you want to
 # make any modifications, in particular, the variables just below, and the
@@ -51,8 +51,8 @@ DRIVE='/dev/sda'
 # Hostname of the installed machine.
 HOSTNAME='arch'
 
-# Encrypt everything (except /boot).  Leave blank to disable.
-ENCRYPT_DRIVE=''
+# Encrypt everything (except /boot). true or false
+ENCRYPT_DRIVE=false
 
 # Passphrase used to encrypt the drive (leave blank to be prompted).
 DRIVE_PASSPHRASE=''
@@ -195,7 +195,8 @@ setup() {
     echo 'Creating partitions'
     partition_drive "$DRIVE"
 
-    if "$ENCRYPT_DRIVE";then
+    if "$ENCRYPT_DRIVE"
+    then
         local lvm_part="/dev/mapper/lvm"
 
         if [ -z "$DRIVE_PASSPHRASE" ];then
@@ -247,7 +248,7 @@ setup() {
 disk_clean(){
     echo 'cleaning disk'
 
-    umount -R /mnt || true
+    umount --recursive --quiet /mnt || true
     swapoff -a
 
     pvs "$DRIVE"2 || return 0
@@ -427,7 +428,8 @@ unmount_filesystems() {
     umount -R /mnt
     swapoff /dev/vg00/swap
     vgchange -an
-    if [ -n "$ENCRYPT_DRIVE" ];then
+    if $ENCRYPT_DRIVE
+    then
         cryptsetup luksClose lvm
     fi
 }
@@ -577,7 +579,8 @@ set_initcpio() {
     fi
 
     local encrypt=""
-    if [ -n "$ENCRYPT_DRIVE" ];then
+    if $ENCRYPT_DRIVE
+    then
         encrypt="encrypt keyboard"
     fi
 

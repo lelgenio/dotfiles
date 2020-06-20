@@ -1,4 +1,4 @@
-"
+" {{@@ header() @@}}
 " LEL
 "             _
 "  _ ____   _(_)_ __ ___
@@ -212,7 +212,7 @@ call plug#end()
     imap jj <ESC>
 
     "I deserve the death sentence
-    nmap <C-s>      :w<CR>
+    nmap <C-s>      :wa<CR>
 
     "open and close folds
     nmap    <silent> {{@@ key.right @@}} <right>
@@ -233,9 +233,13 @@ call plug#end()
     map e <Plug>(easymotion-prefix)
     set ignorecase
 
+    map <C-j> :GFiles<CR>
+
     "" coc {{{
+
         "allow json comments
-         autocmd FileType json syntax match Comment +\/\/.\+$+
+        autocmd FileType json syntax match Comment +\/\/.\+$+
+
         " Don't pass messages to |ins-completion-menu|.
         set shortmess+=c
 

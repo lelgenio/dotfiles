@@ -1,3 +1,4 @@
+//  {{@@ header() @@}}
 {
     "position":"{{@@ bar_pos @@}}",
     "layer":"top",
@@ -156,4 +157,4 @@
 
 
 }
-# vim:ft=json
+// vim:ft=json

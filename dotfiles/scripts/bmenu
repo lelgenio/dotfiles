@@ -3,11 +3,11 @@
 # bmenu *       - use as dmenu, -p for custom prompt (man bemenu)
 # bmenu run     - select from .desktop files and run it
 # bmenu start   - internal option
-if test "$argv[1]" != "start" || test "$argv[1]" = "run" 
+if test "$argv[1]" != "start" || test "$argv[1]" = "run"
     test -n "$SWAYSOCK" && swaymsg fullscreen off > /dev/null
 end
 
-if test "$argv[1]" = "run" 
+if test "$argv[1]" = "run"
     test -n "$2" && set t "$2" || set t "terminal"
     exec j4-dmenu-desktop --dmenu="bmenu start -p Iniciar:" --term "$t"
 end
@@ -25,9 +25,9 @@ bemenu \
     --no-overlap\
     --list 20\
     --prefix '->'\
-    --fn "FiraCode 12"\
-    --tb "#242424" --tf "#cc5757" \
-    --fb "#242424" --ff "#cccccc" \
-    --nb "#202020" --nf "#cccccc" \
-    --hb "#303030" --hf "#cc5757" \
+    --fn "{{@@ font.mono @@}} 12"\
+    --tb "{{@@ color.bg       @@}}" --tf "{{@@ color.accent @@}}" \
+    --fb "{{@@ color.bg       @@}}" --ff "{{@@ color.txt    @@}}" \
+    --nb "{{@@ color.bg       @@}}" --nf "{{@@ color.txt    @@}}" \
+    --hb "{{@@ color.bg_light @@}}" --hf "{{@@ color.accent @@}}" \
     $argv

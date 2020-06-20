@@ -1,8 +1,12 @@
 #!/bin/env python
+# {{@@ header() @@}}
+
+
 # pylint: disable=C0111
 # type: ignore
 from qutebrowser.config.configfiles import ConfigAPI  # noqa: F401
 from qutebrowser.config.config import ConfigContainer  # noqa: F401
+
 
 # fmt: off
 config = config  # type: ConfigAPI # noqa: F821 pylint: disable=E0602,C0103
