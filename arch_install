@@ -106,7 +106,7 @@ set_pkgs() {
     pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
     pkgs_base+=' fish bluez cronie git man-db'
     # netctl
-    pkgs_base+=' netctl dhcpd ifplugged wpa_supplicant dialog'
+    pkgs_base+=' netctl dhcpcd ifpluged wpa_supplicant dialog'
 
     pkgs_base+=" $(pacman -Sgq base-devel)"
     if $IS_BIOS;then
@@ -189,15 +189,9 @@ setup() {
     local boot_dev="$DRIVE"1
     local lvm_dev="$DRIVE"2
 
-    echo 'Cleaning disk'
-    disk_clean
-
-    echo 'Creating partitions'
-    partition_drive "$DRIVE"
-
     if "$ENCRYPT_DRIVE"
     then
-        local lvm_part="/dev/mapper/lvm"
+        local lvm_dev="/dev/mapper/lvm"
 
         if [ -z "$DRIVE_PASSPHRASE" ];then
             echo 'Enter a passphrase to encrypt the disk:'
@@ -206,13 +200,16 @@ setup() {
 
         echo 'Encrypting partition'
         encrypt_drive "$lvm_dev" "$DRIVE_PASSPHRASE" lvm
-
-    else
-        local lvm_part="$lvm_dev"
     fi
 
+    echo 'Cleaning disk'
+    disk_clean "$lvm_dev"
+
+    echo 'Creating partitions'
+    partition_drive "$DRIVE"
+
     echo 'Setting up LVM'
-    setup_lvm "$lvm_part" vg00
+    setup_lvm "$lvm_dev" vg00
 
     echo 'Formatting filesystems'
     format_filesystems "$boot_dev"
@@ -246,19 +243,22 @@ setup() {
 #}}}
 # Remove old LVMs{{{
 disk_clean(){
+
+    local lvm_part="$1"
+
     echo 'cleaning disk'
 
     umount --recursive --quiet /mnt || true
     swapoff -a
 
-    pvs "$DRIVE"2 || return 0
+    pvs "$lvm_part" || return 0
 
-    for vg in $(pvs -o vg_name --nohead "$DRIVE"2)
+    for vg in $(pvs -o vg_name --nohead "$lvm_part")
     do
         vgremove "$vg" --yes
     done
 
-    pvremove "$DRIVE"2
+    pvremove "$lvm_part"
 }
 #}}}
 # Partition Drive{{{
