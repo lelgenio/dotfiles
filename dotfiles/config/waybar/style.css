@@ -1,0 +1,96 @@
+* {
+    font: 14px {{@@ font.interface @@}}, Font Awesome, FuraCode Nerd Font;
+    border-radius:0;
+    margin:0;
+    padding: 0;
+    transition-duration:0;
+}
+
+window#waybar {
+    background-color: rgba(30,30,30,.9);
+    {%@@ if bar_pos == "top" @@%}
+        border-bottom:
+    {%@@ else @@%}
+        border-top:
+    {%@@ endif @@%}
+      2px solid {{@@ color.bg_dark @@}};
+}
+
+window#waybar.solo {
+    background-color: {{@@ color.bg @@}};
+}
+
+window#waybar.empty {
+    background-color: transparent;
+    border:none;
+}
+
+#workspaces button {
+    background-color: transparent;
+    border: 3px solid transparent;
+    color: #aaaaaa;
+}
+
+#workspaces button.focused {
+    {%@@ if bar_pos == "top" @@%}
+        border-top:
+    {%@@ else @@%}
+        border-bottom:
+    {%@@ endif @@%}
+        3px solid {{@@ color.accent @@}};
+    /* border-bottom: 3px solid transparent; */
+    color: #ffffff;
+}
+
+/*Window Title*/
+#window{
+    color:#aaa;
+    margin:0 4px;
+}
+
+
+#mpd,
+#tray,
+#clock,
+#network,
+#battery,
+#backlight,
+#pulseaudio,
+#custom-mail,
+#custom-spigot,
+#custom-updates,
+#custom-weather,
+#custom-torrentD,
+#custom-torrentS
+{
+    margin: 0 7px;
+    color: {{@@ color.txt @@}};
+    opacity:.7;
+}
+
+#clock,
+#custom-weather
+{
+    font-size:15px;
+}
+#network{
+    margin-top:-1px;
+    font-size:16px;
+}
+
+#mpd,
+#window,
+#workspaces
+{
+    font-weight:normal;
+}
+
+
+#custom-recording {
+    color: #ee4040;
+}
+
+#mpd.paused {
+    font-size: 0;
+    border: none;
+}

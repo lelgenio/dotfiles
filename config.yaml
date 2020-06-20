@@ -1,0 +1,103 @@
+config:
+  backup: true
+  banner: false
+  create: false
+  dotpath: dotfiles
+  keepdot: false
+  link_dotfile_default: nolink
+  link_on_import: nolink
+  longkey: false
+  default_actions:
+  - notify
+profiles:
+  i15:
+    dotfiles:
+    - nvim
+    - f_sway
+    - f_teste
+    - f_fish
+    - f_mako
+    - d_waybar
+    - f_kitty.conf
+    - qutebrowser.py
+    - f_lesskey
+    - scripts
+    - d_wofi
+    - d_ranger
+    - d_zathura
+    - d_wallpapers
+    - mime
+    variables:
+      key:
+        left: h
+        down: t
+        up: n
+        right: s
+        next: l
+      font:
+        mono: Fira Code
+        interface: Inter
+      color:
+        accent: '#D9534F'
+        bg: '#202020'
+        bg_light: '#303030'
+        bg_dark: '#191919'
+        txt: '#ffffff'
+        nontxt: '#252525'
+      bar_pos: top
+dotfiles:
+  nvim:
+    src: config/nvim
+    dst: ~/.config/nvim
+  f_sway:
+    src: config/sway.conf
+    dst: ~/.config/sway/config
+  f_teste:
+    src: teste
+    dst: ~/teste
+  f_fish:
+    src: config/config.fish
+    dst: ~/.config/fish/config.fish
+  f_mako:
+    src: config/mako.conf
+    dst: ~/.config/mako/config
+    actions:
+    - makoreload
+    - notify
+  d_waybar:
+    src: config/waybar
+    dst: ~/.config/waybar
+  f_kitty.conf:
+    src: config/kitty.conf
+    dst: ~/.config/kitty/kitty.conf
+  qutebrowser.py:
+    src: config/qutebrowser.py
+    dst: ~/.config/qutebrowser/config.py
+  f_lesskey:
+    src: lesskey
+    dst: ~/.lesskey
+    actions:
+    - lesskey
+    - notify
+  scripts:
+    src: scripts
+    dst: ~/.local/bin
+  d_wofi:
+    src: config/wofi
+    dst: ~/.config/wofi
+  d_ranger:
+    src: config/ranger
+    dst: ~/.config/ranger
+  d_zathura:
+    src: config/zathura.conf
+    dst: ~/.config/zathura/zathurarc
+  d_wallpapers:
+    src: wallpapers
+    dst: ~/.local/share/wallpapers
+  mime:
+    src: mime/
+    dst: ~/
+actions:
+  notify: notify-send "Updating dotfiles"
+  makoreload: makoctl reload
+  lesskey: lesskey

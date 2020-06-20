@@ -1,0 +1,67 @@
+#!/bin/sh
+
+set -ex
+
+tmpf=$(mktemp)
+
+choose(){
+    choice=$(grep "$(cat $tmpf | cut -d\| -f1| wdmenu)" $tmpf)
+    choiceId="$(echo $choice| cut -d\| -f2)"
+    choiceUrl=http://deezer.com/$sType/$choiceId
+    choicePreview=$( curl -s "api.deezer.com/$sType/$choiceId/$preview_suffix" | 
+        jq -r '.preview, .data[0].preview | select(. != null)' )
+
+    choice=$( echo -e "Preview\nDownload" | wdmenu )
+    if [ "$choice" = Preview ]
+    then
+        mpv --quiet "$choicePreview" &
+        mpvPid=$!
+        choice=$(echo -e "Download\nAnother" | wdmenu -p 'Download?')
+        kill $mpvPid
+        if test "$choice" = "Another"
+        then
+            choose
+            return
+        fi
+    fi
+    if [ "$choice" = Download ]
+    then
+        notify-send "Starting Download"
+        deemix "$choiceUrl" && 
+            notify-send "Download Successful" || 
+            notify-send "Download Failed"
+        mpc add /
+        mpdDup
+    fi
+
+}
+
+clean(){
+    set +e
+    kill "$mpvPid"
+
+    rm -f $tmpf
+}
+trap clean EXIT
+
+sType=$(echo -e "Track\nAlbum\nArtist" | wdmenu | tr [:upper:] [:lower:] )
+query=$(echo -n | wdmenu | sed 's/[^ a-z]//g;s/ /+/g')
+case "$sType" in
+    track)
+        jqFilter='.data[]|.title+" - "+.album.title+" - "+.artist.name+"|"+( .id | tostring ) '
+        ;;
+    album)
+        jqFilter='.data[]| ( .nb_tracks | tostring ) +" - "+.title+" - "+.artist.name+"|"+ ( .id | tostring ) '
+        preview_suffix=tracks 
+        ;;
+    artist)
+        jqFilter='.data[]| ( .nb_fan | tostring ) +" - "+.name+"|"+ ( .id | tostring ) '
+        preview_suffix=top    
+        ;;
+esac
+
+curl -s "api.deezer.com/search/$sType?q=${query}" |
+    jq -r "$jqFilter" > $tmpf
+
+choose
+
