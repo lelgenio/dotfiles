@@ -27,6 +27,7 @@ profiles:
     - d_wallpapers
     - mime
     - fusuma.yml
+    - f_alacritty.yml
     variables:
       key:
         left: h
@@ -44,6 +45,16 @@ profiles:
         bg_dark: '#191919'
         txt: '#ffffff'
         nontxt: '#252525'
+        normal:
+          black:   '#000000'
+          red:     '#d54e53'
+          green:   '#b9ca4a'
+          yellow:  '#e6c547'
+          blue:    '#7aa6da'
+          magenta: '#c397d8'
+          cyan:    '#70c0ba'
+          white:   '#eaeaea'
+      bar: waybar
       bar_pos: top
 dotfiles:
   nvim:
@@ -100,6 +111,9 @@ dotfiles:
   fusuma.yml:
     src: config/fusuma.yml
     dst: ~/.config/fusuma/config.yml
+  f_alacritty.yml:
+    src: config/alacritty.yml
+    dst: ~/.config/alacritty.yml
 actions:
   notify: notify-send "Updating dotfiles"
   makoreload: makoctl reload

@@ -320,6 +320,9 @@ call plug#end()
         call cursor(l, c)
     endfun
 
+    " Allow saving of files as sudo when I forgot to start vim using sudo.
+    cmap w!! w !sudo tee % >/dev/null
+
     autocmd BufWritePre  * :call <SID>StripTrailingWhitespaces()
 
     " Auto deploy dotfiles

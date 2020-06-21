@@ -92,8 +92,8 @@
         "scroll-step": 10,
         "format": "{icon}",
         "format-bluetooth": "",
-        "format-bluetooth-muted": "",
-        "format-muted": "",
+        "format-bluetooth-muted": "",
+        "format-muted": "",
         "format-icons": {
             "headphones": "",
             "handsfree": "",
@@ -108,7 +108,7 @@
     "custom/weather": {
         "tooltip":false,
         "format": "<b>{}</b>",
-        "exec": "jq -r '.temp +\"°C \"+ .weather' .forecast.json",
+        "exec": "jq -r '.temp +\"°C \"+ .weather' ~/.forecast.json",
         "interval": 30,
         "on-click": "terminal --class weather sh -c 'forecast full;read -n1 -p\"Press Any key to quit \"'",
         "on-click-right": "xdg-open https://openweathermap.org"

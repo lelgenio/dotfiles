@@ -15,8 +15,8 @@ set -x VISUAL nvim
 set -x BROWSER qutebrowser
 set -x PAGER less
 
-if test -n "$XDG_VTRN"; and test -z "$DISPLAY"
-    or command -qs systemctl;and systemctl -q is-enabled ly
+# if test -n "$XDG_VTRN"; and test -z "$DISPLAY"
+    # or command -qs systemctl;and systemctl -q is-enabled ly
 
     export _JAVA_AWT_WM_NONREPARENTING=1
 
@@ -30,7 +30,8 @@ if test -n "$XDG_VTRN"; and test -z "$DISPLAY"
     export QT_SCALE_FACTOR=1.0001
     export QPA_PLATFORM=wayland
     export QT_QPA_PLATFORM=wayland
-end
+
+# end
 #}}}
 # Aliases{{{
 abbr rv sudo nvim

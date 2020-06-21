@@ -1,5 +1,5 @@
 * {
-    font: 14px {{@@ font.interface @@}}, Font Awesome, FuraCode Nerd Font;
+    font: 14px {{@@ font.interface @@}}, Font Awesome, Fira Code Nerd Font;
     border-radius:0;
     margin:0;
     padding: 0;
@@ -26,6 +26,7 @@ window#waybar.empty {
 }
 
 #workspaces button {
+    padding:0 10px;
     background-color: transparent;
     border: 3px solid transparent;
     color: #aaaaaa;
@@ -48,6 +49,9 @@ window#waybar.empty {
     margin:0 4px;
 }
 
+#mode{
+    color: {{@@ color.accent @@}};
+}
 
 #mpd,
 #tray,
@@ -66,6 +70,10 @@ window#waybar.empty {
     margin: 0 7px;
     color: {{@@ color.txt @@}};
     opacity:.7;
+}
+
+#battery{
+    margin-right:15px;
 }
 
 #clock,
