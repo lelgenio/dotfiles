@@ -52,7 +52,7 @@ DRIVE='/dev/sda'
 HOSTNAME='arch'
 
 # Encrypt everything (except /boot). true or false
-ENCRYPT_DRIVE=false
+ENCRYPT_DRIVE=true
 
 # Passphrase used to encrypt the drive (leave blank to be prompted).
 DRIVE_PASSPHRASE=''
@@ -100,13 +100,17 @@ FULL_INSTALL=false
 #}}}
 # PACKAGES{{{
 set_pkgs() {
+    # pkgs_base     -> Are on the official repo are are mandatory to use the system
+    # pkgs          -> Basic packages for a simple desktop, may be from AUR
+    # FULL_INSTALL  -> Install extra stuff, completely optional
+
     # sudo to allow to run as a user later
     sudo pacman -Sy
 
     pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
     pkgs_base+=' fish bluez cronie git man-db'
     # netctl
-    pkgs_base+=' netctl dhcpcd ifpluged wpa_supplicant dialog'
+    pkgs_base+=' netctl dhcpcd ifplugd wpa_supplicant dialog'
 
     pkgs_base+=" $(pacman -Sgq base-devel)"
     if $IS_BIOS;then
@@ -187,11 +191,23 @@ set_pkgs() {
 # Base install{{{
 setup() {
     local boot_dev="$DRIVE"1
-    local lvm_dev="$DRIVE"2
 
     if "$ENCRYPT_DRIVE"
     then
+        local crypt_dev="$DRIVE"2
         local lvm_dev="/dev/mapper/lvm"
+    else
+        local lvm_dev="$DRIVE"2
+    fi
+
+    echo 'Cleaning disk'
+    disk_clean "$lvm_dev" "$DRIVE"2
+
+    echo 'Creating partitions'
+    partition_drive "$DRIVE"
+
+    if "$ENCRYPT_DRIVE"
+    then
 
         if [ -z "$DRIVE_PASSPHRASE" ];then
             echo 'Enter a passphrase to encrypt the disk:'
@@ -199,14 +215,8 @@ setup() {
         fi
 
         echo 'Encrypting partition'
-        encrypt_drive "$lvm_dev" "$DRIVE_PASSPHRASE" lvm
+        encrypt_drive "$crypt_dev" "$DRIVE_PASSPHRASE" lvm
     fi
-
-    echo 'Cleaning disk'
-    disk_clean "$lvm_dev"
-
-    echo 'Creating partitions'
-    partition_drive "$DRIVE"
 
     echo 'Setting up LVM'
     setup_lvm "$lvm_dev" vg00
@@ -244,21 +254,30 @@ setup() {
 # Remove old LVMs{{{
 disk_clean(){
 
-    local lvm_part="$1"
+    local lvm_dev="$1"
+    local disk="$2"
 
     echo 'cleaning disk'
 
     umount --recursive --quiet /mnt || true
     swapoff -a
 
-    pvs "$lvm_part" || return 0
+    pvs "$lvm_dev" || return 0
 
-    for vg in $(pvs -o vg_name --nohead "$lvm_part")
+    for vg in $(pvs -o vg_name --nohead "$lvm_dev")
     do
         vgremove "$vg" --yes
     done
 
-    pvremove "$lvm_part"
+    pvremove "$lvm_dev"
+
+    if "$ENCRYPT_DRIVE"
+    then
+        cryptsetup close lvm
+    fi
+
+    wipefs -a "$disk"
+
 }
 #}}}
 # Partition Drive{{{
@@ -404,7 +423,7 @@ Include = /etc/pacman.d/mirrorlist
 EOF
 #}}}
 # /etc/pacman.d/mirrorlist{{{
-    pacman -Sy reflector --noconfirm
+    pacman -Sy reflector --noconfirm --needed
 
     reflector -c $COUNTRY -f 10 -p http -p https
 #}}}
@@ -464,9 +483,6 @@ configure() {
     echo 'Configuring initial ramdisk'
     set_initcpio
 
-    echo 'Setting initial daemons'
-    set_daemons "$TMP_ON_TMPFS"
-
     echo 'Configuring Bluetooth'
     set_bluetooth
 
@@ -505,6 +521,9 @@ configure() {
 
     shred   "/home/$USER_NAME/setup.sh"
     rm      "/home/$USER_NAME/setup.sh"
+
+    echo 'Setting initial daemons'
+    set_daemons "$TMP_ON_TMPFS"
 
     echo 'Updating pkgfile database'
     update_pkgfile
@@ -596,7 +615,9 @@ HOOKS=(base udev autodetect block $encrypt lvm2 filesystems fsck)
 
 EOF
 
-    mkinitcpio -P
+    # Intall kernel, if necessary
+    [ -f /boot/vmlinuz-linux-zen ] ||
+        mkinitcpio -P
 }
 #}}}
 # set_daemons() {#{{{
@@ -612,14 +633,6 @@ set_daemons() {
         ly.service
 
     # Netctl{{{
-    cd /sys/class/net/
-    for interface in $(ls -d en*);do
-        systemctl enable netctl-ifpluged@$interface
-    done
-    for interface in $(ls -d wl*);do
-        systemctl enable netctl-auto@$interface
-    done
-    cd -
 
     cat > /etc/netctl/ethernet-dhcp <<EOF
 Description='A basic dhcp ethernet connection'
@@ -633,10 +646,20 @@ EOF
 for interface in /sys/class/net/en*; do
         break;
 done
-Interface=$(basename $interface)
-echo "en-any: using interface $Interface";
+Interface=\$(basename \$interface)
+echo "en-any: using interface \$Interface";
 EOF
     chmod +x /etc/netctl/interfaces/en-any
+
+    cd /sys/class/net/
+    for interface in $(ls -d en*);do
+        systemctl enable netctl-ifpluged@$interface
+    done
+    for interface in $(ls -d wl*);do
+        systemctl enable netctl-auto@$interface
+    done
+    cd -
+
 #}}}
 # Ly{{{
     mkdir -p /etc/ly/
@@ -759,7 +782,8 @@ create_user() {
     local name="$1"; shift
     local password="$1"; shift
 
-    useradd -m -s /usr/bin/$USER_SHELL -G adm,systemd-journal,wheel,rfkill,games,network,video,audio,optical,floppy,storage,scanner,power,input "$name"
+    grep "^$name" /etc/passwd ||
+        useradd -m -s /usr/bin/$USER_SHELL -G adm,systemd-journal,wheel,rfkill,games,network,video,audio,optical,floppy,storage,scanner,power,input "$name"
     /bin/echo -en "$password\n$password" | passwd "$name"
 }
 #}}}
@@ -829,7 +853,8 @@ stow_dots() {
     if [ ! -d  ~/.dotfiles ];then
         git clone $DOTFILES_URL ~/.dotfiles
     fi
-    dotdrop --cfg ./dotfiles/config.yml install --force --no-banner
+    test -f ~/.dotfiles/config.y*ml &&
+        dotdrop --cfg ~/.dotfiles/config.y*ml install --force --no-banner
 }
 #}}}
 #}}}
