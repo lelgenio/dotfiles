@@ -21,7 +21,7 @@ set -x PAGER less
     export _JAVA_AWT_WM_NONREPARENTING=1
 
     export GTK_CSD=0
-    export LD_PRELOAD='/usr/lib/libgtk3-nocsd.so.0'
+    # export LD_PRELOAD='/usr/lib/libgtk3-nocsd.so.0'
 
     export XCURSOR_THEME=capitaine-cursors
     export GTK_THEME=materia-custom-accent:dark

@@ -28,6 +28,7 @@ profiles:
     - mime
     - fusuma.yml
     - f_alacritty.yml
+    - d_mpd
     variables:
       key:
         left: h
@@ -46,14 +47,14 @@ profiles:
         txt: '#ffffff'
         nontxt: '#252525'
         normal:
-          black:   '#000000'
-          red:     '#d54e53'
-          green:   '#b9ca4a'
-          yellow:  '#e6c547'
-          blue:    '#7aa6da'
+          black: '#000000'
+          red: '#d54e53'
+          green: '#b9ca4a'
+          yellow: '#e6c547'
+          blue: '#7aa6da'
           magenta: '#c397d8'
-          cyan:    '#70c0ba'
-          white:   '#eaeaea'
+          cyan: '#70c0ba'
+          white: '#eaeaea'
       bar: waybar
       bar_pos: top
 dotfiles:
@@ -114,6 +115,9 @@ dotfiles:
   f_alacritty.yml:
     src: config/alacritty.yml
     dst: ~/.config/alacritty.yml
+  d_mpd:
+    src: config/mpd.conf
+    dst: ~/.config/mpd/mpd.conf
 actions:
   notify: notify-send "Updating dotfiles"
   makoreload: makoctl reload
