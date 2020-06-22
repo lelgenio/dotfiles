@@ -71,11 +71,11 @@
             "good": 95,
             "warning": 25
         },
-        "format": "{icon}",
+        "format": "{icon} ",
         "format-charging": "",
         "format-plugged": "",
         "format-full": "",
-        "format-warning":"{icon} {time}",
+        "format-warning":"{icon}  {time}",
         "format-icons": ["", "", "", "", "", ""]
     },
     "network": {
