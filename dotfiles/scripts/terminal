@@ -1,10 +1,10 @@
 #!/bin/sh
 
+command -v kitty > /dev/null &&
+    exec kitty $@
 command -v alacritty > /dev/null &&
 {
     test "$#" -gt "0" &&
         exec alacritty -e $@ ||
         exec alacritty
 } & exit
-command -v kitty > /dev/null &&
-    exec kitty $@

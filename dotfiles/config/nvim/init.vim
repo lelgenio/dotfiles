@@ -208,9 +208,6 @@ call plug#end()
     imap <C-{{@@ key.down  @@}}> <Left>
     imap <C-{{@@ key.up    @@}}> <Right>
 
-    " Quickly exit insert mode
-    imap jj <ESC>
-
     "I deserve the death sentence
     nmap <C-s>      :wa<CR>
 
@@ -251,6 +248,11 @@ call plug#end()
         else
           set signcolumn=yes
         endif
+
+        " Use `[g` and `]g` to navigate diagnostics
+        " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+        nmap <silent> [g <Plug>(coc-diagnostic-prev)
+        nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
         " GoTo code navigation.
         nmap <silent> gd <Plug>(coc-definition)
@@ -329,6 +331,8 @@ call plug#end()
     autocmd BufWritePost /**/dotdrop/{config.yaml,dotfiles/**} silent !dotdrop install -f
 
 "python env{{{
+let g:python_host_prog = '/usr/bin/python2'
+let g:python3_host_prog = '/usr/bin/python'
 " MUST NOT BE INDENTED!
 py3 << EOF
 import os
