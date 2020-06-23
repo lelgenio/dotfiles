@@ -15,8 +15,8 @@ for line in $(cat $CACHE); do
     password_files+=( $line )
 done
 
-entry=$(printf '%s\n' "${password_files[@]}" | 
-        sort | uniq -c | sort -r | 
+entry=$(printf '%s\n' "${password_files[@]}" |
+        sort | uniq -c | sort -r |
         sed 's/ *[0-9]* //'|
         wdmenu -p Password $@)
 

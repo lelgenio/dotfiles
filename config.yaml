@@ -12,23 +12,22 @@ profiles:
   i15:
     dotfiles:
     - nvim
-    - f_sway
-    - f_teste
-    - f_fish
-    - f_mako
-    - d_waybar
-    - f_kitty.conf
+    - sway
+    - fish
+    - mako
+    - waybar
+    - kitty.conf
     - qutebrowser.py
-    - f_lesskey
+    - lesskey
     - scripts
-    - d_wofi
-    - d_ranger
-    - d_zathura
-    - d_wallpapers
+    - wofi
+    - ranger
+    - zathura
+    - wallpapers
     - mime
     - fusuma.yml
-    - f_alacritty.yml
-    - d_mpd
+    - alacritty.yml
+    - mpd
     variables:
       key:
         left: h
@@ -61,31 +60,28 @@ dotfiles:
   nvim:
     src: config/nvim
     dst: ~/.config/nvim
-  f_sway:
+  sway:
     src: config/sway.conf
     dst: ~/.config/sway/config
-  f_teste:
-    src: teste
-    dst: ~/teste
-  f_fish:
+  fish:
     src: config/fish.fish
     dst: ~/.config/fish/config.fish
-  f_mako:
+  mako:
     src: config/mako.conf
     dst: ~/.config/mako/config
     actions:
     - makoreload
     - notify
-  d_waybar:
+  waybar:
     src: config/waybar
     dst: ~/.config/waybar
-  f_kitty.conf:
+  kitty.conf:
     src: config/kitty.conf
     dst: ~/.config/kitty/kitty.conf
   qutebrowser.py:
     src: config/qutebrowser.py
     dst: ~/.config/qutebrowser/config.py
-  f_lesskey:
+  lesskey:
     src: lesskey
     dst: ~/.lesskey
     actions:
@@ -94,16 +90,16 @@ dotfiles:
   scripts:
     src: scripts
     dst: ~/.local/bin
-  d_wofi:
+  wofi:
     src: config/wofi
     dst: ~/.config/wofi
-  d_ranger:
+  ranger:
     src: config/ranger
     dst: ~/.config/ranger
-  d_zathura:
+  zathura:
     src: config/zathura.conf
     dst: ~/.config/zathura/zathurarc
-  d_wallpapers:
+  wallpapers:
     src: wallpapers
     dst: ~/.local/share/wallpapers
   mime:
@@ -112,10 +108,10 @@ dotfiles:
   fusuma.yml:
     src: config/fusuma.yml
     dst: ~/.config/fusuma/config.yml
-  f_alacritty.yml:
+  alacritty.yml:
     src: config/alacritty.yml
     dst: ~/.config/alacritty.yml
-  d_mpd:
+  mpd:
     src: config/mpd.conf
     dst: ~/.config/mpd/mpd.conf
 actions:
