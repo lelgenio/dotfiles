@@ -1,25 +1,16 @@
 #!/bin/env python
 # {{@@ header() @@}}
 
+# Ignore import error
+# pylint: disable=E0401
+from qutebrowser.config.configfiles import ConfigAPI
+from qutebrowser.config.config import ConfigContainer
 
-# pylint: disable=C0111
-# type: ignore
-from qutebrowser.config.configfiles import ConfigAPI  # noqa: F401
-from qutebrowser.config.config import ConfigContainer  # noqa: F401
+# Ignore undefined
+config: ConfigAPI
+c: ConfigContainer
 
-
-# fmt: off
-config = config  # type: ConfigAPI # noqa: F821 pylint: disable=E0602,C0103
-c = c  # type: ConfigContainer # noqa: F821 pylint: disable=E0602,C0103
-# fmt: on
-
-
-# Documentation:
-#   qute://help/configuring.html
-#   qute://help/settings.html
-
-# Uncomment this to still load settings configured via autoconfig.yml
-# config.load_autoconfig()
+# Behavior {{{
 
 # Aliases for commands. The keys of the given dictionary are the
 # aliases, while the values are the commands they map to.
@@ -120,21 +111,14 @@ config.set("content.media_capture", True, "https://ca.bbcollab.com")
 #   - ask
 config.set("content.notifications", False, "https://www.duolingo.com")
 
-# Allow websites to show notifications.
-# Type: BoolAsk
-# Valid values:
-#   - true
-#   - false
-#   - ask
-config.set("content.notifications", False, "https://www.jornalcontabil.com.br")
-
 # Automatically mute tabs. Note that if the `:tab-mute` command is used,
 # the mute status for the affected tab is now controlled manually, and
 # this setting doesn't have any effect.
 # Type: Bool
 c.content.mute = True
 c.content.autoplay = False
-
+# }}}
+# UI {{{
 # Shrink the completion to be smaller than the configured size if there
 # are no scrollbars.
 # Type: Bool
@@ -216,7 +200,8 @@ c.tabs.title.format = "{audio} {current_title}"
 # Width (in pixels) of the progress indicator (0 to disable).
 # Type: Int
 c.tabs.indicator.width = 0
-
+# }}}
+# Search {{{
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
@@ -244,12 +229,14 @@ c.url.searchengines = {
     "DEFAULT": "search.disroot.org?q={}",
     "!aw": "wiki.archlinux.org?search={}",
     "!w": "pt.wikipedia.org/w?search={}",
+    "!au": "aur.archlinux.org/packages/?K={}",
 }
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
 c.url.start_pages = "https://search.disroot.org"
-
+# }}}
+# Colors {{{
 # Background color of the completion widget for odd rows.
 c.colors.completion.odd.bg = "{{@@ color.bg @@}}"
 c.colors.completion.even.bg = "{{@@ color.bg_light @@}}"
@@ -342,7 +329,8 @@ c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.threshold.background = 256 // 2
 c.colors.webpage.darkmode.threshold.text = 256 // 2
 c.colors.webpage.bg = "{{@@ color.bg @@}}"
-
+# }}}
+# Fonts {{{
 # Font used in the completion widget.
 c.fonts.completion.entry = "16px {{@@ font.interface @@}}"
 
@@ -378,7 +366,8 @@ c.fonts.statusbar = "14px {{@@ font.mono @@}}"
 
 # Font used in the tab bar.
 c.fonts.tabs = "14px {{@@ font.interface @@}}"
-
+# }}}
+# Bindings {{{
 # Bindings for normal mode
 config.bind(",m", "spawn mpv --fs {url}")
 config.bind(",r", "spawn --userscript readability")
@@ -415,3 +404,4 @@ config.bind(
 )
 
 c.editor.command = ["terminal", "nvim", "-f", "{file}", "+{line}"]
+# }}}

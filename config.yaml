@@ -16,8 +16,8 @@ profiles:
     - fish
     - mako
     - waybar
-    - kitty.conf
-    - qutebrowser.py
+    - kitty
+    - qutebrowser
     - lesskey
     - scripts
     - wofi
@@ -25,8 +25,8 @@ profiles:
     - zathura
     - wallpapers
     - mime
-    - fusuma.yml
-    - alacritty.yml
+    - fusuma
+    - alacritty
     - mpd
     variables:
       key:
@@ -46,23 +46,29 @@ profiles:
         txt: '#ffffff'
         nontxt: '#252525'
         normal:
-          black: '#000000'
-          red: '#d54e53'
-          green: '#b9ca4a'
-          yellow: '#e6c547'
-          blue: '#7aa6da'
-          magenta: '#c397d8'
-          cyan: '#70c0ba'
-          white: '#eaeaea'
+          black: '#555555'
+          red: '#D54E53'
+          green: '#B9CA4A'
+          yellow: '#E6C547'
+          blue: '#7AA6DA'
+          magenta: '#C397D8'
+          cyan: '#70C0BA'
+          white: '#EAEAEA'
       bar: waybar
       bar_pos: top
 dotfiles:
   nvim:
     src: config/nvim
     dst: ~/.config/nvim
+    actions:
+      - vimplug
+      - notify
   sway:
     src: config/sway.conf
     dst: ~/.config/sway/config
+    actions:
+      - reload_sway
+      - notify
   fish:
     src: config/fish.fish
     dst: ~/.config/fish/config.fish
@@ -75,10 +81,10 @@ dotfiles:
   waybar:
     src: config/waybar
     dst: ~/.config/waybar
-  kitty.conf:
+  kitty:
     src: config/kitty.conf
     dst: ~/.config/kitty/kitty.conf
-  qutebrowser.py:
+  qutebrowser:
     src: config/qutebrowser.py
     dst: ~/.config/qutebrowser/config.py
   lesskey:
@@ -105,10 +111,10 @@ dotfiles:
   mime:
     src: mime/
     dst: ~/
-  fusuma.yml:
+  fusuma:
     src: config/fusuma.yml
     dst: ~/.config/fusuma/config.yml
-  alacritty.yml:
+  alacritty:
     src: config/alacritty.yml
     dst: ~/.config/alacritty.yml
   mpd:
@@ -118,3 +124,10 @@ actions:
   notify: notify-send "Updating dotfiles"
   makoreload: makoctl reload
   lesskey: lesskey
+  reload_sway: swaymsg reload
+  vimplug: >
+    nvim +PlugUpgrade
+         +PlugClean!
+         +PlugInstall
+         +PlugUpdate
+         +qall
