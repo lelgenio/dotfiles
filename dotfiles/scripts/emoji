@@ -3,9 +3,9 @@
 set -e
 
 main(){
-    sym=$(bmenu  | cut -d' ' -f1)
+    sym=$(bmenu  | grep -o '^.' )
     wl-copy --trim-newline "$sym"
-    notify-send "Copied:" "$sym"
+    notify-send "Copied:" "\"$sym\""
 }
 
 echo "\
