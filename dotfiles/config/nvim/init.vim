@@ -20,11 +20,6 @@
 
     call plug#begin('~/.config/nvim/plugged')
 
-    Plug 'arrufat/vala.vim'
-    Plug 'NLKNguyen/c-syntax.vim'
-    Plug 'vim-python/python-syntax'
-    Plug 'jaxbot/semantic-highlight.vim'
-    Plug 'stephpy/vim-yaml'
 
     Plug 'airblade/vim-gitgutter'
     Plug 'chrisbra/Colorizer'
@@ -61,16 +56,16 @@
     Plug 'tpope/vim-commentary'
 
     " Status bar
-    " Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline'
     " Plug 'vim-airline/vim-airline-themes'
     " let g:airline#extensions#ale#enabled = 1
 
     " Bufferlist (integrates with airline)
-    "Plug 'bling/vim-bufferline'
+    " Plug 'bling/vim-bufferline'
 
     " Color scheme
     Plug 'dikiaap/minimalist'
-
+    Plug 'morhetz/gruvbox'
 
     " Simplify movement
     Plug 'easymotion/vim-easymotion'
@@ -100,8 +95,15 @@
     Plug 'vim-latex/vim-latex', { 'for': 'tex' }
     Plug 'vim-scripts/AnsiEsc.vim', { 'for': 'man' }
      " Plug 'powerman/vim-plugin-AnsiEsc'
+
+    " Language sytax highlight improvements
     Plug 'mboughaba/i3config.vim'
     Plug 'dag/vim-fish'
+    Plug 'arrufat/vala.vim'
+    Plug 'NLKNguyen/c-syntax.vim'
+    Plug 'vim-python/python-syntax'
+    Plug 'stephpy/vim-yaml'
+
 call plug#end()
 
 "}}}
