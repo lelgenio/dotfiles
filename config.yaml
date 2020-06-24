@@ -38,6 +38,8 @@ profiles:
       font:
         mono: Fira Code
         interface: Inter
+      use:
+        playerctl: false
       color:
         accent: '#D9534F'
         bg: '#202020'
