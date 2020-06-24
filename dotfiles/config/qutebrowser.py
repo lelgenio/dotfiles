@@ -109,7 +109,7 @@ config.set("content.media_capture", True, "https://ca.bbcollab.com")
 #   - true
 #   - false
 #   - ask
-config.set("content.notifications", False, "https://www.duolingo.com")
+config.set("content.notifications", False, "*")
 
 # Automatically mute tabs. Note that if the `:tab-mute` command is used,
 # the mute status for the affected tab is now controlled manually, and

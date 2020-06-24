@@ -126,8 +126,11 @@ actions:
   lesskey: lesskey
   reload_sway: swaymsg reload
   vimplug: >
-    nvim +PlugUpgrade
-         +PlugClean!
-         +PlugInstall
-         +PlugUpdate
-         +qall
+    nvim
+    +PlugUpgrade
+    +PlugClean!
+    +PlugInstall
+    +PlugUpdate
+    +qall
+    &> /dev/null
+    & disown
