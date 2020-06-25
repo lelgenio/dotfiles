@@ -84,6 +84,16 @@ function etc #{{{
 end
 #}}}
 # }}}
+# Keys{{{
+bind           {{@@ key.left  @@}} backward-char
+bind -M visual {{@@ key.left  @@}} backward-char
+bind           {{@@ key.down  @@}} down-or-search
+bind -M visual {{@@ key.down  @@}} down-line
+bind           {{@@ key.up    @@}} up-or-search
+bind -M visual {{@@ key.up    @@}} up-line
+bind           {{@@ key.right @@}} forward-char
+bind -M visual {{@@ key.right @@}} forward-char
+#}}}
 # start window manager if using tty1 {{{
 #
     function esway
