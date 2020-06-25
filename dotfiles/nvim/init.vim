@@ -234,7 +234,7 @@ call plug#end()
     xmap     <silent> gc        :Commentary<CR>
 
     " Toggle file manager
-    map      <silent> <C-n> :NERDTreeToggle %:p:h<CR>
+    " map      <silent> <C-n> :NERDTreeToggle %:p:h<CR>
 
     " EasyAlign
     xmap     ga <Plug>(EasyAlign)
