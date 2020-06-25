@@ -60,34 +60,34 @@ profiles:
       bar_pos: top
 dotfiles:
   nvim:
-    src: config/nvim
+    src: nvim
     dst: ~/.config/nvim
     actions:
       - vimplug
       - notify
   sway:
-    src: config/sway.conf
+    src: sway.conf
     dst: ~/.config/sway/config
     actions:
       - reload_sway
       - notify
   fish:
-    src: config/fish.fish
+    src: fish.fish
     dst: ~/.config/fish/config.fish
   mako:
-    src: config/mako.conf
+    src: mako.conf
     dst: ~/.config/mako/config
     actions:
     - makoreload
     - notify
   waybar:
-    src: config/waybar
+    src: waybar
     dst: ~/.config/waybar
   kitty:
-    src: config/kitty.conf
+    src: kitty.conf
     dst: ~/.config/kitty/kitty.conf
   qutebrowser:
-    src: config/qutebrowser.py
+    src: qutebrowser.py
     dst: ~/.config/qutebrowser/config.py
   lesskey:
     src: lesskey
@@ -99,13 +99,13 @@ dotfiles:
     src: scripts
     dst: ~/.local/bin
   wofi:
-    src: config/wofi
+    src: wofi
     dst: ~/.config/wofi
   ranger:
-    src: config/ranger
+    src: ranger
     dst: ~/.config/ranger
   zathura:
-    src: config/zathura.conf
+    src: zathura.conf
     dst: ~/.config/zathura/zathurarc
   wallpapers:
     src: wallpapers
@@ -114,13 +114,13 @@ dotfiles:
     src: mime/
     dst: ~/
   fusuma:
-    src: config/fusuma.yml
+    src: fusuma.yml
     dst: ~/.config/fusuma/config.yml
   alacritty:
-    src: config/alacritty.yml
+    src: alacritty.yml
     dst: ~/.config/alacritty.yml
   mpd:
-    src: config/mpd.conf
+    src: mpd.conf
     dst: ~/.config/mpd/mpd.conf
 actions:
   notify: notify-send "Updating dotfiles"
