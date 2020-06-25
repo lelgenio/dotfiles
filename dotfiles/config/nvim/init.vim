@@ -30,8 +30,15 @@
     "
     " Plug 'sheerun/vim-polyglot'
     " Plug 'dense-analysis/ale'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " Plug 'davidhalter/jedi-vim'
+
+    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'mattn/vim-lsp-settings'
+
+    Plug 'prabirshrestha/asyncomplete.vim'
+        Plug 'prabirshrestha/asyncomplete-lsp.vim'
+        Plug 'prabirshrestha/asyncomplete-file.vim'
 
     " Plug 'autozimu/LanguageClient-neovim', {
     "     \ 'branch': 'next',
@@ -65,15 +72,15 @@
 
     " Color scheme
     Plug 'dikiaap/minimalist'
-    Plug 'morhetz/gruvbox'
+    " Plug 'morhetz/gruvbox'
 
     " Simplify movement
-    Plug 'easymotion/vim-easymotion'
+    " Plug 'easymotion/vim-easymotion'
 
     " Simplify file management
-    Plug 'scrooloose/nerdtree'
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
+    " Plug 'scrooloose/nerdtree'
+    " Plug 'ryanoasis/vim-devicons'
+    " Plug 'Xuyuanp/nerdtree-git-plugin'
 
     " Format using prettier
     " Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
@@ -234,13 +241,13 @@ call plug#end()
     nmap     ga <Plug>(EasyAlign)
 
     "EasyMotion
-    map e <Plug>(easymotion-prefix)
+    " map e <Plug>(easymotion-prefix)
     set ignorecase
 
     map <C-j> :GFiles<CR>
 
     "" coc {{{
-
+    {#@@
         "allow json comments
         autocmd FileType json syntax match Comment +\/\/.\+$+
 
@@ -312,9 +319,119 @@ call plug#end()
         omap ic <Plug>(coc-classobj-i)
         xmap ac <Plug>(coc-classobj-a)
         omap ac <Plug>(coc-classobj-a)
-
+  @@#}
 
     "}}}
+    " ale{{{
+
+
+{#@@
+        " Lint
+        let g:ale_echo_msg_error_str = 'E'
+        let g:ale_echo_msg_warning_str = 'W'
+        let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'       "
+
+
+        let g:ale_python_pyls_executable = '/usr/bin/pyls'
+        let g:ale_use_global_executables = 1
+        let g:ale_python_mypy_options = '--ignore-missing-imports'
+        let g:ale_linters = {
+            \ 'python': ['pyls'],
+            \ }
+
+        " Fix
+        "
+        let g:ale_fixers = {
+        \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+        \   'python': ['autopep8'],
+        \}
+        let g:ale_fix_on_save = 1
+
+        " Complete
+        "
+        " Use deoplete.
+        let g:deoplete#enable_at_startup = 1
+        call deoplete#custom#option('sources', {
+            \ '_': ['ale'],
+            \})
+
+        " let g:ale_completion_symbols = {
+        " \ 'text': '',
+        " \ 'method': '',
+        " \ 'function': '',
+        " \ 'constructor': '',
+        " \ 'field': '',
+        " \ 'variable': '',
+        " \ 'class': '',
+        " \ 'interface': '',
+        " \ 'module': '',
+        " \ 'property': '',
+        " \ 'unit': 'unit',
+        " \ 'value': 'val',
+        " \ 'enum': '',
+        " \ 'keyword': 'keyword',
+        " \ 'snippet': '',
+        " \ 'color': 'color',
+        " \ 'file': '',
+        " \ 'reference': 'ref',
+        " \ 'folder': '',
+        " \ 'enum member': '',
+        " \ 'constant': '',
+        " \ 'struct': '',
+        " \ 'event': 'event',
+        " \ 'operator': '',
+        " \ 'type_parameter': 'type param',
+        " \ '<default>': 'v'
+        " \ }
+
+        " Move
+        "
+        " move around
+        nmap <silent> [g <Plug>(ale_previous_wrap)
+        nmap <silent> ]g <Plug>(ale_next_wrap)
+
+        " Colors
+        highlight ALEError       gui=undercurl guisp=red
+        highlight ALEErrorSign   guifg=red
+
+        highlight ALEWarning       gui=undercurl guisp=yellow
+        highlight ALEWarningSign   guifg=yellow
+
+@@#}
+
+        "}}}
+" vim-lsp
+
+    "allow json comments
+    autocmd FileType json syntax match Comment +\/\/.\+$+
+
+    " Complete
+    inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+    imap <c-space> <Plug>(asyncomplete_force_refresh)
+
+    " Fix
+    nmap <silent> gf <Plug>(lsp-document-format)
+    vmap <silent> gf <Plug>(lsp-document-range-format)
+    nmap          gr :LspRename<cr>
+
+    " Move around
+    nmap <silent> [g <Plug>(lsp-previous-diagnostic)
+    nmap <silent> ]g <Plug>(lsp-next-diagnostic)
+
+    nmap  <silent> gd :LspDefinition<cr>
+    nmap  <silent> K  :LspHover<cr>
+
+
+    " Colors
+    highlight LspErrorHighlight gui=undercurl guisp=red
+    highlight LspErrorText      guibg=none    guifg=red gui=underline
+
+    highlight LspWarningHighlight gui=undercurl guisp={{@@ color.normal.yellow @@}}
+    highlight LspWarningText      gui=underline guifg={{@@ color.normal.yellow @@}} guibg=none
+
+
 "}}}
 " Lanugage Server{{{
 "

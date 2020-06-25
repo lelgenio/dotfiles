@@ -48,13 +48,8 @@ abbr gp 'git pull; git push'
 alias dotdrop "dotdrop --cfg $HOME/dotdrop/config.yaml"
 
 function edit-config #{{{
-    cd ~/.config
-    set file ~/.config/( fzf )
-    cd -
-
-    if test -f "$file"
-        commandline -r nvim\ $file
-    end
+    cd dotdrop
+    nvim +GFiles
 end
 abbr ec edit-config
 #}}}
