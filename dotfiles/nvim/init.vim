@@ -24,21 +24,23 @@
     Plug 'airblade/vim-gitgutter'
     Plug 'chrisbra/Colorizer'
 
-    Plug 'junegunn/vim-easy-align'
 
     " Language server support
     "
-    " Plug 'sheerun/vim-polyglot'
-    " Plug 'dense-analysis/ale'
+{%@@ set lsp = "vim-lsp" @@%}
 
-    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+{%@@ if lsp == "vim-lsp" @@%}
     Plug 'prabirshrestha/vim-lsp'
     Plug 'mattn/vim-lsp-settings'
 
     Plug 'prabirshrestha/asyncomplete.vim'
         Plug 'prabirshrestha/asyncomplete-lsp.vim'
         Plug 'prabirshrestha/asyncomplete-file.vim'
+{%@@ elif lsp == "coc" @@%}
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+{%@@ endif @@%}
+
+    Plug 'sheerun/vim-polyglot'
 
     " Plug 'autozimu/LanguageClient-neovim', {
     "     \ 'branch': 'next',
@@ -55,41 +57,27 @@
     " Completions
     " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-    " Pais
+    " HTML shortcuts
+    Plug 'mattn/emmet-vim'
+
     Plug 'jiangmiao/auto-pairs'
     Plug 'tpope/vim-surround'
-
-    " Comments
+    Plug 'junegunn/vim-easy-align'
     Plug 'tpope/vim-commentary'
 
     " Status bar
     Plug 'vim-airline/vim-airline'
     " Plug 'vim-airline/vim-airline-themes'
-    " let g:airline#extensions#ale#enabled = 1
+{%@@ if lsp == "ale" @@%}
+    let g:airline#extensions#ale#enabled = 1
+{%@@ endif @@%}
 
     " Bufferlist (integrates with airline)
     " Plug 'bling/vim-bufferline'
 
     " Color scheme
     Plug 'dikiaap/minimalist'
-    " Plug 'morhetz/gruvbox'
-
-    " Simplify movement
-    " Plug 'easymotion/vim-easymotion'
-
-    " Simplify file management
-    " Plug 'scrooloose/nerdtree'
-    " Plug 'ryanoasis/vim-devicons'
-    " Plug 'Xuyuanp/nerdtree-git-plugin'
-
-    " Format using prettier
-    " Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-
-    " Make markdown fun again
-    "Plug 'junegunn/limelight.vim'
-
-    " Better buffer management
-    "Plug 'qpkorr/vim-bufkill'
+    " Plug 'morhetz/gruvbox' " Not that good
 
     " Utilities
     "Plug 'xolox/vim-misc'
@@ -104,12 +92,12 @@
      " Plug 'powerman/vim-plugin-AnsiEsc'
 
     " Language sytax highlight improvements
-    Plug 'mboughaba/i3config.vim'
-    Plug 'dag/vim-fish'
-    Plug 'arrufat/vala.vim'
-    Plug 'NLKNguyen/c-syntax.vim'
-    Plug 'vim-python/python-syntax'
-    Plug 'stephpy/vim-yaml'
+    " Plug 'mboughaba/i3config.vim'
+    " Plug 'dag/vim-fish'
+    " Plug 'arrufat/vala.vim'
+    " Plug 'NLKNguyen/c-syntax.vim'
+    " Plug 'vim-python/python-syntax'
+    " Plug 'stephpy/vim-yaml'
 
 call plug#end()
 
@@ -244,10 +232,66 @@ call plug#end()
     " map e <Plug>(easymotion-prefix)
     set ignorecase
 
-    map <C-j> :GFiles<CR>
+    map <C-j>   :GFiles<CR>
+    map <C-q>   :Files<CR>
 
+"}}}
+" Lanugage Server{{{
+"
+    set foldmethod=marker
+    set hidden
+    set autoread
+
+    autocmd BufWritePre  * :call <SID>StripTrailingWhitespaces()
+    function! <SID>StripTrailingWhitespaces()
+        let l = line(".")
+        let c = col(".")
+        %s/\s\+$//e
+        call cursor(l, c)
+    endfun
+
+    " Allow saving of files as sudo when I forgot to start vim using sudo.
+    cmap w!! w !sudo tee % >/dev/null
+
+    " Auto deploy dotfiles
+    autocmd BufWritePost /**/dotdrop/{config.yaml,dotfiles/**} silent !dotdrop install -f
+
+    {%@@ if     lsp == "vim-lsp" @@%}
+" vim-lsp{{{
+
+    "allow json comments
+    autocmd FileType json syntax match Comment +\/\/.\+$+
+
+    " Complete
+    inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+    imap <c-space> <Plug>(asyncomplete_force_refresh)
+
+    " Fix
+    nmap <silent> gf <Plug>(lsp-document-format)
+    vmap <silent> gf <Plug>(lsp-document-range-format)
+    nmap          gr :LspRename<cr>
+
+    " Move around
+    nmap <silent> [g <Plug>(lsp-previous-diagnostic)
+    nmap <silent> ]g <Plug>(lsp-next-diagnostic)
+
+    nmap  <silent> gd :LspDefinition<cr>
+    nmap  <silent> K  :LspHover<cr>
+
+
+    " Colors
+    highlight LspErrorHighlight gui=undercurl guisp=red
+    highlight LspErrorText      guibg=none    guifg=red gui=underline
+
+    highlight LspWarningHighlight gui=undercurl guisp={{@@ color.normal.yellow @@}}
+    highlight LspWarningText      gui=underline guifg={{@@ color.normal.yellow @@}} guibg=none
+
+"}}}
+    {%@@ elif   lsp == "coc" @@%}
     "" coc {{{
-    {#@@
+
         "allow json comments
         autocmd FileType json syntax match Comment +\/\/.\+$+
 
@@ -319,13 +363,11 @@ call plug#end()
         omap ic <Plug>(coc-classobj-i)
         xmap ac <Plug>(coc-classobj-a)
         omap ac <Plug>(coc-classobj-a)
-  @@#}
 
     "}}}
+    {%@@ elif   lsp == "ale" @@%}
     " ale{{{
 
-
-{#@@
         " Lint
         let g:ale_echo_msg_error_str = 'E'
         let g:ale_echo_msg_warning_str = 'W'
@@ -397,62 +439,8 @@ call plug#end()
         highlight ALEWarning       gui=undercurl guisp=yellow
         highlight ALEWarningSign   guifg=yellow
 
-@@#}
-
         "}}}
-" vim-lsp
-
-    "allow json comments
-    autocmd FileType json syntax match Comment +\/\/.\+$+
-
-    " Complete
-    inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-    inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
-    imap <c-space> <Plug>(asyncomplete_force_refresh)
-
-    " Fix
-    nmap <silent> gf <Plug>(lsp-document-format)
-    vmap <silent> gf <Plug>(lsp-document-range-format)
-    nmap          gr :LspRename<cr>
-
-    " Move around
-    nmap <silent> [g <Plug>(lsp-previous-diagnostic)
-    nmap <silent> ]g <Plug>(lsp-next-diagnostic)
-
-    nmap  <silent> gd :LspDefinition<cr>
-    nmap  <silent> K  :LspHover<cr>
-
-
-    " Colors
-    highlight LspErrorHighlight gui=undercurl guisp=red
-    highlight LspErrorText      guibg=none    guifg=red gui=underline
-
-    highlight LspWarningHighlight gui=undercurl guisp={{@@ color.normal.yellow @@}}
-    highlight LspWarningText      gui=underline guifg={{@@ color.normal.yellow @@}} guibg=none
-
-
-"}}}
-" Lanugage Server{{{
-"
-    set foldmethod=marker
-    set hidden
-    set autoread
-
-     function! <SID>StripTrailingWhitespaces()
-        let l = line(".")
-        let c = col(".")
-        %s/\s\+$//e
-        call cursor(l, c)
-    endfun
-
-    " Allow saving of files as sudo when I forgot to start vim using sudo.
-    cmap w!! w !sudo tee % >/dev/null
-
-    autocmd BufWritePre  * :call <SID>StripTrailingWhitespaces()
-
-    " Auto deploy dotfiles
-    autocmd BufWritePost /**/dotdrop/{config.yaml,dotfiles/**} silent !dotdrop install -f
+    {%@@ endif @@%}
 
 "python env{{{
 let g:python_host_prog = '/usr/bin/python2'

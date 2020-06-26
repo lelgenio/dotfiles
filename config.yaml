@@ -130,7 +130,6 @@ actions:
   vimplug: >
     nvim
     +PlugUpgrade
-    +PlugClean!
     +PlugInstall
     +PlugUpdate
     +qall
