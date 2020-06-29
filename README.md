@@ -2,7 +2,7 @@
 ## What I use:
 * sway / Waybar
 * kitty (only way to get ranger image previews on wayland) 
-* fish (figth me!)
+* fish (fight me!)
 * nvim / vim-lsp (pure vimscript)
 * qutebrowser
 * zathura
