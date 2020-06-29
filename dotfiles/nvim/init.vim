@@ -262,6 +262,9 @@ call plug#end()
     "allow json comments
     autocmd FileType json syntax match Comment +\/\/.\+$+
 
+    " Workaround for bug
+    let g:lsp_documentation_float=0
+
     " Complete
     inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
     inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
