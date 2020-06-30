@@ -96,6 +96,7 @@ window#waybar.empty {
 
 
 #custom-recording {
+    min-width:15px;
     color: #ee4040;
 }
 

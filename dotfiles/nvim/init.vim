@@ -263,7 +263,13 @@ call plug#end()
     autocmd FileType json syntax match Comment +\/\/.\+$+
 
     " Workaround for bug
-    let g:lsp_documentation_float=0
+    let g:lsp_documentation_float = 0
+
+    " Highlight all references, looks pretty *-*
+    let g:lsp_highlight_references_enabled = 1
+
+    let g:lsp_diagnostics_echo_cursor = 1
+    let g:lsp_virtual_text_enabled = 0
 
     " Complete
     inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -272,9 +278,10 @@ call plug#end()
     imap <c-space> <Plug>(asyncomplete_force_refresh)
 
     " Fix
-    nmap <silent> gf <Plug>(lsp-document-format)
-    vmap <silent> gf <Plug>(lsp-document-range-format)
-    nmap          gr :LspRename<cr>
+    nmap gf <Plug>(lsp-document-format)
+    vmap gf <Plug>(lsp-document-range-format)
+    nmap gr <plug>(lsp-rename)
+    nmap gl <plug>(lsp-code-action)
 
     " Move around
     nmap <silent> [g <Plug>(lsp-previous-diagnostic)
@@ -283,13 +290,12 @@ call plug#end()
     nmap  <silent> gd :LspDefinition<cr>
     nmap  <silent> K  :LspHover<cr>
 
-
     " Colors
-    highlight LspErrorHighlight gui=undercurl guisp=red
-    highlight LspErrorText      guibg=none    guifg=red gui=underline
+    highlight LspErrorHighlight     gui=undercurl guisp={{@@ color.normal.red    @@}}
+    highlight LspErrorText          gui=bold      guifg={{@@ color.normal.red    @@}} guibg=none
 
-    highlight LspWarningHighlight gui=undercurl guisp={{@@ color.normal.yellow @@}}
-    highlight LspWarningText      gui=underline guifg={{@@ color.normal.yellow @@}} guibg=none
+    highlight LspWarningHighlight   gui=undercurl guisp={{@@ color.normal.yellow @@}}
+    highlight LspWarningText        gui=bold      guifg={{@@ color.normal.yellow @@}} guibg=none
 
 "}}}
     {%@@ elif   lsp == "coc" @@%}

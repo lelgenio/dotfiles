@@ -2,7 +2,7 @@
 set -e
 
 getnew(){
-    find ~/.mail/INBOX{,.{Contas,Faculdade,Git,Trabalhos}}/new -type f | wc -l
+    find ~/.local/share/mail/INBOX{,.{Contas,Faculdade,Git,Trabalhos}}/new -type f | wc -l
 }
 
 OLD=$(getnew)
