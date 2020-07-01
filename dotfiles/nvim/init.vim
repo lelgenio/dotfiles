@@ -108,15 +108,15 @@ call plug#end()
     " Enable syntax and set color scheme
     syntax on
 
-    set tabstop=4
-    set shiftwidth=4
+    set tabstop=2
+    set shiftwidth=2
     set expandtab
     set smarttab
 
     set virtualedit=all
 
-    set scrolloff=10
-    set sidescrolloff=10
+    set scrolloff=8
+    set sidescrolloff=8
 
     set nowrap
 
@@ -265,12 +265,6 @@ call plug#end()
     " Workaround for bug
     let g:lsp_documentation_float = 0
 
-    " Highlight all references, looks pretty *-*
-    let g:lsp_highlight_references_enabled = 1
-
-    let g:lsp_diagnostics_echo_cursor = 1
-    let g:lsp_virtual_text_enabled = 0
-
     " Complete
     inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
     inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -282,6 +276,7 @@ call plug#end()
     vmap gf <Plug>(lsp-document-range-format)
     nmap gr <plug>(lsp-rename)
     nmap gl <plug>(lsp-code-action)
+    nmap gs <plug>(lsp-references)
 
     " Move around
     nmap <silent> [g <Plug>(lsp-previous-diagnostic)
@@ -293,9 +288,15 @@ call plug#end()
     " Colors
     highlight LspErrorHighlight     gui=undercurl guisp={{@@ color.normal.red    @@}}
     highlight LspErrorText          gui=bold      guifg={{@@ color.normal.red    @@}} guibg=none
+    highlight LspErrorVirtual       gui=underline guifg={{@@ color.normal.red    @@}} guibg=none
 
     highlight LspWarningHighlight   gui=undercurl guisp={{@@ color.normal.yellow @@}}
     highlight LspWarningText        gui=bold      guifg={{@@ color.normal.yellow @@}} guibg=none
+    highlight LspWarningVirtual     gui=underline guifg={{@@ color.normal.yellow @@}} guibg=none
+
+    " Highlight all references, looks pretty *-*
+    let g:lsp_highlight_references_enabled = 1
+    highlight LspReference          gui=bold      guifg={{@@ color.normal.yellow @@}}
 
 "}}}
     {%@@ elif   lsp == "coc" @@%}
