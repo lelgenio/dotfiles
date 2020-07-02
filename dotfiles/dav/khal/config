@@ -1,0 +1,29 @@
+[default]
+default_calendar = calendar_local
+
+[calendars]
+    [[calendar_local]]
+    path = ~/.local/share/calendars/personal
+
+    [[contacts_local]]
+    path = ~/.local/share/contacts/contacts
+    type = discover
+
+[locale]
+timeformat = %H:%M
+dateformat = %d/%m
+longdateformat = %d/%m/%Y
+datetimeformat = %H:%M %d/%m
+longdatetimeformat = %H:%M %d/%m/%Y
+
+[keybindings]
+left = h
+down = t
+up   = n
+right= s
+
+new  = c
+today= g
+
+
+# vim: ft=toml

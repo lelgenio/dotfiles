@@ -71,12 +71,6 @@ config.set(
 
 config.set(
     "content.headers.user_agent",
-    "Mozilla/5.0 ({os_info}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99 Safari/537.36",
-    "https://*.slack.com/*",
-)
-
-config.set(
-    "content.headers.user_agent",
     "Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0",
     "https://docs.google.com/*",
 )
@@ -102,6 +96,7 @@ config.set("content.javascript.enabled", True, "qute://*/*")
 #   - false
 #   - ask
 config.set("content.media_capture", True, "https://ca.bbcollab.com")
+config.set("content.autoplay", True, "https://ca.bbcollab.com")
 
 # Allow websites to show notifications.
 # Type: BoolAsk

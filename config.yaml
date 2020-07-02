@@ -28,6 +28,7 @@ profiles:
     - fusuma
     - alacritty
     - mpd
+    - dav
     variables:
       key:
         left: h
@@ -120,6 +121,9 @@ dotfiles:
   mpd:
     src: mpd.conf
     dst: ~/.config/mpd/mpd.conf
+  dav:
+    src: dav/
+    dst: ~/.config
 actions:
   notify: notify-send "Updating dotfiles"
   makoreload: makoctl reload
