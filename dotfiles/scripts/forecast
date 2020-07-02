@@ -12,7 +12,7 @@ owm(){
     QUERY="$CITY, $REGI, $COUN"
     APPID="fd68c0fe7951f5ab7e24a240eb0942b8"
 
-    FORECAST=$(http get http://api.openweathermap.org/data/2.5/forecast\?APPID\=${APPID}\&q="${CITY}"\&units\=metric)
+    FORECAST=$(wget -qO- http://api.openweathermap.org/data/2.5/forecast\?APPID\=${APPID}\&q="${CITY}"\&units\=metric)
     TEMP=$(echo $FORECAST | jq -r ".list[0].main.temp" |
         perl -pe 's/(\d*)\.\d*/\1/')
     WEATHER=$(echo $FORECAST | jq -r ".list[0].weather[0].main")
@@ -78,7 +78,7 @@ owm_json(){
     owm
 
     tee > .forecast.json <<EOF
-{ 
+{
     "min":"$MIN",
     "max":"$MAX",
     "temp":"$TEMP",
