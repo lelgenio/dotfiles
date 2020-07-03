@@ -360,7 +360,8 @@ c.fonts.prompts = "16px {{@@ font.interface @@}}"
 c.fonts.statusbar = "14px {{@@ font.mono @@}}"
 
 # Font used in the tab bar.
-c.fonts.tabs = "14px {{@@ font.interface @@}}"
+c.fonts.tabs.selected = "14px {{@@ font.interface @@}}"
+c.fonts.tabs.unselected = "14px {{@@ font.interface @@}}"
 # }}}
 # Bindings {{{
 # Bindings for normal mode
