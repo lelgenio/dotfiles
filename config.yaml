@@ -29,6 +29,7 @@ profiles:
     - alacritty
     - mpd
     - dav
+    - mutt
     variables:
       key:
         left: h
@@ -82,6 +83,9 @@ dotfiles:
   waybar:
     src: waybar
     dst: ~/.config/waybar
+    actions:
+      - reload_sway
+      - notify
   kitty:
     src: kitty.conf
     dst: ~/.config/kitty/kitty.conf
@@ -124,6 +128,9 @@ dotfiles:
   dav:
     src: dav/
     dst: ~/.config
+  mutt:
+    src: neomutt/
+    dst: ~/.config/neomutt/
 actions:
   notify: notify-send "Updating dotfiles"
   makoreload: makoctl reload

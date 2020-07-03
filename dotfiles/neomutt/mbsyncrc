@@ -1,0 +1,25 @@
+IMAPStore disroot-remote
+Host disroot.org
+Port  993
+User lelgenio@disroot.org
+PassCmd "pass Disroot | head -n1"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore disroot-local
+Subfolders Verbatim
+Path  ~/.local/share/mail/
+Inbox ~/.local/share/mail/INBOX
+Flatten .
+
+Channel disroot-remote
+Expunge Both
+Master :disroot-remote:
+Slave :disroot-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+# MaxMessages 0
+# End profile
+
+# vim: ft=sh
