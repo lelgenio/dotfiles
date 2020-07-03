@@ -34,6 +34,7 @@ set -x PAGER less
 # end
 #}}}
 # Aliases{{{
+abbr v nvim
 abbr rv sudo nvim
 
 command -qs exa &&
