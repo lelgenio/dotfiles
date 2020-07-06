@@ -146,11 +146,13 @@
     "custom/torrentD":{
         "format":" {} ",
         "exec":"transmission-remote -l | tail -n+2 | grep Down | wc -l | sed 's/^0$//'",
+        "exec-if":"pgrep transmission",
         "interval":180
     },
     "custom/torrentS":{
         "format":" {} ",
         "exec":"transmission-remote -l | grep Seeding| wc -l | sed 's/^0$//'",
+        "exec-if":"pgrep transmission",
         "interval":180
     }
 
