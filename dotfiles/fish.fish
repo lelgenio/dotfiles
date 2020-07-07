@@ -107,12 +107,10 @@ bind -M visual {{@@ key.right @@}} forward-char
         # export XDG_CURRENT_DESKTOP=Unity
         pgrep sway || exec sway
     end
-    if test "$XDG_VTNR" = 1 -a -z "$DISPLAY" #faster like this
-        if command -v systemctl -a systemctl -q is-active graphical.target
-            esway &> .swaylog
-            # ei3 &> .i3log
-            # ebsp &> .bsplog
-        end
+    if test "$XDG_VTNR" = 1 -a -z "$DISPLAY"
+        esway &> .swaylog
+        # ei3 &> .i3log
+        # ebsp &> .bsplog
     end
 
 # }}}
