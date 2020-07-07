@@ -37,6 +37,9 @@ set -x PAGER less
 abbr v nvim
 abbr rv sudo nvim
 
+command -qs trash &&
+    alias rm trash
+
 command -qs exa &&
     alias ls exa
 
