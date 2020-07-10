@@ -8,10 +8,10 @@ choose(){
     choice=$(grep "$(cat $tmpf | cut -d\| -f1| wdmenu)" $tmpf)
     choiceId="$(echo $choice| cut -d\| -f2)"
     choiceUrl=http://deezer.com/$sType/$choiceId
-    choicePreview=$( curl -s "api.deezer.com/$sType/$choiceId/$preview_suffix" | 
+    choicePreview=$( curl -s "api.deezer.com/$sType/$choiceId/$preview_suffix" |
         jq -r '.preview, .data[0].preview | select(. != null)' )
 
-    choice=$( echo -e "Preview\nDownload" | wdmenu )
+    choice=$( echo -e "Preview\nDownload\nCopy URL" | wdmenu )
     if [ "$choice" = Preview ]
     then
         mpv --quiet "$choicePreview" &
@@ -27,11 +27,15 @@ choose(){
     if [ "$choice" = Download ]
     then
         notify-send "Starting Download"
-        deemix "$choiceUrl" && 
-            notify-send "Download Successful" || 
+        deemix "$choiceUrl" &&
+            notify-send "Download Successful" ||
             notify-send "Download Failed"
         mpc add /
         mpdDup
+    fi
+    if [ "$choice" = "Copy URL" ]
+    then
+        wl-copy "$choiceUrl"
     fi
 
 }
@@ -52,11 +56,11 @@ case "$sType" in
         ;;
     album)
         jqFilter='.data[]| ( .nb_tracks | tostring ) +" - "+.title+" - "+.artist.name+"|"+ ( .id | tostring ) '
-        preview_suffix=tracks 
+        preview_suffix=tracks
         ;;
     artist)
         jqFilter='.data[]| ( .nb_fan | tostring ) +" - "+.name+"|"+ ( .id | tostring ) '
-        preview_suffix=top    
+        preview_suffix=top
         ;;
 esac
 

@@ -180,6 +180,8 @@ call plug#end()
 
     highlight Identifier guifg={{@@ color.accent @@}}
 
+    highlight MatchParen gui=bold guifg=yellow
+
     "}}}
 " Keys{{{
 "

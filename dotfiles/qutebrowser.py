@@ -2,10 +2,13 @@
 # {{@@ header() @@}}
 
 # Ignore import error
-# pylint: disable=E0401
+# pylint: disable=E0401,E0602
+# type: ignore
 from qutebrowser.config.configfiles import ConfigAPI
 from qutebrowser.config.config import ConfigContainer
 
+config = config
+c = c
 # Ignore undefined
 config: ConfigAPI
 c: ConfigContainer
@@ -365,6 +368,7 @@ c.fonts.tabs.unselected = "14px {{@@ font.interface @@}}"
 # }}}
 # Bindings {{{
 # Bindings for normal mode
+config.bind(",d", "spawn --verbose youtube-dl {url}")
 config.bind(",m", "spawn mpv --fs {url}")
 config.bind(",r", "spawn --userscript readability")
 config.bind(";e", "hint links spawn deemix '{hint-url}'")
@@ -388,8 +392,8 @@ config.bind("{{@@ key.right .upper() @@}}", "forward")
 
 # Bindings for caret mode
 config.bind("{{@@ key.left  @@}}", "move-to-prev-char", mode="caret")
-config.bind("{{@@ key.down  @@}}", "move-to-prev-line", mode="caret")
-config.bind("{{@@ key.up    @@}}", "move-to-next-line", mode="caret")
+config.bind("{{@@ key.up    @@}}", "move-to-prev-line", mode="caret")
+config.bind("{{@@ key.down  @@}}", "move-to-next-line", mode="caret")
 config.bind("{{@@ key.right @@}}", "move-to-next-char", mode="caret")
 
 # Bindings for insert mode
