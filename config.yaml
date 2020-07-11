@@ -30,6 +30,7 @@ profiles:
     - mpd
     - dav
     - mutt
+    - crontab
     variables:
       key:
         left: h
@@ -70,7 +71,6 @@ dotfiles:
     dst: ~/.config/sway/config
     actions:
       - reload_sway
-      - notify
   fish:
     src: fish.fish
     dst: ~/.config/fish/config.fish
@@ -79,13 +79,11 @@ dotfiles:
     dst: ~/.config/mako/config
     actions:
     - makoreload
-    - notify
   waybar:
     src: waybar
     dst: ~/.config/waybar
     actions:
       - reload_sway
-      - notify
   kitty:
     src: kitty.conf
     dst: ~/.config/kitty/kitty.conf
@@ -97,7 +95,6 @@ dotfiles:
     dst: ~/.lesskey
     actions:
     - lesskey
-    - notify
   scripts:
     src: scripts
     dst: ~/.local/bin
@@ -131,6 +128,11 @@ dotfiles:
   mutt:
     src: neomutt/
     dst: ~/.config/neomutt/
+  crontab:
+    src: crontab
+    dst: ~/.local/share/crontab
+    actions:
+      - crontab_install
 actions:
   notify: notify-send "Updating dotfiles"
   makoreload: makoctl reload
@@ -144,3 +146,6 @@ actions:
     +qall
     &> /dev/null
     & disown
+  crontab_install: |
+    crontab -r
+    crontab ~/.local/share/crontab
