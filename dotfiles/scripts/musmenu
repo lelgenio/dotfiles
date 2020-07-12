@@ -17,7 +17,16 @@ search(){
 }
 
 delete(){
-    current=~/Música/"$(mpc current -f %file%)"
+    [ -n "$XDG_CONFIG_HOME" ] &&
+      config_root="$XDG_CONFIG_HOME" ||
+      config_root="$HOME/.config"
+    music_root=$(awk '/^music_directory/
+                      {
+                        gsub(/"/,"");
+                        gsub(/~/,"'$HOME'");
+                        print $2
+                      }' $config_root/mpd/mpd.conf)
+    current="$music_root"/"$(mpc current -f %file%)"
     answer=$(echo -e "nothing\n$current" | $menu -p"delete?" )
     if [ "$answer" == "$current" ]
     then

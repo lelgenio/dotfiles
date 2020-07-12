@@ -108,8 +108,8 @@ call plug#end()
     " Enable syntax and set color scheme
     syntax on
 
-    set tabstop=2
-    set shiftwidth=2
+    set tabstop=4
+    set shiftwidth=4
     set expandtab
     set smarttab
 
@@ -256,7 +256,7 @@ call plug#end()
     cmap w!! w !sudo tee % >/dev/null
 
     " Auto deploy dotfiles
-    autocmd BufWritePost /**/dotdrop/{config.yaml,dotfiles/**} silent !dotdrop install -f
+    autocmd BufWritePost {{@@ parent_dir( _dotdrop_dotpath ) @@}}/{config.yaml,dotfiles/**} silent !dotdrop install -f
 
     {%@@ if     lsp == "vim-lsp" @@%}
 " vim-lsp{{{

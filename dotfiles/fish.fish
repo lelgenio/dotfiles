@@ -31,6 +31,9 @@ set -x PAGER less
     export QPA_PLATFORM=wayland
     export QT_QPA_PLATFORM=wayland
 
+    # keep my dirs clean
+    export PYTHONPYCACHEPREFIX=$HOME/.cache/python
+
 # end
 #}}}
 # Aliases{{{
@@ -51,10 +54,10 @@ alias fish_greeting 'khal list now 10d --format " {title}"'
 abbr gs git status
 abbr gp 'git pull; git push'
 
-alias dotdrop "dotdrop --cfg $HOME/dotdrop/config.yaml"
+alias dotdrop "dotdrop --cfg \"{{@@ _dotdrop_cfgpath @@}}\""
 
 function edit-config #{{{
-    cd dotdrop
+    cd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
     nvim +GFiles
 end
 abbr ec edit-config
@@ -91,14 +94,19 @@ end
 #}}}
 # }}}
 # Keys{{{
-bind           {{@@ key.left  @@}} backward-char
-bind -M visual {{@@ key.left  @@}} backward-char
-bind           {{@@ key.down  @@}} down-or-search
-bind -M visual {{@@ key.down  @@}} down-line
-bind           {{@@ key.up    @@}} up-or-search
-bind -M visual {{@@ key.up    @@}} up-line
-bind           {{@@ key.right @@}} forward-char
-bind -M visual {{@@ key.right @@}} forward-char
+
+set fish_key_bindings fish_vi_key_bindings
+
+if test $fish_key_bindings = fish_vi_key_bindings
+    bind           {{@@ key.left  @@}} backward-char
+    bind -M visual {{@@ key.left  @@}} backward-char
+    bind           {{@@ key.down  @@}} down-or-search
+    bind -M visual {{@@ key.down  @@}} down-line
+    bind           {{@@ key.up    @@}} up-or-search
+    bind -M visual {{@@ key.up    @@}} up-line
+    bind           {{@@ key.right @@}} forward-char
+    bind -M visual {{@@ key.right @@}} forward-char
+end
 #}}}
 # start window manager if using tty1 {{{
 #
@@ -115,7 +123,7 @@ bind -M visual {{@@ key.right @@}} forward-char
 
 # }}}
 # use tmux{{{
-    # set TMUX 1
+    set TMUX 1
     if test -z "$TMUX" -a -n "$DISPLAY" &&
         not string match -qr kitty "$TERM" &&
         test -z "$GNOME_TERMINAL_SCREEN" &&
@@ -139,6 +147,55 @@ bind -M visual {{@@ key.right @@}} forward-char
     end
 #}}}
 # Prompt customization{{{
+
+
+# Fine, I'll do it myself
+function fish_vi_cursor;end
+function fish_mode_prompt;end
+
+# function _fish_prompt_accent
+#     set_color --bold "{{@@ color.accent @@}}"
+#     echo -en $argv
+# end
+
+# function _fish_prompt_normal
+#     set_color --bold "brwhite"
+#     echo -en $argv
+# end
+
+# function fish_prompt
+#     _fish_prompt_accent $USER
+#     _fish_prompt_normal " in "
+#     _fish_prompt_accent (prompt_pwd)
+#     echo
+
+#     if test $fish_key_bindings = fish_vi_key_bindings
+#         printf '\e[1 q'
+
+#         printf (
+#         switch $fish_bind_mode
+#             case insert
+#                 printf '\e[5 q'
+#                 printf 'i'
+#             case replace_one
+#                 printf 'o'
+#             case default
+#                 printf 'n'
+#             case '*'
+#                 printf (string match -r '^.' $fish_bind_mode )
+#         end | string upper
+#         )' '
+#     end
+
+#     if test $USER = root
+#         _fish_prompt_normal "\# "
+#     else
+#         _fish_prompt_normal "\$ "
+#     end
+
+#     set_color normal
+# end
+
     set SPACEFISH_USER_SHOW always
     set SPACEFISH_USER_COLOR "{{@@ color.accent @@}}"
     set SPACEFISH_DIR_COLOR  "{{@@ color.accent @@}}"
@@ -146,29 +203,23 @@ bind -M visual {{@@ key.right @@}} forward-char
     set SPACEFISH_PROMPT_ADD_NEWLINE false
 
     set SPACEFISH_CHAR_COLOR_SUCCESS white
-
     set SPACEFISH_CHAR_PREFIX ""
     set SPACEFISH_CHAR_SYMBOL '$'
     set SPACEFISH_CHAR_SYMBOL_ROOT '#'
 
     set SPACEFISH_VI_MODE_COLOR "{{@@ color.accent @@}}"
-
     set SPACEFISH_VI_MODE_PREFIX "\e[1 q"
-    set SPACEFISH_VI_MODE_SUFIX ""
     set SPACEFISH_VI_MODE_INSERT "I\e[5 q"
     set SPACEFISH_VI_MODE_NORMAL "N"
     set SPACEFISH_VI_MODE_VISUAL "V"
     set SPACEFISH_VI_MODE_REPLACE "R"
     set SPACEFISH_VI_MODE_REPLACE_ONE 	"S"
+    set SPACEFISH_VI_MODE_SUFIX ""
 
-    set fish_cursor_default     block      blink
-    set fish_cursor_insert      line       blink
-    set fish_cursor_replace_one underscore blink
-    set fish_cursor_visual      block
-
-    # set -l cnf /usr/share/doc/pkgfile/command-not-found.fish
-    test -f "$cnf" &&
-        source "$cnf"
+    # set fish_cursor_default     block      blink
+    # set fish_cursor_insert      line       blink
+    # set fish_cursor_replace_one underscore blink
+    # set fish_cursor_visual      block
 
 #}}}
 # Color man pages{{{

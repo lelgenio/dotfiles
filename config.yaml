@@ -8,6 +8,8 @@ config:
   longkey: false
   default_actions:
   - notify
+  func_file:
+  - funcs.py
 profiles:
   i15:
     dotfiles:
@@ -65,7 +67,6 @@ dotfiles:
     dst: ~/.config/nvim
     actions:
       - vimplug
-      - notify
   sway:
     src: sway.conf
     dst: ~/.config/sway/config
