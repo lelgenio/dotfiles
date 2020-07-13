@@ -49,7 +49,8 @@ command -qs exa &&
 command -qs bat &&
     alias cat bat
 
-alias fish_greeting 'khal list now 10d --format " {title}"'
+command -qs khard &&
+    khal list now 10d --format " {title}"
 
 abbr gs git status
 abbr gp 'git pull; git push'
