@@ -33,6 +33,7 @@ profiles:
     - dav
     - mutt
     - crontab
+    - theme
     variables:
       key:
         left: h
@@ -43,6 +44,8 @@ profiles:
       font:
         mono: Fira Code
         interface: Inter
+      gtk_theme: materia-custom-accent
+      cursor_theme: capitaine-cursors
       color:
         accent: '#D9534F'
         bg: '#202020'
@@ -134,6 +137,9 @@ dotfiles:
     dst: ~/.local/share/crontab
     actions:
       - crontab_install
+  theme:
+    src: theme
+    dst: ~/
 actions:
   notify: notify-send "Updating dotfiles"
   makoreload: makoctl reload

@@ -23,7 +23,7 @@ set -x PAGER less
     export GTK_CSD=0
     # export LD_PRELOAD='/usr/lib/libgtk3-nocsd.so.0'
 
-    export XCURSOR_THEME=capitaine-cursors
+    export XCURSOR_THEME={{@@ cursor_theme @@}}
     export GTK_THEME=materia-custom-accent:dark
 
     # export XDG_CURRENT_DESKTOP=Unity
