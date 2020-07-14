@@ -50,7 +50,7 @@ command -qs bat &&
     alias cat bat
 
 command -qs khard &&
-    khal list now 10d --format " {title}"
+    alias fish_greeting='khal list now 10d --format " {title}"'
 
 abbr gs git status
 abbr gp 'git pull; git push'
@@ -111,16 +111,17 @@ end
 #}}}
 # start window manager if using tty1 {{{
 #
-    function esway
-        clear
-        # export XDG_CURRENT_DESKTOP=Unity
-        pgrep sway || exec sway
-    end
-    if test "$XDG_VTNR" = 1 -a -z "$DISPLAY"
-        esway &> .swaylog
-        # ei3 &> .i3log
-        # ebsp &> .bsplog
-    end
+
+function esway
+    clear
+    # export XDG_CURRENT_DESKTOP=Unity
+    pgrep sway || exec sway
+end
+if test "$XDG_VTNR" = 1 -a -z "$DISPLAY"
+    esway &> .swaylog
+    # ei3 &> .i3log
+    # ebsp &> .bsplog
+end
 
 # }}}
 # use tmux{{{

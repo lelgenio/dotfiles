@@ -228,6 +228,8 @@ c.url.searchengines = {
     "!aw": "wiki.archlinux.org?search={}",
     "!w": "pt.wikipedia.org/w?search={}",
     "!au": "aur.archlinux.org/packages/?K={}",
+    "!alt": "alternativeto.net/browse/search?q={}",
+    "!gw": "https://wiki.gentoo.org/?search={}"
 }
 
 # Page(s) to open at the start.
