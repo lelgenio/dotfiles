@@ -1,0 +1,38 @@
+#!/bin/env sh
+
+if which xdg-user-dir 1>&2 2> /dev/null
+then
+    DESTFOLDER=$(xdg-user-dir PICTURES)
+else
+    for i in Images Imagens Pictures Fotos ""
+    do
+        DESTFOLDER=$HOME/$i
+        test -d "$DESTFOLDER" &&
+            break
+    done
+    mkdir -p $DESTFOLDER
+fi
+
+DESTFILE=$DESTFOLDER/$(date +'%Y-%m-%d-%H%M%S_screenshot.png')
+case $1 in
+    def)
+        # Screenshot to file
+        grim $DESTFILE
+        echo $DESTFILE
+        ;;
+
+    area)
+        # Screen area to file
+        grim -g "$(slurp)" $DESTFILE
+        echo $DESTFILE
+        ;;
+    area-clip)
+        # Screen area to clipboard
+        grim -g "$(slurp)" - | wl-copy
+        ;;
+
+    clip)
+        # Focused monitor to clipboard
+        grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
+        ;;
+esac
