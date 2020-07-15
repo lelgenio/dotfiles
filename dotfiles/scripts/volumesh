@@ -1,0 +1,113 @@
+#!/bin/sh
+
+# depends on: awk, pactl, pacmd, notify-send
+
+# FILLED="◼"
+# EMPTY="◻"
+
+MAX_VOL=120
+STEP=10
+
+FILLED="■"
+EMPTY="□"
+STRIPPED="▨"
+
+is_muted(){
+    env LC_ALL=C pacmd list-sinks | grep 'muted: yes' 1> /dev/null
+}
+
+get_bar(){
+
+    is_muted &&
+        FILLED=$STRIPPED
+
+    round $1 | awk '{
+            for (i=1;i <= $1/10;i++) {
+                if ( i == 11 ) {
+                    printf "|";
+                }
+                printf "'$FILLED'"
+            };
+            for (i=1;i <= 10-$1/10;i++) {
+                printf "'$EMPTY'"
+            };
+        }'
+
+}
+
+get_vol(){
+
+    env LC_ALL=C pactl list sinks |
+        awk '/^\tVolume/ {
+                gsub(/%/,"");
+                printf $5;
+            }'
+}
+
+notify(){
+    volume=$(get_vol)
+    bar=$(get_bar $volume)
+
+    if is_muted ; then
+        s="Muted"
+    else
+        s="Volume"
+    fi
+
+    notify-send "${s}: ${volume}%" "$bar" --app-name=volumesh
+
+}
+
+round(){
+    echo $1 | awk '{
+        print int($1/'$STEP')*'$STEP';
+    }'
+}
+
+min(){
+    printf '%i\n' ${@} | sort -n | head -n1
+}
+
+change_vol(){
+
+    pactl set-sink-volume @DEFAULT_SINK@ "${1}$(min 120 $2)%"
+
+    newvol=$(min $MAX_VOL $(round $(get_vol)))
+
+    pactl set-sink-volume @DEFAULT_SINK@ "${newvol}%"
+
+}
+
+toggle_mute(){
+
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+}
+
+
+while [ $# -gt 0 ]
+do
+    case $1 in
+        -i | --increase)
+            shift
+            change_vol + $1
+            shift
+            ;;
+        -d | --decrease)
+            shift
+            change_vol - $1
+            shift
+            ;;
+        -t | --toggle)
+            toggle_mute
+            shift
+            ;;
+        *)
+            echo outro = $1
+            shift
+            ;;
+    esac
+done
+
+notify
+
