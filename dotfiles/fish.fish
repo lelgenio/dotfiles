@@ -15,7 +15,7 @@ set -x VISUAL nvim
 set -x BROWSER qutebrowser
 set -x PAGER less
 
-# if test -n "$XDG_VTRN"; and test -z "$DISPLAY"
+if test -n "$XDG_VTRN"; and test -z "$DISPLAY"
     # or command -qs systemctl;and systemctl -q is-enabled ly
 
     export _JAVA_AWT_WM_NONREPARENTING=1
@@ -34,7 +34,7 @@ set -x PAGER less
     # keep my dirs clean
     export PYTHONPYCACHEPREFIX=$HOME/.cache/python
 
-# end
+end
 #}}}
 # Aliases{{{
 abbr v nvim
@@ -57,6 +57,14 @@ abbr gp 'git pull; git push'
 
 alias dotdrop "dotdrop --cfg \"{{@@ _dotdrop_cfgpath @@}}\""
 
+# cwd{{{
+function save -d "save cwd" --on-variable PWD
+    set -U _pwd (pwd)
+end
+test -d "$_pwd" &&
+    status is-interactive &&
+    cd $_pwd
+#}}}
 function edit-config #{{{
     cd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
     nvim +GFiles
