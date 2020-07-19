@@ -192,10 +192,10 @@ call plug#end()
     noremap {{@@ key.up    @@}} <up>
     noremap {{@@ key.right @@}} <right>
 
-    noremap <C-w>{{@@ key.left  @@}} :wincmd h<CR>
-    noremap <C-w>{{@@ key.down  @@}} :wincmd j<CR>
-    noremap <C-w>{{@@ key.up    @@}} :wincmd k<CR>
-    noremap <C-w>{{@@ key.right @@}} :wincmd l<CR>
+    noremap <silent> <C-w>{{@@ key.left  @@}} :wincmd h<CR>
+    noremap <silent> <C-w>{{@@ key.down  @@}} :wincmd j<CR>
+    noremap <silent> <C-w>{{@@ key.up    @@}} :wincmd k<CR>
+    noremap <silent> <C-w>{{@@ key.right @@}} :wincmd l<CR>
 
     noremap {{@@ key.next         @@}} n
     noremap {{@@ key.next.upper() @@}} N
