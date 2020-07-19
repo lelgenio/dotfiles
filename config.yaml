@@ -18,6 +18,7 @@ profiles:
     - fish
     - mako
     - waybar
+    - kanshi
     - kitty
     - qutebrowser
     - lesskey
@@ -140,6 +141,9 @@ dotfiles:
   theme:
     src: theme
     dst: ~/
+  kanshi:
+    src: kanshi
+    dst: ~/.config/kanshi/config
 actions:
   notify: notify-send "Updating dotfiles"
   makoreload: makoctl reload
