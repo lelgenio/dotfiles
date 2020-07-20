@@ -57,14 +57,6 @@ abbr gp 'git pull; git push'
 
 alias dotdrop "dotdrop --cfg \"{{@@ _dotdrop_cfgpath @@}}\""
 
-# cwd{{{
-function save -d "save cwd" --on-variable PWD
-    set -U _pwd (pwd)
-end
-test -d "$_pwd" &&
-    status is-interactive &&
-    cd $_pwd
-#}}}
 function edit-config #{{{
     cd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
     nvim +GFiles
