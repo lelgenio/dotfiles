@@ -15,26 +15,26 @@ set -x VISUAL nvim
 set -x BROWSER qutebrowser
 set -x PAGER less
 
-if test -n "$XDG_VTRN"; and test -z "$DISPLAY"
+# if test -n "$XDG_VTRN"; and test -z "$DISPLAY"
     # or command -qs systemctl;and systemctl -q is-enabled ly
 
-    export _JAVA_AWT_WM_NONREPARENTING=1
+    set -x _JAVA_AWT_WM_NONREPARENTING 1
 
-    export GTK_CSD=0
-    # export LD_PRELOAD='/usr/lib/libgtk3-nocsd.so.0'
+    set -x GTK_CSD 0
+    # set -x LD_PRELOAD '/usr/lib/libgtk3-nocsd.so.0'
 
-    export XCURSOR_THEME={{@@ cursor_theme @@}}
-    export GTK_THEME=materia-custom-accent:dark
+    set -x XCURSOR_THEME {{@@ cursor_theme @@}}
+    set -x GTK_THEME materia-custom-accent:dark
 
-    # export XDG_CURRENT_DESKTOP=Unity
-    export QT_SCALE_FACTOR=1.0001
-    export QPA_PLATFORM=wayland
-    export QT_QPA_PLATFORM=wayland
+    # set -x XDG_CURRENT_DESKTOP Unity
+    set -x QT_SCALE_FACTOR 1.0001
+    set -x QPA_PLATFORM wayland
+    set -x QT_QPA_PLATFORM wayland
 
     # keep my dirs clean
-    export PYTHONPYCACHEPREFIX=$HOME/.cache/python
+    set -x PYTHONPYCACHEPREFIX $HOME/.cache/python
 
-end
+# end
 #}}}
 # Aliases{{{
 abbr v nvim
