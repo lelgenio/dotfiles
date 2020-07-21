@@ -287,6 +287,10 @@ call plug#end()
     nmap  <silent> gd :LspDefinition<cr>
     nmap  <silent> K  :LspHover<cr>
 
+    " Lint
+    let g:lsp_diagnostics_echo_cursor = 1
+    let g:lsp_virtual_text_enabled = 0
+
     " Colors
     highlight LspErrorHighlight     gui=undercurl guisp={{@@ color.normal.red    @@}}
     highlight LspErrorText          gui=bold      guifg={{@@ color.normal.red    @@}} guibg=none
