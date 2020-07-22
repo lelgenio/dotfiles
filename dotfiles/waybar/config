@@ -12,7 +12,7 @@
         "custom/weather"
     ],
     "modules-right": [
-        "mpd",
+        "custom/mpd",
         "custom/recording",
         "tray",
         "custom/mail",
@@ -40,19 +40,11 @@
     "sway/window":{
         "max-length":40
     },
-    "mpd": {
+    "custom/mpd": {
         "tooltip":false,
-        "format": " {stateIcon} {title} - {artist}",
-        "format-disconnected": " Disconnected",
-        "format-stopped": "",
-        "timeout":60,
-        "unknown-tag": " N/A ",
-        "interval": 2,
-        "max-length":40,
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        }
+        "exec": "mpd-status",
+        "exec-if": "pgrep mpd",
+        "interval": 2
     },
     "tray": {
         "spacing": 7,

@@ -50,7 +50,7 @@ command -qs bat &&
     alias cat bat
 
 command -qs khard &&
-    alias fish_greeting='khal list now 10d --format " {title}"'
+    alias fish_greeting='khal list now 10d --format " {title}" | sed "/No events/d" '
 
 abbr gs git status
 abbr gp 'git pull; git push'

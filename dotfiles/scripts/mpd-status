@@ -1,0 +1,9 @@
+#!/bin/sh
+
+pgrep mpd > /dev/null ||
+    exit 1
+
+mpc status | grep '^\[playing\]' > /dev/null &&
+    mpc current -f ' %title% - %artist% '
+
+true

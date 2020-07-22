@@ -54,7 +54,7 @@ window#waybar.empty {
     color: {{@@ color.accent @@}};
 }
 
-#mpd,
+#custom-mpd,
 #tray,
 #clock,
 #network,
