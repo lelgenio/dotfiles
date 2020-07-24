@@ -31,6 +31,8 @@ profiles:
     - fusuma
     - alacritty
     - mpd
+    - imv
+    - mpv
     - dav
     - mutt
     - crontab
@@ -144,6 +146,14 @@ dotfiles:
   kanshi:
     src: kanshi
     dst: ~/.config/kanshi/config
+  imv:
+    src: imv.conf
+    dst: ~/.config/imv/config
+  mpv:
+    src : mpv.conf
+    dst: ~/.config/mpv/mpv.conf
+    actions:
+      - sponsorblock
 actions:
   notify: notify-send "Updating dotfiles"
   makoreload: makoctl reload
@@ -160,3 +170,7 @@ actions:
   crontab_install: |
     crontab -r
     crontab ~/.local/share/crontab
+  sponsorblock: >
+    git clone
+    https://github.com/po5/mpv_sponsorblock
+    ~/.config/mpv/scripts
