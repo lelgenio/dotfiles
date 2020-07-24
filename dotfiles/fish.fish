@@ -18,18 +18,6 @@ set -x PAGER less
 # if test -n "$XDG_VTRN"; and test -z "$DISPLAY"
     # or command -qs systemctl;and systemctl -q is-enabled ly
 
-    set -x _JAVA_AWT_WM_NONREPARENTING 1
-
-    set -x GTK_CSD 0
-    # set -x LD_PRELOAD '/usr/lib/libgtk3-nocsd.so.0'
-
-    set -x XCURSOR_THEME {{@@ cursor_theme @@}}
-    set -x GTK_THEME materia-custom-accent:dark
-
-    # set -x XDG_CURRENT_DESKTOP Unity
-    set -x QT_SCALE_FACTOR 1.0001
-    set -x QPA_PLATFORM wayland
-    set -x QT_QPA_PLATFORM wayland
 
     # keep my dirs clean
     set -x PYTHONPYCACHEPREFIX $HOME/.cache/python
@@ -114,6 +102,20 @@ end
 
 function esway
     clear
+
+    set -x _JAVA_AWT_WM_NONREPARENTING 1
+
+    set -x GTK_CSD 0
+    # set -x LD_PRELOAD '/usr/lib/libgtk3-nocsd.so.0'
+
+    set -x XCURSOR_THEME {{@@ cursor_theme @@}}
+    set -x GTK_THEME materia-custom-accent:dark
+
+    # set -x XDG_CURRENT_DESKTOP Unity
+    set -x QT_SCALE_FACTOR 1.0001
+    set -x QPA_PLATFORM wayland
+    set -x QT_QPA_PLATFORM wayland
+
     # export XDG_CURRENT_DESKTOP=Unity
     pgrep sway || exec sway
 end
