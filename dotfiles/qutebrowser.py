@@ -227,9 +227,11 @@ c.url.searchengines = {
     "DEFAULT": "search.disroot.org?q={}",
     "!aw": "wiki.archlinux.org?search={}",
     "!w": "wikipedia.org/w?search={}",
+    "!wpt": "pt.wikipedia.org/w?search={}",
     "!au": "aur.archlinux.org/packages/?K={}",
     "!alt": "alternativeto.net/browse/search?q={}",
-    "!gw": "https://wiki.gentoo.org/?search={}"
+    "!gw": "wiki.gentoo.org/?search={}",
+    "!yt": "youtube.com/results?q={}",
 }
 
 # Page(s) to open at the start.
