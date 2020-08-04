@@ -79,10 +79,10 @@ bind index \Cf noop
 
 # index
 #
-bind index {{@@ key.left  @@}} noop
-bind index {{@@ key.down  @@}} next-entry
-bind index {{@@ key.up    @@}} previous-entry
-bind index {{@@ key.right @@}} display-message
+bind index "{{@@ key.left  @@}}" noop
+bind index "{{@@ key.down  @@}}" next-entry
+bind index "{{@@ key.up    @@}}" previous-entry
+bind index "{{@@ key.right @@}}" display-message
 
 bind index G last-entry
 bind index gg first-entry
@@ -93,9 +93,9 @@ bind index U undelete-message
 bind index L limit
 bind index <space> tag-entry
 
+bind attach <return>            view-mailcap
+bind attach "{{@@ key.right @@}}" view-mailcap
 
-bind attach <return> view-mailcap
-bind attach l view-mailcap
 bind editor <space> noop
 bind pager,attach h exit
 bind pager t next-line
