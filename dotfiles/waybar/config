@@ -84,7 +84,7 @@
         "format": "{icon}",
         "format-bluetooth": "",
         "format-bluetooth-muted": "",
-        "format-muted": "",
+        "format-muted": "ﱝ",
         "format-icons": {
             "headphones": "",
             "handsfree": "",
@@ -92,7 +92,7 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": ["奄", "奔", "墳"]
         },
         "on-click": "pavucontrol"
     },
