@@ -38,7 +38,14 @@ command -qs bat &&
     alias cat bat
 
 command -qs khard &&
-    alias fish_greeting='khal list now 10d --format " {title}" | sed "/No events/d" '
+    function fish_greeting
+        set -l khalList khal list now 10d --format " {title}"
+        $khalList &> /dev/null
+            or return
+        $khalList | grep '^No events$' &> /dev/null
+            and return
+        $khalList
+    end
 
 abbr gs git status
 abbr gp 'git pull; git push'
