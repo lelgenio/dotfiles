@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Ensure we're not using the wayland backend on SDL
+unset SDL_VIDEODRIVER
+
+wf-recorder -c rawvideo --geometry="$(slurp)" -m sdl -f pipe:wayland-mirror
+￼
