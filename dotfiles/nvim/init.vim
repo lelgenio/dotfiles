@@ -48,7 +48,9 @@
     "     \}
 
     " Debugger
-    " Plug 'vim-vdebug/vdebug'
+    let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
+    let g:vimspector_enable_mappings = 'HUMAN'
+    Plug 'puremourning/vimspector'
 
     " Fuzzy find
     Plug 'junegunn/fzf'
@@ -60,7 +62,7 @@
     " HTML shortcuts
     Plug 'mattn/emmet-vim'
 
-    Plug 'jiangmiao/auto-pairs'
+    " Plug 'jiangmiao/auto-pairs'
     Plug 'tpope/vim-surround'
     Plug 'junegunn/vim-easy-align'
     Plug 'tpope/vim-commentary'
@@ -199,13 +201,20 @@ call plug#end()
 
     noremap {{@@ key.next         @@}} n
     noremap {{@@ key.next.upper() @@}} N
+
+    noremap t i
+    noremap T I
+
+    noremap h o
+    noremap H O
+
     " Added benefits
     noremap - $
     noremap _ ^
     " noremap N <C-w><C-w>
     " noremap T <C-w><C-r>
-    noremap H 8<Down>
-    noremap T 8<Up>
+    noremap {{@@ key.down.upper() @@}} 8<Down>
+    noremap {{@@ key.up.upper()   @@}} 8<Up>
     " noremap D <C-w><C-r>
 
     " Single charater traversal
@@ -215,7 +224,7 @@ call plug#end()
     "I deserve the death sentence
     nmap <C-s>      :wa<CR>
 
-    "open and close folds
+    "open folds
     nmap    <silent> {{@@ key.right @@}} <right>
     noremap <silent> <right>             <right>:silent! foldopen<CR>
 
@@ -235,7 +244,7 @@ call plug#end()
     set ignorecase
 
     map <C-j>   :GFiles<CR>
-    map <C-q>   :Files<CR>
+    " map <C-q>   :Files<CR>
 
 "}}}
 " Lanugage Server{{{

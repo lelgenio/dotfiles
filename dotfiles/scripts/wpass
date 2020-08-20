@@ -35,7 +35,7 @@ case $action in
         if [ $(swaymsg -t get_tree | jq -r '.. | select(.focused? == true).app_id') = "org.qutebrowser.qutebrowser" ]
         then
             ydotool key esc
-            ydotool key i
+            ydotool key t
         fi
         ydotool type "$username"
         ydotool key tab
@@ -47,4 +47,4 @@ case $action in
         printf '%s' "$password" | wl-copy;;
 esac
 
-swaymsg input \* xkb_layout 'br(dvorak)'
+swaymsg input \* xkb_layout 'us(colemak)'

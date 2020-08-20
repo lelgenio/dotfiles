@@ -378,8 +378,13 @@ config.bind(",r", "spawn --userscript readability")
 config.bind(";e", "hint links spawn deemix '{hint-url}'")
 config.bind(";m", "hint links spawn mpv --fs {hint-url}")
 
-config.bind("e", "hint all")
-config.bind("E", "hint all tab")
+config.bind("s", "hint all")
+config.bind("S", "hint all tab")
+
+config.bind("h", "set-cmd-text -s :open")
+config.bind("H", "set-cmd-text -s :open -t")
+
+config.bind("t", "enter-mode insert")
 
 config.bind("{{@@ key.next         @@}}", "search-next")
 config.bind("{{@@ key.next.upper() @@}}", "search-prev")
