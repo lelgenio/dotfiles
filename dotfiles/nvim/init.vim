@@ -62,7 +62,7 @@
     " HTML shortcuts
     Plug 'mattn/emmet-vim'
 
-    " Plug 'jiangmiao/auto-pairs'
+    Plug 'jiangmiao/auto-pairs'
     Plug 'tpope/vim-surround'
     Plug 'junegunn/vim-easy-align'
     Plug 'tpope/vim-commentary'
@@ -189,10 +189,10 @@ call plug#end()
 "
 
     " Basic motion
-    noremap {{@@ key.left  @@}} <left>
-    noremap {{@@ key.down  @@}} <down>
-    noremap {{@@ key.up    @@}} <up>
-    noremap {{@@ key.right @@}} <right>
+    map {{@@ key.left  @@}} <left>
+    map {{@@ key.down  @@}} <down>
+    map {{@@ key.up    @@}} <up>
+    map {{@@ key.right @@}} <right>
 
     noremap <silent> <C-w>{{@@ key.left  @@}} :wincmd h<CR>
     noremap <silent> <C-w>{{@@ key.down  @@}} :wincmd j<CR>
@@ -202,31 +202,47 @@ call plug#end()
     noremap {{@@ key.next         @@}} n
     noremap {{@@ key.next.upper() @@}} N
 
-    noremap t i
-    noremap T I
+    noremap {{@@ key.insertMode         @@}} i
+    noremap {{@@ key.insertMode.upper() @@}} I
 
-    noremap h o
-    noremap H O
+    {%@@ if key.layout == "colemak" @@%}
 
-    " Added benefits
-    noremap - $
-    noremap _ ^
-    " noremap N <C-w><C-w>
-    " noremap T <C-w><C-r>
+        " insert on next line
+        noremap h o
+        noremap H O
+
+        " To end of word
+        noremap t e
+        noremap T E
+
+        " inneR object (like vip)
+        onoremap r      i
+        {%@@ for move in "p{([w" @@%}
+            nnoremap vr{{@@ move @@}} vi{{@@ move @@}}
+        {%@@ endfor @@%}
+
+    {%@@ endif @@%}
+
+    {%@@ if key.layout == "dvorak" @@%}
+
+        " Added benefits
+        noremap - $
+        noremap _ ^
+        noremap N <C-w><C-w>
+        noremap T <C-w><C-r>
+
+    {%@@ endif @@%}
+
     noremap {{@@ key.down.upper() @@}} 8<Down>
     noremap {{@@ key.up.upper()   @@}} 8<Up>
-    " noremap D <C-w><C-r>
+    noremap D <C-w><C-r>
 
-    " Single charater traversal
-    imap <C-{{@@ key.down  @@}}> <Left>
-    imap <C-{{@@ key.up    @@}}> <Right>
+    "open folds
+    nmap <silent> {{@@    key.right       @@}} <right>
+    nmap <silent> <right> <right>:silent! foldopen<CR>
 
     "I deserve the death sentence
     nmap <C-s>      :wa<CR>
-
-    "open folds
-    nmap    <silent> {{@@ key.right @@}} <right>
-    noremap <silent> <right>             <right>:silent! foldopen<CR>
 
     " Easy comment toggle
     nmap     <silent> gc        :Commentary<CR>
@@ -239,10 +255,6 @@ call plug#end()
     xmap     ga <Plug>(EasyAlign)
     nmap     ga <Plug>(EasyAlign)
 
-    "EasyMotion
-    " map e <Plug>(easymotion-prefix)
-    set ignorecase
-
     map <C-j>   :GFiles<CR>
     " map <C-q>   :Files<CR>
 
@@ -250,6 +262,7 @@ call plug#end()
 " Lanugage Server{{{
 "
     set foldmethod=marker
+    set ignorecase
     set hidden
     set autoread
 

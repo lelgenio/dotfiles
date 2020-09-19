@@ -40,15 +40,17 @@ profiles:
     - blender
     variables:
       key:
+        layout: colemak
         left: n
         down: e
         up: i
         right: o
         next: l
+        insertMode: s
       font:
         mono: Fira Code
         interface: Inter
-      gtk_theme: materia-custom-accent
+      gtk_theme: materia-custom-accent-dark
       cursor_theme: capitaine-cursors
       color:
         accent: '#D9534F'
