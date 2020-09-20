@@ -35,7 +35,19 @@
 
     Plug 'prabirshrestha/asyncomplete.vim'
         Plug 'prabirshrestha/asyncomplete-lsp.vim'
-        Plug 'prabirshrestha/asyncomplete-file.vim'
+        Plug 'prabigshrestha/asyncomplete-file.vim'
+
+    Plug 'SirVer/ultisnips'
+        Plug 'prabirshrestha/async.vim'
+        Plug 'thomasfaingnaert/vim-lsp-snippets'
+        Plug 'thomasfaingnaert/vim-lsp-ultisnips'
+
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsJumpForwardTrigger="<tab>"
+    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+    set completeopt+=menuone
+    set cot+=preview
 {%@@ elif lsp == "coc" @@%}
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 {%@@ endif @@%}
@@ -57,7 +69,7 @@
     Plug 'junegunn/fzf.vim'
 
     " Completions
-    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
     " HTML shortcuts
     Plug 'mattn/emmet-vim'
@@ -287,13 +299,13 @@ call plug#end()
     autocmd FileType json syntax match Comment +\/\/.\+$+
 
     " Workaround for bug
-    let g:lsp_documentation_float = 0
+    " let g:lsp_documentation_float = 0
 
     " Complete
-    inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-    inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
-    imap <c-space> <Plug>(asyncomplete_force_refresh)
+    inoremap <expr>    <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr>    <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr>    <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+    imap     <c-space> <Plug>(asyncomplete_force_refresh)
 
     " Fix
     nmap gf <Plug>(lsp-document-format)
