@@ -38,6 +38,7 @@ profiles:
     - crontab
     - theme
     - blender
+    - clang-format
     variables:
       key:
         layout: colemak
@@ -75,12 +76,12 @@ dotfiles:
     src: nvim
     dst: ~/.config/nvim
     actions:
-      - vimplug
+    - vimplug
   sway:
     src: sway.conf
     dst: ~/.config/sway/config
     actions:
-      - reload_sway
+    - reload_sway
   fish:
     src: fish.fish
     dst: ~/.config/fish/config.fish
@@ -93,7 +94,7 @@ dotfiles:
     src: waybar
     dst: ~/.config/waybar
     actions:
-      - reload_sway
+    - reload_sway
   kitty:
     src: kitty.conf
     dst: ~/.config/kitty/kitty.conf
@@ -142,7 +143,7 @@ dotfiles:
     src: crontab
     dst: ~/.local/share/crontab
     actions:
-      - crontab_install
+    - crontab_install
   theme:
     src: theme
     dst: ~/
@@ -153,13 +154,16 @@ dotfiles:
     src: imv.conf
     dst: ~/.config/imv/config
   mpv:
-    src : mpv.conf
+    src: mpv.conf
     dst: ~/.config/mpv/mpv.conf
     actions:
-      - sponsorblock
+    - sponsorblock
   blender:
     src: blenderTheme.xml
     dst: ~/.config/blender/2.83/scripts/presets/interface_theme/blenderTheme.xml
+  clang-format:
+    src: clang-format
+    dst: ~/.clang-format
 actions:
   notify: notify-send "Updating dotfiles"
   makoreload: makoctl reload
