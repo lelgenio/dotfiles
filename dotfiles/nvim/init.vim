@@ -35,7 +35,7 @@
 
     Plug 'prabirshrestha/asyncomplete.vim'
         Plug 'prabirshrestha/asyncomplete-lsp.vim'
-        Plug 'prabigshrestha/asyncomplete-file.vim'
+        " Plug 'prabigshrestha/asyncomplete-file.vim'
 
     Plug 'SirVer/ultisnips'
         Plug 'prabirshrestha/async.vim'
