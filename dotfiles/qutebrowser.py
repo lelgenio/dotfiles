@@ -109,6 +109,15 @@ config.set("content.autoplay", True, "https://ca.bbcollab.com")
 #   - ask
 config.set("content.notifications", False, "*")
 
+# Allow websites to register protocol handlers via
+# `navigator.registerProtocolHandler`.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.register_protocol_handler', False, 'https://mail.disroot.org?mailto&to=%25s')
+
 # Automatically mute tabs. Note that if the `:tab-mute` command is used,
 # the mute status for the affected tab is now controlled manually, and
 # this setting doesn't have any effect.
@@ -327,7 +336,7 @@ c.colors.tabs.pinned.selected.odd.bg = "{{@@ color.bg_light @@}}"
 # Background color of pinned selected even tabs.
 c.colors.tabs.pinned.selected.even.bg = "{{@@ color.bg_light @@}}"
 
-c.colors.webpage.darkmode.enabled = True
+c.colors.webpage.darkmode.enabled = False
 c.colors.webpage.darkmode.threshold.background = 256 // 2
 c.colors.webpage.darkmode.threshold.text = 256 // 2
 c.colors.webpage.bg = "{{@@ color.bg @@}}"
