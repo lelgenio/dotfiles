@@ -246,7 +246,7 @@ call plug#end()
 
     noremap {{@@ key.down.upper() @@}} 8<Down>
     noremap {{@@ key.up.upper()   @@}} 8<Up>
-    noremap D <C-w><C-r>
+    " noremap D <C-w><C-r>
 
     "open folds
     nmap <silent> {{@@    key.right       @@}} <right>
