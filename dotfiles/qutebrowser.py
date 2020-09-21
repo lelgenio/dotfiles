@@ -137,7 +137,11 @@ c.hints.border = "2px solid {{@@ color.accent @@}}"
 
 # Characters used for hint strings.
 # Type: UniqueCharString
-c.hints.chars = "aoeuidnths"
+{%@@ if key.layout == "colemak" @@%}
+    c.hints.chars = "asrtdhneio"
+{%@@ elif key.layout == "dvorak" @@%}
+    c.hints.chars = "aoeuidnths"
+{%@@ endif @@%}
 
 # Leave insert mode if a non-editable element is clicked.
 # Type: Bool

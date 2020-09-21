@@ -8,7 +8,7 @@
 
 # Environment Vairables {{{
 set -x QT_QPA_PLATFORMTHEME qt5ct
-set -x PATH $PATH ~/.local/bin
+set -x PATH ~/.local/bin $PATH
 
 set -x EDITOR nvim
 set -x VISUAL nvim
