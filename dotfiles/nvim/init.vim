@@ -20,10 +20,9 @@
 
     call plug#begin('~/.config/nvim/plugged')
 
-
-    Plug 'airblade/vim-gitgutter'
     Plug 'chrisbra/Colorizer'
-
+    Plug 'airblade/vim-gitgutter'
+    let g:gitgutter_map_keys = 0
 
     " Language server support
     "
