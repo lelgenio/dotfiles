@@ -102,6 +102,9 @@ if test $fish_key_bindings = fish_vi_key_bindings
     bind -M visual {{@@ key.up    @@}} up-line
     bind           {{@@ key.right @@}} forward-char
     bind -M visual {{@@ key.right @@}} forward-char
+
+    bind -m insert {{@@ key.insertMode @@}} repaint-mode
+
 end
 #}}}
 # start window manager if using tty1 {{{
