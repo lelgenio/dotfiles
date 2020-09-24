@@ -126,7 +126,8 @@ function esway
     set -x QPA_PLATFORM wayland
     set -x QT_QPA_PLATFORM wayland
 
-    # export XDG_CURRENT_DESKTOP=Unity
+    export XDG_CURRENT_DESKTOP=sway
+    export XDG_SESSION_TYPE=wayland
     pgrep sway || exec sway
 end
 if test "$XDG_VTNR" = 1 -a -z "$DISPLAY"

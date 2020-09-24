@@ -30,6 +30,13 @@ c.aliases = {
 # Type: Bool
 c.session.lazy_restore = True
 
+# Additional arguments to pass to Qt, without leading `--`. With
+# QtWebEngine, some Chromium arguments (see
+# https://peter.sh/experiments/chromium-command-line-switches/ for a
+# list) will work.
+# Type: List of String
+c.qt.args = ['enable-features=WebRTCPipeWireCapturer']
+
 # Always restore open sites when qutebrowser is reopened.
 # Type: Bool
 c.auto_save.session = True
@@ -136,80 +143,31 @@ c.completion.shrink = True
 c.hints.border = "2px solid {{@@ color.accent @@}}"
 
 # Characters used for hint strings.
-# Type: UniqueCharString
-{%@@ if key.layout == "colemak" @@%}
-c.hints.chars = "asrtdhneio"
-{%@@ elif key.layout == "dvorak" @@%}
-c.hints.chars = "aoeuidnths"
-{%@@ endif @@%}
+# {%@@ if key.layout == "colemak" @@%}
 
-# Leave insert mode if a non-editable element is clicked.
-# Type: Bool
+c.hints.chars = "asrtdhneio"
+# {%@@ elif key.layout == "dvorak" @@%}
+
+c.hints.chars = "aoeuidnths"
+# {%@@ endif @@%}
+
 c.input.insert_mode.auto_leave = False
 
-# Enable smooth scrolling for web pages. Note smooth scrolling does not
-# work with the `:scroll-px` command.
-# Type: Bool
+# necessary for screensharing due to bug
+c.scrolling.bar = 'when-searching'
+
 c.scrolling.smooth = True
 
-# List of widgets displayed in the statusbar.
-# Type: List of String
-# Valid values:
-#   - url: Current page URL.
-#   - scroll: Percentage of the current page position like `10%`.
-#   - scroll_raw: Raw percentage of the current page position like `10`.
-#   - history: Display an arrow when possible to go back/forward in history.
-#   - tabs: Current active tab, e.g. `2`.
-#   - keypress: Display pressed keys when composing a vi command.
-#   - progress: Progress bar for the current page loading.
 c.statusbar.widgets = ["keypress", "url", "scroll", "history", "tabs"]
 
-# When to show favicons in the tab bar.
-# Type: String
-# Valid values:
-#   - always: Always show favicons.
-#   - never: Always hide favicons.
-#   - pinned: Show favicons only on pinned tabs.
 c.tabs.favicons.show = "always"
-
-# Which tab to select when the focused tab is removed.
-# Type: SelectOnRemove
-# Valid values:
-#   - prev: Select the tab which came before the closed one (left in horizontal, above in vertical).
-#   - next: Select the tab which came after the closed one (right in horizontal, below in vertical).
-#   - last-used: Select the previously selected tab.
 c.tabs.select_on_remove = "last-used"
 
 # When to show the tab bar.
-# Type: String
-# Valid values:
-#   - always: Always show the tab bar.
-#   - never: Always hide the tab bar.
-#   - multiple: Hide the tab bar if only one tab is open.
-#   - switching: Show the tab bar when switching tabs.
 c.tabs.show = "multiple"
 
-# Duration (in milliseconds) to show the tab bar before hiding it when
-# tabs.show is set to 'switching'.
-# Type: Int
 c.tabs.show_switching_delay = 2000
-
-# Format to use for the tab title. The following placeholders are
-# defined:  * `{perc}`: Percentage as a string like `[10%]`. *
-# `{perc_raw}`: Raw percentage, e.g. `10`. * `{current_title}`: Title of
-# the current web page. * `{title_sep}`: The string ` - ` if a title is
-# set, empty otherwise. * `{index}`: Index of this tab. * `{id}`:
-# {{@@ font.interface @@}}nal tab ID of this tab. * `{scroll_pos}`: Page scroll position. *
-# `{host}`: Host of the current web page. * `{backend}`: Either
-# ''webkit'' or ''webengine'' * `{private}`: Indicates when private mode
-# is enabled. * `{current_url}`: URL of the current web page. *
-# `{protocol}`: Protocol (http/https/...) of the current web page. *
-# `{audio}`: Indicator for audio/mute status.
-# Type: FormatString
 c.tabs.title.format = "{audio} {current_title}"
-
-# Width (in pixels) of the progress indicator (0 to disable).
-# Type: Int
 c.tabs.indicator.width = 0
 # }}}
 # Search {{{
