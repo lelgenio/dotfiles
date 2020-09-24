@@ -97,12 +97,14 @@ bind attach <return>            view-mailcap
 bind attach "{{@@ key.right @@}}" view-mailcap
 
 bind editor <space> noop
-bind pager,attach h exit
-bind pager t next-line
-bind pager n previous-line
-bind pager s view-attachments
-bind browser h goto-parent
-macro browser h '<change-dir><kill-line>..<enter>' "Go to parent folder"
+
+bind pager,attach   "{{@@ key.left  @@}}"  exit
+bind pager          "{{@@ key.down  @@}}"  next-line
+bind pager 	        "{{@@ key.up    @@}}"  previous-line
+bind pager 	        "{{@@ key.right @@}}"  view-attachments
+
+bind browser    "{{@@ key.left  @@}}"  goto-parent
+macro browser   "{{@@ key.left  @@}}" '<change-dir><kill-line>..<enter>' "Go to parent folder"
 bind index,pager H view-raw-message
 bind browser l select-entry
 bind pager,browser gg top-page
@@ -132,9 +134,11 @@ set sidebar_short_path = yes
 set sidebar_next_new_wrap = yes
 # set mail_check_stats
 set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
-bind index,pager \Ct sidebar-next
-bind index,pager \Cn sidebar-prev
-bind index,pager \Cs sidebar-open
+
+bind index,pager "\C{{@@ key.down  @@}}" sidebar-next
+bind index,pager "\C{{@@ key.up    @@}}" sidebar-prev
+bind index,pager "\C{{@@ key.right @@}}" sidebar-open
+
 # bind index,pager \Cp sidebar-prev-new
 # bind index,pager \Cn sidebar-next-new
 bind index,pager B sidebar-toggle-visible
