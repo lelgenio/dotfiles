@@ -36,6 +36,12 @@
         Plug 'prabirshrestha/asyncomplete-lsp.vim'
         " Plug 'prabigshrestha/asyncomplete-file.vim'
 
+    Plug 'prabirshrestha/asyncomplete-emmet.vim'
+    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emmet#get_source_options({
+        \ 'name': 'emmet',
+        \ 'whitelist': ['html'],
+        \ 'completor': function('asyncomplete#sources#emmet#completor'),
+        \ }))
     Plug 'SirVer/ultisnips'
         Plug 'prabirshrestha/async.vim'
         Plug 'thomasfaingnaert/vim-lsp-snippets'
@@ -233,7 +239,7 @@ call plug#end()
 
         " inneR object (like vip)
         onoremap r      i
-        {%@@ for move in "p{([w" @@%}
+        {%@@ for move in "pPwW{([" @@%}
             nnoremap vr{{@@ move @@}} vi{{@@ move @@}}
         {%@@ endfor @@%}
 
