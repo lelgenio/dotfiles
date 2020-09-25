@@ -93,15 +93,19 @@ bind index U undelete-message
 bind index L limit
 bind index <space> tag-entry
 
-bind attach <return>            view-mailcap
-bind attach "{{@@ key.right @@}}" view-mailcap
+# Attachment screen
+bind attach <return>                view-mailcap
+bind attach "{{@@ key.up    @@}}"   previous-entry
+bind attach "{{@@ key.down  @@}}"   next-entry
+bind attach "{{@@ key.left  @@}}"   exit
+bind attach "{{@@ key.right @@}}"   view-mailcap
 
 bind editor <space> noop
 
-bind pager,attach   "{{@@ key.left  @@}}"  exit
-bind pager          "{{@@ key.down  @@}}"  next-line
-bind pager 	        "{{@@ key.up    @@}}"  previous-line
-bind pager 	        "{{@@ key.right @@}}"  view-attachments
+bind pager "{{@@ key.left  @@}}"  exit
+bind pager "{{@@ key.down  @@}}"  next-line
+bind pager "{{@@ key.up    @@}}"  previous-line
+bind pager "{{@@ key.right @@}}"  view-attachments
 
 bind browser    "{{@@ key.left  @@}}"  goto-parent
 macro browser   "{{@@ key.left  @@}}" '<change-dir><kill-line>..<enter>' "Go to parent folder"
