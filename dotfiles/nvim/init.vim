@@ -108,7 +108,11 @@
     Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
     Plug 'vim-latex/vim-latex', { 'for': 'tex' }
     Plug 'vim-scripts/AnsiEsc.vim', { 'for': 'man' }
-     " Plug 'powerman/vim-plugin-AnsiEsc'
+    " Plug 'powerman/vim-plugin-AnsiEsc'
+
+    Plug 'rbgrouleff/bclose.vim'
+    Plug 'francoiscabrol/ranger.vim'
+    let g:ranger_map_keys = 0
 
     " Language sytax highlight improvements
     " Plug 'mboughaba/i3config.vim'
@@ -286,6 +290,11 @@ call plug#end()
         nmap <C-m>      :GFiles <CR>
 
     {%@@ endif @@%}
+
+    " File Browser
+    nmap F          :Ranger <CR>
+
+    nmap Q          :wqa<CR>
 
     " Open folds
     nmap <silent> {{@@    key.right       @@}} <right>
