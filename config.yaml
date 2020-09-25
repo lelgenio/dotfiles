@@ -160,7 +160,7 @@ dotfiles:
     - sponsorblock
   blender:
     src: blenderTheme.xml
-    dst: ~/.config/blender/2.83/scripts/presets/interface_theme/blenderTheme.xml
+    dst: ~/.config/blender/2.90/scripts/presets/interface_theme/blenderTheme.xml
   clang-format:
     src: clang-format
     dst: ~/.clang-format
