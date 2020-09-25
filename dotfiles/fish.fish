@@ -164,53 +164,54 @@ end
 # Prompt customization{{{
 
 
-# Fine, I'll do it myself
-function fish_vi_cursor;end
-function fish_mode_prompt;end
+    # Fine, I'll do it myself
+    function fish_vi_cursor;end
+    function fish_mode_prompt;end
 
-# function _fish_prompt_accent
-#     set_color --bold "{{@@ color.accent @@}}"
-#     echo -en $argv
-# end
+    function _fish_prompt_accent
+        set_color --bold "{{@@ color.accent @@}}"
+        echo -en $argv
+    end
 
-# function _fish_prompt_normal
-#     set_color --bold "brwhite"
-#     echo -en $argv
-# end
+    function _fish_prompt_normal
+        set_color --bold "brwhite"
+        echo -en $argv
+    end
 
-# function fish_prompt
-#     _fish_prompt_accent $USER
-#     _fish_prompt_normal " in "
-#     _fish_prompt_accent (prompt_pwd)
-#     echo
+    function fish_prompt
+        _fish_prompt_accent $USER
+        _fish_prompt_normal " in "
+        _fish_prompt_accent (prompt_pwd)
+        echo
 
-#     if test $fish_key_bindings = fish_vi_key_bindings
-#         printf '\e[1 q'
+        if test $fish_key_bindings = fish_vi_key_bindings
+            printf '\e[1 q'
 
-#         printf (
-#         switch $fish_bind_mode
-#             case insert
-#                 printf '\e[5 q'
-#                 printf 'i'
-#             case replace_one
-#                 printf 'o'
-#             case default
-#                 printf 'n'
-#             case '*'
-#                 printf (string match -r '^.' $fish_bind_mode )
-#         end | string upper
-#         )' '
-#     end
+            printf (
+            switch $fish_bind_mode
+                case insert
+                    printf '\e[5 q'
+                    printf 'i'
+                case replace_one
+                    printf 'o'
+                case default
+                    printf 'n'
+                case '*'
+                    printf (string match -r '^.' $fish_bind_mode )
+            end | string upper
+            )' '
+        end
 
-#     if test $USER = root
-#         _fish_prompt_normal "\# "
-#     else
-#         _fish_prompt_normal "\$ "
-#     end
+        if test $USER = root
+            _fish_prompt_normal "\# "
+        else
+            _fish_prompt_normal "\$ "
+        end
 
-#     set_color normal
-# end
+        set_color normal
+    end
 
+if false
     set SPACEFISH_USER_SHOW always
     set SPACEFISH_USER_COLOR "{{@@ color.accent @@}}"
     set SPACEFISH_DIR_COLOR  "{{@@ color.accent @@}}"
@@ -230,6 +231,7 @@ function fish_mode_prompt;end
     set SPACEFISH_VI_MODE_REPLACE "R"
     set SPACEFISH_VI_MODE_REPLACE_ONE 	"S"
     set SPACEFISH_VI_MODE_SUFIX ""
+end
 
     # set fish_cursor_default     block      blink
     # set fish_cursor_insert      line       blink
