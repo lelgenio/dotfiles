@@ -349,16 +349,20 @@ config.bind(",r", "spawn --userscript readability")
 config.bind(";e", "hint links spawn deemix '{hint-url}'")
 config.bind(";m", "hint links spawn mpv --fs {hint-url}")
 
-config.bind("s", "hint all")
-config.bind("S", "hint all tab")
+# {%@@ if key.layout == "colemak" @@%}
+#
+config.bind("t", "hint all")
+config.bind("T", "hint all tab")
 
 config.bind("h", "set-cmd-text -s :open")
 config.bind("H", "set-cmd-text -s :open -t")
 
-config.bind("t", "enter-mode insert")
+# {%@@ endif @@%}
 
-config.bind("{{@@ key.next         @@}}", "search-next")
-config.bind("{{@@ key.next.upper() @@}}", "search-prev")
+config.bind("{{@@ key.insertMode    @@}}", "enter-mode insert")
+
+config.bind("{{@@ key.next          @@}}", "search-next")
+config.bind("{{@@ key.next.upper()  @@}}", "search-prev")
 
 config.bind("{{@@ key.left  @@}}", "scroll left")
 config.bind("{{@@ key.down  @@}}", "scroll down")

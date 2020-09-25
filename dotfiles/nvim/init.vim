@@ -74,7 +74,7 @@
     Plug 'junegunn/fzf.vim'
 
     " Completions
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
     " HTML shortcuts
     Plug 'mattn/emmet-vim'
@@ -132,25 +132,29 @@ call plug#end()
     set expandtab
     set smarttab
 
+    " Allow moving the cursor anywhere
     set virtualedit=all
 
+    " When to start scrolling the window
     set scrolloff=8
     set sidescrolloff=8
 
     set nowrap
 
-    "destaque no númer de linhas
+    " Show line numbers on the left
     set number
     set relativenumber
 
-    "display whitespace
+    " Display whitespace
     set listchars=tab:>-,trail:~,extends:>,precedes:<
     set listchars=space:_,eol:;,tab:>-,trail:~,extends:>,precedes:<
     set list
 
-    "ativa o mouse
+    " Enable mouse
     set mouse =a
     set clipboard +=unnamedplus
+
+    " Rename the terminal
     set title
 
      let g:python_highlight_all = 1
@@ -223,18 +227,26 @@ call plug#end()
     noremap <silent> <C-w>{{@@ key.up   .upper() @@}} :wincmd K<CR>
     noremap <silent> <C-w>{{@@ key.right.upper() @@}} :wincmd L<CR>
 
+    " Skip 8 lines
+    noremap {{@@ key.down.upper() @@}} 8<Down>
+    noremap {{@@ key.up.upper()   @@}} 8<Up>
+
+    " Repeat search
     noremap {{@@ key.next         @@}} n
     noremap {{@@ key.next.upper() @@}} N
 
+    " for/backward on tabs
     nnoremap {{@@ key.tabL @@}} :tabprev<cr>
     nnoremap {{@@ key.tabR @@}} :tabnext<cr>
 
+    " Enter insert mode
     noremap {{@@ key.insertMode         @@}} i
     noremap {{@@ key.insertMode.upper() @@}} I
 
+    " Keyboard Layout specific
     {%@@ if key.layout == "colemak" @@%}
 
-        " insert on next line
+        " Insert on next line
         noremap h o
         noremap H O
 
@@ -242,20 +254,18 @@ call plug#end()
         noremap t e
         noremap T E
 
-        " inneR object (like vip)
-        onoremap r      i
-        {%@@ for move in "pPwW{([" @@%}
-            nnoremap vr{{@@ move @@}} vi{{@@ move @@}}
-        {%@@ endfor @@%}
-
         " FZF bindings
         nmap <C-b>      :Buffers<CR>
         nmap <C-k>      :Files  <CR>
         nmap <C-m>      :GFiles <CR>
 
-    {%@@ endif @@%}
+        " inneR object (like vip)
+        onoremap r      i
+        {%@@ for move in "pPwW{(['\"" @@%}
+            nnoremap vr{{@@ move @@}} vi{{@@ move @@}}
+        {%@@ endfor @@%}
 
-    {%@@ if key.layout == "dvorak" @@%}
+    {%@@ elif key.layout == "dvorak" @@%}
 
         " Added benefits
         noremap - $
@@ -268,13 +278,16 @@ call plug#end()
         nmap <C-k>      :Files  <CR>
         nmap <C-b>      :Buffers<CR>
 
+    {%@@ elif key.layout == "qwerty" @@%}
+
+        " FZF bindings
+        nmap <C-b>      :Buffers<CR>
+        nmap <C-n>      :Files  <CR>
+        nmap <C-m>      :GFiles <CR>
+
     {%@@ endif @@%}
 
-    noremap {{@@ key.down.upper() @@}} 8<Down>
-    noremap {{@@ key.up.upper()   @@}} 8<Up>
-    " noremap D <C-w><C-r>
-
-    "open folds
+    " Open folds
     nmap <silent> {{@@    key.right       @@}} <right>
     nmap <silent> <right> <right>:silent! foldopen<CR>
 
@@ -285,17 +298,9 @@ call plug#end()
     nmap     <silent> gc        :Commentary<CR>
     xmap     <silent> gc        :Commentary<CR>
 
-    " Toggle file manager
-    " map      <silent> <C-n> :NERDTreeToggle %:p:h<CR>
-
     " EasyAlign
     xmap     ga <Plug>(EasyAlign)
     nmap     ga <Plug>(EasyAlign)
-
-    " FZF bindings
-    nmap <C-b>      :Buffers<CR>
-    nmap <C-n>      :Files  <CR>
-    nmap <C-m>      :GFiles <CR>
 
 "}}}
 " Lanugage Server{{{
