@@ -59,7 +59,7 @@ depends=(
     imv mpv mpd mpc ncmpcpp mpv
     blender gimp kdenlive picard
     # Office
-    libreoffice-fresh libreoffice-fresh-pt-br hunspell-pt_br papirus-libreoffice-theme
+    libreoffice-fresh libreoffice-fresh-pt-br hunspell-pt-br papirus-libreoffice-theme
     # Programing
     code neovim python-pynvim neovim-symlinks ipython
     gdb clang
