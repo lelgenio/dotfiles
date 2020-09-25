@@ -47,6 +47,8 @@ profiles:
         up: i
         right: o
         next: l
+        tabL: U
+        tabR: Y
         insertMode: s
       font:
         mono: Fira Code

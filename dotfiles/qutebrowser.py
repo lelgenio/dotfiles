@@ -366,9 +366,13 @@ config.bind("{{@@ key.up    @@}}", "scroll up")
 config.bind("{{@@ key.right @@}}", "scroll right")
 
 config.bind("{{@@ key.left  .upper() @@}}", "back")
-config.bind("{{@@ key.down  .upper() @@}}", "tab-prev")
-config.bind("{{@@ key.up    .upper() @@}}", "tab-next")
 config.bind("{{@@ key.right .upper() @@}}", "forward")
+
+config.bind("{{@@ key.up    .upper() @@}}", "scroll-px 0 -100")
+config.bind("{{@@ key.down  .upper() @@}}", "scroll-px 0  100")
+
+config.bind("{{@@ key.tabL  .upper() @@}}", "tab-prev")
+config.bind("{{@@ key.tabR  .upper() @@}}", "tab-next")
 
 # Bindings for caret mode
 config.bind("{{@@ key.left  @@}}", "move-to-prev-char", mode="caret")

@@ -175,6 +175,8 @@ call plug#end()
     highlight EndOfBuffer guibg=None guifg={{@@ color.bg_light @@}}
     highlight SpecialKey  guibg=None guifg={{@@ color.accent @@}}
 
+    highlight tabLine     None
+    highlight tabLineFill None
 
     highlight SignColumn      guibg=None
     highlight GitGutterAdd    guifg=lightgreen
@@ -223,6 +225,9 @@ call plug#end()
 
     noremap {{@@ key.next         @@}} n
     noremap {{@@ key.next.upper() @@}} N
+
+    nnoremap {{@@ key.tabL @@}} :tabprev<cr>
+    nnoremap {{@@ key.tabR @@}} :tabnext<cr>
 
     noremap {{@@ key.insertMode         @@}} i
     noremap {{@@ key.insertMode.upper() @@}} I
