@@ -79,9 +79,9 @@
     " HTML shortcuts
     Plug 'mattn/emmet-vim'
 
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'tpope/vim-surround'
-    Plug 'junegunn/vim-easy-align'
+    " Plug 'jiangmiao/auto-pairs'
+    " Plug 'tpope/vim-surround'
+    " Plug 'junegunn/vim-easy-align'
     Plug 'tpope/vim-commentary'
 
     " Status bar
@@ -214,22 +214,21 @@ call plug#end()
     "}}}
 " Keys{{{
 "
+    {%@@ set keys = {
+        "h": key.left,
+        "j": key.down,
+        "k": key.up,
+        "l": key.right,
+    } @@%}
 
     " Basic motion
-    map {{@@ key.left  @@}} <left>
-    map {{@@ key.down  @@}} <down>
-    map {{@@ key.up    @@}} <up>
-    map {{@@ key.right @@}} <right>
+    {%@@ for old, new in keys.items() @@%}
+    " {{@@ new @@}} -> {{@@ old @@}}
+    noremap {{@@ new @@}} {{@@ old @@}}
+    noremap <silent> <C-w>{{@@ new          @@}} :wincmd {{@@ old         @@}}<CR>
+    noremap <silent> <C-w>{{@@ new.upper()  @@}} :wincmd {{@@ old.upper() @@}}<CR>
+    {%@@ endfor @@%}
 
-    noremap <silent> <C-w>{{@@ key.left  @@}} :wincmd h<CR>
-    noremap <silent> <C-w>{{@@ key.down  @@}} :wincmd j<CR>
-    noremap <silent> <C-w>{{@@ key.up    @@}} :wincmd k<CR>
-    noremap <silent> <C-w>{{@@ key.right @@}} :wincmd l<CR>
-
-    noremap <silent> <C-w>{{@@ key.left .upper() @@}} :wincmd H<CR>
-    noremap <silent> <C-w>{{@@ key.down .upper() @@}} :wincmd J<CR>
-    noremap <silent> <C-w>{{@@ key.up   .upper() @@}} :wincmd K<CR>
-    noremap <silent> <C-w>{{@@ key.right.upper() @@}} :wincmd L<CR>
 
     " Skip 8 lines
     noremap {{@@ key.down.upper() @@}} 8<Down>
@@ -262,12 +261,6 @@ call plug#end()
         nmap <C-b>      :Buffers<CR>
         nmap <C-k>      :Files  <CR>
         nmap <C-m>      :GFiles <CR>
-
-        " inneR object (like vip)
-        onoremap r      i
-        {%@@ for move in "pPwW{(['\"" @@%}
-            nnoremap vr{{@@ move @@}} vi{{@@ move @@}}
-        {%@@ endfor @@%}
 
     {%@@ elif key.layout == "dvorak" @@%}
 
