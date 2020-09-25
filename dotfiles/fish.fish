@@ -218,9 +218,9 @@ end
         end
 
         if test $USER = root
-            _fish_prompt_normal "\# "
+            _fish_prompt_normal '# '
         else
-            _fish_prompt_normal "\$ "
+            _fish_prompt_normal '$ '
         end
 
         if test $fish_bind_mode = insert

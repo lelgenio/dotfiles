@@ -20,7 +20,7 @@ depends=(
     netctl dhcpcd ifplugd wpa_supplicant dialog
 
     # DE
-    sway waybar ruby-fusuma light mako udiskie dotdrop yay
+    sway waybar ruby-fusuma light mako kanshi udiskie dotdrop yay
     bemenu j4-dmenu-desktop
     # passwords and auth
     pass gnupg pam-gnupg
