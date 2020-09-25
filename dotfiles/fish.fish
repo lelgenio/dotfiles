@@ -163,7 +163,6 @@ end
 #}}}
 # Prompt customization{{{
 
-
     # Fine, I'll do it myself
     function fish_vi_cursor;end
     function fish_mode_prompt;end
@@ -178,10 +177,22 @@ end
         echo -en $argv
     end
 
+    function _fish_prompt_warn
+        set_color --bold "bryellow"
+        echo -en $argv
+    end
+
     function fish_prompt
+        set _status $status
+
         _fish_prompt_accent $USER
         _fish_prompt_normal " in "
         _fish_prompt_accent (prompt_pwd)
+        if fish_vcs_prompt > /dev/null
+            _fish_prompt_normal " on"
+            _fish_prompt_accent (fish_vcs_prompt)
+        end
+
         echo
 
         if test $fish_key_bindings = fish_vi_key_bindings
@@ -190,7 +201,6 @@ end
             printf (
             switch $fish_bind_mode
                 case insert
-                    printf '\e[5 q'
                     printf 'i'
                 case replace_one
                     printf 'o'
@@ -202,10 +212,18 @@ end
             )' '
         end
 
+        if test $_status -ne 0
+            _fish_prompt_warn $_status' '
+        end
+
         if test $USER = root
             _fish_prompt_normal "\# "
         else
             _fish_prompt_normal "\$ "
+        end
+
+        if test $fish_bind_mode = insert
+            printf '\e[5 q'
         end
 
         set_color normal
