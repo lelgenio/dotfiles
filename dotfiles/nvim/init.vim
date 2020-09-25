@@ -248,6 +248,11 @@ call plug#end()
             nnoremap vr{{@@ move @@}} vi{{@@ move @@}}
         {%@@ endfor @@%}
 
+        " FZF bindings
+        nmap <C-b>      :Buffers<CR>
+        nmap <C-k>      :Files  <CR>
+        nmap <C-m>      :GFiles <CR>
+
     {%@@ endif @@%}
 
     {%@@ if key.layout == "dvorak" @@%}
@@ -257,6 +262,11 @@ call plug#end()
         noremap _ ^
         noremap N <C-w><C-w>
         noremap T <C-w><C-r>
+
+        " FZF bindings
+        nmap <C-j>      :GFiles <CR>
+        nmap <C-k>      :Files  <CR>
+        nmap <C-b>      :Buffers<CR>
 
     {%@@ endif @@%}
 
@@ -282,8 +292,10 @@ call plug#end()
     xmap     ga <Plug>(EasyAlign)
     nmap     ga <Plug>(EasyAlign)
 
-    map <C-j>   :GFiles<CR>
-    " map <C-q>   :Files<CR>
+    " FZF bindings
+    nmap <C-b>      :Buffers<CR>
+    nmap <C-n>      :Files  <CR>
+    nmap <C-m>      :GFiles <CR>
 
 "}}}
 " Lanugage Server{{{
