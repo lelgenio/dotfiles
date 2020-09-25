@@ -1,4 +1,8 @@
-{{@@ key.down         @@}}  forw-line
 {{@@ key.up           @@}}  back-line
+{{@@ key.down         @@}}  forw-line
+
+{{@@ key.up  .upper() @@}}  back-scroll
+{{@@ key.down.upper() @@}}  forw-scroll
+
 {{@@ key.next         @@}}  repeat-search
 {{@@ key.next.upper() @@}}  reverse-search
