@@ -35,7 +35,7 @@ case $action in
         if [ $(swaymsg -t get_tree | jq -r '.. | select(.focused? == true).app_id') = "org.qutebrowser.qutebrowser" ]
         then
             ydotool key esc
-            ydotool key t
+            ydotool key {{@@ key.insertMode @@}}
         fi
         ydotool type "$username"
         ydotool key tab

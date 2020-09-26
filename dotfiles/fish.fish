@@ -68,7 +68,7 @@ abbr neomutt mutt
 function rcd #{{{
     set file (mktemp)
 
-    ranger $argv --choosedir=$file
+    ranger --choosedir=$file
     cd (cat $file)
 
     rm $file
