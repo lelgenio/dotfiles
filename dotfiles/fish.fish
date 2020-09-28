@@ -239,27 +239,27 @@ end
         set_color normal
     end
 
-if false
-    set SPACEFISH_USER_SHOW always
-    set SPACEFISH_USER_COLOR "{{@@ color.accent @@}}"
-    set SPACEFISH_DIR_COLOR  "{{@@ color.accent @@}}"
+    if false
+        set SPACEFISH_USER_SHOW always
+        set SPACEFISH_USER_COLOR "{{@@ color.accent @@}}"
+        set SPACEFISH_DIR_COLOR  "{{@@ color.accent @@}}"
 
-    set SPACEFISH_PROMPT_ADD_NEWLINE false
+        set SPACEFISH_PROMPT_ADD_NEWLINE false
 
-    set SPACEFISH_CHAR_COLOR_SUCCESS white
-    set SPACEFISH_CHAR_PREFIX ""
-    set SPACEFISH_CHAR_SYMBOL '$'
-    set SPACEFISH_CHAR_SYMBOL_ROOT '#'
+        set SPACEFISH_CHAR_COLOR_SUCCESS white
+        set SPACEFISH_CHAR_PREFIX ""
+        set SPACEFISH_CHAR_SYMBOL '$'
+        set SPACEFISH_CHAR_SYMBOL_ROOT '#'
 
-    set SPACEFISH_VI_MODE_COLOR "{{@@ color.accent @@}}"
-    set SPACEFISH_VI_MODE_PREFIX "\e[1 q"
-    set SPACEFISH_VI_MODE_INSERT "I\e[5 q"
-    set SPACEFISH_VI_MODE_NORMAL "N"
-    set SPACEFISH_VI_MODE_VISUAL "V"
-    set SPACEFISH_VI_MODE_REPLACE "R"
-    set SPACEFISH_VI_MODE_REPLACE_ONE 	"S"
-    set SPACEFISH_VI_MODE_SUFIX ""
-end
+        set SPACEFISH_VI_MODE_COLOR "{{@@ color.accent @@}}"
+        set SPACEFISH_VI_MODE_PREFIX "\e[1 q"
+        set SPACEFISH_VI_MODE_INSERT "I\e[5 q"
+        set SPACEFISH_VI_MODE_NORMAL "N"
+        set SPACEFISH_VI_MODE_VISUAL "V"
+        set SPACEFISH_VI_MODE_REPLACE "R"
+        set SPACEFISH_VI_MODE_REPLACE_ONE 	"S"
+        set SPACEFISH_VI_MODE_SUFIX ""
+    end
 
     # set fish_cursor_default     block      blink
     # set fish_cursor_insert      line       blink
