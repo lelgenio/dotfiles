@@ -109,6 +109,10 @@ if test $fish_key_bindings = fish_vi_key_bindings
     bind -m insert {{@@ key.insertMode         @@}} repaint-mode
     bind -m insert {{@@ key.insertMode.upper() @@}} beginning-of-line repaint-mode
 
+    {%@@ if key.layout == 'colemak' @@%}
+        bind -M insert -m default kk repaint-mode
+    {%@@ endif @@%}
+
 end
 #}}}
 # start window manager if using tty1 {{{
@@ -182,7 +186,7 @@ end
     alias _fish_prompt_warn   "_fish_prompt_color 'bryellow'"
 
     function _fish_promt_git_status
-        git status -s | grep "$argv[1]" &> /dev/null &&
+        git status -s | grep "^$argv[1]" &> /dev/null &&
         _fish_prompt_color $argv[3] $argv[2]
     end
 
@@ -199,6 +203,7 @@ end
             _fish_promt_git_status ' M' '~' yellow
             _fish_promt_git_status ' D' '-' red
             _fish_promt_git_status 'A ' '+' green
+            _fish_promt_git_status 'M ' '~' green
 
             _fish_prompt_accent (fish_vcs_prompt | string replace -ra ' \(|\)' '')
         end
