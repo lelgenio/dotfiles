@@ -171,19 +171,19 @@ end
     function fish_vi_cursor;end
     function fish_mode_prompt;end
 
-    function _fish_prompt_accent
-        set_color --bold "{{@@ color.accent @@}}"
+    function _fish_prompt_color -a color
+        set_color --bold $color
+        set -e argv[1]
         echo -en $argv
     end
 
-    function _fish_prompt_normal
-        set_color --bold "brwhite"
-        echo -en $argv
-    end
+    alias _fish_prompt_accent "_fish_prompt_color '{{@@ color.accent @@}}'"
+    alias _fish_prompt_normal "_fish_prompt_color 'brwhite'"
+    alias _fish_prompt_warn   "_fish_prompt_color 'bryellow'"
 
-    function _fish_prompt_warn
-        set_color --bold "bryellow"
-        echo -en $argv
+    function _fish_promt_git_status
+        git status -s | grep "$argv[1]" &> /dev/null &&
+        _fish_prompt_color $argv[3] $argv[2]
     end
 
     function fish_prompt
@@ -193,19 +193,29 @@ end
         _fish_prompt_normal " in "
         _fish_prompt_accent (prompt_pwd)
         if fish_vcs_prompt > /dev/null
-            _fish_prompt_normal " on"
-            _fish_prompt_accent (fish_vcs_prompt | string replace -ra '\(|\)' '')
+            _fish_prompt_normal " on "
+
+            _fish_promt_git_status '??' '?' brwhite
+            _fish_promt_git_status ' M' '~' yellow
+            _fish_promt_git_status ' D' '-' red
+            _fish_promt_git_status 'A ' '+' green
+
+            _fish_prompt_accent (fish_vcs_prompt | string replace -ra ' \(|\)' '')
         end
 
         echo
 
         if test $fish_key_bindings = fish_vi_key_bindings
-            printf '\e[1 q'
 
-            printf (
+            # Set cursor shape
+            if test $fish_bind_mode = insert
+                printf '\e[5 q' # Bar
+            else
+                printf '\e[1 q' # Block
+            end
+
+            _fish_prompt_accent (
             switch $fish_bind_mode
-                case insert
-                    printf 'i'
                 case replace_one
                     printf 'o'
                 case default
@@ -224,10 +234,6 @@ end
             _fish_prompt_normal '# '
         else
             _fish_prompt_normal '$ '
-        end
-
-        if test $fish_bind_mode = insert
-            printf '\e[5 q'
         end
 
         set_color normal
