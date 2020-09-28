@@ -42,14 +42,6 @@
         \ 'whitelist': ['html'],
         \ 'completor': function('asyncomplete#sources#emmet#completor'),
         \ }))
-    Plug 'SirVer/ultisnips'
-        Plug 'prabirshrestha/async.vim'
-        Plug 'thomasfaingnaert/vim-lsp-snippets'
-        Plug 'thomasfaingnaert/vim-lsp-ultisnips'
-
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsJumpForwardTrigger="<tab>"
-    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
     set completeopt+=menuone
     set cot+=preview
@@ -58,16 +50,6 @@
 {%@@ endif @@%}
 
     Plug 'sheerun/vim-polyglot'
-
-    " Plug 'autozimu/LanguageClient-neovim', {
-    "     \ 'branch': 'next',
-    "     \ 'do': 'bash install.sh',
-    "     \}
-
-    " Debugger
-    let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
-    let g:vimspector_enable_mappings = 'HUMAN'
-    Plug 'puremourning/vimspector'
 
     " Fuzzy find
     Plug 'junegunn/fzf'
@@ -79,48 +61,30 @@
     " HTML shortcuts
     Plug 'mattn/emmet-vim'
 
-    " Plug 'jiangmiao/auto-pairs'
-    " Plug 'tpope/vim-surround'
-    " Plug 'junegunn/vim-easy-align'
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'junegunn/vim-easy-align'
     Plug 'tpope/vim-commentary'
+
+    Plug 'tpope/vim-surround'
+    let g:surround_no_mappings = 1
+
+    " Select based on indentation
+    Plug 'lelgenio/vim-indent-object-colemak'
 
     " Status bar
     Plug 'vim-airline/vim-airline'
     " Plug 'vim-airline/vim-airline-themes'
-{%@@ if lsp == "ale" @@%}
-    let g:airline#extensions#ale#enabled = 1
-{%@@ endif @@%}
-
-    " Bufferlist (integrates with airline)
-    " Plug 'bling/vim-bufferline'
 
     " Color scheme
     Plug 'dikiaap/minimalist'
-    " Plug 'morhetz/gruvbox' " Not that good
-
-    " Utilities
-    "Plug 'xolox/vim-misc'
-
-    " Notes
-    "Plug 'xolox/vim-notes'
 
     " Latex
     Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
-    " Plug 'vim-latex/vim-latex', { 'for': 'tex' }
     Plug 'vim-scripts/AnsiEsc.vim', { 'for': 'man' }
-    " Plug 'powerman/vim-plugin-AnsiEsc'
 
     Plug 'rbgrouleff/bclose.vim'
     Plug 'francoiscabrol/ranger.vim'
     let g:ranger_map_keys = 0
-
-    " Language sytax highlight improvements
-    " Plug 'mboughaba/i3config.vim'
-    " Plug 'dag/vim-fish'
-    " Plug 'arrufat/vala.vim'
-    " Plug 'NLKNguyen/c-syntax.vim'
-    " Plug 'vim-python/python-syntax'
-    " Plug 'stephpy/vim-yaml'
 
 call plug#end()
 
@@ -299,6 +263,18 @@ call plug#end()
     " Easy comment toggle
     nmap     <silent> gc        :Commentary<CR>
     xmap     <silent> gc        :Commentary<CR>
+
+    " Surround
+    nmap dk  <Plug>Dsurround
+    nmap ck  <Plug>Csurround
+    nmap cK  <Plug>CSurround
+    nmap yk  <Plug>Ysurround
+    nmap yK  <Plug>YSurround
+    nmap ykk <Plug>Yssurround
+    nmap yKk <Plug>YSsurround
+    nmap yKK <Plug>YSsurround
+    xmap K   <Plug>VSurround
+    xmap gK  <Plug>VgSurround
 
     " EasyAlign
     xmap     ga <Plug>(EasyAlign)
