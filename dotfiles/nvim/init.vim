@@ -221,6 +221,8 @@ call plug#end()
         noremap t e
         noremap T E
 
+        imap {{@@ key.insertQuit @@}} <ESC>
+
         " FZF bindings
         nmap <C-b>      :Buffers<CR>
         nmap <C-k>      :Files  <CR>

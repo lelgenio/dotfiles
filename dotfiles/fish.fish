@@ -109,9 +109,7 @@ if test $fish_key_bindings = fish_vi_key_bindings
     bind -m insert {{@@ key.insertMode         @@}} repaint-mode
     bind -m insert {{@@ key.insertMode.upper() @@}} beginning-of-line repaint-mode
 
-    {%@@ if key.layout == 'colemak' @@%}
-        bind -M insert -m default kk repaint-mode
-    {%@@ endif @@%}
+    bind -M insert {{@@ key.insertQuit @@}} repaint-mode -m default
 
 end
 #}}}

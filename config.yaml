@@ -50,6 +50,7 @@ profiles:
         tabL: U
         tabR: Y
         insertMode: s
+        insertQuit: kk
       font:
         mono: Fira Code
         interface: Inter

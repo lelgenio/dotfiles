@@ -123,7 +123,8 @@ config.set("content.notifications", False, "*")
 #   - true
 #   - false
 #   - ask
-config.set('content.register_protocol_handler', False, 'https://mail.disroot.org?mailto&to=%25s')
+config.set('content.register_protocol_handler', False,
+           'https://mail.disroot.org?mailto&to=%25s')
 
 # Automatically mute tabs. Note that if the `:tab-mute` command is used,
 # the mute status for the affected tab is now controlled manually, and
@@ -364,6 +365,7 @@ config.bind("H", "set-cmd-text -s :open -t")
 # {%@@ endif @@%}
 
 config.bind("{{@@ key.insertMode    @@}}", "enter-mode insert")
+config.bind("{{@@ key.insertQuit    @@}}", "enter-mode normal", mode="insert")
 
 config.bind("{{@@ key.next          @@}}", "search-next")
 config.bind("{{@@ key.next.upper()  @@}}", "search-prev")
