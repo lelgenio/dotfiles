@@ -37,6 +37,9 @@ command -qs exa &&
 command -qs bat &&
     alias cat bat
 
+command -qs zoxide &&
+    zoxide init fish | source
+
 command -qs khard &&
     function fish_greeting
         set -l khalList khal list now 10d --format " {title}"
@@ -78,7 +81,7 @@ function rcd #{{{
 end
 
 # force-repaint to redraw prompt
-bind -M insert \co rcd
+bind -M insert \cr rcd
 #}}}
 function etc #{{{
     cd /etc/
