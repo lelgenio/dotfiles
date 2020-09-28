@@ -106,7 +106,7 @@
 
     " Latex
     Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
-    Plug 'vim-latex/vim-latex', { 'for': 'tex' }
+    " Plug 'vim-latex/vim-latex', { 'for': 'tex' }
     Plug 'vim-scripts/AnsiEsc.vim', { 'for': 'man' }
     " Plug 'powerman/vim-plugin-AnsiEsc'
 
