@@ -194,7 +194,7 @@ end
         _fish_prompt_accent (prompt_pwd)
         if fish_vcs_prompt > /dev/null
             _fish_prompt_normal " on"
-            _fish_prompt_accent (fish_vcs_prompt)
+            _fish_prompt_accent (fish_vcs_prompt | string replace -ra '\(|\)' '')
         end
 
         echo
