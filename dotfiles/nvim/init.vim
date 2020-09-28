@@ -287,7 +287,7 @@ call plug#end()
     " File Browser
     nmap F          :Ranger <CR>
 
-    nmap Q          :wqa<CR>
+    nmap <C-Q>      :wqa<CR>
 
     " Open folds
     nmap <silent> {{@@    key.right       @@}} <right>
