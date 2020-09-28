@@ -171,10 +171,14 @@ c.tabs.title.format = "{audio} {current_title}"
 c.tabs.indicator.width = 0
 # }}}
 # Search {{{
+
+# {%@@ set search_engine = "start.duckduckgo.com" @@%}
+
+
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
-c.url.default_page = "https://search.disroot.org"
+c.url.default_page = "{{@@ search_engine @@}}"
 
 # Search engines which can be used via the address bar.  Maps a search
 # engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
@@ -195,7 +199,7 @@ c.url.default_page = "https://search.disroot.org"
 # qutebrowser`.
 # Type: Dict
 c.url.searchengines = {
-    "DEFAULT": "search.disroot.org?q={}",
+    "DEFAULT": "{{@@ search_engine @@}}?q={}",
     "!aw": "wiki.archlinux.org?search={}",
     "!w": "wikipedia.org/w?search={}",
     "!wpt": "pt.wikipedia.org/w?search={}",
@@ -207,7 +211,7 @@ c.url.searchengines = {
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = "https://search.disroot.org"
+c.url.start_pages = "{{@@ search_engine @@}}"
 # }}}
 # Colors {{{
 # Background color of the completion widget for odd rows.
