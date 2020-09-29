@@ -152,7 +152,7 @@ c.hints.chars = "asrtdhneio"
 c.hints.chars = "aoeuidnths"
 # {%@@ endif @@%}
 
-c.input.insert_mode.auto_leave = False
+# c.input.insert_mode.auto_leave = False
 
 # necessary for screensharing due to bug
 c.scrolling.bar = 'when-searching'
@@ -365,7 +365,7 @@ config.bind("H", "set-cmd-text -s :open -t")
 # {%@@ endif @@%}
 
 config.bind("{{@@ key.insertMode    @@}}", "enter-mode insert")
-config.bind("{{@@ key.insertQuit    @@}}", "enter-mode normal", mode="insert")
+# config.bind("{{@@ key.insertQuit    @@}}", "enter-mode normal", mode="insert")
 
 config.bind("{{@@ key.next          @@}}", "search-next")
 config.bind("{{@@ key.next.upper()  @@}}", "search-prev")
