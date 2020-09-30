@@ -4,6 +4,7 @@ pgrep mpd > /dev/null ||
     exit 1
 
 mpc status | grep '^\[playing\]' > /dev/null &&
-    mpc current -f ' %title% - %artist% '
+    mpc current -f ' %title% - %artist% ' |
+    sed 's/&/and/g'
 
 true
