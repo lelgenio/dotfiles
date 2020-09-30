@@ -42,7 +42,7 @@ depends=(
     # Terminal
     tmux ranger atool p7zip tree
     neofetch powerline-fonts
-    exa bat lolcat cmatrix
+    exa bat zoxide lolcat cmatrix
     # extra font for ranger
     nerd-fonts-fira-code
     # Network
