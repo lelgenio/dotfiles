@@ -186,9 +186,14 @@ actions:
     crontab -r
     crontab ~/.local/share/crontab
   sponsorblock: >
+    test -d ~/.config/mpv/scripts/sponsorblock_shared ||
     git clone
     https://github.com/po5/mpv_sponsorblock
-    ~/.config/mpv/scripts
+    ~/.config/mpv/scripts;
+
+    rm -f
+    ~/.config/mpv/scripts/LICENSE
+    ~/.config/mpv/scripts/README.md
   ranger_icons:
     git clone
     https://github.com/alexanderjeurissen/ranger_devicons
