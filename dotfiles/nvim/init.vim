@@ -8,7 +8,7 @@
 
 " Plugins{{{
 "
-    " Install plug if it isn't already
+    " Install plug if it isn't already {{{
     if empty(glob('~/.config/nvim/autoload/plug.vim'))
         silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
             \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -17,10 +17,12 @@
             autocmd VimEnter * PlugInstall
         augroup END
     endif
+    "}}}
 
-    call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
     Plug 'chrisbra/Colorizer'
+    Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
     let g:gitgutter_map_keys = 0
 
@@ -34,17 +36,12 @@
 
     Plug 'prabirshrestha/asyncomplete.vim'
         Plug 'prabirshrestha/asyncomplete-lsp.vim'
-        " Plug 'prabigshrestha/asyncomplete-file.vim'
+        Plug 'prabirshrestha/asyncomplete-file.vim'
+        Plug 'prabirshrestha/asyncomplete-emmet.vim'
+        Plug 'prabirshrestha/asyncomplete-neosnippet.vim'
+        Plug 'prabirshrestha/asyncomplete-buffer.vim'
 
-    Plug 'prabirshrestha/asyncomplete-emmet.vim'
-    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emmet#get_source_options({
-        \ 'name': 'emmet',
-        \ 'whitelist': ['html'],
-        \ 'completor': function('asyncomplete#sources#emmet#completor'),
-        \ }))
-
-    set completeopt+=menuone
-    set cot+=preview
+    set completeopt+=menu,longest,preview
 {%@@ elif lsp == "coc" @@%}
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 {%@@ endif @@%}
@@ -65,8 +62,10 @@
     Plug 'junegunn/vim-easy-align'
     Plug 'tpope/vim-commentary'
 
+    Plug 'Shougo/neosnippet.vim'
+    Plug 'Shougo/neosnippet-snippets'
+
     Plug 'tpope/vim-surround'
-    let g:surround_no_mappings = 1
 
     " Select based on indentation
     Plug 'lelgenio/vim-indent-object-colemak'
@@ -89,10 +88,39 @@
 call plug#end()
 
 "}}}
+" General{{{
+"
+    " set foldmethod=marker " Friendship with marker ended, new indent is my best friend
+    set smartcase
+    set hidden
+    set autoread
+
+    " Show line numbers on the left
+    set number
+    set relativenumber
+
+    " Avoid shifting the text due to git or LSP
+    set signcolumn=yes
+
+    " Auto trimm end of line whitespace
+    autocmd BufWritePre  * :call <SID>StripTrailingWhitespaces()
+    function! <SID>StripTrailingWhitespaces()
+        let l = line(".")
+        let c = col(".")
+        %s/\s\+$//e
+        call cursor(l, c)
+    endfun
+
+    " Allow saving of files as sudo when I forget to start vim using sudo.
+    cmap w!! w !sudo tee % >/dev/null
+
+    " Auto deploy dotfiles in the background
+    autocmd BufWritePost {{@@ parent_dir( _dotdrop_dotpath ) @@}}/{config.yaml,dotfiles/**} silent call jobstart('dotdrop install -f &')
+
+"}}}
 " Syntax options{{{
 "
 
-    " Enable syntax and set color scheme
     syntax on
 
     set tabstop=4
@@ -107,14 +135,10 @@ call plug#end()
     set scrolloff=8
     set sidescrolloff=8
 
-    set nowrap
-
-    " Show line numbers on the left
-    set number
-    set relativenumber
+    " set nowrap
+    set linebreak
 
     " Display whitespace
-    set listchars=tab:>-,trail:~,extends:>,precedes:<
     set listchars=space:_,eol:;,tab:>-,trail:~,extends:>,precedes:<
     set list
 
@@ -125,7 +149,7 @@ call plug#end()
     " Rename the terminal
     set title
 
-     let g:python_highlight_all = 1
+    let g:python_highlight_all = 1
 "}}}
 " Gay colors{{{
 
@@ -143,17 +167,17 @@ call plug#end()
     set       background=dark
 
     "background color is transparent
-    highlight Normal      guibg=None
-    highlight EndOfBuffer guibg=None guifg={{@@ color.bg_light @@}}
-    highlight SpecialKey  guibg=None guifg={{@@ color.accent @@}}
+    highlight Normal          guibg=None
+    highlight EndOfBuffer     guibg=None guifg={{@@ color.bg_light @@}}
+    highlight SpecialKey      guibg=None guifg={{@@ color.accent   @@}}
 
-    highlight tabLine     None
-    highlight tabLineFill None
+    highlight tabLine         None
+    highlight tabLineFill     None
 
     highlight SignColumn      guibg=None
-    highlight GitGutterAdd    guifg=lightgreen
-    highlight GitGutterChange guifg=yellow
-    highlight GitGutterDelete guifg=lightred
+    highlight GitGutterAdd    guibg=None guifg=lightgreen
+    highlight GitGutterChange guibg=None guifg=yellow
+    highlight GitGutterDelete guibg=None guifg=lightred
 
     "Line numers
     highlight LineNr  term=bold        ctermfg=9     guifg={{@@ color.bg_light @@}} guibg=None
@@ -164,33 +188,34 @@ call plug#end()
 
     "Current line
     set       cursorline
-    highlight CursorLine   term=bold cterm=bold gui=Bold guibg={{@@ color.bg_dark @@}}
-    highlight CursorLineNr term=bold cterm=bold gui=Bold guibg={{@@ color.bg_dark @@}} guifg=white
+    highlight CursorLine   term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}}
+    highlight CursorLineNr term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}} guifg=white
 
     "Splits
-    highlight   VertSplit guibg=None guifg={{@@ color.bg_dark @@}}
+    highlight VertSplit    guibg=None guifg={{@@   color.bg_dark @@}}
     " set         fillchars=vert:/
 
-    highlight Identifier guifg={{@@ color.accent @@}}
+    highlight Identifier   guifg={{@@ color.accent @@}}
 
-    highlight MatchParen gui=bold guifg=yellow
+    highlight MatchParen   gui=bold   guifg=yellow
 
     "}}}
 " Keys{{{
 "
+    " The g is for moving between lines broken by wrap.
     {%@@ set keys = {
-        "h": key.left,
-        "j": key.down,
-        "k": key.up,
-        "l": key.right,
+        " h": key.left,
+        "gj": key.down,
+        "gk": key.up,
+        " l": key.right,
     } @@%}
 
     " Basic motion
     {%@@ for old, new in keys.items() @@%}
     " {{@@ new @@}} -> {{@@ old @@}}
     noremap {{@@ new @@}} {{@@ old @@}}
-    noremap <silent> <C-w>{{@@ new          @@}} :wincmd {{@@ old         @@}}<CR>
-    noremap <silent> <C-w>{{@@ new.upper()  @@}} :wincmd {{@@ old.upper() @@}}<CR>
+    noremap <silent> <C-w>{{@@ new          @@}} :wincmd {{@@ old[-1]         @@}}<CR>
+    noremap <silent> <C-w>{{@@ new.upper()  @@}} :wincmd {{@@ old[-1].upper() @@}}<CR>
     {%@@ endfor @@%}
 
 
@@ -227,6 +252,24 @@ call plug#end()
         nmap <C-b>      :Buffers<CR>
         nmap <C-k>      :Files  <CR>
         nmap <C-m>      :GFiles <CR>
+
+        " Snippets
+        imap <C-e>     <Plug>(neosnippet_expand_or_jump)
+        smap <C-e>     <Plug>(neosnippet_expand_or_jump)
+        xmap <C-e>     <Plug>(neosnippet_expand_target)
+
+        " Surround
+        let g:surround_no_mappings = 1
+        nmap dk  <Plug>Dsurround
+        nmap ck  <Plug>Csurround
+        nmap cK  <Plug>CSurround
+        nmap yk  <Plug>Ysurround
+        nmap yK  <Plug>YSurround
+        nmap ykk <Plug>Yssurround
+        nmap yKk <Plug>YSsurround
+        nmap yKK <Plug>YSsurround
+        xmap K   <Plug>VSurround
+        xmap gK  <Plug>VgSurround
 
     {%@@ elif key.layout == "dvorak" @@%}
 
@@ -266,18 +309,6 @@ call plug#end()
     nmap     <silent> gc        :Commentary<CR>
     xmap     <silent> gc        :Commentary<CR>
 
-    " Surround
-    nmap dk  <Plug>Dsurround
-    nmap ck  <Plug>Csurround
-    nmap cK  <Plug>CSurround
-    nmap yk  <Plug>Ysurround
-    nmap yK  <Plug>YSurround
-    nmap ykk <Plug>Yssurround
-    nmap yKk <Plug>YSsurround
-    nmap yKK <Plug>YSsurround
-    xmap K   <Plug>VSurround
-    xmap gK  <Plug>VgSurround
-
     " EasyAlign
     xmap     ga <Plug>(EasyAlign)
     nmap     ga <Plug>(EasyAlign)
@@ -285,25 +316,6 @@ call plug#end()
 "}}}
 " Lanugage Server{{{
 "
-    set foldmethod=marker
-    set ignorecase
-    set hidden
-    set autoread
-
-    autocmd BufWritePre  * :call <SID>StripTrailingWhitespaces()
-    function! <SID>StripTrailingWhitespaces()
-        let l = line(".")
-        let c = col(".")
-        %s/\s\+$//e
-        call cursor(l, c)
-    endfun
-
-    " Allow saving of files as sudo when I forgot to start vim using sudo.
-    cmap w!! w !sudo tee % >/dev/null
-
-    " Auto deploy dotfiles
-    autocmd BufWritePost {{@@ parent_dir( _dotdrop_dotpath ) @@}}/{config.yaml,dotfiles/**} silent !dotdrop install -f
-
     {%@@ if     lsp == "vim-lsp" @@%}
 " vim-lsp{{{
 
@@ -350,6 +362,39 @@ call plug#end()
     let g:lsp_highlight_references_enabled = 1
     highlight LspReference          gui=bold      guifg={{@@ color.normal.yellow @@}}
 
+    " Complete File paths{{{
+    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+                \ 'name': 'file',
+                \ 'whitelist': ['*'],
+                \ 'priority': 10,
+                \ 'completor': function('asyncomplete#sources#file#completor')
+                \ }))
+    "}}}
+    " Emmet{{{
+    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emmet#get_source_options({
+        \ 'name': 'emmet',
+        \ 'whitelist': ['html'],
+        \ 'completor': function('asyncomplete#sources#emmet#completor'),
+        \ }))
+    "}}}
+    " Snipets{{{
+    call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+                \ 'name': 'neosnippet',
+                \ 'whitelist': ['*'],
+                \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
+                \ }))
+
+    "}}}
+    "Buffer{{{
+        call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+            \ 'name': 'buffer',
+            \ 'allowlist': ['*'],
+            \ 'completor': function('asyncomplete#sources#buffer#completor'),
+            \ 'config': {
+            \    'max_buffer_size': 5000000,
+            \  },
+            \ }))
+    "}}}
 "}}}
     {%@@ elif   lsp == "coc" @@%}
     "" coc {{{
@@ -427,81 +472,6 @@ call plug#end()
         omap ac <Plug>(coc-classobj-a)
 
     "}}}
-    {%@@ elif   lsp == "ale" @@%}
-    " ale{{{
-
-        " Lint
-        let g:ale_echo_msg_error_str = 'E'
-        let g:ale_echo_msg_warning_str = 'W'
-        let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'       "
-
-
-        let g:ale_python_pyls_executable = '/usr/bin/pyls'
-        let g:ale_use_global_executables = 1
-        let g:ale_python_mypy_options = '--ignore-missing-imports'
-        let g:ale_linters = {
-            \ 'python': ['pyls'],
-            \ }
-
-        " Fix
-        "
-        let g:ale_fixers = {
-        \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'python': ['autopep8'],
-        \}
-        let g:ale_fix_on_save = 1
-
-        " Complete
-        "
-        " Use deoplete.
-        let g:deoplete#enable_at_startup = 1
-        call deoplete#custom#option('sources', {
-            \ '_': ['ale'],
-            \})
-
-        " let g:ale_completion_symbols = {
-        " \ 'text': '',
-        " \ 'method': '',
-        " \ 'function': '',
-        " \ 'constructor': '',
-        " \ 'field': '',
-        " \ 'variable': '',
-        " \ 'class': '',
-        " \ 'interface': '',
-        " \ 'module': '',
-        " \ 'property': '',
-        " \ 'unit': 'unit',
-        " \ 'value': 'val',
-        " \ 'enum': '',
-        " \ 'keyword': 'keyword',
-        " \ 'snippet': '',
-        " \ 'color': 'color',
-        " \ 'file': '',
-        " \ 'reference': 'ref',
-        " \ 'folder': '',
-        " \ 'enum member': '',
-        " \ 'constant': '',
-        " \ 'struct': '',
-        " \ 'event': 'event',
-        " \ 'operator': '',
-        " \ 'type_parameter': 'type param',
-        " \ '<default>': 'v'
-        " \ }
-
-        " Move
-        "
-        " move around
-        nmap <silent> [g <Plug>(ale_previous_wrap)
-        nmap <silent> ]g <Plug>(ale_next_wrap)
-
-        " Colors
-        highlight ALEError       gui=undercurl guisp=red
-        highlight ALEErrorSign   guifg=red
-
-        highlight ALEWarning       gui=undercurl guisp=yellow
-        highlight ALEWarningSign   guifg=yellow
-
-        "}}}
     {%@@ endif @@%}
 
 "python env{{{
