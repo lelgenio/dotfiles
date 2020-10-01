@@ -51,7 +51,7 @@ depends=(
     # Browser
     qutebrowser youtube-dl
     # Email
-    neomutt isync
+    neomutt mailview isync
     # Files
     syncthing nextcloud-client
     deluge deemix
