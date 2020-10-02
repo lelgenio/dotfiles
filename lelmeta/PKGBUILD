@@ -40,9 +40,12 @@ depends=(
     materia-custom-accent papirus-icon-theme
     papirus-folders capitaine-cursors
     # Terminal
-    tmux ranger atool p7zip tree
-    neofetch powerline-fonts
-    exa bat zoxide lolcat cmatrix
+        tmux ranger atool p7zip tree
+        neofetch powerline-fonts
+        lolcat cmatrix
+        # Replacements
+        #ls cat grep    find sed cd
+        exa bat ripgrep fd   sd  zoxide
     # extra font for ranger
     nerd-fonts-fira-code
     # Network
