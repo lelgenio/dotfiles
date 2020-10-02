@@ -11,19 +11,18 @@ default_calendar = calendar_local
 
 [locale]
 timeformat = %H:%M
-dateformat = %d/%m
+dateformat = %d
 longdateformat = %d/%m/%Y
 datetimeformat = %H:%M %d/%m
 longdatetimeformat = %H:%M %d/%m/%Y
 
 [keybindings]
-left = h
-down = t
-up   = n
-right= s
+left = {{@@ key.left    @@}}
+down = {{@@ key.down    @@}}
+up   = {{@@ key.up      @@}}
+right= {{@@ key.right   @@}}
 
 new  = c
 today= g
-
 
 # vim: ft=toml
