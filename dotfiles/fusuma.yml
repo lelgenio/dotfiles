@@ -1,9 +1,9 @@
 swipe:
   3:
     left:
-      command: 'swaymsg workspace prev'
-    right:
       command: 'swaymsg workspace next'
+    right:
+      command: 'swaymsg workspace prev'
     up:
       command: 'swaymsg fullscreen toggle'
     down:
