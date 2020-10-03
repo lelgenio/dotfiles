@@ -34,7 +34,7 @@ depends=(
     ttf-hack inter-font ttf-fira-code ttf-material-wifi-icons-git
 
     # Screenshot
-    grim slurp wl-clipboard wf-recorder
+    grim slurp wl-clipboard wf-recorder wshowkeys
     httpie jq
     # Theme
     materia-custom-accent papirus-icon-theme
