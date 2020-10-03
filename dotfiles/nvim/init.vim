@@ -72,7 +72,6 @@ call plug#begin('~/.config/nvim/plugged')
 
     " Status bar
     Plug 'vim-airline/vim-airline'
-    " Plug 'vim-airline/vim-airline-themes'
 
     " Color scheme
     Plug 'dikiaap/minimalist'
@@ -245,6 +244,8 @@ call plug#end()
         " To end of word
         noremap t e
         noremap T E
+
+        noremap , ^
 
         imap {{@@ key.insertQuit @@}} <ESC>
 
