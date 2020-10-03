@@ -71,7 +71,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'lelgenio/vim-indent-object-colemak'
 
     " Status bar
-    Plug 'vim-airline/vim-airline'
+    " Plug 'vim-airline/vim-airline'
 
     " Color scheme
     Plug 'dikiaap/minimalist'
