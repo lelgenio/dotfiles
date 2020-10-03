@@ -297,14 +297,13 @@ call plug#end()
     " File Browser
     nmap F          :Ranger <CR>
 
-    nmap <C-Q>      :wqa<CR>
-
     " Open folds
     nmap <silent> {{@@    key.right       @@}} <right>
     nmap <silent> <right> <right>:silent! foldopen<CR>
 
     "I deserve the death sentence
     nmap <C-s>      :wa<CR>
+    nmap <C-Q>      :wqa<CR>
 
     " Easy comment toggle
     nmap     <silent> gc        :Commentary<CR>
