@@ -5,7 +5,7 @@ menu=wdmenu
 
 search(){
     music=$(mpc playlist --format '%artist% : %title%' | sed '/^ : $/d' | $menu)
-    if [ "$music" == "" ]
+    if [ "$music" = "" ]
     then
         exit 1
     fi
@@ -26,8 +26,8 @@ delete(){
                         print $2
                       }' $config_root/mpd/mpd.conf)
     current="$music_root"/"$(mpc current -f %file%)"
-    answer=$(echo -e "nothing\n$current" | $menu -p"delete?" )
-    if [ "$answer" == "$current" ]
+    answer=$(echo "nothing\n$current" | $menu -p"delete?" )
+    if [ "$answer" = "$current" ]
     then
         trash "$answer"
         mpc --quiet next
@@ -41,10 +41,10 @@ usage(){
     echo "  $0 delete     --  prompts to delete the current song"
 }
 
-if [ "$1" == "delete" ]
+if [ "$1" = "delete" ]
 then
     delete
-elif [ "$1" == "search" ]
+elif [ "$1" = "search" ]
 then
     search
 else
