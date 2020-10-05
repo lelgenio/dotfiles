@@ -82,6 +82,7 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'rbgrouleff/bclose.vim'
     Plug 'francoiscabrol/ranger.vim'
+    let g:ranger_replace_netrw = 1
     let g:ranger_map_keys = 0
 
 call plug#end()
@@ -93,6 +94,9 @@ call plug#end()
     set smartcase
     set hidden
     set autoread
+
+    " Better completion on command line
+    set wildmode=longest:full
 
     " Show line numbers on the left
     set number
