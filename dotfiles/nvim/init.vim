@@ -118,7 +118,7 @@ call plug#end()
     cmap w!! w !sudo tee % >/dev/null
 
     " Auto deploy dotfiles in the background
-    autocmd BufWritePost {{@@ parent_dir( _dotdrop_dotpath ) @@}}/{config.yaml,dotfiles/**} silent call jobstart('dotdrop install -f &')
+    autocmd BufWritePost {{@@ parent_dir( _dotdrop_dotpath ) @@}}/{config.yaml,dotfiles/**} silent !sh -c 'dotdrop install -f &'
 
 "}}}
 " Syntax options{{{

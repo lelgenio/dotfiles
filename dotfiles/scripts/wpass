@@ -14,7 +14,7 @@ entry=$(printf '%s\n' "${password_files[@]}" | wdmenu -p Password $@)
 username=$( pass show "$entry" 2>/dev/null | perl -ne 'print $1 if /^login: (.*)/' )
 password=$( pass show "$entry" 2>/dev/null | head -n 1 )
 
-action=$(echo -e "Autotype\nUsername -> $username\nPassword" | wdmenu -p Action)
+action=$(printf "Autotype\nUsername -> $username\nPassword" | wdmenu -p Action)
 
 autotype(){
     if swaymsg -t get_inputs | grep -i colemak > /dev/null

@@ -125,6 +125,7 @@ function esway
     # set -x LD_PRELOAD '/usr/lib/libgtk3-nocsd.so.0'
 
     set -x XCURSOR_THEME {{@@ cursor_theme @@}}
+    set -x XCURSOR_SIZE  {{@@ cursor_size @@}}
     set -x GTK_THEME materia-custom-accent:dark
 
     # set -x XDG_CURRENT_DESKTOP Unity

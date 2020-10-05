@@ -11,12 +11,12 @@ choose(){
     choicePreview=$( curl -s "api.deezer.com/$sType/$choiceId/$preview_suffix" |
         jq -r '.preview, .data[0].preview | select(. != null)' )
 
-    choice=$( echo -e "Preview\nDownload\nCopy URL" | wdmenu )
+    choice=$( printf "Preview\nDownload\nCopy URL" | wdmenu )
     if [ "$choice" = Preview ]
     then
         mpv --quiet "$choicePreview" &
         mpvPid=$!
-        choice=$(echo -e "Download\nAnother" | wdmenu -p 'Download?')
+        choice=$(printf "Download\nAnother" | wdmenu -p 'Download?')
         kill $mpvPid
         if test "$choice" = "Another"
         then
@@ -48,7 +48,7 @@ clean(){
 }
 trap clean EXIT
 
-sType=$(echo -e "Track\nAlbum\nArtist" | wdmenu | tr [:upper:] [:lower:] )
+sType=$(printf "Track\nAlbum\nArtist" | wdmenu | tr [:upper:] [:lower:] )
 query=$(echo -n | wdmenu | sed 's/[^ a-z]//g;s/ /+/g')
 case "$sType" in
     track)
