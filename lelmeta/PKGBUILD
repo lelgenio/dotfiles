@@ -26,7 +26,7 @@ depends=(
     pass gnupg pam-gnupg
 
     # pkgs+=' i3 termite scrot pamixer'
-    nemo cinnamon-translations thunar redshift-wayland-git
+    thunar redshift-wayland-git
     pkgfile alacritty neovim moreutils htop
     # Audio
     pulseaudio
@@ -54,7 +54,7 @@ depends=(
     # Browser
     qutebrowser youtube-dl
     # Email
-    neomutt mailview isync
+    neomutt urlview isync
     # Files
     syncthing nextcloud-client
     deluge deemix
