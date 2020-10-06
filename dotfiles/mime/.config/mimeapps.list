@@ -15,6 +15,7 @@
 [Default Applications]
 
 text/plain=nvim.desktop
+inode/directory=thunar.desktop
 
 application/pdf=org.pwmt.zathura.desktop
 
