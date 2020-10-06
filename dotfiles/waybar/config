@@ -43,7 +43,7 @@
     "custom/mpd": {
         "tooltip":false,
         "exec": "mpd-status",
-        "exec-if": "pgrep mpd",
+        "exec-if": "pidof mpd",
         "interval": 2
     },
     "tray": {
@@ -124,7 +124,7 @@
     },
     "custom/recording": {
         "tooltip":false,
-        "exec": "pgrep wf-recorder > /dev/null && echo  || echo",
+        "exec": "pidof wf-recorder > /dev/null && echo  || echo",
         "interval": 5,
         "on-click": "pkill wf-recorder; pkill -SIGRTMIN+5 waybar",
         "signal": 5
@@ -138,13 +138,13 @@
     "custom/torrentD":{
         "format":" {} ",
         "exec":"transmission-remote -l | tail -n+2 | grep Down | wc -l | sed 's/^0$//'",
-        "exec-if":"pgrep transmission",
+        "exec-if":"pidof transmission-daemon",
         "interval":180
     },
     "custom/torrentS":{
         "format":" {} ",
         "exec":"transmission-remote -l | grep Seeding| wc -l | sed 's/^0$//'",
-        "exec-if":"pgrep transmission",
+        "exec-if":"pidof transmission-daemon",
         "interval":180
     }
 

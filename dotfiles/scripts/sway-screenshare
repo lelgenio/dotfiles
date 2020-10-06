@@ -16,21 +16,21 @@ geometry(){
 }
 
 {
-if pgrep wf-recorder > /dev/null && pgrep ffplay > /dev/null
+if pidof wf-recorder > /dev/null && pidof ffplay > /dev/null
 then
-	if pgrep ffplay > /dev/null; then
+	if pidof ffplay > /dev/null; then
 		pkill ffplay > /dev/null
 	fi
-	if pgrep wf-recorder > /dev/null; then
+	if pidof wf-recorder > /dev/null; then
 		pkill wf-recorder > /dev/null
 	fi
 	notify-send -t 2000 "Wayland recording has been stopped"
 else
-	if ! pgrep wf-recorder > /dev/null; then
+	if ! pidof wf-recorder > /dev/null; then
 		geometry=$(geometry) || exit $?
 		wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video2 --geometry="$geometry" &
 	fi
-	if ! pgrep ffplay; then
+	if ! pidof ffplay; then
 		swaymsg assign [class=ffplay] workspace 11
 
 		unset SDL_VIDEODRIVER

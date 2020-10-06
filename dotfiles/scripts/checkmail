@@ -17,7 +17,7 @@ fi
 
 echo $NEW | sed 's/^0$//'
 
-if [ "$(ps -o comm= $PPID)" != "waybar" ] && pgrep waybar>/dev/null;then
+if [ "$(ps -o comm= $PPID)" != "waybar" ] && pidof waybar>/dev/null;then
     pkill -SIGRTMIN+4 waybar
 fi
 

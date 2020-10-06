@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pgrep wshowkeys && pkill wshowkeys ||
+pidof wshowkeys && pkill wshowkeys ||
 exec wshowkeys \
     -a bottom -a right \
     -F 'Inter 20' \
