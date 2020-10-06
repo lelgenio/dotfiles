@@ -1,5 +1,5 @@
 # {{@@ header() @@}}
-PATH={{@@ env["PATH"] @@}}
+PATH={{@@ ordered_path() @@}}
 
 #minute hour day month day_week cmd
 */5     *    *   *     *        forecast   json
