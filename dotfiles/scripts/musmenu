@@ -26,7 +26,7 @@ delete(){
                         print $2
                       }' $config_root/mpd/mpd.conf)
     current="$music_root"/"$(mpc current -f %file%)"
-    answer=$(echo "nothing\n$current" | $menu -p"delete?" )
+    answer=$(printf "nothing\n$current" | $menu -p"delete?" )
     if [ "$answer" = "$current" ]
     then
         trash "$answer"
