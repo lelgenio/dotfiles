@@ -815,7 +815,7 @@ user_setup() {
     fi
 
     echo 'Stowing dotfiles'
-    stow_dots
+    install_dots
 }
 # Install AUR packages #{{{
 install_aur_packages() {
@@ -849,7 +849,7 @@ clean_packages() {
 }
 #}}}
 # Install dotfiles{{{
-stow_dots() {
+install_dots() {
     if [ ! -d  ~/.dotfiles ];then
         git clone $DOTFILES_URL ~/.dotfiles
     fi
