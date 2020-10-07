@@ -27,23 +27,6 @@ echo (){
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #}}}
-#ABOUT#{{{
-# This script will set up an Arch installation with a 100 MB /boot partition
-# and an encrypted LVM partition with swap and / inside.  It also installs
-# and configures systemd as the init system.
-#
-# You should read through this script before running it in case you want to
-# make any modifications, in particular, the variables just below, and the
-# following functions:
-#
-#    partition_drive - Customize to change partition sizes (/boot vs LVM)
-#    setup_lvm - Customize for partitions inside LVM
-#    install_packages - Customize packages installed in base system
-#                       (desktop environment, etc.)
-#    install_aur_packages - More packages after packer (AUR helper) is
-#                           installed
-#    set_netcfg - Preload netcfg profiles
-#}}}
 # CONFIGURE THESE VARIABLES{{{
 # Drive to install to.
 DRIVE='/dev/sda'
@@ -85,107 +68,6 @@ KEYMAP='br-abnt2'
 
 LANG=pt_BR.UTF-8
 
-# Choose your video driver
-# For Intel
-VIDEO_DRIVER="i915"
-# For nVidia
-#VIDEO_DRIVER="nouveau"
-# For ATI
-#VIDEO_DRIVER="radeon"
-# For generic stuff
-#VIDEO_DRIVER="vesa"
-
-REMOVE_PKGS=false
-FULL_INSTALL=false
-#}}}
-# PACKAGES{{{
-set_pkgs() {
-    # pkgs_base     -> Are on the official repo are are mandatory to use the system
-    # pkgs          -> Basic packages for a simple desktop, may be from AUR
-    # FULL_INSTALL  -> Install extra stuff, completely optional
-
-    # sudo to allow to run as a user later
-    sudo pacman -Sy
-
-    pkgs_base+=' base linux-zen linux-firmware intel-ucode lvm2 '
-    pkgs_base+=' fish bluez cronie git man-db'
-    # netctl
-    pkgs_base+=' netctl dhcpcd ifplugd wpa_supplicant dialog'
-
-    pkgs_base+=" $(pacman -Sgq base-devel)"
-    if $IS_BIOS;then
-        pkgs_base+=' grub'
-    fi
-
-    pkgs+=" $pkgs_base"
-    # DE
-    pkgs+=' ly sway waybar ruby-fusuma light mako udiskie dotdrop yay'
-    pkgs+=' bemenu wofi-hg j4-dmenu-desktop'
-    # passwords and auth
-    pkgs+=' pass gnupg pam-gnupg'
-
-    # pkgs+=' i3 termite scrot pamixer'
-    pkgs+=' thunar redshift-wlr-gamma-control-git '
-    pkgs+=' pkgfile alacritty neovim moreutils htop-vim-git'
-    # Audio
-    pkgs+=' pulseaudio pavolume-git'
-    # Fonts
-    pkgs+=' ttf-hack inter-font otf-fira-code ttf-material-wifi-icons-git'
-    if $FULL_INSTALL; then
-        # Screenshot
-        pkgs+=' grim slurp wl-clipboard wf-recorder-git'
-        pkgs+=' httpie jq'
-        # Theme
-        pkgs+=' materia-custom-accent papirus-icon-theme'
-        pkgs+=' papirus-folders-git capitaine-cursors '
-        # Terminal
-        pkgs+=' tmux ranger atool p7zip tree'
-        pkgs+=' neofetch powerline-fonts'
-        pkgs+=' exa bat lolcat cmatrix'
-        # extra font for ranger
-        pkgs+=' otf-nerd-fonts-fira-code'
-        # Network
-        pkgs+=' wget curl bluez-utils rsync rclone nmap gnu-netcat tor mtr speedtest-cli'
-        pkgs+=' openssh sshfs fail2ban'
-        # Browser
-        pkgs+=' qutebrowser youtube-dl'
-        # Email
-        pkgs+=' neomutt isync'
-        # Files
-        pkgs+=' syncthing nextcloud-client '
-        pkgs+=' deluge deezloader-remix-git smloadr'
-        # Media
-        pkgs+=' imv mpv mpd mpc ncmpcpp mpv-mpris mpdris2 playerctl'
-        pkgs+=' blender gimp kdenlive picard image_optim'
-        # Office
-        pkgs+=' libreoffice-fresh libreoffice-fresh-pt-br hunspell-pt-br papirus-libreoffice-theme'
-        # Programing
-        pkgs+=' code neovim python-pynvim neovim-symlinks ipython how2'
-        pkgs+=' gdb clang'
-        # Virt
-        pkgs+=' qemu'
-        # Gtk
-        pkgs+=' gtk3-nocsd-git'
-        # Qt
-        pkgs+=' qt5-base qt5-wayland qt5ct kvantum-qt5'
-        # Chat
-        pkgs+=' discord telegram-desktop telegram-cli-git'
-        # Gaming
-        pkgs+=' steam lutris gamemode lutris-wine-meta wine wine-mono winetricks'
-        if [ "$VIDEO_DRIVER" == "i915" ];then
-            pkgs+=' xf86-video-intel '
-            pkgs+=' lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader'
-        elif [ "$VIDEO_DRIVER" == "radeon" ];then
-            pkgs+=' xf86-video-ati'
-            pkgs+='  lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader'
-        elif [ "$VIDEO_DRIVER" == "nouveau" ];then
-            pkgs+=' xf86-video-nouveau'
-            pkgs+=' nvidia nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader'
-        elif [ "$VIDEO_DRIVER" == "vesa" ];then
-            packages+=' xf86-video-vesa'
-        fi
-    fi
-}
 #}}}
 # Initial Setup{{{
 # Base install{{{
@@ -434,7 +316,10 @@ cp -r /mnt/etc/pacman* /etc/
 #}}}
 # install_base #{{{
 install_base() {
-    pacstrap /mnt $pkgs_base
+    pacstrap /mnt \
+        base base-devel linux-zen linux-firmware intel-ucode grub \
+        fish bluez cronie git man-db \
+        iwd dhcpcd
 }
 #}}}
 # Set fstab {{{
@@ -628,39 +513,11 @@ set_daemons() {
     fi
 
     systemctl enable \
-        cronie.service \
-        netctl.service \
-        ly.service
+        cronie.service  \
+        iwd.service     \
+        dhcpcd.service  \
+        ly.service      \
 
-    # Netctl{{{
-
-    cat > /etc/netctl/ethernet-dhcp <<EOF
-Description='A basic dhcp ethernet connection'
-Interface=en-any
-Connection=ethernet
-IP=dhcp
-EOF
-    mkdir -p /etc/netctl/interfaces/
-    cat > /etc/netctl/interfaces/en-any <<EOF
-#!/bin/bash
-for interface in /sys/class/net/en*; do
-        break;
-done
-Interface=\$(basename \$interface)
-echo "en-any: using interface \$Interface";
-EOF
-    chmod +x /etc/netctl/interfaces/en-any
-
-    cd /sys/class/net/
-    for interface in $(ls -d en*);do
-        systemctl enable netctl-ifpluged@$interface
-    done
-    for interface in $(ls -d wl*);do
-        systemctl enable netctl-auto@$interface
-    done
-    cd -
-
-#}}}
 # Ly{{{
     mkdir -p /etc/ly/
     cat > /etc/ly/config.ini << EOF
@@ -809,15 +666,10 @@ user_setup() {
     echo 'Installing packages'
     install_aur_packages
 
-    if $REMOVE_PKGS;then
-        echo 'Cleaning packages'
-        clean_packages
-    fi
-
-    echo 'Stowing dotfiles'
+    echo 'Installing dotfiles'
     install_dots
 }
-# Install AUR packages #{{{
+# Install AUR helper #{{{
 install_aur_packages() {
 
     sudo pacman -S --needed git
@@ -830,22 +682,6 @@ install_aur_packages() {
         makepkg -si --noconfirm
         cd -
     fi
-
-    yay -Syu --needed --noconfirm $pkgs || true
-}
-#}}}
-# Clean up packages #{{{
-clean_packages() {
-    # Mark every package as dependency
-    yay -D --asdeps $(yay -Qqe) > /dev/null
-    # Mark some packages as explicit
-    yay -D --asexplicit $pkgs > /dev/null
-    # Query orphan dependencies
-    TO_REMOVE=$(yay -Qtdq)
-    if [ -n "$TO_REMOVE" ];then
-        # Remove queried packages
-        yay -Rns --noconfirm $TO_REMOVE
-    fi
 }
 #}}}
 # Install dotfiles{{{
@@ -853,13 +689,13 @@ install_dots() {
     if [ ! -d  ~/.dotfiles ];then
         git clone $DOTFILES_URL ~/.dotfiles
     fi
-    test -f ~/.dotfiles/config.y*ml &&
+    if [ -f ~/.dotfiles/config.y*ml ]; then
         dotdrop --cfg ~/.dotfiles/config.y*ml install --force --no-banner
+    fi
 }
 #}}}
 #}}}
 
-set_pkgs
 if [ ! "$USER" == "root"  ];then
     user_setup
 elif is_chroot;then
