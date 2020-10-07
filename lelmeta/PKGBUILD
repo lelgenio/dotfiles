@@ -1,79 +1,105 @@
-# This is an example PKGBUILD file. Use this as a start to creating your own,
-# and remove these comments. For more information, see 'man PKGBUILD'.
-# NOTE: Please fill out the license field for your package! If it is unknown,
-# then please put 'unknown'.
-
-# Maintainer: Your Name <youremail@domain.com>
+# Maintainer: Leonardo Eugênio <lelgenio@disroot.org>
 pkgname=lelgenio-meta
 pkgver=1
 pkgrel=2
-pkgdesc="meta"
+pkgdesc="Metapackage for swaywm related programs"
 arch=('any')
 url=""
 license=('GPL')
 depends=()
 
 depends=(
-    base linux-firmware intel-ucode lvm2
-    fish bluez cronie git man-db
-    #
-     dhcpcd ifplugd wpa_supplicant dialog
+
+    fish cronie git man-db
 
     # DE
-    sway swayidle swaylock waybar ruby-fusuma light mako kanshi udiskie dotdrop yay
-    bemenu j4-dmenu-desktop
+        # Sway
+        sway swayidle swaylock waybar
+        # Menu
+        bemenu j4-dmenu-desktop
+        # Utility
+        ruby-fusuma light mako kanshi udiskie redshift-wayland-git
+        # Configuration manager
+        dotdrop
+
+    # Packages
+    pkgfile yay
+
     # passwords and auth
     pass gnupg pam-gnupg
 
-    thunar redshift-wayland-git pamixer
-    pkgfile alacritty neovim moreutils htop
+    # Dav
+    vdirsyncer khal khard
+
     # Audio
-    pulseaudio
+    pulseaudio pamixer
+
     # Fonts
-    ttf-hack inter-font ttf-fira-code ttf-material-wifi-icons-git
+    inter-font ttf-material-wifi-icons-git
+    ttf-fira-code otf-nerd-fonts-fira-code
 
     # Screenshot
     grim slurp wl-clipboard wf-recorder wshowkeys
-    httpie jq
+
     # Theme
     materia-custom-accent papirus-icon-theme
     papirus-folders capitaine-cursors
+
     # Terminal
-        tmux ranger atool p7zip tree
-        neofetch powerline-fonts
-        lolcat cmatrix
+        ranger atool p7zip tree jq
+        neofetch htop
         # Replacements
         #ls cat rm -rf    grep    find sed cd
         exa bat trash-cli ripgrep fd   sd  zoxide
-    # extra font for ranger
-    otf-nerd-fonts-fira-code
+
     # Network
-    wget curl bluez-utils rsync rclone nmap gnu-netcat tor mtr speedtest-cli
-    openssh sshfs fail2ban
+        iwd dhcpcd
+        # Transfer
+        wget curl rsync rclone nmap
+        # Testing
+        gnu-netcat tor mtr speedtest-cli
+        # ssh
+        openssh sshfs fail2ban
+        # Bluetooth
+        bluez bluez-utils
+
     # Browser
     qutebrowser youtube-dl
+
     # Email
     neomutt urlview isync
+
     # Files
+    thunar
     syncthing nextcloud-client
     transmission-sequential-cli deemix
+
     # Media
-    imv mpv mpd mpc ncmpcpp mpv
-    blender gimp kdenlive picard
+    imv mpv
+    mpd mpc ncmpcpp
+    blender gimp kdenlive
+
     # Office
     libreoffice-fresh libreoffice-fresh-pt-br hunspell-pt-br papirus-libreoffice-theme
+
     # Programing
-    code neovim python-pynvim neovim-symlinks ipython
-    gdb clang
+    neovim python-pynvim neovim-symlinks ipython
+    rust gcc gdb
+
     # Virt
     qemu
+
     # Gtk
     gtk3-nocsd-git
+
     # Qt
     qt5-base qt5-wayland qt5ct kvantum-qt5
+
     # Chat
     discord telegram-desktop
+
     # Gaming
-    steam lutris  lutris-wine-meta wine wine-mono winetricks
+    steam lutris lutris-wine-meta wine wine-mono winetricks
+
 )
 
