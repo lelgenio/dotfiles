@@ -15,9 +15,6 @@ c: ConfigContainer
 
 # Behavior {{{
 
-# Aliases for commands. The keys of the given dictionary are the
-# aliases, while the values are the commands they map to.
-# Type: Dict
 c.aliases = {
     "q": "close",
     "qa": "quit",
@@ -27,18 +24,12 @@ c.aliases = {
 }
 
 # Load a restored tab as soon as it takes focus.
-# Type: Bool
 c.session.lazy_restore = True
 
-# Additional arguments to pass to Qt, without leading `--`. With
-# QtWebEngine, some Chromium arguments (see
-# https://peter.sh/experiments/chromium-command-line-switches/ for a
-# list) will work.
-# Type: List of String
+# Enable screensharing for wayland
 c.qt.args = ['enable-features=WebRTCPipeWireCapturer']
 
 # Always restore open sites when qutebrowser is reopened.
-# Type: Bool
 c.auto_save.session = True
 
 config.set("content.cookies.accept", "all", "chrome-devtools://*")
@@ -46,38 +37,14 @@ config.set("content.cookies.accept", "all", "chrome-devtools://*")
 config.set("content.cookies.accept", "all", "devtools://*")
 
 # Allow websites to request geolocations.
-# Type: BoolAsk
-# Valid values:
-#   - true
-#   - false
-#   - ask
 config.set("content.geolocation", True, "https://openweathermap.org")
 
-c.content.headers.user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36 "
-
-config.set(
-    "content.headers.user_agent",
-    "Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}",
-    "https://web.whatsapp.com/",
-)
-
-config.set(
-    "content.headers.user_agent",
-    "Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0",
-    "https://accounts.google.com/*",
-)
-
-config.set(
-    "content.headers.user_agent",
-    "Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0",
-    "https://docs.google.com/*",
-)
-
-config.set(
-    "content.headers.user_agent",
-    "Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0",
-    "https://drive.google.com/*",
-)
+c.content.headers.user_agent = """\
+    Mozilla/5.0 ({os_info})
+    AppleWebKit/{webkit_version} (KHTML, like Gecko)
+    {qt_key}/{qt_version}
+    {upstream_browser_key}/{upstream_browser_version}
+    Safari/{webkit_version}""".replace("\n","")
 
 # Enable JavaScript.
 config.set("content.javascript.enabled", True, "file://*")
