@@ -22,11 +22,12 @@ profiles:
       font:
         mono: Fira Code
         interface: Inter
-      gtk_theme: materia-custom-accent-dark
-      cursor_theme: capitaine-cursors
+      theme:
+        icon: Papirus-Dark
+        gtk: materia-custom-accent-dark
+        cursor: capitaine-cursors
       cursor_size: 24
-      # {{{
-      color_dark: &dark
+      color_dark: &dark # {{{
         type: dark
         accent: '#D9534F'
         bg: '#202020'

@@ -124,7 +124,7 @@ function esway
     set -x GTK_CSD 0
     # set -x LD_PRELOAD '/usr/lib/libgtk3-nocsd.so.0'
 
-    set -x XCURSOR_THEME {{@@ cursor_theme @@}}
+    set -x XCURSOR_THEME {{@@ theme.cursor @@}}
     set -x XCURSOR_SIZE  {{@@ cursor_size @@}}
     set -x GTK_THEME materia-custom-accent:dark
 
