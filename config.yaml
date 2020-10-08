@@ -1,15 +1,10 @@
-config:
-  backup: false
-  banner: false
-  dotpath: dotfiles
-  keepdot: false
-  link_dotfile_default: nolink
-  link_on_import: nolink
-  longkey: false
-  default_actions:
-  - notify
-  func_file:
-  - funcs.py
+#      _       _      _
+#   __| | ___ | |_ __| |_ __ ___  _ __
+#  / _` |/ _ \| __/ _` | '__/ _ \| '_ \
+# | (_| | (_) | || (_| | | | (_) | |_) |
+#  \__,_|\___/ \__\__,_|_|  \___/| .__/
+#                                |_|
+
 profiles:
   i15:
     variables:
@@ -30,7 +25,9 @@ profiles:
       gtk_theme: materia-custom-accent-dark
       cursor_theme: capitaine-cursors
       cursor_size: 24
-      color:
+      # {{{
+      color_dark: &dark
+        type: dark
         accent: '#D9534F'
         bg: '#202020'
         bg_light: '#303030'
@@ -46,11 +43,26 @@ profiles:
           magenta: '#C397D8'
           cyan: '#70C0BA'
           white: '#EAEAEA'
+      # }}}
+      color: *dark
       bar: waybar
       bar_pos: top
     dotfiles:
     - ALL
-dotfiles:
+config: # {{{
+  backup: false
+  banner: false
+  dotpath: dotfiles
+  keepdot: false
+  link_dotfile_default: nolink
+  link_on_import: nolink
+  longkey: false
+  default_actions:
+  - notify
+  func_file:
+  - funcs.py
+# }}}
+dotfiles: # {{{
   nvim:
     src: nvim
     dst: ~/.config/nvim
@@ -145,7 +157,8 @@ dotfiles:
   clang-format:
     src: clang-format
     dst: ~/.clang-format
-actions:
+# }}}
+actions: #{{{
   notify: notify-send "Updating dotfiles"
   makoreload: makoctl reload
   lesskey: lesskey
@@ -173,3 +186,5 @@ actions:
     git clone
     https://github.com/alexanderjeurissen/ranger_devicons
     ~/.config/ranger/plugins/ranger_devicons
+# }}}
+# vim: fdm=marker
