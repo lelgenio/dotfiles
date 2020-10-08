@@ -53,18 +53,6 @@ config.set("content.cookies.accept", "all", "devtools://*")
 #   - ask
 config.set("content.geolocation", True, "https://openweathermap.org")
 
-# User agent to send.  The following placeholders are defined:  *
-# `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
-# The underlying WebKit version (set to a fixed value   with
-# QtWebEngine). * `{qt_key}`: "Qt" for QtWebKit, "QtWebEngine" for
-# QtWebEngine. * `{qt_version}`: The underlying Qt version. *
-# `{upstream_browser_key}`: "Version" for QtWebKit, "Chrome" for
-# QtWebEngine. * `{upstream_browser_version}`: The corresponding
-# Safari/Chrome version. * `{qutebrowser_version}`: The currently
-# running qutebrowser version.  The default value is equal to the
-# unchanged user agent of QtWebKit/QtWebEngine.  Note that the value
-# read from JavaScript is always the global value.
-# Type: FormatString
 c.content.headers.user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36 "
 
 config.set(
@@ -92,7 +80,6 @@ config.set(
 )
 
 # Enable JavaScript.
-# Type: Bool
 config.set("content.javascript.enabled", True, "file://*")
 config.set("content.javascript.enabled", True, "chrome-devtools://*")
 config.set("content.javascript.enabled", True, "devtools://*")
@@ -100,36 +87,17 @@ config.set("content.javascript.enabled", True, "chrome://*/*")
 config.set("content.javascript.enabled", True, "qute://*/*")
 
 # Allow websites to record audio/video.
-# Type: BoolAsk
-# Valid values:
-#   - true
-#   - false
-#   - ask
 config.set("content.media_capture", True, "https://ca.bbcollab.com")
 config.set("content.autoplay", True, "https://ca.bbcollab.com")
+config.set("content.mute", False, "https://ca.bbcollab.com")
 
 # Allow websites to show notifications.
-# Type: BoolAsk
-# Valid values:
-#   - true
-#   - false
-#   - ask
 config.set("content.notifications", False, "*")
 
 # Allow websites to register protocol handlers via
-# `navigator.registerProtocolHandler`.
-# Type: BoolAsk
-# Valid values:
-#   - true
-#   - false
-#   - ask
 config.set('content.register_protocol_handler', False,
            'https://mail.disroot.org?mailto&to=%25s')
 
-# Automatically mute tabs. Note that if the `:tab-mute` command is used,
-# the mute status for the affected tab is now controlled manually, and
-# this setting doesn't have any effect.
-# Type: Bool
 c.content.mute = True
 c.content.autoplay = False
 # }}}
@@ -164,8 +132,9 @@ c.statusbar.widgets = ["keypress", "url", "scroll", "history", "tabs"]
 c.tabs.favicons.show = "always"
 c.tabs.select_on_remove = "last-used"
 
-# When to show the tab bar.
-c.tabs.show = "multiple"
+# When to show the status/tab bar.
+c.tabs.show = "switching"
+c.statusbar.show = "in-mode"
 
 c.tabs.show_switching_delay = 2000
 c.tabs.title.format = "{audio} {current_title}"
@@ -176,29 +145,8 @@ c.tabs.indicator.width = 0
 # {%@@ set search_engine = "start.duckduckgo.com" @@%}
 
 
-# Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
-# for a blank page.
-# Type: FuzzyUrl
 c.url.default_page = "{{@@ search_engine @@}}"
 
-# Search engines which can be used via the address bar.  Maps a search
-# engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
-# placeholder. The placeholder will be replaced by the search term, use
-# `{{` and `}}` for literal `{`/`}` braces.  The following further
-# placeholds are defined to configure how special characters in the
-# search terms are replaced by safe characters (called 'quoting'):  *
-# `{}` and `{semiquoted}` quote everything except slashes; this is the
-# most   sensible choice for almost all search engines (for the search
-# term   `slash/and&amp` this placeholder expands to `slash/and%26amp`).
-# * `{quoted}` quotes all characters (for `slash/and&amp` this
-# placeholder   expands to `slash%2Fand%26amp`). * `{unquoted}` quotes
-# nothing (for `slash/and&amp` this placeholder   expands to
-# `slash/and&amp`).  The search engine named `DEFAULT` is used when
-# `url.auto_search` is turned on and something else than a URL was
-# entered to be opened. Other search engines can be used by prepending
-# the search engine name to the search term, e.g. `:open google
-# qutebrowser`.
-# Type: Dict
 c.url.searchengines = {
     "DEFAULT": "{{@@ search_engine @@}}?q={}",
     "!aw": "wiki.archlinux.org?search={}",
@@ -399,3 +347,5 @@ config.bind(
 
 c.editor.command = ["terminal", "nvim", "-f", "{file}", "+{line}"]
 # }}}
+
+# vim: fdm=marker
