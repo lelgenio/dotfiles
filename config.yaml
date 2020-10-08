@@ -12,33 +12,6 @@ config:
   - funcs.py
 profiles:
   i15:
-    dotfiles:
-    - nvim
-    - sway
-    - fish
-    - mako
-    - waybar
-    - kanshi
-    - kitty
-    - qutebrowser
-    - lesskey
-    - scripts
-    - wofi
-    - ranger
-    - zathura
-    - wallpapers
-    - mime
-    - fusuma
-    - alacritty
-    - mpd
-    - imv
-    - mpv
-    - dav
-    - mutt
-    - crontab
-    - theme
-    - blender
-    - clang-format
     variables:
       key:
         layout: colemak
@@ -75,6 +48,8 @@ profiles:
           white: '#EAEAEA'
       bar: waybar
       bar_pos: top
+    dotfiles:
+    - ALL
 dotfiles:
   nvim:
     src: nvim
