@@ -130,10 +130,6 @@ c.url.searchengines = {
 c.url.start_pages = "{{@@ search_engine @@}}"
 # }}}
 # Colors {{{
-# Background color of the completion widget for odd rows.
-c.colors.completion.fg = "{{@@ color.txt @@}}"
-c.colors.completion.odd.bg = "{{@@ color.bg_dark @@}}"
-c.colors.completion.even.bg = "{{@@ color.bg_light @@}}"
 
 c.colors.completion.category.fg = "{{@@ color.txt @@}}"
 c.colors.completion.category.bg = "{{@@ color.bg_light @@}}"
@@ -143,6 +139,10 @@ c.colors.completion.category.border.bottom = "{{@@ color.bg_dark @@}}"
 c.colors.completion.item.selected.bg = "{{@@ color.accent @@}}"
 c.colors.completion.item.selected.border.top = "{{@@ color.bg_dark @@}}"
 c.colors.completion.item.selected.border.bottom = "{{@@ color.bg_dark @@}}"
+
+c.colors.completion.fg = "{{@@ color.txt @@}}"
+c.colors.completion.even.bg = "{{@@ color.bg_light @@}}"
+c.colors.completion.odd.bg = "{{@@ color.bg_dark @@}}"
 
 c.colors.statusbar.command.fg = "{{@@ color.txt @@}}"
 

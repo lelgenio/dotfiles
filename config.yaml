@@ -20,7 +20,6 @@ variables:
   font:
     mono: Fira Code
     interface: Inter
-  cursor_size: 24
   color_dark: &dark # {{{
     type: dark
     accent: '#D9534F'
@@ -42,16 +41,16 @@ variables:
   color_light: &light # {{{
     type: light
     accent: '#D9534F'
-    bg: '#E0E0E0'
+    bg: '#D5D5D5'
     bg_light: '#F0F0F0'
-    bg_dark: '#C9C9C9'
+    bg_dark: '#C5C5C5'
     txt: '#101010'
-    nontxt: '#808080'
+    nontxt: '#A0A0A0'
     normal:
       black: '#555555'
       red: '#D54E53'
       green: '#008800'
-      yellow: '#E6C547'
+      yellow: '#C0A030'
       blue: '#7AA6DA'
       magenta: '#C397D8'
       cyan: '#70C0BA'
@@ -61,6 +60,7 @@ variables:
   gtk_theme: "materia-custom-accent{{@@ '-dark' if color.type =='dark' @@}}"
   icon_theme: "Papirus-{{@@ 'Dark' if color.type == 'dark' else 'Light' @@}}"
   cursor_theme: "capitaine-cursors{{@@ '-light' if color.type == 'light' @@}}"
+  cursor_size: 24
   # }}}
   color: *light
   bar: waybar

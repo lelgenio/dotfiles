@@ -45,7 +45,7 @@ gui_on (){
     cp /usr/share/applications/gnome-mimeapps.list ~/.config/mimeapps.list
 
     kvantummanager --set Materia
-    gsettings set org.gnome.desktop.interface icon-theme '{{@@ theme.icon @@}}'
+    gsettings set org.gnome.desktop.interface icon-theme '{{@@ icon_theme @@}}'
 
     comment     /etc/mkinitcpio.conf "HOOKS.* (!?plymouth)"
     uncomment   /etc/mkinitcpio.conf "HOOKS.* plymouth"

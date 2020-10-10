@@ -168,13 +168,15 @@ call plug#end()
       endif
     " endif
 
-    {%@@ if color.type == "light" @@%}
+    " {%@@ if color.type == "light" @@%}
+    "
         colorscheme github
         set       background=light
-    {%@@ elif color.type == "dark" @@%}
+    " {%@@ elif color.type == "dark" @@%}
+
         colorscheme minimalist
         set       background=dark
-    {%@@ endif @@%}
+    " {%@@ endif @@%}
 
     "background color is transparent
     highlight Normal          guibg=None
@@ -197,7 +199,7 @@ call plug#end()
     highlight Comment guifg={{@@ color.nontxt @@}} guibg=None
 
     "Make whitespace dark
-    highlight NonText guifg={{@@ color.bg_dark @@}} guibg=None
+    highlight NonText guifg={{@@ color.nontxt @@}} guibg=None
     " highlight SpecialKey  ctermfg=black guifg=#252525 guibg=None
 
     "Current line
@@ -212,6 +214,21 @@ call plug#end()
     highlight Identifier   guifg={{@@ color.accent @@}}
 
     highlight MatchParen   gui=bold   guifg=yellow
+
+    let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
 
     "}}}
 " Keys{{{

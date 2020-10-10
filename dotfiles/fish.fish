@@ -124,9 +124,9 @@ function esway
     set -x GTK_CSD 0
     # set -x LD_PRELOAD '/usr/lib/libgtk3-nocsd.so.0'
 
-    set -x XCURSOR_THEME {{@@ theme.cursor @@}}
+    set -x XCURSOR_THEME {{@@ cursor_theme @@}}
     set -x XCURSOR_SIZE  {{@@ cursor_size @@}}
-    set -x GTK_THEME {{@@ theme.gtk @@}}
+    set -x GTK_THEME {{@@ gtk_theme @@}}
 
     # set -x XDG_CURRENT_DESKTOP Unity
     set -x QT_SCALE_FACTOR 1.0001

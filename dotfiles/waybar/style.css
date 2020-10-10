@@ -24,7 +24,8 @@ window#waybar.solo {
 }
 
 window#waybar.empty {
-    background-color: transparent;
+    opacity: .5;
+    background-color: {{@@ color.bg @@}};
     border:none;
 }
 
