@@ -1,6 +1,6 @@
 #!/bin/fish
 
-command -qs bmenu &&
-    exec bmenu $argv
 command -qs wofi &&
     exec wofi -d $argv
+command -qs bmenu &&
+    exec bmenu $argv

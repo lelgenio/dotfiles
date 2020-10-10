@@ -1,19 +1,19 @@
 *{
-    color:#ccc;
+    color:{{@@ color.txt @@}};
 }
 
-window { 
-    background-color:  #cc5757;
-} 
+window {
+    background-color:  {{@@ color.accent @@}};
+}
 
-#input { 
-    margin-bottom: 5px ; 
-    background-color: #202020; 
-} 
+#input {
+    margin-bottom: 5px ;
+    background-color: {{@@ color.bg @@}};
+}
 
-#outer-box { 
-    margin: 2px; 
+#outer-box {
+    margin: 2px;
     padding: 15px ;
-    padding-bottom:0; 
-    background-color: #202020; 
-} 
+    padding-bottom:0;
+    background-color: {{@@ color.bg @@}};
+}
