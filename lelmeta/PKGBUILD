@@ -39,7 +39,7 @@ depends=(
     ttf-fira-code otf-nerd-fonts-fira-code
 
     # Screenshot
-    grim slurp wl-clipboard wf-recorder wshowkeys
+    grim slurp wl-clipboard imagemagick wf-recorder wshowkeys
 
     # Theme
     materia-custom-accent papirus-icon-theme
