@@ -43,7 +43,7 @@ variables:
     accent: '#D9534F'
     bg: '#EEEEEE'
     bg_light: '#A0A0A0'
-    bg_dark: '#A0A0A0'
+    bg_dark: '#999999'
     txt: '#101010'
     nontxt: '#A0A0A0'
     normal:
@@ -58,6 +58,7 @@ variables:
   # }}}
   # Themes {{{
   gtk_theme: "materia-custom-accent{{@@ '-dark' if color.type =='dark' @@}}"
+  kvantum_theme: "Materia{{@@ 'Dark' if color.type =='dark' @@}}"
   icon_theme: "Papirus-{{@@ 'Dark' if color.type == 'dark' else 'Light' @@}}"
   cursor_theme: "capitaine-cursors{{@@ '-light' if color.type == 'light' @@}}"
   cursor_size: 24
