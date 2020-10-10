@@ -30,8 +30,7 @@ call plug#begin('~/.config/nvim/plugged')
     "
 " {%@@ set lsp = "vim-lsp" @@%}
 
-" {%@@ if lsp == "vim-lsp" @@%}
-"
+" {%@@ if lsp == "vim-lsp" @@%} "
     Plug 'prabirshrestha/vim-lsp'
     Plug 'mattn/vim-lsp-settings'
 
@@ -43,8 +42,7 @@ call plug#begin('~/.config/nvim/plugged')
         Plug 'prabirshrestha/asyncomplete-buffer.vim'
 
     set completeopt+=menu,longest,preview
-" {%@@ elif lsp == "coc" @@%}
-"
+" {%@@ elif lsp == "coc" @@%} "
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " {%@@ endif @@%}
 
@@ -146,7 +144,9 @@ call plug#end()
 
     " Display whitespace
     set listchars=space:_,eol:;,tab:>-,trail:~,extends:>,precedes:<
+    " {%@@ if color.type != "light" @@%} "
     set list
+    " {%@@ endif @@%}
 
     " Enable mouse
     set mouse =a
@@ -168,12 +168,10 @@ call plug#end()
       endif
     " endif
 
-    " {%@@ if color.type == "light" @@%}
-    "
+    " {%@@ if color.type == "light" @@%} "
         colorscheme github
         set       background=light
-    " {%@@ elif color.type == "dark" @@%}
-
+    " {%@@ elif color.type == "dark" @@%} "
         colorscheme minimalist
         set       background=dark
     " {%@@ endif @@%}
@@ -196,16 +194,19 @@ call plug#end()
     highlight LineNr  term=bold        ctermfg=9     guifg={{@@ color.bg_light @@}} guibg=None
 
     " Comments
-    highlight Comment guifg={{@@ color.nontxt @@}} guibg=None
+    highlight Comment guifg={{@@ color.bg_light @@}} guibg=None
 
     "Make whitespace dark
     highlight NonText guifg={{@@ color.nontxt @@}} guibg=None
     " highlight SpecialKey  ctermfg=black guifg=#252525 guibg=None
 
     "Current line
+    " {%@@ if color.type != "light" @@%} "
     set       cursorline
     highlight CursorLine   term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}}
-    highlight CursorLineNr term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}} guifg={{@@ color.nontxt @@}}
+    highlight CursorLineNr term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}}
+    " {%@@ endif @@%} "
+    highlight CursorLineNr guifg={{@@ color.nontxt @@}}
 
     "Splits
     highlight VertSplit    guibg=None guifg={{@@   color.bg_dark @@}}
@@ -267,7 +268,7 @@ call plug#end()
     noremap {{@@ key.insertMode.upper() @@}} I
 
     " Keyboard Layout specific
-    {%@@ if key.layout == "colemak" @@%}
+    " {%@@ if key.layout == "colemak" @@%} "
 
         " Insert on next line
         noremap h o
@@ -304,7 +305,7 @@ call plug#end()
         xmap K   <Plug>VSurround
         xmap gK  <Plug>VgSurround
 
-    {%@@ elif key.layout == "dvorak" @@%}
+    " {%@@ elif key.layout == "dvorak" @@%} "
 
         " Added benefits
         noremap - $
@@ -317,14 +318,14 @@ call plug#end()
         nmap <C-k>      :Files  <CR>
         nmap <C-b>      :Buffers<CR>
 
-    {%@@ elif key.layout == "qwerty" @@%}
+    " {%@@ elif key.layout == "qwerty" @@%} "
 
         " FZF bindings
         nmap <C-b>      :Buffers<CR>
         nmap <C-n>      :Files  <CR>
         nmap <C-m>      :GFiles <CR>
 
-    {%@@ endif @@%}
+    " {%@@ endif @@%} "
 
     " File Browser
     nmap F          :Ranger <CR>
@@ -348,7 +349,7 @@ call plug#end()
 "}}}
 " Lanugage Server{{{
 "
-    {%@@ if     lsp == "vim-lsp" @@%}
+    " {%@@ if     lsp == "vim-lsp" @@%} "
 " vim-lsp{{{
 
     "allow json comments
@@ -428,7 +429,7 @@ call plug#end()
             \ }))
     "}}}
 "}}}
-    {%@@ elif   lsp == "coc" @@%}
+    " {%@@ elif   lsp == "coc" @@%} "
     "" coc {{{
 
         "allow json comments
@@ -504,7 +505,7 @@ call plug#end()
         omap ac <Plug>(coc-classobj-a)
 
     "}}}
-    {%@@ endif @@%}
+    " {%@@ endif @@%} "
 
 "python env{{{
 let g:python_host_prog = '/usr/bin/python2'

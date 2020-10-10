@@ -24,7 +24,7 @@ variables:
     type: dark
     accent: '#D9534F'
     bg: '#202020'
-    bg_light: '#303030'
+    bg_light: '#404040'
     bg_dark: '#191919'
     txt: '#ffffff'
     nontxt: '#252525'
@@ -41,9 +41,9 @@ variables:
   color_light: &light # {{{
     type: light
     accent: '#D9534F'
-    bg: '#D5D5D5'
-    bg_light: '#F0F0F0'
-    bg_dark: '#C5C5C5'
+    bg: '#EEEEEE'
+    bg_light: '#A0A0A0'
+    bg_dark: '#A0A0A0'
     txt: '#101010'
     nontxt: '#A0A0A0'
     normal:

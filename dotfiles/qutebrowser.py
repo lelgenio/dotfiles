@@ -79,11 +79,9 @@ c.completion.shrink = True
 c.hints.border = "2px solid {{@@ color.accent @@}}"
 
 # Characters used for hint strings.
-# {%@@ if key.layout == "colemak" @@%}
-
+# {%@@ if key.layout == "colemak" @@%} #
 c.hints.chars = "asrtdhneio"
-# {%@@ elif key.layout == "dvorak" @@%}
-
+# {%@@ elif key.layout == "dvorak" @@%} #
 c.hints.chars = "aoeuidnths"
 # {%@@ endif @@%}
 
@@ -109,7 +107,7 @@ c.tabs.indicator.width = 0
 # }}}
 # Search {{{
 
-# {%@@ set search_engine = "start.duckduckgo.com" @@%}
+# {%@@ set search_engine = "start.duckduckgo.com" @@%} #
 
 
 c.url.default_page = "{{@@ search_engine @@}}"
@@ -222,8 +220,7 @@ c.colors.tabs.pinned.selected.odd.bg = "{{@@ color.bg_light @@}}"
 # Background color of pinned selected even tabs.
 c.colors.tabs.pinned.selected.even.bg = "{{@@ color.bg_light @@}}"
 
-# {%@@ if color.type == "dark" @@%}
-#
+# {%@@ if color.type == "dark" @@%} #
 c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.threshold.background = 256 // 2
 c.colors.webpage.darkmode.threshold.text = 256 // 2
@@ -275,8 +272,7 @@ config.bind(",r", "spawn --userscript readability")
 config.bind(";e", "hint links spawn deemix '{hint-url}'")
 config.bind(";m", "hint links spawn mpv --fs {hint-url}")
 
-# {%@@ if key.layout == "colemak" @@%}
-#
+# {%@@ if key.layout == "colemak" @@%} #
 config.bind("t", "hint all")
 config.bind("T", "hint all tab")
 

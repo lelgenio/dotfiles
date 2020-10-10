@@ -30,14 +30,16 @@ window#waybar.empty {
 }
 
 #workspaces button {
-    /* padding:0 10px; */
+    color: {{@@ color.bg_light @@}};
+
     min-width:50px;
     background-color: transparent;
     border: 3px solid transparent;
-    color: {{@@ color.nontxt @@}};
 }
 
 #workspaces button.focused {
+    color: {{@@ color.txt @@}};
+
     {%@@ if bar_pos == "top" @@%}
         border-top:
     {%@@ else @@%}
@@ -45,7 +47,6 @@ window#waybar.empty {
     {%@@ endif @@%}
         3px solid {{@@ color.accent @@}};
     /* border-bottom: 3px solid transparent; */
-    color: {{@@ color.txt @@}};
 }
 
 /*Window Title*/
