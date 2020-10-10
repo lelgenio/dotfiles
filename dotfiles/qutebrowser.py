@@ -131,15 +131,23 @@ c.url.start_pages = "{{@@ search_engine @@}}"
 # }}}
 # Colors {{{
 # Background color of the completion widget for odd rows.
-c.colors.completion.odd.bg = "{{@@ color.bg @@}}"
+c.colors.completion.fg = "{{@@ color.txt @@}}"
+c.colors.completion.odd.bg = "{{@@ color.bg_dark @@}}"
 c.colors.completion.even.bg = "{{@@ color.bg_light @@}}"
-c.colors.completion.category.bg = "{{@@ color.bg_dark @@}}"
+
+c.colors.completion.category.fg = "{{@@ color.txt @@}}"
+c.colors.completion.category.bg = "{{@@ color.bg_light @@}}"
+c.colors.completion.category.border.top = "{{@@ color.bg_dark @@}}"
+c.colors.completion.category.border.bottom = "{{@@ color.bg_dark @@}}"
+
 c.colors.completion.item.selected.bg = "{{@@ color.accent @@}}"
-c.colors.completion.item.selected.border.top = "#550000"
-c.colors.completion.item.selected.border.bottom = "#550000"
+c.colors.completion.item.selected.border.top = "{{@@ color.bg_dark @@}}"
+c.colors.completion.item.selected.border.bottom = "{{@@ color.bg_dark @@}}"
+
+c.colors.statusbar.command.fg = "{{@@ color.txt @@}}"
 
 # Foreground color of the matched text in the selected completion item.
-c.colors.completion.item.selected.match.fg = "white"
+c.colors.completion.item.selected.match.fg = "{{@@ color.txt @@}}"
 
 # Color of the scrollbar in the completion view.
 c.colors.completion.scrollbar.bg = "{{@@ color.bg_light @@}}"
@@ -170,13 +178,13 @@ c.colors.keyhint.suffix.fg = "{{@@ color.accent @@}}"
 c.colors.keyhint.bg = "rgba(30, 30, 30, 95%)"
 
 # Foreground color of the statusbar.
-c.colors.statusbar.normal.fg = "gray"
+c.colors.statusbar.normal.fg = "{{@@ color.txt @@}}"
 
 # Background color of the statusbar.
 c.colors.statusbar.normal.bg = "{{@@ color.bg @@}}"
 
 # Foreground color of the statusbar in insert mode.
-c.colors.statusbar.insert.fg = "#aaffaa"
+c.colors.statusbar.insert.fg = "{{@@ color.normal.green @@}}"
 
 # Background color of the statusbar in insert mode.
 c.colors.statusbar.insert.bg = "{{@@ color.bg @@}}"
@@ -189,28 +197,24 @@ c.colors.statusbar.caret.selection.bg = "{{@@ color.accent @@}}"
 
 # Foreground color of the URL in the statusbar on successful load
 # (https).
-c.colors.statusbar.url.success.https.fg = "white"
+c.colors.statusbar.url.success.https.fg = "{{@@ color.txt @@}}"
 
 # Background color of the tab bar.
 c.colors.tabs.bar.bg = "{{@@ color.bg @@}}"
 
-# Background color of unselected odd tabs.
+# Foreground color of tabs.
+c.colors.tabs.even.fg = "{{@@ color.txt @@}}"
+c.colors.tabs.odd.fg = "{{@@ color.txt @@}}"
+# Background color of tabs.
+c.colors.tabs.even.bg = "{{@@ color.bg @@}}"
 c.colors.tabs.odd.bg = "{{@@ color.bg @@}}"
 
-# Background color of unselected even tabs.
-c.colors.tabs.even.bg = "{{@@ color.bg @@}}"
-
-# Foreground color of selected odd tabs.
-c.colors.tabs.selected.odd.fg = "white"
-
-# Background color of selected odd tabs.
-c.colors.tabs.selected.odd.bg = "{{@@ color.accent @@}}"
-
-# Foreground color of selected even tabs.
-c.colors.tabs.selected.even.fg = "white"
-
-# Background color of selected even tabs.
+# Foreground color of selected tabs.
+c.colors.tabs.selected.even.fg = "{{@@ color.txt @@}}"
+c.colors.tabs.selected.odd.fg = "{{@@ color.txt @@}}"
+# Background color of selected tabs.
 c.colors.tabs.selected.even.bg = "{{@@ color.accent @@}}"
+c.colors.tabs.selected.odd.bg = "{{@@ color.accent @@}}"
 
 # Background color of pinned selected odd tabs.
 c.colors.tabs.pinned.selected.odd.bg = "{{@@ color.bg_light @@}}"
@@ -218,9 +222,12 @@ c.colors.tabs.pinned.selected.odd.bg = "{{@@ color.bg_light @@}}"
 # Background color of pinned selected even tabs.
 c.colors.tabs.pinned.selected.even.bg = "{{@@ color.bg_light @@}}"
 
+# {%@@ if color.type == "dark" @@%}
+#
 c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.threshold.background = 256 // 2
 c.colors.webpage.darkmode.threshold.text = 256 // 2
+# {%@@ endif @@%}
 # }}}
 # Fonts {{{
 # Font used in the completion widget.

@@ -5,49 +5,68 @@
 #  \__,_|\___/ \__\__,_|_|  \___/| .__/
 #                                |_|
 
+variables:
+  key:
+    layout: colemak
+    left: n
+    down: e
+    up: i
+    right: o
+    next: l
+    tabL: U
+    tabR: Y
+    insertMode: s
+    insertQuit: kk
+  font:
+    mono: Fira Code
+    interface: Inter
+  cursor_size: 24
+  color_dark: &dark # {{{
+    type: dark
+    accent: '#D9534F'
+    bg: '#202020'
+    bg_light: '#303030'
+    bg_dark: '#191919'
+    txt: '#ffffff'
+    nontxt: '#252525'
+    normal:
+      black: '#555555'
+      red: '#D54E53'
+      green: '#B9CA4A'
+      yellow: '#E6C547'
+      blue: '#7AA6DA'
+      magenta: '#C397D8'
+      cyan: '#70C0BA'
+      white: '#EAEAEA'
+  # }}}
+  color_light: &light # {{{
+    type: light
+    accent: '#D9534F'
+    bg: '#E0E0E0'
+    bg_light: '#F0F0F0'
+    bg_dark: '#C9C9C9'
+    txt: '#101010'
+    nontxt: '#808080'
+    normal:
+      black: '#555555'
+      red: '#D54E53'
+      green: '#008800'
+      yellow: '#E6C547'
+      blue: '#7AA6DA'
+      magenta: '#C397D8'
+      cyan: '#70C0BA'
+      white: '#EAEAEA'
+  # }}}
+  # Themes {{{
+  gtk_theme: "materia-custom-accent{{@@ '-dark' if color.type =='dark' @@}}"
+  icon_theme: "Papirus-{{@@ 'Dark' if color.type == 'dark' else 'Light' @@}}"
+  cursor_theme: "capitaine-cursors{{@@ '-light' if color.type == 'light' @@}}"
+  # }}}
+  color: *light
+  bar: waybar
+  bar_pos: top
 profiles:
   i15:
-    variables:
-      key:
-        layout: colemak
-        left: n
-        down: e
-        up: i
-        right: o
-        next: l
-        tabL: U
-        tabR: Y
-        insertMode: s
-        insertQuit: kk
-      font:
-        mono: Fira Code
-        interface: Inter
-      theme:
-        icon: Papirus-Dark
-        gtk: materia-custom-accent-dark
-        cursor: capitaine-cursors
-      cursor_size: 24
-      color_dark: &dark # {{{
-        type: dark
-        accent: '#D9534F'
-        bg: '#202020'
-        bg_light: '#303030'
-        bg_dark: '#191919'
-        txt: '#ffffff'
-        nontxt: '#252525'
-        normal:
-          black: '#555555'
-          red: '#D54E53'
-          green: '#B9CA4A'
-          yellow: '#E6C547'
-          blue: '#7AA6DA'
-          magenta: '#C397D8'
-          cyan: '#70C0BA'
-          white: '#EAEAEA'
-      # }}}
-      color: *dark
-      bar: waybar
-      bar_pos: top
     dotfiles:
     - ALL
 config: # {{{

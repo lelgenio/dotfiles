@@ -28,9 +28,10 @@ call plug#begin('~/.config/nvim/plugged')
 
     " Language server support
     "
-{%@@ set lsp = "vim-lsp" @@%}
+" {%@@ set lsp = "vim-lsp" @@%}
 
-{%@@ if lsp == "vim-lsp" @@%}
+" {%@@ if lsp == "vim-lsp" @@%}
+"
     Plug 'prabirshrestha/vim-lsp'
     Plug 'mattn/vim-lsp-settings'
 
@@ -42,9 +43,10 @@ call plug#begin('~/.config/nvim/plugged')
         Plug 'prabirshrestha/asyncomplete-buffer.vim'
 
     set completeopt+=menu,longest,preview
-{%@@ elif lsp == "coc" @@%}
+" {%@@ elif lsp == "coc" @@%}
+"
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-{%@@ endif @@%}
+" {%@@ endif @@%}
 
     Plug 'sheerun/vim-polyglot'
 
@@ -75,6 +77,7 @@ call plug#begin('~/.config/nvim/plugged')
 
     " Color scheme
     Plug 'dikiaap/minimalist'
+    Plug 'endel/vim-github-colorscheme'
 
     " Latex
     Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
@@ -165,14 +168,19 @@ call plug#end()
       endif
     " endif
 
-    colorscheme minimalist
-
-    set       background=dark
+    {%@@ if color.type == "light" @@%}
+        colorscheme github
+        set       background=light
+    {%@@ elif color.type == "dark" @@%}
+        colorscheme minimalist
+        set       background=dark
+    {%@@ endif @@%}
 
     "background color is transparent
     highlight Normal          guibg=None
     highlight EndOfBuffer     guibg=None guifg={{@@ color.bg_light @@}}
     highlight SpecialKey      guibg=None guifg={{@@ color.accent   @@}}
+    highlight Folded          guibg=None
 
     highlight tabLine         None
     highlight tabLineFill     None
@@ -185,14 +193,17 @@ call plug#end()
     "Line numers
     highlight LineNr  term=bold        ctermfg=9     guifg={{@@ color.bg_light @@}} guibg=None
 
+    " Comments
+    highlight Comment guifg={{@@ color.nontxt @@}} guibg=None
+
     "Make whitespace dark
-    highlight NonText ctermfg=darkgray guifg={{@@ color.nontxt @@}} guibg=None
+    highlight NonText guifg={{@@ color.bg_dark @@}} guibg=None
     " highlight SpecialKey  ctermfg=black guifg=#252525 guibg=None
 
     "Current line
     set       cursorline
     highlight CursorLine   term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}}
-    highlight CursorLineNr term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}} guifg=white
+    highlight CursorLineNr term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}} guifg={{@@ color.nontxt @@}}
 
     "Splits
     highlight VertSplit    guibg=None guifg={{@@   color.bg_dark @@}}

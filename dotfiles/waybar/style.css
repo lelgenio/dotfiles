@@ -7,7 +7,9 @@
 }
 
 window#waybar {
-    background-color: rgba(30,30,30,.9);
+    /* background-color: rgba(30,30,30,.9); */
+    opacity: 0.9;
+    background-color: {{@@ color.bg @@}};
     {%@@ if bar_pos == "top" @@%}
         border-bottom:
     {%@@ else @@%}
@@ -17,6 +19,7 @@ window#waybar {
 }
 
 window#waybar.solo {
+    opacity: 1;
     background-color: {{@@ color.bg @@}};
 }
 
@@ -30,7 +33,7 @@ window#waybar.empty {
     min-width:50px;
     background-color: transparent;
     border: 3px solid transparent;
-    color: #aaaaaa;
+    color: {{@@ color.nontxt @@}};
 }
 
 #workspaces button.focused {
@@ -41,12 +44,12 @@ window#waybar.empty {
     {%@@ endif @@%}
         3px solid {{@@ color.accent @@}};
     /* border-bottom: 3px solid transparent; */
-    color: #ffffff;
+    color: {{@@ color.txt @@}};
 }
 
 /*Window Title*/
 #window{
-    color:#aaa;
+    color: {{@@ color.txt @@}};
     margin:0 4px;
 }
 

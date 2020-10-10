@@ -126,7 +126,7 @@ function esway
 
     set -x XCURSOR_THEME {{@@ theme.cursor @@}}
     set -x XCURSOR_SIZE  {{@@ cursor_size @@}}
-    set -x GTK_THEME materia-custom-accent:dark
+    set -x GTK_THEME {{@@ theme.gtk @@}}
 
     # set -x XDG_CURRENT_DESKTOP Unity
     set -x QT_SCALE_FACTOR 1.0001
@@ -174,8 +174,8 @@ end
     end
 
     alias _fish_prompt_accent "_fish_prompt_color '{{@@ color.accent @@}}'"
-    alias _fish_prompt_normal "_fish_prompt_color 'brwhite'"
     alias _fish_prompt_warn   "_fish_prompt_color 'bryellow'"
+    alias _fish_prompt_normal "_fish_prompt_color '{{@@ color.txt @@}}'"
 
     function _fish_promt_git_status
         git status -s | grep "^$argv[1]" &> /dev/null &&
@@ -191,11 +191,11 @@ end
         if fish_vcs_prompt > /dev/null
             _fish_prompt_normal " on "
 
-            _fish_promt_git_status '??' '?' brwhite
-            _fish_promt_git_status ' M' '~' yellow
-            _fish_promt_git_status ' D' '-' red
-            _fish_promt_git_status 'A ' '+' green
-            _fish_promt_git_status 'M ' '~' green
+            _fish_promt_git_status '??' '?' '{{@@ color.txt             @@}}'
+            _fish_promt_git_status ' M' '~' '{{@@ color.normal.yellow   @@}}'
+            _fish_promt_git_status ' D' '-' '{{@@ color.normal.red      @@}}'
+            _fish_promt_git_status 'A ' '+' '{{@@ color.normal.green    @@}}'
+            _fish_promt_git_status 'M ' '~' '{{@@ color.normal.green    @@}}'
 
             _fish_prompt_accent (fish_vcs_prompt | string replace -ra ' \(|\)' '')
         end
