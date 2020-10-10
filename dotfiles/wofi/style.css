@@ -1,5 +1,12 @@
 *{
     color:{{@@ color.txt @@}};
+    font: Inter 16;
+}
+
+#entry:selected {
+    border: none;
+    padding: none;
+    background: {{@@ color.accent @@}};
 }
 
 window {
