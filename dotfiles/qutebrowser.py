@@ -54,7 +54,7 @@ config.set("content.javascript.enabled", True, "chrome://*/*")
 config.set("content.javascript.enabled", True, "qute://*/*")
 
 # Allow websites to record audio/video.
-config.set("content.media_capture", True, "https://ca.bbcollab.com")
+config.set("content.media.audio_video_capture", True, "https://ca.bbcollab.com")
 config.set("content.autoplay", True, "https://ca.bbcollab.com")
 config.set("content.mute", False, "https://ca.bbcollab.com")
 
@@ -130,7 +130,7 @@ c.url.start_pages = "{{@@ search_engine @@}}"
 # Colors {{{
 
 c.colors.completion.category.fg = "{{@@ color.txt @@}}"
-c.colors.completion.category.bg = "{{@@ color.bg_light @@}}"
+c.colors.completion.category.bg = "{{@@ color.bg_dark @@}}"
 c.colors.completion.category.border.top = "{{@@ color.bg_dark @@}}"
 c.colors.completion.category.border.bottom = "{{@@ color.bg_dark @@}}"
 
@@ -140,7 +140,7 @@ c.colors.completion.item.selected.border.bottom = "{{@@ color.bg_dark @@}}"
 
 c.colors.completion.fg = "{{@@ color.txt @@}}"
 c.colors.completion.even.bg = "{{@@ color.bg_light @@}}"
-c.colors.completion.odd.bg = "{{@@ color.bg_dark @@}}"
+c.colors.completion.odd.bg = "{{@@ color.bg @@}}"
 
 c.colors.statusbar.command.fg = "{{@@ color.txt @@}}"
 
@@ -154,17 +154,17 @@ c.colors.completion.scrollbar.bg = "{{@@ color.bg_light @@}}"
 c.colors.downloads.bar.bg = "{{@@ color.bg @@}}"
 
 # Color gradient start for download backgrounds.
-c.colors.downloads.start.bg = "#5757cc"
+c.colors.downloads.start.bg = "{{@@ color.normal.blue @@}}"
 
 # Color gradient stop for download backgrounds.
-c.colors.downloads.stop.bg = "#57cc57"
+c.colors.downloads.stop.bg = "{{@@ color.normal.green @@}}"
 
 # Font color for hints.
 c.colors.hints.fg = "{{@@ color.txt @@}}"
 
 # Background color for hints. Note that you can use a `rgba(...)` value
 # for transparency.
-c.colors.hints.bg = "{{@@ color.bg_light @@}}"
+c.colors.hints.bg = "{{@@ color.bg @@}}"
 
 # Font color for the matched part of hints.
 c.colors.hints.match.fg = "{{@@ color.accent @@}}"
