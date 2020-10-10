@@ -1,3 +1,4 @@
+{%@@ set bg_rgb = hex2rgb(color.bg) @@%}
 * {
     font: 14px {{@@ font.interface @@}}, Font Awesome, Fira Code Nerd Font;
     border-radius:0;
@@ -6,10 +7,14 @@
     transition-duration:0;
 }
 
+window#waybar.empty * {
+    color: {{@@ color.txt @@}};
+}
+
 window#waybar {
     /* background-color: rgba(30,30,30,.9); */
-    opacity: 0.9;
-    background-color: {{@@ color.bg @@}};
+    transition-duration: .5s;
+    background-color: rgba({{@@ bg_rgb @@}}, .9);
     {%@@ if bar_pos == "top" @@%}
         border-bottom:
     {%@@ else @@%}
@@ -19,13 +24,15 @@ window#waybar {
 }
 
 window#waybar.solo {
-    opacity: 1;
     background-color: {{@@ color.bg @@}};
 }
 
 window#waybar.empty {
-    opacity: .5;
-    background-color: {{@@ color.bg @@}};
+    {%@@ if color.type == "dark" @@%}
+    background-color: transparent;
+    {%@@ else @@%}
+    background-color: rgba({{@@ bg_rgb @@}}, 0.3);
+    {%@@ endif @@%}
     border:none;
 }
 
