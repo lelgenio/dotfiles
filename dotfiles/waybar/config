@@ -101,7 +101,7 @@
         "format": "<b>{}</b>",
         "exec": "jq -r '.temp +\"°C \"+ .weather' ~/.forecast.json",
         "interval": 30,
-        "on-click": "terminal --class weather sh -c 'forecast full;read -n1 -p\"Press Any key to quit \"'",
+        "on-click": "terminal --class weather 'forecast interactive'",
         "on-click-right": "xdg-open https://openweathermap.org"
     },
     "custom/mail": {

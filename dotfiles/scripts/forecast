@@ -102,6 +102,10 @@ case "$1" in
         owm_json;;
     long)
         owm_long;;
+    interactive)
+        clear
+        wttrin
+        read -n1 -p"Press any key to quit..." ;;
     full|*)
         wttrin;;
 esac
