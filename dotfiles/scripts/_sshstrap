@@ -1,0 +1,10 @@
+#!/bin/sh
+
+mkdir ~/.ssh
+touch ~/.ssh/id_rsa ~/.ssh/id_rsa.pub
+
+chmod 600 ~/.ssh/id_rsa ~/.ssh/id_rsa.pub
+
+pass SSH\ Private > ~/.ssh/id_rsa
+pass SSH\ Public  > ~/.ssh/id_rsa.pub
+
