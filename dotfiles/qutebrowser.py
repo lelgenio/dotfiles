@@ -221,6 +221,8 @@ c.colors.tabs.pinned.selected.odd.bg = "{{@@ color.bg_light @@}}"
 c.colors.tabs.pinned.selected.even.bg = "{{@@ color.bg_light @@}}"
 
 # {%@@ if color.type == "dark" @@%} #
+c.colors.webpage.bg = "{{@@ color.bg @@}}"
+c.colors.webpage.prefers_color_scheme_dark = True
 c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.threshold.background = 256 // 2
 c.colors.webpage.darkmode.threshold.text = 256 // 2

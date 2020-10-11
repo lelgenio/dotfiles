@@ -63,7 +63,7 @@ variables:
   cursor_theme: "capitaine-cursors{{@@ '-light' if color.type == 'light' @@}}"
   cursor_size: 24
   # }}}
-  color: *light
+  color: *dark
   bar: waybar
   bar_pos: top
 profiles:
