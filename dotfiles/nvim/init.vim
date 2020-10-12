@@ -509,7 +509,7 @@ call plug#end()
 
 "python env{{{
 let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
 " MUST NOT BE INDENTED!
 py3 << EOF
 import os
