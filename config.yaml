@@ -57,7 +57,7 @@ variables:
       white: '#EAEAEA'
   # }}}
   # Themes {{{
-  gtk_theme: "materia-custom-accent{{@@ '-dark' if color.type =='dark' @@}}"
+  gtk_theme: "materia-lelgenio{{@@ '-dark' if color.type =='dark' @@}}"
   kvantum_theme: "Materia{{@@ 'Dark' if color.type =='dark' @@}}"
   icon_theme: "Papirus-{{@@ 'Dark' if color.type == 'dark' else 'Light' @@}}"
   cursor_theme: "capitaine-cursors{{@@ '-light' if color.type == 'light' @@}}"
