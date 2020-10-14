@@ -26,7 +26,11 @@ set -x PAGER less
 #}}}
 # Aliases{{{
 abbr v nvim
-abbr rv sudo nvim
+
+command -qs sudo &&
+    abbr rv sudo nvim
+command -qs doas &&
+    abbr rv doas nvim
 
 command -qs trash &&
     alias rm trash
