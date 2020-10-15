@@ -54,7 +54,8 @@ config.set("content.javascript.enabled", True, "chrome://*/*")
 config.set("content.javascript.enabled", True, "qute://*/*")
 
 # Allow websites to record audio/video.
-config.set("content.media.audio_video_capture", True, "https://ca.bbcollab.com")
+config.set("content.media_capture", True, "https://ca.bbcollab.com")
+# config.set("content.media.audio_video_capture", True, "https://ca.bbcollab.com")
 config.set("content.autoplay", True, "https://ca.bbcollab.com")
 config.set("content.mute", False, "https://ca.bbcollab.com")
 
@@ -88,7 +89,7 @@ c.hints.chars = "aoeuidnths"
 # c.input.insert_mode.auto_leave = False
 
 # necessary for screensharing due to bug
-c.scrolling.bar = 'when-searching'
+c.scrolling.bar = 'never'
 
 c.scrolling.smooth = True
 
