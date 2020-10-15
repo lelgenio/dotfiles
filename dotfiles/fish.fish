@@ -126,7 +126,8 @@ function esway
     set -x _JAVA_AWT_WM_NONREPARENTING 1
 
     set -x GTK_CSD 0
-    # set -x LD_PRELOAD '/usr/lib/libgtk3-nocsd.so.0'
+    test -f &&
+        set -x LD_PRELOAD '/usr/lib/libgtk3-nocsd.so.0'
 
     set -x XCURSOR_THEME {{@@ cursor_theme @@}}
     set -x XCURSOR_SIZE  {{@@ cursor_size @@}}
