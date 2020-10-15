@@ -16,7 +16,7 @@ depends=(
         # Sway
         sway swayidle swaylock waybar
         # Menu
-        bemenu j4-dmenu-desktop
+        bemenu-wlroots j4-dmenu-desktop
         # Utility
         ruby-fusuma light mako kanshi udiskie redshift-wayland-git
         # Configuration manager
