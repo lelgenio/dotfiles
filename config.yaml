@@ -8,7 +8,7 @@
 variables:
   cursor_size: 24
   launcher: wofi
-  terminal: alacritty
+  terminal: kitty
   bar: waybar
   bar_pos: top
   key:
