@@ -285,7 +285,7 @@ call plug#end()
         " FZF bindings
         nmap <C-b>      :Buffers<CR>
         nmap <C-k>      :Files  <CR>
-        nmap <C-m>      :GFiles <CR>
+        nmap <C-n>      :GFiles <CR>
 
         " Snippets
         imap <C-e>     <Plug>(neosnippet_expand_or_jump)
