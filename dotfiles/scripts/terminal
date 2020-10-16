@@ -1,10 +1,15 @@
 #!/bin/sh
 
-command -v kitty > /dev/null &&
-    exec kitty $@
-command -v alacritty > /dev/null &&
-{
-    test "$#" -gt "0" &&
-        exec alacritty -e $@ ||
-        exec alacritty
-} & exit
+# {%@@ if terminal == "alacritty" @@%} #
+    command -v alacritty > /dev/null &&
+    {
+        test "$#" -gt "0" &&
+            exec alacritty -e $@ ||
+            exec alacritty
+    } & exit
+# {%@@ else @@%} #
+    command -v kitty > /dev/null &&
+        exec kitty $@
+# {%@@ endif @@%} #
+
+notify-send "Error" "Terminal program missing"

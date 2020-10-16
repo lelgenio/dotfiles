@@ -1,4 +1,16 @@
 #!/bin/fish
 
-command -qs wofi &&     exec wofi --show drun --allow-images --no-actions --prompt 'Iniciar: '
-command -qs bmenu &&    exec bmenu run
+# {%@@ if launcher == "wofi" @@%} #
+    command -qs wofi &&
+    exec wofi \
+        --show drun \
+        --allow-images \
+        --no-actions \
+        --prompt 'Iniciar: ' \
+
+# {%@@ else @@%} #
+    command -qs bmenu &&
+    exec bmenu run
+# {%@@ endif @@%} #
+
+notify-send "Error" "Launcher program missing"
