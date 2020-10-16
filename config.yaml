@@ -6,6 +6,9 @@
 #                                |_|
 
 variables:
+  cursor_size: 24
+  bar: waybar
+  bar_pos: top
   key:
     layout: colemak
     left: n
@@ -20,56 +23,61 @@ variables:
   font:
     mono: Fira Code
     interface: Inter
-  color_dark: &dark # {{{
-    type: dark
-    accent: '#D9534F'
-    bg: '#202020'
-    bg_light: '#404040'
-    bg_dark: '#191919'
-    txt: '#ffffff'
-    nontxt: '#252525'
-    normal:
-      black: '#555555'
-      red: '#D54E53'
-      green: '#B9CA4A'
-      yellow: '#E6C547'
-      blue: '#7AA6DA'
-      magenta: '#C397D8'
-      cyan: '#70C0BA'
-      white: '#EAEAEA'
-  # }}}
-  color_light: &light # {{{
-    type: light
-    accent: '#D9534F'
-    bg: '#EEEEEE'
-    bg_light: '#A0A0A0'
-    bg_dark: '#999999'
-    txt: '#101010'
-    nontxt: '#A0A0A0'
-    normal:
-      black: '#555555'
-      red: '#D54E53'
-      green: '#008800'
-      yellow: '#C0A030'
-      blue: '#7AA6DA'
-      magenta: '#C397D8'
-      cyan: '#70C0BA'
-      white: '#EAEAEA'
-  # }}}
-  # Themes {{{
-  gtk_theme: "materia-lelgenio{{@@ '-dark' if color.type =='dark' @@}}"
-  kvantum_theme: "Materia{{@@ 'Dark' if color.type =='dark' @@}}"
-  icon_theme: "Papirus-{{@@ 'Dark' if color.type == 'dark' else 'Light' @@}}"
-  cursor_theme: "capitaine-cursors{{@@ '-light' if color.type == 'light' @@}}"
-  cursor_size: 24
-  # }}}
-  color: *dark
-  bar: waybar
-  bar_pos: top
 profiles:
-  i15:
+  dark: # {{{
+    variables:
+      gtk_theme:     materia-lelgenio-dark
+      kvantum_theme: MateriaDark
+      icon_theme:    Papirus-Dark
+      cursor_theme:  capitaine-cursors
+      color: #{{{
+        type: dark
+        accent: '#D9534F'
+        bg: '#202020'
+        bg_light: '#404040'
+        bg_dark: '#191919'
+        txt: '#ffffff'
+        nontxt: '#252525'
+        normal:
+          black: '#555555'
+          red: '#D54E53'
+          green: '#B9CA4A'
+          yellow: '#E6C547'
+          blue: '#7AA6DA'
+          magenta: '#C397D8'
+          cyan: '#70C0BA'
+          white: '#EAEAEA'
+      # }}}
     dotfiles:
     - ALL
+# }}}
+  light: # {{{
+    variables:
+      gtk_theme:     materia-lelgenio
+      kvantum_theme: Materia
+      icon_theme:    Papirus-Light
+      cursor_theme:  capitaine-cursors-light
+      color: # {{{
+        type: light
+        accent: '#D9534F'
+        bg: '#EEEEEE'
+        bg_light: '#A0A0A0'
+        bg_dark: '#999999'
+        txt: '#101010'
+        nontxt: '#A0A0A0'
+        normal:
+          black: '#555555'
+          red: '#D54E53'
+          green: '#008800'
+          yellow: '#A0A000'
+          blue: '#7AA6DA'
+          magenta: '#C397D8'
+          cyan: '#70C0BA'
+          white: '#EAEAEA'
+# }}}
+    dotfiles:
+    - ALL
+# }}}
 config: # {{{
   backup: false
   banner: false
@@ -190,6 +198,7 @@ actions: #{{{
     +PlugUpdate
     +qall
     &> /dev/null
+    & disown
   crontab_install: |
     crontab -r
     crontab ~/.local/share/crontab
