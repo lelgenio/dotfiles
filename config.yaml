@@ -159,6 +159,8 @@ dotfiles: # {{{
   dav:
     src: dav/
     dst: ~/.config
+    actions:
+    - vdirsyncer
   mutt:
     src: neomutt/
     dst: ~/.config/neomutt/
@@ -204,6 +206,8 @@ actions: #{{{
   crontab_install: |
     crontab -r
     crontab ~/.local/share/crontab
+  vdirsyncer: |
+    yes | vdirsyncer discover
   sponsorblock: >
     test -d ~/.config/mpv/scripts/sponsorblock_shared ||
     git clone
