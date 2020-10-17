@@ -11,13 +11,15 @@ SAVES_DIR="$DOCUMETS/GameSaves/"
 test -d "$SAVES_DIR" || exit 1
 
 test_rsync(){
-    test -d "$1" &&
-        install -dDT "$1" "$2"
+    test -d "$1" && {
+        mkdir -p $(dirname "$2")
+        cp --recursive --no-target-directory "$1" "$2"
+    }
 }
 
 game_save(){
     GAME_NAME="$1"; shift
-    INSTALL_DIR="$1/"; shift
+    INSTALL_DIR="${1/"~"/$HOME}/"; shift
 
     BACKUP_DIR="$SAVES_DIR/$GAME_NAME/"
 
@@ -32,7 +34,8 @@ game_save(){
     done
 }
 
-game_save mindustry ~/.local/share/Mindustry
-game_save minecraft ~/.minecraft/saves
-game_save factorio  ~/.factorio '_autosave*.zip' '*.sync-conflict-*'
+game_save mindustry "~/.local/share/Mindustry"
+game_save minecraft "~/.minecraft/saves"
+game_save factorio  "~/.factorio" '_autosave*.zip' '*.sync-conflict-*'
+game_save cuphead   "~/Games/cuphead/drive_c/users/lelgenio/Application Data/Cuphead"
 
