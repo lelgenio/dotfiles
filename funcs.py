@@ -1,4 +1,6 @@
 import os
+from subprocess import check_output
+import re
 
 
 def parent_dir(path):
@@ -31,3 +33,20 @@ def hex2rgb(e):
     b = e[4:6]
 
     return ", ".join([h2r(i) for i in (r, g, b)])
+
+
+def rclone_obscure(pass_name):
+    try:
+        fPath = os.path.expanduser("~/.config/rclone/rclone.conf")
+        t = open(fPath, 'r').read()
+
+        PASSWORD_PATTERN = r'^pass *= *(.*)$'
+        password = re.search(PASSWORD_PATTERN, t, re.M).group(1)
+        return password
+    except Exception:
+        pass
+
+    def sh(*args):
+        return check_output(args).decode().strip()
+
+    return sh("rclone", "obscure", sh("_get-pass", pass_name))

@@ -163,6 +163,9 @@ dotfiles: # {{{
     dst: ~/.config
     actions:
     - vdirsyncer
+  rclone:
+    src: rclone.conf
+    dst: ~/.config/rclone/rclone.conf
   mutt:
     src: neomutt/
     dst: ~/.config/neomutt/
