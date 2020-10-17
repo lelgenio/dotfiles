@@ -198,7 +198,7 @@ dotfiles: # {{{
     dst: ~/.clang-format
 # }}}
 actions: #{{{
-  notify: notify-send "Updating dotfiles"
+  notify: notify-send "Updating dotfiles" "{{@@ _dotfile_abs_src.strip(env['HOME']) @@}}"
   makoreload: makoctl reload
   lesskey: lesskey
   reload_sway: swaymsg reload
