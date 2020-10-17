@@ -88,8 +88,8 @@ c.hints.chars = "aoeuidnths"
 
 # c.input.insert_mode.auto_leave = False
 
-# necessary for screensharing due to bug
-c.scrolling.bar = 'never'
+# Scrollbar style
+c.scrolling.bar = 'overlay'
 
 c.scrolling.smooth = True
 
