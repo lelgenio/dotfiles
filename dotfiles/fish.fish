@@ -61,7 +61,9 @@ command -qs khard &&
 abbr gs git status
 abbr gp 'git pull; git push'
 
-alias dotdrop "dotdrop --cfg '{{@@ _dotdrop_cfgpath @@}}' "
+export DOTDROP_CONFIG="{{@@ _dotdrop_cfgpath @@}}"
+export DOTDROP_PROFILE="{{@@ profile @@}}"
+abbr dot "dotdrop install -f"
 
 function edit-config #{{{
     cd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
