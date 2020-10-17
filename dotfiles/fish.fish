@@ -39,7 +39,11 @@ command -qs exa &&
     alias ls exa
 
 command -qs bat &&
-    alias cat bat
+    # {%@@ if color.type == "light" @@%} #
+    alias cat 'bat --theme GitHub'
+    # {%@@ else @@%} #
+    alias cat 'bat'
+    # {%@@ endif @@%} #
 
 command -qs zoxide &&
     zoxide init fish | source
@@ -57,7 +61,7 @@ command -qs khard &&
 abbr gs git status
 abbr gp 'git pull; git push'
 
-alias dotdrop "dotdrop --cfg '{{@@ _dotdrop_cfgpath @@}}' --profile '{{@@ profile @@}}'"
+alias dotdrop "dotdrop --cfg '{{@@ _dotdrop_cfgpath @@}}' "
 
 function edit-config #{{{
     cd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
