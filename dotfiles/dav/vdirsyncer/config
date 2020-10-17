@@ -44,9 +44,9 @@ fileext = ".vcf"
 
 [storage contacts_remote]
 type = "carddav"
-url = "https://cloud.disroot.org/remote.php/dav/addressbooks/users/lelgenio/contacts/"
-username = "lelgenio@disroot.org"
-password.fetch = [ "command", "sh", "-c",  "pass Disroot | head -n1" ]
+url = "https://cloud.{{@@ mail @@}}/remote.php/dav/addressbooks/users/{{@@ username @@}}/contacts/"
+username = "{{@@ username @@}}@{{@@ mail @@}}"
+password.fetch = [ "command", "_get-pass", "{{@@ mail @@}}" ]
 
 # CALDAV
 [pair calendar]
@@ -64,6 +64,6 @@ fileext = ".ics"
 
 [storage calendar_remote]
 type = "caldav"
-url = "https://cloud.disroot.org/remote.php/dav/calendars/lelgenio/personal/"
-username = "lelgenio@disroot.org"
-password.fetch = [ "command", "sh", "-c",  "pass Disroot | head -n1" ]
+url = "https://cloud.{{@@ mail @@}}/remote.php/dav/calendars/{{@@ username @@}}/personal/"
+username = "{{@@ username @@}}@{{@@ mail @@}}"
+password.fetch = [ "command", "_get-pass", "{{@@ mail @@}}" ]

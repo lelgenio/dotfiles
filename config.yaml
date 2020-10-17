@@ -6,6 +6,8 @@
 #                                |_|
 
 variables:
+  username: lelgenio
+  mail: disroot.org
   cursor_size: 24
   launcher: wofi
   terminal: kitty
@@ -164,6 +166,8 @@ dotfiles: # {{{
   mutt:
     src: neomutt/
     dst: ~/.config/neomutt/
+    actions:
+    - cpmbsync
   crontab:
     src: crontab
     dst: ~/.local/share/crontab
@@ -207,7 +211,9 @@ actions: #{{{
     crontab -r
     crontab ~/.local/share/crontab
   vdirsyncer: |
-    yes | vdirsyncer discover
+    yes | vdirsyncer discover & disown
+  cpmbsync: |
+    ln -fs ~/.config/neomutt/mbsyncrc ~/.mbsyncrc
   sponsorblock: >
     test -d ~/.config/mpv/scripts/sponsorblock_shared ||
     git clone

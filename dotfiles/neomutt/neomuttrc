@@ -7,15 +7,14 @@
 # |_| |_|\___|\___/|_| |_| |_|\__,_|\__|\__|
 
 
-set my_user='lelgenio'
-set my_host='disroot.org'
-set my_pass=`pass show Disroot | head -n1`
+set my_user='{{@@ username @@}}'
+set my_host='{{@@ mail @@}}'
+set my_pass=`pass show "{{@@ mail @@}}" | head -n1`
 
 # Main settings{{{
 
-set realname = "Leonardo da Rosa Eugenio"
-set from = "lelgenio@disroot.org"
-#alias me Leonardo da Rosa Eugenio <lelgenio@disroot.org>
+set realname = "{{@@ username @@}}"
+set from = "{{@@ username @@}}@{{@@ mail @@}}"
 
 # Set MailDir
 set mbox_type = Maildir
