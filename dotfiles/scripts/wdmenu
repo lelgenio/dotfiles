@@ -1,6 +1,11 @@
 #!/bin/fish
 
+# {%@@ if launcher == "wofi" @@%} #
 command -qs wofi &&
     exec wofi -d $argv
+# {%@@ else @@%} #
 command -qs bmenu &&
     exec bmenu $argv
+# {%@@ endif @@%} #
+
+notify-send "Error" "Launcher program missing"
