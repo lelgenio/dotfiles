@@ -27,9 +27,9 @@ autotype(){
             ydotool --delay 1 key esc
             ydotool --delay 1 key {{@@ key.insertMode @@}}
     fi
-    ydotool type "$username"
+    ydotool type --delay 100 "$username"
     ydotool key tab
-    ydotool type "$password"
+    ydotool type --delay 100 "$password"
 
     [ -n "$restoreKeyLayout" ] &&
         swaymsg input \* xkb_layout "$restoreKeyLayout"
