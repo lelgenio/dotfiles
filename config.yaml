@@ -196,6 +196,11 @@ dotfiles: # {{{
   clang-format:
     src: clang-format
     dst: ~/.clang-format
+  gpg-agent:
+    src: gpg-agent.conf
+    dst: ~/.gnupg/gpg-agent.conf
+    actions:
+    - pam_gpg
 # }}}
 actions: #{{{
   notify: notify-send "Updating dotfiles" "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}"
@@ -230,5 +235,7 @@ actions: #{{{
     git clone
     https://github.com/alexanderjeurissen/ranger_devicons
     ~/.config/ranger/plugins/ranger_devicons
+  pam_gpg: |
+    _pam-gpg-strap
 # }}}
 # vim: fdm=marker

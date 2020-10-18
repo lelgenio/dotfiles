@@ -1,0 +1,12 @@
+#!/bin/sh
+
+
+gpg --list-secret-keys --with-keygrip  \
+    "{{@@ username @@}}@{{@@ mail @@}}" |
+awk '
+/^ssb/ {
+    ssb=1
+}
+/Keygrip/{
+    if (ssb) print $3
+}' > .pam-gnupg
