@@ -107,6 +107,11 @@ for i in (seq 3 10)
     alias $dots "cd $segs"
 end
 #}}}
+# Autoreload{{{
+function _fish_autoreload --on-signal HUP
+    source {{@@ _dotfile_abs_dst @@}}
+end
+#}}}
 # }}}
 # Keys{{{
 

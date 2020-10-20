@@ -9,8 +9,8 @@ variables:
   username: lelgenio
   mail: disroot.org
   cursor_size: 24
-  launcher: wofi
-  terminal: kitty
+  launcher: bmenu
+  terminal: alacritty
   bar: waybar
   bar_pos: top
   key:
@@ -108,6 +108,8 @@ dotfiles: # {{{
   fish:
     src: fish.fish
     dst: ~/.config/fish/config.fish
+    actions:
+    - reload_fish
   mako:
     src: mako.conf
     dst: ~/.config/mako/config
@@ -210,6 +212,7 @@ actions: #{{{
   makoreload: makoctl reload
   lesskey: lesskey
   reload_sway: swaymsg reload
+  reload_fish: pkill -HUP fish
   vimplug: >
     nvim
     +PlugUpgrade
@@ -238,7 +241,6 @@ actions: #{{{
     git clone
     https://github.com/alexanderjeurissen/ranger_devicons
     ~/.config/ranger/plugins/ranger_devicons
-  pam_gpg: |
-    _pam-gpg-strap
+  pam_gpg: _pam-gpg-strap
 # }}}
 # vim: fdm=marker
