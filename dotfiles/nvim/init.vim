@@ -66,6 +66,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'Shougo/neosnippet-snippets'
 
     Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-repeat'
 
     " Select based on indentation
     Plug 'lelgenio/vim-indent-object-colemak'
