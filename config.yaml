@@ -201,6 +201,9 @@ dotfiles: # {{{
     dst: ~/.gnupg/gpg-agent.conf
     actions:
     - pam_gpg
+  tmux:
+    src: tmux.conf
+    dst: ~/.tmux.conf
 # }}}
 actions: #{{{
   notify: notify-send "Updating dotfiles" "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}"
