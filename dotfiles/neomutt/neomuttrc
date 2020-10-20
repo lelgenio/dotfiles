@@ -1,5 +1,4 @@
-#
-# LEL
+# {{@@ header() @@}}
 #                                   _   _
 #  _ __   ___  ___  _ __ ___  _   _| |_| |_
 # | '_ \ / _ \/ _ \| '_ ` _ \| | | | __| __|
@@ -9,7 +8,7 @@
 
 set my_user='{{@@ username @@}}'
 set my_host='{{@@ mail @@}}'
-set my_pass=`pass show "{{@@ mail @@}}" | head -n1`
+set my_pass=`_get-pass "{{@@ mail @@}}"`
 
 # Main settings{{{
 
