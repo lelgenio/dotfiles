@@ -36,7 +36,7 @@ command -qs trash &&
     alias rm trash
 
 command -qs exa &&
-    alias ls exa
+    alias ls 'exa --git'
 
 command -qs bat &&
     # {%@@ if color.type == "light" @@%} #
