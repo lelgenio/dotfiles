@@ -19,15 +19,46 @@ end
 # s  selected
 # sc scrollbar
 
+set -l fn "{{@@ font.mono @@}} 12"
+
+set -l tb "{{@@ color.bg       @@}}"
+set -l tf "{{@@ color.accent @@}}"
+
+set -l fb "{{@@ color.bg       @@}}"
+set -l ff "{{@@ color.txt    @@}}"
+
+set -l nb "{{@@ color.bg       @@}}"
+set -l nf "{{@@ color.txt    @@}}"
+
+set -l hb "{{@@ color.bg_light @@}}"
+set -l hf "{{@@ color.accent @@}}"
+
+#{%@@ if False @@%}#
+# Hacks to allow runnning even if not templated
+set -l fn "Fira Code 12"
+
+set -l tf "#D9534F"
+set -l tb "#202020"
+
+set -l ff "#ffffff"
+set -l fb "#202020"
+
+set -l nf "#ffffff"
+set -l nb "#202020"
+
+set -l hf "#D9534F"
+set -l hb "#404040"
+#{%@@ endif @@%}#
+
 bemenu \
     --ignorecase\
     --bottom\
     --no-overlap\
     --list 20\
     --prefix '->'\
-    --fn "{{@@ font.mono @@}} 12"\
-    --tb "{{@@ color.bg       @@}}" --tf "{{@@ color.accent @@}}" \
-    --fb "{{@@ color.bg       @@}}" --ff "{{@@ color.txt    @@}}" \
-    --nb "{{@@ color.bg       @@}}" --nf "{{@@ color.txt    @@}}" \
-    --hb "{{@@ color.bg_light @@}}" --hf "{{@@ color.accent @@}}" \
+    --fn "$fn"\
+    --tb "$tb" --tf "$tf" \
+    --fb "$fb" --ff "$ff" \
+    --nb "$nb" --nf "$nf" \
+    --hb "$hb" --hf "$hf" \
     $argv

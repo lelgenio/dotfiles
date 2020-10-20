@@ -2,6 +2,11 @@
 
 shopt -s nullglob globstar
 
+INSERTKEY="{{@@ key.insertMode @@}}"
+#{%@@ if False @@%}#
+INSERTKEY="i"
+#{%@@ endif @@%}#
+
 prefix=${PASSWORD_STORE_DIR-~/.password-store}
 password_files=( "$prefix"/**/*.gpg )
 password_files=( "${password_files[@]#"$prefix"/}" )
@@ -25,7 +30,7 @@ autotype(){
     if [ $(swaymsg -t get_tree | jq -r '.. | select(.focused? == true).app_id') = "org.qutebrowser.qutebrowser" ]
     then
             ydotool --delay 1 key esc
-            ydotool --delay 1 key {{@@ key.insertMode @@}}
+            ydotool --delay 1 key "$INSERTKEY"
     fi
     ydotool type --delay 100 "$username"
     ydotool key tab
