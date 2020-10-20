@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+test -z "$XDG_RUNTIME_DIR" &&
+    export XDG_RUNTIME_DIR=/run/user/$(id -u)
+
 getnew(){
     find ~/.local/share/mail/INBOX{,.{Contas,Faculdade,Git,Trabalhos}}/new -type f | wc -l
 }
@@ -12,7 +15,7 @@ OLD=$(getnew)
 NEW=$(getnew)
 
 if [ "$NEW" -gt "$OLD" ];then
-    notify-send "Novos Emails!"
+    notify-send " New E-Mails!"
 fi
 
 echo $NEW | sed 's/^0$//'
