@@ -101,6 +101,13 @@ function etc #{{{
     and sudo nvim $file
 end
 #}}}
+# cd ...{{{
+for i in (seq 3 10)
+    set -l dots (string repeat -n $i .)
+    set -l segs (string repeat -n $i ./.)
+    alias $dots "cd $segs"
+end
+#}}}
 # }}}
 # Keys{{{
 
