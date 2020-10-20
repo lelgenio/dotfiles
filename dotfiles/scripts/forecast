@@ -10,7 +10,12 @@ owm(){
     REGI=$(echo $INFO | jq -r '.region')
     COUN=$(echo $INFO | jq -r '.country')
     QUERY="$CITY, $REGI, $COUN"
-    APPID="fd68c0fe7951f5ab7e24a240eb0942b8"
+    APPID=`_get-pass OpenWeatherMapAPPID`
+    #{%@@ if False @@%}#
+    notify-send "Get a free appid"
+    xdg-open openweathermap.org &
+    exit 1
+    #{%@@ endif @@%}#
 
     FORECAST=$(wget -qO- http://api.openweathermap.org/data/2.5/forecast\?APPID\=${APPID}\&q="${CITY}"\&units\=metric)
     TEMP=$(echo $FORECAST | jq -r ".list[0].main.temp" |
