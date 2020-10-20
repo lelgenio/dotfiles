@@ -216,8 +216,10 @@ call plug#end()
 
     highlight MatchParen    gui=bold   guifg=yellow
 
-    highlight SpellBad      guisp={{@@ color.normal.red  @@}} guibg=none
-    highlight SpellRare     guisp={{@@ color.normal.blue @@}} guibg=none
+    highlight SpellBad      guisp={{@@ color.normal.red    @@}} guibg=none
+    highlight SpellRare     guisp={{@@ color.normal.blue   @@}} guibg=none
+    highlight SpellCap      guisp={{@@ color.normal.cyan   @@}} guibg=none
+    highlight SpellLocal    guisp={{@@ color.normal.yellow @@}} guibg=none
 
     let g:fzf_colors =
     \ { 'fg':      ['fg', 'Normal'],
