@@ -23,8 +23,10 @@ set -x PAGER less
     set -x PYTHONPYCACHEPREFIX $HOME/.cache/python
 
 # end
+
 #}}}
 # Aliases{{{
+
 abbr v nvim
 
 command -qs sudo &&
@@ -66,8 +68,10 @@ function edit-config #{{{
     nvim +GFiles
 end
 abbr ec edit-config
+
 #}}}
 # alias mutt #{{{
+
 function mutt --wraps=neomutt --description 'alias mutt=neomutt'
   neomutt  $argv;
   pkill -RTMIN+4 waybar
@@ -110,6 +114,7 @@ end
 set fish_key_bindings fish_vi_key_bindings
 
 if test $fish_key_bindings = fish_vi_key_bindings
+
     bind           {{@@ key.left  @@}} backward-char
     bind -M visual {{@@ key.left  @@}} backward-char
     bind           {{@@ key.down  @@}} down-or-search
@@ -125,6 +130,7 @@ if test $fish_key_bindings = fish_vi_key_bindings
     bind -M insert {{@@ key.insertQuit @@}} repaint-mode -m default
 
 end
+
 #}}}
 # start window manager if using tty1 {{{
 #
@@ -151,28 +157,29 @@ function esway
     export XDG_SESSION_TYPE=wayland
     pidof sway || exec sway
 end
+
 if test "$XDG_VTNR" = 1 -a -z "$DISPLAY"
-    esway &> .swaylog
+    esway &| tee .swaylog
     # ei3 &> .i3log
     # ebsp &> .bsplog
 end
 
 # }}}
 # use tmux{{{
-    set TMUX 1
-    if test -z "$TMUX" -a -n "$DISPLAY" &&
-        not string match -qr kitty "$TERM" &&
-        test -z "$GNOME_TERMINAL_SCREEN" &&
-        status is-interactive
-        set attach_session (tmux 2> /dev/null ls -F \
-            '#{session_attached} #{?#{==:#{session_last_attached},},1,#{session_last_attached}} #{session_id}' |
-            awk '/^0/ { if ($2 > t) { t = $2; s = $3 } }; END { if (s) printf "%s", s }')
-        if test -n "$attach_session"
-            exec tmux attach -t "$attach_session"
-        else
-            exec tmux
-        end
+
+if test -z "$TMUX" -a -n "$DISPLAY" -a -z "$GNOME_TERMINAL_SCREEN"
+    and not string match -qr kitty "$TERM"
+    and status is-interactive
+
+    set attach_session (tmux 2> /dev/null ls -F \
+        '#{session_attached} #{?#{==:#{session_last_attached},},1,#{session_last_attached}} #{session_id}' |
+        awk '/^0/ { if ($2 > t) { t = $2; s = $3 } }; END { if (s) printf "%s", s }')
+    if test -n "$attach_session"
+        exec tmux attach -t "$attach_session"
+    else
+        exec tmux
     end
+end
 
 # }}}
 # Prompt customization{{{
@@ -182,7 +189,9 @@ end
     function fish_mode_prompt;end
 
     function _fish_prompt_color -a color
-        set_color --bold $color
+        # separate line needed for bold normal
+        set_color $color
+        set_color --bold
         set -e argv[1]
         echo -en $argv
     end
@@ -190,9 +199,7 @@ end
     alias _fish_prompt_accent "_fish_prompt_color '{{@@ color.accent @@}}'"
     alias _fish_prompt_warn   "_fish_prompt_color 'bryellow'"
 
-    set _fish_normal_color (test -n "$DISPLAY" &&
-        echo '{{@@ color.txt @@}}' || echo 'white')
-    alias _fish_prompt_normal "_fish_prompt_color '$_fish_normal_color'"
+    alias _fish_prompt_normal "_fish_prompt_color 'normal'"
 
     function _fish_prompt_git_status
         git status -s | grep "^$argv[1]" &> /dev/null &&
@@ -250,29 +257,8 @@ end
             _fish_prompt_normal '$ '
         end
 
+        _update_fzf_colors
         set_color normal
-    end
-
-    if false
-        set SPACEFISH_USER_SHOW always
-        set SPACEFISH_USER_COLOR "{{@@ color.accent @@}}"
-        set SPACEFISH_DIR_COLOR  "{{@@ color.accent @@}}"
-
-        set SPACEFISH_PROMPT_ADD_NEWLINE false
-
-        set SPACEFISH_CHAR_COLOR_SUCCESS white
-        set SPACEFISH_CHAR_PREFIX ""
-        set SPACEFISH_CHAR_SYMBOL '$'
-        set SPACEFISH_CHAR_SYMBOL_ROOT '#'
-
-        set SPACEFISH_VI_MODE_COLOR "{{@@ color.accent @@}}"
-        set SPACEFISH_VI_MODE_PREFIX "\e[1 q"
-        set SPACEFISH_VI_MODE_INSERT "I\e[5 q"
-        set SPACEFISH_VI_MODE_NORMAL "N"
-        set SPACEFISH_VI_MODE_VISUAL "V"
-        set SPACEFISH_VI_MODE_REPLACE "R"
-        set SPACEFISH_VI_MODE_REPLACE_ONE 	"S"
-        set SPACEFISH_VI_MODE_SUFIX ""
     end
 
     # set fish_cursor_default     block      blink
@@ -292,6 +278,8 @@ set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 
 #}}}
 # Fzf settings{{{
+function _update_fzf_colors
+
 export FZF_DEFAULT_OPTS="\
 --preview '{{@@ bat_command @@}} --style=numbers --color=always {}' \
 --color='\
@@ -301,5 +289,9 @@ prompt:{{@@ color.accent @@}},\
 pointer:{{@@ color.accent @@}},\
 spinner:{{@@ color.accent @@}}\
 '"
+
+end
+_update_fzf_colors
+
 #}}}
 # vim:foldmethod=marker
