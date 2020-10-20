@@ -132,6 +132,9 @@ call plug#end()
     set expandtab
     set smarttab
 
+    set spelllang=en_us,pt_br
+    autocmd FileType tex set spell
+
     " Allow moving the cursor anywhere
     set virtualedit=all
 
@@ -139,7 +142,6 @@ call plug#end()
     set scrolloff=8
     set sidescrolloff=8
 
-    " set nowrap
     set linebreak
 
     " Display whitespace
@@ -159,14 +161,12 @@ call plug#end()
 "}}}
 " Gay colors{{{
 
-    " if (empty($TMUX))
-      if (has('nvim'))
-        let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-      endif
-      if (has('termguicolors'))
-       set termguicolors
-      endif
-    " endif
+    if (has('nvim'))
+      let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+    endif
+    if (has('termguicolors'))
+     set termguicolors
+    endif
 
     " {%@@ if color.type == "light" @@%} "
         colorscheme github
@@ -203,18 +203,21 @@ call plug#end()
     "Current line
     " {%@@ if color.type != "light" @@%} "
     set       cursorline
-    highlight CursorLine   term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}}
-    highlight CursorLineNr term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}}
+    highlight CursorLine    term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}}
+    highlight CursorLineNr  term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}}
     " {%@@ endif @@%} "
-    highlight CursorLineNr guifg={{@@ color.nontxt @@}}
+    highlight CursorLineNr  guifg={{@@ color.nontxt @@}}
 
     "Splits
-    highlight VertSplit    guibg=None guifg={{@@   color.bg_dark @@}}
+    highlight VertSplit     guibg=None guifg={{@@   color.bg_dark @@}}
     " set         fillchars=vert:/
 
-    highlight Identifier   guifg={{@@ color.accent @@}}
+    highlight Identifier    guifg={{@@ color.accent @@}}
 
-    highlight MatchParen   gui=bold   guifg=yellow
+    highlight MatchParen    gui=bold   guifg=yellow
+
+    highlight SpellBad      guisp={{@@ color.normal.red  @@}} guibg=none
+    highlight SpellRare     guisp={{@@ color.normal.blue @@}} guibg=none
 
     let g:fzf_colors =
     \ { 'fg':      ['fg', 'Normal'],
