@@ -1,7 +1,7 @@
 # My Dotfiles
 ## What I use:
 * sway / Waybar
-* kitty (only way to get ranger image previews on wayland) 
+* kitty (only way to get ranger image previews on wayland)
 * fish (fight me!)
 * nvim / vim-lsp (pure vimscript)
 * qutebrowser
@@ -11,10 +11,10 @@
 * btwOs
 
 ## Install:
-Most files need to be pre-prossesed with dotdrop.    
-By default mapped to Dvorak, edit config.yaml to remap.
+Most files need to be pre-prossesed with dotdrop.
+By default mapped to Colemak, edit config.yaml to remap.
 ```bash
 pip install --user dotdrop
-dotdrop -c config.yaml install
+dotdrop -c config.yaml install -p dark
 ```
 ![image.png](./image.png)
