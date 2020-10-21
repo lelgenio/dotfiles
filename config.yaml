@@ -64,10 +64,10 @@ profiles:
       color: # {{{
         type: light
         accent: '#D9534F'
-        bg: '#EEEEEE'
+        bg: '#E0E0E0'
         bg_light: '#A0A0A0'
         bg_dark: '#999999'
-        txt: '#101010'
+        txt: '#303030'
         nontxt: '#A0A0A0'
         normal:
           black: '#555555'
