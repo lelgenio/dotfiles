@@ -48,7 +48,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'sheerun/vim-polyglot'
 
     " Fuzzy find
-    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf', { 'do': {-> fzf#install() } }
     Plug 'junegunn/fzf.vim'
 
     " Completions
