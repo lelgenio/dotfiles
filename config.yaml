@@ -214,7 +214,7 @@ actions: #{{{
   makoreload: makoctl reload
   lesskey: lesskey
   reload_sway: swaymsg reload
-  reload_fish: pkill -HUP fish
+  reload_fish: pkill -SIGHUP fish
   vimplug: >
     nvim
     +PlugUpgrade

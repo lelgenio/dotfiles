@@ -108,7 +108,7 @@ for i in (seq 3 10)
 end
 #}}}
 # Autoreload{{{
-function _fish_autoreload --on-signal HUP
+function _fish_autoreload --on-signal SIGHUP
     source {{@@ _dotfile_abs_dst @@}}
     kitty @ set-colors -a ~/.config/kitty/kitty.conf
 end
