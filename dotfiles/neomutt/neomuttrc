@@ -8,12 +8,12 @@
 
 set my_user='{{@@ username @@}}'
 set my_host='{{@@ mail @@}}'
-set my_pass=`_get-pass "{{@@ mail @@}}"`
+set my_pass=`_get-pass "$my_host"`
 
 # Main settings{{{
 
-set realname = "{{@@ username @@}}"
-set from = "{{@@ username @@}}@{{@@ mail @@}}"
+set realname = "$my_user"
+set from = "${my_user}@${my_host}"
 
 # Set MailDir
 set mbox_type = Maildir
@@ -39,7 +39,7 @@ mailboxes \
 
 set record = "+Sent"
 set use_from = yes
-set smtp_url=smtps://$my_user:$my_pass@$my_host
+set smtp_url = "smtps://${my_user}:${my_pass}@${my_host}"
 set ssl_force_tls = yes
 #
 set date_format="%y/%m/%d %I:%M%p"
@@ -61,6 +61,7 @@ set sort = 'reverse-date'
 #set include			# include message in replies
 #set mail_check=60 # to avoid lags using IMAP with some email providers (yahoo for example)
 
+set display_filter  = 'sed -e "s/&nbsp;*/\n/g" '
 set mailcap_path 	= ~/.config/neomutt/mailcap
 auto_view text/html		# automatically show html (mailcap uses w3m)
 auto_view application/pgp-encrypted
@@ -232,7 +233,7 @@ color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-
 # color	error		        brightwhite		brightred
 color	indicator	        brightwhite		red
 # prompt
-color	status		        brightwhite		default
+color	status		        default		    default
 # color	tree		        black			white
 # color	markers		        red				white
 # color	search		        white			black
