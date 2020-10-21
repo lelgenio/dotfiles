@@ -9,4 +9,4 @@ awk '
 }
 /Keygrip/{
     if (ssb) print $3
-}' > .pam-gnupg
+}' > ~/.pam-gnupg
