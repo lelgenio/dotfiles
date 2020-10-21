@@ -55,7 +55,10 @@ command -qs khard &&
         $khalList
     end
 
+abbr mpn ncmpcpp
+
 abbr gs git status
+abbr gd git diff
 abbr gp 'git pull; git push'
 
 export DOTDROP_CONFIG="{{@@ _dotdrop_cfgpath @@}}"
