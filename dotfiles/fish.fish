@@ -110,6 +110,7 @@ end
 # Autoreload{{{
 function _fish_autoreload --on-signal HUP
     source {{@@ _dotfile_abs_dst @@}}
+    kitty @ set-colors -a ~/.config/kitty/kitty.conf
 end
 #}}}
 # }}}

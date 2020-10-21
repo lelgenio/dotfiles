@@ -9,8 +9,8 @@ variables:
   username: lelgenio
   mail: disroot.org
   cursor_size: 24
-  launcher: bmenu
-  terminal: alacritty
+  launcher: wofi
+  terminal: kitty
   bar: waybar
   bar_pos: top
   key:
@@ -74,7 +74,7 @@ profiles:
           red: '#D54E53'
           green: '#008800'
           yellow: '#A0A000'
-          blue: '#7AA6DA'
+          blue: '#0D68A8'
           magenta: '#C397D8'
           cyan: '#70C0BA'
           white: '#EAEAEA'
@@ -123,6 +123,8 @@ dotfiles: # {{{
   kitty:
     src: kitty.conf
     dst: ~/.config/kitty/kitty.conf
+    actions:
+    - reload_fish
   qutebrowser:
     src: qutebrowser.py
     dst: ~/.config/qutebrowser/config.py
