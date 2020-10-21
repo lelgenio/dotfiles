@@ -118,9 +118,6 @@ call plug#end()
     " Allow saving of files as sudo when I forget to start vim using sudo.
     cmap w!! w !sudo tee % >/dev/null
 
-    " Auto deploy dotfiles in the background
-    autocmd BufWritePost {{@@ parent_dir( _dotdrop_dotpath ) @@}}/{config.yaml,dotfiles/**} silent !sh -c 'dotdrop install -f &'
-
 "}}}
 " Syntax options{{{
 "
