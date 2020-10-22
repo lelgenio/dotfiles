@@ -267,7 +267,6 @@ function fish_prompt
         _fish_prompt_normal '$ '
     end
 
-    _update_fzf_colors
     set_color normal
 end
 
@@ -288,7 +287,6 @@ set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 
 #}}}
 # Fzf settings{{{
-function _update_fzf_colors
 
 export FZF_DEFAULT_OPTS="\
 --preview '{{@@ bat_command @@}} --style=numbers --color=always {}' \
@@ -299,9 +297,6 @@ prompt:{{@@ color.accent @@}},\
 pointer:{{@@ color.accent @@}},\
 spinner:{{@@ color.accent @@}}\
 '"
-
-end
-_update_fzf_colors
 
 #}}}
 # vim:foldmethod=marker
