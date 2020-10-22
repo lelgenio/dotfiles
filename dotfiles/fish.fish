@@ -278,6 +278,15 @@ end
 # set fish_cursor_visual      block
 
 #}}}
+# Fish colors{{{
+
+set fish_color_command green
+set fish_color_autosuggestion --dim default
+
+set fish_pager_color_prefix default --bold
+set fish_pager_color_description yellow
+
+#}}}
 # Color man pages{{{
 
 set -xU LESS_TERMCAP_md (printf "\e[01;31m")
