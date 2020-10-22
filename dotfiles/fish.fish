@@ -140,6 +140,8 @@ if test $fish_key_bindings = fish_vi_key_bindings
 
     bind -M insert {{@@ key.insertQuit @@}} repaint-mode -m default
 
+    bind yy fish_clipboard_copy
+
 end
 
 #}}}
