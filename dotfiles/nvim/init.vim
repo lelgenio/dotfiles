@@ -261,6 +261,10 @@ call plug#end()
         noremap h o
         noremap H O
 
+        " Jump to oposite side of selection
+        vnoremap m o
+        vnoremap M O
+
         " To end of word
         noremap t e
         noremap T E
