@@ -61,11 +61,11 @@ profiles: #{{{
           black: '#555555'
           red: '#D54E53'
           green: '#008800'
-          yellow: '#A0A000'
+          yellow: '#EAB700'
           blue: '#0D68A8'
           magenta: '#C397D8'
           cyan: '#00A0A5'
-          white: '#EAEAEA'
+          white: '#FFFFFF'
 # }}}
   colemak: #{{{
     variables:
