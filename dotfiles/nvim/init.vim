@@ -296,6 +296,12 @@ call plug#end()
         xmap K   <Plug>VSurround
         xmap gK  <Plug>VgSurround
 
+        " Custom surrounds
+        "              d
+        let b:surround_100 = "{{@@ '#{{@@ \\r @@}}#' @@}}"
+        "              s
+        let b:surround_115 = "{{@@ '#{%@@ \\r @@%}#\\n#{%@@  @@%}#' @@}}"
+
     " {%@@ elif key.layout == "dvorak" @@%} "
 
         " Added benefits
