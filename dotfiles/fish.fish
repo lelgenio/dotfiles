@@ -280,6 +280,12 @@ end
 #}}}
 # Fish colors{{{
 
+set fish_color_comment yellow
+
+set fish_color_redirection purple
+set fish_color_end purple
+set fish_color_operator purple
+
 set fish_color_command green
 set fish_color_autosuggestion --dim default
 
