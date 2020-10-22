@@ -48,7 +48,7 @@ profiles: #{{{
       gtk_theme:     materia-lelgenio
       kvantum_theme: Materia
       icon_theme:    Papirus-Light
-      cursor_theme:  capitaine-cursors-light
+      cursor_theme:  capitaine-cursors
       color:
         type: light
         accent: '#D9534F'
