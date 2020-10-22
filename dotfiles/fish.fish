@@ -209,7 +209,7 @@ function _fish_prompt_color -a color
 end
 
 alias _fish_prompt_accent "_fish_prompt_color '{{@@ color.accent @@}}'"
-alias _fish_prompt_warn   "_fish_prompt_color 'bryellow'"
+alias _fish_prompt_warn   "_fish_prompt_color 'yellow'"
 
 alias _fish_prompt_normal "_fish_prompt_color 'normal'"
 
