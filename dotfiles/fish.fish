@@ -294,6 +294,7 @@ export FZF_DEFAULT_OPTS="\
 --preview '{{@@ bat_command @@}} --style=numbers --color=always {}' \
 --color='\
 bg+:{{@@ color.bg_light @@}},\
+hl+:{{@@ color.normal.green @@}},\
 gutter:{{@@ color.bg @@}},\
 prompt:{{@@ color.accent @@}},\
 pointer:{{@@ color.accent @@}},\
