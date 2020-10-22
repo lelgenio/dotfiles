@@ -80,9 +80,9 @@ c.completion.shrink = True
 c.hints.border = "2px solid {{@@ color.accent @@}}"
 
 # Characters used for hint strings.
-# {%@@ if key.layout == "colemak" @@%} #
+# {%@@ if key_layout == "colemak" @@%} #
 c.hints.chars = "asrtdhneio"
-# {%@@ elif key.layout == "dvorak" @@%} #
+# {%@@ elif key_layout == "dvorak" @@%} #
 c.hints.chars = "aoeuidnths"
 # {%@@ endif @@%}
 
@@ -275,7 +275,7 @@ config.bind(",r", "spawn --userscript readability")
 config.bind(";e", "hint links spawn deemix '{hint-url}'")
 config.bind(";m", "hint links spawn mpv --fs {hint-url}")
 
-# {%@@ if key.layout == "colemak" @@%} #
+# {%@@ if key_layout == "colemak" @@%} #
 config.bind("t", "hint all")
 config.bind("T", "hint all tab")
 

@@ -61,6 +61,9 @@ abbr gs git status
 abbr gd git diff
 abbr gp 'git pull; git push'
 
+export _KEYBOARD_LAYOUT="{{@@ key_layout @@}}"
+export _COLOR_TYPE="{{@@      color_type @@}}"
+
 export DOTDROP_CONFIG="{{@@ _dotdrop_cfgpath @@}}"
 export DOTDROP_PROFILE="{{@@ profile @@}}"
 abbr dot "dotdrop install -f"

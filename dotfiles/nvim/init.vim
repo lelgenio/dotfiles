@@ -255,7 +255,7 @@ call plug#end()
     noremap {{@@ key.insertMode.upper() @@}} I
 
     " Keyboard Layout specific
-    " {%@@ if key.layout == "colemak" @@%} "
+    " {%@@ if key_layout == "colemak" @@%} "
 
         " Insert on next line
         noremap h o
@@ -296,13 +296,7 @@ call plug#end()
         xmap K   <Plug>VSurround
         xmap gK  <Plug>VgSurround
 
-        " Custom surrounds
-        "              d
-        let b:surround_100 = "{{@@ '#{{@@ \\r @@}}#' @@}}"
-        "              s
-        let b:surround_115 = "{{@@ '#{%@@ \\r @@%}#\\n#{%@@  @@%}#' @@}}"
-
-    " {%@@ elif key.layout == "dvorak" @@%} "
+    " {%@@ elif key_layout == "dvorak" @@%} "
 
         " Added benefits
         noremap - $
@@ -315,7 +309,7 @@ call plug#end()
         nmap <C-k>      :Files  <CR>
         nmap <C-b>      :Buffers<CR>
 
-    " {%@@ elif key.layout == "qwerty" @@%} "
+    " {%@@ elif key_layout == "qwerty" @@%} "
 
         " FZF bindings
         nmap <C-b>      :Buffers<CR>
@@ -342,6 +336,13 @@ call plug#end()
     " EasyAlign
     xmap     ga <Plug>(EasyAlign)
     nmap     ga <Plug>(EasyAlign)
+
+
+    " Custom surrounds, should work fine on all layouts
+    "              d
+    autocmd FileType * let b:surround_100 = "{{@@ '{{@@ \\r @@}}' @@}}"
+    "              s
+    autocmd FileType * let b:surround_115 = "{{@@ '#{%@@ \\r @@%}#\\n#{%@@  @@%}#' @@}}"
 
 "}}}
 " Lanugage Server{{{

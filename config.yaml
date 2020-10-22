@@ -13,28 +13,17 @@ variables:
   terminal: kitty
   bar: waybar
   bar_pos: top
-  key:
-    layout: colemak
-    left: n
-    down: e
-    up: i
-    right: o
-    next: l
-    tabL: U
-    tabR: Y
-    insertMode: s
-    insertQuit: kk
   font:
     mono: Fira Code
     interface: Inter
-profiles:
+profiles: #{{{
   dark: # {{{
     variables:
       gtk_theme:     materia-lelgenio-dark
       kvantum_theme: MateriaDark
       icon_theme:    Papirus-Dark
       cursor_theme:  capitaine-cursors
-      color: #{{{
+      color:
         type: dark
         accent: '#D9534F'
         bg: '#202020'
@@ -51,7 +40,6 @@ profiles:
           magenta: '#C397D8'
           cyan: '#70C0BA'
           white: '#EAEAEA'
-      # }}}
     dotfiles:
     - ALL
 # }}}
@@ -61,7 +49,7 @@ profiles:
       kvantum_theme: Materia
       icon_theme:    Papirus-Light
       cursor_theme:  capitaine-cursors-light
-      color: # {{{
+      color:
         type: light
         accent: '#D9534F'
         bg: '#E0E0E0'
@@ -79,9 +67,42 @@ profiles:
           cyan: '#70C0BA'
           white: '#EAEAEA'
 # }}}
+  colemak: #{{{
+    variables:
+      key:
+        layout: colemak
+        left: n
+        down: e
+        up: i
+        right: o
+        next: l
+        tabL: U
+        tabR: Y
+        insertMode: s
+        insertQuit: kk
+#}}}
+  qwerty: #{{{
+    variables:
+      key:
+        layout: qwerty
+        left: h
+        down: j
+        up: k
+        right: l
+        next: l
+        tabL: I
+        tabR: O
+        insertMode: i
+        insertQuit: jj
+#}}}
+  main: #{{{
     dotfiles:
     - ALL
-# }}}
+    include:
+    - "{{@@ key_layout @@}}"
+    - "{{@@ color_type @@}}"
+ #}}}
+#}}}
 config: # {{{
   backup: false
   banner: false
@@ -93,6 +114,15 @@ config: # {{{
   - notify
   func_file:
   - funcs.py
+dynvariables:
+  key_layout: |
+    if test -n "$_KEYBOARD_LAYOUT"; then
+      echo "$_KEYBOARD_LAYOUT"
+    else
+      grep lelgenio /etc/passwd &>/dev/null &&
+        echo colemak || echo qwerty
+    fi
+  color_type: test -n "$_COLOR_TYPE" && echo "$_COLOR_TYPE" || echo dark
 # }}}
 dotfiles: # {{{
   nvim:
