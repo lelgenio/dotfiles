@@ -52,7 +52,7 @@ profiles: #{{{
       color:
         type: light
         accent: '#D9534F'
-        bg: '#E0E0E0'
+        bg: '#EAEAEA'
         bg_light: '#A0A0A0'
         bg_dark: '#999999'
         txt: '#303030'
@@ -64,7 +64,7 @@ profiles: #{{{
           yellow: '#A0A000'
           blue: '#0D68A8'
           magenta: '#C397D8'
-          cyan: '#70C0BA'
+          cyan: '#00A0A5'
           white: '#EAEAEA'
 # }}}
   colemak: #{{{
