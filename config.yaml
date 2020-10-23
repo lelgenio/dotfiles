@@ -25,7 +25,7 @@ profiles: #{{{
       cursor_theme:  capitaine-cursors
       color:
         type: dark
-        accent: '#D9534F'
+        accent: '#0953FF'
         bg: '#202020'
         bg_light: '#404040'
         bg_dark: '#191919'
@@ -123,6 +123,7 @@ dynvariables:
         echo colemak || echo qwerty
     fi
   color_type: test -n "$_COLOR_TYPE" && echo "$_COLOR_TYPE" || echo dark
+  blender_version: blender --version | head -n1 | sed -E 's|^Blender (.*)\..*|\1|g'
 # }}}
 dotfiles: # {{{
   nvim:
@@ -226,7 +227,7 @@ dotfiles: # {{{
     - sponsorblock
   blender:
     src: blenderTheme.xml
-    dst: ~/.config/blender/2.90/scripts/presets/interface_theme/blenderTheme.xml
+    dst: "~/.config/blender/{{@@ blender_version @@}}/scripts/presets/interface_theme/blenderTheme.xml"
   clang-format:
     src: clang-format
     dst: ~/.clang-format
