@@ -29,12 +29,12 @@ game_save(){
 
     while test -n "$1"
     do
-        find "$BACKUP_DIR" -name "$1" -delete
+        find "$BACKUP_DIR" -name "$1" -exec rm -rf {} +
         shift
     done
 }
 
-game_save mindustry "~/.local/share/Mindustry"
+game_save mindustry "~/.local/share/Mindustry" 'previews'
 game_save minecraft "~/.minecraft/saves"
 game_save factorio  "~/.factorio" '_autosave*.zip' '*.sync-conflict-*'
 game_save cuphead   "~/Games/cuphead/drive_c/users/lelgenio/Application Data/Cuphead"
