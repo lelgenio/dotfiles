@@ -36,6 +36,6 @@ game_save(){
 
 game_save mindustry "~/.local/share/Mindustry" 'previews'
 game_save minecraft "~/.minecraft/saves"
-game_save factorio  "~/.factorio" '_autosave*.zip' '*.sync-conflict-*'
-game_save cuphead   "~/Games/cuphead/drive_c/users/lelgenio/Application Data/Cuphead"
+game_save factorio  "~/.factorio" '_autosave*.zip' '*.sync-conflict-*' 'doc-html' 'temp'
+game_save cuphead   "~/Games/cuphead/drive_c/users/$USER/Application Data/Cuphead"
 
