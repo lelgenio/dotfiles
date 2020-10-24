@@ -239,10 +239,10 @@ function fish_prompt
         _fish_prompt_normal " on "
 
         _fish_prompt_git_status '??' '?' '{{@@ color.txt             @@}}'
-        _fish_prompt_git_status ' M' '~' '{{@@ color.normal.yellow   @@}}'
-        _fish_prompt_git_status ' D' '-' '{{@@ color.normal.red      @@}}'
-        _fish_prompt_git_status 'A ' '+' '{{@@ color.normal.green    @@}}'
-        _fish_prompt_git_status 'M ' '~' '{{@@ color.normal.green    @@}}'
+        _fish_prompt_git_status '.M' '~' '{{@@ color.normal.yellow   @@}}'
+        _fish_prompt_git_status '.D' '-' '{{@@ color.normal.red      @@}}'
+        _fish_prompt_git_status 'A.' '+' '{{@@ color.normal.green    @@}}'
+        _fish_prompt_git_status 'M.' '~' '{{@@ color.normal.green    @@}}'
 
         _fish_prompt_accent (fish_vcs_prompt | string replace -ra ' \(|\)' '')
     end
