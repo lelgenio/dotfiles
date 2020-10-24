@@ -32,5 +32,15 @@ echo -e "$colors" |
 
 mkdir -p "${dst_path}/${theme_name}"
 
-echo -e "$colors" > "$color_file"
-./change_color.sh -t "${dst_path}" -o "${theme_name}" "$color_file"
+{
+    notify-send "Generating theme in Background"
+
+    echo -e "$colors" > "$color_file"
+    ./change_color.sh \
+        -t "${dst_path}" \
+        -o "${theme_name}" \
+        "$color_file" &> /dev/null
+    echo -e "$colors" > "$color_file"
+
+    notify-send "Finished generating theme"
+} &
