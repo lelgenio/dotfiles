@@ -1,0 +1,36 @@
+#!/bin/bash
+
+src_path="$HOME/.cache/materia-theme"
+
+theme_name="materia-${USER}{{@@ '-dark' if color.type == 'dark' @@}}"
+dst_path="${HOME}/.themes"
+
+test -d "$src_path" ||
+    git clone\
+    "https://github.com/nana-4/materia-theme"\
+    "$src_path"
+
+cd "$src_path"
+
+# SEL = accent
+# BG = header-bar
+# HDR = menubar?
+colors="\
+SEL_BG={{@@             color.accent    .lstrip('#') @@}}\n\
+FG={{@@                 color.txt       .lstrip('#') @@}}\n\
+BG={{@@                 color.bg_dark   .lstrip('#') @@}}\n\
+HDR_FG={{@@             color.txt       .lstrip('#') @@}}\n\
+HDR_BG={{@@             color.bg_dark   .lstrip('#') @@}}\n\
+MATERIA_VIEW={{@@       color.bg        .lstrip('#') @@}}\n\
+MATERIA_SURFACE={{@@    color.bg        .lstrip('#') @@}}"
+
+color_file="${dst_path}/${theme_name}/_colors"
+# No changes in input, no change in output
+echo -e "$colors" |
+    diff "$color_file" - &&
+    exit 0
+
+mkdir -p "${dst_path}/${theme_name}"
+
+echo -e "$colors" > "$color_file"
+./change_color.sh -t "${dst_path}" -o "${theme_name}" "$color_file"
