@@ -25,7 +25,7 @@ profiles: #{{{
       cursor_theme:  capitaine-cursors
       color:
         type: dark
-        accent: '#0953FF'
+        accent: '#D9534F'
         bg: '#202020'
         bg_light: '#404040'
         bg_dark: '#191919'
