@@ -241,6 +241,9 @@ dotfiles: # {{{
   tmux:
     src: tmux.conf
     dst: ~/.tmux.conf
+  git:
+    src: gitconfig
+    dst: ~/.gitconfig
 # }}}
 actions: #{{{
   notify: notify-send "Updating dotfiles" "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}"
