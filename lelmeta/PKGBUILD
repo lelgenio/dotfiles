@@ -36,7 +36,7 @@ depends=(
 
     # Fonts
     inter-font ttf-material-wifi-icons-git
-    ttf-fira-code otf-nerd-fonts-fira-code
+    otf-nerd-fonts-fira-code
 
     # Screenshot
     grim slurp wl-clipboard imagemagick wf-recorder wshowkeys

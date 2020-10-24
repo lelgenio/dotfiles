@@ -14,7 +14,7 @@ variables:
   bar: waybar
   bar_pos: top
   font:
-    mono: Fira Code
+    mono: FiraCode Nerd Font
     interface: Inter
 profiles: #{{{
   dark: # {{{
