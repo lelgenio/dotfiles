@@ -14,7 +14,9 @@ cd "$src_path"
 
 # SEL = accent
 # BG = header-bar
-# HDR = menubar?
+# HDR = menubar
+# View = Main part of file browser
+# Surface = background of context menu
 colors="\
 SEL_BG={{@@             color.accent    .lstrip('#') @@}}\n\
 FG={{@@                 color.txt       .lstrip('#') @@}}\n\
