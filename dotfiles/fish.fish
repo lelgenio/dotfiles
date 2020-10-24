@@ -68,6 +68,9 @@ export DOTDROP_CONFIG="{{@@ _dotdrop_cfgpath @@}}"
 export DOTDROP_PROFILE="{{@@ profile @@}}"
 abbr dot "dotdrop install -f"
 
+# }}}
+# Functions {{{
+
 function edit-config #{{{
     pushd .
     cd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
@@ -88,7 +91,7 @@ abbr ec edit-config
 #}}}
 # alias mutt #{{{
 
-function mutt --wraps=neomutt --description 'alias mutt=neomutt'
+function mutt --wraps=neomutt
   neomutt  $argv;
   pkill -RTMIN+4 waybar
 end
@@ -130,6 +133,22 @@ function _fish_autoreload --on-signal SIGHUP
     kitty @ set-colors -a ~/.config/kitty/kitty.conf
 end
 #}}}
+function dark_toggle # {{{
+    if test "$_COLOR_TYPE" = "dark"
+        set  _COLOR_TYPE "light"
+    else
+        set  _COLOR_TYPE "dark"
+    end
+
+    set -l gArgs -C "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
+    git $gArgs stash push
+    dotdrop install -f
+    git $gArgs stash pop
+
+end
+
+# }}}
+
 # }}}
 # Keys{{{
 
