@@ -69,6 +69,7 @@ export DOTDROP_PROFILE="{{@@ profile @@}}"
 abbr dot "dotdrop install -f"
 
 function edit-config #{{{
+    pushd .
     cd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
     set -l path (git ls-files | fzf)
     set -l time (date +%s)
@@ -79,8 +80,8 @@ function edit-config #{{{
         echo "  paths:"
         echo "  - $path"
     end > ~/.local/share/fish/fish_history
-    cd -
     history merge
+    popd
 end
 abbr ec edit-config
 
