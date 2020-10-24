@@ -70,7 +70,17 @@ abbr dot "dotdrop install -f"
 
 function edit-config #{{{
     cd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
-    nvim +GFiles
+    set -l path (git ls-files | fzf)
+    set -l time (date +%s)
+    nvim "$path"
+    begin
+        echo "- cmd: nvim $path"
+        echo "  when: $time"
+        echo "  paths:"
+        echo "  - $path"
+    end > ~/.local/share/fish/fish_history
+    cd -
+    history merge
 end
 abbr ec edit-config
 
