@@ -173,50 +173,53 @@ call plug#end()
         set       background=dark
     " {%@@ endif @@%}
 
+    "{%@@ set c = color     @@%}"
+    "{%@@ set n = c.normal  @@%}"
+
     "background color is transparent
     highlight Normal          guibg=None
-    highlight EndOfBuffer     guibg=None guifg={{@@ color.bg_light @@}}
-    highlight SpecialKey      guibg=None guifg={{@@ color.accent   @@}}
+    highlight EndOfBuffer     guibg=None guifg={{@@ c.bg_light @@}}
+    highlight SpecialKey      guibg=None guifg={{@@ c.accent   @@}}
     highlight Folded          guibg=None
 
     highlight tabLine         None
     highlight tabLineFill     None
 
     highlight SignColumn      guibg=None
-    highlight GitGutterAdd    guibg=None guifg={{@@ color.normal.green @@}}
-    highlight GitGutterChange guibg=None guifg={{@@ color.normal.yellow @@}}
-    highlight GitGutterDelete guibg=None guifg={{@@ color.normal.red @@}}
+    highlight GitGutterAdd    guibg=None guifg={{@@ n.green @@}}
+    highlight GitGutterChange guibg=None guifg={{@@ n.yellow @@}}
+    highlight GitGutterDelete guibg=None guifg={{@@ n.red @@}}
 
     "Line numers
-    highlight LineNr  term=bold        ctermfg=9     guifg={{@@ color.bg_light @@}} guibg=None
+    highlight LineNr  term=bold        ctermfg=9     guifg={{@@ c.bg_light @@}} guibg=None
 
     " Comments
-    highlight Comment guifg={{@@ color.bg_light @@}} guibg=None
+    highlight Comment guifg={{@@ c.bg_light @@}} guibg=None
 
     "Make whitespace dark
-    highlight NonText guifg={{@@ color.nontxt @@}} guibg=None
+    highlight NonText guifg={{@@ c.nontxt @@}} guibg=None
     " highlight SpecialKey  ctermfg=black guifg=#252525 guibg=None
 
     "Current line
-    " {%@@ if color.type != "light" @@%} "
+    " {%@@ if c.type != "light" @@%} "
     set       cursorline
-    highlight CursorLine    term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}}
-    highlight CursorLineNr  term=bold  cterm=bold   gui=Bold      guibg={{@@ color.bg_dark @@}}
+    highlight CursorLine    term=bold  cterm=bold   gui=Bold      guibg={{@@ c.bg_dark @@}}
+    highlight CursorLineNr  term=bold  cterm=bold   gui=Bold      guibg={{@@ c.bg_dark @@}}
     " {%@@ endif @@%} "
-    highlight CursorLineNr  guifg={{@@ color.nontxt @@}}
+    highlight CursorLineNr  guifg={{@@ c.nontxt @@}}
 
     "Splits
-    highlight VertSplit     guibg=None guifg={{@@   color.bg_dark @@}}
+    highlight VertSplit     guibg=None guifg={{@@   c.bg_dark @@}}
     " set         fillchars=vert:/
 
-    highlight Identifier    guifg={{@@ color.accent @@}}
+    highlight Identifier    guifg={{@@ c.accent @@}}
 
-    highlight MatchParen    gui=bold   guifg=yellow
+    highlight MatchParen    gui=bold   guifg={{@@ n.yellow @@}}
 
-    highlight SpellBad      guisp={{@@ color.normal.red    @@}} guibg=none
-    highlight SpellRare     guisp={{@@ color.normal.blue   @@}} guibg=none
-    highlight SpellCap      guisp={{@@ color.normal.cyan   @@}} guibg=none
-    highlight SpellLocal    guisp={{@@ color.normal.yellow @@}} guibg=none
+    highlight SpellBad      guisp={{@@ n.red    @@}} guibg=none
+    highlight SpellRare     guisp={{@@ n.blue   @@}} guibg=none
+    highlight SpellCap      guisp={{@@ n.cyan   @@}} guibg=none
+    highlight SpellLocal    guisp={{@@ n.yellow @@}} guibg=none
 
     "}}}
 " Keys{{{
