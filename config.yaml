@@ -257,7 +257,7 @@ actions: #{{{
   notify: notify-send "Updating dotfiles" "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}"
   makoreload: makoctl reload
   lesskey: lesskey
-  reload_sway: pidof swaymsg || swaymsg reload
+  reload_sway: swaymsg reload
   reload_fish: pkill -SIGHUP fish
   vimplug: >
     nvim
