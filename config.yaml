@@ -65,6 +65,7 @@ profiles:
   accent_pink:    {variables: {accent_color: "#E91E63"}}
   accent_teal:    {variables: {accent_color: "#16A085"}}
   accent_magenta: {variables: {accent_color: "#9C27B0"}}
+  accent_orange:  {variables: {accent_color: "#D93200"}}
 
 # }}}
   colemak: #{{{
