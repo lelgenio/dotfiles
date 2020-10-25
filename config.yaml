@@ -153,7 +153,7 @@ dotfiles: # {{{
     src: mako.conf
     dst: ~/.config/mako/config
     actions:
-    - makoreload
+    - reload_mako
   waybar:
     src: waybar
     dst: ~/.config/waybar
@@ -255,7 +255,7 @@ dotfiles: # {{{
 # }}}
 actions: #{{{
   notify: notify-send "Updating dotfiles" "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}"
-  makoreload: makoctl reload
+  reload_mako: makoctl reload
   lesskey: lesskey
   reload_sway: swaymsg reload
   reload_fish: pkill -SIGHUP fish
