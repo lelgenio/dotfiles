@@ -183,9 +183,9 @@ call plug#end()
     highlight tabLineFill     None
 
     highlight SignColumn      guibg=None
-    highlight GitGutterAdd    guibg=None guifg=lightgreen
-    highlight GitGutterChange guibg=None guifg=yellow
-    highlight GitGutterDelete guibg=None guifg=lightred
+    highlight GitGutterAdd    guibg=None guifg={{@@ color.normal.green @@}}
+    highlight GitGutterChange guibg=None guifg={{@@ color.normal.yellow @@}}
+    highlight GitGutterDelete guibg=None guifg={{@@ color.normal.red @@}}
 
     "Line numers
     highlight LineNr  term=bold        ctermfg=9     guifg={{@@ color.bg_light @@}} guibg=None
