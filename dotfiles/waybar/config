@@ -24,7 +24,7 @@
         "battery"
     ],
     "sway/workspaces": {
-        "enable-bar-scroll":true,
+        "enable-bar-scroll":false,
         "format": "{icon}",
         "format-icons": {
             "1":  "",
@@ -44,6 +44,8 @@
         "tooltip":false,
         "exec": "mpd-status",
         "exec-if": "pidof mpd",
+        "on-scroll-up": "mpc vol +10",
+        "on-scroll-down": "mpc vol -10",
         "interval": 2
     },
     "tray": {
