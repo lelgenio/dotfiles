@@ -20,10 +20,6 @@ variables:
 profiles:
   dark: # {{{
     variables:
-      gtk_theme:     materia-lelgenio-dark
-      kvantum_theme: MateriaDark
-      icon_theme:    Papirus-Dark
-      cursor_theme:  capitaine-cursors
       color:
         type: dark
         bg: '#202020'
@@ -45,10 +41,6 @@ profiles:
 # }}}
   light: # {{{
     variables:
-      gtk_theme:     materia-lelgenio
-      kvantum_theme: Materia
-      icon_theme:    Papirus-Light
-      cursor_theme:  capitaine-cursors
       color:
         type: light
         bg: '#EAEAEA'
@@ -104,6 +96,11 @@ profiles:
         insertQuit: jj
 #}}}
   main: #{{{
+    variables:
+      gtk_theme:      "materia-{{@@ env['USER'] @@}}-{{@@ accent_color_name @@}}-{{@@ color.type @@}}"
+      kvantum_theme:  "Materia{{@@ color.type.capitalize() @@}}"
+      icon_theme:     "Papirus-{{@@ color.type.capitalize() @@}}"
+      cursor_theme:   "capitaine-cursors{{@@ '-light' if color.type == 'light' @@}}"
     dotfiles:
     - ALL
     include:
