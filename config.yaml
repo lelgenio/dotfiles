@@ -9,7 +9,7 @@ variables:
   username: lelgenio
   mail: disroot.org
   cursor_size: 24
-  launcher: bmenu
+  launcher: wofi
   terminal: kitty
   bar: waybar
   bar_pos: top
