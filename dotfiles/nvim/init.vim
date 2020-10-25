@@ -155,6 +155,8 @@ call plug#end()
     set title
 
     let g:python_highlight_all = 1
+
+    autocmd FileType i3config hi Error none
 "}}}
 " Gay colors{{{
 
