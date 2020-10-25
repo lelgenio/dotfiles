@@ -34,7 +34,7 @@
           <ThemeWidgetColors
             outline="#373737"
             inner="#585858ff"
-            inner_sel="{{@@ color.accent.lower() @@}}e6"
+            inner_sel="{{@@ accent_color.lower() @@}}e6"
             item="#3e3e3eff"
             text="#d9d9d9"
             text_sel="#ffffff"

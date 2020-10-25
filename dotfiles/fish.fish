@@ -61,8 +61,9 @@ abbr gs git status
 abbr gd git diff
 abbr gp 'git pull; git push'
 
-export _KEYBOARD_LAYOUT="{{@@ key_layout @@}}"
-export _COLOR_TYPE="{{@@      color_type @@}}"
+export _KEYBOARD_LAYOUT="{{@@   key_layout          @@}}"
+export _COLOR_TYPE="{{@@        color_type          @@}}"
+export _ACCENT_COLOR "{{@@      accent_color_name   @@}}"
 
 export DOTDROP_CONFIG="{{@@ _dotdrop_cfgpath @@}}"
 export DOTDROP_PROFILE="{{@@ profile @@}}"
@@ -229,7 +230,7 @@ function _fish_prompt_color -a color
     echo -en $argv
 end
 
-alias _fish_prompt_accent "_fish_prompt_color '{{@@ color.accent @@}}'"
+alias _fish_prompt_accent "_fish_prompt_color '{{@@ accent_color @@}}'"
 alias _fish_prompt_warn   "_fish_prompt_color 'yellow'"
 
 alias _fish_prompt_normal "_fish_prompt_color 'normal'"
@@ -334,9 +335,9 @@ export FZF_DEFAULT_OPTS="\
 bg+:{{@@ color.bg_light @@}},\
 hl+:{{@@ color.normal.green @@}},\
 gutter:{{@@ color.bg @@}},\
-prompt:{{@@ color.accent @@}},\
-pointer:{{@@ color.accent @@}},\
-spinner:{{@@ color.accent @@}}\
+prompt:{{@@ accent_color @@}},\
+pointer:{{@@ accent_color @@}},\
+spinner:{{@@ accent_color @@}}\
 '"
 
 #}}}

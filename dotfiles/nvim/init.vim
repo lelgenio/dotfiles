@@ -179,7 +179,7 @@ call plug#end()
     "background color is transparent
     highlight Normal          guibg=None
     highlight EndOfBuffer     guibg=None guifg={{@@ c.bg_light @@}}
-    highlight SpecialKey      guibg=None guifg={{@@ c.accent   @@}}
+    highlight SpecialKey      guibg=None guifg={{@@ accent_color   @@}}
     highlight Folded          guibg=None
 
     highlight tabLine         None
@@ -212,7 +212,7 @@ call plug#end()
     highlight VertSplit     guibg=None guifg={{@@   c.bg_dark @@}}
     " set         fillchars=vert:/
 
-    highlight Identifier    guifg={{@@ c.accent @@}}
+    highlight Identifier    guifg={{@@ accent_color @@}}
 
     highlight MatchParen    gui=bold   guifg={{@@ n.yellow @@}}
 

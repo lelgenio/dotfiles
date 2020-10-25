@@ -52,7 +52,7 @@ window#waybar.empty {
     {%@@ else @@%}
         border-bottom:
     {%@@ endif @@%}
-        3px solid {{@@ color.accent @@}};
+        3px solid {{@@ accent_color @@}};
     /* border-bottom: 3px solid transparent; */
 }
 
@@ -63,7 +63,7 @@ window#waybar.empty {
 }
 
 #mode{
-    color: {{@@ color.accent @@}};
+    color: {{@@ accent_color @@}};
 }
 
 #custom-mpd,

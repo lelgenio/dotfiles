@@ -22,7 +22,7 @@ end
 set -l fn "{{@@ font.mono @@}} 12"
 
 set -l tb "{{@@ color.bg       @@}}"
-set -l tf "{{@@ color.accent @@}}"
+set -l tf "{{@@ accent_color @@}}"
 
 set -l fb "{{@@ color.bg       @@}}"
 set -l ff "{{@@ color.txt    @@}}"
@@ -31,7 +31,7 @@ set -l nb "{{@@ color.bg       @@}}"
 set -l nf "{{@@ color.txt    @@}}"
 
 set -l hb "{{@@ color.bg_light @@}}"
-set -l hf "{{@@ color.accent @@}}"
+set -l hf "{{@@ accent_color @@}}"
 
 #{%@@ if False @@%}#
 # Hacks to allow runnning even if not templated

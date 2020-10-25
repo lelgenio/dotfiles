@@ -77,7 +77,7 @@ c.completion.shrink = True
 
 # CSS border value for hints.
 # Type: String
-c.hints.border = "2px solid {{@@ color.accent @@}}"
+c.hints.border = "2px solid {{@@ accent_color @@}}"
 
 # Characters used for hint strings.
 # {%@@ if key_layout == "colemak" @@%} #
@@ -135,7 +135,7 @@ c.colors.completion.category.bg = "{{@@ color.bg_dark @@}}"
 c.colors.completion.category.border.top = "{{@@ color.bg_dark @@}}"
 c.colors.completion.category.border.bottom = "{{@@ color.bg_dark @@}}"
 
-c.colors.completion.item.selected.bg = "{{@@ color.accent @@}}"
+c.colors.completion.item.selected.bg = "{{@@ accent_color @@}}"
 c.colors.completion.item.selected.border.top = "{{@@ color.bg_dark @@}}"
 c.colors.completion.item.selected.border.bottom = "{{@@ color.bg_dark @@}}"
 
@@ -168,10 +168,10 @@ c.colors.hints.fg = "{{@@ color.txt @@}}"
 c.colors.hints.bg = "{{@@ color.bg @@}}"
 
 # Font color for the matched part of hints.
-c.colors.hints.match.fg = "{{@@ color.accent @@}}"
+c.colors.hints.match.fg = "{{@@ accent_color @@}}"
 
 # Highlight color for keys to complete the current keychain.
-c.colors.keyhint.suffix.fg = "{{@@ color.accent @@}}"
+c.colors.keyhint.suffix.fg = "{{@@ accent_color @@}}"
 
 # Background color of the keyhint widget.
 c.colors.keyhint.bg = "rgba(30, 30, 30, 95%)"
@@ -192,7 +192,7 @@ c.colors.statusbar.insert.bg = "{{@@ color.bg @@}}"
 c.colors.statusbar.command.bg = "{{@@ color.bg @@}}"
 
 # Background color of the statusbar in caret mode with a selection.
-c.colors.statusbar.caret.selection.bg = "{{@@ color.accent @@}}"
+c.colors.statusbar.caret.selection.bg = "{{@@ accent_color @@}}"
 
 # Foreground color of the URL in the statusbar on successful load
 # (https).
@@ -212,8 +212,8 @@ c.colors.tabs.odd.bg = "{{@@ color.bg @@}}"
 c.colors.tabs.selected.even.fg = "{{@@ color.txt @@}}"
 c.colors.tabs.selected.odd.fg = "{{@@ color.txt @@}}"
 # Background color of selected tabs.
-c.colors.tabs.selected.even.bg = "{{@@ color.accent @@}}"
-c.colors.tabs.selected.odd.bg = "{{@@ color.accent @@}}"
+c.colors.tabs.selected.even.bg = "{{@@ accent_color @@}}"
+c.colors.tabs.selected.odd.bg = "{{@@ accent_color @@}}"
 
 # Background color of pinned selected odd tabs.
 c.colors.tabs.pinned.selected.odd.bg = "{{@@ color.bg_light @@}}"

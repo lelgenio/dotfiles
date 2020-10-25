@@ -6,11 +6,11 @@
 #entry:selected {
     border: none;
     padding: none;
-    background: {{@@ color.accent @@}};
+    background: {{@@ accent_color @@}};
 }
 
 window {
-    background-color:  {{@@ color.accent @@}};
+    background-color:  {{@@ accent_color @@}};
 }
 
 #input {

@@ -1,8 +1,20 @@
 #!/bin/bash
 
+# Papirus Icon Theme
+{
+    if papirus-folders -l | grep "{{@@ accent_color_name @@}}"
+    then
+        notify-send "Switching Folder Color"
+        papirus-folders -uC "{{@@ accent_color_name @@}}"
+    else
+        papirus-folders -uD
+    fi
+} &> /dev/null &
+
+# Materia GTK Theme
 src_path="$HOME/.cache/materia-theme"
 
-theme_name="materia-${USER}{{@@ '-dark' if color.type == 'dark' @@}}"
+theme_name="{{@@ gtk_theme @@}}"
 dst_path="${HOME}/.themes"
 
 test -d "$src_path" ||
@@ -18,11 +30,11 @@ cd "$src_path"
 # View = Main part of file browser
 # Surface = background of context menu
 colors="\
-SEL_BG={{@@             color.accent    .lstrip('#') @@}}\n\
+SEL_BG={{@@             accent_color    .lstrip('#') @@}}\n\
 FG={{@@                 color.txt       .lstrip('#') @@}}\n\
-BG={{@@                 color.bg_dark   .lstrip('#') @@}}\n\
+BG={{@@                 color.bg        .lstrip('#') @@}}\n\
 HDR_FG={{@@             color.txt       .lstrip('#') @@}}\n\
-HDR_BG={{@@             color.bg_dark   .lstrip('#') @@}}\n\
+HDR_BG={{@@             color.bg        .lstrip('#') @@}}\n\
 MATERIA_VIEW={{@@       color.bg        .lstrip('#') @@}}\n\
 MATERIA_SURFACE={{@@    color.bg        .lstrip('#') @@}}"
 
@@ -41,8 +53,8 @@ mkdir -p "${dst_path}/${theme_name}"
     ./change_color.sh \
         -t "${dst_path}" \
         -o "${theme_name}" \
-        "$color_file" &> /dev/null
+        "$color_file"
     echo -e "$colors" > "$color_file"
 
     notify-send "Finished generating theme"
-} &
+} &> /dev/null &

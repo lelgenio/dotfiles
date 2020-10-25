@@ -16,7 +16,8 @@ variables:
   font:
     mono: FiraCode Nerd Font
     interface: Inter
-profiles: #{{{
+
+profiles:
   dark: # {{{
     variables:
       gtk_theme:     materia-lelgenio-dark
@@ -25,7 +26,6 @@ profiles: #{{{
       cursor_theme:  capitaine-cursors
       color:
         type: dark
-        accent: '#D9534F'
         bg: '#202020'
         bg_light: '#404040'
         bg_dark: '#191919'
@@ -51,7 +51,6 @@ profiles: #{{{
       cursor_theme:  capitaine-cursors
       color:
         type: light
-        accent: '#D9534F'
         bg: '#EAEAEA'
         bg_light: '#A0A0A0'
         bg_dark: '#999999'
@@ -66,6 +65,15 @@ profiles: #{{{
           magenta: '#C397D8'
           cyan: '#00A0A5'
           white: '#FFFFFF'
+# }}}
+# Accents {{{
+  accent_red:     {variables: {accent_color: "#D9534F"}}
+  accent_green:   {variables: {accent_color: "#159828"}}
+  accent_blue:    {variables: {accent_color: "#3465A3"}}
+  accent_pink:    {variables: {accent_color: "#E91E63"}}
+  accent_teal:    {variables: {accent_color: "#16A085"}}
+  accent_magenta: {variables: {accent_color: "#9C27B0"}}
+
 # }}}
   colemak: #{{{
     variables:
@@ -101,8 +109,9 @@ profiles: #{{{
     include:
     - "{{@@ key_layout @@}}"
     - "{{@@ color_type @@}}"
+    - "accent_{{@@ accent_color_name @@}}"
  #}}}
-#}}}
+
 config: # {{{
   backup: false
   banner: false
@@ -123,6 +132,7 @@ dynvariables:
         echo colemak || echo qwerty
     fi
   color_type: test -n "$_COLOR_TYPE" && echo "$_COLOR_TYPE" || echo dark
+  accent_color_name: test -n "$_ACCENT_COLOR" && echo "$_ACCENT_COLOR" || echo red
   blender_version: blender --version | head -n1 | sed -E 's|^Blender (.*)\..*|\1|g'
 # }}}
 dotfiles: # {{{
@@ -249,7 +259,7 @@ actions: #{{{
   notify: notify-send "Updating dotfiles" "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}"
   makoreload: makoctl reload
   lesskey: lesskey
-  reload_sway: swaymsg reload
+  reload_sway: pidof swaymsg || swaymsg reload
   reload_fish: pkill -SIGHUP fish
   vimplug: >
     nvim
