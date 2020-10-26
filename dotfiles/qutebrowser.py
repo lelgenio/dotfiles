@@ -99,8 +99,8 @@ c.tabs.favicons.show = "always"
 c.tabs.select_on_remove = "last-used"
 
 # When to show the status/tab bar.
-c.tabs.show = "switching"
-c.statusbar.show = "in-mode"
+c.tabs.show = "always"
+c.statusbar.show = "always"
 
 c.tabs.show_switching_delay = 2000
 c.tabs.title.format = "{audio} {current_title}"
