@@ -6,7 +6,7 @@
 # |_| |_|___/_| |_|
 
 # Environment Vairables {{{
-set -x QT_QPA_PLATFORMTHEME qt5ct
+set -x QT_QPA_PLATFORMTHEME gtk3
 set -x PATH ~/.local/bin ~/.cargo/bin $PATH
 
 set -x EDITOR nvim
