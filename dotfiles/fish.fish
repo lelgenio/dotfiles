@@ -61,12 +61,12 @@ abbr gs git status
 abbr gd git diff
 abbr gp 'git pull; git push'
 
-export _KEYBOARD_LAYOUT="{{@@   key_layout          @@}}"
-export _COLOR_TYPE="{{@@        color_type          @@}}"
-export _ACCENT_COLOR "{{@@      accent_color_name   @@}}"
+set -x _KEYBOARD_LAYOUT "{{@@ key_layout        @@}}"
+set -x _COLOR_TYPE      "{{@@ color_type        @@}}"
+set -x _ACCENT_COLOR    "{{@@ accent_color_name @@}}"
 
-export DOTDROP_CONFIG="{{@@ _dotdrop_cfgpath @@}}"
-export DOTDROP_PROFILE="{{@@ profile @@}}"
+set -x DOTDROP_CONFIG   "{{@@ _dotdrop_cfgpath  @@}}"
+set -x DOTDROP_PROFILE  "{{@@ profile           @@}}"
 abbr dot "dotdrop install -f"
 
 # }}}
@@ -183,8 +183,8 @@ function esway
     # set -x QPA_PLATFORM wayland
     # set -x QT_QPA_PLATFORM wayland
 
-    export XDG_CURRENT_DESKTOP=sway
-    export XDG_SESSION_TYPE=wayland
+    set -x XDG_CURRENT_DESKTOP  sway
+    set -x XDG_SESSION_TYPE     wayland
 
     pidof sway || exec sway
 end
@@ -329,7 +329,7 @@ set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 #}}}
 # Fzf settings{{{
 
-export FZF_DEFAULT_OPTS="\
+set -x FZF_DEFAULT_OPTS "\
 --preview '{{@@ bat_command @@}} --style=numbers --color=always {}' \
 --color='\
 bg+:{{@@ color.bg_light @@}},\
