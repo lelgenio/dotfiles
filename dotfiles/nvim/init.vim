@@ -72,6 +72,7 @@ call plug#begin('~/.config/nvim/plugged')
 
     " Status bar
     Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
 
     " Color scheme
     Plug 'dikiaap/minimalist'
@@ -170,6 +171,7 @@ call plug#end()
     " {%@@ if color.type == "light" @@%} "
         colorscheme github
         set       background=light
+        let g:airline_theme="sol"
     " {%@@ elif color.type == "dark" @@%} "
         colorscheme minimalist
         set       background=dark
