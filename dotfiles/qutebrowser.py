@@ -221,6 +221,12 @@ c.colors.tabs.pinned.selected.odd.bg = "{{@@ color.bg_light @@}}"
 # Background color of pinned selected even tabs.
 c.colors.tabs.pinned.selected.even.bg = "{{@@ color.bg_light @@}}"
 
+
+c.colors.contextmenu.menu.bg = '{{@@ color.bg @@}}'
+c.colors.contextmenu.menu.fg = '{{@@ color.txt @@}}'
+c.colors.contextmenu.selected.bg = '{{@@ accent_color @@}}'
+c.colors.contextmenu.disabled.fg = '{{@@ color.bg_light @@}}'
+
 # {%@@ if color.type == "dark" @@%} #
 c.colors.webpage.bg = "{{@@ color.bg @@}}"
 c.colors.webpage.prefers_color_scheme_dark = True
