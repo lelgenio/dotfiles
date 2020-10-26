@@ -179,9 +179,9 @@ function esway
     test -f &&
         set -x LD_PRELOAD '/usr/lib/libgtk3-nocsd.so.0'
 
-    set -x QT_SCALE_FACTOR 1.0001
-    set -x QPA_PLATFORM wayland
-    set -x QT_QPA_PLATFORM wayland
+    # set -x QT_SCALE_FACTOR 1.0001
+    # set -x QPA_PLATFORM wayland
+    # set -x QT_QPA_PLATFORM wayland
 
     export XDG_CURRENT_DESKTOP=sway
     export XDG_SESSION_TYPE=wayland
