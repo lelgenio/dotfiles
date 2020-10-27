@@ -83,6 +83,12 @@ bind index "{{@@ key.down  @@}}" next-entry
 bind index "{{@@ key.up    @@}}" previous-entry
 bind index "{{@@ key.right @@}}" display-message
 
+bind index <left>  noop
+bind index <down>  next-entry
+bind index <up>    previous-entry
+bind index <right> display-message
+
+
 bind index G last-entry
 bind index gg first-entry
 
@@ -91,6 +97,7 @@ bind index U undelete-message
 
 bind index L limit
 bind index <space> tag-entry
+
 
 # Attachment screen
 bind attach <return>                view-mailcap
@@ -105,6 +112,12 @@ bind pager "{{@@ key.left  @@}}"  exit
 bind pager "{{@@ key.down  @@}}"  next-line
 bind pager "{{@@ key.up    @@}}"  previous-line
 bind pager "{{@@ key.right @@}}"  view-attachments
+
+bind pager <left>   exit
+bind pager <down>   next-line
+bind pager <up>     previous-line
+bind pager <right>  view-attachments
+
 
 bind browser    "{{@@ key.left  @@}}"  goto-parent
 macro browser   "{{@@ key.left  @@}}" '<change-dir><kill-line>..<enter>' "Go to parent folder"
