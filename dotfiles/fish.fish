@@ -140,6 +140,13 @@ function dark_toggle # {{{
 end
 
 # }}}
+# Open{{{
+functions -q _fish_open
+    or functions -c open _fish_open
+function open
+    _fish_open $argv &> /dev/null
+end
+#}}}
 
 # }}}
 # Keys{{{
