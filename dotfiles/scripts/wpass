@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# passmenu, for wayland
+# depends: ydotool, wtype, pass
+
 shopt -s nullglob globstar
 
 INSERTKEY="{{@@ key.insertMode @@}}"
@@ -7,46 +10,55 @@ INSERTKEY="{{@@ key.insertMode @@}}"
 INSERTKEY="i"
 #{%@@ endif @@%}#
 
-prefix=${PASSWORD_STORE_DIR-~/.password-store}
-password_files=( "$prefix"/**/*.gpg )
-password_files=( "${password_files[@]#"$prefix"/}" )
-password_files=( "${password_files[@]%.gpg}" )
+for m in "dmenu"  "bmenu"  "wofi" "wdmenu"; do
+    command -v "$m" > /dev/null && dmenu="$m"
+done
 
-entry=$(printf '%s\n' "${password_files[@]}" | wdmenu -p Password $@)
+test -z "$dmenu" && exit 1
+test "$dmenu" = "wofi" &&
+    dmenu="wofi -d"
 
-[ -n "$entry" ] || exit
+main() {
 
-username=$( pass show "$entry" 2>/dev/null | perl -ne 'print $1 if /^login: (.*)/' )
-password=$( pass show "$entry" 2>/dev/null | head -n 1 )
+    prefix=${PASSWORD_STORE_DIR-~/.password-store}
+    password_files=( "$prefix"/**/*.gpg )
+    password_files=( "${password_files[@]#"$prefix"/}" )
+    password_files=( "${password_files[@]%.gpg}" )
 
-action=$(printf "Autotype\nUsername -> $username\nPassword" | wdmenu -p Action)
+    entry=`printf '%s\n' "${password_files[@]}" | "$dmenu" -p Password $@`
 
-autotype(){
-    if swaymsg -t get_inputs | grep -i colemak > /dev/null
-    then
-      swaymsg input \* xkb_layout 'us'
-      restoreKeyLayout='us(colemak)'
-    fi
-    if [ $(swaymsg -t get_tree | jq -r '.. | select(.focused? == true).app_id') = "org.qutebrowser.qutebrowser" ]
-    then
-            ydotool --delay 1 key esc
-            ydotool --delay 1 key "$INSERTKEY"
-    fi
-    ydotool type --delay 100 "$username"
-    ydotool key tab
-    ydotool type --delay 100 "$password"
+    [ -n "$entry" ] || exit
 
-    [ -n "$restoreKeyLayout" ] &&
-        swaymsg input \* xkb_layout "$restoreKeyLayout"
+    username=`pass show "$entry" 2>/dev/null | perl -ne 'print $1 if /^login: (.*)/'`
+    password=`pass show "$entry" 2>/dev/null | head -n 1`
+
+    action=`printf "Autotype\nUsername -> $username\nPassword" | "$dmenu" -p Action`
+
+    case $action in
+        Autotype)
+            autotype
+            ;;
+        Username*)
+            printf '%s' "$username" | wl-copy;;
+        Password)
+            printf '%s' "$password" | wl-copy;;
+    esac
+
 }
 
-case $action in
-    Autotype)
-        autotype
-        ;;
-    Username*)
-        printf '%s' "$username" | wl-copy;;
-    Password)
-        printf '%s' "$password" | wl-copy;;
-esac
+autotype(){
 
+    curWindow=`swaymsg -t get_tree | jq -r '.. | select(.focused? == true).app_id'`
+    if test "$curWindow" = "org.qutebrowser.qutebrowser"
+    then
+        ydotool key esc
+        wtype "$INSERTKEY"
+    fi
+
+    wtype "$username"
+    ydotool key tab
+    wtype "$password"
+
+}
+
+main

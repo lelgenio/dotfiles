@@ -19,6 +19,7 @@ depends=(
         bemenu-wlroots j4-dmenu-desktop
         # Utility
         ruby-fusuma light mako kanshi udiskie redshift-wayland-git
+        ydotool wtype
         # Configuration manager
         dotdrop
 
