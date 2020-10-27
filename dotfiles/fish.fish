@@ -252,8 +252,9 @@ function fish_prompt
     _fish_prompt_normal " in "
     _fish_prompt_accent (prompt_pwd)
     if git status -s &> /dev/null
+        set _git_branch (git branch | perl -ne 'print $1 if /^\* (.*)$/')
+
         _fish_prompt_normal " on "
-        set _git_branch (git status | perl -ne 'print $1 if /On branch (.*)$/')
 
         _fish_prompt_git_status '.M' '~' '{{@@ color.normal.yellow   @@}}'
         _fish_prompt_git_status '.D' '-' '{{@@ color.normal.red      @@}}'
@@ -261,7 +262,7 @@ function fish_prompt
         _fish_prompt_git_status '??' '?' '{{@@ color.txt             @@}}'
         _fish_prompt_accent "$_git_branch"
         for remote in (git remote)
-            if not git diff --quiet "$remote"/"$_git_branch"
+            if not git diff --quiet HEAD "$remote"/"$_git_branch"
                 _fish_prompt_color '{{@@ color.txt @@}}' '↑'
             end
         end
@@ -295,7 +296,7 @@ function fish_prompt
     end
 
     if test $_status -ne 0
-        _fish_prompt_warn $_status' '
+        _fish_prompt_warn "$_status "
     end
 
     if test $USER = root
