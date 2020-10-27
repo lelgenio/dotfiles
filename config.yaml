@@ -20,6 +20,7 @@ variables:
 profiles:
   dark: # {{{
     variables:
+      opacity: 0.98
       color:
         type: dark
         bg: '#202020'
@@ -41,6 +42,7 @@ profiles:
 # }}}
   light: # {{{
     variables:
+      opacity: 0.95
       color:
         type: light
         bg: '#EAEAEA'

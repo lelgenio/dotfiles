@@ -14,7 +14,7 @@ window#waybar.empty * {
 window#waybar {
     /* background-color: rgba(30,30,30,.9); */
     transition-duration: .5s;
-    background-color: rgba({{@@ bg_rgb @@}}, .9);
+    background-color: rgba({{@@ bg_rgb @@}}, {{@@ opacity @@}});
     {%@@ if bar_pos == "top" @@%}
         border-bottom:
     {%@@ else @@%}
