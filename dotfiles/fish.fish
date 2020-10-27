@@ -223,9 +223,6 @@ end
 # }}}
 # Prompt customization{{{
 
-set fish_color_command default --bold
-set fish_color_param default
-
 # Fine, I'll do it myself
 function fish_vi_cursor;end
 function fish_mode_prompt;end
@@ -317,6 +314,7 @@ set fish_color_end purple
 set fish_color_operator purple
 
 set fish_color_command green
+set fish_color_param default
 set fish_color_autosuggestion --dim default
 
 set fish_pager_color_selected_background --background={{@@ color.bg_light @@}}
