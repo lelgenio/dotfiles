@@ -170,7 +170,8 @@ c.colors.hints.match.fg = color.accent
 
 
 c.colors.keyhint.suffix.fg = color.accent
-c.colors.keyhint.bg = "rgba({{@@ hex2rgb(color.bg) @@}}, {{@@ opacity @@}}%)"
+c.colors.keyhint.fg = color.txt
+c.colors.keyhint.bg = "rgba({{@@ hex2rgb(color.bg) @@}}, {{@@ opacity @@}})"
 
 
 c.colors.statusbar.normal.fg = color.txt
@@ -189,8 +190,8 @@ c.colors.tabs.odd.fg = color.txt
 c.colors.tabs.even.bg = color.bg
 c.colors.tabs.odd.bg = color.bg
 
-c.colors.tabs.selected.even.fg = color.txt
-c.colors.tabs.selected.odd.fg = color.txt
+c.colors.tabs.selected.even.fg = color.bg
+c.colors.tabs.selected.odd.fg = color.bg
 c.colors.tabs.selected.even.bg = color.accent
 c.colors.tabs.selected.odd.bg = color.accent
 
@@ -217,28 +218,30 @@ c.colors.webpage.darkmode.threshold.text = 256 // 2
 # Fonts {{{
 
 class fonts:
+    DEF_MONO = "{{@@ font.size.medium @@}}px {{@@ font.mono @@}}"
     BIG_MONO = "{{@@ font.size.big @@}}px {{@@ font.mono @@}}"
     DEF_INTER = "{{@@ font.size.medium @@}}px {{@@ font.interface @@}}"
+    BIG_INTER = "{{@@ font.size.big @@}}px {{@@ font.interface @@}}"
 
 
-c.fonts.completion.entry = fonts.BIG_MONO
+c.fonts.completion.entry = fonts.BIG_INTER
 
-c.fonts.completion.category = fonts.BIG_MONO
-c.fonts.debug_console = fonts.BIG_MONO
-c.fonts.hints = fonts.BIG_MONO
-c.fonts.keyhint = fonts.BIG_MONO
+c.fonts.completion.category = fonts.BIG_INTER
+c.fonts.debug_console = fonts.BIG_INTER
+c.fonts.hints = 'bold ' + fonts.BIG_MONO
+c.fonts.keyhint = fonts.BIG_INTER
 
-c.fonts.messages.error = fonts.BIG_MONO
-c.fonts.messages.info = fonts.BIG_MONO
-c.fonts.messages.warning = fonts.BIG_MONO
+c.fonts.messages.error = fonts.BIG_INTER
+c.fonts.messages.info = fonts.BIG_INTER
+c.fonts.messages.warning = fonts.BIG_INTER
 
-c.fonts.statusbar = fonts.BIG_MONO
+c.fonts.statusbar = fonts.DEF_MONO
 
 c.fonts.tabs.selected = fonts.DEF_INTER
 c.fonts.tabs.unselected = fonts.DEF_INTER
 
-c.fonts.prompts = fonts.DEF_INTER
-c.fonts.downloads = fonts.DEF_INTER
+c.fonts.prompts = fonts.BIG_INTER
+c.fonts.downloads = fonts.BIG_INTER
 
 # }}}
 # Bindings {{{
