@@ -49,7 +49,7 @@ profiles:
       opacity: 0.95
       color:
         type: light
-        bg: '#EAEAEA'
+        bg: '#F5F5F5'
         bg_light: '#A0A0A0'
         bg_dark: '#999999'
         txt: '#303030'
