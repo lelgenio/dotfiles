@@ -4,7 +4,7 @@
 include "/home/lelgenio/.gtkrc-2.0.mine"
 gtk-theme-name="{{@@ gtk_theme @@}}"
 gtk-icon-theme-name="{{@@ icon_theme @@}}"
-gtk-font-name="{{@@ font.interface @@}} 12"
+gtk-font-name="{{@@ font.interface @@}} {{@@ font.size.medium @@}}"
 gtk-cursor-theme-name="{{@@ cursor_theme @@}}"
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_BOTH

@@ -16,6 +16,10 @@ variables:
   font:
     mono: FiraCode Nerd Font
     interface: Inter
+    size:
+      small: 12
+      medium: 14
+      big: 16
 
 profiles:
   dark: # {{{

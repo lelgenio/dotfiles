@@ -133,148 +133,113 @@ c.url.start_pages = "{{@@ search_engine @@}}"
 # }}}
 # Colors {{{
 
-c.colors.completion.category.fg = "{{@@ color.txt @@}}"
-c.colors.completion.category.bg = "{{@@ color.bg_dark @@}}"
-c.colors.completion.category.border.top = "{{@@ color.bg_dark @@}}"
-c.colors.completion.category.border.bottom = "{{@@ color.bg_dark @@}}"
 
-c.colors.completion.item.selected.bg = "{{@@ accent_color @@}}"
-c.colors.completion.item.selected.border.top = "{{@@ color.bg_dark @@}}"
-c.colors.completion.item.selected.border.bottom = "{{@@ color.bg_dark @@}}"
+class color:
+    accent = "{{@@ accent_color @@}}"
+    txt = "{{@@ color.txt @@}}"
+    bg = "{{@@ color.bg @@}}"
+    bg_dark = "{{@@ color.bg_dark @@}}"
+    bg_light = "{{@@ color.bg_light @@}}"
 
-c.colors.completion.fg = "{{@@ color.txt @@}}"
-c.colors.completion.even.bg = "{{@@ color.bg_light @@}}"
-c.colors.completion.odd.bg = "{{@@ color.bg @@}}"
 
-c.colors.statusbar.command.fg = "{{@@ color.txt @@}}"
+c.colors.completion.category.fg = color.txt
+c.colors.completion.category.bg = color.bg_light
+c.colors.completion.category.border.top = color.bg_dark
+c.colors.completion.category.border.bottom = color.bg_dark
 
-# Foreground color of the matched text in the selected completion item.
-c.colors.completion.item.selected.match.fg = "{{@@ color.txt @@}}"
+c.colors.completion.item.selected.fg = color.txt
+c.colors.completion.item.selected.bg = color.accent
+c.colors.completion.item.selected.border.top = color.bg_dark
+c.colors.completion.item.selected.border.bottom = color.bg_dark
 
-# Color of the scrollbar in the completion view.
-c.colors.completion.scrollbar.bg = "{{@@ color.bg_light @@}}"
+c.colors.completion.fg = color.txt
+c.colors.completion.even.bg = color.bg
+c.colors.completion.odd.bg = color.bg
+c.colors.completion.item.selected.match.fg = color.txt
+c.colors.completion.scrollbar.bg = color.bg_light
 
-# Background color for the download bar.
-c.colors.downloads.bar.bg = "{{@@ color.bg @@}}"
 
-# Color gradient start for download backgrounds.
+c.colors.downloads.bar.bg = color.bg
 c.colors.downloads.start.bg = "{{@@ color.normal.blue @@}}"
-
-# Color gradient stop for download backgrounds.
 c.colors.downloads.stop.bg = "{{@@ color.normal.green @@}}"
 
-# Font color for hints.
-c.colors.hints.fg = "{{@@ color.txt @@}}"
 
-# Background color for hints. Note that you can use a `rgba(...)` value
-# for transparency.
-c.colors.hints.bg = "{{@@ color.bg @@}}"
+c.colors.hints.fg = color.txt
+c.colors.hints.bg = color.bg
+c.colors.hints.match.fg = color.accent
 
-# Font color for the matched part of hints.
-c.colors.hints.match.fg = "{{@@ accent_color @@}}"
 
-# Highlight color for keys to complete the current keychain.
-c.colors.keyhint.suffix.fg = "{{@@ accent_color @@}}"
+c.colors.keyhint.suffix.fg = color.accent
+c.colors.keyhint.bg = "rgba({{@@ hex2rgb(color.bg) @@}}, {{@@ opacity @@}}%)"
 
-# Background color of the keyhint widget.
-c.colors.keyhint.bg = "rgba(30, 30, 30, 95%)"
 
-# Foreground color of the statusbar.
-c.colors.statusbar.normal.fg = "{{@@ color.txt @@}}"
-
-# Background color of the statusbar.
-c.colors.statusbar.normal.bg = "{{@@ color.bg @@}}"
-
-# Foreground color of the statusbar in insert mode.
+c.colors.statusbar.normal.fg = color.txt
+c.colors.statusbar.normal.bg = color.bg
+c.colors.statusbar.insert.bg = color.bg
+c.colors.statusbar.command.fg = color.txt
+c.colors.statusbar.command.bg = color.bg
+c.colors.statusbar.caret.selection.bg = color.accent
+c.colors.statusbar.url.success.https.fg = color.txt
 c.colors.statusbar.insert.fg = "{{@@ color.normal.green @@}}"
 
-# Background color of the statusbar in insert mode.
-c.colors.statusbar.insert.bg = "{{@@ color.bg @@}}"
 
-# Background color of the statusbar in command mode.
-c.colors.statusbar.command.bg = "{{@@ color.bg @@}}"
+c.colors.tabs.bar.bg = color.bg
+c.colors.tabs.even.fg = color.txt
+c.colors.tabs.odd.fg = color.txt
+c.colors.tabs.even.bg = color.bg
+c.colors.tabs.odd.bg = color.bg
 
-# Background color of the statusbar in caret mode with a selection.
-c.colors.statusbar.caret.selection.bg = "{{@@ accent_color @@}}"
+c.colors.tabs.selected.even.fg = color.txt
+c.colors.tabs.selected.odd.fg = color.txt
+c.colors.tabs.selected.even.bg = color.accent
+c.colors.tabs.selected.odd.bg = color.accent
 
-# Foreground color of the URL in the statusbar on successful load
-# (https).
-c.colors.statusbar.url.success.https.fg = "{{@@ color.txt @@}}"
-
-# Background color of the tab bar.
-c.colors.tabs.bar.bg = "{{@@ color.bg @@}}"
-
-# Foreground color of tabs.
-c.colors.tabs.even.fg = "{{@@ color.txt @@}}"
-c.colors.tabs.odd.fg = "{{@@ color.txt @@}}"
-# Background color of tabs.
-c.colors.tabs.even.bg = "{{@@ color.bg @@}}"
-c.colors.tabs.odd.bg = "{{@@ color.bg @@}}"
-
-# Foreground color of selected tabs.
-c.colors.tabs.selected.even.fg = "{{@@ color.txt @@}}"
-c.colors.tabs.selected.odd.fg = "{{@@ color.txt @@}}"
-# Background color of selected tabs.
-c.colors.tabs.selected.even.bg = "{{@@ accent_color @@}}"
-c.colors.tabs.selected.odd.bg = "{{@@ accent_color @@}}"
-
-# Background color of pinned selected odd tabs.
-c.colors.tabs.pinned.selected.odd.bg = "{{@@ color.bg_light @@}}"
-
-# Background color of pinned selected even tabs.
-c.colors.tabs.pinned.selected.even.bg = "{{@@ color.bg_light @@}}"
+c.colors.tabs.pinned.selected.odd.bg = color.accent
+c.colors.tabs.pinned.selected.even.bg = color.accent
 
 
-c.colors.contextmenu.menu.bg = '{{@@ color.bg @@}}'
-c.colors.contextmenu.menu.fg = '{{@@ color.txt @@}}'
-c.colors.contextmenu.selected.bg = '{{@@ accent_color @@}}'
-c.colors.contextmenu.disabled.fg = '{{@@ color.bg_light @@}}'
+c.colors.contextmenu.menu.bg = color.bg
+c.colors.contextmenu.menu.fg = color.txt
+c.colors.contextmenu.selected.bg = color.accent
+c.colors.contextmenu.disabled.fg = color.bg_light
+
 
 # {%@@ if color.type == "dark" @@%} #
-c.colors.webpage.bg = "{{@@ color.bg @@}}"
+c.colors.webpage.bg = color.bg
 c.colors.webpage.prefers_color_scheme_dark = True
 c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.threshold.background = 256 // 2
 c.colors.webpage.darkmode.threshold.text = 256 // 2
 # {%@@ endif @@%}
+
+
 # }}}
 # Fonts {{{
-# Font used in the completion widget.
-c.fonts.completion.entry = "16px {{@@ font.interface @@}}"
 
-# Font used in the completion categories.
-c.fonts.completion.category = "16px {{@@ font.mono @@}}"
+class fonts:
+    BIG_MONO = "{{@@ font.size.big @@}}px {{@@ font.mono @@}}"
+    DEF_INTER = "{{@@ font.size.medium @@}}px {{@@ font.interface @@}}"
 
-# Font used for the debugging console.
-c.fonts.debug_console = "16px {{@@ font.mono @@}}"
 
-# Font used for the downloadbar.
-c.fonts.downloads = "16px {{@@ font.mono @@}}"
+c.fonts.completion.entry = fonts.BIG_MONO
 
-# Font used for the hints.
-c.fonts.hints = "bold 16px {{@@ font.mono @@}}"
+c.fonts.completion.category = fonts.BIG_MONO
+c.fonts.debug_console = fonts.BIG_MONO
+c.fonts.hints = fonts.BIG_MONO
+c.fonts.keyhint = fonts.BIG_MONO
 
-# Font used in the keyhint widget.
-c.fonts.keyhint = "16px {{@@ font.mono @@}}"
+c.fonts.messages.error = fonts.BIG_MONO
+c.fonts.messages.info = fonts.BIG_MONO
+c.fonts.messages.warning = fonts.BIG_MONO
 
-# Font used for error messages.
-c.fonts.messages.error = "16px {{@@ font.mono @@}}"
+c.fonts.statusbar = fonts.BIG_MONO
 
-# Font used for info messages.
-c.fonts.messages.info = "16px {{@@ font.mono @@}}"
+c.fonts.tabs.selected = fonts.DEF_INTER
+c.fonts.tabs.unselected = fonts.DEF_INTER
 
-# Font used for warning messages.
-c.fonts.messages.warning = "16px {{@@ font.mono @@}}"
+c.fonts.prompts = fonts.DEF_INTER
+c.fonts.downloads = fonts.DEF_INTER
 
-# Font used for prompts.
-c.fonts.prompts = "16px {{@@ font.interface @@}}"
-
-# Font used in the statusbar.
-c.fonts.statusbar = "14px {{@@ font.mono @@}}"
-
-# Font used in the tab bar.
-c.fonts.tabs.selected = "14px {{@@ font.interface @@}}"
-c.fonts.tabs.unselected = "14px {{@@ font.interface @@}}"
 # }}}
 # Bindings {{{
 # Bindings for normal mode
