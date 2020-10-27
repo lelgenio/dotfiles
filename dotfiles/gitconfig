@@ -2,5 +2,8 @@
 	name = {{@@ username @@}}
 	email = {{@@ username @@}}@{{@@ mail @@}}
 
+[init]
+    defaultBranch = main
+
 [pull]
 	rebase = false
