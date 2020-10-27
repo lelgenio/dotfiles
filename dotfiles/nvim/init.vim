@@ -344,8 +344,9 @@ call plug#end()
     xmap     ga <Plug>(EasyAlign)
     nmap     ga <Plug>(EasyAlign)
 
-    nmap     ]d :GitGutterNextHunk<CR>
-    nmap     [d :GitGutterPrevHunk<CR>
+    nmap <C-w>g :vertical Gdiffsplit<CR>
+    nmap ]d     :GitGutterNextHunk<CR>
+    nmap [d     :GitGutterPrevHunk<CR>
 
     " Custom surrounds, should work fine on all layouts
     "              d
