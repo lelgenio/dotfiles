@@ -3,12 +3,10 @@ profile sedetary {
     output HDMI-A-1 enable
 
     exec xrdb .Xresources
-    exec pgrep dotdrop || pacmd set-card-profile 0 output:hdmi-stereo+input:analog-stereo
 }
 
 profile nomad {
     output eDP-1    enable
 
     exec xrdb .Xresources
-    exec pgrep dotdrop || pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo
 }
