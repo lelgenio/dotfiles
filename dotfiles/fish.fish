@@ -251,16 +251,24 @@ function fish_prompt
     _fish_prompt_accent $USER
     _fish_prompt_normal " in "
     _fish_prompt_accent (prompt_pwd)
-    if fish_vcs_prompt > /dev/null
+    if git status -s &> /dev/null
         _fish_prompt_normal " on "
+        set _git_branch (git status | perl -ne 'print $1 if /On branch (.*)$/')
 
-        _fish_prompt_git_status '??' '?' '{{@@ color.txt             @@}}'
         _fish_prompt_git_status '.M' '~' '{{@@ color.normal.yellow   @@}}'
         _fish_prompt_git_status '.D' '-' '{{@@ color.normal.red      @@}}'
+
+        _fish_prompt_git_status '??' '?' '{{@@ color.txt             @@}}'
+        _fish_prompt_accent "$_git_branch"
+        for remote in (git remote)
+            if not git diff --quiet "$remote"/"$_git_branch"
+                _fish_prompt_color '{{@@ color.txt @@}}' '↑'
+            end
+        end
+
         _fish_prompt_git_status 'A.' '+' '{{@@ color.normal.green    @@}}'
         _fish_prompt_git_status 'M.' '~' '{{@@ color.normal.green    @@}}'
-
-        _fish_prompt_accent (fish_vcs_prompt | string replace -ra ' \(|\)' '')
+        _fish_prompt_git_status 'D.' '-' '{{@@ color.normal.red      @@}}'
     end
 
     echo
