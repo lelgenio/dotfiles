@@ -68,6 +68,9 @@ config.set('content.register_protocol_handler', False,
 
 c.content.mute = True
 c.content.autoplay = False
+
+c.editor.command = ["terminal", "nvim", "-f", "{file}", "+{line}"]
+
 # }}}
 # UI {{{
 # Shrink the completion to be smaller than the configured size if there
@@ -316,14 +319,6 @@ config.bind("{{@@ key.up    @@}}", "move-to-prev-line", mode="caret")
 config.bind("{{@@ key.down  @@}}", "move-to-next-line", mode="caret")
 config.bind("{{@@ key.right @@}}", "move-to-next-char", mode="caret")
 
-# Bindings for insert mode
-config.bind(
-    "<Ctrl+i>",
-    "spawn --userscript qute-keepass -p ~/Documentos/senhas/Senhas.kdbx",
-    mode="insert",
-)
-
-c.editor.command = ["terminal", "nvim", "-f", "{file}", "+{line}"]
 # }}}
 
 # vim: fdm=marker
