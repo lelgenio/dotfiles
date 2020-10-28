@@ -258,6 +258,9 @@ dotfiles: # {{{
   git:
     src: gitconfig
     dst: ~/.config/git/config
+  telegram-theme:
+    src: ./telegram.palette
+    dst: ~/.local/share/TelegramDesktop/tdata/editing-theme.tdesktop-palette
 # }}}
 actions: #{{{
   notify: notify-send "Updating dotfiles" "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}"
