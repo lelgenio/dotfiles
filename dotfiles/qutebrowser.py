@@ -181,6 +181,8 @@ c.colors.statusbar.command.fg = color.txt
 c.colors.statusbar.command.bg = color.bg
 c.colors.statusbar.caret.selection.bg = color.accent
 c.colors.statusbar.url.success.https.fg = color.txt
+c.colors.statusbar.url.success.http.fg = "{{@@ color.normal.yellow @@}}"
+c.colors.statusbar.url.hover.fg = "{{@@ color.normal.cyan @@}}"
 c.colors.statusbar.insert.fg = "{{@@ color.normal.green @@}}"
 
 
