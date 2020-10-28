@@ -141,8 +141,8 @@ dynvariables:
 # }}}
 dotfiles: # {{{
   nvim:
-    src: nvim
-    dst: ~/.config/nvim
+    src: nvim.vim
+    dst: ~/.config/nvim/init.vim
     actions:
     - vimplug
   sway:
