@@ -20,7 +20,7 @@
 
 call plug#begin('~/.config/nvim/plugged')
 
-    Plug 'chrisbra/Colorizer'
+    Plug 'norcalli/nvim-colorizer.lua'
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
     let g:gitgutter_map_keys = 0
@@ -166,6 +166,7 @@ call plug#end()
     endif
     if (has('termguicolors'))
      set termguicolors
+     lua require'colorizer'.setup()
     endif
 
     " {%@@ if color.type == "light" @@%} "
@@ -335,6 +336,10 @@ call plug#end()
     "I deserve the death sentence
     nmap <C-s>      :wa<CR>
     nmap <C-Q>      :wqa<CR>
+
+    " Color yay! 💕 😍 💝
+    autocmd BufRead * lua require'colorizer'.attach_to_buffer(0)
+    nmap <silent> gC :ColorizerToggle<CR>
 
     " Easy comment toggle
     nmap     <silent> gc        :Commentary<CR>
