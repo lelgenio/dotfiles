@@ -355,9 +355,9 @@ call plug#end()
 
     " Custom surrounds, should work fine on all layouts
     "              d
-    autocmd VimEnter * let b:surround_100 = "{{@@ '{{@@ \\r @@}}' @@}}"
+    autocmd BufRead * let b:surround_100 = "{{@@ '{{@@ \\r @@}}' @@}}"
     "              s
-    autocmd VimEnter * let b:surround_115 = "{{@@ '#{%@@ \\r @@%}#\\n#{%@@  @@%}#' @@}}"
+    autocmd BufRead * let b:surround_115 = "{{@@ '#{%@@ \\r @@%}#\\n#{%@@  @@%}#' @@}}"
 
 "}}}
 " Lanugage Server{{{
