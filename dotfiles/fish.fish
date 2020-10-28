@@ -262,8 +262,12 @@ function fish_prompt
         _fish_prompt_git_status '??' '?' '{{@@ color.txt             @@}}'
         _fish_prompt_accent "$_git_branch"
         for remote in (git remote)
+            if not git branch --remotes |
+                    grep "$remote"/"$_git_branch" &> /dev/null
+                continue
+            end
             if not git diff --quiet\
-                HEAD "$remote"/"$_git_branch"
+                    HEAD "$remote"/"$_git_branch"
                 _fish_prompt_color '{{@@ color.txt @@}}' '↑'
             end
         end
