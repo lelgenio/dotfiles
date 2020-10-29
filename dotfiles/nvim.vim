@@ -277,6 +277,10 @@ call plug#end()
         noremap t e
         noremap T E
 
+        " Join line without space
+        nnoremap j gJ
+
+        " Beginning of line
         noremap , ^
 
         imap {{@@ key.insertQuit @@}} <ESC>
