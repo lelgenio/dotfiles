@@ -113,7 +113,7 @@
         "exec": "checkmail",
         "on-click": "terminal neomutt; pkill -SIGRTMIN+4 waybar",
         "signal": 4,
-        "interval": 30
+        "interval": 10
     },
     "custom/updates": {
         "tooltip":false,
