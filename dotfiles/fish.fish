@@ -184,7 +184,7 @@ function esway
     set -x _JAVA_AWT_WM_NONREPARENTING 1
 
     set -x GTK_CSD 0
-    test -f &&
+    test -f '/usr/lib/libgtk3-nocsd.so.0' &&
         set -x LD_PRELOAD '/usr/lib/libgtk3-nocsd.so.0'
 
     # set -x QT_SCALE_FACTOR 1.0001
