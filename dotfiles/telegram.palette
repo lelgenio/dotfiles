@@ -63,7 +63,7 @@ smallCloseIconFg: #c7c7c7 ;
 smallCloseIconFgOver: #a3a3a3 ;
 radialFg: windowFgActive ;
 radialBg: {{@@ accent_color @@}} ;
-placeholderFg: {{@@ color.bg_light @@}} ;
+placeholderFg: {{@@ color.txt @@}} ;
 placeholderFgActive: {{@@ color.bg_light @@}} ;
 inputBorderFg: windowFg ;
 filterInputBorderFg: {{@@ accent_color @@}} ;
