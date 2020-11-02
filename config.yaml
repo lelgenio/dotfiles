@@ -221,7 +221,7 @@ dotfiles: # {{{
     src: neomutt/
     dst: ~/.config/neomutt/
     actions:
-    - cpmbsync
+    - lnMail
   crontab:
     src: crontab
     dst: ~/.local/share/crontab
@@ -281,8 +281,9 @@ actions: #{{{
     crontab ~/.local/share/crontab
   vdirsyncer: |
     yes | vdirsyncer discover & disown
-  cpmbsync: |
+  lnMail: |
     ln -fs ~/.config/neomutt/mbsyncrc ~/.mbsyncrc
+    ln -fs ~/.config/neomutt/urlview ~/.urlview
   sponsorblock: >
     test -d ~/.config/mpv/scripts/sponsorblock_shared ||
     git clone
