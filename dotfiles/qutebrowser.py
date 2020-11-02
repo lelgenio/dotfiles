@@ -248,7 +248,7 @@ c.fonts.downloads = fonts.BIG_INTER
 # }}}
 # Bindings {{{
 # Bindings for normal mode
-config.bind(",d", "spawn --verbose youtube-dl {url}")
+config.bind(",d", "spawn --verbose youtube-dl -fbest[ext=mp4] {url}")
 config.bind(",m", "spawn --userscript view_in_mpv")
 config.bind(",r", "spawn --userscript readability")
 config.bind(";e", "hint links spawn deemix '{hint-url}'")
