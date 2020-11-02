@@ -12,13 +12,9 @@ FILLED="■"
 EMPTY="□"
 STRIPPED="▨"
 
-is_muted(){
-    env LC_ALL=C pacmd list-sinks | grep 'muted: yes' 1> /dev/null
-}
-
 get_bar(){
 
-    is_muted &&
+    is_muted_$TARGET &&
         FILLED=$STRIPPED
 
     round $1 | awk '{
@@ -35,24 +31,18 @@ get_bar(){
 
 }
 
-get_vol(){
-
-    env LC_ALL=C pactl list sinks |
-        awk '/^\tVolume/ {
-                gsub(/%/,"");
-                printf $5;
-            }'
-}
 
 notify(){
-    volume=$(get_vol)
+    volume=$(get_vol_$TARGET)
     bar=$(get_bar $volume)
 
-    if is_muted ; then
+    if is_muted_$TARGET ; then
         s="Muted"
     else
         s="Volume"
     fi
+
+    s=$(echo "${TARGET} ${s}" | sed 's/^\(.\)/\U\1/')
 
     notify-send "${s}: ${volume}%" "$bar" --app-name=volumesh
 
@@ -68,46 +58,101 @@ min(){
     printf '%i\n' ${@} | sort -n | head -n1
 }
 
-change_vol(){
+# Pulse{{{
+get_vol_pulse(){
+    env LC_ALL=C pactl list sinks |
+        awk '/^\tVolume/ {
+                gsub(/%/,"");
+                printf $5;
+            }'
+}
 
+is_muted_pulse(){
+    env LC_ALL=C pacmd list-sinks | grep 'muted: yes' 1> /dev/null
+}
+
+change_vol_pulse(){
     pactl set-sink-volume @DEFAULT_SINK@ "${1}$(min 120 $2)%"
-
-    newvol=$(min $MAX_VOL $(round $(get_vol)))
-
+    newvol=$(min $MAX_VOL $(round $(get_vol_$TARGET)))
     pactl set-sink-volume @DEFAULT_SINK@ "${newvol}%"
-
 }
 
-toggle_mute(){
-
+toggle_mute_pulse(){
     pactl set-sink-mute @DEFAULT_SINK@ toggle
+}
+#}}}
+# Mpd {{{
 
+get_vol_mpd(){
+    env LC_ALL=C mpc status |
+        awk '/^volume/ {
+                gsub(/%/,"");
+                printf $2;
+            }'
 }
 
+is_muted_mpd(){
+    env LC_ALL=C mpc status | grep '\[paused\]' 1> /dev/null
+}
+change_vol_mpd(){
+    mpc vol "${1}${2}"
+    newvol=$(min $MAX_VOL $(round $(get_vol_$TARGET)))
+    mpc vol "${newvol}"
+}
+
+toggle_mute_mpd(){
+    mpc toggle
+}
+#}}}
+usage(){
+    local CNAME=`basename $0`
+    echo "${CNAME} [-d][-di <amount>]"
+    echo "${CNAME} [-d][-t]"
+    echo ""
+    echo "Options:"
+    echo "  -m --mpd          Target mpd instead of PulseAudio"
+    echo "  -i --increase     <amount> of volume to increase"
+    echo "  -d --decrease     <amount> of volume to decrease"
+    echo "  -t --toggle       Mute/Unmute target"
+    echo "  -h --help         Show This help message"
+
+    exit "$1"
+}
+TARGET=pulse
+
+# test $# = 0 &&
+    # usage 1
 
 while [ $# -gt 0 ]
 do
     case $1 in
+        -m | --mpd)
+            TARGET=mpd
+            shift
+            ;;
         -i | --increase)
             shift
-            change_vol + $1
+            change_vol_$TARGET + $1
             shift
             ;;
         -d | --decrease)
             shift
-            change_vol - $1
+            change_vol_$TARGET - $1
             shift
             ;;
         -t | --toggle)
-            toggle_mute
+            toggle_mute_$TARGET
             shift
             ;;
+        -h | --help)
+            usage 0
+            ;;
         *)
-            echo outro = $1
-            shift
+            usage 1
             ;;
     esac
 done
 
 notify
 
+# vim: fdm=marker
