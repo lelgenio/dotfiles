@@ -22,6 +22,7 @@ set header_cache = ~/.cache/mutt/
 
 # set Mailboxes
 set spoolfile = "+INBOX"
+set record = "+Sent"
 set postponed = "+Drafts"
 set trash = "+Trash"
 mailboxes \
@@ -35,9 +36,7 @@ mailboxes \
     "=Sent" \
     "=Drafts" \
     "=Trash" \
-    "=Junk"
 
-set record = "+Sent"
 set use_from = yes
 set smtp_url = "smtps://${my_user}:${my_pass}@${my_host}"
 set ssl_force_tls = yes
