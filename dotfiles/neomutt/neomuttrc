@@ -1,9 +1,9 @@
 # {{@@ header() @@}}
-#                                   _   _
-#  _ __   ___  ___  _ __ ___  _   _| |_| |_
-# | '_ \ / _ \/ _ \| '_ ` _ \| | | | __| __|
-# | | | |  __/ (_) | | | | | | |_| | |_| |_
-# |_| |_|\___|\___/|_| |_| |_|\__,_|\__|\__|
+#  _   _                            _   _
+# | \ | | ___  ___  _ __ ___  _   _| |_| |_
+# |  \| |/ _ \/ _ \| '_ ` _ \| | | | __| __|
+# | |\  |  __/ (_) | | | | | | |_| | |_| |_
+# |_| \_|\___|\___/|_| |_| |_|\__,_|\__|\__|
 
 
 set my_user='{{@@ username @@}}'
@@ -37,6 +37,8 @@ mailboxes \
     "=Drafts" \
     "=Trash" \
 
+set help = false
+
 set use_from = yes
 set smtp_url = "smtps://${my_user}:${my_pass}@${my_host}"
 set ssl_force_tls = yes
@@ -61,8 +63,8 @@ set sort = 'reverse-date'
 #set mail_check=60 # to avoid lags using IMAP with some email providers (yahoo for example)
 
 set display_filter  = 'sed -e "s/&nbsp;*/\n/g" '
-set mailcap_path 	= ~/.config/neomutt/mailcap
-auto_view text/html		# automatically show html (mailcap uses w3m)
+set mailcap_path    = ~/.config/neomutt/mailcap
+auto_view text/html		# automatically show html
 auto_view application/pgp-encrypted
 alternative_order text/plain text/enriched text/html
 
@@ -239,6 +241,7 @@ mono body bold "^gpg: BAD signature from.*"
 color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
 
 # }}}
+
 # color	normal		        white			default
 # color	hdrdefault	        blue			default
 # color	quoted		        blue			white
@@ -248,21 +251,31 @@ color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-
 # color	message		        brightred		default
 # color	error		        brightwhite		brightred
 color	indicator	        brightwhite		red
-# prompt
+
+# Prompt
 color	status		        default		    default
 # color	tree		        black			white
 # color	markers		        red				white
 # color	search		        white			black
 # color	tilde		        brightmagenta	default
 color	index		        blue			white "~F"
-# new messages
-color	index		        brightgreen		default "~N|~O"
-color   index_author        brightred       default "~N"
-color   index_subject       brightcyan      default "~N"
-#sidebar
-color   sidebar_new         green           default
-color   sidebar_highlight   default         green
-color   sidebar_indicator   default         red
+
+# Messages
+color index         green   default '.*'
+color index_number  black   default
+color index_author  red     default '.*'
+color index_subject default default '.*'
+
+# New messages
+color index         brightgreen default "~N|~O"
+color index_author  brightred   default "~N"
+color index_subject brightcyan  default "~N"
+
+# Sidebar
+color sidebar_new       green   default
+color sidebar_highlight default green
+color sidebar_indicator default red
+color sidebar_divider   black   default
 
 # }}}
 # vim: filetype=neomuttrc:foldmethod=marker
