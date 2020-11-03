@@ -1,12 +1,12 @@
-#!/bin/fish
+#!/bin/sh
 
 test -n "$SWAYSOCK" && swaymsg fullscreen off > /dev/null
 
 # {%@@ if launcher == "wofi" @@%} #
-command -qs wofi &&
+which wofi &> /dev/null &&
     exec wofi -d $argv
 # {%@@ else @@%} #
-command -qs bmenu &&
+which bemenu &> /dev/null &&
     exec bmenu $argv
 # {%@@ endif @@%} #
 

@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-set -x 
+#!/bin/sh
+set -x
 if ! lsmod | grep v4l2loopback > /dev/null; then
 	echo "Adding v42loopback module to kernel"
 	sudo modprobe v4l2loopback

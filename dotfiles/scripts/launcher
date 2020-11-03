@@ -1,9 +1,9 @@
-#!/bin/fish
+#!/bin/sh
 
 test -n "$SWAYSOCK" && swaymsg fullscreen off > /dev/null
 
 # {%@@ if launcher == "wofi" @@%} #
-    command -qs wofi &&
+which wofi &> /dev/null &&
     exec wofi \
         --show drun \
         --allow-images \
@@ -11,7 +11,7 @@ test -n "$SWAYSOCK" && swaymsg fullscreen off > /dev/null
         --prompt 'Iniciar: ' \
 
 # {%@@ else @@%} #
-    command -qs bmenu &&
+which bmenu &> /dev/null &&
     exec bmenu run
 # {%@@ endif @@%} #
 

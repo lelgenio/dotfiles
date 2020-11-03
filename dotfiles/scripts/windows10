@@ -1,9 +1,10 @@
-#!/usr/bin/fish
+#!/bin/sh
 
-if not command -v qemu-system-x86_64 > /dev/null
+if ! which qemu-system-x86_64 &> /dev/null
+then
     echo qemu not installed
     exit 1
-end
+fi
 
 # -cdrom ~/Downloads/win10.iso \
 # -boot order=d \
@@ -15,9 +16,10 @@ qemu-system-x86_64                                              \
     -enable-kvm                                                 \
     -m 2G                                                       \
     -cpu host                                                   \
-    -smp (nproc)                                                \
+    -smp `nproc`                                                \
     -display sdl,gl=on                                          \
-    -audiodev pa,id=snd0                                    \
-    -device ich9-intel-hda \
-    -device hda-output,audiodev=snd0\
-    -drive file="$HOME/.local/share/windows10.img",format=raw
+    -audiodev pa,id=snd0                                        \
+    -device ich9-intel-hda                                      \
+    -device hda-output,audiodev=snd0                            \
+    -drive file="$HOME/.local/share/windows10.img",format=raw   \
+

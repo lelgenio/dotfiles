@@ -1,6 +1,6 @@
-#!/bin/env sh
+#!/bin/sh
 
-if which xdg-user-dir 1>&2 2> /dev/null
+if which xdg-user-dir &> /dev/null
 then
     DESTFOLDER=$(xdg-user-dir PICTURES)
 else

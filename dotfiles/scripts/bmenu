@@ -1,16 +1,18 @@
-#!/bin/fish
+#!/bin/sh
 # wrapper around bemenu
 # bmenu *       - use as dmenu, -p for custom prompt (man bemenu)
 # bmenu run     - select from .desktop files and run it
 # bmenu start   - internal option
-if test "$argv[1]" != "start" || test "$argv[1]" = "run"
+if test "$1" != "start" || test "$1" = "run"
+then
     test -n "$SWAYSOCK" && swaymsg fullscreen off > /dev/null
-end
+fi
 
-if test "$argv[1]" = "run"
-    test -n "$2" && set t "$2" || set t "terminal"
+if test "$1" = "run"
+then
+    test -n "$2" && t="$2" || t="terminal"
     exec j4-dmenu-desktop --dmenu="bmenu start -p Iniciar:" --term "$t"
-end
+fi
 
 # t  title
 # f  filter
@@ -19,35 +21,35 @@ end
 # s  selected
 # sc scrollbar
 
-set -l fn "{{@@ font.mono @@}} 12"
+ fn="{{@@ font.mono @@}} 12"
 
-set -l tb "{{@@ color.bg       @@}}"
-set -l tf "{{@@ accent_color @@}}"
+ tb="{{@@ color.bg       @@}}"
+ tf="{{@@ accent_color @@}}"
 
-set -l fb "{{@@ color.bg       @@}}"
-set -l ff "{{@@ color.txt    @@}}"
+ fb="{{@@ color.bg       @@}}"
+ ff="{{@@ color.txt    @@}}"
 
-set -l nb "{{@@ color.bg       @@}}"
-set -l nf "{{@@ color.txt    @@}}"
+ nb="{{@@ color.bg       @@}}"
+ nf="{{@@ color.txt    @@}}"
 
-set -l hb "{{@@ color.bg_light @@}}"
-set -l hf "{{@@ accent_color @@}}"
+ hb="{{@@ color.bg_light @@}}"
+ hf="{{@@ accent_color @@}}"
 
 #{%@@ if False @@%}#
 # Hacks to allow runnning even if not templated
-set -l fn "Fira Code 12"
+ fn="Fira Code 12"
 
-set -l tf "#D9534F"
-set -l tb "#202020"
+ tf="#D9534F"
+ tb="#202020"
 
-set -l ff "#ffffff"
-set -l fb "#202020"
+ ff="#ffffff"
+ fb="#202020"
 
-set -l nf "#ffffff"
-set -l nb "#202020"
+ nf="#ffffff"
+ nb="#202020"
 
-set -l hf "#D9534F"
-set -l hb "#404040"
+ hf="#D9534F"
+ hb="#404040"
 #{%@@ endif @@%}#
 
 bemenu \
@@ -61,4 +63,4 @@ bemenu \
     --fb "$fb" --ff "$ff" \
     --nb "$nb" --nf "$nf" \
     --hb "$hb" --hf "$hf" \
-    $argv
+    $@
