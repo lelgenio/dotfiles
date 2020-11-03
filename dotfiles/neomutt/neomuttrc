@@ -10,7 +10,7 @@ set my_user='{{@@ username @@}}'
 set my_host='{{@@ mail @@}}'
 set my_pass=`_get-pass "$my_host"`
 
-# Main settings{{{
+# Mailbox {{{
 
 set realname = "$my_user"
 set from = "${my_user}@${my_host}"
@@ -25,6 +25,7 @@ set spoolfile = "+INBOX"
 set record = "+Sent"
 set postponed = "+Drafts"
 set trash = "+Trash"
+
 mailboxes \
     "=INBOX" \
     "=INBOX.Faculdade"\
@@ -37,42 +38,21 @@ mailboxes \
     "=Drafts" \
     "=Trash" \
 
-set help = false
 
 set use_from = yes
 set smtp_url = "smtps://${my_user}:${my_pass}@${my_host}"
 set ssl_force_tls = yes
-#
-set date_format="%y/%m/%d %I:%M%p"
-set index_format="%2C %zs %?X?A& ? %D %-15.15F %s (%-4.4c)"
-set sort = 'reverse-date'
-#set smtp_authenticators = 'gssapi:login'
-#set query_command = "abook --mutt-query '%s'"
-#set rfc2047_parameters = yes
-#set sleep_time = 0		# Pause 0 seconds for informational messages
-#set markers = no		# Disables the `+` displayed at line wraps
-#set mark_old = no		# Unread mail stay unread until read
-#set mime_forward = yes		# attachments are forwarded with mail
-#set wait_key = no		# mutt won't ask "press key to continue"
-#set fast_reply			# skip to compose when replying
-#set fcc_attach			# save attachments with the body
-#set forward_format = "Fwd: %s"	# format of subject when forwarding
-#set forward_quote		# include message in forwards
-#set reverse_name		# reply as whomever it was to
-#set include			# include message in replies
-#set mail_check=60 # to avoid lags using IMAP with some email providers (yahoo for example)
+# }}}
+# General {{{
 
-set display_filter  = 'sed -e "s/&nbsp;*/\n/g" '
-set mailcap_path    = ~/.config/neomutt/mailcap
-auto_view text/html		# automatically show html
+set sort = 'reverse-date'
+set mark_old = no  # Unread mail stay unread until read
+set mailcap_path = ~/.config/neomutt/mailcap
+auto_view text/html  # automatically show html
 auto_view application/pgp-encrypted
 alternative_order text/plain text/enriched text/html
 
 set query_command= "khard email --parsable %s"
-
-bind index,pager i noop
-bind index,pager g noop
-bind index \Cf noop
 
 # }}}
 # General rebindings{{{
@@ -90,6 +70,7 @@ bind index <up>    previous-entry
 bind index <right> display-message
 
 
+bind index g noop           # needed to allow gg
 bind index G last-entry
 bind index gg first-entry
 
@@ -119,6 +100,8 @@ bind pager <down>   next-line
 bind pager <up>     previous-line
 bind pager <right>  view-attachments
 
+bind index,pager,browser '{{@@ key.up  .upper() @@}}' half-up
+bind index,pager,browser '{{@@ key.down.upper() @@}}' half-down
 
 bind browser    "{{@@ key.left  @@}}"  goto-parent
 macro browser   "{{@@ key.left  @@}}" '<change-dir><kill-line>..<enter>' "Go to parent folder"
@@ -126,8 +109,6 @@ bind index,pager H view-raw-message
 bind browser l select-entry
 bind pager,browser gg top-page
 bind pager,browser G bottom-page
-bind index,pager,browser d half-down
-bind index,pager,browser u half-up
 bind index,pager S sync-mailbox
 bind index,pager R group-reply
 bind index \031 previous-undeleted	# Mouse wheel
@@ -159,112 +140,32 @@ set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
 bind index,pager "\C{{@@ key.down  @@}}" sidebar-next
 bind index,pager "\C{{@@ key.up    @@}}" sidebar-prev
 bind index,pager "\C{{@@ key.right @@}}" sidebar-open
-
-# bind index,pager \Cp sidebar-prev-new
-# bind index,pager \Cn sidebar-next-new
-bind index,pager B sidebar-toggle-visible
+bind index,pager "\C{{@@ key.left  @@}}" sidebar-toggle-visible
 
 # }}}
+# Appearence{{{
+
+set help = false        # Don't show the menu bar at the top
+
+set markers = no		# Disables the `+` displayed at line wraps
+
+set date_format="%m/%d %H:%M"
+set index_format="%2C %zs %?X?A& ? %D %-15.15F %s"
+
+set display_filter  = 'sed -e "s/&nbsp;*/\n/g"'
+
+#}}}
 # colors{{{
-# {{{
 
-# # Default index colors:
-color index yellow default '.*'
-color index_author red default '.*'
-color index_number blue default
-color index_subject cyan default '.*'
-#
-# # New mail is boldened:
-color index brightyellow black "~N"
-color index_author brightred black "~N"
-color index_subject brightcyan black "~N"
-#
-# # Tagged mail is highlighted:
-# color index brightyellow blue "~T"
-# color index_author brightred blue "~T"
-# color index_subject brightcyan blue "~T"
-#
-# # Other colors and aesthetic settings:
-mono bold bold
-mono underline underline
-mono indicator reverse
-mono error bold
-color normal default default
-color indicator brightblack white
-color sidebar_highlight red default
-# color sidebar_divider black black
-color sidebar_flagged red black
-color sidebar_new green black
-color normal brightyellow default
-color error red default
-color tilde black default
-color message cyan default
-color markers red white
-color attachment white default
-color search brightmagenta default
-color status brightyellow black
-color hdrdefault brightgreen default
-color quoted green default
-color quoted1 blue default
-color quoted2 cyan default
-color quoted3 yellow default
-color quoted4 red default
-color quoted5 brightred default
-color signature brightgreen default
-color bold black default
-color underline black default
-color normal default default
-#
-# # Regex highlighting:
-color header blue default ".*"
-color header brightmagenta default "^(From)"
-color header brightcyan default "^(Subject)"
-color header brightwhite default "^(CC|BCC)"
-color body brightred default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
-color body brightblue default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
-color body green default "\`[^\`]*\`" # Green text between ` and `
-color body brightblue default "^# \.*" # Headings as bold blue
-color body brightcyan default "^## \.*" # Subheadings as bold cyan
-color body brightgreen default "^### \.*" # Subsubheadings as bold green
-color body yellow default "^(\t| )*(-|\\*) \.*" # List items as yellow
-color body brightcyan default "[;:][-o][)/(|]" # emoticons
-color body brightcyan default "[;:][)(|]" # emoticons
-color body brightcyan default "[ ][*][^*]*[*][ ]?" # more emoticon?
-color body brightcyan default "[ ]?[*][^*]*[*][ ]" # more emoticon?
-color body red default "(BAD signature)"
-color body cyan default "(Good signature)"
-color body brightblack default "^gpg: Good signature .*"
-color body brightyellow default "^gpg: "
-color body brightyellow red "^gpg: BAD signature from.*"
-mono body bold "^gpg: Good signature"
-mono body bold "^gpg: BAD signature from.*"
-color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
-
-# }}}
-
-# color	normal		        white			default
-# color	hdrdefault	        blue			default
-# color	quoted		        blue			white
-# color	signature           red         	white
-# color	attachment	        red				white
-# color	prompt		        brightmagenta	default
-# color	message		        brightred		default
-# color	error		        brightwhite		brightred
-color	indicator	        brightwhite		red
-
-# Prompt
-color	status		        default		    default
-# color	tree		        black			white
-# color	markers		        red				white
-# color	search		        white			black
-# color	tilde		        brightmagenta	default
-color	index		        blue			white "~F"
+# General
+color status    black       default
+color indicator brightwhite red
 
 # Messages
-color index         green   default '.*'
+color index         default default '.*'
 color index_number  black   default
 color index_author  red     default '.*'
-color index_subject default default '.*'
+color index_subject green   default '.*'
 
 # New messages
 color index         brightgreen default "~N|~O"
@@ -276,6 +177,21 @@ color sidebar_new       green   default
 color sidebar_highlight default green
 color sidebar_indicator default red
 color sidebar_divider   black   default
+
+# Header - information for any open email
+color header default     default "^(Date)"
+color header red         default "^(From)"
+color header green       default "^(Subject)"
+color header brightwhite default "^(CC|BCC)"
+
+# Content - Body of open email
+color body       brightred  default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
+color body       brightblue default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
+color attachment default    black
+
+# Comically large Regex{{{
+color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+# }}}
 
 # }}}
 # vim: filetype=neomuttrc:foldmethod=marker
