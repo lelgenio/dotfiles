@@ -161,78 +161,78 @@ call plug#end()
 "}}}
 " Gay colors{{{
 
-    if (has('nvim'))
-      let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-    endif
-    if (has('termguicolors'))
-     set termguicolors
-     lua require'colorizer'.setup()
-    endif
+if (has('nvim'))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+endif
+if (has('termguicolors'))
+ set termguicolors
+ lua require'colorizer'.setup()
+endif
 
-    " {%@@ if color.type == "light" @@%} "
-        colorscheme github
-        set       background=light
-        let g:airline_theme="sol"
-    " {%@@ elif color.type == "dark" @@%} "
-        colorscheme minimalist
-        set       background=dark
-    " {%@@ endif @@%}
+" {%@@ if color.type == "light" @@%} "
+    colorscheme github
+    set       background=light
+    let g:airline_theme="sol"
+" {%@@ elif color.type == "dark" @@%} "
+    colorscheme minimalist
+    set       background=dark
+" {%@@ endif @@%}
 
-    "{%@@ set c = color     @@%}"
-    "{%@@ set n = c.normal  @@%}"
+"{%@@ set c = color     @@%}"
+"{%@@ set n = c.normal  @@%}"
 
-    "background color is transparent
-    highlight Normal          guibg=None
-    highlight EndOfBuffer     guibg=None guifg={{@@ c.bg_light @@}}
-    highlight SpecialKey      guibg=None guifg={{@@ accent_color   @@}}
-    highlight Folded          guibg=None
+"background color is transparent
+hi Normal          guibg=None
+hi EndOfBuffer     guibg=None guifg={{@@ c.bg_light @@}}
+hi SpecialKey      guibg=None guifg={{@@ accent_color   @@}}
+hi Folded          guibg=None
 
-    highlight tabLine         None
-    highlight tabLineFill     None
+hi tabLine         None
+hi tabLineFill     None
 
-    highlight SignColumn      guibg=None
-    highlight GitGutterAdd    guibg=None guifg={{@@ n.green @@}}
-    highlight GitGutterChange guibg=None guifg={{@@ n.yellow @@}}
-    highlight GitGutterDelete guibg=None guifg={{@@ n.red @@}}
+hi SignColumn      guibg=None
+hi GitGutterAdd    guibg=None guifg={{@@ n.green @@}}
+hi GitGutterChange guibg=None guifg={{@@ n.yellow @@}}
+hi GitGutterDelete guibg=None guifg={{@@ n.red @@}}
 
-    "Line numers
-    highlight LineNr  term=bold        ctermfg=9     guifg={{@@ c.bg_light @@}} guibg=None
+"Line numers
+hi LineNr guifg={{@@ c.bg_light @@}} guibg=None
 
-    " Comments
-    highlight Comment guifg={{@@ c.bg_light @@}} guibg=None
+" Comments
+hi Comment guifg={{@@ c.bg_light @@}} guibg=None
 
-    "Make whitespace dark
-    highlight NonText guifg={{@@ c.nontxt @@}} guibg=None
-    " highlight SpecialKey  ctermfg=black guifg=#252525 guibg=None
+"Make whitespace dark
+hi NonText guifg={{@@ c.nontxt @@}} guibg=None
+" highlight SpecialKey  ctermfg=black guifg=#252525 guibg=None
 
-    "Current line
-    " {%@@ if c.type != "light" @@%} "
-    set       cursorline
-    highlight CursorLine    term=bold  cterm=bold   gui=Bold      guibg={{@@ c.bg_dark @@}}
-    highlight CursorLineNr  term=bold  cterm=bold   gui=Bold      guibg={{@@ c.bg_dark @@}}
+"Current line
+" {%@@ if c.type != "light" @@%} "
+set cursorline
+hi  CursorLine   gui=Bold guibg={{@@ c.bg_dark @@}}
+hi  CursorLineNr gui=Bold guibg={{@@ c.bg_dark @@}}
 
-    set       cursorcolumn
-    highlight CursorColumn  term=bold  cterm=bold   gui=Bold      guibg=none
+set cursorcolumn
+hi  CursorColumn gui=Bold guibg=none
 
-    set       colorcolumn=80
-    highlight ColorColumn   term=bold  cterm=bold   gui=Bold      guibg={{@@ c.bg @@}}
-    " {%@@ endif @@%} "
-    highlight CursorLineNr  guifg={{@@ c.nontxt @@}}
+set colorcolumn=80
+hi  ColorColumn  gui=Bold   guibg={{@@ c.bg @@}}
+" {%@@ endif @@%} "
+hi  CursorLineNr guifg={{@@ c.nontxt   @@}}
 
-    "Splits
-    highlight VertSplit     guibg=None guifg={{@@   c.bg_dark @@}}
-    " set         fillchars=vert:/
+"Splits
+hi VertSplit     guibg=None guifg={{@@   c.bg_dark @@}}
+" set         fillchars=vert:/
 
-    highlight Identifier    guifg={{@@ accent_color @@}}
+hi Identifier    guifg={{@@ accent_color @@}}
 
-    highlight MatchParen    gui=bold   guifg={{@@ n.yellow @@}}
+hi MatchParen    gui=bold   guifg={{@@ n.yellow @@}}
 
-    highlight SpellBad      guisp={{@@ n.red    @@}} guibg=none
-    highlight SpellRare     guisp={{@@ n.blue   @@}} guibg=none
-    highlight SpellCap      guisp={{@@ n.cyan   @@}} guibg=none
-    highlight SpellLocal    guisp={{@@ n.yellow @@}} guibg=none
+hi SpellBad      guisp={{@@ n.red    @@}} guibg=none
+hi SpellRare     guisp={{@@ n.blue   @@}} guibg=none
+hi SpellCap      guisp={{@@ n.cyan   @@}} guibg=none
+hi SpellLocal    guisp={{@@ n.yellow @@}} guibg=none
 
-    "}}}
+"}}}
 " Keys{{{
 "
     " The g is for moving between lines broken by wrap.
