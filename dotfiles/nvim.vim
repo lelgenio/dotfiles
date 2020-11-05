@@ -158,6 +158,8 @@ call plug#end()
     let g:python_highlight_all = 1
 
     autocmd FileType i3config hi Error none
+    autocmd FileType sql setlocal commentstring=--\ %s
+
 "}}}
 " Gay colors{{{
 
