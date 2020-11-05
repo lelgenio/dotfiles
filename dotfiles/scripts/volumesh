@@ -2,9 +2,6 @@
 
 # depends on: awk, pactl, pacmd, notify-send
 
-# FILLED="◼"
-# EMPTY="◻"
-
 MAX_VOL=120
 STEP=10
 
@@ -17,7 +14,7 @@ get_bar(){
     is_muted_$TARGET &&
         FILLED=$STRIPPED
 
-    round $1 | awk '{
+    echo $1 | round | awk '{
             for (i=1;i <= $1/10;i++) {
                 if ( i == 11 ) {
                     printf "|";
@@ -49,9 +46,14 @@ notify(){
 }
 
 round(){
-    echo $1 | awk '{
+    awk '{
         print int($1/'$STEP')*'$STEP';
     }'
+}
+
+round_vol(){
+    rounded=$(get_vol_$TARGET | round)
+    newvol=$(min $MAX_VOL $rounded)
 }
 
 min(){
@@ -73,7 +75,7 @@ is_muted_pulse(){
 
 change_vol_pulse(){
     pactl set-sink-volume @DEFAULT_SINK@ "${1}$(min 120 $2)%"
-    newvol=$(min $MAX_VOL $(round $(get_vol_$TARGET)))
+    round_vol
     pactl set-sink-volume @DEFAULT_SINK@ "${newvol}%"
 }
 
@@ -84,11 +86,8 @@ toggle_mute_pulse(){
 # Mpd {{{
 
 get_vol_mpd(){
-    env LC_ALL=C mpc status |
-        awk '/^volume/ {
-                gsub(/%/,"");
-                printf $2;
-            }'
+    env LC_ALL=C mpc vol |
+        sed -e 's/^.*://g' -e 's/%.*$//g'
 }
 
 is_muted_mpd(){
@@ -96,7 +95,7 @@ is_muted_mpd(){
 }
 change_vol_mpd(){
     mpc vol "${1}${2}"
-    newvol=$(min $MAX_VOL $(round $(get_vol_$TARGET)))
+    round_vol
     mpc vol "${newvol}"
 }
 
