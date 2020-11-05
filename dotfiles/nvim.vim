@@ -210,6 +210,12 @@ call plug#end()
     set       cursorline
     highlight CursorLine    term=bold  cterm=bold   gui=Bold      guibg={{@@ c.bg_dark @@}}
     highlight CursorLineNr  term=bold  cterm=bold   gui=Bold      guibg={{@@ c.bg_dark @@}}
+
+    set       cursorcolumn
+    highlight CursorColumn  term=bold  cterm=bold   gui=Bold      guibg=none
+
+    set       colorcolumn=80
+    highlight ColorColumn   term=bold  cterm=bold   gui=Bold      guibg={{@@ c.bg @@}}
     " {%@@ endif @@%} "
     highlight CursorLineNr  guifg={{@@ c.nontxt @@}}
 
@@ -240,15 +246,11 @@ call plug#end()
     " Basic motion
     {%@@ for old, new in keys.items() @@%}
     " {{@@ new @@}} -> {{@@ old @@}}
-    noremap {{@@ new @@}} {{@@ old @@}}
+    noremap {{@@ new @@}}           {{@@ old @@}}
+    noremap {{@@ new.upper() @@}} 10{{@@ old[-1] @@}}
     noremap <silent> <C-w>{{@@ new          @@}} :wincmd {{@@ old[-1]         @@}}<CR>
     noremap <silent> <C-w>{{@@ new.upper()  @@}} :wincmd {{@@ old[-1].upper() @@}}<CR>
     {%@@ endfor @@%}
-
-
-    " Skip 8 lines
-    noremap {{@@ key.down.upper() @@}} 8<Down>
-    noremap {{@@ key.up.upper()   @@}} 8<Up>
 
     " Repeat search
     noremap {{@@ key.next         @@}} n
