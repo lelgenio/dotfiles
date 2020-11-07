@@ -400,8 +400,8 @@ hi SpellLocal    guisp={{@@ n.yellow @@}} guibg=none
     nmap  <silent> K  :LspHover<cr>
 
     " Lint
-    let g:lsp_diagnostics_echo_cursor = 1
-    let g:lsp_virtual_text_enabled = 0
+    let g:lsp_diagnostics_echo_cursor = 0
+    let g:lsp_virtual_text_enabled = 1
 
     " Colors
     highlight LspErrorHighlight     gui=undercurl guisp={{@@ color.normal.red    @@}}
@@ -416,6 +416,15 @@ hi SpellLocal    guisp={{@@ n.yellow @@}} guibg=none
     let g:lsp_highlight_references_enabled = 1
     highlight LspReference          gui=bold      guifg={{@@ color.normal.yellow @@}}
 
+    " Pyls {{{
+    au User lsp_setup call lsp#register_server({
+                \ 'name': 'pyls',
+                \ 'cmd': {server_info->['pyls']},
+                \ 'whitelist': ['python'],
+                \ 'workspace_config': {'pyls': {'plugins': {
+                    \ 'pyls_mypy': {'enabled': v:true},
+                \ } } } })
+    "}}}
     " Complete File paths{{{
     au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
                 \ 'name': 'file',
