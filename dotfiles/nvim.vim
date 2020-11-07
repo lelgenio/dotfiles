@@ -246,13 +246,12 @@ hi SpellLocal    guisp={{@@ n.yellow @@}} guibg=none
     } @@%}
 
     " Basic motion
-    {%@@ for old, new in keys.items() @@%}
-    " {{@@ new @@}} -> {{@@ old @@}}
+    "{%@@ for old, new in keys.items() @@%}"
     noremap {{@@ new @@}}           {{@@ old @@}}
     noremap {{@@ new.upper() @@}} 10{{@@ old[-1] @@}}
     noremap <silent> <C-w>{{@@ new          @@}} :wincmd {{@@ old[-1]         @@}}<CR>
     noremap <silent> <C-w>{{@@ new.upper()  @@}} :wincmd {{@@ old[-1].upper() @@}}<CR>
-    {%@@ endfor @@%}
+    "{%@@ endfor @@%}"
 
     " Repeat search
     noremap {{@@ key.next         @@}} n
@@ -284,8 +283,9 @@ hi SpellLocal    guisp={{@@ n.yellow @@}} guibg=none
         " Join line without space
         nnoremap j gJ
 
-        " Beginning of line
+        " Beginning/Ending of line
         noremap , ^
+        noremap ; $
 
         imap {{@@ key.insertQuit @@}} <ESC>
 
