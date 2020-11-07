@@ -261,6 +261,9 @@ dotfiles: # {{{
   telegram-theme:
     src: ./telegram.palette
     dst: ~/.local/share/TelegramDesktop/theme.tdesktop-palette
+  kakoune:
+    src: kakoune.kak
+    dst: ~/.config/kak/kakrc
 # }}}
 actions: #{{{
   notify: notify-send "Updating dotfiles" "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}"
