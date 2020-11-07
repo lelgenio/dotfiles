@@ -247,10 +247,11 @@ hi SpellLocal    guisp={{@@ n.yellow @@}} guibg=none
 
     " Basic motion
     "{%@@ for old, new in keys.items() @@%}"
-    noremap {{@@ new @@}}           {{@@ old @@}}
-    noremap {{@@ new.upper() @@}} 10{{@@ old[-1] @@}}
-    noremap <silent> <C-w>{{@@ new          @@}} :wincmd {{@@ old[-1]         @@}}<CR>
-    noremap <silent> <C-w>{{@@ new.upper()  @@}} :wincmd {{@@ old[-1].upper() @@}}<CR>
+    "{%@@ set OLD, NEW = old[-1].upper(), new.upper() @@%}"
+        noremap {{@@ new @@}}  {{@@  old     @@}}
+        noremap {{@@ NEW @@}} 10{{@@ old[-1] @@}}
+        noremap <silent> <C-w>{{@@ new @@}} :wincmd {{@@ old[-1] @@}}<CR>
+        noremap <silent> <C-w>{{@@ NEW @@}} :wincmd {{@@ OLD     @@}}<CR>
     "{%@@ endfor @@%}"
 
     " Repeat search
@@ -404,13 +405,17 @@ hi SpellLocal    guisp={{@@ n.yellow @@}} guibg=none
     let g:lsp_virtual_text_enabled = 1
 
     " Colors
-    highlight LspErrorHighlight     gui=undercurl guisp={{@@ color.normal.red    @@}}
-    highlight LspErrorText          gui=bold      guifg={{@@ color.normal.red    @@}} guibg=none
-    highlight LspErrorVirtual       gui=underline guifg={{@@ color.normal.red    @@}} guibg=none
-
-    highlight LspWarningHighlight   gui=undercurl guisp={{@@ color.normal.yellow @@}}
-    highlight LspWarningText        gui=bold      guifg={{@@ color.normal.yellow @@}} guibg=none
-    highlight LspWarningVirtual     gui=underline guifg={{@@ color.normal.yellow @@}} guibg=none
+    {%@@ set cols = {
+        'Error': n.red,
+        'Warning': n.yellow,
+        'Information': n.blue,
+        'Hint': n.cyan,
+    } @@%}
+    "{%@@ for obj, col in cols.items() @@%}"
+    highlight Lsp{{@@ obj @@}}Highlight gui=undercurl guisp={{@@ col @@}}
+    highlight Lsp{{@@ obj @@}}Text      gui=bold      guifg={{@@ col @@}} guibg=none
+    highlight Lsp{{@@ obj @@}}Virtual   gui=underline guifg={{@@ col @@}} guibg=none
+    "{%@@ endfor @@%}"
 
     " Highlight all references, looks pretty *-*
     let g:lsp_highlight_references_enabled = 1
