@@ -117,6 +117,8 @@ bind pager \031 previous-line		# Mouse wheel
 bind pager \005 next-line		# Mouse wheel
 bind editor <Tab> complete-query
 
+set abort_key="<ESC>"
+
 macro index,pager a \
   "<pipe-message>khard add-email<return>" \
   "add the sender email address to khard"

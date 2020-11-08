@@ -8,6 +8,7 @@
 # Environment Vairables {{{
 set -x QT_QPA_PLATFORMTHEME gtk3
 set -x PATH ~/.local/bin ~/.cargo/bin $PATH
+set -x ESCDELAY 0
 
 set -x EDITOR nvim
 set -x VISUAL nvim
