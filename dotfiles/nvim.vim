@@ -282,7 +282,7 @@ hi SpellLocal    guisp={{@@ n.yellow @@}} guibg=none
         noremap T E
 
         " Join line without space
-        nnoremap j gJ
+        nnoremap j :s/$\n\s*//<CR>
 
         " Beginning/Ending of line
         noremap , ^
