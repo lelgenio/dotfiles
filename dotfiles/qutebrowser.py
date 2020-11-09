@@ -44,7 +44,7 @@ c.content.headers.user_agent = """\
     AppleWebKit/{webkit_version} (KHTML, like Gecko)
     {qt_key}/{qt_version}
     {upstream_browser_key}/{upstream_browser_version}
-    Safari/{webkit_version}""".replace("\n","")
+    Safari/{webkit_version}""".replace("\n", "")
 
 # Enable JavaScript.
 config.set("content.javascript.enabled", True, "file://*")
@@ -55,7 +55,8 @@ config.set("content.javascript.enabled", True, "qute://*/*")
 
 # Allow websites to record audio/video.
 # config.set("content.media_capture", True, "https://ca.bbcollab.com")
-config.set("content.media.audio_video_capture", True, "https://ca.bbcollab.com")
+config.set("content.media.audio_video_capture", True,
+           "https://ca.bbcollab.com")
 config.set("content.autoplay", True, "https://ca.bbcollab.com")
 config.set("content.mute", False, "https://ca.bbcollab.com")
 
@@ -264,7 +265,6 @@ config.bind("H", "set-cmd-text -s :open -t")
 # {%@@ endif @@%}
 
 config.bind("{{@@ key.insertMode    @@}}", "enter-mode insert")
-# config.bind("{{@@ key.insertQuit    @@}}", "enter-mode normal", mode="insert")
 
 config.bind("{{@@ key.next          @@}}", "search-next")
 config.bind("{{@@ key.next.upper()  @@}}", "search-prev")
