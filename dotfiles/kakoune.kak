@@ -45,6 +45,8 @@
         map global normal <c-k> <a-s>
 
         map global normal t e
+
+        map global normal <C-n> ':fzf-mode<ret>'
     {%@@ endif @@%}
 
     map global insert <tab> '<a-;><gt>'
