@@ -5,6 +5,7 @@ pidof mpd > /dev/null ||
 
 mpc status | grep '^\[playing\]' > /dev/null &&
     mpc current -f ' %title% - %artist% ' |
-    sed 's/&/and/g'
+        sed 's/&/and/g' ||
+    printf ' '
 
 true
