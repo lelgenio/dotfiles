@@ -11,6 +11,7 @@ variables:
   cursor_size: 24
   launcher: wofi
   terminal: kitty
+  editor: kak
   bar: waybar
   bar_pos: top
   font:

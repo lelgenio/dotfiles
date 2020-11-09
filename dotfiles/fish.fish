@@ -10,8 +10,8 @@ set -x QT_QPA_PLATFORMTHEME gtk3
 set -x PATH ~/.local/bin ~/.cargo/bin $PATH
 set -x ESCDELAY 0
 
-set -x EDITOR nvim
-set -x VISUAL nvim
+set -x EDITOR {{@@ editor @@}}
+set -x VISUAL {{@@ editor @@}}
 set -x BROWSER qutebrowser
 set -x PAGER less
 
@@ -27,12 +27,12 @@ set -x PAGER less
 #}}}
 # Aliases{{{
 
-abbr v nvim
+abbr v {{@@ editor @@}}
 
 command -qs sudo &&
-    abbr rv sudo nvim
+    abbr rv sudo {{@@ editor @@}}
 command -qs doas &&
-    abbr rv doas nvim
+    abbr rv doas {{@@ editor @@}}
 
 command -qs trash &&
     alias rm trash
@@ -76,7 +76,7 @@ abbr dot "dotdrop install -f"
 function edit-config #{{{
     pushd .
     cd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
-    nvim +Files
+    {{@@ editor @@}} (git ls-files | fzf)
     popd
 end
 abbr ec edit-config
@@ -110,7 +110,7 @@ function etc #{{{
     set file /etc/(fzf)
     cd -
     test -f "$file"
-    and sudo nvim $file
+    and sudo {{@@ editor @@}} $file
 end
 #}}}
 # cd ...{{{

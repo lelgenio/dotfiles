@@ -70,7 +70,7 @@ config.set('content.register_protocol_handler', False,
 c.content.mute = True
 c.content.autoplay = False
 
-c.editor.command = ["terminal", "nvim", "-f", "{file}", "+{line}"]
+c.editor.command = ["terminal", "{{@@ editor @@}}", "{file}", "+{line}"]
 
 # }}}
 # UI {{{
