@@ -46,8 +46,12 @@
 
         map global normal t e
 
-        map global normal <C-n> ':fzf-mode<ret>'
+        map global normal <C-n> ': fzf-mode<ret>'
+        map global normal <C-e> ': enter-user-mode lsp<ret>'
     {%@@ endif @@%}
+
+
+    map global normal '#' :comment-line<ret>
 
     map global insert <tab> '<a-;><gt>'
     map global insert <s-tab> '<a-;><lt>'
@@ -69,6 +73,13 @@
           printf %s "$kak_main_reg_dquote" | wl-copy > /dev/null 2>&1 &
     }}
 
+    hook global NormalIdle .* %{ try %{
+        git show-diff
+    } }
+
+    hook global BufOpenFile .* %{
+        modeline-parse
+    }
 
     add-highlighter global/ number-lines -relative -hlcursor
 
@@ -131,3 +142,18 @@
 
     face global Whitespace default,default+f
     face global BufferPadding blue,default
+
+    #lsp
+    {%@@ set cols = {
+        'Error':       'red',
+        'Warning':     'yellow',
+        'Hint':        'blue',
+    } @@%}
+    #{%@@ for obj, col in cols.items() @@%}#
+    face global HighlightDiagnostic{{@@ obj @@}} {{@@ col @@}},default+bu
+    face global Diagnostic{{@@          obj @@}} {{@@ col @@}},default+b
+    face global TextDiagnostic{{@@      obj @@}} {{@@ col @@}},default+b
+    face global InlayDiagnostic{{@@     obj @@}} {{@@ col @@}},default+bu
+    #{%@@ endfor @@%}#
+
+    face global Reference yellow,default+b
