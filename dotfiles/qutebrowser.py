@@ -274,11 +274,18 @@ config.bind("{{@@ key.down  @@}}", "scroll down")
 config.bind("{{@@ key.up    @@}}", "scroll up")
 config.bind("{{@@ key.right @@}}", "scroll right")
 
-config.bind("{{@@ key.left  .upper() @@}}", "back")
-config.bind("{{@@ key.right .upper() @@}}", "forward")
 
+# {%@@ if editor == "kak" @@%} #
+config.bind("<Alt-{{@@ key.up    @@}}>", "scroll-px 0 -100")
+config.bind("<Alt-{{@@ key.down  @@}}>", "scroll-px 0  100")
+config.bind("<Alt-{{@@ key.left  @@}}>", "back")
+config.bind("<Alt-{{@@ key.right @@}}>", "forward")
+# {%@@ else @@%} #
 config.bind("{{@@ key.up    .upper() @@}}", "scroll-px 0 -100")
 config.bind("{{@@ key.down  .upper() @@}}", "scroll-px 0  100")
+config.bind("{{@@ key.left  .upper() @@}}", "back")
+config.bind("{{@@ key.right .upper() @@}}", "forward")
+# {%@@ endif @@%} #
 
 config.bind("{{@@ key.tabL  .upper() @@}}", "tab-prev")
 config.bind("{{@@ key.tabR  .upper() @@}}", "tab-next")
