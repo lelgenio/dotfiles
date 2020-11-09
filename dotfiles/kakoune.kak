@@ -5,12 +5,16 @@ plug "kak-lsp/kak-lsp" do %{
     cargo install --locked --force --path .
 }
 
+lsp-enable
+lsp-inlay-diagnostics-enable global
+
 {%@@ set keys = {
     "h": key.left,
     "j": key.down,
     "k": key.up,
     "l": key.right,
     "i": key.insertMode,
+    "n": key.next,
 } @@%}
 
 {%@@ for old, new in keys.items() @@%}
@@ -27,9 +31,7 @@ plug "kak-lsp/kak-lsp" do %{
 
     map global normal k s
     map global normal K S
-    map global normal <a-k> <a-s>
-
-    map global normal l n
+    map global normal <c-k> <a-s>
 
     map global normal t e
 {%@@ endif @@%}
@@ -81,11 +83,11 @@ face global MenuInfo cyan
 face global Information black,yellow
 face global Error white,default
 
-face global StatusLine      black,  default
+face global StatusLine      black,default
 face global StatusLineMode  black,default
-face global StatusLineInfo  black,  default
-face global StatusLineValue black, default
-face global StatusCursor    black, default
+face global StatusLineInfo  black,default
+face global StatusLineValue black,default
+face global StatusCursor    black,default
 
 face global Prompt yellow,default
 face global MatchingChar default,default+b
