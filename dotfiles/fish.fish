@@ -74,8 +74,7 @@ abbr dot "dotdrop install -f"
 # Functions {{{
 
 function edit-config #{{{
-    pushd .
-    cd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
+    pushd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
     {{@@ editor @@}} (git ls-files | fzf)
     popd
 end
@@ -106,11 +105,11 @@ end
 bind -M insert \cr rcd
 #}}}
 function etc #{{{
-    cd /etc/
+    pushd /etc/
     set file /etc/(fzf)
-    cd -
+    popd
     test -f "$file"
-    and sudo {{@@ editor @@}} $file
+        and sudo {{@@ editor @@}} $file
 end
 #}}}
 # cd ...{{{
