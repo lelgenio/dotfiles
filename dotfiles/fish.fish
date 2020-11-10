@@ -133,10 +133,7 @@ function dark_toggle # {{{
         set  _COLOR_TYPE "dark"
     end
 
-    set -l gArgs -C "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
-    git $gArgs stash push
     dotdrop install -f
-    git $gArgs stash pop
 
 end
 
