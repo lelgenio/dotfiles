@@ -225,6 +225,7 @@ hi  CursorLineNr guifg={{@@ c.nontxt   @@}}
 hi VertSplit     guibg=None guifg={{@@   c.bg_dark @@}}
 " set         fillchars=vert:/
 
+hi Keyword       guifg={{@@ accent_color @@}}
 hi Identifier    guifg={{@@ accent_color @@}}
 
 hi MatchParen    gui=bold   guifg={{@@ n.yellow @@}}

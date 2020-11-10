@@ -2,6 +2,8 @@
 
     source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
+    plug 'delapouite/kakoune-palette'
+
     plug "andreyorst/fzf.kak"
     plug "kak-lsp/kak-lsp" do %{
         cargo install --locked --force --path .
@@ -77,6 +79,7 @@
 
     hook global NormalIdle .* %{ try %{
         git show-diff
+        palette-status
     } }
 
     hook global BufOpenFile .* %{
@@ -87,11 +90,13 @@
     hook global InsertChar \t %{ exec -draft -itersel h@ } -group kakrc-replace-tabs-with-spaces
 
     add-highlighter global/ number-lines -relative -hlcursor
+    add-highlighter global/ show-whitespaces
 
 #color
 
     {%@@ set accent = "rgb:%s" % accent_color.replace('#','') @@%}
     {%@@ set bg_light = "rgb:%s" % color.bg_light.replace('#','') @@%}
+    {%@@ set nontxt = "rgb:%s" % color.nontxt.replace('#','') @@%}
 
     # For Code
     face global value default
@@ -102,7 +107,7 @@
     face global string green
     face global keyword {{@@ accent @@}}
     face global operator yellow
-    face global attribute green
+    face global attribute yellow+b
     face global comment {{@@ bg_light @@}}
     face global documentation comment
     face global meta magenta
@@ -146,7 +151,7 @@
     face global Prompt yellow,default
     face global MatchingChar default,default+b
 
-    face global Whitespace default,default+f
+    face global Whitespace {{@@ nontxt @@}},default+f
     face global BufferPadding blue,default
 
     #lsp

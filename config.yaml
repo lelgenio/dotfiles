@@ -13,6 +13,7 @@ variables:
   terminal: kitty
   bar: waybar
   bar_pos: top
+
   font:
     mono: FiraCode Nerd Font
     interface: Inter
@@ -25,20 +26,22 @@ profiles:
   dark: # {{{
     variables:
       opacity: 0.98
+
       color:
         type: dark
         bg: '#202020'
         bg_light: '#404040'
         bg_dark: '#191919'
-        txt: '#ffffff'
+        txt: '#FFFFFF'
         nontxt: '#252525'
+
         normal:
           black: '#404040'
           red: '#AB4642'
           green: '#A1B56C'
           yellow: '#E6C547'
           blue: '#6C99DA'
-          magenta: '#C397D8'
+          magenta: '#C10175'
           cyan: '#70C0BA'
           white: '#EAEAEA'
     dotfiles:
@@ -47,24 +50,28 @@ profiles:
   light: # {{{
     variables:
       opacity: 0.95
+
       color:
         type: light
-        bg: '#F5F5F5'
+        bg: '#FAFAFA'
         bg_light: '#A0A0A0'
         bg_dark: '#999999'
         txt: '#303030'
         nontxt: '#A0A0A0'
+
         normal:
           black: '#555555'
           red: '#D54E53'
           green: '#008800'
-          yellow: '#EAB700'
+          yellow: '#DBB704'
           blue: '#0D68A8'
           magenta: '#C397D8'
           cyan: '#00A0A5'
           white: '#FFFFFF'
+
 # }}}
 # Accents {{{
+
   accent_red:     {variables: {accent_color: "#D9534F"}}
   accent_green:   {variables: {accent_color: "#159828"}}
   accent_blue:    {variables: {accent_color: "#3465A3"}}
@@ -87,6 +94,7 @@ profiles:
         tabR: Y
         insertMode: s
         insertQuit: kk
+
 #}}}
   qwerty: #{{{
     variables:
@@ -101,7 +109,9 @@ profiles:
         tabR: O
         insertMode: i
         insertQuit: jj
+
 #}}}
+
   main: #{{{
     variables:
       gtk_theme:      "materia-{{@@ env['USER'] @@}}-{{@@ accent_color_name @@}}-{{@@ color.type @@}}"
@@ -114,6 +124,7 @@ profiles:
     - "{{@@ key_layout @@}}"
     - "{{@@ color_type @@}}"
     - "accent_{{@@ accent_color_name @@}}"
+
  #}}}
 
 config: # {{{
