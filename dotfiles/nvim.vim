@@ -238,12 +238,11 @@ hi SpellLocal    guisp={{@@ n.yellow @@}} guibg=none
 " Keys{{{
 "
     " The g is for moving between lines broken by wrap.
-    {%@@ set keys = {
+    " {%@@ set keys = {
         " h": key.left,
         "gj": key.down,
         "gk": key.up,
-        " l": key.right,
-    } @@%}
+        " l": key.right, } @@%}
 
     " Basic motion
     "{%@@ for old, new in keys.items() @@%}"
@@ -405,12 +404,12 @@ hi SpellLocal    guisp={{@@ n.yellow @@}} guibg=none
     let g:lsp_virtual_text_enabled = 1
 
     " Colors
-    {%@@ set cols = {
-        'Error': n.red,
-        'Warning': n.yellow,
-        'Information': n.blue,
-        'Hint': n.cyan,
-    } @@%}
+    " {%@@ set cols = {
+        "Error": n.red,
+        "Warning": n.yellow,
+        "Information": n.blue,
+        "Hint": n.cyan, } @@%}
+
     "{%@@ for obj, col in cols.items() @@%}"
     highlight Lsp{{@@ obj @@}}Highlight gui=undercurl guisp={{@@ col @@}}
     highlight Lsp{{@@ obj @@}}Text      gui=bold      guifg={{@@ col @@}} guibg=none
