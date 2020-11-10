@@ -70,7 +70,8 @@ config.set('content.register_protocol_handler', False,
 c.content.mute = True
 c.content.autoplay = False
 
-c.editor.command = ["terminal", "{{@@ editor @@}}", "{file}", "+{line}"]
+editor = "{{@@ editor @@}}"
+c.editor.command = ["terminal", editor, "{file}", "+{line}"]
 
 # }}}
 # UI {{{
@@ -249,6 +250,21 @@ c.fonts.downloads = fonts.BIG_INTER
 # }}}
 # Bindings {{{
 # Bindings for normal mode
+
+
+class key:
+    up = "{{@@ key.up @@}}"
+    down = "{{@@ key.down @@}}"
+    left = "{{@@ key.left @@}}"
+    right = "{{@@ key.right @@}}"
+
+    tabL = "{{@@ key.tabL @@}}"
+    tabR = "{{@@ key.tabR @@}}"
+
+    insert = "{{@@ key.insertMode @@}}"
+    next = "{{@@ key.next @@}}"
+
+
 config.bind(",d", "spawn --verbose youtube-dl -fbest[ext=mp4] {url}")
 config.bind(",m", "spawn --userscript view_in_mpv")
 config.bind(",r", "spawn --userscript readability")
@@ -264,37 +280,35 @@ config.bind("H", "set-cmd-text -s :open -t")
 
 # {%@@ endif @@%}
 
-config.bind("{{@@ key.insertMode    @@}}", "enter-mode insert")
+config.bind(key.insert, "enter-mode insert")
 
-config.bind("{{@@ key.next          @@}}", "search-next")
-config.bind("{{@@ key.next.upper()  @@}}", "search-prev")
-
-config.bind("{{@@ key.left  @@}}", "scroll left")
-config.bind("{{@@ key.down  @@}}", "scroll down")
-config.bind("{{@@ key.up    @@}}", "scroll up")
-config.bind("{{@@ key.right @@}}", "scroll right")
+config.bind(key.next, "search-next")
+config.bind(key.next.upper(), "search-prev")
 
 
-# {%@@ if editor == "kak" @@%} #
-config.bind("<Alt-{{@@ key.up    @@}}>", "scroll-px 0 -100")
-config.bind("<Alt-{{@@ key.down  @@}}>", "scroll-px 0  100")
-config.bind("<Alt-{{@@ key.left  @@}}>", "back")
-config.bind("<Alt-{{@@ key.right @@}}>", "forward")
-# {%@@ else @@%} #
-config.bind("{{@@ key.up    .upper() @@}}", "scroll-px 0 -100")
-config.bind("{{@@ key.down  .upper() @@}}", "scroll-px 0  100")
-config.bind("{{@@ key.left  .upper() @@}}", "back")
-config.bind("{{@@ key.right .upper() @@}}", "forward")
-# {%@@ endif @@%} #
+config.bind(key.left, "scroll left")
+config.bind(key.down, "scroll down")
+config.bind(key.up, "scroll up")
+config.bind(key.right, "scroll right")
 
-config.bind("{{@@ key.tabL  .upper() @@}}", "tab-prev")
-config.bind("{{@@ key.tabR  .upper() @@}}", "tab-next")
+for k, v in {
+    key.up: "scroll-px 0 -100",
+    key.down: "scroll-px 0  100",
+    key.left: "back",
+    key.right: "forward",
+    key.tabL: "tab-prev",
+    key.tabR: "tab-next",
+}.items():
+    if editor == "kak":
+        config.bind("<Alt-{}>".format(k), v)
+    else:
+        config.bind(k.upper(), v)
 
 # Bindings for caret mode
-config.bind("{{@@ key.left  @@}}", "move-to-prev-char", mode="caret")
-config.bind("{{@@ key.up    @@}}", "move-to-prev-line", mode="caret")
-config.bind("{{@@ key.down  @@}}", "move-to-next-line", mode="caret")
-config.bind("{{@@ key.right @@}}", "move-to-next-char", mode="caret")
+config.bind(key.left, "move-to-prev-char", mode="caret")
+config.bind(key.up, "move-to-prev-line", mode="caret")
+config.bind(key.down, "move-to-next-line", mode="caret")
+config.bind(key.right, "move-to-next-char", mode="caret")
 
 # }}}
 
