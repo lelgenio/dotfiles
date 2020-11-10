@@ -34,7 +34,7 @@ profiles:
         txt: '#ffffff'
         nontxt: '#252525'
         normal:
-          black: '#555555'
+          black: '#404040'
           red: '#AB4642'
           green: '#A1B56C'
           yellow: '#E6C547'
