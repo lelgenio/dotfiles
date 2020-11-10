@@ -7,9 +7,13 @@
         cargo install --locked --force --path .
     }
 
+
     lsp-enable
     lsp-inlay-diagnostics-enable global
 
+#syntax
+
+    set global tabstop 4
 
 #keys
 
@@ -50,10 +54,8 @@
         map global normal <C-e> ': enter-user-mode lsp<ret>'
     {%@@ endif @@%}
 
-
     map global normal '#' :comment-line<ret>
 
-    map global insert <tab> '<a-;><gt>'
     map global insert <s-tab> '<a-;><lt>'
 
 #hooks
@@ -81,11 +83,15 @@
         modeline-parse
     }
 
+    # use spaces insted of tabs
+    hook global InsertChar \t %{ exec -draft -itersel h@ } -group kakrc-replace-tabs-with-spaces
+
     add-highlighter global/ number-lines -relative -hlcursor
 
 #color
 
     {%@@ set accent = "rgb:%s" % accent_color.replace('#','') @@%}
+    {%@@ set bg_light = "rgb:%s" % color.bg_light.replace('#','') @@%}
 
     # For Code
     face global value default
@@ -97,7 +103,7 @@
     face global keyword {{@@ accent @@}}
     face global operator yellow
     face global attribute green
-    face global comment black
+    face global comment {{@@ bg_light @@}}
     face global documentation comment
     face global meta magenta
     face global builtin default+b
@@ -121,21 +127,21 @@
     face global PrimaryCursorEol   black,cyan+fg
     face global SecondaryCursorEol PrimaryCursorEol
 
-    face global LineNumbers      black,default
+    face global LineNumbers      {{@@ bg_light @@}},default
     face global LineNumberCursor white,default
 
-    face global MenuForeground white,red
-    face global MenuBackground white,black
+    face global MenuForeground white,{{@@ accent @@}}
+    face global MenuBackground white,{{@@ bg_light @@}}
     face global MenuInfo cyan
 
     face global Information yellow,default
     face global Error white,default
 
-    face global StatusLine      black,default
+    face global StatusLine      default,default
     face global StatusLineMode  green,default
-    face global StatusLineInfo  black,default
-    face global StatusLineValue black,default
-    face global StatusCursor    black,red
+    face global StatusLineInfo  default,default
+    face global StatusLineValue default,default
+    face global StatusCursor    default,{{@@ accent @@}}
 
     face global Prompt yellow,default
     face global MatchingChar default,default+b
