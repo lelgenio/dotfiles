@@ -272,11 +272,18 @@ config.bind(";e", "hint links spawn deemix '{hint-url}'")
 config.bind(";m", "hint links spawn mpv --fs {hint-url}")
 
 # {%@@ if key_layout == "colemak" @@%} #
-config.bind("t", "hint all")
-config.bind("T", "hint all tab")
 
+config.bind("t", "hint all")
 config.bind("h", "set-cmd-text -s :open")
-config.bind("H", "set-cmd-text -s :open -t")
+
+for k, v in {
+    "T": "hint all tab",
+    "H": "set-cmd-text -s :open -t",
+}.items():
+    if editor == "kak":
+        config.bind("<Alt-{}>".format(k), v)
+    else:
+        config.bind(k.upper(), v)
 
 # {%@@ endif @@%}
 
