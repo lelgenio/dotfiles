@@ -94,6 +94,7 @@
     map global git 'A' ': git add .<ret>'                   -docstring 'add'
     map global git 'd' ': git diff %reg{%}<ret>'            -docstring 'diff current'
     map global git 'D' ': git diff<ret>'                    -docstring 'diff'
+    map global git '<a-d>' ': git diff --staged<ret>'       -docstring 'diff staged'
     map global git 'c' ': git commit -v<ret>'               -docstring 'commit'
     map global user 'v' ': enter-user-mode git<ret>'        -docstring 'git vcs mode'
 
