@@ -44,8 +44,7 @@ profiles:
           magenta: '#C10175'
           cyan: '#70C0BA'
           white: '#EAEAEA'
-    dotfiles:
-    - ALL
+
 # }}}
   light: # {{{
     variables:
