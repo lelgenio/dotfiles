@@ -201,7 +201,7 @@
     face global Whitespace {{@@ nontxt @@}},default+f
     face global BufferPadding blue,default
     # highlight trailing whitespace
-    add-highlighter global/ regex '\h*$' 0:red,red
+    add-highlighter global/ regex '\h*$' 0:red,red+g
 
     #lsp
     {%@@ set cols = {
