@@ -194,8 +194,8 @@ c.colors.tabs.odd.fg = color.txt
 c.colors.tabs.even.bg = color.bg
 c.colors.tabs.odd.bg = color.bg
 
-c.colors.tabs.selected.even.fg = color.bg
-c.colors.tabs.selected.odd.fg = color.bg
+c.colors.tabs.selected.even.fg = color.txt
+c.colors.tabs.selected.odd.fg = color.txt
 c.colors.tabs.selected.even.bg = color.accent
 c.colors.tabs.selected.odd.bg = color.accent
 

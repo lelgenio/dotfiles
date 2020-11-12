@@ -37,7 +37,7 @@ sed -i -- '1d' "${namebase}.2"
 {
     echo '# Please review/modify this script or empty it to do nothing'
     while read -r l1 <&3 && read -r l2 <&4; do
-        [ "$l1" = "$l2" ] || printf "mv -i -- %q %q" "$l1" "$l2"
+        [ "$l1" = "$l2" ] || printf "mv -Ti -- %q %q\n" "$l1" "$l2"
     done 3<"${namebase}.1" 4<"${namebase}.2"
 } > "${namebase}.sh"
 
