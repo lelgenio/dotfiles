@@ -120,6 +120,7 @@
     }}
 
     hook global NormalIdle .* %{ try %{
+        lsp-highlight-references
         git show-diff
         palette-status
     } }
@@ -218,6 +219,6 @@
     #{%@@ endfor @@%}#
 
     lsp-enable
-    lsp-inlay-diagnostics-enable global
+    # lsp-inlay-diagnostics-enable global
 
     face global Reference yellow,default+b
