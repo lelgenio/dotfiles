@@ -27,6 +27,7 @@
 #syntax
 
     set global tabstop 4
+    set global scrolloff 8,8
 
 #keys
 
