@@ -1,7 +1,0 @@
-#!/bin/sh
-
-exec /usr/bin/bat {%@@ if color_type == "light"  @@%}
-    "--theme GitHub"
-{%@@ else @@%}
-{%@@ endif  @@%}
-$@
