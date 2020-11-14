@@ -84,6 +84,7 @@ depends=(
     libreoffice-fresh libreoffice-fresh-pt-br hunspell-pt-br papirus-libreoffice-theme
 
     # Programing
+    kakoune kak-lsp
     neovim python-pynvim neovim-symlinks ipython
     rust gcc gdb
 
