@@ -100,6 +100,16 @@
     map global user 'v' ': enter-user-mode git<ret>'        -docstring 'git vcs mode'
 
 
+    def -hidden insert-c-n %{
+     try %{
+       lsp-snippets-select-next-placeholders
+       exec '<a-;>d'
+     } catch %{
+       exec -with-hooks '<c-n>'
+     }
+    }
+    map global insert <c-n> "<a-;>: insert-c-n<ret>"
+
     # map global insert <s-tab> '<a-;><lt>'
 
 #hooks
