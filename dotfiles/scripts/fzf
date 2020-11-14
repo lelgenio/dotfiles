@@ -1,0 +1,13 @@
+#!/bin/sh
+
+{%@@ set bat_command = "bat " + ("--theme GitHub" * (color_type == "light")) @@%}
+
+exec /usr/bin/fzf --preview '{{@@ bat_command @@}} --style=numbers --color=always {}' \
+--color="\
+bg+:{{@@ color.bg_light @@}},\
+hl+:{{@@ color.normal.green @@}},\
+gutter:{{@@ color.bg @@}},\
+prompt:{{@@ accent_color @@}},\
+pointer:{{@@ accent_color @@}},\
+spinner:{{@@ accent_color @@}}\
+" $@

@@ -39,9 +39,9 @@ command -qs trash &&
 
 command -qs exa &&
     alias ls 'exa --git'
-{%@@ set bat_command = "bat " + ("--theme GitHub" * (color.type == "light")) @@%}
-command -qs bat &&
-    alias cat "{{@@ bat_command @@}}"
+
+bat --version &>/dev/null &&
+    alias cat bat
 
 command -qs zoxide &&
     zoxide init fish | source
@@ -342,20 +342,6 @@ set -xU LESS_TERMCAP_se (printf "\e[0m")
 set -xU LESS_TERMCAP_so (printf "\e[01;44;33m")
 set -xU LESS_TERMCAP_ue (printf "\e[0m")
 set -xU LESS_TERMCAP_us (printf "\e[01;32m")
-
-#}}}
-# Fzf settings{{{
-
-set -x FZF_DEFAULT_OPTS "\
---preview '{{@@ bat_command @@}} --style=numbers --color=always {}' \
---color='\
-bg+:{{@@ color.bg_light @@}},\
-hl+:{{@@ color.normal.green @@}},\
-gutter:{{@@ color.bg @@}},\
-prompt:{{@@ accent_color @@}},\
-pointer:{{@@ accent_color @@}},\
-spinner:{{@@ accent_color @@}}\
-'"
 
 #}}}
 # vim:foldmethod=marker
