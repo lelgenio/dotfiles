@@ -1,7 +1,8 @@
 #!/bin/sh
 
-cmd="$1"
-shift
+test $# -gt 0 &&
+    cmd="$1" &&
+    shift
 
 # {%@@ if terminal == "alacritty" @@%} #
     command -v alacritty > /dev/null &&
