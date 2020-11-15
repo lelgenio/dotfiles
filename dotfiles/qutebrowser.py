@@ -265,6 +265,14 @@ class key:
     next = "{{@@ key.next @@}}"
 
 
+def edbind(k, v):
+    if editor == "kak":
+        config.bind("<Alt-{}>".format(k), v)
+        config.bind(k.upper(), "nop")
+    else:
+        config.bind(k.upper(), v)
+
+
 config.bind(",d", "spawn --verbose youtube-dl -fbest[ext=mp4] {url}")
 config.bind(",m", "spawn --userscript view_in_mpv")
 config.bind(",r", "spawn --userscript readability")
@@ -280,10 +288,7 @@ for k, v in {
     "T": "hint all tab",
     "H": "set-cmd-text -s :open -t",
 }.items():
-    if editor == "kak":
-        config.bind("<Alt-{}>".format(k), v)
-    else:
-        config.bind(k.upper(), v)
+    edbind(k, v)
 
 # {%@@ endif @@%}
 
@@ -306,10 +311,7 @@ for k, v in {
     key.tabL: "tab-prev",
     key.tabR: "tab-next",
 }.items():
-    if editor == "kak":
-        config.bind("<Alt-{}>".format(k), v)
-    else:
-        config.bind(k.upper(), v)
+    edbind(k, v)
 
 # Bindings for caret mode
 config.bind(key.left, "move-to-prev-char", mode="caret")
