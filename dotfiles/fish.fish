@@ -75,7 +75,7 @@ abbr dot "dotdrop install -f"
 
 function edit-config #{{{
     pushd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
-    {{@@ editor @@}} (git ls-files | fzf)
+    {{@@ editor @@}} (git ls-files | wdmenu)
     popd
 end
 abbr ec edit-config

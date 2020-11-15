@@ -11,6 +11,7 @@ auto-pairs-enable
 plug 'h-youhei/kakoune-surround'
 
 plug 'delapouite/kakoune-palette'
+plug 'insipx/kak-crosshairs'
 
 plug "kak-lsp/kak-lsp" do %{
     cargo install --locked --force --path .

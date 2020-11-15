@@ -1,40 +1,71 @@
 # {{@@ header() @@}}
 
-map global user 'g' ': enter-user-mode lsp<ret>'        -docstring 'lsp mode'
+map global user 'g' ': enter-user-mode lsp<ret>' -docstring 'lsp mode'
+map global user 'z' ':zoxide ' -docstring 'zoxide'
 
-map global user 'c' ': comment-line<ret>'               -docstring 'comment line'
-map global user 'C' ': comment-block<ret>'              -docstring 'comment block'
+map global user 'c' ': comment-line<ret>' -docstring 'comment line'
+map global user 'C' ': comment-block<ret>' -docstring 'comment block'
 
-map global user 'p' '<a-!> wl-paste -n <ret>'           -docstring 'clipboard paste'
-map global user 'P' '! wl-paste -n <ret>'               -docstring 'clipboard paste before'
+map global user 'p' '<a-!> wl-paste -n <ret>' -docstring 'clipboard paste'
+map global user 'P' '! wl-paste -n <ret>' -docstring 'clipboard paste before'
 
 declare-user-mode surround
-map global surround 's' ': surround<ret>'               -docstring 'surround'
-map global surround 'c' ': change-surround<ret>'        -docstring 'change'
-map global surround 'd' ': delete-surround<ret>'        -docstring 'delete'
-map global surround 't' ': select-surrounding-tag<ret>' -docstring 'select tag'
-map global user 's' ': enter-user-mode surround<ret>'   -docstring 'surround mode'
+map global user 's' ': enter-user-mode surround<ret>' -docstring 'surround mode'
+map global surround 's' ': surround<ret>' -docstring 'surround'
+map global surround 'c' ': change-surround<ret>' -docstring 'change'
+map global surround 'd' ': delete-surround<ret>' -docstring 'delete'
+map global surround 't' ': surround-with-tag<ret>' -docstring 'surround with tag'
+map global surround 'g' ': select-surrounding-tag<ret>' -docstring 'select tag'
 
 declare-user-mode git
-map global git 's'     ': git status<ret>'          -docstring 'status'
-map global git 'a'     ': git add<ret>'             -docstring 'add current'
-map global git 'A'     ': git add .<ret>'           -docstring 'add'
-map global git 'd'     ': git diff %reg{%}<ret>'    -docstring 'diff current'
-map global git 'D'     ': git diff<ret>'            -docstring 'diff'
-map global git '<a-d>' ': git diff --staged<ret>'   -docstring 'diff staged'
-map global git 'c'     ': git commit -v<ret>'       -docstring 'commit'
 map global user 'v'    ': enter-user-mode git<ret>' -docstring 'git vcs mode'
+map global git 's'     ': git status<ret>' -docstring 'status'
+map global git 'a'     ': git add<ret>' -docstring 'add current'
+map global git 'd'     ': git diff %reg{%}<ret>' -docstring 'diff current'
+map global git 'r'     ': git restore %reg{%}<ret>' -docstring 'restore current'
+map global git 'A'     ': git add --all<ret>' -docstring 'add all'
+map global git 'D'     ': git diff<ret>' -docstring 'diff all'
+map global git '<a-d>' ': git diff --staged<ret>' -docstring 'diff staged'
+map global git 'c'     ': git commit -v<ret>' -docstring 'commit'
 
 declare-user-mode find
-map global find 'f' ': edit %sh{fd -tf | wdmenu}<ret>'                  -docstring 'file'
-map global find 'v' ': edit %sh{git ls-files | wdmenu}<ret>'                  -docstring 'file'
-map global find 'c' ': cd %sh{fd -td | wdmenu}<ret>'                  -docstring 'status'
-map global user 'f' ': enter-user-mode find<ret>'                   -docstring 'fzf mode'
+map global user 'f' ': enter-user-mode find<ret>' -docstring 'find mode'
+map global find 'f' ': find_file<ret>' -docstring 'file'
+map global find 'r' ': find_ripgrep<ret>' -docstring 'ripgrep all file'
+map global find 'g' ': find_git_file<ret>' -docstring 'git files'
+map global find 'c' ': find_dir<ret>' -docstring 'change dir'
+map global find 'b' ': find_buffer<ret>' -docstring 'find buffer'
 
-map global user 'z' ': prompt z: zoxide<ret>'                     -docstring 'add current'
-define-command zoxide \
+
+define-command -hidden find_file \
+%{ edit -existing %sh{
+    test "$PWD" -eq "$HOME" || args="-H"
+    fd -tf "$args" | sed "/.git\//d" | wdmenu
+} }
+
+define-command -hidden find_git_file \
+%{ edit -existing %sh{ git ls-files | wdmenu } }
+
+define-command -hidden find_dir \
+%{ cd %sh{ fd -Htd | wdmenu } }
+
+define-command -hidden find_buffer \
+%{ buffer %sh{
+    printf "%s\n" $kak_buflist | wdmenu
+} }
+
+define-command -hidden find_ripgrep \
+%{ eval %sh{
+    rg -n . | wdmenu |
+        perl -ne 'print "edit \"$1\" \"$2\" " if /(.+):(\d+):/'
+} }
+
+
+define-command -params .. \
+-shell-script-candidates 'zoxide query -l' \
+zoxide \
 %{
-    cd %sh{ zoxide query "$kak_text" }
+    cd %sh{ zoxide query "$@" }
     echo %sh{ pwd | sed "s|$HOME|~|" }
 }
 

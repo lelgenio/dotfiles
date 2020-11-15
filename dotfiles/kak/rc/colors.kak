@@ -1,9 +1,6 @@
 # {{@@ header() @@}}
 # this is not in colors/ because it loads plugins
 
-source "%val{config}/rc/plug.kak"
-plug 'insipx/kak-crosshairs'
-
 {%@@ set accent = "rgb:%s" % accent_color.replace('#','') @@%}
 {%@@ set bg_light = "rgb:%s" % color.bg_light.replace('#','') @@%}
 {%@@ set bg_dark = "rgb:%s" % color.bg_dark.replace('#','') @@%}
