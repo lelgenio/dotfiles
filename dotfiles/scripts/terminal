@@ -1,15 +1,18 @@
 #!/bin/sh
 
+cmd="$1"
+shift
+
 # {%@@ if terminal == "alacritty" @@%} #
     command -v alacritty > /dev/null &&
     {
         test "$#" -gt "0" &&
-            exec alacritty -e $@ ||
+            exec alacritty -e "$cmd $@" ||
             exec alacritty
     } & exit
 # {%@@ else @@%} #
     command -v kitty > /dev/null &&
-        exec kitty $@
+        exec kitty $cmd "$@"
 # {%@@ endif @@%} #
 
 notify-send "Error" "Terminal program missing"
