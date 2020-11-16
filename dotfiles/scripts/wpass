@@ -25,7 +25,7 @@ main() {
     password_files=( "${password_files[@]#"$prefix"/}" )
     password_files=( "${password_files[@]%.gpg}" )
 
-    entry=`printf '%s\n' "${password_files[@]}" | "$dmenu" -p Password $@`
+    entry=`printf '%s\n' "${password_files[@]}" | "$dmenu" -p "Password" $@`
 
     [ -n "$entry" ] || exit
 

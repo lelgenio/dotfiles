@@ -4,10 +4,10 @@ test -n "$SWAYSOCK" && swaymsg fullscreen off > /dev/null
 
 # {%@@ if launcher == "wofi" @@%} #
 which wofi &> /dev/null &&
-    exec wofi -d $argv
+    exec wofi -d $@
 # {%@@ else @@%} #
 which bemenu &> /dev/null &&
-    exec bmenu $argv
+    exec bmenu $@
 # {%@@ endif @@%} #
 
 notify-send "Error" "Launcher program missing"

@@ -35,12 +35,19 @@ map global find 'r' ': find_ripgrep<ret>' -docstring 'ripgrep all file'
 map global find 'g' ': find_git_file<ret>' -docstring 'git files'
 map global find 'c' ': find_dir<ret>' -docstring 'change dir'
 map global find 'b' ': find_buffer<ret>' -docstring 'find buffer'
+map global find 'd' ': find_delete<ret>' -docstring 'file to delete'
 
 
 define-command -hidden find_file \
 %{ edit -existing %sh{
-    test "$PWD" -eq "$HOME" || args="-H"
+    test "$PWD" -ne "$HOME" && args="-H"
     fd -tf "$args" | sed "/.git\//d" | wdmenu
+} }
+
+define-command -hidden find_delete \
+%{ nop %sh{
+    test "$PWD" -ne "$HOME" && args="-H"
+    fd -tf "$args" | sed "/.git\//d" | wdmenu | xargs trash
 } }
 
 define-command -hidden find_git_file \
@@ -56,8 +63,9 @@ define-command -hidden find_buffer \
 
 define-command -hidden find_ripgrep \
 %{ eval %sh{
-    rg -n . | wdmenu |
-        perl -ne 'print "edit \"$1\" \"$2\" " if /(.+):(\d+):/'
+    patter=$( wdmenu -p "Regex")
+    rg --column -n "$patter" | wdmenu |
+        perl -ne 'print "edit \"$1\" \"$2\" \"$3\" " if /(.+):(\d+):(\d+):/'
 } }
 
 
