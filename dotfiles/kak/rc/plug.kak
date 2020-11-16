@@ -17,7 +17,7 @@ plug "kak-lsp/kak-lsp" do %{
     cargo install --locked --force --path .
 }
 
-def -hidden insert-c-n %{
+def -hidden complete-snippets %{
  try %{
    lsp-snippets-select-next-placeholders
    # exec '<a-;>d'
@@ -25,4 +25,4 @@ def -hidden insert-c-n %{
    exec -with-hooks '<c-n>'
  }
 }
-map global insert <c-n> "<a-;>: insert-c-n<ret>"
+map global insert <c-e> "<a-;>: complete-snippets<ret>"
