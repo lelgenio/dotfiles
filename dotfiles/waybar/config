@@ -19,6 +19,7 @@
         "custom/torrentD",
         "custom/torrentS",
         "custom/updates",
+        "custom/caffeine",
         "pulseaudio",
         "network",
         "battery"
@@ -149,7 +150,14 @@
         "exec":"transmission-remote -l | grep Seeding| wc -l | sed 's/^0$//'",
         "exec-if":"pidof transmission-daemon",
         "interval":180
-    }
+    },
+    "custom/caffeine":{
+        "format":"{} ",
+        "exec":"pidof caffeinated &>/dev/null &&echo 零||echo 鈴",
+        "on-click":"pidof caffeinated &&pkill caffeinated||caffeinated -d ",
+        "interval": 1
+    },
+
 
 
 }
