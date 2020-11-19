@@ -2,6 +2,7 @@ show=drun
 prompt=Iniciar:
 allow_images=true
 allow_markup=true
+no-actions=true
 term=terminal
 insensitive=true
 width=800
