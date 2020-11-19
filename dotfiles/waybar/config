@@ -153,12 +153,10 @@
     },
     "custom/caffeine":{
         "format":"{} ",
-        "exec":"pidof caffeinated &>/dev/null &&echo 零||echo 鈴",
+        "exec":"pidof caffeinated &>/dev/null &&echo  ||echo 鈴",
         "on-click":"pidof caffeinated &&pkill caffeinated||caffeinated -d ",
         "interval": 1
     },
-
-
 
 }
 // vim:ft=json

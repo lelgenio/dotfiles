@@ -78,7 +78,8 @@ window#waybar.empty {
 #custom-updates,
 #custom-weather,
 #custom-torrentD,
-#custom-torrentS
+#custom-torrentS,
+#custom-caffeine
 {
     margin: 0 7px;
     color: {{@@ color.txt @@}};
@@ -95,7 +96,8 @@ window#waybar.empty {
     font-size: {{@@ font.size.big @@}}px;
 }
 #network,
-#pulseaudio
+#pulseaudio,
+#custom-caffeine
 {
     margin-top:-1px;
     font-size:16px;
@@ -117,4 +119,9 @@ window#waybar.empty {
 #mpd.paused {
     font-size: 0;
     border: none;
+}
+
+#tray {
+    padding: 0;
+    margin: 0;
 }
