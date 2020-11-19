@@ -36,18 +36,19 @@ delete(){
 }
 
 usage(){
+    cmdname=$(basename "$0")
     echo "Commands: "
-    echo "  $0 search     -- searches the current playlist for songs and plays it"
-    echo "  $0 delete     --  prompts to delete the current song"
+    echo "  $cmdname search     -- Searches the current playlist for songs and plays it."
+    echo "  $cmdname delete     -- Prompts to delete the current song."
 }
 
-if [ "$1" = "delete" ]
-then
-    delete
-elif [ "$1" = "search" ]
-then
-    search
-else
-    usage
-    search
-fi
+case "$1" in
+    delete)
+        delete ;;
+    search)
+        search ;;
+    *)
+        usage
+        search
+        ;;
+esac
