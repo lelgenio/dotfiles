@@ -122,8 +122,8 @@
         "format": "{} ",
         "interval": 60,
         "exec-if":"sleep 60s",
-        "exec": "yay -Qqu | wc -l | sed 's/^0$//'",
-        "on-click": "terminal sh -c 'ping -qc1 archlinux.org >/dev/null && yay -Syu || yay -Su; pkill -SIGRTMIN+8 waybar; read'",
+        "exec": "pacman -Qqu | wc -l | sed 's/^0$//'",
+        "on-click": "terminal sh -c 'ping -qc1 archlinux.org >/dev/null && pacman -Syu || pacman -Su; pkill -SIGRTMIN+8 waybar; read'",
         "signal": 8
     },
     "custom/recording": {
