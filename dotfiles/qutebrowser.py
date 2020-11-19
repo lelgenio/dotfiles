@@ -319,6 +319,19 @@ config.bind(key.up, "move-to-prev-line", mode="caret")
 config.bind(key.down, "move-to-next-line", mode="caret")
 config.bind(key.right, "move-to-next-char", mode="caret")
 
+# devtools
+config.unbind("wIh")
+config.unbind("wIj")
+config.unbind("wIk")
+config.unbind("wIl")
+
+config.bind("wIf", "devtools-focus")
+config.bind("wIw", "devtools window")
+config.bind("wI" + key.left,  "devtools left")
+config.bind("wI" + key.down,  "devtools bottom")
+config.bind("wI" + key.up,    "devtools top")
+config.bind("wI" + key.right, "devtools right")
+
 # }}}
 
 # vim: fdm=marker
