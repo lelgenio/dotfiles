@@ -11,7 +11,7 @@ default_calendar = calendar_local
 
 [locale]
 timeformat = %H:%M
-dateformat = %d
+dateformat = %d/%m
 longdateformat = %d/%m/%Y
 datetimeformat = %H:%M %d/%m
 longdatetimeformat = %H:%M %d/%m/%Y
