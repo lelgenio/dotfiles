@@ -11,6 +11,7 @@ variables:
   cursor_size: 24
   launcher: bmenu
   terminal: kitty
+  file_manager: thunar
   bar: waybar
   bar_pos: top
 
