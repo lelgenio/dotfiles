@@ -275,6 +275,10 @@ dotfiles: # {{{
     dst: ~/.local/share/metapkg/PKGBUILD
     actions:
     - install_meta
+  bat:
+    src: bat
+    dst: ~/.config/bat/config
+
 
 # }}}
 actions: #{{{

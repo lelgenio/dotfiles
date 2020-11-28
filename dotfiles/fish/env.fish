@@ -39,9 +39,8 @@ set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 # Fzf settings
 ################################################################
 
-{%@@ set bat_command = "bat " + ("--theme GitHub" * (color.type == "light")) @@%}
 set -x FZF_DEFAULT_OPTS "\
---preview '{{@@ bat_command @@}} --style=numbers --color=always {}' \
+--preview 'bat --style=numbers --color=always {}' \
 --color='\
 bg+:{{@@ color.bg_light @@}},\
 hl+:{{@@ color.normal.green @@}},\

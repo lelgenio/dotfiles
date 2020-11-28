@@ -34,9 +34,8 @@ alias crm 'command rm -i'
 
 command -qs exa &&
     alias ls 'exa --git'
-{%@@ set bat_command = "bat " + ("--theme GitHub" * (color.type == "light")) @@%}
 command -qs bat &&
-    alias cat "{{@@ bat_command @@}}"
+    alias cat "bat"
 
 ################################################################
 # The ever usefull "z" command
