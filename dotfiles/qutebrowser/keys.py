@@ -55,7 +55,7 @@ if key_layout == "colemak":
     edbind("T", "hint all tab")
     edbind("H", "set-cmd-text -s :open -t")
 
-    c.hints.chars = "asrtdhneio"
+    c.hints.chars = "arstwfuyneio"
 
 elif key_layout == "dvorak":
     c.hints.chars = "aoeuidnths"
