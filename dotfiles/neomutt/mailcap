@@ -1,4 +1,4 @@
-text/html; xdg-open %s ; nametemplate=%s.htmlimage/*; xdg-open %s ;
+text/html; xdg-open %s ; nametemplate=%s.html
 text/plain; $EDITOR %s ;
 
 image/*; xdg-open %s &;
