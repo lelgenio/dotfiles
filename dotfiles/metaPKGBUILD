@@ -24,7 +24,7 @@ depends=(
         dotdrop
 
     # Packages
-    pkgfile yay
+    pkgfile paru
 
     # passwords and auth
     pass gnupg pam-gnupg
