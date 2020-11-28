@@ -270,6 +270,12 @@ dotfiles: # {{{
   kakoune:
     src: kak
     dst: ~/.config/kak
+  packages:
+    src: metaPKGBUILD
+    dst: ~/.local/share/metapkg/PKGBUILD
+    actions:
+    - install_meta
+
 # }}}
 actions: #{{{
   notify: notify-send "Updating dotfiles" "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}"
@@ -309,5 +315,7 @@ actions: #{{{
   pam_gpg: _pam-gpg-strap
   make_theme:
     ~/.local/bin/_make_theme
+  install_meta:
+    ~/.local/bin/install_meta
 # }}}
 # vim: fdm=marker

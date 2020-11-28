@@ -1,0 +1,30 @@
+#!/bin/sh
+
+set -e
+
+command -v makepkg &> /dev/null ||
+    exit 1
+
+install_pikaur(){
+    PIKDIR="$HOME/.cache/pikaur/build/pikaur"
+    test -d "$PIKDIR" ||
+        git clone \
+            https://aur.archlinux.org/pikaur.git \
+            "$PIKDIR"
+
+    cd "$PIKDIR"
+
+    makepkg -si --noconfirm --needed
+}
+
+command -v pikaur &> /dev/null ||
+    install_pikaur
+
+cd "$HOME/.local/share/metapkg/"
+
+pikaur \
+    --pkgbuild \
+    --install \
+    --rebuild \
+    --noconfirm \
+    --keepbuilddep
