@@ -20,7 +20,8 @@ set -x PAGER less
 
 
     # keep my dirs clean
-    set -x PYTHONPYCACHEPREFIX $HOME/.cache/python
+    set -x PYTHONPYCACHEPREFIX "$HOME/.cache/python"
+    set -x MYPY_CACHE_DIR "$HOME/.cache/mypy"
 
 # end
 
