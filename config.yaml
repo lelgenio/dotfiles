@@ -157,8 +157,8 @@ dotfiles: # {{{
     actions:
     - reload_sway
   fish:
-    src: fish.fish
-    dst: ~/.config/fish/config.fish
+    src: fish
+    dst: ~/.config/fish
     actions:
     - reload_fish
   mako:
