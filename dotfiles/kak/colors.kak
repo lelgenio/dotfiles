@@ -38,14 +38,14 @@ face global Default default,default
 
 face global PrimaryCursor      default,{{@@ accent @@}}+fg
 face global PrimaryCursorEol   PrimaryCursor
-face global PrimarySelection   white,black+fg
+face global PrimarySelection   default,{{@@ bg_light @@}}+fg
 
 face global SecondaryCursor    default,default+rfg
 face global SecondaryCursorEol SecondaryCursor
-face global SecondarySelection white,black+fg
+face global SecondarySelection default,{{@@ bg_light @@}}+fg
 
-face global MenuForeground white,{{@@ accent @@}}
-face global MenuBackground white,{{@@ bg_dark @@}}
+face global MenuForeground default,{{@@ accent @@}}
+face global MenuBackground default,{{@@ bg_dark @@}}
 face global MenuInfo cyan
 
 face global Information default,{{@@ bg_dark @@}}
