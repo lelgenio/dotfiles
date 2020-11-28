@@ -25,14 +25,6 @@ class key:
     next = "{{@@ key.next @@}}"
 
 
-def edbind(k, v):
-    if "{{@@ editor @@}}" == "kak":
-        config.bind("<Alt-{}>".format(k), v)
-        config.bind(k.upper(), "nop")
-    else:
-        config.bind(k.upper(), v)
-
-
 ##########################################################
 # Usermode
 ##########################################################
@@ -43,6 +35,7 @@ config.bind(",r", "spawn --userscript readability")
 config.bind(";e", "hint links spawn deemix '{hint-url}'")
 config.bind(";m", "hint links spawn mpv --fs {hint-url}")
 
+
 ##########################################################
 # Layout specific
 ##########################################################
@@ -52,8 +45,8 @@ if key_layout == "colemak":
     config.bind("t", "hint all")
     config.bind("h", "set-cmd-text -s :open")
 
-    edbind("T", "hint all tab")
-    edbind("H", "set-cmd-text -s :open -t")
+    config.bind("T".upper(), "hint all tab")
+    config.bind("H".upper(), "set-cmd-text -s :open -t")
 
     c.hints.chars = "arstwfuyneio"
 
@@ -81,7 +74,8 @@ for k, v in {
     key.tabL: "tab-prev",
     key.tabR: "tab-next",
 }.items():
-    edbind(k, v)
+    config.bind(k.upper(), v)
+
 
 ##########################################################
 # Insert mode
@@ -91,6 +85,7 @@ config.bind(key.insert, "enter-mode insert")
 
 c.input.insert_mode.auto_leave = False
 
+
 ##########################################################
 # Caret mode
 ##########################################################
@@ -99,6 +94,7 @@ config.bind(key.left, "move-to-prev-char", mode="caret")
 config.bind(key.up, "move-to-prev-line", mode="caret")
 config.bind(key.down, "move-to-next-line", mode="caret")
 config.bind(key.right, "move-to-next-char", mode="caret")
+
 
 ##########################################################
 # devtools

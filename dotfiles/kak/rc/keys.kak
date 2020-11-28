@@ -24,14 +24,6 @@
     map global normal <a-{{@@ NEW @@}}> <a-{{@@ OLD @@}}>
 {%@@ endfor @@%}
 
-{%@@ for old, new in {
-        "j": key.down,
-        "k": key.up,
-    }.items() @@%}
-    map global normal <a-{{@@ new @@}}> 10{{@@ old @@}}
-    map global normal <a-{{@@ new.upper() @@}}> 10{{@@ old.upper() @@}}
-{%@@ endfor @@%}
-
 {%@@ if key.layout == 'colemak' @@%}
     map global normal k s
     map global normal K S

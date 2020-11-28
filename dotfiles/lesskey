@@ -1,15 +1,8 @@
 {{@@ key.up           @@}}  back-line
 {{@@ key.down         @@}}  forw-line
 
-
-# {%@@ if editor == "kak" @@%} #
-\e{{@@ key.up   @@}}  back-scroll
-\e{{@@ key.down @@}}  forw-scroll
-# {%@@ else @@%} #
 {{@@ key.up  .upper() @@}}  back-scroll
 {{@@ key.down.upper() @@}}  forw-scroll
-# {%@@ endif @@%} #
-
 
 {{@@ key.next         @@}}  repeat-search
 {{@@ key.next.upper() @@}}  reverse-search

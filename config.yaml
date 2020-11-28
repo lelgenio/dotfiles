@@ -9,6 +9,8 @@ variables:
   username: lelgenio
   mail: disroot.org
   cursor_size: 24
+  editor: kak
+  key_layout: colemak
   launcher: bmenu
   terminal: kitty
   file_manager: thunar
@@ -139,16 +141,8 @@ config: # {{{
   func_file:
   - funcs.py
 dynvariables:
-  key_layout: |
-    if test -n "$_KEYBOARD_LAYOUT"; then
-      echo "$_KEYBOARD_LAYOUT"
-    else
-      grep lelgenio /etc/passwd &>/dev/null &&
-        echo colemak || echo qwerty
-    fi
   color_type: test -n "$_COLOR_TYPE" && echo "$_COLOR_TYPE" || echo dark
   accent_color_name: test -n "$_ACCENT_COLOR" && echo "$_ACCENT_COLOR" || echo red
-  editor: test -n "$EDITOR" && echo "$EDITOR" || echo nvim
   blender_version: blender --version | head -n1 | sed -E 's|^Blender (.*)\..*|\1|g'
 # }}}
 dotfiles: # {{{
