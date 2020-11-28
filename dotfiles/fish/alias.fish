@@ -7,6 +7,7 @@
 
 abbr mpn ncmpcpp
 abbr dot "dotdrop install -f"
+abbr p   "paru"
 
 ################################################################
 # Editor
