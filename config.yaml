@@ -11,7 +11,7 @@ variables:
   cursor_size: 24
   editor: kak
   key_layout: colemak
-  launcher: bmenu
+  launcher: wofi
   terminal: kitty
   file_manager: thunar
   bar: waybar
@@ -57,9 +57,9 @@ profiles:
         type: light
         bg: '#FAFAFA'
         bg_light: '#A0A0A0'
-        bg_dark: '#999999'
+        bg_dark: '#EAEAEA'
         txt: '#303030'
-        nontxt: '#A0A0A0'
+        nontxt: '#F0F0F0'
 
         normal:
           black: '#555555'
