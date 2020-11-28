@@ -183,8 +183,8 @@ dotfiles: # {{{
     actions:
     - reload_fish
   qutebrowser:
-    src: qutebrowser.py
-    dst: ~/.config/qutebrowser/config.py
+    src: qutebrowser
+    dst: ~/.config/qutebrowser
   lesskey:
     src: lesskey
     dst: ~/.lesskey

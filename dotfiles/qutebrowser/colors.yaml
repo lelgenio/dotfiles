@@ -1,0 +1,126 @@
+colors:
+    ########################################################
+    # Tabs
+    ########################################################
+    tabs:
+        bar:
+            bg: "{{@@ color.bg @@}}"
+        odd:
+            bg: "{{@@ color.bg @@}}"
+            fg: "{{@@ color.txt @@}}"
+        even:
+            bg: "{{@@ color.bg_dark @@}}"
+            fg: "{{@@ color.txt @@}}"
+        selected:
+            odd:
+                bg: "{{@@ accent_color @@}}"
+                fg: "{{@@ color.txt @@}}"
+            even:
+                bg: "{{@@ accent_color @@}}"
+                fg: "{{@@ color.txt @@}}"
+        pinned:
+            selected:
+                odd:
+                    bg: "{{@@ color.bg @@}}"
+                even:
+                    bg: "{{@@ color.bg_dark @@}}"
+    ########################################################
+    # Completion for urls and commands
+    ########################################################
+    completion:
+        fg: "{{@@ color.txt @@}}"
+        even:
+            bg: "{{@@ color.bg @@}}"
+        odd:
+            bg: "{{@@ color.bg @@}}"
+        scrollbar:
+            bg: "{{@@ color.bg_light @@}}"
+        category:
+            fg: "{{@@ color.txt @@}}"
+            bg: "{{@@ color.bg_light @@}}"
+            border:
+                top: "{{@@ color.bg_dark @@}}"
+                bottom: "{{@@ color.bg_dark @@}}"
+        item:
+            selected:
+                fg: "{{@@ color.txt @@}}"
+                bg: "{{@@ accent_color @@}}"
+                border:
+                    top: "{{@@ color.bg_dark @@}}"
+                    bottom: "{{@@ color.bg_dark @@}}"
+                match:
+                    fg: "{{@@ color.txt @@}}"
+    ########################################################
+    # Statusbar
+    ########################################################
+    statusbar:
+        normal:
+            fg: "{{@@ color.txt @@}}"
+            bg: "{{@@ color.bg @@}}"
+        insert:
+            fg: "{{@@ color.normal.green @@}}"
+            bg: "{{@@ color.bg @@}}"
+        command:
+            fg: "{{@@ color.txt @@}}"
+            bg: "{{@@ color.bg @@}}"
+        caret:
+            selection:
+                bg: "{{@@ accent_color @@}}"
+        url:
+            success:
+                https:
+                    fg: "{{@@ color.txt @@}}"
+                    fg: "{{@@ color.normal.yellow @@}}"
+            hover:
+                fg: "{{@@ color.normal.cyan @@}}"
+    ########################################################
+    # Downloads
+    ########################################################
+    downloads:
+        start:
+            bg: "{{@@ color.normal.blue @@}}"
+        stop:
+            bg: "{{@@ color.normal.green @@}}"
+        bar:
+            bg: "{{@@ color.bg @@}}"
+    ########################################################
+    # Choice of what element should be clicked
+    ########################################################
+    hints:
+        fg: "{{@@ color.txt @@}}"
+        bg: "{{@@ color.bg @@}}"
+        match:
+            fg: "{{@@ accent_color @@}}"
+    ########################################################
+    # List of what each keybinding does
+    ########################################################
+    keyhint:
+        fg: "{{@@ color.txt @@}}"
+        bg: "rgba({{@@ hex2rgb(color.bg) @@}}, {{@@ opacity @@}})"
+        suffix:
+            fg: "{{@@ accent_color @@}}"
+    ########################################################
+    # Right click menu
+    ########################################################
+    contextmenu:
+        menu:
+            bg: "{{@@ color.bg @@}}"
+            fg: "{{@@ color.txt @@}}"
+        selected:
+            bg: "{{@@ accent_color @@}}"
+        disabled:
+            fg: "{{@@ color.bg_light @@}}"
+
+    ########################################################
+    # Dark theme
+    ########################################################
+    # {%@@ if color.type == "dark" @@%} #
+    webpage:
+        bg: "{{@@ color.bg @@}}"
+        prefers_color_scheme_dark: True
+        darkmode:
+            enabled: True
+            threshold:
+                background: {{@@ 256 // 2 @@}}
+                text: {{@@ 256 // 2 @@}}
+    # {%@@ endif @@%}
