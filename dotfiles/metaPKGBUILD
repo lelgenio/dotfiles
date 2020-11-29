@@ -50,8 +50,8 @@ depends=(
         ranger atool p7zip tree jq fzf
         neofetch htop
         # Replacements
-        #ls cat rm -rf    grep    find sed cd
-        exa bat trash-cli ripgrep fd   sd  zoxide
+        #ls cat rm -rf    grep    find sed diff  cd
+        exa bat trash-cli ripgrep fd   sd  diffr zoxide
 
     # Network
         iwd dhcpcd

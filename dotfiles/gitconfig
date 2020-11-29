@@ -10,6 +10,6 @@
 
 [pager]
     # diff-highlight is script provided by git that shows word-by-word diff
-    log  = perl /usr/share/git/diff-highlight/diff-highlight | less
-    show = perl /usr/share/git/diff-highlight/diff-highlight | less
-    diff = perl /usr/share/git/diff-highlight/diff-highlight | less
+    log  = diffr | less
+    show = diffr | less
+    diff = diffr | less
