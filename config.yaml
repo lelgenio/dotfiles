@@ -11,7 +11,7 @@ variables:
   cursor_size: 24
   editor: kak
   key_layout: colemak
-  launcher: wofi
+  launcher: bmenu
   terminal: kitty
   file_manager: thunar
   bar: waybar
