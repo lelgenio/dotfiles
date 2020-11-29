@@ -69,7 +69,7 @@ add-highlighter global/ show-whitespaces
 face global Whitespace {{@@ nontxt @@}},default+f
 face global BufferPadding {{@@ nontxt @@}},default
 # highlight trailing whitespace
-add-highlighter global/ regex '\h*$' 0:red,red+g
+# add-highlighter global/ regex '\h*$' 0:red,red+g
 
 
 # Lsp
