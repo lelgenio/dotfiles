@@ -64,6 +64,7 @@ face global MatchingChar default,default+b
 add-highlighter global/ number-lines -relative -hlcursor
 face global LineNumbers      {{@@ bg_light @@}},default
 face global LineNumberCursor white,{{@@ bg_dark @@}}
+face global LineNumbersWrapped  red,default
 
 add-highlighter global/ show-whitespaces
 face global Whitespace {{@@ nontxt @@}},default+f

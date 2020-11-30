@@ -1,9 +1,5 @@
 # {{@@ header() @@}}
 
-# not exactly hooks but ok
-set global tabstop 4
-set global scrolloff 8,8
-
 # use spaces insted of tabs
 hook global InsertChar \t %{ exec -draft -itersel h@ } -group kakrc-replace-tabs-with-spaces
 
