@@ -2,7 +2,7 @@
 
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
-{%@@ for p in [ 'prelude', 'auto-pairs', 'manual-indent' ] @@%}
+{%@@ for p in [ 'prelude', 'auto-pairs', ] @@%}
     plug 'alexherbo2/{{@@ p @@}}.kak'
     require-module '{{@@ p @@}}'
 {%@@ endfor @@%}

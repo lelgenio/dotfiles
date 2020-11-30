@@ -18,10 +18,6 @@ hook global BufOpenFile .* %{
     lsp-enable
 }
 
-hook global WinCreate .* %{
-    manual-indent-enable
-}
-
 #completion with tab
 hook global InsertCompletionShow .* %{ try %{
     execute-keys -draft 'h<a-K>\h<ret>'
