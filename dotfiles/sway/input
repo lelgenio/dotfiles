@@ -26,4 +26,4 @@ input * {
     xkb_numlock enabled
 }
 
-# vim: ft=sh
+# vim: ft=i3

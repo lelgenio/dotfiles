@@ -70,4 +70,4 @@ XF86HomePage    exec xdg-open http://start.duckduckgo.com
 
 }
 
-# vim: ft=sh
+# vim: ft=i3

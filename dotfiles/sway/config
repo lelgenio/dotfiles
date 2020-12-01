@@ -49,6 +49,4 @@ include daemons
 
 include /etc/sway/config.d/
 
-# vim:ft=sh
-
-
+# vim:ft=i3

@@ -87,4 +87,4 @@ exec_always {
 seat * xcursor_theme "{{@@ cursor_theme @@}}" "{{@@ cursor_size @@}}"
 
 
-# vim: ft=sh
+# vim: ft=i3

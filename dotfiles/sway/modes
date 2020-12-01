@@ -45,4 +45,4 @@ mode Passthrough {
 }
 bindsym $mod+escape mode Passthrough
 
-# vim: ft=sh
+# vim: ft=i3

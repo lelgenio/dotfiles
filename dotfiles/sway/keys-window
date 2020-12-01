@@ -76,4 +76,4 @@ $mod+z focus child
 
 }
 
-# vim: ft=sh
+# vim: ft=i3
