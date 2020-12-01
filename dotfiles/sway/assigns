@@ -1,0 +1,33 @@
+# {{@@ header() @@}}
+#  _____      ____ _ _   _
+# / __\ \ /\ / / _` | | | |
+# \__ \\ V  V / (_| | |_| |
+# |___/ \_/\_/ \__,_|\__, |
+#                    |___/
+
+###############################################################
+# Assigns
+###############################################################
+
+for_window [app_id=pavucontrol] floating enable
+
+for_window [app_id=weather] fullscreen
+
+
+###############################################################
+# Workspaces
+###############################################################
+
+assign [app_id=qutebrowser] workspace 2
+assign [class=qutebrowser] workspace 2
+
+assign [class=Steam] workspace 9
+assign [title=^steam] workspace 9
+
+assign [app_id=telegram.?desktop] workspace 10
+assign [class=TelegramDesktop] workspace 10
+
+assign [class=discord] workspace 10
+
+
+# vim: ft=sh

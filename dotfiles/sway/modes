@@ -1,0 +1,48 @@
+# {{@@ header() @@}}
+#  _____      ____ _ _   _
+# / __\ \ /\ / / _` | | | |
+# \__ \\ V  V / (_| | |_| |
+# |___/ \_/\_/ \__,_|\__, |
+#                    |___/
+
+set $dexec mode default;exec
+
+###############################################################
+# Music
+###############################################################
+
+bindsym $mod+m mode Music
+mode Music bindsym {
+
+    m                   exec volumesh -t
+    {{@@ key.tabL  @@}} exec volumesh -d 10
+    {{@@ key.tabR  @@}} exec volumesh -i 10
+
+    {{@@ key.right @@}} exec mpc next
+    {{@@ key.left  @@}} exec mpc prev
+    {{@@ key.up    @@}} exec volumesh --mpd -i 10
+    {{@@ key.down  @@}} exec volumesh --mpd -d 10
+
+    space $dexec mpc toggle
+    p     $dexec mpc toggle
+
+    d $dexec musmenu delete
+    f $dexec musmenu search
+    a $dexec dzadd
+    s $dexec pulse-sink
+
+    escape mode default
+    q      mode default
+
+}
+
+###############################################################
+# Passthrough
+###############################################################
+
+mode Passthrough {
+    bindsym $mod+escape mode default
+}
+bindsym $mod+escape mode Passthrough
+
+# vim: ft=sh

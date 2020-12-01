@@ -1,0 +1,79 @@
+# {{@@ header() @@}}
+#  _____      ____ _ _   _
+# / __\ \ /\ / / _` | | | |
+# \__ \\ V  V / (_| | |_| |
+# |___/ \_/\_/ \__,_|\__, |
+#                    |___/
+
+bindsym {
+
+###############################################################
+# Moving around
+###############################################################
+
+# Move your focus around
+{%@@ for dir in "up,down,left,right".split(',') @@%}
+    {%@@ set DIR = dir.capitalize() @@%}
+    $mod+${{@@       dir @@}} focus {{@@ dir @@}}
+    $mod+{{@@        DIR @@}} focus {{@@ dir @@}}
+    $mod+Shift+${{@@ dir @@}} move  {{@@ dir @@}}
+{%@@ endfor @@%}
+
+# Resizing containers:
+$mod+Control+$left  resize shrink width  20px
+$mod+Control+$down  resize grow   height 20px
+$mod+Control+$up    resize shrink height 20px
+$mod+Control+$right resize grow   width  20px
+
+
+###############################################################
+# Workspaces
+###############################################################
+
+# Switch to workspace
+# Move focused container to workspace
+{%@@ for i in range(1,11) @@%}
+    $mod+{{@@       i%10 @@}} workspace {{@@                i @@}}
+    $mod+Shift+{{@@ i%10 @@}} move container workspace {{@@ i @@}}
+{%@@ endfor @@%}
+
+# go/move to Workspaces
+# button8,9 = Mouse next/prev button
+{%@@ for targ, buttons in {
+    "prev_on_output": [ key.tabL, "bracketleft",  "button9", ],
+    "next_on_output": [ key.tabR, "bracketright", "button8", ],
+}.items() @@%}
+{%@@ for button in buttons @@%}
+    {%@@ set pref = ("--whole-window " if "button" in button) @@%}
+    {{@@ pref @@}}$mod+{{@@       button @@}}      workspace {{@@ targ @@}}
+    {{@@ pref @@}}$mod+Shift+{{@@ button @@}} move workspace {{@@ targ @@}}
+{%@@ endfor @@%}
+{%@@ endfor @@%}
+
+
+###############################################################
+# Layout
+###############################################################
+
+# Splits
+$mod+v splitv
+# No splith since we can just mod+r
+
+# Layout styles
+$mod+t layout tabbed
+$mod+r layout toggle split
+
+# Make the current focus fullscreen
+$mod+f fullscreen
+
+# Floating
+$mod+Shift+space floating toggle
+$mod+space focus mode_toggle
+
+# Move focus to the parent container
+$mod+a focus parent
+$mod+z focus child
+
+}
+
+# vim: ft=sh

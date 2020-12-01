@@ -1,0 +1,29 @@
+# {{@@ header() @@}}
+#  _____      ____ _ _   _
+# / __\ \ /\ / / _` | | | |
+# \__ \\ V  V / (_| | |_| |
+# |___/ \_/\_/ \__,_|\__, |
+#                    |___/
+
+# Hide the mouse after 10 seconds
+seat * hide_cursor 10000
+
+input "type:touchpad" {
+    # Disable While Typing
+    dwt disabled
+    natural_scroll enabled
+    tap enabled
+}
+
+input * {
+    {%@@ if key_layout == "colemak" @@%}
+        xkb_layout "us(colemak),br"
+        xkb_options "lv3:lsgt_switch,grp:shifts_toggle"
+    {%@@ elif key_layout == "dvorak" @@%}
+        xkb_layout "us(dvorak)"
+    {%@@ endif @@%}
+    xkb_options caps:backspace
+    xkb_numlock enabled
+}
+
+# vim: ft=sh

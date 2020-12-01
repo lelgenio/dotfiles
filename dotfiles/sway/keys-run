@@ -1,0 +1,42 @@
+# {{@@ header() @@}}
+#  _____      ____ _ _   _
+# / __\ \ /\ / / _` | | | |
+# \__ \\ V  V / (_| | |_| |
+# |___/ \_/\_/ \__,_|\__, |
+#                    |___/
+
+bindsym {
+
+# Start a terminal
+$mod+Return exec terminal
+
+#start web browser
+$mod+b exec qutebrowser
+
+#start file manager
+$mod+Control+Return exec {{@@ file_manager @@}}
+
+# Insert special characters
+$mod+g exec emoji
+
+# Kill focused window
+$mod+x kill
+
+# Start your launcher
+$mod+$menu exec launcher
+
+# Fill passwords
+$mod+p exec wpass
+
+# Reload the configuration file
+$mod+Shift+c reload
+
+# Lock Sway and suspend
+--locked $mod+Control+z exec loginctl suspend || systemctl suspend
+
+# Exit sway
+Control+Alt+delete exit
+
+}
+
+# vim: ft=sh

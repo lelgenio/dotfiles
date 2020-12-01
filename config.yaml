@@ -152,8 +152,8 @@ dotfiles: # {{{
     actions:
     - vimplug
   sway:
-    src: sway.conf
-    dst: ~/.config/sway/config
+    src: sway
+    dst: ~/.config/sway
     actions:
     - reload_sway
   fish:

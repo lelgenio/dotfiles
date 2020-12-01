@@ -1,0 +1,81 @@
+# {{@@ header() @@}}
+#  _____      ____ _ _   _
+# / __\ \ /\ / / _` | | | |
+# \__ \\ V  V / (_| | |_| |
+# |___/ \_/\_/ \__,_|\__, |
+#                    |___/
+
+###############################################################
+# User Programs
+###############################################################
+
+# kde connect
+exec /usr/lib/kdeconnectd
+exec kdeconnect-indicator
+# Telegram
+exec telegram-desktop-bin || telegram-desktop
+# Music Player Daemon
+exec pidof mpd || mpd
+exec pgrep -f mpDris2|| mpDris2
+
+
+###############################################################
+# Screen locking
+###############################################################
+
+# Lock configuration
+set $lock \
+    pkill caffeinated;\
+    swaylock -f \
+        --image $wallPath \
+        --font '{{@@ font.interface @@}}' \
+
+set $screenReload \
+    pkill kanshi; \
+    kanshi & disown\
+
+###############################################################
+# System Daemons
+###############################################################
+
+# start dbusd just in case
+exec 'dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus'
+
+#Notification Daemon
+exec_always pidof mako || mako
+
+# Block device Mounter to /run/media/<username>
+exec udiskie
+
+# gesture daemon
+exec fusuma
+
+# Blue light filter
+exec_always pidof redshift || redshift
+
+# Screen manager
+exec_always $screenReload
+
+# Set minimum brightness to 1 instead of 0
+# not exactly a daemon
+exec light -N 1
+
+###############################################################
+# Idle
+###############################################################
+
+# Prevent the screen from locking if fullscreen
+for_window [title=.*] inhibit_idle fullscreen
+
+# Idle daemon
+exec_always pkill swayidle && false || \
+exec swayidle -w \
+   before-sleep '$lock' \
+       after-resume '$screenReload' \
+   timeout 360 '$lock' \
+       resume '$screenReload' \
+   timeout 1800 'swaymsg "output * dpms off"' \
+        resume 'swaymsg "output * dpms on";$screenReload' \
+
+
+# vim: ft=sh

@@ -1,0 +1,73 @@
+# {{@@ header() @@}}
+#  _____      ____ _ _   _
+# / __\ \ /\ / / _` | | | |
+# \__ \\ V  V / (_| | |_| |
+# |___/ \_/\_/ \__,_|\__, |
+#                    |___/
+
+bindsym {
+
+###############################################################
+# Screenshots
+###############################################################
+
+# Screens to file
+Print exec screenshotsh def
+
+# Screen area to file
+Shift+Print exec screenshotsh area
+
+# Screen area to clipboard
+Control+Shift+Print exec screenshotsh area-clip
+
+# Focused monitor to clipboard
+Control+Print exec screenshotsh clip
+
+# Screen recorder
+Control+Alt+Shift+r exec wf-recorder -a
+
+# Mirror selection as window
+$mod+Alt+r exec sssway
+
+# Color picker
+$mod+c exec color-picker
+
+# show keys being pressed
+$mod+k exec showkeys
+
+
+###############################################################
+# Audio
+###############################################################
+
+# Volume controll, script in dotfiles
+--locked    XF86AudioRaiseVolume exec  volumesh -i 10
+--locked    XF86AudioLowerVolume exec  volumesh -d 10
+--locked    XF86AudioMute        exec  volumesh -t
+
+# Media player controls
+--locked XF86AudioPlay  exec mpc toggle
+--locked XF86AudioNext  exec mpc next
+--locked XF86AudioPrev  exec mpc prev
+
+###############################################################
+# Backlight settings for laptops
+###############################################################
+
+XF86MonBrightnessUp   exec light -A 5
+XF86MonBrightnessDown exec light -U 5
+
+
+###############################################################
+# Special Keys
+###############################################################
+
+XF86Calculator  exec terminal ipython
+XF86Mail        exec terminal neomutt
+XF86Explorer    exec {{@@ file_manager @@}}
+XF86HomePage    exec xdg-open http://start.duckduckgo.com
+
+
+}
+
+# vim: ft=sh

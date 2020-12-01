@@ -1,0 +1,90 @@
+# {{@@ header() @@}}
+#  _____      ____ _ _   _
+# / __\ \ /\ / / _` | | | |
+# \__ \\ V  V / (_| | |_| |
+# |___/ \_/\_/ \__,_|\__, |
+#                    |___/
+
+
+###############################################################
+# Variables
+###############################################################
+
+set $accent     {{@@ accent_color @@}}
+set $fg_color   {{@@ color.txt @@}}
+set $bg_color   {{@@ color.bg_dark @@}}
+set $alert      #000000
+
+font {{@@ font.interface @@}}  {{@@ font.size.medium @@}}px
+output * bg $wallPath fill
+
+###############################################################
+# window decoration, aka border
+###############################################################
+
+default_border pixel 2px
+default_floating_border normal 2px
+
+#                       border      background  text        indicator   child_border
+client.focused          $accent     $accent     $fg_color   $accent     $accent
+client.focused_inactive $bg_color   $bg_color   $fg_color   $bg_color   $bg_color
+client.unfocused        $bg_color   $bg_color   $fg_color   $bg_color   $bg_color
+client.urgent           $alert      $alert      $fg_color   $alert      $alert
+
+
+###############################################################
+# Bar configuration
+###############################################################
+
+{%@@ if bar == "waybar" @@%}
+    # Wake up pulseaudio
+    exec pactl set-sink-volume @DEFAULT_SINK@ +0%
+
+    bar swaybar_command waybar
+{%@@ else @@%}
+    # I rarely use this
+    bar {
+        position {{@@ bar_pos @@}}
+        # status_command i3blocks
+
+        # gaps 5px
+        icon_theme {{@@ icon_theme @@}}
+
+        font {{@@ font.interface @@}} {{@@ font.size.medium @@}}px
+
+        colors {
+            statusline $fg_color
+            background $bg_color
+            focused_workspace $accent $bg_color $fg_color
+        }
+    }
+{%@@ endif @@%}
+
+###############################################################
+# Gaps
+###############################################################
+
+smart_gaps on
+smart_borders on
+
+gaps inner 5px
+
+
+###############################################################
+# Themes
+###############################################################
+
+set $gnome-schema org.gnome.desktop.interface
+exec_always {
+    # In case of errors, kvantummanager opens a window
+    # this is retarded
+    timeout 1s kvantummanager --set          '{{@@ kvantum_theme @@}}'
+    gsettings set $gnome-schema gtk-theme    '{{@@ gtk_theme     @@}}'
+    gsettings set $gnome-schema icon-theme   '{{@@ icon_theme    @@}}'
+    gsettings set $gnome-schema cursor-theme '{{@@ cursor_theme  @@}}'
+}
+
+seat * xcursor_theme "{{@@ cursor_theme @@}}" "{{@@ cursor_size @@}}"
+
+
+# vim: ft=sh

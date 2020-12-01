@@ -1,0 +1,54 @@
+# {{@@ header() @@}}
+#  _____      ____ _ _   _
+# / __\ \ /\ / / _` | | | |
+# \__ \\ V  V / (_| | |_| |
+# |___/ \_/\_/ \__,_|\__, |
+#                    |___/
+
+###############################################################
+# Variables
+###############################################################
+
+# Logo key.
+set $mod Mod4
+
+# mouse button for dragging.
+floating_modifier $mod normal
+
+# Home row direction keys, like vim
+set $left       {{@@ key.left @@}}
+set $down       {{@@ key.down @@}}
+set $up         {{@@ key.up @@}}
+set $right      {{@@ key.right @@}}
+set $menu       s
+set $mus        r
+
+set $wallPath\
+    {%@@ if color.type == 'dark' @@%}
+        ~/.local/share/wallpapers/assembly.png
+    {%@@ else @@%}
+        ~/.local/share/wallpapers/austria.jpg
+    {%@@ endif @@%}
+
+###############################################################
+# Includes
+###############################################################
+
+include input
+
+include visual
+
+include keys-window
+include keys-run
+include keys-special
+include modes
+
+include assigns
+include daemons
+
+
+include /etc/sway/config.d/
+
+# vim:ft=sh
+
+
