@@ -21,8 +21,11 @@ input * {
         xkb_options "lv3:lsgt_switch,grp:shifts_toggle"
     {%@@ elif key_layout == "dvorak" @@%}
         xkb_layout "us(dvorak)"
+        xkb_options "caps:backspace"
+    {%@@ else @@%}
+        xkb_options "caps:backspace"
     {%@@ endif @@%}
-    xkb_options caps:backspace
+
     xkb_numlock enabled
 }
 
