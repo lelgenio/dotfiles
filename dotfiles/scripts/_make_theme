@@ -2,7 +2,7 @@
 
 # Papirus Icon Theme
 {
-    if papirus-folders -l | grep "{{@@ accent_color_name @@}}"
+    if papirus-folders -l | grep "[^>] {{@@ accent_color_name @@}}"
     then
         notify-send "Switching Folder Color"
         papirus-folders -uC "{{@@ accent_color_name @@}}"
