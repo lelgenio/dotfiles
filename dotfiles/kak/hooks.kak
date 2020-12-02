@@ -4,7 +4,6 @@
 hook global InsertChar \t %{ exec -draft -itersel h@ } -group kakrc-replace-tabs-with-spaces
 
 hook global NormalIdle .* %{ try %{
-    lsp-highlight-references
     git show-diff
     palette-status
 } }
