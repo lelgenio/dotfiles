@@ -29,7 +29,7 @@ imageBgTransparent:             windowFg ;
 activeButtonBg:                 {{@@ accent_color @@}} ;
 activeButtonBgOver:             {{@@ accent_color @@}} ;
 activeButtonBgRipple:           {{@@ accent_color @@}} ;
-activeButtonFg:                 windowFg ;
+activeButtonFg:                 {{@@ color.nontxt @@}} ;
 activeButtonFgOver:             activeButtonFg ;
 activeButtonSecondaryFg:        windowBgRipple ;
 activeButtonSecondaryFgOver:    activeButtonSecondaryFg ;
@@ -189,17 +189,7 @@ stickerPanDeleteBg:             #000000cc ;
 stickerPanDeleteFg:             #525252f2 ;
 stickerPreviewBg:               {{@@ color.txt @@}} ;
 
-historyTextInFg:                {{@@ color.txt @@}} ;
-historyTextOutFg:               #000000 ;
-historyCaptionInFg:             historyTextInFg ;
-historyCaptionOutFg:            historyTextOutFg ;
-historyFileNameInFg:            historyTextInFg ;
-historyFileNameOutFg:           #000000 ;
-historyOutIconFg:               #000000 ;
-historyOutIconFgSelected:       #000000 ;
 historyIconFgInverted:          {{@@ color.txt @@}} ;
-historySendingOutIconFg:        {{@@ accent_color @@}} ;
-historySendingInIconFg:         {{@@ color.bg_light @@}} ;
 historySendingInvertedIconFg:   #ffffffc8 ;
 historySystemBg:                #89a0b47f ;
 historySystemBgSelected:        #bbc8d4a2 ;
@@ -232,34 +222,50 @@ historyScrollBg:                #00000000 ;
 historyScrollBgOver:            {{@@ color.bg_light @@}} ;
 
 
+msgOutBg:                       {{@@ accent_color @@}} ;
+msgOutBgSelected:               msgOutBg ;
+msgOutDateFg:                   {{@@ color.bg_dark @@}} ;
+msgOutDateFgSelected:           msgOutDateFg ;
+msgOutMonoFg:                   {{@@ color.nontxt @@}} ;
+msgOutReplyBarColor:            msgInReplyBarColor ;
+msgOutReplyBarSelColor:         {{@@ color.nontxt @@}} ;
+msgOutServiceFg:                {{@@ color.bg_dark @@}} ;
+msgOutServiceFgSelected:        msgOutServiceFg ;
+msgOutShadow:                   {{@@ accent_color | darker @@}} ;
+msgOutShadowSelected:           msgOutShadow ;
+
+historyCaptionOutFg:            historyTextOutFg ;
+historyFileNameOutFg:           {{@@ color.bg_dark @@}} ;
+historyOutIconFg:               {{@@ color.bg_dark @@}} ;
+historyOutIconFgSelected:       {{@@ color.bg_dark @@}} ;
+historySendingOutIconFg:        {{@@ color.bg_dark @@}} ;
+historyTextOutFg:               {{@@ color.nontxt @@}} ;
+
+
 msgInBg:                        {{@@ color.bg @@}} ;
 msgInBgSelected:                {{@@ color.bg_light @@}} ;
-msgOutBg:                       {{@@ accent_color @@}} ;
-msgOutBgSelected:               {{@@ accent_color @@}} ;
-msgSelectOverlay:               #358cd44c ;
-msgStickerOverlay:              #358cd47f ;
-msgInServiceFg:                 {{@@ color.txt @@}} ;
-msgInServiceFgSelected:         {{@@ color.txt @@}} ;
-msgOutServiceFg:                #000000 ;
-msgOutServiceFgSelected:        #000000 ;
-msgInShadow:                    {{@@ color.bg_dark @@}} ;
-msgInShadowSelected:            {{@@ color.bg_light @@}} ;
-msgOutShadow:                   {{@@ color.bg_dark @@}} ;
-msgOutShadowSelected:           {{@@ color.bg_light @@}} ;
 msgInDateFg:                    {{@@ color.bg_light @@}} ;
 msgInDateFgSelected:            {{@@ color.txt @@}} ;
-msgOutDateFg:                   #000000 ;
-msgOutDateFgSelected:           #000000 ;
+msgInMonoFg:                    {{@@ color.bg_light @@}} ;
+msgInReplyBarColor:             {{@@ color.bg_light @@}} ;
+msgInReplyBarSelColor:          {{@@ color.txt @@}} ;
+msgInServiceFg:                 {{@@ color.txt @@}} ;
+msgInServiceFgSelected:         {{@@ color.txt @@}} ;
+msgInShadow:                    {{@@ color.bg_dark @@}} ;
+msgInShadowSelected:            {{@@ color.bg_light @@}} ;
+
+historyTextInFg:                {{@@ color.txt @@}} ;
+historyCaptionInFg:             historyTextInFg ;
+historyFileNameInFg:            historyTextInFg ;
+historySendingInIconFg:         {{@@ color.bg_light @@}} ;
+
+
+msgSelectOverlay:               #358cd44c ;
+msgStickerOverlay:              #358cd47f ;
 msgServiceFg:                   {{@@ color.txt @@}} ;
 msgServiceBg:                   #5B606F95 ;
 msgServiceBgSelected:           #8ca0b3a2 ;
-msgInReplyBarColor:             {{@@ color.bg_light @@}} ;
-msgInReplyBarSelColor:          {{@@ color.txt @@}} ;
-msgOutReplyBarColor:            msgInReplyBarColor ;
-msgOutReplyBarSelColor:         {{@@ color.txt @@}} ;
 msgImgReplyBarColor:            msgServiceFg ;
-msgInMonoFg:                    {{@@ color.bg_light @@}} ;
-msgOutMonoFg:                   {{@@ color.txt @@}} ;
 msgDateImgFg:                   {{@@ color.bg_light @@}} ;
 msgDateImgBg:                   #00000054 ;
 msgDateImgBgOver:               #5B606F95 ;
