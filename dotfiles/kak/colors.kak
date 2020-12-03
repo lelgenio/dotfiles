@@ -62,14 +62,14 @@ face global MatchingChar default,default+b
 
 # Goodies
 add-highlighter global/ number-lines -relative -hlcursor
-face global LineNumbers      {{@@ bg_light @@}},default
-face global LineNumberCursor white,{{@@ bg_dark @@}}
+face global LineNumbers         {{@@ bg_light @@}},default
+face global LineNumberCursor    default,{{@@ bg_dark @@}}
 face global LineNumbersWrapped  red,default
 
 add-highlighter global/ show-whitespaces
 face global Whitespace {{@@ nontxt @@}},default+f
 face global BufferPadding {{@@ nontxt @@}},default
-# highlight trailing whitespace
+## highlight trailing whitespace
 # add-highlighter global/ regex '\h*$' 0:red,red+g
 
 
