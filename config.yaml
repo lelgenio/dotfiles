@@ -5,7 +5,10 @@
 #  \__,_|\___/ \__\__,_|_|  \___/| .__/
 #                                |_|
 
+###############################################################
 variables:
+###############################################################
+
   username: lelgenio
   mail: disroot.org
   cursor_size: 24
@@ -25,8 +28,11 @@ variables:
       medium: 14
       big: 16
 
+###############################################################
 profiles:
-  dark: # {{{
+###############################################################
+
+  dark:
     variables:
       opacity: 0.98
 
@@ -48,8 +54,7 @@ profiles:
           cyan: '#70C0BA'
           white: '#EAEAEA'
 
-# }}}
-  light: # {{{
+  light:
     variables:
       opacity: 0.95
 
@@ -71,8 +76,9 @@ profiles:
           cyan: '#00A0A5'
           white: '#FFFFFF'
 
-# }}}
+###############################################################
 # Accents {{{
+###############################################################
 
   accent_red:     {variables: {accent_color: "#D9534F"}}
   accent_green:   {variables: {accent_color: "#159828"}}
@@ -82,8 +88,11 @@ profiles:
   accent_magenta: {variables: {accent_color: "#9C27B0"}}
   accent_orange:  {variables: {accent_color: "#D93200"}}
 
-# }}}
-  colemak: #{{{
+###############################################################
+# Keyboard Layouts
+###############################################################
+
+  colemak:
     variables:
       key:
         layout: colemak
@@ -97,8 +106,7 @@ profiles:
         insertMode: s
         insertQuit: kk
 
-#}}}
-  qwerty: #{{{
+  qwerty:
     variables:
       key:
         layout: qwerty
@@ -112,9 +120,12 @@ profiles:
         insertMode: i
         insertQuit: jj
 
-#}}}
 
-  main: #{{{
+###############################################################
+# Main profile
+###############################################################
+
+  main:
     variables:
       gtk_theme:      "materia-{{@@ env['USER'] @@}}-{{@@ accent_color_name @@}}-{{@@ color.type @@}}"
       kvantum_theme:  "Materia{{@@ color.type.capitalize() @@}}"
@@ -127,9 +138,11 @@ profiles:
     - "{{@@ color_type @@}}"
     - "accent_{{@@ accent_color_name @@}}"
 
- #}}}
 
-config: # {{{
+###############################################################
+config:
+###############################################################
+
   backup: false
   banner: false
   keepdot: false
@@ -140,153 +153,31 @@ config: # {{{
   - notify
   func_file:
   - funcs.py
+  filter_file:
+  - funcs.py
+
+###############################################################
 dynvariables:
+###############################################################
+
   color_type: test -n "$_COLOR_TYPE" && echo "$_COLOR_TYPE" || echo dark
   accent_color_name: test -n "$_ACCENT_COLOR" && echo "$_ACCENT_COLOR" || echo red
   blender_version: blender --version | head -n1 | sed -E 's|^Blender (.*)\..*|\1|g'
-# }}}
-dotfiles: # {{{
-  nvim:
-    src: nvim.vim
-    dst: ~/.config/nvim/init.vim
-    actions:
-    - vimplug
-  sway:
-    src: sway
-    dst: ~/.config/sway
-    actions:
-    - reload_sway
-  fish:
-    src: fish
-    dst: ~/.config/fish
-    actions:
-    - reload_fish
-  mako:
-    src: mako.conf
-    dst: ~/.config/mako/config
-    actions:
-    - reload_mako
-  waybar:
-    src: waybar
-    dst: ~/.config/waybar
-    actions:
-    - reload_sway
-  kitty:
-    src: kitty.conf
-    dst: ~/.config/kitty/kitty.conf
-    actions:
-    - reload_fish
-  qutebrowser:
-    src: qutebrowser
-    dst: ~/.config/qutebrowser
-  lesskey:
-    src: lesskey
-    dst: ~/.lesskey
-    actions:
-    - lesskey
-  scripts:
-    src: scripts
-    dst: ~/.local/bin
-    actions:
-    - make_theme
-  wofi:
-    src: wofi
-    dst: ~/.config/wofi
-  ranger:
-    src: ranger
-    dst: ~/.config/ranger
-    actions:
-    - ranger_icons
-  zathura:
-    src: zathura.conf
-    dst: ~/.config/zathura/zathurarc
-  wallpapers:
-    src: wallpapers
-    dst: ~/.local/share/wallpapers
-  mime:
-    src: mime/
-    dst: ~/
-  fusuma:
-    src: fusuma.yml
-    dst: ~/.config/fusuma/config.yml
-  alacritty:
-    src: alacritty.yml
-    dst: ~/.config/alacritty.yml
-  mpd:
-    src: mpd.conf
-    dst: ~/.config/mpd/mpd.conf
-  dav:
-    src: dav/
-    dst: ~/.config
-    actions:
-    - vdirsyncer
-  rclone:
-    src: rclone.conf
-    dst: ~/.config/rclone/rclone.conf
-  mutt:
-    src: neomutt/
-    dst: ~/.config/neomutt/
-    actions:
-    - lnMail
-  crontab:
-    src: crontab
-    dst: ~/.local/share/crontab
-    actions:
-    - crontab_install
-  theme:
-    src: theme
-    dst: ~/
-  kanshi:
-    src: kanshi
-    dst: ~/.config/kanshi/config
-  imv:
-    src: imv.conf
-    dst: ~/.config/imv/config
-  mpv:
-    src: mpv.conf
-    dst: ~/.config/mpv/mpv.conf
-    actions:
-    - sponsorblock
-  blender:
-    src: blenderTheme.xml
-    dst: "~/.config/blender/{{@@ blender_version @@}}/scripts/presets/interface_theme/blenderTheme.xml"
-  clang-format:
-    src: clang-format
-    dst: ~/.clang-format
-  gpg-agent:
-    src: gpg-agent.conf
-    dst: ~/.gnupg/gpg-agent.conf
-    actions:
-    - pam_gpg
-  tmux:
-    src: tmux.conf
-    dst: ~/.tmux.conf
-  git:
-    src: gitconfig
-    dst: ~/.config/git/config
-  telegram-theme:
-    src: ./telegram.palette
-    dst: ~/.local/share/TelegramDesktop/theme.tdesktop-palette
-  kakoune:
-    src: kak
-    dst: ~/.config/kak
-  packages:
-    src: metaPKGBUILD
-    dst: ~/.local/share/metapkg/PKGBUILD
-    actions:
-    - install_meta
-  bat:
-    src: bat
-    dst: ~/.config/bat/config
 
 
-# }}}
-actions: #{{{
-  notify: notify-send "Updating dotfiles" "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}"
+###############################################################
+actions:
+###############################################################
+
+  notify: >
+      notify-send
+      "Updating dotfiles"
+      "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}"
+
   reload_mako: makoctl reload
   lesskey: lesskey
-  reload_sway: swaymsg reload &>/dev/null & disown
   reload_fish: pkill -SIGHUP fish
+
   vimplug: >
     nvim
     +PlugUpgrade
@@ -295,14 +186,18 @@ actions: #{{{
     +qall
     &> /dev/null
     & disown
+
   crontab_install: |
     crontab -r
     crontab ~/.local/share/crontab
+
   vdirsyncer: |
     yes | vdirsyncer discover & disown
+
   lnMail: |
     ln -fs ~/.config/neomutt/mbsyncrc ~/.mbsyncrc
     ln -fs ~/.config/neomutt/urlview ~/.urlview
+
   sponsorblock: >
     test -d ~/.config/mpv/scripts/sponsorblock_shared ||
     git clone
@@ -312,14 +207,174 @@ actions: #{{{
     rm -f
     ~/.config/mpv/scripts/LICENSE
     ~/.config/mpv/scripts/README.md
+
   ranger_icons:
     git clone
     https://github.com/alexanderjeurissen/ranger_devicons
     ~/.config/ranger/plugins/ranger_devicons
+
+  # bootstrap scripts
   pam_gpg: _pam-gpg-strap
-  make_theme:
-    ~/.local/bin/_make_theme
-  install_meta:
-    ~/.local/bin/install_meta
-# }}}
-# vim: fdm=marker
+  make_theme: _make_theme
+  install_meta: install_meta
+
+  post:
+    # by having it be the last thing to run
+    # and quickly disowning,
+    # we can make it run only once
+    reload_sway: >
+        pidof swaymsg  &>/dev/null ||
+        swaymsg reload &
+        disown
+
+###############################################################
+dotfiles: # Just a bunch of paths and action mappings
+###############################################################
+
+  ###############################################################
+  # Regular programs
+  ###############################################################
+
+  sway:
+    src: sway
+    dst: ~/.config/sway
+    actions:
+    - reload_sway
+
+  fish:
+    src: fish
+    dst: ~/.config/fish
+    actions:
+    - reload_fish
+
+  mako:
+    src: mako.conf
+    dst: ~/.config/mako/config
+    actions:
+    - reload_mako
+
+  waybar:
+    src: waybar
+    dst: ~/.config/waybar
+    actions:
+    - reload_sway
+
+  kitty:
+    src: kitty.conf
+    dst: ~/.config/kitty/kitty.conf
+    actions:
+    - reload_fish
+
+  nvim:
+    src: nvim.vim
+    dst: ~/.config/nvim/init.vim
+    actions:
+    - vimplug
+
+  mutt:
+    src: neomutt/
+    dst: ~/.config/neomutt/
+    actions:
+    - lnMail
+
+  lesskey:
+    src: lesskey
+    dst: ~/.lesskey
+    actions:
+    - lesskey
+
+  ranger:
+    src: ranger
+    dst: ~/.config/ranger
+    actions:
+    - ranger_icons
+
+  mpv:
+    src: mpv.conf
+    dst: ~/.config/mpv/mpv.conf
+    actions:
+    - sponsorblock
+
+  dav:
+    src: dav/
+    dst: ~/.config
+    actions:
+    - vdirsyncer
+
+  tmux:
+    src: tmux.conf
+    dst: ~/.tmux.conf
+
+  ###############################################################
+  # Other
+  ###############################################################
+
+  scripts:
+    src: scripts
+    dst: ~/.local/bin
+    actions:
+    - make_theme
+
+  wallpapers:
+    src: wallpapers
+    dst: ~/.local/share/wallpapers
+
+  mime:
+    src: mime/
+    dst: ~/
+
+  crontab:
+    src: crontab
+    dst: ~/.local/share/crontab
+    actions:
+    - crontab_install
+
+  theme:
+    src: theme
+    dst: ~/
+
+  clang-format:
+    src: clang-format
+    dst: ~/.clang-format
+
+  gpg-agent:
+    src: gpg-agent.conf
+    dst: ~/.gnupg/gpg-agent.conf
+    actions:
+    - pam_gpg
+
+  packages:
+    src: metaPKGBUILD
+    dst: ~/.local/share/metapkg/PKGBUILD
+    actions:
+    - install_meta
+
+  ###############################################################
+  # Big pahts
+  ###############################################################
+
+  telegram-theme:
+    src: ./telegram.palette
+    dst: ~/.local/share/TelegramDesktop/theme.tdesktop-palette
+
+  blender:
+    "src": blenderTheme.xml
+    "dst": "~/.config/blender/{{@@ blender_version @@}}/scripts/presets/interface_theme/blenderTheme.xml"
+
+
+  ###############################################################
+  # .config/, no actions
+  ###############################################################
+
+  alacritty:   { "src":"alacritty.yml", "dst":"~/.config/alacritty.yml"      }
+  bat:         { "src":"bat",           "dst":"~/.config/bat/config"         }
+  fusuma:      { "src":"fusuma.yml",    "dst":"~/.config/fusuma/config.yml"  }
+  git:         { "src":"gitconfig",     "dst":"~/.config/git/config"         }
+  imv:         { "src":"imv.conf",      "dst":"~/.config/imv/config"         }
+  kakoune:     { "src":"kak",           "dst":"~/.config/kak"                }
+  kanshi:      { "src":"kanshi",        "dst":"~/.config/kanshi/config"      }
+  mpd:         { "src":"mpd.conf",      "dst":"~/.config/mpd/mpd.conf"       }
+  qutebrowser: { "src":"qutebrowser",   "dst":"~/.config/qutebrowser"        }
+  rclone:      { "src":"rclone.conf",   "dst":"~/.config/rclone/rclone.conf" }
+  wofi:        { "src":"wofi",          "dst":"~/.config/wofi"               }
+  zathura:     { "src":"zathura.conf",  "dst":"~/.config/zathura/zathurarc"  }
