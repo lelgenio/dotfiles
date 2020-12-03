@@ -59,7 +59,7 @@ profiles:
         bg_light: '#A0A0A0'
         bg_dark: '#EAEAEA'
         txt: '#303030'
-        nontxt: '#F0F0F0'
+        nontxt: '#E0E0E0'
 
         normal:
           black: '#555555'
