@@ -47,6 +47,9 @@ depends=(
     papirus-folders capitaine-cursors
 
     # Terminal
+        # Emulators
+        kitty alacritty
+        #Tools
         ranger atool p7zip tree jq fzf
         neofetch htop
         # Replacements
@@ -105,3 +108,4 @@ depends=(
 
 )
 
+# vim: ft=sh
