@@ -1,32 +1,33 @@
 colors:
+
     ########################################################
     # Tabs
     ########################################################
+
     tabs:
         bar:
             bg: "{{@@ color.bg @@}}"
-        odd:
-            bg: "{{@@ color.bg @@}}"
-            fg: "{{@@ color.txt @@}}"
-        even:
-            bg: "{{@@ color.bg_dark @@}}"
-            fg: "{{@@ color.txt @@}}"
-        selected:
+        pinned: &tabs_defaults
             odd:
-                bg: "{{@@ accent_color @@}}"
+                bg: "{{@@ color.bg @@}}"
                 fg: "{{@@ color.txt @@}}"
             even:
-                bg: "{{@@ accent_color @@}}"
+                bg: "{{@@ color.bg_dark @@}}"
                 fg: "{{@@ color.txt @@}}"
-        pinned:
             selected:
                 odd:
-                    bg: "{{@@ color.bg @@}}"
+                    bg: "{{@@ accent_color @@}}"
+                    fg: "{{@@ color.txt @@}}"
                 even:
-                    bg: "{{@@ color.bg_dark @@}}"
+                    bg: "{{@@ accent_color @@}}"
+                    fg: "{{@@ color.txt @@}}"
+        <<: *tabs_defaults
+
+
     ########################################################
     # Completion for urls and commands
     ########################################################
+
     completion:
         fg: "{{@@ color.txt @@}}"
         even:
@@ -35,6 +36,8 @@ colors:
             bg: "{{@@ color.bg @@}}"
         scrollbar:
             bg: "{{@@ color.bg_light @@}}"
+        match:
+            fg: "{{@@ accent_color @@}}"
         category:
             fg: "{{@@ color.txt @@}}"
             bg: "{{@@ color.bg_light @@}}"
@@ -50,9 +53,12 @@ colors:
                     bottom: "{{@@ color.bg_dark @@}}"
                 match:
                     fg: "{{@@ color.txt @@}}"
+
+
     ########################################################
     # Statusbar
     ########################################################
+
     statusbar:
         normal:
             fg: "{{@@ color.txt @@}}"
@@ -70,12 +76,16 @@ colors:
             success:
                 https:
                     fg: "{{@@ color.txt @@}}"
-                    fg: "{{@@ color.normal.yellow @@}}"
+                http:
+                    fg: "{{@@ color.normal.red @@}}"
             hover:
                 fg: "{{@@ color.normal.cyan @@}}"
+
+
     ########################################################
     # Downloads
     ########################################################
+
     downloads:
         start:
             bg: "{{@@ color.normal.blue @@}}"
@@ -83,25 +93,34 @@ colors:
             bg: "{{@@ color.normal.green @@}}"
         bar:
             bg: "{{@@ color.bg @@}}"
+
+
     ########################################################
     # Choice of what element should be clicked
     ########################################################
+
     hints:
         fg: "{{@@ color.txt @@}}"
         bg: "{{@@ color.bg @@}}"
         match:
             fg: "{{@@ accent_color @@}}"
+
+
     ########################################################
     # List of what each keybinding does
     ########################################################
+
     keyhint:
         fg: "{{@@ color.txt @@}}"
         bg: "rgba({{@@ hex2rgb(color.bg) @@}}, {{@@ opacity @@}})"
         suffix:
             fg: "{{@@ accent_color @@}}"
+
+
     ########################################################
     # Right click menu
     ########################################################
+
     contextmenu:
         menu:
             bg: "{{@@ color.bg @@}}"
@@ -111,10 +130,13 @@ colors:
         disabled:
             fg: "{{@@ color.bg_light @@}}"
 
+
     ########################################################
     # Dark theme
     ########################################################
+
     # {%@@ if color.type == "dark" @@%} #
+
     webpage:
         bg: "{{@@ color.bg @@}}"
         prefers_color_scheme_dark: True
@@ -123,4 +145,5 @@ colors:
             threshold:
                 background: {{@@ 256 // 2 @@}}
                 text: {{@@ 256 // 2 @@}}
+
     # {%@@ endif @@%}
