@@ -18,23 +18,6 @@ def ordered_path():
     return ':'.join(newPATH)
 
 
-def hex2rgb(e):
-    assert e.startswith("#")
-    e = e.strip("#").lower()
-    assert len(e) == 6
-    for i in e:
-        assert (i in "0123456789abcdef")
-
-    def h2r(i):
-        return str(eval('0x{}'.format(i)))
-
-    r = e[0:2]
-    g = e[2:4]
-    b = e[4:6]
-
-    return ", ".join([h2r(i) for i in (r, g, b)])
-
-
 def rclone_obscure(pass_name):
     try:
         fPath = os.path.expanduser("~/.config/rclone/rclone.conf")
@@ -50,3 +33,47 @@ def rclone_obscure(pass_name):
         return check_output(args).decode().strip()
 
     return sh("rclone", "obscure", sh("_get-pass", pass_name))
+
+
+####################################################################
+# color
+####################################################################
+
+def split_hex(e):
+    e = e.lstrip("#").lower()
+    return e[0:2], e[2:4], e[4:6]
+
+
+def hex2rgb(e):
+    return ", ".join([str(int(s, base=16))
+                      for s in split_hex(e)])
+
+
+def color_mult(e: str, amount: float):
+    """\
+    Multiply e hex rgb colorCode with amount number
+    Usefull for lightening/darkening
+    """
+
+    def segment(s):
+        base256 = int(s, base=16)
+        result_val = base256 * amount
+
+        hex_result = hex(int(result_val))[2:]
+
+        return str(hex_result)
+
+    prefix = "#" * e.startswith("#")
+    return prefix + "".join(map(segment, split_hex(e)))
+
+
+####################################################################
+# Filters
+####################################################################
+
+def darker(arg1, amount=0.75):
+    return color_mult(arg1, amount)
+
+
+def lighter(arg1, amount=1.25):
+    return color_mult(arg1, amount)
