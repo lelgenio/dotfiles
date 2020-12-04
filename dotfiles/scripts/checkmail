@@ -1,27 +1,36 @@
 #!/bin/sh
 set -e
 
+test "$XDG_CURRENT_DESKTOP" = "gnome" &&
+    exit 0
+
 test -z "$XDG_RUNTIME_DIR" &&
     export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
 getnew(){
-    find ~/.local/share/mail/INBOX{,.{Contas,Faculdade,Git,Trabalhos}}/new -type f | wc -l
+    pushd "~/.local/share/mail/"
+
+    find INBOX*/new -type f |
+        wc -l
+
+    popd
 }
 
 OLD=$(getnew)
 
-[ "$1" = "update" ] && mbsync -a
+[ "$1" = "update" ] &&
+    mbsync -a
 
 NEW=$(getnew)
 
-if [ "$NEW" -gt "$OLD" ];then
+[ "$NEW" -gt "$OLD" ] &&
     notify-send " New E-Mails!"
-fi
 
 echo $NEW | sed 's/^0$//'
 
-if [ "$(ps -o comm= $PPID)" != "waybar" ] && pidof waybar>/dev/null;then
+[ "$(ps -o comm= $PPID)" != "waybar" ] &&
+pidof waybar>/dev/null &&
     pkill -SIGRTMIN+4 waybar
-fi
+
 
 # vim:ft=sh

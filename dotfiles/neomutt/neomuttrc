@@ -27,13 +27,7 @@ set postponed = "+Drafts"
 set trash = "+Trash"
 
 mailboxes \
-    "=INBOX" \
-    "=INBOX.Faculdade"\
-    "=INBOX.Trabalhos" \
-    "=INBOX.Contas"\
-    "=INBOX.Git" \
-    "=INBOX.Duolingo" \
-    "=INBOX.LBRY"\
+    `echo ~/.local/share/mail/INBOX*` \
     "=Sent" \
     "=Drafts" \
     "=Trash" \
@@ -154,7 +148,7 @@ set markers = no		# Disables the `+` displayed at line wraps
 set date_format="%m/%d %H:%M"
 set index_format="%2C %zs %?X?A& ? %D %-15.15F %s"
 
-# set display_filter  = 'sed -e "s/&nbsp;*/\n/g"'
+set display_filter  = 'sed -e "s/&nbsp;*/\n/g"'
 
 #}}}
 # colors{{{
@@ -196,4 +190,4 @@ color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-
 # }}}
 
 # }}}
-# vim: filetype=neomuttrc:foldmethod=marker
+# vim: ft=sh
