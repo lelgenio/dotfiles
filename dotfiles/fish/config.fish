@@ -17,6 +17,9 @@ source {$__fish_config_dir}/prompt.fish
 
 function _fish_autoreload --on-signal SIGHUP
     source {$__fish_config_dir}/config.fish
-    kitty @ set-colors -a ~/.config/kitty/kitty.conf
-    kitty @ set-background-opacity "{{@@ opacity @@}}"
+    
+    if test "$TERM" = "xterm-kitty"
+        kitty @ set-colors -a ~/.config/kitty/kitty.conf
+        kitty @ set-background-opacity "{{@@ opacity @@}}"
+    end
 end
