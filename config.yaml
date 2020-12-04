@@ -353,6 +353,10 @@ dotfiles: # Just a bunch of paths and action mappings
   # Big pahts
   ###############################################################
 
+  code-oss:
+    src: vscode.jsonc
+    dst: "~/.config/Code - OSS/User/settings.json"
+
   telegram-theme:
     src: ./telegram.palette
     dst: ~/.local/share/TelegramDesktop/theme.tdesktop-palette
