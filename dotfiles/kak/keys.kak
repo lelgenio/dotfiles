@@ -32,3 +32,17 @@
     map global normal t e
 
 {%@@ endif @@%}
+
+######################################################
+# Emacs-like insert
+######################################################
+
+map global insert <c-b> "<a-;>h"
+map global insert <c-f> "<a-;>l"
+
+map global insert <a-b> "<a-;>b"
+map global insert <a-f> "<a-;>w"
+
+map global insert <c-a> "<a-;>gi"
+map global insert <c-e> "<a-;>gl<right>"
+map global insert <c-w> "<a-;>b<a-;>d"
