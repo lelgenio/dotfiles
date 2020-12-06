@@ -89,6 +89,7 @@ end
 function fish_vimode_prompt # Not fish_mode_prompt!
 
     if not test $fish_key_bindings = fish_vi_key_bindings
+        printf '\e[5 q' # Bar
         return
     end
 

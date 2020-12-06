@@ -5,8 +5,11 @@
 # |  _| \__ \ | | |
 # |_| |_|___/_| |_|
 
-
-set fish_key_bindings fish_vi_key_bindings
+if test "$EDITOR" = vim
+    fish_vi_key_bindings
+else
+    fish_default_key_bindings
+end
 
 if test $fish_key_bindings = fish_vi_key_bindings
 
