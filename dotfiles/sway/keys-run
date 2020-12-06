@@ -5,7 +5,7 @@
 # |___/ \_/\_/ \__,_|\__, |
 #                    |___/
 
-bindsym {
+bindsym --to-code {
 
 # Start a terminal
 $mod+Return exec terminal
