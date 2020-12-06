@@ -26,6 +26,7 @@ assign [title=^steam] workspace 9
 
 assign [app_id=telegram.?desktop] workspace 10
 assign [class=TelegramDesktop] workspace 10
+assign [class="Jitsi Meet"] workspace 10
 
 assign [class=discord] workspace 10
 
