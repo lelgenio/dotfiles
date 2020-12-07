@@ -13,7 +13,7 @@ test $# -gt 0 &&
     } & exit
 # {%@@ else @@%} #
     command -v kitty > /dev/null &&
-        exec kitty $cmd "$@"
+        exec kitty $cmd $@
 # {%@@ endif @@%} #
 
 notify-send "Error" "Terminal program missing"
