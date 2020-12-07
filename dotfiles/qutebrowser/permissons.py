@@ -22,7 +22,8 @@ c.content.headers.user_agent = """\
     AppleWebKit/{webkit_version} (KHTML, like Gecko)
     {qt_key}/{qt_version}
     {upstream_browser_key}/{upstream_browser_version}
-    Safari/{webkit_version}""".replace("\n", "")
+    Safari/{webkit_version}
+    """.replace("\n", "").replace("\t", "")
 
 
 # STFU
