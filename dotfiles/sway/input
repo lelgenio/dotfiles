@@ -17,7 +17,7 @@ input "type:touchpad" {
 
 input * {
     {%@@ if key_layout == "colemak" @@%}
-        xkb_layout "us(colemak),br"
+        xkb_layout "us(colemak),br,ru"
         xkb_options "lv3:lsgt_switch,grp:shifts_toggle"
     {%@@ elif key_layout == "dvorak" @@%}
         xkb_layout "us(dvorak)"
