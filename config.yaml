@@ -16,14 +16,14 @@ variables:
   tabs: true
   key_layout: colemak
   launcher: bmenu
-  terminal: kitty
+  terminal: alacritty
   file_manager: thunar
   bar: waybar
   bar_pos: top
   tmux: false
 
   font:
-    mono: FiraCode Nerd Font
+    mono: Hack
     interface: Inter
     size:
       small: 12
