@@ -59,6 +59,9 @@ def color_mult(e: str, amount: float):
         base256 = int(s, base=16)
         result_val = base256 * amount
 
+        # normalize between 0 and 255
+        result_val = min(255, max(0, result_val))
+
         hex_result = hex(int(result_val))[2:]
 
         return str(hex_result)
