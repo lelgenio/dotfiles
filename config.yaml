@@ -13,7 +13,7 @@ variables:
     mail: disroot.org
     cursor_size: 24
     editor: kak
-    tabs: true
+    tabs: false
     key_layout: colemak
     launcher: bmenu
     terminal: alacritty
@@ -384,5 +384,3 @@ dotfiles: # Just a bunch of paths and action mappings
     rclone:      { "src":"rclone.conf",   "dst":"~/.config/rclone/rclone.conf" }
     wofi:        { "src":"wofi",          "dst":"~/.config/wofi"               }
     zathura:     { "src":"zathura.conf",  "dst":"~/.config/zathura/zathurarc"  }
-
-# vim: tabstop=2
