@@ -351,6 +351,11 @@ dotfiles: # Just a bunch of paths and action mappings
     actions:
     - install_meta
 
+  kak-lsp:
+    src: kak-lsp.toml
+    dst: ~/.config/kak-lsp/kak-lsp.toml
+
+
   ###############################################################
   # Big pahts
   ###############################################################
