@@ -356,6 +356,10 @@ dotfiles: # Just a bunch of paths and action mappings
     src: kak-lsp.toml
     dst: ~/.config/kak-lsp/kak-lsp.toml
 
+  rustfmt:
+    src: rustfmt.toml
+    dst: ~/.rustfmt.toml
+
 
   ###############################################################
   # Big pahts
