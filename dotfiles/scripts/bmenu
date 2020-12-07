@@ -21,7 +21,7 @@ fi
 # s  selected
 # sc scrollbar
 
- fn="{{@@ font.mono @@}} 12"
+ fn="{{@@ font.mono @@}} {{@@ font.size.small @@}}"
 
  tb="{{@@ color.bg       @@}}"
  tf="{{@@ accent_color @@}}"
@@ -57,7 +57,7 @@ bemenu \
     --bottom\
     --no-overlap\
     --list 20\
-    --prefix '->'\
+    --prefix '>'\
     --fn "$fn"\
     --tb "$tb" --tf "$tf" \
     --fb "$fb" --ff "$ff" \
