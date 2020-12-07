@@ -1,0 +1,9 @@
+# {{@@ header() @@}} #
+
+tab_spaces = 4
+
+max_width = 80
+
+{%@@ if tabs @@%}
+hard_tabs = true
+{%@@ endif @@%}
