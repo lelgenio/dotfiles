@@ -1,8 +1,10 @@
 # {{@@ header() @@}}
 
-*.yaml yaml=true
-*.yml yaml=true
 
 {%@@ if tabs @@%}
-* filter=tabspace
+*       filter=tabspace
+*.yaml  -filter
+*.yml   -filter
+*.png   -filter
+*.jpg   -filter
 {%@@ endif @@%}
