@@ -6,13 +6,6 @@
 # |_|\_\__,_|_|\_\___/ \__,_|_| |_|\___|
 
 
-set global tabstop 4
-{%@@ if tabs @@%}
-set global indentwidth 4
-{%@@ else @@%}
-set global indentwidth 0
-{%@@ endif @@%}
-
 set global scrolloff 8,8
 add-highlighter global/ wrap
 
@@ -20,4 +13,5 @@ source "%val{config}/plug.kak"
 source "%val{config}/keys.kak"
 source "%val{config}/usermode.kak"
 source "%val{config}/hooks.kak"
+source "%val{config}/indent.kak"
 source "%val{config}/colors.kak"

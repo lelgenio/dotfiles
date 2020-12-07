@@ -1,12 +1,5 @@
 # {{@@ header() @@}}
 
-# {%@@ if not tabs @@%}
-# use spaces insted of tabs
-hook global InsertChar \t %{
-    exec -draft -itersel h@
-} -group kakrc-replace-tabs-with-spaces
-# {%@@ endif @@%}
-
 hook global NormalIdle .* %{ try %{
     git show-diff
     palette-status
@@ -37,3 +30,5 @@ hook global RegisterModified '"' %{ nop %sh{
 hook global BufWritePre .* %{ try %{
     execute-keys -draft \%s\h+$<ret>d
 } }
+
+
