@@ -42,6 +42,7 @@ function fish_git_prompt
 
     set _git_branch (git branch --show-current 2> /dev/null)
     if not test -n "$_git_branch"
+        or not git status -s &> /dev/null
         return
     end
 
