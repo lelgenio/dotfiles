@@ -13,3 +13,11 @@
     log  = diffr | less
     show = diffr | less
     diff = diffr | less
+
+{%@@ if tabs @@%}
+
+[filter "tabspace"]
+    smudge = unexpand --tabs=4 --first-only
+    clean = expand --tabs=4 --initial
+
+{%@@ endif @@%}

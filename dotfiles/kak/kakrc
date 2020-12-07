@@ -7,6 +7,12 @@
 
 
 set global tabstop 4
+{%@@ if tabs @@%}
+set global indentwidth 4
+{%@@ else @@%}
+set global indentwidth 0
+{%@@ endif @@%}
+
 set global scrolloff 8,8
 add-highlighter global/ wrap
 

@@ -1,0 +1,3 @@
+{%@@ if tabs @@%}
+* filter=tabspace
+{%@@ endif @@%}

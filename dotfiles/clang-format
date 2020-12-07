@@ -1,2 +1,7 @@
 BasedOnStyle: Mozilla
 IndentWidth: 4
+TabWidth: 4
+
+{%@@ if tabs @@%}
+UseTab: ForContinuationAndIndentation
+{%@@ endif @@%}

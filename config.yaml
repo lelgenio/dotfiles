@@ -13,6 +13,7 @@ variables:
   mail: disroot.org
   cursor_size: 24
   editor: kak
+  tabs: true
   key_layout: colemak
   launcher: bmenu
   terminal: kitty
@@ -374,7 +375,7 @@ dotfiles: # Just a bunch of paths and action mappings
   alacritty:   { "src":"alacritty.yml", "dst":"~/.config/alacritty.yml"      }
   bat:         { "src":"bat",           "dst":"~/.config/bat/config"         }
   fusuma:      { "src":"fusuma.yml",    "dst":"~/.config/fusuma/config.yml"  }
-  git:         { "src":"gitconfig",     "dst":"~/.config/git/config"         }
+  git:         { "src":"git",           "dst":"~/.config/git"                }
   imv:         { "src":"imv.conf",      "dst":"~/.config/imv/config"         }
   kakoune:     { "src":"kak",           "dst":"~/.config/kak"                }
   kanshi:      { "src":"kanshi",        "dst":"~/.config/kanshi/config"      }

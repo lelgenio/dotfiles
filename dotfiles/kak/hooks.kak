@@ -1,7 +1,11 @@
 # {{@@ header() @@}}
 
+# {%@@ if not tabs @@%}
 # use spaces insted of tabs
-hook global InsertChar \t %{ exec -draft -itersel h@ } -group kakrc-replace-tabs-with-spaces
+hook global InsertChar \t %{
+    exec -draft -itersel h@
+} -group kakrc-replace-tabs-with-spaces
+# {%@@ endif @@%}
 
 hook global NormalIdle .* %{ try %{
     git show-diff
