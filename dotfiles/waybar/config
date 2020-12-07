@@ -5,11 +5,11 @@
     "modules-left": [
         "sway/workspaces",
         "sway/mode",
-        "sway/window"
+        "sway/window",
     ],
     "modules-center": [
         "clock",
-        "custom/weather"
+        "custom/weather",
     ],
     "modules-right": [
         "custom/mpd",
