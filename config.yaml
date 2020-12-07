@@ -19,6 +19,7 @@ variables:
   file_manager: thunar
   bar: waybar
   bar_pos: top
+  tmux: false
 
   font:
     mono: FiraCode Nerd Font

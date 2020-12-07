@@ -5,6 +5,10 @@
 # |  _| \__ \ | | |
 # |_| |_|___/_| |_|
 
+{%@@ if not tmux @@%}
+set TMUX 1
+{%@@ endif @@%}
+
 if test -z "$TMUX" -a -n "$DISPLAY" -a -z "$GNOME_TERMINAL_SCREEN"
     and not string match -qr kitty "$TERM"
     and status is-interactive
