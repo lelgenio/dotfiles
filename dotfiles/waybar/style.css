@@ -125,3 +125,8 @@ window#waybar.empty {
     padding: 0;
     margin: 0;
 }
+
+#custom-layout {
+    font-size: {{@@ font.size.medium @@}}px;
+    color: {{@@ color.bg_light @@}};
+}

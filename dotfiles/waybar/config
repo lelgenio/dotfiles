@@ -12,6 +12,7 @@
         "custom/weather",
     ],
     "modules-right": [
+        "custom/layout",
         "custom/mpd",
         "custom/recording",
         "tray",
@@ -157,6 +158,10 @@
         "on-click":"pidof caffeinated &&pkill caffeinated||caffeinated -d ",
         "interval": 1
     },
+    "custom/layout":{
+        "exec":"_get-sway-layout",
+        "interval": 1
+    }
 
 }
 // vim:ft=json
