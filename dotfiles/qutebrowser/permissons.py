@@ -23,7 +23,7 @@ c.content.headers.user_agent = """\
     {qt_key}/{qt_version}
     {upstream_browser_key}/{upstream_browser_version}
     Safari/{webkit_version}
-    """.replace("\n", "").replace("\t", "")
+    """.replace("\n", "").replace("\t", " ")
 
 
 # STFU
