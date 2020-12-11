@@ -7,6 +7,10 @@
 
 set global tabstop 4
 
+hook global BufOpenFile .*\.ya?ml %{
+    set buffer tabstop 2
+}
+
 {%@@ if tabs @@%}
 #################################################################
 # Tabs
@@ -17,7 +21,6 @@ set global tabstop 4
 
     # yaml is ass and does not allow tabs for indent
     hook global BufOpenFile .*\.ya?ml %{
-        set buffer tabstop 2
         execute-keys -draft '%s^\s*<ret><a-@>'
     } -group kakrc-replace-spaces-with-tabs
 
