@@ -22,11 +22,11 @@ hook global BufOpenFile .*\.ya?ml %{
     # yaml is ass and does not allow tabs for indent
     hook global BufOpenFile .*\.ya?ml %{
         execute-keys -draft '%s^\s*<ret><a-@>'
-    } -group kakrc-replace-spaces-with-tabs
+    } -group yaml-replace-spaces-with-tabs
 
     hook global BufWritePre  .*\.ya?ml %{
         execute-keys -draft '%s^\s*<ret>@'
-    } -group kakrc-replace-spaces-with-tabs
+    } -group yaml-replace-spaces-with-tabs
 
 {%@@ else @@%}
 #################################################################
@@ -38,6 +38,6 @@ hook global BufOpenFile .*\.ya?ml %{
     # use spaces insted of tabs
     hook global InsertChar \t %{
         exec -draft -itersel h@
-    } -group kakrc-replace-tabs-with-spaces
+    } -group replace-tabs-with-spaces
 
 {%@@ endif @@%}
