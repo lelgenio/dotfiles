@@ -76,7 +76,7 @@ depends=(
     # Files
     thunar gvfs tumbler thunar-archive-plugin thunar-volman
     syncthing xdg-user-dirs
-    transmission-sequential-cli deemix
+    transmission-cli deemix
 
     # Media
     imv mpv
