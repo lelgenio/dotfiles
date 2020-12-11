@@ -2,7 +2,7 @@
 
 # depends on: awk, pactl, pacmd, notify-send
 
-MAX_VOL=120
+MAX_VOL=150
 STEP=10
 
 FILLED="■"
