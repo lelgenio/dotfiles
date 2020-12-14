@@ -64,7 +64,7 @@ def color_mult(e: str, amount: float):
 
         hex_result = hex(int(result_val))[2:]
 
-        return str(hex_result)
+        return hex_result.zfill(2)
 
     prefix = "#" * e.startswith("#")
     return prefix + "".join(map(segment, split_hex(e)))
