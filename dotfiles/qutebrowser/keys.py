@@ -85,6 +85,7 @@ for k, v in {
 ##########################################################
 
 config.bind(key.insert, "enter-mode insert")
+config.bind("<Alt-k>", "enter-mode normal", mode="insert")
 
 c.input.insert_mode.auto_leave = False
 

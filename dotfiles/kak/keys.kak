@@ -46,3 +46,10 @@ map global insert <a-f> "<a-;>w"
 map global insert <c-a> "<a-;>gi"
 map global insert <c-e> "<a-;>gl<right>"
 map global insert <c-w> "<a-;>b<a-;>d"
+
+
+######################################################
+# Other insert binds
+######################################################
+
+map global insert <a-k> "<esc>"
