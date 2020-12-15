@@ -106,7 +106,7 @@
         "format": "<b>{}</b>",
         "exec": "jq -r '.temp +\"°C \"+ .weather' ~/.forecast.json",
         "interval": 30,
-        "on-click": "terminal --class weather 'forecast interactive'",
+        "on-click": "terminal forecast interactive",
         "on-click-right": "xdg-open https://openweathermap.org"
     },
     "custom/mail": {
@@ -154,8 +154,8 @@
     },
     "custom/caffeine":{
         "format":"{} ",
-        "exec":"pidof caffeinated &>/dev/null &&echo  ||echo 鈴",
-        "on-click":"pidof caffeinated &&pkill caffeinated||caffeinated -d ",
+        "exec":"pidof caffeinated > /dev/null && echo  || echo 鈴",
+        "on-click":"pidof caffeinated && pkill caffeinated || caffeinated -d",
         "interval": 1
     },
     "custom/layout":{

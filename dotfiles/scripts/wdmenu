@@ -3,10 +3,10 @@
 test -n "$SWAYSOCK" && swaymsg fullscreen off > /dev/null
 
 # {%@@ if launcher == "wofi" @@%} #
-which wofi &> /dev/null &&
+command -v wofi > /dev/null &&
     exec wofi -d $@
 # {%@@ else @@%} #
-which bemenu &> /dev/null &&
+command -v bemenu > /dev/null &&
     exec bmenu $@
 # {%@@ endif @@%} #
 
