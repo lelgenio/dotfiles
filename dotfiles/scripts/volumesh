@@ -66,6 +66,7 @@ get_vol_pulse(){
         awk '/^\tVolume/ {
                 gsub(/%/,"");
                 printf $5;
+                exit;
             }'
 }
 
