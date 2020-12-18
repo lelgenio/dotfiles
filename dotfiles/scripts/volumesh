@@ -105,8 +105,8 @@ toggle_mute_mpd(){
 #}}}
 usage(){
     local CNAME=`basename $0`
-    echo "${CNAME} [-d][-di <amount>]"
-    echo "${CNAME} [-d][-t]"
+    echo "${CNAME} [-m][-di <amount>]"
+    echo "${CNAME} [-m][-t]"
     echo ""
     echo "Options:"
     echo "  -m --mpd          Target mpd instead of PulseAudio"
