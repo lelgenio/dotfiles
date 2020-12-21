@@ -32,6 +32,12 @@ c.tabs.show = "multiple"
 c.tabs.favicons.show = "always"
 c.tabs.title.format = "{audio} {current_title}"
 c.tabs.indicator.width = 0
+c.tabs.padding = {
+    'top': 3,
+    'bottom': 3,
+    'left': 5,
+    'right': 5,
+}
 
 c.tabs.select_on_remove = "last-used"
 c.tabs.show_switching_delay = 2000
