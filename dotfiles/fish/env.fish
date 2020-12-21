@@ -6,7 +6,7 @@
 # |_| |_|___/_| |_|
 
 set -x QT_QPA_PLATFORMTHEME gtk3
-set -x PATH ~/.local/bin ~/.cargo/bin $PATH
+set -x PATH ~/.local/bin ~/.cargo/bin ~/.factorio/bin/* $PATH
 set -x ESCDELAY 0
 
 ################################################################
