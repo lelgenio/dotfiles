@@ -10,10 +10,10 @@ cursorline
 face global crosshairs_line     default,{{@@ bg_dark @@}}
 
 # For Code
-face global value default
+face global value magenta
 face global type yellow
 face global variable default
-face global module value
+face global module variable
 face global function cyan
 face global string green
 face global keyword {{@@ accent @@}}
@@ -22,7 +22,7 @@ face global attribute green+b
 face global comment {{@@ bg_light @@}}
 face global documentation comment
 face global meta magenta
-face global builtin default+b
+face global builtin blue
 
 # For markup
 face global title blue
