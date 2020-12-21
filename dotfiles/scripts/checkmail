@@ -8,12 +8,12 @@ test -z "$XDG_RUNTIME_DIR" &&
     export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
 getnew(){
-    pushd "~/.local/share/mail/"
+    pushd "$HOME/.local/share/mail/" > /dev/null
 
     find INBOX*/new -type f |
         wc -l
 
-    popd
+    popd > /dev/null
 }
 
 OLD=$(getnew)
