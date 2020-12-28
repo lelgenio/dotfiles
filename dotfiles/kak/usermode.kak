@@ -75,7 +75,7 @@ define-command -params .. \
 -shell-script-candidates 'zoxide query -l' \
 zoxide \
 %{
-    cd %sh{ zoxide query "$@" }
+    cd %sh{ zoxide query "$@" || echo "$@" }
     echo %sh{ pwd | sed "s|$HOME|~|" }
 }
 
