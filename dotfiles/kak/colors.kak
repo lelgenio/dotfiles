@@ -38,11 +38,11 @@ face global Default default,default
 
 face global PrimaryCursor      default,{{@@ accent @@}}+fg
 face global PrimaryCursorEol   PrimaryCursor
-face global PrimarySelection   default,{{@@ bg_light @@}}+fg
+face global PrimarySelection   default,{{@@ bg_light @@}}
 
 face global SecondaryCursor    default,default+rfg
 face global SecondaryCursorEol SecondaryCursor
-face global SecondarySelection default,{{@@ bg_light @@}}+fg
+face global SecondarySelection default,{{@@ bg_light @@}}
 
 face global MenuForeground default,{{@@ accent @@}}
 face global MenuBackground default,{{@@ bg_dark @@}}

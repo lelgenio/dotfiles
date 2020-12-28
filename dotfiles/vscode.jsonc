@@ -71,6 +71,8 @@
         "statusBar.noFolderBackground": "{{@@ color.bg @@}}",
         "statusBar.debuggingBackground": "{{@@ color.bg @@}}",
         "sideBar.background": "{{@@ color.bg @@}}",
+        "terminal.background": "{{@@ color.bg @@}}",
+        "panel.background": "{{@@ color.bg @@}}",
         // foregrounds
         "editorCursor.background": "{{@@ color.txt @@}}",
         "statusBar.foreground": "{{@@ color.txt @@}}",
