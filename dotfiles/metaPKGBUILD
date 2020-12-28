@@ -74,7 +74,7 @@ depends=(
     neomutt urlview isync
 
     # Files
-    thunar gvfs tumbler thunar-archive-plugin thunar-volman
+    nautilus
     syncthing xdg-user-dirs
     transmission-cli deemix
 

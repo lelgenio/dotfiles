@@ -17,7 +17,7 @@ variables:
   key_layout: colemak
   launcher: bmenu
   terminal: alacritty
-  file_manager: thunar
+  file_manager: nautilus
   bar: waybar
   bar_pos: top
   tmux: false
