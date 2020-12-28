@@ -165,7 +165,9 @@ dynvariables:
 
   color_type: test -n "$_COLOR_TYPE" && echo "$_COLOR_TYPE" || echo dark
   accent_color_name: test -n "$_ACCENT_COLOR" && echo "$_ACCENT_COLOR" || echo red
-  blender_version: blender --version | head -n1 | sed -E 's|^Blender (.*)\..*|\1|g'
+  blender_version: |
+    pacman -Qi blender | grep "^Version" | cut -d: -f3 | cut -d. -f1-2 ||
+    blender --version | head -n1 | sed -E 's|^Blender (.*)\..*|\1|g'
 
 
 ###############################################################
