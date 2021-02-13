@@ -27,8 +27,8 @@ map global git 'A'     ': git add --all<ret>' -docstring 'add all'
 map global git 'D'     ': git diff<ret>' -docstring 'diff all'
 map global git '<a-d>' ': git diff --staged<ret>' -docstring 'diff staged'
 map global git 'c'     ': git commit -v<ret>' -docstring 'commit'
-map global git 'n'     ': git next-hunk <ret>' -docstring 'next changed hunk'
-map global git 'p'     ': git previous-hunk <ret>' -docstring 'previous changed hunk'
+map global git 'n'     ': git next-hunk <ret>' -docstring 'next hunk'
+map global git 'p'     ': git prev-hunk <ret>' -docstring 'previous hunk'
 
 declare-user-mode find
 map global user 'f' ': enter-user-mode find<ret>' -docstring 'find mode'
