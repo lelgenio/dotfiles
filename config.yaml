@@ -73,11 +73,11 @@ profiles:
           black: '#555555'
           red: '#D54E53'
           green: '#008800'
-          yellow: '#DBB704'
+          yellow: '#B3A400'
           blue: '#0D68A8'
           magenta: '#C397D8'
           cyan: '#00A0A5'
-          white: '#FFFFFF'
+          white: '#999999'
 
 ###############################################################
 # Accents {{{
