@@ -29,6 +29,7 @@ assign [class=TelegramDesktop] workspace 10
 assign [class="Jitsi Meet"] workspace 10
 
 assign [class=discord] workspace 10
+assign [title=Discord] workspace 10
 
 
 # vim: ft=i3
