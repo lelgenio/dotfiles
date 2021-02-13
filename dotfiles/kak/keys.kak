@@ -1,5 +1,7 @@
 # {{@@ header() @@}}
 
+map global normal <F2> ': lsp-rename-prompt<ret>'
+
 {%@@ for old, new, gdoc, vdoc in [
    [ "h", key.left,       "line begin",      "scroll left" ],
    [ "l", key.right,      "line right",      "scroll right" ],
