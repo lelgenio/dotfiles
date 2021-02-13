@@ -5,7 +5,7 @@
 # |  _| \__ \ | | |
 # |_| |_|___/_| |_|
 
-set -x QT_QPA_PLATFORMTHEME gtk3
+set -x QT_QPA_PLATFORMTHEME qt5ct
 set -x PATH ~/.local/bin ~/.cargo/bin ~/.factorio/bin/* $PATH
 set -x ESCDELAY 0
 
@@ -20,8 +20,14 @@ set -x PAGER less
 ################################################################
 # keep my dirs clean
 ################################################################
-set -x PYTHONPYCACHEPREFIX "$HOME/.cache/python"
-set -x MYPY_CACHE_DIR "$HOME/.cache/mypy"
+
+if test "$USER" != "root"
+    set -x PYTHONPYCACHEPREFIX "$HOME/.cache/python"
+    set -x MYPY_CACHE_DIR "$HOME/.cache/mypy"
+else
+    set -e PYTHONPYCACHEPREFIX
+    set -e MYPY_CACHE_DIR
+end
 
 ################################################################
 # Color man pages
