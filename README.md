@@ -1,7 +1,7 @@
 # My Dotfiles
 ## What I use:
 * sway / Waybar
-* kitty (only way to get ranger image previews on wayland)
+* Alacritty
 * fish (fight me!)
 * kakoune
 * qutebrowser
