@@ -5,8 +5,8 @@ set -ex
 tmpf=$(mktemp)
 
 choose(){
-    choice=$(grep "$(cat $tmpf | cut -d\| -f1| wdmenu)" $tmpf)
-    choiceId="$(echo $choice| cut -d\| -f2)"
+    choice=$(grep "$(cat $tmpf | cut -d\| -f1 | wdmenu)" $tmpf)
+    choiceId="$(echo $choice | cut -d\| -f2)"
     choiceUrl=http://deezer.com/$sType/$choiceId
     choicePreview=$( curl -s "api.deezer.com/$sType/$choiceId/$preview_suffix" |
         jq -r '.preview, .data[0].preview | select(. != null)' )
@@ -27,7 +27,7 @@ choose(){
     if [ "$choice" = Download ]
     then
         notify-send "Starting Download"
-        deemix "$choiceUrl" &&
+        deemix "$choiceUrl" < /dev/null &&
             notify-send "Download Successful" ||
             notify-send "Download Failed"
         mpc add /
@@ -48,8 +48,12 @@ clean(){
 }
 trap clean EXIT
 
-sType=$(printf "Track\nAlbum\nArtist" | wdmenu | tr [:upper:] [:lower:] )
-query=$(echo -n | wdmenu | sed 's/[^ a-z]//g;s/ /+/g')
+sType=$(printf "Track\nAlbum\nArtist" | wdmenu | tr '[:upper:]' '[:lower:]' )
+test -z "$sType" && exit 1
+
+query=$(echo -n | wdmenu | sed 's/[^ a-z0-9]//g;s/ /+/g')
+test -z "$query" && exit 1
+
 case "$sType" in
     track)
         jqFilter='.data[]|.title+" - "+.album.title+" - "+.artist.name+"|"+( .id | tostring ) '
