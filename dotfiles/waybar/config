@@ -131,7 +131,7 @@
         "tooltip":false,
         "exec": "pidof wf-recorder > /dev/null && echo  || echo",
         "interval": 5,
-        "on-click": "pkill wf-recorder; pkill -SIGRTMIN+5 waybar",
+        "on-click": "pkill -2 wf-recorder; pkill -SIGRTMIN+5 waybar",
         "signal": 5
     },
     "custom/spigot":{
