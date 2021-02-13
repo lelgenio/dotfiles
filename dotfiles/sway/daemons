@@ -16,7 +16,7 @@ exec kdeconnect-indicator
 exec telegram-desktop-bin || telegram-desktop
 # Music Player Daemon
 exec pidof mpd || mpd
-exec pgrep -f mpDris2|| mpDris2
+exec pgrep -f mpDris2 || sleep 5s &&  mpDris2
 
 
 ###############################################################
