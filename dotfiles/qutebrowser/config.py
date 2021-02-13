@@ -25,6 +25,8 @@ config.source("permissons.py")
 # General options
 ########################################################################
 
+# Load configurations from autoconfig.yaml
+config.load_autoconfig(False)
 # Load a restored tab as soon as it takes focus.
 c.session.lazy_restore = True
 # Always restore open sites when qutebrowser is reopened.
