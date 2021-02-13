@@ -5,44 +5,64 @@
 # |  _| \__ \ | | |
 # |_| |_|___/_| |_|
 
-abbr mpn ncmpcpp
-abbr dot "dotdrop install -f"
-abbr p   "paru"
+
+function cabbr
+    command -qs ( echo $argv[2] | cut -d' ' -f1 )
+    and abbr -g $argv; end
+function calias
+    command -qs ( echo $argv[2] | cut -d' ' -f1 )
+    and alias $argv; end
+
+
+abbr -g mpn ncmpcpp
+abbr -g dot "dotdrop install -f"
+
+cabbr p emerge
+
+cabbr p pacman
+cabbr p pikaur
+cabbr p yay
+cabbr p paru
+
 
 ################################################################
 # Editor
 ################################################################
 
-abbr v {{@@ editor @@}}
+cabbr v {{@@ editor @@}}
 
-command -qs sudo &&
-    abbr rv sudo {{@@ editor @@}}
-command -qs doas &&
-    abbr rv doas {{@@ editor @@}}
+cabbr rv sudo {{@@ editor @@}}
+cabbr rv doas {{@@ editor @@}}
 
 
 ################################################################
 # Safe guard for rm
 ################################################################
 
-alias rm  'trash'
-alias crm 'command rm -i'
+calias rm  trash
+abbr -g  crm command rm -i
 
 ################################################################
 # ls and cat
 ################################################################
 
-command -qs exa &&
-    alias ls 'exa --git'
-command -qs bat &&
-    alias cat "bat"
+calias ls 'exa --git'
+calias cat 'bat'
 
 ################################################################
+# Chang Directory
+################################################################
+
 # The ever usefull "z" command
-################################################################
-
 command -qs zoxide &&
     zoxide init fish | source
+
+for i in (seq 3 10)
+    set -l dots (string repeat -n $i .)
+    set -l segs (string repeat -n $i ./.)
+    alias $dots "cd $segs"
+end
+
 
 ################################################################
 # Show reminders on startup
@@ -63,23 +83,20 @@ command -qs khard &&
 # Git
 ################################################################
 
-abbr g  'git'
-abbr gs 'git status'
-abbr gd 'git diff'
-abbr gp 'git pull; git push'
-abbr gc 'git commit -v'
+abbr -g g  'git'
+abbr -g gs 'git status'
+abbr -g gd 'git diff'
+abbr -g gp 'git pull; git push'
+abbr -g gc 'git commit -v'
 
 
 ################################################################
-# cd ...
+# open
 ################################################################
 
-for i in (seq 3 10)
-    set -l dots (string repeat -n $i .)
-    set -l segs (string repeat -n $i ./.)
-    alias $dots "cd $segs"
+function open -w xdg-open
+    xdg-open $argv &> /dev/null & disown
 end
-
 
 ################################################################
 # quickly edit dotfiles
@@ -87,7 +104,9 @@ end
 
 function edit-config
     pushd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
-    {{@@ editor @@}} (git ls-files | wdmenu)
+    set -l dotfile (git ls-files | wdmenu)
+    test -z "$dotfile" || exit 1
+    {{@@ editor @@}} "$dotfile"
     popd
 end
-abbr ec edit-config
+abbr -g ec edit-config
