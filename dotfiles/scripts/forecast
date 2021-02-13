@@ -93,9 +93,7 @@ EOF
 }
 
 wttrin(){
-    local request="wttr.in/${1-Caxias}?QF"
-    [ "$(tput cols)" -lt 125 ] && request+='n'
-    curl -sH "Accept-Language: ${LANG%_*}" --compressed "$request"
+    curl -s --compressed "v2.wttr.in"
 }
 
 case "$1" in
