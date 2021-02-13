@@ -35,6 +35,8 @@ $mod+c exec color-picker
 # show keys being pressed
 $mod+k exec showkeys
 
+# Take a screenshot and draw on it
+$mod+Shift+s exec grim - | swappy -f -
 
 ###############################################################
 # Audio
