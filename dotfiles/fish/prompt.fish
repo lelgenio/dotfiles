@@ -52,12 +52,12 @@ function fish_git_prompt
     # Left side represents Index/Filesystem
     ############################################################
     # Modified
-    _fish_prompt_git_status '.M' '~' '{{@@ color.normal.yellow   @@}}'
+    _fish_prompt_git_status '.M' '~' 'yellow'
     # Deleted
-    _fish_prompt_git_status '.D' '-' '{{@@ color.normal.red      @@}}'
+    _fish_prompt_git_status '.D' '-' 'red'
 
     # Untraked files exist
-    _fish_prompt_git_status '??' '?' '{{@@ color.txt             @@}}'
+    _fish_prompt_git_status '??' '?' 'normal'
 
     # Print name of branch and a "↑" if ahead of origin
     _fish_prompt_accent "$_git_branch"
