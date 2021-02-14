@@ -45,6 +45,9 @@ mode Music bindsym {
 mode Playerctl bindsym --locked {
 
     --to-code {
+        $tabL  exec volumesh -d 10
+        $tabR  exec volumesh -i 10
+
         $right exec playerctl next
         $left  exec playerctl previous
         $up    exec playerctl volume +10
