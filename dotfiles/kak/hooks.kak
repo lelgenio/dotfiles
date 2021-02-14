@@ -1,8 +1,9 @@
 # {{@@ header() @@}}
 
 hook global NormalIdle .* %{ try %{
-    git show-diff
     palette-status
+    source ~/.config/kak/colors.kak
+    git show-diff
 } }
 
 hook global BufOpenFile .* %{
