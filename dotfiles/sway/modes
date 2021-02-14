@@ -64,8 +64,8 @@ mode Playerctl bindsym --locked {
 ###############################################################
 
 mode Passthrough {
-    bindsym $mod+escape mode default
+    bindsym $mod+escape mode default;exec notify-send "Passthrough off"
 }
-bindsym $mod+escape mode Passthrough
+bindsym $mod+escape mode Passthrough;exec notify-send "Passthrough on"
 
 # vim: ft=i3
