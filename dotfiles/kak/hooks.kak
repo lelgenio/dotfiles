@@ -6,6 +6,16 @@ hook global NormalIdle .* %{ try %{
     git show-diff
 } }
 
+hook global WinSetOption filetype=rust|c|cpp %{
+  hook window BufReload  .* lsp-semantic-tokens
+  hook window NormalIdle .* lsp-semantic-tokens
+  hook window InsertIdle .* lsp-semantic-tokens
+}
+
+hook global WinSetOption filetype=rust %{
+    hook window NormalIdle .* rust-analyzer-inlay-hints
+}
+
 hook global BufOpenFile .* %{
     modeline-parse
     lsp-enable
