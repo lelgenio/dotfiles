@@ -30,7 +30,7 @@ c.scrolling.smooth = True
 c.tabs.show = "multiple"
 
 c.tabs.favicons.show = "always"
-c.tabs.title.format = "{audio} {current_title}"
+c.tabs.title.format = "{index}:{audio} {current_title}"
 c.tabs.indicator.width = 0
 c.tabs.padding = {
     'top': 3,
