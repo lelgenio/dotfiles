@@ -6,13 +6,12 @@
 {%@@ set bg_dark = "rgb:%s" % color.bg_dark.replace('#','') @@%}
 {%@@ set nontxt = "rgb:%s" % color.nontxt.replace('#','') @@%}
 
-cursorline
 face global crosshairs_line     default,{{@@ bg_dark @@}}
 
 # For Code
 face global value magenta
 face global type yellow
-face global variable default
+face global variable blue
 face global module variable
 face global function cyan
 face global string green
@@ -38,18 +37,18 @@ face global Default default,default
 
 face global PrimaryCursor      default,{{@@ accent @@}}+fg
 face global PrimaryCursorEol   PrimaryCursor
-face global PrimarySelection   default,{{@@ bg_light @@}}
+face global PrimarySelection   default,{{@@ bg_light @@}}+f
 
 face global SecondaryCursor    default,default+rfg
 face global SecondaryCursorEol SecondaryCursor
-face global SecondarySelection default,{{@@ bg_light @@}}
+face global SecondarySelection default,{{@@ bg_light @@}}+f
 
 face global MenuForeground default,{{@@ accent @@}}
 face global MenuBackground default,{{@@ bg_dark @@}}
 face global MenuInfo cyan
 
 face global Information default,{{@@ bg_dark @@}}
-face global Error white,default
+face global Error default
 
 face global StatusLine      default,{{@@ nontxt @@}}
 face global StatusLineMode  green,{{@@ nontxt @@}}
@@ -61,16 +60,16 @@ face global Prompt yellow,default
 face global MatchingChar default,default+b
 
 # Goodies
-add-highlighter global/ number-lines -relative -hlcursor
+try %{add-highlighter global/ number-lines -relative -hlcursor}
 face global LineNumbers         {{@@ bg_light @@}},default
 face global LineNumberCursor    default,{{@@ bg_dark @@}}
 face global LineNumbersWrapped  red,default
 
-add-highlighter global/ show-whitespaces
+try %{add-highlighter global/ show-whitespaces}
 face global Whitespace {{@@ nontxt @@}},default+f
 face global BufferPadding {{@@ nontxt @@}},default
 ## highlight trailing whitespace
-# add-highlighter global/ regex '\h*$' 0:red,red+g
+# add-highlighter global/ regex '\h*$' 0:red,red+u
 
 
 # Lsp
@@ -86,4 +85,5 @@ face global BufferPadding {{@@ nontxt @@}},default
 {%@@ endfor @@%}
 
 face global Reference yellow,default+b
+face global InlayHint {{@@ bg_light @@}}
 
