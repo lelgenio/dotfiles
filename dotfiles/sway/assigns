@@ -21,13 +21,17 @@ for_window [app_id=weather] fullscreen
 assign [app_id=qutebrowser] workspace 2
 assign [class=qutebrowser] workspace 2
 
-assign [class=Steam] workspace 9
-assign [title=^steam] workspace 9
+# Games
+assign [class=Steam]        workspace 9
+assign [title=^steam]       workspace 9
+assign [class=factorio]     workspace 9
+assign [class=DUSK\.x86_64] workspace 9
+assign [title=Mindustry]    workspace 9
 
+# Chats
 assign [app_id=telegram.?desktop] workspace 10
 assign [class=TelegramDesktop] workspace 10
 assign [class="Jitsi Meet"] workspace 10
-
 assign [class=discord] workspace 10
 assign [title=Discord] workspace 10
 
