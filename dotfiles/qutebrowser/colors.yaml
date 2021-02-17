@@ -66,6 +66,9 @@ colors:
         insert:
             fg: "{{@@ color.normal.green @@}}"
             bg: "{{@@ color.bg @@}}"
+        passthrough:
+            fg: "{{@@ color.normal.blue @@}}"
+            bg: "{{@@ color.bg @@}}"
         command:
             fg: "{{@@ color.txt @@}}"
             bg: "{{@@ color.bg @@}}"
