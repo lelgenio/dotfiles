@@ -1,6 +1,6 @@
 #!/bin/sh
 
-test -n "$SWAYSOCK" && swaymsg fullscreen off > /dev/null
+test -n "$SWAYSOCK" && swaymsg fullscreen off &> /dev/null
 
 # {%@@ if launcher == "wofi" @@%} #
 command -v wofi > /dev/null &&
