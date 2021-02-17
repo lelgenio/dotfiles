@@ -2,9 +2,12 @@
 
 hook global NormalIdle .* %{ try %{
     palette-status
-    source ~/.config/kak/colors.kak
     git show-diff
 } }
+
+hook global NormalIdle .* %{
+    source ~/.config/kak/colors.kak
+} -group source-colors
 
 hook global WinSetOption filetype=rust|c|cpp %{
   hook window BufReload  .* lsp-semantic-tokens
