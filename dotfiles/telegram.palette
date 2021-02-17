@@ -227,14 +227,14 @@ msgOutBgSelected:               msgOutBg ;
 msgOutDateFg:                   {{@@ color.bg_dark @@}} ;
 msgOutDateFgSelected:           msgOutDateFg ;
 msgOutMonoFg:                   {{@@ color.nontxt @@}} ;
-msgOutReplyBarColor:            msgInReplyBarColor ;
+msgOutReplyBarColor:            {{@@ color.bg_dark @@}} ;
 msgOutReplyBarSelColor:         {{@@ color.nontxt @@}} ;
 msgOutServiceFg:                {{@@ color.bg_dark @@}} ;
 msgOutServiceFgSelected:        msgOutServiceFg ;
 msgOutShadow:                   {{@@ accent_color | darker @@}} ;
 msgOutShadowSelected:           msgOutShadow ;
 
-historyCaptionOutFg:            historyTextOutFg ;
+historyCaptionOutFg:            {{@@ color.txt @@}} ;
 historyFileNameOutFg:           {{@@ color.bg_dark @@}} ;
 historyOutIconFg:               {{@@ color.bg_dark @@}} ;
 historyOutIconFgSelected:       {{@@ color.bg_dark @@}} ;
@@ -260,8 +260,8 @@ historyFileNameInFg:            historyTextInFg ;
 historySendingInIconFg:         {{@@ color.bg_light @@}} ;
 
 
-msgSelectOverlay:               #{{@@ accent_color @@}} ;
-msgStickerOverlay:              #{{@@ accent_color @@}} ;
+msgSelectOverlay:               {{@@ accent_color @@}} ;
+msgStickerOverlay:              {{@@ accent_color @@}} ;
 msgServiceFg:                   windowFg ;
 msgServiceBg:                   #5B606F95 ;
 msgServiceBgSelected:           #8ca0b3a2 ;
