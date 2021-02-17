@@ -16,10 +16,10 @@ set $mod Mod4
 floating_modifier $mod normal
 
 # Home row direction keys, like vim
-set $left       {{@@ key.left  @@}}
-set $down       {{@@ key.down  @@}}
-set $up         {{@@ key.up    @@}}
-set $right      {{@@ key.right @@}}
+set $Left       {{@@ key.left  @@}}
+set $Down       {{@@ key.down  @@}}
+set $Up         {{@@ key.up    @@}}
+set $Right      {{@@ key.right @@}}
 set $tabL       {{@@ key.tabL  @@}}
 set $tabR       {{@@ key.tabR  @@}}
 

@@ -11,19 +11,21 @@ bindsym --to-code {
 # Moving around
 ###############################################################
 
-# Move your focus around
-{%@@ for dir in "up,down,left,right".split(',') @@%}
-    {%@@ set DIR = dir.capitalize() @@%}
-    $mod+${{@@       dir @@}} focus {{@@ dir @@}}
-    $mod+{{@@        DIR @@}} focus {{@@ dir @@}}
-    $mod+Shift+${{@@ dir @@}} move  {{@@ dir @@}}
+{%@@ for dir in "Left,Up,Right,Down".split(',') @@%}
+    {%@@ set resize_cmd = "{} {} 20px".format(
+        ('shrink' if (loop.index0 < 2) else 'grow'),
+        ('height' if (loop.index0 % 2) else 'width'),
+    ) @@%}
+    # Move focus
+    $mod+${{@@         dir @@}} focus  {{@@ dir @@}}
+    $mod+{{@@          dir @@}} focus  {{@@ dir @@}}
+    # Move window
+    $mod+Shift+${{@@   dir @@}} move   {{@@ dir @@}}
+    $mod+Shift+{{@@    dir @@}} move   {{@@ dir @@}}
+    # Resize window
+    $mod+Control+${{@@ dir @@}} resize {{@@ resize_cmd @@}}
+    $mod+Control+{{@@  dir @@}} resize {{@@ resize_cmd @@}}
 {%@@ endfor @@%}
-
-# Resizing containers:
-$mod+Control+$left  resize shrink width  20px
-$mod+Control+$down  resize grow   height 20px
-$mod+Control+$up    resize shrink height 20px
-$mod+Control+$right resize grow   width  20px
 
 
 ###############################################################
@@ -33,7 +35,7 @@ $mod+Control+$right resize grow   width  20px
 # Switch to workspace
 # Move focused container to workspace
 {%@@ for i in range(1,11) @@%}
-    $mod+{{@@       i%10 @@}} workspace {{@@                i @@}}
+    $mod+{{@@       i%10 @@}} workspace                {{@@ i @@}}
     $mod+Shift+{{@@ i%10 @@}} move container workspace {{@@ i @@}}
 {%@@ endfor @@%}
 

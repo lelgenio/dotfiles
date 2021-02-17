@@ -24,10 +24,10 @@ mode Music bindsym {
             $tabL  exec volumesh -d 10
             $tabR  exec volumesh -i 10
 
-            $right exec mpc next
-            $left  exec mpc prev
-            $up    exec volumesh --mpd -i 10
-            $down  exec volumesh --mpd -d 10
+            $Right exec mpc next
+            $Left  exec mpc prev
+            $Up    exec volumesh --mpd -i 10
+            $Down  exec volumesh --mpd -d 10
         }
 
         m                   exec volumesh -t
@@ -48,10 +48,10 @@ mode Playerctl bindsym --locked {
         $tabL  exec volumesh -d 10
         $tabR  exec volumesh -i 10
 
-        $right exec playerctl next
-        $left  exec playerctl previous
-        $up    exec playerctl volume +10
-        $down  exec playerctl volume -10
+        $Right exec playerctl next
+        $Left  exec playerctl previous
+        $Up    exec playerctl volume +10
+        $Down  exec playerctl volume -10
     }
 
     p     mode Music
