@@ -1,6 +1,6 @@
 BasedOnStyle: LLVM
-IndentWidth: 4
-TabWidth: 4
+IndentWidth: {{@@ indent_width @@}}
+TabWidth: {{@@ indent_width @@}}
 
 {%@@ if tabs @@%}
 UseTab: ForContinuationAndIndentation

@@ -17,7 +17,7 @@
 {%@@ if tabs @@%}
 
 [filter "tabspace"]
-    smudge = unexpand --tabs=4 --first-only
-    clean = expand --tabs=4 --initial
+    smudge = unexpand --tabs={{@@ indent_width @@}} --first-only
+    clean  = expand   --tabs={{@@ indent_width @@}} --initial
 
 {%@@ endif @@%}

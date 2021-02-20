@@ -13,7 +13,8 @@ variables:
   mail: disroot.org
   cursor_size: 24
   editor: kak
-  tabs: false
+  tabs: true
+  indent_width: 4
   key_layout: colemak
   launcher: bmenu
   terminal: alacritty
