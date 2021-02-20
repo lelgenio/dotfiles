@@ -5,6 +5,9 @@
 [init]
     defaultBranch = main
 
+[commit]
+    verbose = true
+
 [pull]
     rebase = false
 
@@ -21,3 +24,5 @@
     clean  = expand   --tabs={{@@ indent_width @@}} --initial
 
 {%@@ endif @@%}
+
+# vim: ft=ini
