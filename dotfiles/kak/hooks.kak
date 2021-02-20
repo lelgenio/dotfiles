@@ -24,6 +24,11 @@ hook global BufOpenFile .* %{
     lsp-enable
 }
 
+hook global BufOpenFile .*/COMMIT_EDITMSG %{
+    execute-keys -draft 'ge<a-!>git log<ret>'
+    write
+}
+
 #completion with tab
 hook global InsertCompletionShow .* %{ try %{
     execute-keys -draft 'h<a-K>\h<ret>'
