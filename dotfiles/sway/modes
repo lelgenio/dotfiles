@@ -30,7 +30,9 @@ mode Music bindsym {
             $Down  exec volumesh --mpd -d 10
         }
 
-        m                   exec volumesh -t
+        m       exec   volumesh -t
+        Shift+u $dexec mpc add / && mpdDup && notify-send "update playlist"
+        Shift+l $dexec terminal clyrics -p
 
         space $dexec mpc toggle
         p     mode Playerctl
