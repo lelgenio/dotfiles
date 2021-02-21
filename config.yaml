@@ -223,15 +223,7 @@ actions:
   make_theme: _make_theme
   install_meta: install_meta
   filter_backgrounds: _filter_backgrounds
-
-  post:
-    # by having it be the last thing to run
-    # and quickly disowning,
-    # we can make it run only once
-    reload_sway: >
-        pidof swaymsg  &>/dev/null ||
-        swaymsg reload &
-        disown
+  reload_sway: _reload_sway
 
 ###############################################################
 dotfiles: # Just a bunch of paths and action mappings
