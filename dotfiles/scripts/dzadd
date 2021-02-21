@@ -14,7 +14,7 @@ choose(){
     choice=$( printf "Preview\nDownload\nCopy URL" | wdmenu )
     if [ "$choice" = Preview ]
     then
-        mpv --quiet "$choicePreview" &
+        mpv --quiet --volume=50 "$choicePreview" &
         mpvPid=$!
         choice=$(printf "Download\nAnother" | wdmenu -p 'Download?')
         kill $mpvPid
