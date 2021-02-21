@@ -3,8 +3,6 @@
 hook global NormalIdle .* %{ try %{
     palette-status
     git show-diff
-    lsp-highlight-references
-    lsp-semantic-tokens
 } }
 
 hook global NormalIdle .* %{
@@ -17,7 +15,6 @@ hook global WinSetOption filetype=rust %{
 
 hook global BufOpenFile .* %{
     modeline-parse
-    lsp-enable
 }
 
 hook global BufOpenFile .*/COMMIT_EDITMSG %{

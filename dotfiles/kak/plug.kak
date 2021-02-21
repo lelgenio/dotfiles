@@ -37,5 +37,18 @@ plug 'kak-lsp/kak-lsp' config %{
     lsp-auto-hover-enable
     set global lsp_hover_max_lines 10
     lsp-inlay-diagnostics-enable global
+
+    hook global NormalIdle  .* %{try lsp-highlight-references}
+    hook global BufOpenFile .* lsp-enable
+
+    hook global WinSetOption filetype=(c|cpp|rust) %{
+        hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
+        hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
+        hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
+        hook -once -always window WinSetOption filetype=.* %{
+            remove-hooks window semantic-tokens
+        }
+    }
+
 }
 
