@@ -80,3 +80,9 @@ def darker(arg1, amount=0.75):
 
 def lighter(arg1, amount=1.25):
     return color_mult(arg1, amount)
+
+def as_hex(in_number):
+    return hex(int(in_number))[2:]
+
+def clamp_to_hex(in_number):
+    return as_hex(in_number * 255)

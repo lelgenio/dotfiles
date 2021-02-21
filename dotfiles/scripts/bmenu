@@ -21,35 +21,35 @@ fi
 # s  selected
 # sc scrollbar
 
- fn="{{@@ font.mono @@}} {{@@ font.size.small @@}}"
+    fn="{{@@ font.mono      @@}} {{@@ font.size.small           @@}}"
 
- tb="{{@@ color.bg       @@}}"
- tf="{{@@ accent_color @@}}"
+    tb="{{@@ color.bg       @@}}{{@@ opacity | clamp_to_hex @@}}"
+    tf="{{@@ accent_color   @@}}"
 
- fb="{{@@ color.bg       @@}}"
- ff="{{@@ color.txt    @@}}"
+    fb="{{@@ color.bg       @@}}{{@@ opacity | clamp_to_hex @@}}"
+    ff="{{@@ color.txt      @@}}"
 
- nb="{{@@ color.bg       @@}}"
- nf="{{@@ color.txt    @@}}"
+    nb="{{@@ color.bg       @@}}{{@@ opacity | clamp_to_hex @@}}"
+    nf="{{@@ color.txt      @@}}"
 
- hb="{{@@ color.bg_light @@}}"
- hf="{{@@ accent_color @@}}"
+    hb="{{@@ color.bg_light @@}}"
+    hf="{{@@ accent_color   @@}}"
 
 #{%@@ if False @@%}#
 # Hacks to allow runnning even if not templated
- fn="Fira Code 12"
+    fn="Fira Code 12"
 
- tf="#D9534F"
- tb="#202020"
+    tf="#D9534F"
+    tb="#202020"
 
- ff="#ffffff"
- fb="#202020"
+    ff="#ffffff"
+    fb="#202020"
 
- nf="#ffffff"
- nb="#202020"
+    nf="#ffffff"
+    nb="#202020"
 
- hf="#D9534F"
- hb="#404040"
+    hf="#D9534F"
+    hb="#404040"
 #{%@@ endif @@%}#
 
 bemenu \
