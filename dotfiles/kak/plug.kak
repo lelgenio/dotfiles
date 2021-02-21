@@ -36,5 +36,6 @@ plug 'kak-lsp/kak-lsp' config %{
     # LSP
     lsp-auto-hover-enable
     set global lsp_hover_max_lines 10
+    lsp-inlay-diagnostics-enable global
 }
 

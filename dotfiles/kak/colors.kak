@@ -81,9 +81,9 @@ face global BufferPadding {{@@ nontxt @@}},default
     face global HighlightDiagnostic{{@@ obj @@}} {{@@ col @@}},default+bu
     face global Diagnostic{{@@          obj @@}} {{@@ col @@}},default+b
     face global TextDiagnostic{{@@      obj @@}} {{@@ col @@}},default+b
-    face global InlayDiagnostic{{@@     obj @@}} {{@@ col @@}},default+bu
+    face global InlayDiagnostic{{@@     obj @@}} {{@@ col @@}},default+br
 {%@@ endfor @@%}
 
-face global Reference yellow,default+b
+face global Reference default+bu
 face global InlayHint {{@@ bg_light @@}}
 

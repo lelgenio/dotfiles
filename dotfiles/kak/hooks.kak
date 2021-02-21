@@ -3,17 +3,13 @@
 hook global NormalIdle .* %{ try %{
     palette-status
     git show-diff
+    lsp-highlight-references
+    lsp-semantic-tokens
 } }
 
 hook global NormalIdle .* %{
     source ~/.config/kak/colors.kak
 } -group source-colors
-
-hook global WinSetOption filetype=rust|c|cpp %{
-  hook window BufReload  .* lsp-semantic-tokens
-  hook window NormalIdle .* lsp-semantic-tokens
-  hook window InsertIdle .* lsp-semantic-tokens
-}
 
 hook global WinSetOption filetype=rust %{
     hook window NormalIdle .* rust-analyzer-inlay-hints
