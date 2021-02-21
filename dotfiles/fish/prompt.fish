@@ -29,7 +29,7 @@ alias _fish_prompt_warn   "_fish_prompt_color 'yellow'"
 alias _fish_prompt_normal "_fish_prompt_color 'normal'"
 
 function _fish_prompt_git_status
-    git status -s | grep "^$argv[1]" &> /dev/null &&
+    git status -s | string match -r "^$argv[1]" &> /dev/null &&
     _fish_prompt_color $argv[3] $argv[2]
 end
 
@@ -40,11 +40,12 @@ end
 
 function fish_git_prompt
 
-    set _git_branch (git branch --show-current 2> /dev/null)
-    if not test -n "$_git_branch"
-        or not git status -s &> /dev/null
-        return
-    end
+    git branch --show-current &> /dev/null
+        or return
+
+    git status | string match 'HEAD detached at *' &> /dev/null
+        and set _git_branch detached
+        or  set _git_branch (git branch --show-current 2> /dev/null)
 
     _fish_prompt_normal " on "
 
@@ -60,10 +61,13 @@ function fish_git_prompt
     _fish_prompt_git_status '??' '?' 'normal'
 
     # Print name of branch and a "↑" if ahead of origin
-    _fish_prompt_accent "$_git_branch"
-    for remote in (git remote)
+    test "$_git_branch" = "detached"
+        and _fish_prompt_warn   "$_git_branch"
+        or  _fish_prompt_accent "$_git_branch"
+
+    for remote in (git remote 2> /dev/null)
         if not git branch --remotes |
-                grep "$remote"/"$_git_branch" &> /dev/null
+               string match -r "$remote"/"$_git_branch" &> /dev/null
             continue
         end
         if not git diff --quiet -- HEAD "$remote"/"$_git_branch"
