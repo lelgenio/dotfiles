@@ -8,6 +8,7 @@ map global user 'C' ': comment-block<ret>' -docstring 'comment block'
 
 map global user 'p' '<a-!> wl-paste -n <ret>' -docstring 'clipboard paste'
 map global user 'P' '! wl-paste -n <ret>' -docstring 'clipboard paste before'
+map global user 'R' '"_d! wl-paste -n <ret>' -docstring 'clipboard replace'
 
 declare-user-mode surround
 map global user 's' ': enter-user-mode surround<ret>' -docstring 'surround mode'

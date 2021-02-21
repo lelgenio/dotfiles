@@ -35,7 +35,8 @@ hook global InsertCompletionHide .* %{
 }
 
 hook global RegisterModified '"' %{ nop %sh{
-      printf %s "$kak_main_reg_dquote" | wl-copy > /dev/null 2>&1 &
+      printf %s "$kak_main_reg_dquote" | wl-copy -n > /dev/null 2>&1 &
+      printf %s "$kak_main_reg_dquote" | xclip -i -selection clipboard > /dev/null 2>&1 &
 }}
 
 # Trim trailing whitespace
