@@ -5,7 +5,7 @@
 # |  _| \__ \ | | |
 # |_| |_|___/_| |_|
 
-set -x QT_QPA_PLATFORMTHEME qt5ct
+set -x QT_QPA_PLATFORMTHEME gtk3
 set -x PATH ~/.local/bin ~/.cargo/bin ~/.factorio/bin/* $PATH
 set -x ESCDELAY 0
 
