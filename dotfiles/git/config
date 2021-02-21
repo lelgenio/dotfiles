@@ -30,4 +30,7 @@
 
 {%@@ endif @@%}
 
+[core]
+    excludesfile = {{@@ _dotfile_abs_dst @@}}/ignore
+
 # vim: ft=ini
