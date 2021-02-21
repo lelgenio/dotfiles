@@ -246,6 +246,10 @@ dotfiles: # Just a bunch of paths and action mappings
     actions:
     - reload_sway
 
+  i3:
+    src: i3
+    dst: ~/.config/i3
+
   fish:
     src: fish
     dst: ~/.config/fish
