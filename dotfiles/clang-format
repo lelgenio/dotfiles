@@ -1,6 +1,7 @@
 BasedOnStyle: LLVM
-IndentWidth: {{@@ indent_width @@}}
-TabWidth: {{@@ indent_width @@}}
+{%@@ set small_indent = [2, indent_width / 2] | max @@%}
+IndentWidth: {{@@ small_indent @@}}
+TabWidth: {{@@ small_indent @@}}
 
 {%@@ if tabs @@%}
 UseTab: ForContinuationAndIndentation

@@ -2,9 +2,12 @@
 
 
 {%@@ if tabs @@%}
-*       filter=tabspace
-*.yaml  -filter
-*.yml   -filter
-*.png   -filter
-*.jpg   -filter
+*           filter=tabspace
+*.c         filter=tabspace_small
+*.cpp       filter=tabspace_small
+*.yml       -filter
+*.scd       -filter
+?akefile    -filter
+*.png       -filter
+*.jpg       -filter
 {%@@ endif @@%}
