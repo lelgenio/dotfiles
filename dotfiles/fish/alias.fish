@@ -48,6 +48,7 @@ abbr -g  crm command rm -i
 
 calias ls 'exa --git'
 calias cat 'bat'
+calias ip 'ip --color=auto'
 
 ################################################################
 # Chang Directory
