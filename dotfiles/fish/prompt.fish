@@ -132,6 +132,11 @@ function fish_prompt
     _fish_prompt_normal " in "
     _fish_prompt_accent (prompt_pwd)
 
+    if test -n "$SSH_TTY"
+        _fish_prompt_normal " to "
+        _fish_prompt_accent "$hostname"
+    end
+
     fish_git_prompt
 
     # Line break
