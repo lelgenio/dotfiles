@@ -17,6 +17,9 @@
     show = diffr | less
     diff = diffr | less
 
+[alias]
+    graph = log --graph --oneline --all
+
 {%@@ if tabs @@%}
 
 [filter "tabspace"]
