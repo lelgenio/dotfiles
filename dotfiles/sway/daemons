@@ -39,7 +39,7 @@ set $screenReload \
 ###############################################################
 
 # start dbusd just in case
-exec 'dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus'
+exec pidof dbus-daemon || 'dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus'
 
 #Notification Daemon
 exec_always pidof mako || mako
