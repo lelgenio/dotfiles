@@ -222,6 +222,7 @@ actions:
   pam_gpg: _pam-gpg-strap
   make_theme: _make_theme
   install_meta: install_meta
+  filter_backgrounds: _filter_backgrounds
 
   post:
     # by having it be the last thing to run
@@ -324,9 +325,11 @@ dotfiles: # Just a bunch of paths and action mappings
     actions:
     - make_theme
 
-  wallpapers:
-    src: wallpapers
-    dst: ~/.local/share/wallpapers
+  backgrounds:
+    src: backgrounds
+    dst: ~/.local/share/backgrounds/
+    actions:
+    - filter_backgrounds
 
   mime:
     src: mime/

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -x
+
+for img in ~/.local/share/backgrounds/*_dark.*
+do
+  new_path=$(echo "$img" | sed 's/_dark/_light/')
+  test -f "$new_path" ||
+      convert "$img" -channel RGB -negate "$new_path"
+done
