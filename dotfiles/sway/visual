@@ -11,6 +11,7 @@
 ###############################################################
 
 set $accent     {{@@ accent_color @@}}
+set $fg_accent     {{@@ accent_fg @@}}
 set $fg_color   {{@@ color.txt @@}}
 set $bg_color   {{@@ color.bg_dark @@}}
 set $alert      #000000
@@ -26,7 +27,7 @@ default_border pixel 2px
 default_floating_border normal 2px
 
 #                       border      background  text        indicator   child_border
-client.focused          $accent     $accent     $fg_color   $accent     $accent
+client.focused          $accent     $accent     $fg_accent  $accent     $accent
 client.focused_inactive $bg_color   $bg_color   $fg_color   $bg_color   $bg_color
 client.unfocused        $bg_color   $bg_color   $fg_color   $bg_color   $bg_color
 client.urgent           $alert      $alert      $fg_color   $alert      $alert

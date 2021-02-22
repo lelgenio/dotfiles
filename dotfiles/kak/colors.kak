@@ -1,10 +1,11 @@
 # {{@@ header() @@}}
 # this is not in colors/ because it loads plugins
 
-{%@@ set accent = "rgb:%s" % accent_color.replace('#','') @@%}
-{%@@ set bg_light = "rgb:%s" % color.bg_light.replace('#','') @@%}
-{%@@ set bg_dark = "rgb:%s" % color.bg_dark.replace('#','') @@%}
-{%@@ set nontxt = "rgb:%s" % color.nontxt.replace('#','') @@%}
+{%@@ set accent_fg    = accent_fg     .replace('#','rgb:') @@%}
+{%@@ set accent_color = accent_color  .replace('#','rgb:') @@%}
+{%@@ set bg_light     = color.bg_light.replace('#','rgb:') @@%}
+{%@@ set bg_dark      = color.bg_dark .replace('#','rgb:') @@%}
+{%@@ set nontxt       = color.nontxt  .replace('#','rgb:') @@%}
 
 face global crosshairs_line     default,{{@@ bg_dark @@}}
 
@@ -15,7 +16,7 @@ face global variable blue
 face global module variable
 face global function cyan
 face global string green
-face global keyword {{@@ accent @@}}
+face global keyword {{@@ accent_color @@}}
 face global operator yellow
 face global attribute green+b
 face global comment {{@@ bg_light @@}}
@@ -35,7 +36,7 @@ face global list yellow
 # builtin faces
 face global Default default,default
 
-face global PrimaryCursor      default,{{@@ accent @@}}+fg
+face global PrimaryCursor      {{@@ accent_fg @@}},{{@@ accent_color @@}}+fg
 face global PrimaryCursorEol   PrimaryCursor
 face global PrimarySelection   default,{{@@ bg_light @@}}+f
 
@@ -43,7 +44,7 @@ face global SecondaryCursor    default,default+rfg
 face global SecondaryCursorEol SecondaryCursor
 face global SecondarySelection default,{{@@ bg_light @@}}+f
 
-face global MenuForeground default,{{@@ accent @@}}
+face global MenuForeground {{@@ accent_fg @@}},{{@@ accent_color @@}}
 face global MenuBackground default,{{@@ bg_dark @@}}
 face global MenuInfo cyan
 
@@ -54,7 +55,7 @@ face global StatusLine      default,{{@@ nontxt @@}}
 face global StatusLineMode  green,{{@@ nontxt @@}}
 face global StatusLineInfo  default,{{@@ nontxt @@}}
 face global StatusLineValue default,{{@@ nontxt @@}}
-face global StatusCursor    default,{{@@ accent @@}}
+face global StatusCursor    {{@@ accent_fg @@}},{{@@ accent_color @@}}
 
 face global Prompt yellow,default
 face global MatchingChar default,default+b

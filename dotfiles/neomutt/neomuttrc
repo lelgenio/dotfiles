@@ -155,12 +155,12 @@ set display_filter  = 'sed -e "s/&nbsp;*/\n/g"'
 
 # General
 color status    black       default
-color indicator brightwhite red
+color indicator brightwhite {{@@ accent_color_name @@}}
 
 # Messages
 color index         default default '.*'
 color index_number  black   default
-color index_author  red     default '.*'
+color index_author  {{@@ accent_color_name @@}}     default '.*'
 color index_subject green   default '.*'
 
 # New messages
@@ -171,12 +171,12 @@ color index_subject brightcyan  default "~N"
 # Sidebar
 color sidebar_new       green   default
 color sidebar_highlight default green
-color sidebar_indicator default red
+color sidebar_indicator brightwhite {{@@ accent_color_name @@}}
 color sidebar_divider   black   default
 
 # Header - information for any open email
 color header default     default "^(Date)"
-color header red         default "^(From)"
+color header {{@@ accent_color_name @@}}         default "^(From)"
 color header green       default "^(Subject)"
 color header brightwhite default "^(CC|BCC)"
 

@@ -26,10 +26,11 @@ slideFadeOutBg:                 #0000003c ;
 slideFadeOutShadowFg:           windowShadowFg ;
 imageBg:                        {{@@ color.bg_light @@}} ;
 imageBgTransparent:             windowFg ;
+
 activeButtonBg:                 {{@@ accent_color @@}} ;
 activeButtonBgOver:             {{@@ accent_color @@}} ;
 activeButtonBgRipple:           {{@@ accent_color @@}} ;
-activeButtonFg:                 {{@@ color.nontxt @@}} ;
+activeButtonFg:                 {{@@ accent_fg    @@}} ;
 activeButtonFgOver:             activeButtonFg ;
 activeButtonSecondaryFg:        windowBgRipple ;
 activeButtonSecondaryFgOver:    activeButtonSecondaryFg ;
@@ -141,7 +142,7 @@ dialogsVerifiedIconFg:          windowFg ;
 dialogsSendingIconFg:           windowFg ;
 dialogsSentIconFg:              windowFg ;
 dialogsUnreadBg:                {{@@ accent_color @@}} ;
-dialogsUnreadBgMuted:           {{@@ color.bg_light @@}} ;
+dialogsUnreadBgMuted:           {{@@ color.bg_dark @@}} ;
 dialogsUnreadFg:                windowFg ;
 dialogsBgOver:                  {{@@ color.bg_light @@}} ;
 dialogsNameFgOver:              windowFg ;
@@ -158,15 +159,15 @@ dialogsUnreadBgOver:            dialogsUnreadBg ;
 dialogsUnreadBgMutedOver:       {{@@ color.bg_light @@}} ;
 dialogsUnreadFgOver:            {{@@ color.bg @@}} ;
 dialogsBgActive:                {{@@ accent_color @@}} ;
-dialogsNameFgActive:            windowFg ;
-dialogsChatIconFgActive:        windowFg ;
-dialogsDateFgActive:            windowFg ;
-dialogsTextFgActive:            windowFg ;
-dialogsTextFgServiceActive:     windowFg ;
-dialogsDraftFgActive:           windowFg ;
+dialogsNameFgActive:            {{@@ accent_fg    @@}} ;
+dialogsChatIconFgActive:        {{@@ accent_fg    @@}} ;
+dialogsDateFgActive:            {{@@ accent_fg    @@}} ;
+dialogsTextFgActive:            {{@@ accent_fg    @@}} ;
+dialogsTextFgServiceActive:     {{@@ accent_fg    @@}} ;
+dialogsDraftFgActive:           {{@@ accent_fg    @@}} ;
 dialogsVerifiedIconBgActive:    dialogsTextFgActive ;
 dialogsVerifiedIconFgActive:    dialogsBgActive ;
-dialogsSendingIconFgActive:     windowFg ;
+dialogsSendingIconFgActive:     {{@@ accent_fg    @@}} ;
 dialogsSentIconFgActive:        dialogsTextFgActive ;
 dialogsUnreadBgActive:          dialogsTextFgActive ;
 dialogsUnreadBgMutedActive:     dialogsDraftFgActive ;
@@ -194,9 +195,11 @@ historySendingInvertedIconFg:   #ffffffc8 ;
 historySystemBg:                #89a0b47f ;
 historySystemBgSelected:        #bbc8d4a2 ;
 historySystemFg:                radialFg ;
-historyUnreadBarBg:             windowFg ;
+
+historyUnreadBarBg:             windowBg ;
 historyUnreadBarBorder:         shadowFg ;
 historyUnreadBarFg:             {{@@ accent_color @@}} ;
+
 historyForwardChooseBg:         #0000004c ;
 historyForwardChooseFg:         radialFg ;
 historyPeer1NameFg:             #C05D54 ;
@@ -234,12 +237,13 @@ msgOutServiceFgSelected:        msgOutServiceFg ;
 msgOutShadow:                   {{@@ accent_color | darker @@}} ;
 msgOutShadowSelected:           msgOutShadow ;
 
-historyCaptionOutFg:            {{@@ color.txt @@}} ;
+historyCaptionOutFg:            {{@@ accent_fg     @@}} ;
 historyFileNameOutFg:           {{@@ color.bg_dark @@}} ;
 historyOutIconFg:               {{@@ color.bg_dark @@}} ;
 historyOutIconFgSelected:       {{@@ color.bg_dark @@}} ;
 historySendingOutIconFg:        {{@@ color.bg_dark @@}} ;
-historyTextOutFg:               {{@@ color.nontxt @@}} ;
+historyTextOutFg:               {{@@ accent_fg     @@}} ;
+historyLinkOutFg:               {{@@ accent_fg | lighter    @@}} ;
 
 
 msgInBg:                        {{@@ color.bg @@}} ;
@@ -262,9 +266,9 @@ historySendingInIconFg:         {{@@ color.bg_light @@}} ;
 
 msgSelectOverlay:               {{@@ accent_color @@}} ;
 msgStickerOverlay:              {{@@ accent_color @@}} ;
-msgServiceFg:                   windowFg ;
-msgServiceBg:                   #5B606F95 ;
-msgServiceBgSelected:           #8ca0b3a2 ;
+msgServiceFg:                   {{@@ color.txt @@}};
+msgServiceBg:                   {{@@ color.bg @@}};
+msgServiceBgSelected:           {{@@ color.bg @@}};
 msgImgReplyBarColor:            msgServiceFg ;
 msgDateImgFg:                   {{@@ color.bg_light @@}} ;
 msgDateImgBg:                   #00000054 ;
@@ -310,8 +314,8 @@ msgBotKbRippleBg:               #00000020 ;
 
 mediaInFg:                      msgInDateFg ;
 mediaInFgSelected:              msgInDateFgSelected ;
-mediaOutFg:                     windowFg ;
-mediaOutFgSelected:             windowFg ;
+mediaOutFg:                     {{@@ accent_fg @@}} ;
+mediaOutFgSelected:             {{@@ accent_fg @@}} ;
 youtubePlayIconBg:              #e83131c8 ;
 youtubePlayIconFg:              radialFg ;
 

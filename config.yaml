@@ -23,6 +23,8 @@ variables:
   bar_pos: top
   tmux: false
 
+  accent_fg: '#ffffff'
+
   font:
     mono: Hack
     interface: Inter

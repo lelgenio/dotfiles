@@ -9,18 +9,18 @@ colors:
             bg: "{{@@ color.bg @@}}"
         pinned: &tabs_defaults
             odd:
+                fg: "{{@@ color.txt @@}}"
                 bg: "{{@@ color.bg @@}}"
-                fg: "{{@@ color.txt @@}}"
             even:
-                bg: "{{@@ color.bg_dark @@}}"
                 fg: "{{@@ color.txt @@}}"
+                bg: "{{@@ color.bg_dark @@}}"
             selected:
                 odd:
+                    fg: "{{@@ accent_fg @@}}"
                     bg: "{{@@ accent_color @@}}"
-                    fg: "{{@@ color.txt @@}}"
                 even:
+                    fg: "{{@@ accent_fg @@}}"
                     bg: "{{@@ accent_color @@}}"
-                    fg: "{{@@ color.txt @@}}"
         <<: *tabs_defaults
 
 
@@ -35,18 +35,18 @@ colors:
         odd:
             bg: "{{@@ color.bg @@}}"
         scrollbar:
-            bg: "{{@@ color.bg_light @@}}"
+            bg: "{{@@ color.bg_dark @@}}"
         match:
             fg: "{{@@ accent_color @@}}"
         category:
             fg: "{{@@ color.txt @@}}"
-            bg: "{{@@ color.bg_light @@}}"
+            bg: "{{@@ color.bg_dark @@}}"
             border:
                 top: "{{@@ color.bg_dark @@}}"
                 bottom: "{{@@ color.bg_dark @@}}"
         item:
             selected:
-                fg: "{{@@ color.txt @@}}"
+                fg: "{{@@ accent_fg @@}}"
                 bg: "{{@@ accent_color @@}}"
                 border:
                     top: "{{@@ color.bg_dark @@}}"
@@ -74,6 +74,7 @@ colors:
             bg: "{{@@ color.bg @@}}"
         caret:
             selection:
+                fg: "{{@@ accent_fg @@}}"
                 bg: "{{@@ accent_color @@}}"
         url:
             success:
@@ -126,9 +127,10 @@ colors:
 
     contextmenu:
         menu:
-            bg: "{{@@ color.bg @@}}"
             fg: "{{@@ color.txt @@}}"
+            bg: "{{@@ color.bg @@}}"
         selected:
+            fg: "{{@@ accent_fg @@}}"
             bg: "{{@@ accent_color @@}}"
         disabled:
             fg: "{{@@ color.bg_light @@}}"
