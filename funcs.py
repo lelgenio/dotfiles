@@ -74,11 +74,11 @@ def color_mult(e: str, amount: float):
 # Filters
 ####################################################################
 
-def darker(arg1, amount=0.75):
+def darker(arg1, amount=0.5):
     return color_mult(arg1, amount)
 
 
-def lighter(arg1, amount=1.25):
+def lighter(arg1, amount=1.5):
     return color_mult(arg1, amount)
 
 def as_hex(in_number):
