@@ -1,0 +1,28 @@
+#!/bin/sh
+
+my_path="$1"
+my_user="$2"
+my_host="$3"
+my_pass=`_get-pass "$my_host"`
+
+cat <<EOF
+set realname = "$my_user"
+set from = "${my_user}@${my_host}"
+set smtp_url = "smtps://${my_user}:${my_pass}@${my_host}"
+
+# set Mailboxes
+set folder = ~/.local/share/mail/${my_path}/
+set spoolfile = "+INBOX"
+set record = "+Sent"
+set postponed = "+Drafts"
+set trash = "+Trash"
+
+unmailboxes *
+
+mailboxes \
+    `echo ~/.local/share/mail/${my_path}/INBOX*` \
+    "=Sent" \
+    "=Drafts" \
+    "=Trash" \
+
+EOF

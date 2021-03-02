@@ -6,36 +6,32 @@
 # |_| \_|\___|\___/|_| |_| |_|\__,_|\__|\__|
 
 
-set my_user='{{@@ username @@}}'
-set my_host='{{@@ mail @@}}'
-set my_pass=`_get-pass "$my_host"`
-
 # Mailbox {{{
 
-set realname = "$my_user"
-set from = "${my_user}@${my_host}"
 
 # Set MailDir
 set mbox_type = Maildir
-set folder = ~/.local/share/mail
 set header_cache = ~/.cache/mutt/
-
-# set Mailboxes
-set spoolfile = "+INBOX"
-set record = "+Sent"
-set postponed = "+Drafts"
-set trash = "+Trash"
-
-mailboxes \
-    `echo ~/.local/share/mail/INBOX*` \
-    "=Sent" \
-    "=Drafts" \
-    "=Trash" \
-
+set my_mailroot = ~/.local/share/mail
 
 set use_from = yes
-set smtp_url = "smtps://${my_user}:${my_pass}@${my_host}"
 set ssl_force_tls = yes
+
+{%@@ for name, info in mail.items() | reverse @@%}
+set my_source_command = \
+  "_get-mutt-mail '{{@@ name @@}}' '{{@@ info.user @@}}' '{{@@ info.mail @@}}' |"
+
+  folder-hook "$my_mailroot/{{@@ name @@}}/" \
+    source "\"$my_source_command\""
+  source "$my_source_command"
+{%@@ endfor @@%}
+
+{%@@ for name, info in mail.items() @@%}
+  set my_source_command = \
+    "_get-mutt-mail '{{@@ name @@}}' '{{@@ info.user @@}}' '{{@@ info.mail @@}}' |"
+  macro index,pager <f{{@@ loop.index @@}}> "<sync-mailbox><enter-command>source \"$my_source_command\"<enter><change-folder>!<enter>"
+{%@@ endfor @@%}
+
 # }}}
 # General {{{
 

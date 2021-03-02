@@ -10,7 +10,6 @@ variables:
 ###############################################################
 
   username: lelgenio
-  mail: disroot.org
   cursor_size: 24
   editor: kak
   tabs: false
@@ -32,6 +31,14 @@ variables:
       small: 12
       medium: 14
       big: 16
+
+  mail:
+    personal:
+      user: lelgenio
+      mail: disroot.org
+    work:
+      user: leonardo
+      mail: wopus.com.br
 
 ###############################################################
 profiles:

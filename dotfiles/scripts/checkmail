@@ -1,16 +1,25 @@
 #!/bin/sh
 set -e
 
-test "$XDG_CURRENT_DESKTOP" = "gnome" &&
-    exit 0
+if pidof gnome-shell
+then
+  exit 0
+fi
 
 test -z "$XDG_RUNTIME_DIR" &&
     export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
+die() {
+    test "$?" = 0 ||
+        notify-send "Failed to sync mail" "try unlocking your gpg key"
+}
+trap die EXIT
+
 getnew(){
     pushd "$HOME/.local/share/mail/" > /dev/null
 
-    find INBOX*/new -type f |
+    find */INBOX*/new -type f |
+        sed -E '/Duolingo|LBRY/d' |
         wc -l
 
     popd > /dev/null
@@ -18,19 +27,28 @@ getnew(){
 
 OLD=$(getnew)
 
-[ "$1" = "update" ] &&
+if test "$1" = "update"
+then
+    mbsync -a ||
+    mbsync -a ||
     mbsync -a
+fi
 
 NEW=$(getnew)
 
-[ "$NEW" -gt "$OLD" ] &&
+if test  "$NEW" -gt "$OLD"
+then
     notify-send " New E-Mails!"
+fi
 
 echo $NEW | sed 's/^0$//'
 
-[ "$(ps -o comm= $PPID)" != "waybar" ] &&
-pidof waybar>/dev/null &&
-    pkill -SIGRTMIN+4 waybar
+caller=`ps -o comm= $PPID`
+if test "$caller" != "waybar"
+then
+    pidof waybar>/dev/null &&
+        pkill -SIGRTMIN+4 waybar
+fi
 
 
 # vim:ft=sh

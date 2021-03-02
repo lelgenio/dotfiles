@@ -1,25 +1,27 @@
-IMAPStore mail-remote
-Host {{@@ mail @@}}
+{%@@ for name, info in mail.items() | reverse @@%}
+
+IMAPStore {{@@ name @@}}-remote
+Host {{@@ info.mail @@}}
 Port  993
-User {{@@ username @@}}@{{@@ mail @@}}
-PassCmd "_get-pass {{@@ mail @@}}"
+User {{@@ info.user @@}}@{{@@ info.mail @@}}
+PassCmd "_get-pass {{@@ info.mail @@}}"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
-MaildirStore mail-local
+MaildirStore {{@@ name @@}}-local
 Subfolders Verbatim
-Path  ~/.local/share/mail/
-Inbox ~/.local/share/mail/INBOX
+Path  ~/.local/share/mail/{{@@ name @@}}/
+Inbox ~/.local/share/mail/{{@@ name @@}}/INBOX
 Flatten .
 
-Channel mail-remote
+Channel {{@@ name @@}}
 Expunge Both
-Master :mail-remote:
-Slave :mail-local:
+Master :{{@@ name @@}}-remote:
+Slave :{{@@ name @@}}-local:
 Patterns * !"[Gmail]/All Mail"
 Create Both
 SyncState *
-# MaxMessages 0
-# End profile
+
+{%@@ endfor @@%}
 
 # vim: ft=sh
