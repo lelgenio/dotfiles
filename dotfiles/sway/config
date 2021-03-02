@@ -28,9 +28,9 @@ set $mus        r
 
 set $wallPath\
     {%@@ if color.type == 'dark' @@%}
-        ~/.local/share/wallpapers/assembly_dark.png
+        ~/.local/share/backgrounds/assembly_dark.png
     {%@@ else @@%}
-        ~/.local/share/wallpapers/assembly_light.png
+        ~/.local/share/backgrounds/assembly_light.png
     {%@@ endif @@%}
 
 ###############################################################
