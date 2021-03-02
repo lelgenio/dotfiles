@@ -27,6 +27,8 @@ input * {
     {%@@ endif @@%}
 
     xkb_numlock enabled
+    repeat_rate 30
+    repeat_delay 200
 }
 
 # vim: ft=i3
