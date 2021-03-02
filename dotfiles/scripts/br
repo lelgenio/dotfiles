@@ -36,11 +36,14 @@ sed -i -- '1d' "${namebase}.2"
 
 {
     echo '# Please review/modify this script or empty it to do nothing'
+    echo 'run(){'
+    echo '    mv -Ti -- "$1" "$2"'
+    echo '}'
     while read -r l1 <&3 && read -r l2 <&4; do
         [ "$l1" = "$l2" ] || printf "%s\n%s\n" "$l1" "$l2"
     done 3<"${namebase}.1" 4<"${namebase}.2" |
     sed 's/\([\\"$`]\)/\\\1/g;s/^.*$/"&"/' |
-    xargs -d"\n" -L2 echo 'mv -Ti --'
+    xargs -d"\n" -L2 echo 'run'
 } > "${namebase}.sh"
 
 "$EDITOR" -- "${namebase}.sh"
