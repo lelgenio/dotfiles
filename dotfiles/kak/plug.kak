@@ -29,7 +29,7 @@ plug 'h-youhei/kakoune-surround'
 
 plug 'delapouite/kakoune-palette'
 plug 'insipx/kak-crosshairs' config %{
-    cursorline
+  crosshairs
 }
 
 plug 'kak-lsp/kak-lsp' config %{

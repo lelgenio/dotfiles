@@ -8,6 +8,7 @@
 {%@@ set nontxt       = color.nontxt  .replace('#','rgb:') @@%}
 
 face global crosshairs_line     default,{{@@ bg_dark @@}}
+face global crosshairs_column   default+b
 
 # For Code
 face global value magenta
