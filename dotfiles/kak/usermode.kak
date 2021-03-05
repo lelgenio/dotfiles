@@ -3,6 +3,10 @@
 map global user 'g' ': enter-user-mode lsp<ret>' -docstring 'lsp mode'
 map global user 'z' ':zoxide ' -docstring 'zoxide'
 
+map global user 'e' 'x|emmet<ret>{{@@ "@" if not tabs @@}}' -docstring 'process line with emmet'
+map global user 'm' ': format-buffer<ret>' -docstring 'format document'
+map global user 'M' ': format-selections<ret>' -docstring 'format selection'
+
 map global user 'c' ': comment-line<ret>' -docstring 'comment line'
 map global user 'C' ': comment-block<ret>' -docstring 'comment block'
 
@@ -15,8 +19,7 @@ map global user 's' ': enter-user-mode surround<ret>' -docstring 'surround mode'
 map global surround 's' ': surround<ret>' -docstring 'surround'
 map global surround 'c' ': change-surround<ret>' -docstring 'change'
 map global surround 'd' ': delete-surround<ret>' -docstring 'delete'
-map global surround 't' ': surround-with-tag<ret>' -docstring 'surround with tag'
-map global surround 'g' ': select-surrounding-tag<ret>' -docstring 'select tag'
+map global surround 'x' ': select-surround<ret>' -docstring 'select surround'
 
 declare-user-mode git
 map global user 'v'    ': enter-user-mode git<ret>' -docstring 'git vcs mode'
