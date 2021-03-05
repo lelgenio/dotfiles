@@ -40,22 +40,3 @@ hook global BufWritePre .* %{ try %{
     execute-keys -draft \%s\h+$<ret>d
 } }
 
-# Highlight Dotdrop templating syntax
-hook global WinCreate .* %{
-    {%@@ set escape = "\{\{@@,@@\}\},\{%@@,@@%\},\{#@@,@@#\}".split(",") @@%}
-
-    require-module python
-    add-highlighter window/dotdrop regions
-
-    add-highlighter window/dotdrop/expression region '{{@@ escape[0] @@}}' '{{@@ escape[1] @@}}' group
-    add-highlighter window/dotdrop/statement  region '{{@@ escape[2] @@}}' '{{@@ escape[3] @@}}' group
-    add-highlighter window/dotdrop/comment    region '{{@@ escape[4] @@}}' '{{@@ escape[5] @@}}' fill comment
-
-    add-highlighter window/dotdrop/expression/ ref python
-    add-highlighter window/dotdrop/statement/  ref python
-
-    add-highlighter window/dotdrop/expression/ regex '{{@@ escape[0] @@}}|{{@@ escape[1] @@}}' 0:block
-    add-highlighter window/dotdrop/statement/  regex '{{@@ escape[2] @@}}|{{@@ escape[3] @@}}' 0:block
-    add-highlighter window/dotdrop/statement/  regex 'endfor|endif'                            0:keyword
-}
-
