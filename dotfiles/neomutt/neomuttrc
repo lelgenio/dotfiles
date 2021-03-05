@@ -101,12 +101,14 @@ bind pager,browser gg top-page
 bind pager,browser G bottom-page
 bind index,pager S sync-mailbox
 bind index,pager R group-reply
-bind index \031 previous-undeleted	# Mouse wheel
-bind index \005 next-undeleted		# Mouse wheel
-bind pager \031 previous-line		# Mouse wheel
-bind pager \005 next-line		# Mouse wheel
-bind editor <Tab> complete-query
 
+# Mouse wheel
+bind index \031 previous-undeleted
+bind index \005 next-undeleted
+bind pager \031 previous-line
+bind pager \005 next-line
+
+bind editor <Tab> complete-query
 set abort_key="<ESC>"
 
 macro index,pager a \
@@ -137,9 +139,11 @@ bind index,pager "\C{{@@ key.left  @@}}" sidebar-toggle-visible
 # }}}
 # Appearence{{{
 
-set help = false        # Don't show the menu bar at the top
+# Don't show the menu bar at the top
+set help = false
 
-set markers = no		# Disables the `+` displayed at line wraps
+# Disables the `+` displayed at line wraps
+set markers = no
 
 set date_format="%m/%d %H:%M"
 set index_format="%2C %zs %?X?A& ? %D %-15.15F %s"
@@ -154,10 +158,10 @@ color status    black       default
 color indicator brightwhite {{@@ accent_color_name @@}}
 
 # Messages
-color index         default default '.*'
-color index_number  black   default
-color index_author  {{@@ accent_color_name @@}}     default '.*'
-color index_subject green   default '.*'
+color index         default                     default '.*'
+color index_number  black                       default
+color index_author  {{@@ accent_color_name @@}} default '.*'
+color index_subject green                       default '.*'
 
 # New messages
 color index         brightgreen default "~N|~O"
@@ -165,16 +169,16 @@ color index_author  brightred   default "~N"
 color index_subject brightcyan  default "~N"
 
 # Sidebar
-color sidebar_new       green   default
-color sidebar_highlight default green
+color sidebar_new       green       default
+color sidebar_highlight default     green
 color sidebar_indicator brightwhite {{@@ accent_color_name @@}}
-color sidebar_divider   black   default
+color sidebar_divider   black       default
 
 # Header - information for any open email
-color header default     default "^(Date)"
-color header {{@@ accent_color_name @@}}         default "^(From)"
-color header green       default "^(Subject)"
-color header brightwhite default "^(CC|BCC)"
+color header default                     default "^(Date)"
+color header {{@@ accent_color_name @@}} default "^(From)"
+color header green                       default "^(Subject)"
+color header brightwhite                 default "^(CC|BCC)"
 
 # Content - Body of open email
 color body       brightred  default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
