@@ -1,8 +1,0 @@
-#!/bin/sh
-
-{
-    wait $(pidof dotdrop)
-    sleep 1s
-    pidof swaymsg ||
-        swaymsg reload
-} &>/dev/null & disown

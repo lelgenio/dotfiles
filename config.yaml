@@ -232,7 +232,6 @@ actions:
   make_theme: _make_theme
   install_meta: install_meta
   filter_backgrounds: _filter_backgrounds
-  reload_sway: _reload_sway
 
 ###############################################################
 dotfiles: # Just a bunch of paths and action mappings
@@ -245,8 +244,6 @@ dotfiles: # Just a bunch of paths and action mappings
   sway:
     src: sway
     dst: ~/.config/sway
-    actions:
-    - reload_sway
 
   i3:
     src: i3
@@ -267,8 +264,6 @@ dotfiles: # Just a bunch of paths and action mappings
   waybar:
     src: waybar
     dst: ~/.config/waybar
-    actions:
-    - reload_sway
 
   kitty:
     src: kitty.conf
