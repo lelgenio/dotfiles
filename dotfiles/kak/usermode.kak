@@ -47,7 +47,7 @@ map global find 'd' ': find_delete<ret>' -docstring 'file to delete'
 define-command -hidden find_file \
 %{ edit -existing %sh{
     test "$PWD" -ne "$HOME" && args="-H"
-    fd -tf "$args" | sed "/.git\//d" | wdmenu
+    fd -HE .git  -tf "$args" | sed "/.git\//d" | wdmenu
 } }
 
 define-command -hidden find_delete \

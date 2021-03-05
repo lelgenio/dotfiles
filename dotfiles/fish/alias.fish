@@ -105,7 +105,7 @@ end
 
 function edit-config
     pushd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
-    set -l dotfile (git ls-files | wdmenu)
+    set -l dotfile (fd -HE .git | wdmenu)
     test -n "$dotfile" || return 1
     {{@@ editor @@}} "$dotfile"
     popd
