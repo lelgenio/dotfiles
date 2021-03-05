@@ -32,6 +32,7 @@ map global normal <F2> ': lsp-rename-prompt<ret>'
     map global normal <c-k> <a-s>
 
     map global normal t e
+    map global normal T E
 
 {%@@ endif @@%}
 
