@@ -78,7 +78,7 @@ def darker(arg1, amount=0.5):
     return color_mult(arg1, amount)
 
 
-def lighter(arg1, amount=1.5):
+def lighter(arg1, amount=1.25):
     return color_mult(arg1, amount)
 
 def as_hex(in_number):
