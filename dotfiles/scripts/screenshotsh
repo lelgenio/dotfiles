@@ -33,6 +33,10 @@ case $1 in
 
     clip)
         # Focused monitor to clipboard
-        grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
+        cur_output=$(swaymsg -t get_outputs |
+                     jq -r '.[] | select(.focused) | .name')
+
+        grim -o "$cur_output" - | wl-copy ||
+            grim - | wl-copy
         ;;
 esac
