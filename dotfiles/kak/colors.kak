@@ -19,7 +19,7 @@ face global function cyan
 face global string green
 face global keyword {{@@ accent_color @@}}
 face global operator yellow
-face global attribute green+b
+face global attribute yellow+b
 face global comment {{@@ bg_light @@}}
 face global documentation comment
 face global meta magenta
