@@ -56,22 +56,27 @@ set $menu       s
 set $mus        r
 
 
-bindsym {
-
-
-# Move your focus around
-{%@@ for dir in "up,down,left,right".split(',') @@%}
-    {%@@ set DIR = dir.capitalize() @@%}
-    $mod+${{@@       dir @@}} focus {{@@ dir @@}}
-    $mod+{{@@        DIR @@}} focus {{@@ dir @@}}
-    $mod+Shift+${{@@ dir @@}} move  {{@@ dir @@}}
+{%@@ for dir in "Left,Up,Right,Down".split(',') @@%}
+    {%@@ set resize_cmd = "{} {} 20px".format(
+        ('shrink' if (loop.index0 < 2) else 'grow'),
+        ('height' if (loop.index0 % 2) else 'width'),
+    ) @@%}
+    # Move focus
+    bindsym $mod+${{@@         dir @@}} focus  {{@@ dir @@}}
+    bindsym $mod+{{@@          dir @@}} focus  {{@@ dir @@}}
+    # Move window
+    bindsym $mod+Shift+${{@@   dir @@}} move   {{@@ dir @@}}
+    bindsym $mod+Shift+{{@@    dir @@}} move   {{@@ dir @@}}
+    # Resize window
+    bindsym $mod+Control+${{@@ dir @@}} resize {{@@ resize_cmd @@}}
+    bindsym $mod+Control+{{@@  dir @@}} resize {{@@ resize_cmd @@}}
 {%@@ endfor @@%}
 
 # Switch to workspace
 # Move focused container to workspace
 {%@@ for i in range(1,11) @@%}
-    $mod+{{@@       i%10 @@}} workspace {{@@                i @@}}
-    $mod+Shift+{{@@ i%10 @@}} move container workspace {{@@ i @@}}
+    bindsym $mod+{{@@       i%10 @@}} workspace {{@@                i @@}}
+    bindsym $mod+Shift+{{@@ i%10 @@}} move container workspace {{@@ i @@}}
 {%@@ endfor @@%}
 
 # go/move to Workspaces
@@ -83,8 +88,8 @@ bindsym {
 }.items() @@%}
 {%@@ for button in buttons @@%}
     {%@@ set pref = ("--whole-window " if "button" in button) @@%}
-    {{@@ pref @@}}$mod+{{@@       button @@}}      workspace {{@@ targ @@}}
-    {{@@ pref @@}}$mod+Shift+{{@@ button @@}} move workspace {{@@ targ @@}}
+    bindsym {{@@ pref @@}}$mod+{{@@       button @@}}      workspace {{@@ targ @@}}
+    bindsym {{@@ pref @@}}$mod+Shift+{{@@ button @@}} move workspace {{@@ targ @@}}
 {%@@ endfor @@%}
 {%@@ endfor @@%}
 
@@ -93,26 +98,26 @@ bindsym {
 ###############################################################
 
 # Splits
-$mod+v splitv
+bindsym $mod+v splitv
 # No splith since we can just mod+r
 
 # Layout styles
-$mod+t layout tabbed
-$mod+r layout toggle split
+bindsym $mod+t layout tabbed
+bindsym $mod+r layout toggle split
 
 # Make the current focus fullscreen
-$mod+f fullscreen
+bindsym $mod+f fullscreen
 
 # Floating
-$mod+Shift+space floating toggle
-$mod+space focus mode_toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
 
 # Move focus to the parent container
-$mod+a focus parent
-$mod+z focus child
+bindsym $mod+a focus parent
+bindsym $mod+z focus child
 
 
-}
+
 
 
 
