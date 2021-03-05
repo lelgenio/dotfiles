@@ -20,6 +20,7 @@ source_yaml(config, "fonts.yaml")
 config.source("keys.py")
 config.source("ui.py")
 config.source("permissons.py")
+c.content.user_stylesheets = "style.css"
 
 ########################################################################
 # General options

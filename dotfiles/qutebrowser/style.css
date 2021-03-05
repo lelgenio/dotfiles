@@ -1,0 +1,13 @@
+
+/*{%@@ if color.type == "dark" @@%}*/
+
+button {
+    color: unset;
+    background-color: unset;
+}
+
+/*{%@@ endif @@%}*/
+
+.search-filters-wrap:before, .search-filters-wrap:after {
+    display: none;
+}
