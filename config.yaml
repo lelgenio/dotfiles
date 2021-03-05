@@ -395,6 +395,7 @@ dotfiles: # Just a bunch of paths and action mappings
   kakoune:     { "src":"kak",           "dst":"~/.config/kak"                }
   kanshi:      { "src":"kanshi",        "dst":"~/.config/kanshi/config"      }
   mpd:         { "src":"mpd.conf",      "dst":"~/.config/mpd/mpd.conf"       }
+  pqivrc:      { "src":"pqiv.ini",      "dst":"~/.config/pqivrc"             }
   qutebrowser: { "src":"qutebrowser",   "dst":"~/.config/qutebrowser"        }
   rclone:      { "src":"rclone.conf",   "dst":"~/.config/rclone/rclone.conf" }
   wofi:        { "src":"wofi",          "dst":"~/.config/wofi"               }

@@ -7,8 +7,7 @@
 # |_| |_| |_|_|_| |_| |_|\___|\__,_| .__/| .__/|___/
 #                                  |_|   |_|
 
-
-# {%@@ set image_viewer = 'imv.desktop' @@%}
+# {%@@ set image_viewer = 'pqiv.desktop' @@%}
 # {%@@ set video_player = 'mpv.desktop' @@%}
 # {%@@ set web_browser = 'org.qutebrowser.qutebrowser.desktop' @@%}
 

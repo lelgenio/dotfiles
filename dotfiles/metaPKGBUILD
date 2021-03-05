@@ -79,7 +79,7 @@ depends=(
     transmission-cli deemix
 
     # Media
-    imv mpv
+    pqiv mpv
     mpd mpc ncmpcpp
     blender gimp kdenlive
 
