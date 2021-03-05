@@ -9,10 +9,6 @@ hook global NormalIdle .* %{
     source ~/.config/kak/colors.kak
 } -group source-colors
 
-hook global WinSetOption filetype=rust %{
-    hook window NormalIdle .* rust-analyzer-inlay-hints
-}
-
 hook global BufOpenFile .* %{
     modeline-parse
 }
