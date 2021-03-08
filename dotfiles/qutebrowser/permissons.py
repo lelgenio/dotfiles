@@ -38,11 +38,10 @@ config.set('content.register_protocol_handler', False, '*')
 config.set("content.geolocation", True, "https://openweathermap.org")
 
 # Allow websites to record audio/video.
-# config.set("content.media_capture", True, "https://ca.bbcollab.com")
-config.set("content.media.audio_video_capture", True,
-           "https://ca.bbcollab.com")
-config.set("content.autoplay", True, "https://ca.bbcollab.com")
-config.set("content.mute", False, "https://ca.bbcollab.com")
+bb_url = "https://*.bbcollab.com"
+config.set("content.media.audio_video_capture", True, bb_url)
+config.set("content.autoplay", True, bb_url)
+config.set("content.mute", False, bb_url)
 
 
 ###############################################################
