@@ -366,7 +366,7 @@ dotfiles: # Just a bunch of paths and action mappings
     - pam_gpg
 
   packages:
-    src: metaPKGBUILD
+    src: meta.PKGBUILD
     dst: ~/.local/share/metapkg/PKGBUILD
     actions:
     - install_meta

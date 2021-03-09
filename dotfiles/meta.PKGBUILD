@@ -4,9 +4,8 @@ pkgver=1
 pkgrel=2
 pkgdesc="Metapackage for swaywm related programs"
 arch=('any')
-url=""
+url="http://git.disroot.org/lelgenio/dotfiles"
 license=('GPL')
-depends=()
 
 depends=(
 
@@ -87,8 +86,20 @@ depends=(
     libreoffice-fresh libreoffice-fresh-pt-br hunspell-pt-br papirus-libreoffice-theme
 
     # Programing
-    kakoune kak-lsp
-    neovim python-pynvim neovim-symlinks ipython
+        kakoune kak-lsp
+        neovim python-pynvim neovim-symlinks
+
+        bash-language-server
+
+        # Python
+        ipython bpython
+
+        # Python lsp
+        python-language-server
+        python-pylint autopep8 pyls-mypy
+        python-mccabe python-rope python-pyflakes
+        python-pycodestyle python-pydocstyle
+
     rust gcc gdb
 
     # Virt
