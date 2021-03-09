@@ -79,6 +79,6 @@ key_bindings:
   - { key: {{@@ key.insertMode | upper @@}},    mode: Vi|~Search, action: ToggleViMode       }
   - { key: Up,        mods: Control|Shift,      mode: ~Alt,       action: ScrollLineUp,      }
   - { key: Down,      mods: Control|Shift,      mode: ~Alt,       action: ScrollLineDown     }
-  - { key: PageUp,    mods: Control|Shift,      mode: ~Alt,       action: ScrollPageUp,      }
-  - { key: PageDown,  mods: Control|Shift,      mode: ~Alt,       action: ScrollPageDown     }
+  - { key: PageUp,    mods: Control|Shift,      mode: ~Alt,       action: ScrollHalfPageUp   }
+  - { key: PageDown,  mods: Control|Shift,      mode: ~Alt,       action: ScrollHalfPageDown }
 
