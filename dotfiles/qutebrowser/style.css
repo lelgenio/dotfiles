@@ -1,13 +1,39 @@
 
 /*{%@@ if color.type == "dark" @@%}*/
 
-button {
+button,
+input[type="button"] {
     color: unset;
     background-color: unset;
 }
 
-/*{%@@ endif @@%}*/
+/***************************
+ * Remove borked ellements *
+ ***************************/
 
 .search-filters-wrap:before, .search-filters-wrap:after {
+
     display: none;
+}
+
+/*{%@@ endif @@%}*/
+
+
+/*****************
+ * Hide some ads *
+ *****************/
+
+/*Reddit*/
+#sr-header-area .redesign-beta-optin,
+.link.promotedlink.promoted,
+.spacer:empty,
+.spacer .premium-banner-outer,
+.ad-container,
+
+/*Youtube*/
+div#masthead-ad ,
+.video-ads,
+#player-ads
+{
+    display: none !important;
 }

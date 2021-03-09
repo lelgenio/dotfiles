@@ -4,6 +4,8 @@
 from qutebrowser.config.configfiles import ConfigAPI   # type: ignore
 from qutebrowser.config.config import ConfigContainer  # type: ignore
 
+from qutebrowser.api import interceptor  # type: ignore
+
 # {%@@ if False @@%}
 config = ConfigAPI()
 c = ConfigContainer()
@@ -42,6 +44,18 @@ bb_url = "https://*.bbcollab.com"
 config.set("content.media.audio_video_capture", True, bb_url)
 config.set("content.autoplay", True, bb_url)
 config.set("content.mute", False, bb_url)
+
+
+# Youtube
+@interceptor.register
+def filter_yt(info: interceptor.Request):
+    url = info.request_url
+    if (
+            url.host() == "www.youtube.com"
+            and url.path() == "/get_video_info"
+            and "&adformat=" in url.query()
+    ):
+        info.block()
 
 
 ###############################################################
