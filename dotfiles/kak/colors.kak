@@ -7,6 +7,9 @@
 {%@@ set bg_dark      = color.bg_dark .replace('#','rgb:') @@%}
 {%@@ set nontxt       = color.nontxt  .replace('#','rgb:') @@%}
 
+{%@@ set orange  = color.normal.orange  .replace('#','rgb:') @@%}
+{%@@ set brown  = color.normal.brown    .replace('#','rgb:') @@%}
+
 face global crosshairs_line     default,{{@@ bg_dark @@}}
 face global crosshairs_column   default+b
 
@@ -14,15 +17,15 @@ face global crosshairs_column   default+b
 face global value magenta
 face global type yellow
 face global variable blue
-face global module variable
-face global function cyan
+face global module {{@@ brown @@}}
+face global function {{@@ orange @@}}
 face global string green
 face global keyword {{@@ accent_color @@}}
 face global operator yellow
-face global attribute yellow+b
+face global attribute cyan
 face global comment {{@@ bg_light @@}}
 face global documentation comment
-face global meta magenta
+face global meta function
 face global builtin blue
 
 # For markup
