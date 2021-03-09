@@ -7,7 +7,7 @@
 
 
 set global scrolloff 8,8
-add-highlighter global/ wrap
+try %{add-highlighter global/ wrap}
 
 source "%val{config}/plug.kak"
 source "%val{config}/keys.kak"

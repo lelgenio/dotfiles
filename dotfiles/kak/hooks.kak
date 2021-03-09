@@ -5,10 +5,6 @@ hook global NormalIdle .* %{ try %{
     git show-diff
 } }
 
-hook global NormalIdle .* %{
-    source ~/.config/kak/colors.kak
-} -group source-colors
-
 hook global BufOpenFile .* %{
     modeline-parse
 }

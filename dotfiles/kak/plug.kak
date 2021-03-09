@@ -38,7 +38,7 @@ plug 'kak-lsp/kak-lsp' config %{
   # lsp-inlay-diagnostics-enable global
 
   hook global NormalIdle  .* %{try lsp-highlight-references}
-  hook global BufCreate   .* lsp-enable
+  hook global BufCreate   .* %{try lsp-enable}
   hook global WinSetOption filetype=(c|cpp|rust|python) lsp-auto-hover-enable
 
   hook global WinSetOption filetype=rust %{
