@@ -19,6 +19,14 @@ mode Music bindsym {
     a $dexec dzadd
     s $dexec pulse-sink
 
+    Shift+y $dexec musmenu yank
+
+    Ctrl+c   exec musmenu pclear
+    Ctrl+a $dexec musmenu padd
+    Ctrl+s $dexec musmenu psave
+    Ctrl+o $dexec musmenu pload
+    Ctrl+d $dexec musmenu pdelete
+
     --locked {
         --to-code {
             $tabL  exec volumesh -d 10
@@ -28,7 +36,10 @@ mode Music bindsym {
             $Left  exec mpc prev
             $Up    exec volumesh --mpd -i 10
             $Down  exec volumesh --mpd -d 10
+            Shift+$Right exec mpc seek +10
+            Shift+$Left  exec mpc seek -10
         }
+
 
         m       exec   volumesh -t
         Shift+u $dexec mpc add / && mpdDup && notify-send "update playlist"

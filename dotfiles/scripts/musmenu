@@ -3,52 +3,114 @@ set -e
 
 menu=wdmenu
 
-search(){
-    music=$(mpc playlist --format '%artist% : %title%' | sed '/^ : $/d' | $menu)
-    if [ "$music" = "" ]
-    then
-        exit 1
-    fi
+search() {
+    tabs 8
 
-    artist=$(echo "$music" | perl -pe 's/(.*) : (.*)/\1/')
-    title=$(echo "$music"  | perl -pe 's/(.*) : (.*)/\2/')
-
-    mpc --quiet searchplay artist "$artist" title "$title"
+    mpc playlist --format '%artist% : %title%@pos:%position%' |
+        sed '/^ : \t/d'|
+        column -ts"@" |
+        $menu |
+        grep -o  'pos:.*' |
+        cut -d: -f2 |
+        xargs mpc play
 }
 
-delete(){
-    [ -n "$XDG_CONFIG_HOME" ] &&
-      config_root="$XDG_CONFIG_HOME" ||
-      config_root="$HOME/.config"
+get_current() {
+    test -n "$XDG_CONFIG_HOME" &&
+        config_root="$XDG_CONFIG_HOME" ||
+        config_root="${HOME}/.config"
     music_root=$(awk '/^music_directory/ {
-                        gsub(/"/,"");
-                        gsub(/~/,"'$HOME'");
-                        print $2
-                      }' $config_root/mpd/mpd.conf)
-    current="$music_root"/"$(mpc current -f %file%)"
-    answer=$(printf "nothing\n$current" | $menu -p"delete?" )
-    if [ "$answer" = "$current" ]
-    then
+                      gsub(/"/,"");
+                      gsub(/~/,"'$HOME'");
+                      print $2
+                    }' "${config_root}/mpd/mpd.conf")
+
+    echo "${music_root}/$(mpc current -f %file%)"
+}
+
+delete() {
+    current=$(get_current)
+    answer=$(printf "nothing\n$current" | $menu -p"delete?")
+    if test "$answer" = "$current"; then
         trash "$answer"
         mpc --quiet next
         mpc --quiet update
+
+        notify-send "Removed Music" "$(echo answer | sd '~' '$HOME')"
     fi
 }
 
-usage(){
+yank() {
+    current=$(get_current)
+
+    # Some programs need you to pass a path, not the contents
+    wl-copy --type 'text/uri-list' "file:///${current}"
+
+    notify-send "Yanked Music" "$(echo $current | sd "$HOME" "~")"
+}
+
+add() {
+    get_current
+    cd "$music_root"
+    choice=$(fd -E '*.lrc' -E '*.m3u8' | sort | $menu -p "Add Songs(Use Ctrl):")
+    mpc add "$choice" &&
+        notify-send "Added Music" "$(echo $choice | sd "$HOME" "~")" ||
+        notify-send "Failed to Add Music" "$(echo $choice | sd "$HOME" "~")"
+    mpdDup
+}
+
+clear() {
+    mpc clear &&
+        notify-send "Cleared Playlist" ||
+        notify-send "Failed Clear Playlist"
+}
+
+psave() {
+    name=$(mpc playlist | $menu -p 'Save Playlist(Use Shift): ')
+
+    mpc save "$name" &&
+        notify-send "Created playlist" "$name" ||
+        notify-send "Failed to Create Playlist" "$name"
+}
+
+pload() {
+    name=$(mpc lsplaylists | $menu -p 'Load Playlist: ')
+
+    mpc clear
+    mpc load "$name" &&
+        notify-send "Loaded playlist" "$name" ||
+        notify-send "Failed to Load Playlist" "$name"
+}
+
+pdelete() {
+    name=$(mpc lsplaylists | $menu -p 'Delete Playlist: ')
+
+    mpc delete "$name" &&
+        notify-send "Deleted playlist" "$name" ||
+        notify-send "Failed to Delete Playlist" "$name"
+}
+
+usage() {
     cmdname=$(basename "$0")
-    echo "Commands: "
-    echo "  $cmdname search     -- Searches the current playlist for songs and plays it."
-    echo "  $cmdname delete     -- Prompts to delete the current song."
+    echo "Commands:"
+    echo "  $cmdname search   -- Search and play songs."
+    echo "  $cmdname delete   -- Prompt to delete the current song."
+    echo "  $cmdname yank     -- Copie current music to clipboard."
+    echo "  $cmdname add      -- Add song to playlist."
+    echo "Playlist Commands:"
+    echo "  $cmdname pclear   -- Clear."
+    echo "  $cmdname psave    -- Save."
+    echo "  $cmdname pload    -- Load."
+    echo "  $cmdname pdelete  -- Delete."
 }
 
 case "$1" in
-    delete)
-        delete ;;
-    search)
-        search ;;
+    delete | search | yank | add | clear | psave | pload | pdelete)
+        "$1"
+        ;;
     *)
         usage
-        search
+        test -n "$1"
+        echo "Unreconized option: $1"
         ;;
 esac
