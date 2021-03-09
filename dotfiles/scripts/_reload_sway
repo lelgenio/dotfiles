@@ -2,7 +2,8 @@
 
 {
     wait $(pidof dotdrop)
-    sleep 1s
+    sleep 10s
+    timeout 3s kanshi
     pidof swaymsg ||
         swaymsg reload
 } &>/dev/null & disown
