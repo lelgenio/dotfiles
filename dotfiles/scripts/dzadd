@@ -2,53 +2,22 @@
 
 set -ex
 
-tmpf=$(mktemp)
+tmpf=$(mktemp /tmp/dzadd.XXXXXX)
 
-choose(){
-    choice=$(grep "$(cat $tmpf | cut -d\| -f1 | wdmenu)" $tmpf)
-    choiceId="$(echo $choice | cut -d\| -f2)"
-    choiceUrl=http://deezer.com/$sType/$choiceId
-    choicePreview=$( curl -s "api.deezer.com/$sType/$choiceId/$preview_suffix" |
-        jq -r '.preview, .data[0].preview | select(. != null)' )
+clean() {
+    test "$?" -eq "0" ||
+        notify-send "Exiting with error"
 
-    choice=$( printf "Preview\nDownload\nCopy URL" | wdmenu )
-    if [ "$choice" = Preview ]
-    then
-        mpv --quiet --volume=50 "$choicePreview" &
-        mpvPid=$!
-        choice=$(printf "Download\nAnother" | wdmenu -p 'Download?')
-        kill $mpvPid
-        if test "$choice" = "Another"
-        then
-            choose
-            return
-        fi
-    fi
-    if [ "$choice" = Download ]
-    then
-        notify-send "Starting Download"
-        deemix "$choiceUrl" < /dev/null &&
-            notify-send "Download Successful" ||
-            notify-send "Download Failed"
-        mpc add /
-        mpdDup
-    fi
-    if [ "$choice" = "Copy URL" ]
-    then
-        wl-copy "$choiceUrl"
-    fi
-
-}
-
-clean(){
     set +e
+
     kill "$mpvPid"
 
     rm -f $tmpf
 }
+
 trap clean EXIT
 
-sType=$(printf "Track\nAlbum\nArtist" | wdmenu | tr '[:upper:]' '[:lower:]' )
+sType=$(printf "Track\nAlbum\nArtist" | wdmenu | tr '[:upper:]' '[:lower:]')
 test -z "$sType" && exit 1
 
 query=$(echo -n | wdmenu | sed 's/[^ a-z0-9]//g;s/ /+/g')
@@ -57,19 +26,77 @@ test -z "$query" && exit 1
 case "$sType" in
     track)
         jqFilter='.data[]|.title+" - "+.album.title+" - "+.artist.name+"|"+( .id | tostring ) '
+        image_filter='.album.cover_big'
         ;;
     album)
         jqFilter='.data[]| ( .nb_tracks | tostring ) +" - "+.title+" - "+.artist.name+"|"+ ( .id | tostring ) '
+        image_filter='.cover_big'
         preview_suffix=tracks
         ;;
     artist)
         jqFilter='.data[]| ( .nb_fan | tostring ) +" - "+.name+"|"+ ( .id | tostring ) '
+        image_filter='.picture_big'
         preview_suffix=top
         ;;
 esac
 
 curl -s "api.deezer.com/search/$sType?q=${query}" |
-    jq -r "$jqFilter" > $tmpf
+    sed 's/|//g' |
+    jq -r "$jqFilter" >"$tmpf"
 
-choose
+pick_song() {
 
+    choice=$(cat $tmpf | cut -d\| -f1 | wdmenu)
+    choice=$(grep "$choice" $tmpf | head -n 1)
+    choiceId=$(printf "%s" "$choice" | cut -d\| -f2)
+    choiceUrl=http://deezer.com/$sType/$choiceId
+
+    pick_action() {
+
+        COMMON_CHOISES="View Image\nDownload\nCopy URL\nAnother"
+        choice=$(printf "Preview\n${COMMON_CHOISES}" | wdmenu)
+
+        if test "$choice" = "Preview"; then
+            choicePreview=$(
+                curl -s "http://api.deezer.com/$sType/$choiceId/$preview_suffix" |
+                    jq -r '.preview, .data[0].preview | select(. != null)'
+            )
+
+            mpv --quiet --volume=50 --no-resume-playback "$choicePreview" &
+            mpvPid=$!
+            choice=$(printf "$COMMON_CHOISES" | wdmenu -p 'Download?')
+            kill $mpvPid || true
+        fi
+
+        if test "$choice" = "View Image"; then
+            curl -s "api.deezer.com/${sType}/${choiceId}" |
+                jq -r "$image_filter" |
+                xargs curl -s |
+                pqiv -
+
+            pick_action
+        fi
+
+        if test "$choice" = "Download"; then
+            notify-send "Starting Download"
+            deemix "$choiceUrl" </dev/null &&
+                notify-send "Download Successful" ||
+                notify-send "Download Failed"
+            mpc add /
+            mpdDup
+        fi
+
+        if test "$choice" = "Copy URL"; then
+            wl-copy "$choiceUrl"
+        fi
+
+        if test "$choice" = "Another"; then
+            pick_song
+            return
+        fi
+    }
+    pick_action
+
+}
+
+pick_song
