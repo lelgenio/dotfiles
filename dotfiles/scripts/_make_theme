@@ -2,14 +2,13 @@
 
 # Papirus Icon Theme
 {
-    if papirus-folders -l | grep "[^>] {{@@ accent_color_name @@}}"
-    then
+    papirus-folders -l | grep "[^>] {{@@ accent_color_name @@}}"&&
         notify-send "Switching Folder Color"
-        papirus-folders -uC "{{@@ accent_color_name @@}}"
-    else
+
+    papirus-folders -uC "{{@@ accent_color_name @@}}" ||
         papirus-folders -uD
-    fi
-} &> /dev/null &
+
+} &
 
 # Materia GTK Theme
 src_path="$HOME/.cache/materia-theme"
