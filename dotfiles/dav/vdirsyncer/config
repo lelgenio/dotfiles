@@ -44,9 +44,9 @@ fileext = ".vcf"
 
 [storage contacts_remote]
 type = "carddav"
-url = "https://cloud.{{@@ mail @@}}/remote.php/dav/addressbooks/users/{{@@ username @@}}/contacts/"
-username = "{{@@ username @@}}@{{@@ mail @@}}"
-password.fetch = [ "command", "_get-pass", "{{@@ mail @@}}" ]
+url = "https://cloud.{{@@ mail.personal.mail @@}}/remote.php/dav/addressbooks/users/{{@@ mail.personal.user @@}}/contacts/"
+username = "{{@@ mail.personal.user @@}}@{{@@ mail.personal.mail @@}}"
+password.fetch = [ "command", "_get-pass", "{{@@ mail.personal.mail @@}}" ]
 
 # CALDAV
 [pair calendar]
@@ -64,6 +64,6 @@ fileext = ".ics"
 
 [storage calendar_remote]
 type = "caldav"
-url = "https://cloud.{{@@ mail @@}}/remote.php/dav/calendars/{{@@ username @@}}/personal/"
-username = "{{@@ username @@}}@{{@@ mail @@}}"
-password.fetch = [ "command", "_get-pass", "{{@@ mail @@}}" ]
+url = "https://cloud.{{@@ mail.personal.mail @@}}/remote.php/dav/calendars/{{@@ mail.personal.user @@}}/personal/"
+username = "{{@@ mail.personal.user @@}}@{{@@ mail.personal.mail @@}}"
+password.fetch = [ "command", "_get-pass", "{{@@ mail.personal.mail @@}}" ]

@@ -16,8 +16,8 @@ Flatten .
 
 Channel {{@@ name @@}}
 Expunge Both
-Master :{{@@ name @@}}-remote:
-Slave :{{@@ name @@}}-local:
+Far :{{@@ name @@}}-remote:
+Near :{{@@ name @@}}-local:
 Patterns * !"[Gmail]/All Mail"
 Create Both
 SyncState *
