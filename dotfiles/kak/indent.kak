@@ -42,8 +42,15 @@ hook global BufOpenFile .*\.(ya?ml|c(pp)?) %{
     set global indentwidth {{@@ indent_width @@}}
 
     # use spaces insted of tabs
-    hook global InsertChar \t %{
-        exec -draft -itersel h@
-    } -group replace-tabs-with-spaces
+    hook global BufCreate .* %{
+        hook buffer InsertChar \t %{
+            exec -draft -itersel h@
+        } -group replace-tabs-with-spaces
+    }
+
+    hook global WinSetOption filetype=makefile %{
+        remove-hooks buffer replace-tabs-with-spaces
+    }
+
 
 {%@@ endif @@%}
