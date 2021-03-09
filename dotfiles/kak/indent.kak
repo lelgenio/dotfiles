@@ -8,8 +8,12 @@
 set global tabstop {{@@ indent_width @@}}
 {%@@ set small_indent = [2, indent_width / 2] | max @@%}
 
-hook global BufOpenFile .*\.(ya?ml|c(pp)?) %{
-    set buffer tabstop {{@@ small_indent @@}}
+hook global BufCreate .*\.(ya?ml|c(pp)?|css) %{
+    set buffer indent_width {{@@ small_indent @@}}
+}
+
+hook global BufCreate .*\.py %{
+    set global indentwidth 4
 }
 
 {%@@ if tabs @@%}
@@ -22,7 +26,7 @@ hook global BufOpenFile .*\.(ya?ml|c(pp)?) %{
 
     # yaml is ass and does not allow tabs for indent
     hook global BufOpenFile .*\.ya?ml %{
-        execute-keys -draft '%s^\s*<ret><a-@>'
+        execute-keys -draft '%s^\s+<ret><a-@>'
         write
         set buffer autoreload false
     } -group yaml-replace-spaces-with-tabs
