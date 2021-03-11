@@ -21,8 +21,8 @@ mode Music bindsym {
 
     Shift+y $dexec musmenu yank
 
+    Ctrl+a $dexec musmenu add
     Ctrl+c   exec musmenu pclear
-    Ctrl+a $dexec musmenu padd
     Ctrl+s $dexec musmenu psave
     Ctrl+o $dexec musmenu pload
     Ctrl+d $dexec musmenu pdelete
