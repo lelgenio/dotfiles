@@ -33,9 +33,13 @@
     "editor.fontLigatures": true,
     // Input
     "keyboard.dispatch": "keyCode",
-    // Gay colors
+    // Colors
+    {%@@ if color.type == "dark" @@%}
     "workbench.colorTheme": "Community Material Theme Darker",
-    "materialTheme.accent": "Red",
+    {%@@ else @@%}
+    "workbench.colorTheme": "GitHub Light",
+    {%@@ endif @@%}
+    "materialTheme.accent": "{{@@ accent_color_name @@}}",
     "workbench.iconTheme": "material-icon-theme",
     "material-icon-theme.folders.color": "{{@@ accent_color @@}}",
     "workbench.colorCustomizations": {
@@ -63,19 +67,19 @@
         "menubar.selectionForeground": "{{@@ accent_color @@}}",
         "editor.findMatchBorder": "{{@@ accent_color @@}}",
         "selection.background": "{{@@ accent_color @@}}40",
-        // backgrounds
-        "activityBar.background": "{{@@ color.bg @@}}",
-        "editor.background": "{{@@ color.bg @@}}",
-        "editorWhitespace.foreground": "{{@@ color.bg_light @@}}",
-        "statusBar.background": "{{@@ color.bg @@}}",
-        "statusBar.noFolderBackground": "{{@@ color.bg @@}}",
-        "statusBar.debuggingBackground": "{{@@ color.bg @@}}",
-        "sideBar.background": "{{@@ color.bg @@}}",
-        "terminal.background": "{{@@ color.bg @@}}",
-        "panel.background": "{{@@ color.bg @@}}",
-        // foregrounds
-        "editorCursor.background": "{{@@ color.txt @@}}",
-        "statusBar.foreground": "{{@@ color.txt @@}}",
+        // // backgrounds
+        // "activityBar.background": "{{@@ color.bg @@}}",
+        // "editor.background": "{{@@ color.bg @@}}",
+        // "editorWhitespace.foreground": "{{@@ color.bg_light @@}}",
+        // "statusBar.background": "{{@@ color.bg @@}}",
+        // "statusBar.noFolderBackground": "{{@@ color.bg @@}}",
+        // "statusBar.debuggingBackground": "{{@@ color.bg @@}}",
+        // "sideBar.background": "{{@@ color.bg @@}}",
+        // "terminal.background": "{{@@ color.bg @@}}",
+        // "panel.background": "{{@@ color.bg @@}}",
+        // // foregrounds
+        // "editorCursor.background": "{{@@ color.txt @@}}",
+        // "statusBar.foreground": "{{@@ color.txt @@}}",
     },
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
