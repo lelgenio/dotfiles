@@ -8,8 +8,8 @@
 set global tabstop {{@@ indent_width @@}}
 {%@@ set small_indent = [2, indent_width / 2] | max @@%}
 
-hook global BufCreate .*\.(ya?ml|c(pp)?|css) %{
-    set buffer indent_width {{@@ small_indent @@}}
+hook global BufCreate .*\.(ya?ml|c(pp)?|css|less) %{
+    set buffer indentwidth {{@@ small_indent @@}}
 }
 
 hook global BufCreate .*\.py %{
