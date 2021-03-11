@@ -77,6 +77,9 @@ $mod+space focus mode_toggle
 $mod+a focus parent
 $mod+z focus child
 
+$mod+tab scratchpad show
+$mod+Shift+tab move container scratchpad
+
 }
 
 # vim: ft=i3
