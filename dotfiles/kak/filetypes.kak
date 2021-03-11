@@ -28,19 +28,29 @@ hook global WinCreate .* %{
     require-module python
     add-highlighter window/dotdrop regions
 
-    add-highlighter window/dotdrop/expression region '{{@@ escape[0] @@}}' '{{@@ escape[1] @@}}' group
-    add-highlighter window/dotdrop/statement  region '{{@@ escape[2] @@}}' '{{@@ escape[3] @@}}' group
+    add-highlighter window/dotdrop/expression region '{{@@ escape[0] @@}}' '{{@@ escape[1] @@}}' regions
+    add-highlighter window/dotdrop/statement  region '{{@@ escape[2] @@}}' '{{@@ escape[3] @@}}' regions
     add-highlighter window/dotdrop/comment    region '{{@@ escape[4] @@}}' '{{@@ escape[5] @@}}' fill comment
 
-    add-highlighter window/dotdrop/expression/ ref python
-    add-highlighter window/dotdrop/statement/  ref python
+    add-highlighter window/dotdrop/expression/code default-region group
+    add-highlighter window/dotdrop/statement/code  default-region group
 
-    add-highlighter window/dotdrop/expression/ regex '{{@@ escape[0] @@}}|{{@@ escape[1] @@}}' 0:block
-    add-highlighter window/dotdrop/statement/  regex '{{@@ escape[2] @@}}|{{@@ escape[3] @@}}' 0:block
-    add-highlighter window/dotdrop/statement/  regex 'endfor|endif'                            0:keyword
+    add-highlighter window/dotdrop/expression/code/ fill variable
+    add-highlighter window/dotdrop/statement/code/  fill variable
+
+    add-highlighter window/dotdrop/expression/code/ ref python
+    add-highlighter window/dotdrop/statement/code/  ref python
+
+    add-highlighter window/dotdrop/expression/code/ regex '{{@@ escape[0] @@}}|{{@@ escape[1] @@}}' 0:block
+    add-highlighter window/dotdrop/statement/code/  regex '{{@@ escape[2] @@}}|{{@@ escape[3] @@}}' 0:block
+    add-highlighter window/dotdrop/statement/code/  regex 'endfor|endif'                            0:keyword
 }
 
-hook global BufCreate .*\.jsonc %[
+hook global BufCreate .*\.jsonc %[ set buffer filetype jsonc ]
+hook global BufCreate .*\.blade.php %[ set buffer filetype blade ]
+hook global BufCreate .*\.less %[ set buffer filetype less ]
+
+hook global WinSetOption filetype=jsonc %[
     require-module json
     add-highlighter buffer/jsonc regions
     add-highlighter buffer/jsonc/base default-region ref json
@@ -49,7 +59,7 @@ hook global BufCreate .*\.jsonc %[
 ]
 
 
-hook global BufCreate .*\.blade.php %[
+hook global WinSetOption filetype=blade %[
 
   set-option buffer filetype blade
 
@@ -70,7 +80,7 @@ hook global BufCreate .*\.blade.php %[
 
 ]
 
-hook global BufCreate .*\.less %[
+hook global WinSetOption filetype=less  %[
   set buffer formatcmd 'prettier --parser less'
 
   set      buffer extra_word_chars '_'
