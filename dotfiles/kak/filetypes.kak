@@ -40,6 +40,14 @@ hook global WinCreate .* %{
     add-highlighter window/dotdrop/statement/  regex 'endfor|endif'                            0:keyword
 }
 
+hook global BufCreate .*\.jsonc %[
+    require-module json
+    add-highlighter buffer/jsonc regions
+    add-highlighter buffer/jsonc/base default-region ref json
+    add-highlighter buffer/jsonc/double_string region ["] ["] fill string
+    add-highlighter buffer/jsonc/line-comment region // $ fill comment
+]
+
 
 hook global BufCreate .*\.blade.php %[
 
