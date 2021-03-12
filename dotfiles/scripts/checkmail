@@ -1,9 +1,8 @@
 #!/bin/sh
 set -e
 
-if pidof gnome-shell
-then
-  exit 0
+if test -z "$SWAYSOCK" && pidof gnome-shell; then
+    exit 0
 fi
 
 test -z "$XDG_RUNTIME_DIR" &&
@@ -15,40 +14,36 @@ die() {
 }
 trap die EXIT
 
-getnew(){
-    pushd "$HOME/.local/share/mail/" > /dev/null
+getnew() {
+    pushd "$HOME/.local/share/mail/" >/dev/null
 
     find */INBOX*/new -type f |
         sed -E '/Duolingo|LBRY/d' |
         wc -l
 
-    popd > /dev/null
+    popd >/dev/null
 }
 
 OLD=$(getnew)
 
-if test "$1" = "update"
-then
+if test "$1" = "update"; then
     mbsync -a ||
-    mbsync -a ||
-    mbsync -a
+        mbsync -a ||
+        mbsync -a
 fi
 
 NEW=$(getnew)
 
-if test  "$NEW" -gt "$OLD"
-then
+if test "$NEW" -gt "$OLD"; then
     notify-send " New E-Mails!"
 fi
 
 echo $NEW | sed 's/^0$//'
 
-caller=`ps -o comm= $PPID`
-if test "$caller" != "waybar"
-then
-    pidof waybar>/dev/null &&
+caller=$(ps -o comm= $PPID)
+if test "$caller" != "waybar"; then
+    pidof waybar >/dev/null &&
         pkill -SIGRTMIN+4 waybar
 fi
-
 
 # vim:ft=sh
