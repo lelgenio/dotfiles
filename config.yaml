@@ -183,6 +183,7 @@ dynvariables:
 
   color_type: test -n "$_COLOR_TYPE" && echo "$_COLOR_TYPE" || echo dark
   accent_color_name: test -n "$_ACCENT_COLOR" && echo "$_ACCENT_COLOR" || echo red
+  firefox_profile: cat ~/.mozilla/firefox/profiles.ini | grep '^Default' | head -n1 | cut -d= -f2
   blender_version: |
     pacman -Qi blender | grep "^Version" | cut -d: -f3 | cut -d. -f1-2 ||
     blender --version | head -n1 | sed -E 's|^Blender (.*)\..*|\1|g'
@@ -396,6 +397,9 @@ dotfiles: # Just a bunch of paths and action mappings
     "src": blenderTheme.xml
     "dst": "~/.config/blender/{{@@ blender_version @@}}/scripts/presets/interface_theme/blenderTheme.xml"
 
+  firefox:
+    src: firefox
+    dst: "~/.mozilla/firefox/{{@@ firefox_profile @@}}/"
 
   ###############################################################
   # .config/, no actions
@@ -414,3 +418,4 @@ dotfiles: # Just a bunch of paths and action mappings
   rclone:      { "src":"rclone.conf",   "dst":"~/.config/rclone/rclone.conf" }
   wofi:        { "src":"wofi",          "dst":"~/.config/wofi"               }
   zathura:     { "src":"zathura.conf",  "dst":"~/.config/zathura/zathurarc"  }
+
