@@ -1,0 +1,17 @@
+#!/bin/sh
+
+
+TMP_DISPLAY=":999"
+
+Xephyr -screen 1920x1080 "$TMP_DISPLAY" &
+
+export DISPLAY="$TMP_DISPLAY"
+unset WAYLAND_DISPLAY
+
+sleep 1s
+i3 &
+
+sleep 1s
+terminal &
+
+wait
