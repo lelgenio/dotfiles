@@ -42,11 +42,18 @@ face global Default default,default
 
 face global PrimaryCursor      {{@@ accent_fg @@}},{{@@ accent_color @@}}+fg
 face global PrimaryCursorEol   PrimaryCursor
-face global PrimarySelection   default,{{@@ bg_light @@}}+f
+face global PrimarySelection   default,{{@@ bg_light @@}}+g
 
 face global SecondaryCursor    default,default+rfg
 face global SecondaryCursorEol SecondaryCursor
-face global SecondarySelection default,{{@@ bg_light @@}}+f
+face global SecondarySelection PrimarySelection
+
+hook global FocusIn .* %{
+    face global PrimaryCursor      {{@@ accent_fg @@}},{{@@ accent_color @@}}+fg
+}
+hook global FocusOut .* %{
+    face global PrimaryCursor      {{@@ accent_fg @@}},{{@@ bg_light @@}}+fg
+}
 
 face global MenuForeground {{@@ accent_fg @@}},{{@@ accent_color @@}}
 face global MenuBackground default,{{@@ bg_dark @@}}
