@@ -2,7 +2,7 @@
 
 try %{
     require-module python
-    add-highlighter shared/python/code/function regex '([\w_][\w\d_]*)\s*\(' 1:function
+    add-highlighter shared/python/code/function regex '\b([a-zA-Z_][a-zA-Z0-9_]*)\s*\(' 1:function
 }
 
 hook global WinSetOption filetype=sh %{
