@@ -56,6 +56,7 @@
         "progressBar.background": "{{@@ accent_color @@}}",
         "pickerGroup.foreground": "{{@@ accent_color @@}}",
         "tab.activeBorder": "{{@@ accent_color @@}}",
+        "tab.activeBorderTop": "#00000000",
         "notificationLink.foreground": "{{@@ accent_color @@}}",
         "editorWidget.resizeBorder": "{{@@ accent_color @@}}",
         "editorWidget.border": "{{@@ accent_color @@}}",
