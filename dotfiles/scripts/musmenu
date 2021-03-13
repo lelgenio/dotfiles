@@ -36,7 +36,8 @@ delete() {
         mpc --quiet next
         mpc --quiet update
 
-        notify-send "Removed Music" "$(echo $answer | sd '$HOME' '~')"
+        path=$(echo $answer | sd "$HOME" '~')
+        notify-send "Removed Music" "$path"
     fi
 }
 
