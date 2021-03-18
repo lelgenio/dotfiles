@@ -31,6 +31,9 @@ set $lock \
         --font '{{@@ font.interface @@}}' \
 
 set $screenReload \
+    swaymsg -t get_outputs | \
+        jq '.[]|select(.name == "HDMI-A-1")' && \
+        swaymsg output eDP-1 off \
     pkill kanshi; \
     kanshi & disown\
 
