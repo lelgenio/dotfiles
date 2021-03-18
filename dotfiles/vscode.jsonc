@@ -1,7 +1,7 @@
 {
     // Remove clutter teste
-    "window.titleBarStyle": "custom",
-    //   "window.menuBarVisibility": "toggle",
+    // "window.titleBarStyle": "custom",
+    "window.menuBarVisibility": "toggle",
     //   "workbench.activityBar.visible": false,
     //   "workbench.editor.showTabs": false,
     //   "workbench.editor.enablePreview": false,
