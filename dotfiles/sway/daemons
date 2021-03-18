@@ -54,6 +54,7 @@ exec udiskie
 exec fusuma
 
 # Blue light filter
+exec /usr/lib/geoclue-2.0/demos/agent
 exec_always pidof redshift || redshift
 
 # Screen manager
