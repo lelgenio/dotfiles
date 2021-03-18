@@ -19,7 +19,7 @@ plug "robertmeta/plug.kak" noload config %{
 }
 
 plug 'alexherbo2/prelude.kak'
-plug 'alexherbo2/auto-pairs.kak' config %{
+plug 'alexherbo2/auto-pairs.kak' commit "fd735ec149ef0d9ca5f628a95b1e52858b5afbdc" config %{
   require-module 'prelude'
   require-module 'auto-pairs'
   auto-pairs-enable
