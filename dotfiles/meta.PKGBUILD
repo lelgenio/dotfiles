@@ -18,7 +18,7 @@ depends=(
         bemenu-wlroots j4-dmenu-desktop
         # Utility
         ruby-fusuma light mako kanshi udiskie redshift-wayland-git
-        ydotool wtype caffeinated
+        ydotool wtype caffeinated xdg-desktop-portal-wlr
         # Configuration manager
         dotdrop
 
@@ -81,6 +81,7 @@ depends=(
     pqiv mpv
     mpd mpc ncmpcpp
     blender gimp kdenlive
+    zathura zathura-pdf-mupdf
 
     # Office
     libreoffice-fresh libreoffice-fresh-pt-br hunspell-pt-br papirus-libreoffice-theme
@@ -100,7 +101,11 @@ depends=(
         python-mccabe python-rope python-pyflakes
         python-pycodestyle python-pydocstyle
 
-    rust gcc gdb
+        # Compiled
+        rust gcc gdb
+
+        # work
+        blade-formatter nodejs-less nodejs-less-plugin-clean-css
 
     # Virt
     qemu
