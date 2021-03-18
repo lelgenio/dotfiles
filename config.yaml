@@ -194,6 +194,7 @@ actions:
 ###############################################################
 
   notify: >
+      test -n "$DISPLAY" &&
       notify-send
       "Updating dotfiles"
       "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}"
