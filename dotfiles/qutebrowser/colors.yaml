@@ -144,7 +144,6 @@ colors:
 
     webpage:
         bg: "{{@@ color.bg @@}}"
-        prefers_color_scheme_dark: True
         darkmode:
             enabled: True
             threshold:
