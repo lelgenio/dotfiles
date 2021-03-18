@@ -51,6 +51,8 @@ hook global BufCreate .*\.blade.php %[ set buffer filetype blade ]
 hook global BufCreate .*\.less %[ set buffer filetype less ]
 
 hook global WinSetOption filetype=jsonc %[
+    set buffer comment_line '//'
+
     require-module json
     add-highlighter buffer/jsonc regions
     add-highlighter buffer/jsonc/base default-region ref json
@@ -60,6 +62,7 @@ hook global WinSetOption filetype=jsonc %[
 
 
 hook global WinSetOption filetype=blade %[
+  set buffer formatcmd 'blade-formatter --stdin'
 
   set-option buffer filetype blade
 
