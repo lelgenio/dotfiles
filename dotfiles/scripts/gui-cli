@@ -1,6 +1,8 @@
 #!/bin/sh
-# set -e
-# set -x
+set -ex
+
+gnomepkgs="gnome-tweaks geary code lollypop menulibre pamac-aur
+           $(paru -Sqg gnome | sed -E '/gdm|software/d')"
 
 comment(){
     local file="$1";shift
@@ -13,56 +15,33 @@ uncomment(){
 }
 
 gui_off (){
-    # sudo chsh -s /usr/bin/zsh $(whoami)
+    dotdrop install -f
 
-    rm ~/.config/mimeapps.list
-    cd ~/.dotfiles
-    stow mime
-
-    uncomment /etc/mkinitcpio.conf "HOOKS.* (?!plymouth)"
     comment   /etc/mkinitcpio.conf "HOOKS.* plymouth"
-    yay -Rcs plymouth --noconfirm || true
+    comment   /etc/default/grub "GRUB_CMDLINE_LINUX_DEFAULT.* splash"
+
+    paru -D --asdeps $gnomepkgs
+    paru -Qqdt | paru -Rcs --noconfirm - || true
     sudo mkinitcpio -P
 
-    comment /boot/loader/entries/arch.conf "options quiet"
-
-    sudo systemctl disable NetworkManager
-    sudo systemctl enable  netctl-auto@wlp1s0
-    sudo systemctl enable  netctl-ifplugd@enp2s0
-    sudo systemctl enable  netctl
-
-    sudo systemctl disable display-manager.service
-
-    sudo systemctl enable ly
-
+    sudo systemctl --now enable  iwd dhcpcd
+    sudo systemctl --now disable display-manager.service NetworkManager
 }
 
 gui_on (){
-    # sudo chsh -s /usr/bin/fish $(whoami)
 
-    rm -f ~/.config/mimeapps.list
-    yay -S --noconfirm --needed gnome-defaults-list
+    paru -Syu --noconfirm --needed gnome-defaults-list $gnomepkgs || true
     cp /usr/share/applications/gnome-mimeapps.list ~/.config/mimeapps.list
 
-    kvantummanager --set Materia
-    gsettings set org.gnome.desktop.interface icon-theme '{{@@ icon_theme @@}}'
-
-    comment     /etc/mkinitcpio.conf "HOOKS.* (!?plymouth)"
     uncomment   /etc/mkinitcpio.conf "HOOKS.* plymouth"
-    yay -S plymouth plymouth-theme-arch-glow --noconfirm --needed
+    uncomment   /etc/default/grub "GRUB_CMDLINE_LINUX_DEFAULT.* splash"
+
+    paru -S plymouth plymouth-theme-arch-glow gdm-plymouth --noconfirm --needed
     sudo plymouth-set-default-theme arch-glow
-    sudo mkinitcpio -P
+    sudo plymouth-set-default-theme -R arch-glow
 
-    uncomment /boot/loader/entries/arch.conf "options quiet"
-
-    sudo systemctl disable  netctl-auto@wlp1s0
-    sudo systemctl disable  netctl-ifplugd@enp2s0
-    sudo systemctl disable  netctl
-    sudo systemctl enable  NetworkManager
-
-    sudo systemctl disable display-manager.service
-
-    sudo systemctl enable gdm-plymouth
+    sudo systemctl --now disable iwd dhcpcd
+    sudo systemctl --now enable NetworkManager gdm gdm-plymouth
 }
 
 restart_gdm(){
