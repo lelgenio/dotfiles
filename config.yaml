@@ -202,6 +202,7 @@ actions:
   reload_sway: >
     test -n "$SWAYSOCK" &&
     swaymsg reload
+  reload_qutebrowser: _reload_qutebrowser
   reload_mako: makoctl reload
   lesskey: lesskey
   reload_fish: pkill -SIGHUP fish
@@ -300,6 +301,12 @@ dotfiles: # Just a bunch of paths and action mappings
     dst: ~/.config/neomutt/
     actions:
     - lnMail
+
+  qutebrowser:
+    src: qutebrowser
+    dst: ~/.config/qutebrowser
+    actions:
+    - reload_qutebrowser
 
   lesskey:
     src: lesskey
@@ -417,7 +424,6 @@ dotfiles: # Just a bunch of paths and action mappings
   kanshi:      { "src":"kanshi",        "dst":"~/.config/kanshi/config"      }
   mpd:         { "src":"mpd.conf",      "dst":"~/.config/mpd/mpd.conf"       }
   pqivrc:      { "src":"pqiv.ini",      "dst":"~/.config/pqivrc"             }
-  qutebrowser: { "src":"qutebrowser",   "dst":"~/.config/qutebrowser"        }
   rclone:      { "src":"rclone.conf",   "dst":"~/.config/rclone/rclone.conf" }
   wofi:        { "src":"wofi",          "dst":"~/.config/wofi"               }
   zathura:     { "src":"zathura.conf",  "dst":"~/.config/zathura/zathurarc"  }
