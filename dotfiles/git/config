@@ -36,4 +36,7 @@
 [core]
     excludesfile = {{@@ _dotfile_abs_dst @@}}/ignore
 
+[includeIf "gitdir:~/Projects/work/"]
+  path = ~/.config/git/config-work
+
 # vim: ft=ini

@@ -1,0 +1,5 @@
+[user]
+    name = {{@@ mail.work.user | capitalize @@}}
+    email = {{@@ mail.work.user @@}}@{{@@ mail.work.mail @@}}
+
+# vim: ft=ini
