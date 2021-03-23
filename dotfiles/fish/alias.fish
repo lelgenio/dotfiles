@@ -89,6 +89,7 @@ abbr -g gs 'git status'
 abbr -g gd 'git diff'
 abbr -g gp 'git pull; git push'
 abbr -g gc 'git commit'
+abbr -g gr 'cd (git root)'
 
 
 ################################################################

@@ -19,6 +19,7 @@
 
 [alias]
     graph = log --graph --oneline --all
+    root = rev-parse --show-toplevel
 
 {%@@ if tabs @@%}
 
