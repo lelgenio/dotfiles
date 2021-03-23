@@ -57,7 +57,7 @@
     },
     "clock": {
         "interval":60,
-        "format":"<b>{:%H:%M %a %d}</b>",
+        "format":"<b>{:%H:%M %a %d/%m}</b>",
         "tooltip":false
     },
     "battery": {
@@ -156,11 +156,13 @@
         "format":"{} ",
         "exec":"pidof caffeinated > /dev/null && echo  || echo 鈴",
         "on-click":"pidof caffeinated && pkill caffeinated || caffeinated -d",
-        "interval": 1
+        "interval": 1,
+        "tooltip":false
     },
     "custom/layout":{
         "exec":"_get-sway-layout",
-        "interval": 1
+        "interval": 1,
+        "tooltip":false
     }
 
 }
