@@ -1,0 +1,11 @@
+#!/bin/sh
+
+pkill swayidle
+
+exec swayidle -w \
+   before-sleep 'pkill caffeinated; swaylock -f' \
+       after-resume '_sway_displays' \
+   timeout 360 'pkill caffeinated; swaylock -f' \
+       resume '_sway_displays' \
+   timeout 1800 'swaymsg "output * dpms off"' \
+        resume 'swaymsg "output * dpms on"; _sway_displays' \

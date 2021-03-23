@@ -20,24 +20,6 @@ exec pgrep -f mpDris2 || sleep 5s &&  mpDris2
 
 
 ###############################################################
-# Screen locking
-###############################################################
-
-# Lock configuration
-set $lock \
-    pkill caffeinated;\
-    swaylock -f \
-        --image $wallPath \
-        --font '{{@@ font.interface @@}}' \
-
-set $screenReload \
-    swaymsg -t get_outputs | \
-        jq '.[]|select(.name == "HDMI-A-1")' && \
-        swaymsg output eDP-1 off \
-    pkill kanshi; \
-    kanshi & disown\
-
-###############################################################
 # System Daemons
 ###############################################################
 
@@ -58,7 +40,7 @@ exec /usr/lib/geoclue-2.0/demos/agent
 exec_always pidof redshift || redshift
 
 # Screen manager
-exec_always $screenReload
+exec_always _sway_displays
 
 # Set minimum brightness to 1 instead of 0
 # not exactly a daemon
@@ -72,14 +54,6 @@ exec light -N 1
 for_window [title=.*] inhibit_idle fullscreen
 
 # Idle daemon
-exec_always pkill swayidle && false || \
-exec swayidle -w \
-   before-sleep '$lock' \
-       after-resume '$screenReload' \
-   timeout 360 '$lock' \
-       resume '$screenReload' \
-   timeout 1800 'swaymsg "output * dpms off"' \
-        resume 'swaymsg "output * dpms on";$screenReload' \
-
+exec_always _sway_idle
 
 # vim: ft=i3
