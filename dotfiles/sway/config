@@ -26,13 +26,6 @@ set $tabR       {{@@ key.tabR  @@}}
 set $menu       s
 set $mus        r
 
-set $wallPath\
-    {%@@ if color.type == 'dark' @@%}
-        ~/.local/share/backgrounds/assembly_dark.png
-    {%@@ else @@%}
-        ~/.local/share/backgrounds/assembly_light.png
-    {%@@ endif @@%}
-
 ###############################################################
 # Includes
 ###############################################################

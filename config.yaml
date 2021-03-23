@@ -46,6 +46,8 @@ profiles:
 
   dark:
     variables:
+      background: ~/.local/share/backgrounds/assembly_dark.png
+
       opacity: 0.98
 
       color:
@@ -72,6 +74,8 @@ profiles:
 
   light:
     variables:
+      background: ~/.local/share/backgrounds/assembly_light.png
+
       opacity: 0.95
 
       color:

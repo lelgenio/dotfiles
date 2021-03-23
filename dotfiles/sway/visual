@@ -17,7 +17,7 @@ set $bg_color   {{@@ color.bg_dark @@}}
 set $alert      #000000
 
 font {{@@ font.interface @@}}  {{@@ font.size.medium @@}}px
-output * bg $wallPath fill
+output * bg "{{@@ wallpaper @@}}" fill
 
 ###############################################################
 # window decoration, aka border
