@@ -242,6 +242,12 @@ actions:
     https://github.com/alexanderjeurissen/ranger_devicons
     ~/.config/ranger/plugins/ranger_devicons
 
+  greetd_install: |
+    sudo mkdir -p /etc/greetd/
+    sudo cp -r "{{@@ _dotfile_abs_dst @@}}"/* /etc/greetd/
+    sudo chown -R greeter:greeter /etc/greetd/
+
+
   # bootstrap scripts
   pam_gpg: _pam-gpg-strap
   make_theme: _make_theme
@@ -390,6 +396,11 @@ dotfiles: # Just a bunch of paths and action mappings
     src: rustfmt.toml
     dst: ~/.rustfmt.toml
 
+  greetd:
+    src: greetd
+    dst: ~/.config/greetd
+    actions:
+    - greetd_install
 
   ###############################################################
   # Big pahts

@@ -55,5 +55,8 @@ mkdir -p "${dst_path}/${theme_name}"
         "$color_file"
     echo -e "$colors" > "$color_file"
 
+    sudo cp -vr "${dst_path}/${theme_name}" /usr/share/themes/ ||
+    doas cp -vr "${dst_path}/${theme_name}" /usr/share/themes/
+
     notify-send "Finished generating theme"
 } &> /dev/null &

@@ -19,6 +19,8 @@ depends=(
         # Utility
         ruby-fusuma light mako kanshi udiskie redshift-wayland-git
         ydotool wtype caffeinated xdg-desktop-portal-wlr
+        # Greeter
+        cage greetd greetd-gtkgreet
         # Configuration manager
         dotdrop
 

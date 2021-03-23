@@ -10,8 +10,15 @@
 ########################################################
 function esway
 
-    # fix buggy java apps
+    # You get a wayland, and you get a wayland. Everybody get's a wayland!
+    set -x MOZ_ENABLE_WAYLAND 1
+    set -x CLUTTER_BACKEND wayland
+    set -x QT_QPA_PLATFORM wayland-egl
+    set -x ECORE_EVAS_ENGINE wayland-egl
+    set -x ELM_ENGINE wayland_egl
+    set -x SDL_VIDEODRIVER wayland
     set -x _JAVA_AWT_WM_NONREPARENTING 1
+    set -x NO_AT_BRIDGE 1
 
     # Allow sway decoration on gtk3 apps
     set -x GTK_CSD 0
@@ -22,9 +29,10 @@ function esway
     # set -x QPA_PLATFORM wayland
     # set -x QT_QPA_PLATFORM wayland
 
-    # Neede for xdg-dektop-portal
-    set -x XDG_CURRENT_DESKTOP  sway
+    # Needed for xdg-dektop-portal
     set -x XDG_SESSION_TYPE     wayland
+    set -x XDG_SESSION_DESKTOP  sway
+    set -x XDG_CURRENT_DESKTOP  sway
 
     # this should not be necessary, but whatever
     pidof sway || exec sway

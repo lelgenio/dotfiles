@@ -1,7 +1,7 @@
 #!/bin/sh
 set -ex
 
-gnomepkgs="gnome-tweaks geary code lollypop menulibre pamac-aur
+gnomepkgs="gnome-tweaks geary lollypop menulibre pamac-aur
            $(paru -Sqg gnome | sed -E '/gdm|software/d')"
 
 comment(){
@@ -17,15 +17,15 @@ uncomment(){
 gui_off (){
     dotdrop install -f
 
-    comment   /etc/mkinitcpio.conf "HOOKS.* plymouth"
-    comment   /etc/default/grub "GRUB_CMDLINE_LINUX_DEFAULT.* splash"
+    # comment   /etc/mkinitcpio.conf "HOOKS.* plymouth"
+    # comment   /etc/default/grub "GRUB_CMDLINE_LINUX_DEFAULT.* splash"
 
     paru -D --asdeps $gnomepkgs
     paru -Qqdt | paru -Rcs --noconfirm - || true
-    sudo mkinitcpio -P
+    # sudo mkinitcpio -P
 
-    sudo systemctl --now enable  iwd dhcpcd
-    sudo systemctl --now disable display-manager.service NetworkManager
+    sudo systemctl --now enable  iwd dhcpcd greetd
+    sudo systemctl --now disable gdm gdm-plymouth NetworkManager
 }
 
 gui_on (){
@@ -33,14 +33,14 @@ gui_on (){
     paru -Syu --noconfirm --needed gnome-defaults-list $gnomepkgs || true
     cp /usr/share/applications/gnome-mimeapps.list ~/.config/mimeapps.list
 
-    uncomment   /etc/mkinitcpio.conf "HOOKS.* plymouth"
-    uncomment   /etc/default/grub "GRUB_CMDLINE_LINUX_DEFAULT.* splash"
+    # uncomment   /etc/mkinitcpio.conf "HOOKS.* plymouth"
+    # uncomment   /etc/default/grub "GRUB_CMDLINE_LINUX_DEFAULT.* splash"
 
-    paru -S plymouth plymouth-theme-arch-glow gdm-plymouth --noconfirm --needed
-    sudo plymouth-set-default-theme arch-glow
-    sudo plymouth-set-default-theme -R arch-glow
+    # paru -S plymouth plymouth-theme-arch-glow gdm-plymouth --noconfirm --needed
+    # sudo plymouth-set-default-theme arch-glow
+    # sudo plymouth-set-default-theme -R arch-glow
 
-    sudo systemctl --now disable iwd dhcpcd
+    sudo systemctl --now disable iwd dhcpcd greetd
     sudo systemctl --now enable NetworkManager gdm gdm-plymouth
 }
 
