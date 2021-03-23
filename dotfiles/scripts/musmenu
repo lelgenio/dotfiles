@@ -50,7 +50,7 @@ yank() {
     notify-send "Yanked Music" "$(echo $current | sd "$HOME" "~")"
 }
 
-add() {
+padd() {
     get_current
     cd "$music_root"
     choice=$(fd -E '*.lrc' -E '*.m3u8' | sort | $menu -p "Add Songs(Use Ctrl):")
@@ -60,7 +60,7 @@ add() {
     mpdDup
 }
 
-clear() {
+pclear() {
     mpc clear &&
         notify-send "Cleared Playlist" ||
         notify-send "Failed Clear Playlist"
@@ -96,17 +96,17 @@ usage() {
     echo "Commands:"
     echo "  $cmdname search   -- Search and play songs."
     echo "  $cmdname delete   -- Prompt to delete the current song."
-    echo "  $cmdname yank     -- Copie current music to clipboard."
-    echo "  $cmdname add      -- Add song to playlist."
+    echo "  $cmdname yank     -- Copy current music to clipboard."
     echo "Playlist Commands:"
-    echo "  $cmdname pclear   -- Clear."
-    echo "  $cmdname psave    -- Save."
-    echo "  $cmdname pload    -- Load."
-    echo "  $cmdname pdelete  -- Delete."
+    echo "  $cmdname padd     -- Add song"
+    echo "  $cmdname pclear   -- Clear"
+    echo "  $cmdname psave    -- Save"
+    echo "  $cmdname pload    -- Load"
+    echo "  $cmdname pdelete  -- Delete"
 }
 
 case "$1" in
-    delete | search | yank | add | clear | psave | pload | pdelete)
+    delete | search | yank | padd | pclear | psave | pload | pdelete)
         "$1"
         ;;
     *)
