@@ -31,4 +31,8 @@ input * {
     repeat_delay 200
 }
 
+{%@@ if key_layout == "colemak" @@%}
+    bindcode 91 exec 'wtype ,'
+{%@@ endif @@%}
+
 # vim: ft=i3
