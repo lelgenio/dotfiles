@@ -1,5 +1,6 @@
 #!/bin/sh
 
+test "$1" = "-e" && shift
 # {%@@ if terminal == "alacritty" @@%} #
     command -v alacritty > /dev/null &&
     {
