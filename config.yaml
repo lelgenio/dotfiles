@@ -434,6 +434,7 @@ dotfiles: # Just a bunch of paths and action mappings
   mpd:         { "src":"mpd.conf",      "dst":"~/.config/mpd/mpd.conf"       }
   pqivrc:      { "src":"pqiv.ini",      "dst":"~/.config/pqivrc"             }
   rclone:      { "src":"rclone.conf",   "dst":"~/.config/rclone/rclone.conf" }
+  swaylock:    { "src":"sway/swaylock", "dst":"~/.config/swaylock/config"    }
   wofi:        { "src":"wofi",          "dst":"~/.config/wofi"               }
   zathura:     { "src":"zathura.conf",  "dst":"~/.config/zathura/zathurarc"  }
 
