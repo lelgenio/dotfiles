@@ -18,7 +18,7 @@ depends=(
         bemenu-wlroots j4-dmenu-desktop
         # Utility
         ruby-fusuma light mako kanshi udiskie redshift-wayland-git
-        ydotool wtype caffeinated xdg-desktop-portal-wlr
+        ydotool wtype caffeinated xdg-desktop-portal-wlr pipewire-media-session
         # Greeter
         cage greetd greetd-gtkgreet
         # Configuration manager
@@ -46,6 +46,8 @@ depends=(
     # Theme
     materia-custom-accent papirus-icon-theme
     papirus-folders capitaine-cursors
+    # Make dependencies
+    bc sassc inkscape
 
     # Terminal
         # Emulators
