@@ -2,8 +2,8 @@
 
 {
     wait $(pidof dotdrop)
-    sleep 10s
+    sleep 3s
     timeout 3s kanshi
-    pidof swaymsg ||
+    test -n "$SWAYSOCK" &&
         swaymsg reload
 } &>/dev/null & disown

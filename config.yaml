@@ -199,10 +199,8 @@ actions:
       "Updating dotfiles"
       "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}"
 
-  reload_sway: >
-    test -n "$SWAYSOCK" &&
-    swaymsg reload
-  reload_qutebrowser: _reload_qutebrowser
+  reload_sway: _sway_reload
+  reload_qutebrowser: _qutebrowser_reload
   reload_mako: makoctl reload
   lesskey: lesskey
   reload_fish: pkill -SIGHUP fish
