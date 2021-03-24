@@ -1,12 +1,14 @@
 #!/bin/sh
 
+SIZE=$(swaymsg -t get_outputs |
+    jq -r '.[]|select(.active=true).rect |
+           [.width, .height] | join("x")')
 
 TMP_DISPLAY=":999"
-
-Xephyr -screen 1920x1080 "$TMP_DISPLAY" &
+Xephyr -screen "$SIZE" "$TMP_DISPLAY" &
 
 export DISPLAY="$TMP_DISPLAY"
-unset WAYLAND_DISPLAY
+unset WAYLAND_DISPLAY I3SOCK
 
 sleep 1s
 i3 &
