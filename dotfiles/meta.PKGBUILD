@@ -20,7 +20,7 @@ depends=(
         ruby-fusuma light mako kanshi udiskie redshift-wayland-git
         ydotool wtype caffeinated xdg-desktop-portal-wlr pipewire-media-session
         # Greeter
-        cage greetd greetd-gtkgreet
+        greetd greetd-gtkgreet
         # Configuration manager
         dotdrop
 

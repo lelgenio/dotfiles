@@ -1,0 +1,25 @@
+exec "gtkgreet -l --command fish; swaymsg exit"
+
+exec alacritty
+
+bindsym Mod4+control+z exec systemctl suspend || loginctl suspend
+bindsym Mod4+control+e exec systemctl poweroff || loginctl poweroff
+
+exec_always swaymsg -t get_outputs | \
+    jq '.[]|select(.name == "HDMI-A-1")' &> /dev/null && \
+    swaymsg output eDP-1 disable
+
+set $gnome-schema org.gnome.desktop.interface
+exec_always {
+    # In case of errors, kvantummanager opens a window
+    # this is retarded
+    gsettings set $gnome-schema gtk-theme    'materia-lelgenio-red-dark'
+    gsettings set $gnome-schema icon-theme   'Papirus-Dark'
+    gsettings set $gnome-schema cursor-theme 'capitaine-cursors'
+}
+
+{%@@ include _dotdrop_dotpath + '/sway/input' @@%}
+
+include /etc/sway/config.d/*
+
+# vim: ft=i3

@@ -10,8 +10,14 @@ vt = 1
 # with whatever you want started, such as `sway`.
 command = "agreety --cmd $SHELL"
 command = "/etc/greetd/cage.sh"
+command = "sway --config /etc/greetd/sway-config"
+
 
 # The user to run the command as. The privileges this user must have depends
 # on the greeter. A graphical greeter may for example require the user to be
 # in the `video` group.
 user = "greeter"
+
+# [initial_session]
+# command = "{{@@ env['SHELL'] @@}}"
+# user = "{{@@ env['USER'] @@}}"
