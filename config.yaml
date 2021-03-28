@@ -199,7 +199,7 @@ actions:
 
   notify: >
       test -n "$DISPLAY" &&
-      notify-send
+      notify-send --app-name=dotdrop
       "Updating dotfiles"
       "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}" ||
       true
