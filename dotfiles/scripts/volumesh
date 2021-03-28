@@ -5,35 +5,10 @@
 MAX_VOL=150
 STEP=10
 
-FILLED="■"
-EMPTY="□"
-STRIPPED="▨"
-
-get_bar(){
-
-    is_muted_$TARGET &&
-        FILLED=$STRIPPED
-
-    echo $1 | round | awk '{
-            for (i=1;i <= $1/10;i++) {
-                if ( i == 11 ) {
-                    printf "|";
-                }
-                printf "'$FILLED'"
-            };
-            for (i=1;i <= 10-$1/10;i++) {
-                printf "'$EMPTY'"
-            };
-        }'
-
-}
-
-
-notify(){
+notify() {
     volume=$(get_vol_$TARGET)
-    bar=$(get_bar $volume)
 
-    if is_muted_$TARGET ; then
+    if is_muted_$TARGET; then
         s="Muted"
     else
         s="Volume"
@@ -41,27 +16,29 @@ notify(){
 
     s=$(echo "${TARGET} ${s}" | sed 's/^\(.\)/\U\1/')
 
-    notify-send "${s}: ${volume}%" "$bar" --app-name=volumesh
+    notify-send "${s}" "${volume}%" \
+        --app-name=volumesh \
+        --hint=int:value:"$volume"
 
 }
 
-round(){
+round() {
     awk '{
         print int($1/'$STEP')*'$STEP';
     }'
 }
 
-round_vol(){
+round_vol() {
     rounded=$(get_vol_$TARGET | round)
     newvol=$(min $MAX_VOL $rounded)
 }
 
-min(){
+min() {
     printf '%i\n' ${@} | sort -n | head -n1
 }
 
 # Pulse{{{
-get_vol_pulse(){
+get_vol_pulse() {
     env LC_ALL=C pactl list sinks |
         awk '/^\tVolume/ {
                 gsub(/%/,"");
@@ -70,42 +47,42 @@ get_vol_pulse(){
             }'
 }
 
-is_muted_pulse(){
-    env LC_ALL=C pacmd list-sinks | grep 'muted: yes' 1> /dev/null
+is_muted_pulse() {
+    env LC_ALL=C pacmd list-sinks | grep 'muted: yes' 1>/dev/null
 }
 
-change_vol_pulse(){
+change_vol_pulse() {
     pactl set-sink-volume @DEFAULT_SINK@ "${1}$(min 120 $2)%"
     round_vol
     pactl set-sink-volume @DEFAULT_SINK@ "${newvol}%"
 }
 
-toggle_mute_pulse(){
+toggle_mute_pulse() {
     pactl set-sink-mute @DEFAULT_SINK@ toggle
 }
 #}}}
 # Mpd {{{
 
-get_vol_mpd(){
+get_vol_mpd() {
     env LC_ALL=C mpc vol |
-        sed -e 's/^.*://g' -e 's/%.*$//g'
+        sed -e 's/^.*://g' -e 's/%.*$//g' -e 's/ //g'
 }
 
-is_muted_mpd(){
-    env LC_ALL=C mpc status | grep '\[paused\]' 1> /dev/null
+is_muted_mpd() {
+    env LC_ALL=C mpc status | grep '\[paused\]' 1>/dev/null
 }
-change_vol_mpd(){
-    mpc vol "${1}${2}"
+change_vol_mpd() {
+    mpc vol "${1}${2}" &>/dev/null
     round_vol
-    mpc vol "${newvol}"
+    mpc vol "${newvol}" &>/dev/null
 }
 
-toggle_mute_mpd(){
+toggle_mute_mpd() {
     mpc toggle
 }
 #}}}
-usage(){
-    local CNAME=`basename $0`
+usage() {
+    local CNAME=$(basename $0)
     echo "${CNAME} [-m][-di <amount>]"
     echo "${CNAME} [-m][-t]"
     echo ""
@@ -120,11 +97,7 @@ usage(){
 }
 TARGET=pulse
 
-# test $# = 0 &&
-    # usage 1
-
-while [ $# -gt 0 ]
-do
+while [ $# -gt 0 ]; do
     case $1 in
         -m | --mpd)
             TARGET=mpd
