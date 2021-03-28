@@ -31,3 +31,6 @@ if test $fish_key_bindings = fish_vi_key_bindings
 
 end
 
+# Enable fzf key bindings
+fzf_key_bindings
+
