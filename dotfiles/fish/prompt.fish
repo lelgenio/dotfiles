@@ -28,9 +28,10 @@ alias _fish_prompt_warn   "_fish_prompt_color 'yellow'"
 
 alias _fish_prompt_normal "_fish_prompt_color 'normal'"
 
-function _fish_prompt_git_status
-    git status -s | string match -r "^$argv[1]" &> /dev/null &&
-    _fish_prompt_color $argv[3] $argv[2]
+function _fish_prompt_git_status -a git_status_s code symbol color
+    printf "%s\n" $git_status_s |
+        string match -r "^$code" &> /dev/null
+    and _fish_prompt_color "$color" "$symbol"
 end
 
 
@@ -39,13 +40,17 @@ end
 ############################################################
 
 function fish_git_prompt
-
-    git branch --show-current &> /dev/null
+    begin
+        git branch --show-current
+        and set git_status_s (git status -s)
         or return
 
-    git status | string match 'HEAD detached at *' &> /dev/null
-        and set _git_branch detached
-        or  set _git_branch (git branch --show-current 2> /dev/null)
+        if git branch | string match '\* (HEAD detached at *)'
+            set git_branch detached
+        else
+            set git_branch (git branch --show-current)
+        end
+    end &> /dev/null
 
     _fish_prompt_normal " on "
 
@@ -53,25 +58,25 @@ function fish_git_prompt
     # Left side represents Index/Filesystem
     ############################################################
     # Modified
-    _fish_prompt_git_status '.M' '~' 'yellow'
+    _fish_prompt_git_status "$git_status_s"  '.M' '~' 'yellow'
     # Deleted
-    _fish_prompt_git_status '.D' '-' 'red'
-
+    _fish_prompt_git_status "$git_status_s"  '.D' '-' 'red'
     # Untraked files exist
-    _fish_prompt_git_status '??' '?' 'normal'
+    _fish_prompt_git_status "$git_status_s"  '??' '?' 'normal'
 
     # Print name of branch and a "↑" if ahead of origin
-    test "$_git_branch" = "detached"
-        and _fish_prompt_warn   "$_git_branch"
-        or  _fish_prompt_accent "$_git_branch"
+    test "$git_branch" = "detached"
+        and _fish_prompt_warn   "$git_branch"
+        or  _fish_prompt_accent "$git_branch"
 
+    set git_remotes (git branch --remotes) &> /dev/null
     for remote in (git remote 2> /dev/null)
-        if not git branch --remotes |
-               string match -r "$remote"/"$_git_branch" &> /dev/null
+        if not printf "%s\n" $git_remotes |
+               string match -r "$remote"/"$git_branch" &> /dev/null
             continue
         end
-        if not git diff --quiet -- HEAD "$remote"/"$_git_branch"
-            _fish_prompt_color '{{@@ color.txt @@}}' '↑'
+        if not git diff --quiet -- HEAD "$remote"/"$git_branch"
+            _fish_prompt_normal '↑'
         end
     end
 
@@ -79,11 +84,11 @@ function fish_git_prompt
     # Right side represents WorkTree/Staged
     ############################################################
     # New file
-    _fish_prompt_git_status 'A.' '+' '{{@@ color.normal.green    @@}}'
+    _fish_prompt_git_status "$git_status_s"  'A.' '+' 'green'
     # Modified
-    _fish_prompt_git_status 'M.' '~' '{{@@ color.normal.green    @@}}'
+    _fish_prompt_git_status "$git_status_s"  'M.' '~' 'green'
     # Deletion staged
-    _fish_prompt_git_status 'D.' '-' '{{@@ color.normal.red      @@}}'
+    _fish_prompt_git_status "$git_status_s"  'D.' '-' 'red'
 end
 
 
@@ -133,7 +138,7 @@ function fish_prompt
     _fish_prompt_accent (prompt_pwd)
 
     if test -n "$SSH_TTY"
-        _fish_prompt_normal " to "
+        _fish_prompt_normal " at "
         _fish_prompt_accent "$hostname"
     end
 
