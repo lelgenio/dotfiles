@@ -12,7 +12,7 @@ search() {
         $menu |
         grep -o  'pos:.*' |
         cut -d: -f2 |
-        xargs mpc play
+        xargs -r mpc play
 }
 
 get_current() {
