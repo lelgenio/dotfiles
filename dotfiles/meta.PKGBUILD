@@ -18,7 +18,7 @@ depends=(
         bemenu-wlroots j4-dmenu-desktop
         # Utility
         ruby-fusuma light mako kanshi udiskie redshift-wayland-git
-        ydotool wtype caffeinated xdg-desktop-portal-wlr pipewire-media-session
+        wtype caffeinated xdg-desktop-portal-wlr pipewire-media-session
         # Greeter
         greetd greetd-gtkgreet
         # Configuration manager

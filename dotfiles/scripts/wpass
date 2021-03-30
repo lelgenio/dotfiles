@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # passmenu, for wayland
-# depends: ydotool, wtype, pass
+# depends: wtype, pass
 
 shopt -s nullglob globstar
 
@@ -51,12 +51,12 @@ autotype(){
     curWindow=`swaymsg -t get_tree | jq -r '.. | select(.focused? == true).app_id'`
     if test "$curWindow" = "org.qutebrowser.qutebrowser"
     then
-        ydotool key esc
+        wtype -k escape
         wtype "$INSERTKEY"
     fi
 
     wtype "$username"
-    ydotool key tab
+    wtype -k tab
     wtype "$password"
 
 }
