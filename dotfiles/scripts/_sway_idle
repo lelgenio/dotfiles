@@ -1,11 +1,11 @@
 #!/bin/sh
 
-pkill swayidle
+pkill -9 swayidle
 
 exec swayidle -w \
    before-sleep 'pkill caffeinated; swaylock -f' \
-       after-resume '_sway_displays' \
+       after-resume 'pkill kanshi; kanshi' \
    timeout 360 'pkill caffeinated; swaylock -f' \
-       resume '_sway_displays' \
+       resume 'pkill kanshi; kanshi' \
    timeout 1800 'swaymsg "output * dpms off"' \
-        resume 'swaymsg "output * dpms on"; _sway_displays' \
+        resume 'swaymsg "output * dpms on"; pkill kanshi; kanshi' \

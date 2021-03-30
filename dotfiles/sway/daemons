@@ -33,15 +33,14 @@ exec_always pidof mako || mako
 exec udiskie
 
 # gesture daemon
-exec fusuma
+exec_always pidof -x fusuma || fusuma
 
 # Blue light filter
 exec /usr/lib/geoclue-2.0/demos/agent
 exec_always pidof redshift || redshift
 
 # Screen manager
-exec_always _sway_displays
-
+exec_always pkill -9 kanshi;  exec kanshi
 # Set minimum brightness to 1 instead of 0
 # not exactly a daemon
 exec light -N 1
