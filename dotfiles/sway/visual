@@ -17,7 +17,7 @@ set $bg_color   {{@@ color.bg_dark @@}}
 set $alert      #000000
 
 font {{@@ font.interface @@}}  {{@@ font.size.medium @@}}px
-output * bg "{{@@ wallpaper @@}}" fill
+output * bg "{{@@ background @@}}" fill
 
 ###############################################################
 # window decoration, aka border
