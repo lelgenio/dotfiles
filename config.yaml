@@ -204,20 +204,16 @@ actions:
       "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}" ||
       true
 
-  reload_sway: _sway_reload
-  reload_qutebrowser: _qutebrowser_reload
+  reload_sway: swaymsg reload
   reload_mako: makoctl reload
   lesskey: lesskey
   reload_fish: pkill -SIGHUP fish
 
+  reload_qutebrowser: _qutebrowser_reload & disown
+
   vimplug: >
-    nvim
-    +PlugUpgrade
-    +PlugInstall
-    +PlugUpdate
-    +qall
-    &> /dev/null
-    & disown
+    nvim +PlugUpgrade +PlugInstall +PlugUpdate +qall
+    &> /dev/null & disown
 
   crontab_install: |
     crontab -r
