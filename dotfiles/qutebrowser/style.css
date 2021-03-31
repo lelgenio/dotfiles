@@ -33,7 +33,7 @@ input[type="button"] {
 /*Youtube*/
 div#masthead-ad ,
 .video-ads,
-#player-ads
-{
+#player-ads,
+ytd-popup-container {
     display: none !important;
 }
