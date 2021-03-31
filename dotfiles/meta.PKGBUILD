@@ -37,7 +37,7 @@ depends=(
     pulseaudio pamixer
 
     # Fonts
-    inter-font ttf-material-wifi-icons-git
+    inter-font
     otf-nerd-fonts-fira-code
 
     # Screenshot

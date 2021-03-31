@@ -357,6 +357,10 @@ dotfiles: # Just a bunch of paths and action mappings
     actions:
     - filter_backgrounds
 
+  fonts:
+    src: fonts
+    dst: ~/.local/share/fonts/
+
   mime:
     src: mime/
     dst: ~/
