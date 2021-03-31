@@ -9,7 +9,9 @@ set -x QT_QPA_PLATFORMTHEME qt5ct
 # set -x QT_QPA_PLATFOR wayland
 set -x DESKTOP_APP_I_KNOW_ABOUT_GTK_INCOMPATIBILITY 1
 
-fish_add_path ~/.local/bin ~/.cargo/bin ~/.factorio/bin/*
+for i in ~/.local/bin ~/.cargo/bin ~/.factorio/bin/*
+    test -d "$i";and fish_add_path "$i"
+end
 
 # needed for tmux
 set -x ESCDELAY 0
@@ -21,6 +23,12 @@ set -x EDITOR {{@@ editor @@}}
 set -x VISUAL {{@@ editor @@}}
 set -x BROWSER qutebrowser
 set -x PAGER less
+set -x MANPAGER less
+
+if test "$EDITOR" = "kak"
+    # set -x PAGER kak-pager
+    set -x MANPAGER kak-man-pager
+end
 
 ################################################################
 # keep my dirs clean
