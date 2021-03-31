@@ -74,8 +74,8 @@ $mod+Shift+space floating toggle
 $mod+space focus mode_toggle
 
 # Move focus to the parent container
-$mod+a focus parent
-$mod+z focus child
+$mod+equal focus parent
+$mod+minus focus child
 
 $mod+tab scratchpad show
 $mod+Shift+tab move container scratchpad
