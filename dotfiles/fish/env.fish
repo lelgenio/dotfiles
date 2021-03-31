@@ -5,11 +5,13 @@
 # |  _| \__ \ | | |
 # |_| |_|___/_| |_|
 
-set -x QT_QPA_PLATFORMTHEME gtk3
+set -x QT_QPA_PLATFORMTHEME qt5ct
 # set -x QT_QPA_PLATFOR wayland
 set -x DESKTOP_APP_I_KNOW_ABOUT_GTK_INCOMPATIBILITY 1
 
-set -x PATH ~/.local/bin ~/.cargo/bin ~/.factorio/bin/* $PATH
+fish_add_path ~/.local/bin ~/.cargo/bin ~/.factorio/bin/*
+
+# needed for tmux
 set -x ESCDELAY 0
 
 ################################################################
