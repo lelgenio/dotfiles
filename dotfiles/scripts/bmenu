@@ -3,16 +3,21 @@
 # bmenu *       - use as dmenu, -p for custom prompt (man bemenu)
 # bmenu run     - select from .desktop files and run it
 # bmenu start   - internal option
-if test "$1" != "start" || test "$1" = "run"
-then
-    test -n "$SWAYSOCK" && swaymsg fullscreen off &> /dev/null
-fi
 
 if test "$1" = "run"
 then
     test -n "$2" && t="$2" || t="terminal"
     exec j4-dmenu-desktop --dmenu="bmenu start -p Iniciar:" --term "$t"
 fi
+
+fullscreen=false
+
+test -n "$SWAYSOCK" &&
+swaymsg -t get_tree |
+    jq -je '..|select(.focused? and .fullscreen_mode? == 1)|""' &&
+    swaymsg -q fullscreen off &&
+    fullscreen=true
+
 
 # t  title
 # f  filter
@@ -64,3 +69,5 @@ bemenu \
     --nb "$nb" --nf "$nf" \
     --hb "$hb" --hf "$hf" \
     $@
+
+"$fullscreen" && swaymsg -q fullscreen on
