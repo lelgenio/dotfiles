@@ -33,7 +33,6 @@ alias _fish_prompt_normal "_fish_prompt_color 'normal'"
 ############################################################
 
 function _fish_prompt_git_status -a git_status_s code symbol color
-    set code (string escape --style regex "$code")
     echo $git_status_s | string match -qr "^$code"
     and _fish_prompt_color "$color" "$symbol"
 end
@@ -60,13 +59,11 @@ function fish_git_prompt
     # Left side represents Index/Filesystem
     ############################################################
     # Modified
-    _fish_prompt_git_status "$git_status_s" ' M' '~' 'yellow'
-    # Moved
-    _fish_prompt_git_status "$git_status_s" 'RM' '→' 'yellow'
+    _fish_prompt_git_status "$git_status_s" '.M' '~' 'yellow'
     # Deleted
-    _fish_prompt_git_status "$git_status_s" ' D' '-' 'red'
+    _fish_prompt_git_status "$git_status_s" '.D' '-' 'red'
     # Untraked files exist
-    _fish_prompt_git_status "$git_status_s" '??' '?' 'normal'
+    _fish_prompt_git_status "$git_status_s" '\?\?' '?' 'normal'
 
     # Print name of branch or checkedout commit
     if test -n "$git_detach_branch"
@@ -91,11 +88,13 @@ function fish_git_prompt
     # Right side represents WorkTree/Staged
     ############################################################
     # New file
-    _fish_prompt_git_status "$git_status_s" 'A ' '+' 'green'
+    _fish_prompt_git_status "$git_status_s" 'A.' '+' 'green'
     # Modified
-    _fish_prompt_git_status "$git_status_s" 'M ' '~' 'green'
+    _fish_prompt_git_status "$git_status_s" 'M.' '~' 'green'
+    # Moved
+    _fish_prompt_git_status "$git_status_s" 'R.' '→' 'yellow'
     # Deletion staged
-    _fish_prompt_git_status "$git_status_s" 'D ' '-' 'red'
+    _fish_prompt_git_status "$git_status_s" 'D.' '-' 'red'
 end
 
 
