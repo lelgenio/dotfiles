@@ -28,29 +28,31 @@ alias _fish_prompt_warn   "_fish_prompt_color 'yellow'"
 
 alias _fish_prompt_normal "_fish_prompt_color 'normal'"
 
-function _fish_prompt_git_status -a git_status_s code symbol color
-    printf "%s\n" $git_status_s |
-        string match -r "^$code" &> /dev/null
-    and _fish_prompt_color "$color" "$symbol"
-end
-
-
 ############################################################
 # Git
 ############################################################
 
+function _fish_prompt_git_status -a git_status_s code symbol color
+    set code (string escape --style regex "$code")
+    echo $git_status_s | string match -qr "^$code"
+    and _fish_prompt_color "$color" "$symbol"
+end
+
+
 function fish_git_prompt
-    begin
-        git branch --show-current
-        and set git_status_s (git status -s)
+
+    ############################################################
+    # Check if in a git repo and save branch and status
+    ############################################################
+    set git_branches (git branch --all 2> /dev/null)
         or return
 
-        if git branch | string match '\* (HEAD detached at *)'
-            set git_branch detached
-        else
-            set git_branch (git branch --show-current)
-        end
-    end &> /dev/null
+    set git_branch          (string replace -fr '\* (.*?)$'             '$1' $git_branches)
+    set git_detach_branch   (string replace -fr '.*detached at (.*?)\)' '$1' $git_branch )
+    set git_remote_branches (string replace -fr '  remotes/(.*?)$'      '$1' $git_branches)
+    set git_remotes         (string replace -fr '(.*?)/.*$'             '$1' $git_remote_branches | sort -u)
+
+    set git_status_s (git status -s | string collect)
 
     _fish_prompt_normal " on "
 
@@ -58,37 +60,42 @@ function fish_git_prompt
     # Left side represents Index/Filesystem
     ############################################################
     # Modified
-    _fish_prompt_git_status "$git_status_s"  '.M' '~' 'yellow'
+    _fish_prompt_git_status "$git_status_s" ' M' '~' 'yellow'
+    # Moved
+    _fish_prompt_git_status "$git_status_s" 'RM' '→' 'yellow'
     # Deleted
-    _fish_prompt_git_status "$git_status_s"  '.D' '-' 'red'
+    _fish_prompt_git_status "$git_status_s" ' D' '-' 'red'
     # Untraked files exist
-    _fish_prompt_git_status "$git_status_s"  '??' '?' 'normal'
+    _fish_prompt_git_status "$git_status_s" '??' '?' 'normal'
 
-    # Print name of branch and a "↑" if ahead of origin
-    test "$git_branch" = "detached"
-        and _fish_prompt_warn   "$git_branch"
-        or  _fish_prompt_accent "$git_branch"
+    # Print name of branch or checkedout commit
+    if test -n "$git_detach_branch"
+       _fish_prompt_warn   "$git_detach_branch"
+    else if  test -n "$git_branch"
+       _fish_prompt_accent "$git_branch"
+    else
+       _fish_prompt_warn "init"
+    end
 
-    set git_remotes (git branch --remotes) &> /dev/null
-    for remote in (git remote 2> /dev/null)
-        if not printf "%s\n" $git_remotes |
-               string match -r "$remote"/"$git_branch" &> /dev/null
-            continue
-        end
-        if not git diff --quiet -- HEAD "$remote"/"$git_branch"
-            _fish_prompt_normal '↑'
-        end
+    # print a "↑" if ahead of origin
+    for git_remote in $git_remotes
+        # Remote has the current branch
+        string match -qr "$git_remote"/"$git_branch" $git_remote_branches
+        # Check if remote is different
+        and not git diff --quiet HEAD "$git_remote"/"$git_branch"
+        and _fish_prompt_normal '↑'
+        and break
     end
 
     ############################################################
     # Right side represents WorkTree/Staged
     ############################################################
     # New file
-    _fish_prompt_git_status "$git_status_s"  'A.' '+' 'green'
+    _fish_prompt_git_status "$git_status_s" 'A ' '+' 'green'
     # Modified
-    _fish_prompt_git_status "$git_status_s"  'M.' '~' 'green'
+    _fish_prompt_git_status "$git_status_s" 'M ' '~' 'green'
     # Deletion staged
-    _fish_prompt_git_status "$git_status_s"  'D.' '-' 'red'
+    _fish_prompt_git_status "$git_status_s" 'D ' '-' 'red'
 end
 
 
