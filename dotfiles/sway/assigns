@@ -23,7 +23,11 @@ assign [class=qutebrowser] workspace 2
 for_window [title=Whoops!] kill
 
 assign [app_id=firefox] workspace 2
+assign [class=firefox] workspace 2
 assign [class=Chromium] workspace 2
+
+# Books
+assign [app_id=org.pwmt.zathura] workspace 8
 
 # Games
 assign [class=Steam]        workspace 9
