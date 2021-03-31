@@ -11,6 +11,7 @@ map global user 'w' ': write<ret>' -docstring 'write buffer'
 map global user 'u' ': config-source<ret>' -docstring 'source configuration'
 map global user 'g' ': enter-user-mode lsp<ret>' -docstring 'lsp mode'
 map global user 'z' ':zoxide ' -docstring 'zoxide'
+map global user 'n' ': new<ret>' -docstring 'new window'
 
 map global user 'e' 'x|emmet<ret>{{@@ "@" if not tabs @@}}' -docstring 'process line with emmet'
 map global user 'm' ': try format-buffer catch lsp-formatting<ret>' -docstring 'format document'
@@ -58,7 +59,8 @@ try %{
 
     define-command -hidden find_file \
     %{ edit %sh{
-        fd -HE .git | wdmenu
+        fd -HE .git | wdmenu ||
+        echo "$kak_buffile"
     } }
 
     define-command -hidden find_delete \
