@@ -18,6 +18,11 @@ swaymsg -t get_tree |
     swaymsg -q fullscreen off &&
     fullscreen=true
 
+end(){
+    "$fullscreen" && swaymsg -q fullscreen on
+}
+
+trap end EXIT
 
 # t  title
 # f  filter
@@ -69,5 +74,3 @@ bemenu \
     --nb "$nb" --nf "$nf" \
     --hb "$hb" --hf "$hf" \
     $@
-
-"$fullscreen" && swaymsg -q fullscreen on
