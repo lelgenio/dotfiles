@@ -1,9 +1,0 @@
-#!/bin/sh
-
-{
-    wait $(pidof dotdrop)
-    sleep 3s
-    timeout 3s kanshi
-    test -n "$SWAYSOCK" &&
-        swaymsg reload
-} &>/dev/null & disown

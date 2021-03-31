@@ -23,27 +23,22 @@ hook global BufCreate .*\.vue %{
 
 # Highlight Dotdrop templating syntax
 hook global WinCreate .* %{
-    {%@@ set escape = "\{\{@@,@@\}\},\{%@@,@@%\},\{#@@,@@#\}".split(",") @@%}
-
     require-module python
     add-highlighter window/dotdrop regions
 
-    add-highlighter window/dotdrop/expression region '{{@@ escape[0] @@}}' '{{@@ escape[1] @@}}' regions
-    add-highlighter window/dotdrop/statement  region '{{@@ escape[2] @@}}' '{{@@ escape[3] @@}}' regions
-    add-highlighter window/dotdrop/comment    region '{{@@ escape[4] @@}}' '{{@@ escape[5] @@}}' fill comment
+    add-highlighter window/dotdrop/expression region '\{\{@[@]' '[@]@\}\}' group
+    add-highlighter window/dotdrop/statement  region  '\{%@[@]' '[@]@%\}' group
+    add-highlighter window/dotdrop/comment    region  '\{#@[@]' '[@]@#\}' fill comment
 
-    add-highlighter window/dotdrop/expression/code default-region group
-    add-highlighter window/dotdrop/statement/code  default-region group
+    add-highlighter window/dotdrop/expression/ fill variable
+    add-highlighter window/dotdrop/statement/  fill variable
 
-    add-highlighter window/dotdrop/expression/code/ fill variable
-    add-highlighter window/dotdrop/statement/code/  fill variable
+    add-highlighter window/dotdrop/expression/ ref python
+    add-highlighter window/dotdrop/statement/  ref python
 
-    add-highlighter window/dotdrop/expression/code/ ref python
-    add-highlighter window/dotdrop/statement/code/  ref python
-
-    add-highlighter window/dotdrop/expression/code/ regex '{{@@ escape[0] @@}}|{{@@ escape[1] @@}}' 0:block
-    add-highlighter window/dotdrop/statement/code/  regex '{{@@ escape[2] @@}}|{{@@ escape[3] @@}}' 0:block
-    add-highlighter window/dotdrop/statement/code/  regex 'endfor|endif'                            0:keyword
+    add-highlighter window/dotdrop/expression/ regex '\{\{@[@]|[@]@\}\}' 0:block
+    add-highlighter window/dotdrop/statement/  regex  '\{%@[@]|[@]@%\}' 0:block
+    add-highlighter window/dotdrop/statement/  regex 'endfor|endif' 0:keyword
 }
 
 hook global BufCreate .*\.jsonc %[ set buffer filetype jsonc ]
