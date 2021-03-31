@@ -1,6 +1,7 @@
 # {{@@ header() @@}}
 
 try %{
+    declare-user-mode buffer
     declare-user-mode surround
     declare-user-mode git
     declare-user-mode find
@@ -12,8 +13,8 @@ map global user 'g' ': enter-user-mode lsp<ret>' -docstring 'lsp mode'
 map global user 'z' ':zoxide ' -docstring 'zoxide'
 
 map global user 'e' 'x|emmet<ret>{{@@ "@" if not tabs @@}}' -docstring 'process line with emmet'
-map global user 'm' ': format-buffer<ret>' -docstring 'format document'
-map global user 'M' ': format-selections<ret>' -docstring 'format selection'
+map global user 'm' ': try format-buffer catch lsp-formatting<ret>' -docstring 'format document'
+map global user 'M' ': try format-selections catch lsp-range-formatting<ret>' -docstring 'format selection'
 
 map global user 'c' ': comment-line<ret>' -docstring 'comment line'
 map global user 'C' ': comment-block<ret>' -docstring 'comment block'
@@ -21,6 +22,11 @@ map global user 'C' ': comment-block<ret>' -docstring 'comment block'
 map global user 'p' '<a-!> wl-paste -n <ret>' -docstring 'clipboard paste'
 map global user 'P' '! wl-paste -n <ret>' -docstring 'clipboard paste before'
 map global user 'R' '"_d! wl-paste -n <ret>' -docstring 'clipboard replace'
+
+map global user 'b' ': enter-user-mode buffer<ret>' -docstring 'buffer mode'
+map global buffer 'n' ':buffer-next<ret>' -docstring 'next'
+map global buffer 'p' ':buffer-previous<ret>' -docstring 'previous'
+map global buffer 'd' ':delete-buffer<ret>' -docstring 'delete'
 
 map global user 's' ': enter-user-mode surround<ret>' -docstring 'surround mode'
 map global surround 's' ': surround<ret>' -docstring 'surround'
@@ -32,7 +38,7 @@ map global user 'v'    ': enter-user-mode git<ret>' -docstring 'git vcs mode'
 map global git 's'     ': git status<ret>' -docstring 'status'
 map global git 'a'     ': git add<ret>' -docstring 'add current'
 map global git 'd'     ': git diff %reg{%}<ret>' -docstring 'diff current'
-map global git 'r'     ': git restore %reg{%}<ret>' -docstring 'restore current'
+map global git 'r'     ': git checkout %reg{%}<ret>' -docstring 'restore current'
 map global git 'A'     ': git add --all<ret>' -docstring 'add all'
 map global git 'D'     ': git diff<ret>' -docstring 'diff all'
 map global git '<a-d>' ': git diff --staged<ret>' -docstring 'diff staged'
@@ -51,15 +57,13 @@ map global find 'd' ': find_delete<ret>' -docstring 'file to delete'
 try %{
 
     define-command -hidden find_file \
-    %{ edit -existing %sh{
-        test "$PWD" -ne "$HOME" && args="-H"
-        fd -HE .git  -tf "$args" | sed "/.git\//d" | wdmenu
+    %{ edit %sh{
+        fd -HE .git | wdmenu
     } }
 
     define-command -hidden find_delete \
     %{ nop %sh{
-        test "$PWD" -ne "$HOME" && args="-H"
-        fd -tf "$args" | sed "/.git\//d" | wdmenu | xargs trash
+        fd -H -E .git -t f | wdmenu | xargs -r trash
     } }
 
     define-command -hidden find_git_file \
