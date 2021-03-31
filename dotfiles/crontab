@@ -1,5 +1,5 @@
 # {{@@ header() @@}}
-PATH={{@@ ordered_path() @@}}
+PATH={{@@ env['PATH'] @@}}
 
 # {%@@ if env['USER'] != 'root' @@%} #
 #minute hour day month day_week cmd

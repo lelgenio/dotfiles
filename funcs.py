@@ -7,17 +7,6 @@ def parent_dir(path):
     return os.path.split(path)[0]
 
 
-def ordered_path():
-    PATH = os.environ['PATH']
-
-    newPATH = []
-    for i in PATH.split(":"):
-        if i not in newPATH:
-            newPATH.append(i)
-
-    return ':'.join(newPATH)
-
-
 def rclone_obscure(pass_name):
     try:
         fPath = os.path.expanduser("~/.config/rclone/rclone.conf")
