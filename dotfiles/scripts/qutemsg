@@ -3,6 +3,8 @@
 """
 Small Python script to reload qutebrowser themes.
 """
+
+import sys
 try:
     from qutebrowser import qutebrowser, app
     from qutebrowser.misc import ipc
@@ -16,7 +18,8 @@ def qute_reload():
     args = qutebrowser.get_argparser().parse_args()
     app.standarddir.init(args)
     socket = ipc._get_socketname(args.basedir)
-    ipc.send_to_running_instance(socket, [":config-source"], args.target)
+    ipc.send_to_running_instance(
+        socket, [":"+" ".join(sys.argv[1:])], args.target)
 
 
 qute_reload()

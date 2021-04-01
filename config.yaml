@@ -205,11 +205,11 @@ actions:
       true
 
   reload_sway: swaymsg reload
-  reload_mako: makoctl reload
+  reload_mako: pkill -SIGHUP mako
   lesskey: lesskey
   reload_fish: pkill -SIGHUP fish
 
-  reload_qutebrowser: _qutebrowser_reload & disown
+  reload_qutebrowser: qutemsg config-source & disown
 
   vimplug: >
     nvim +PlugUpgrade +PlugInstall +PlugUpdate +qall
