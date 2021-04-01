@@ -63,6 +63,7 @@ trap end EXIT
 #{%@@ endif @@%}#
 
 bemenu \
+    -m -1\
     --ignorecase\
     --bottom\
     --no-overlap\

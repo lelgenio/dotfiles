@@ -25,6 +25,12 @@ bindsym --to-code {
     # Resize window
     $mod+Control+${{@@ dir @@}} resize {{@@ resize_cmd @@}}
     $mod+Control+{{@@  dir @@}} resize {{@@ resize_cmd @@}}
+    # focus output
+    $mod+mod1+{{@@         dir @@}} focus          output {{@@ dir @@}}
+    $mod+mod1+${{@@        dir @@}} focus          output {{@@ dir @@}}
+    # Move workspace to output
+    $mod+mod1+Shift+{{@@   dir @@}} move workspace output {{@@ dir @@}}
+    $mod+mod1+Shift+${{@@  dir @@}} move workspace output {{@@ dir @@}}
 {%@@ endfor @@%}
 
 
