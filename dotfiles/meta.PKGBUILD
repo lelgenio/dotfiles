@@ -77,7 +77,7 @@ depends=(
     neomutt urlview isync
 
     # Files
-    nautilus
+    thunar
     syncthing xdg-user-dirs
     transmission-cli deemix
 
