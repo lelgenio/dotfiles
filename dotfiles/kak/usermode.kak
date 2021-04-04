@@ -20,8 +20,8 @@ map global user 'M' ': try format-selections catch lsp-range-formatting<ret>' -d
 map global user 'c' ': comment-line<ret>' -docstring 'comment line'
 map global user 'C' ': comment-block<ret>' -docstring 'comment block'
 
-map global user 'p' '<a-!> wl-paste -n <ret>' -docstring 'clipboard paste'
-map global user 'P' '! wl-paste -n <ret>' -docstring 'clipboard paste before'
+map global user 'p' '! wl-paste -n<ret>' -docstring 'clipboard paste'
+map global user 'P' '<a-o>j! wl-paste -n<ret>' -docstring 'clipboard paste on next line'
 map global user 'R' '"_d! wl-paste -n <ret>' -docstring 'clipboard replace'
 
 map global user 'b' ': enter-user-mode buffer<ret>' -docstring 'buffer mode'
