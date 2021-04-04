@@ -375,6 +375,10 @@ dotfiles: # Just a bunch of paths and action mappings
     src: theme
     dst: ~/
 
+  prettierrc:
+    src: prettierrc.toml
+    dst: ~/.prettierrc.toml
+
   clang-format:
     src: clang-format
     dst: ~/.clang-format
