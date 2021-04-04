@@ -81,6 +81,8 @@ key_bindings:
   - { key: Down,      mods: Control|Shift,      mode: ~Alt,       action: ScrollLineDown     }
   - { key: PageUp,    mods: Control|Shift,      mode: ~Alt,       action: ScrollHalfPageUp   }
   - { key: PageDown,  mods: Control|Shift,      mode: ~Alt,       action: ScrollHalfPageDown }
+  - { key: N,         mods: Control|Shift,                        action: SpawnNewInstance }
 {%@@ if key.layout == "colemak" @@%}
   - { key: T,                                   mode: Vi|~Search, action: SemanticRightEnd   }
 {%@@ endif @@%}
+
