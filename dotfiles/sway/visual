@@ -19,6 +19,11 @@ set $alert      #000000
 font {{@@ font.interface @@}}  {{@@ font.size.medium @@}}px
 output * bg "{{@@ background @@}}" fill
 
+set $laptop eDP-1
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+
+
 ###############################################################
 # window decoration, aka border
 ###############################################################

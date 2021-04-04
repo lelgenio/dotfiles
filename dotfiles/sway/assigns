@@ -20,7 +20,7 @@ for_window [app_id=weather] fullscreen
 
 assign [app_id=qutebrowser] workspace 2
 assign [class=qutebrowser] workspace 2
-for_window [title=Whoops!] kill
+# for_window [title=Whoops!] kill
 
 assign [app_id=firefox] workspace 2
 assign [class=firefox] workspace 2

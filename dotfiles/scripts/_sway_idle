@@ -4,8 +4,8 @@ pkill -9 swayidle
 
 exec swayidle -w \
    before-sleep 'pkill caffeinated; swaylock -f' \
-       after-resume 'pkill kanshi; kanshi' \
+       after-resume '_sway_displays' \
    timeout 360 'pkill caffeinated; swaylock -f' \
-       resume 'pkill kanshi; kanshi' \
+       resume '_sway_displays' \
    timeout 1800 'swaymsg "output * dpms off"' \
-        resume 'swaymsg "output * dpms on"; pkill kanshi; kanshi' \
+        resume 'swaymsg "output * dpms on"; _sway_displays' \

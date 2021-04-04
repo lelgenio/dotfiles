@@ -26,7 +26,7 @@ exec pidof syncthing || syncthing -no-browser
 ###############################################################
 
 # start dbusd just in case
-exec pidof dbus-daemon || 'dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus'
+# exec pidof dbus-daemon || dbus-daemon --session --address=unix:path='$XDG_RUNTIME_DIR/bus'
 
 # pipewire and desktop-portal for screen sharing
 exec_always pidof pipewire || pipewire
@@ -47,7 +47,7 @@ exec /usr/lib/geoclue-2.0/demos/agent
 exec_always pidof redshift || redshift
 
 # Screen manager
-exec_always pkill -9 kanshi;  exec kanshi
+exec_always _sway_displays
 # Set minimum brightness to 1 instead of 0
 # not exactly a daemon
 exec light -N 1
