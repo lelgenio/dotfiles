@@ -6,12 +6,6 @@
 # |_|\_\__,_|_|\_\___/ \__,_|_| |_|\___|
 
 set global tabstop {{@@ indent_width @@}}
-{%@@ set small_indent = [2, indent_width / 2] | max @@%}
-
-hook global BufCreate .*\.(ya?ml|c(pp)?) %{
-    set buffer indentwidth {{@@ small_indent @@}}
-    set global tabstop {{@@ small_indent @@}}
-}
 
 hook global BufCreate .*\.py %{
     set global indentwidth 4
@@ -34,7 +28,7 @@ hook global BufCreate .*\.py %{
 
     hook global BufWritePost .*\.ya?ml %{ nop %sh{
         tmpf=$(mktemp)
-        expand --tabs={{@@ small_indent @@}} --initial "${kak_buffile}" > "${tmpf}"
+        expand --tabs={{@@ indent_width @@}} --initial "${kak_buffile}" > "${tmpf}"
         cat "${tmpf}" > "${kak_buffile}"
         rm -- "${tmpf}"
     } } -group yaml-replace-spaces-with-tabs
