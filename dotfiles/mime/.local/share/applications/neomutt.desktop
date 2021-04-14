@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Neomutt
+GenericName=Email Client
+Comment=View and Send Emails
+Exec=terminal neomutt %U
+Terminal=false
+Type=Application
+Keywords=Mail;E-mail;
+Icon=mutt
+Categories=Network;Email;
+StartupNotify=false
+MimeType=x-scheme-handler/mailto;

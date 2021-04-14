@@ -10,6 +10,7 @@
 # {%@@ set image_viewer = 'pqiv.desktop' @@%}
 # {%@@ set video_player = 'mpv.desktop' @@%}
 # {%@@ set web_browser = 'org.qutebrowser.qutebrowser.desktop' @@%}
+# {%@@ set email_client = 'neomutt.desktop' @@%}
 
 [Default Applications]
 
@@ -24,6 +25,8 @@ x-scheme-handler/https={{@@ web_browser @@}}
 
 x-scheme-handler/magnet=torrent.desktop
 application/x-bittorrent=torrent.desktop
+
+x-scheme-handler/mailto={{@@ email_client @@}}
 
 # image_viewer {{{
 image/bmp={{@@ image_viewer @@}}
