@@ -23,12 +23,12 @@ case $1 in
 
     area)
         # Screen area to file
-        grim -g "$(slurp)" $DESTFILE
+        grim -g "$(slurp -d)" $DESTFILE
         echo $DESTFILE
         ;;
     area-clip)
         # Screen area to clipboard
-        grim -g "$(slurp)" - | wl-copy
+        grim -g "$(slurp -d)" - | wl-copy
         ;;
 
     clip)
