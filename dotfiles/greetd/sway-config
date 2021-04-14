@@ -1,13 +1,7 @@
 exec "gtkgreet -l --command fish; swaymsg exit"
 
-exec alacritty
-
 bindsym Mod4+control+z exec systemctl suspend || loginctl suspend
 bindsym Mod4+control+e exec systemctl poweroff || loginctl poweroff
-
-exec_always swaymsg -t get_outputs | \
-    jq '.[]|select(.name == "HDMI-A-1")' &> /dev/null && \
-    swaymsg output eDP-1 disable
 
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
