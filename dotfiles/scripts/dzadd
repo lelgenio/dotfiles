@@ -40,7 +40,7 @@ case "$sType" in
         ;;
 esac
 
-curl -s "api.deezer.com/search/$sType?q=${query}" |
+curl -m30 -s "api.deezer.com/search/$sType?q=${query}" |
     sed 's/|//g' |
     jq -r "$jqFilter" >"$tmpf"
 
@@ -58,7 +58,7 @@ pick_song() {
 
         if test "$choice" = "Preview"; then
             choicePreview=$(
-                curl -s "http://api.deezer.com/$sType/$choiceId/$preview_suffix" |
+                curl -m30 -s "http://api.deezer.com/$sType/$choiceId/$preview_suffix" |
                     jq -r '.preview, .data[0].preview | select(. != null)'
             )
 
@@ -69,9 +69,9 @@ pick_song() {
         fi
 
         if test "$choice" = "View Image"; then
-            curl -s "api.deezer.com/${sType}/${choiceId}" |
+            curl -m30 -s "api.deezer.com/${sType}/${choiceId}" |
                 jq -r "$image_filter" |
-                xargs curl -s |
+                xargs curl -m30 -s |
                 pqiv -
 
             pick_action
