@@ -29,7 +29,7 @@ c.content.headers.user_agent = """\
 
 
 # STFU
-config.set("content.notifications", False, "*")
+config.set("content.notifications.enabled", False, "*")
 config.set('content.register_protocol_handler', False, '*')
 
 ###############################################################
