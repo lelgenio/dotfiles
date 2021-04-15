@@ -1,36 +1,44 @@
-#!/bin/sh
+#!/bin/fish
+
 # wrapper around bemenu
 # bmenu *       - use as dmenu, -p for custom prompt (man bemenu)
 # bmenu run     - select from .desktop files and run it
 # bmenu start   - internal option
 
-if test "$1" = "run"
-then
-    test -n "$2" && t="$2" || t="terminal"
+if test "$argv[1]" = "run"
+    test -n "$argv[2]" && set t "$argv[2]" || set t "terminal"
 
-    test -n "$i3SOCK" && wrapper='i3-msg exec --'
-    test -n "$SWAYSOCK" && wrapper='swaymsg exec --'
+    test -n "$i3SOCK" && set wrapper 'i3-msg exec --'
+    test -n "$SWAYSOCK" && set wrapper 'swaymsg exec --'
 
     exec j4-dmenu-desktop \
         --dmenu="bmenu start -p Iniciar:" \
         --term "$t" \
         --wrapper="$wrapper" \
         --no-generic
-fi
+end
 
-fullscreen=false
+set fullscreen false
 
-test -n "$SWAYSOCK" &&
-swaymsg -t get_tree |
-    jq -je '..|select(.focused? and .fullscreen_mode? == 1)|""' &&
-    swaymsg -q fullscreen off &&
-    fullscreen=true
+if test -n "$SWAYSOCK"
+    swaymsg -t get_tree |
+        jq -je '..|select(.focused? and .fullscreen_mode? == 1)|""' &&
+        swaymsg -q fullscreen off &&
+        set fullscreen true
 
-end(){
+    swaymsg -t get_outputs |
+        jq -r 'map(.focused)|reverse|index(true)' |
+        read focused_output
+
+    test -n "$focused_output"
+    and set focused_output "-m $focused_output"
+end
+
+function clean_exit
     "$fullscreen" && swaymsg -q fullscreen on
-}
+end
 
-trap end EXIT
+trap clean_exit EXIT
 
 # t  title
 # f  filter
@@ -39,39 +47,39 @@ trap end EXIT
 # s  selected
 # sc scrollbar
 
-    fn="{{@@ font.mono      @@}} {{@@ font.size.small           @@}}"
+    set fn "{{@@ font.mono      @@}} {{@@ font.size.small           @@}}"
 
-    tb="{{@@ color.bg       @@}}{{@@ opacity | clamp_to_hex @@}}"
-    tf="{{@@ accent_color   @@}}"
+    set tb "{{@@ color.bg       @@}}{{@@ opacity | clamp_to_hex @@}}"
+    set tf "{{@@ accent_color   @@}}"
 
-    fb="{{@@ color.bg       @@}}{{@@ opacity | clamp_to_hex @@}}"
-    ff="{{@@ color.txt      @@}}"
+    set fb "{{@@ color.bg       @@}}{{@@ opacity | clamp_to_hex @@}}"
+    set ff "{{@@ color.txt      @@}}"
 
-    nb="{{@@ color.bg       @@}}{{@@ opacity | clamp_to_hex @@}}"
-    nf="{{@@ color.txt      @@}}"
+    set nb "{{@@ color.bg       @@}}{{@@ opacity | clamp_to_hex @@}}"
+    set nf "{{@@ color.txt      @@}}"
 
-    hb="{{@@ accent_color   @@}}"
-    hf="{{@@ accent_fg      @@}}"
+    set hb "{{@@ accent_color   @@}}"
+    set hf "{{@@ accent_fg      @@}}"
 
 #{%@@ if False @@%}#
 # Hacks to allow runnning even if not templated
-    fn="Fira Code 12"
+    set fn "Fira Code 12"
 
-    tf="#D9534F"
-    tb="#202020"
+    set tf "#D9534F"
+    set tb "#202020"
 
-    ff="#ffffff"
-    fb="#202020"
+    set ff "#ffffff"
+    set fb "#202020"
 
-    nf="#ffffff"
-    nb="#202020"
+    set nf "#ffffff"
+    set nb "#202020"
 
-    hf="#D9534F"
-    hb="#404040"
+    set hf "#D9534F"
+    set hb "#404040"
 #{%@@ endif @@%}#
 
 bemenu \
-    -m -1\
+    $focused_output\
     --ignorecase\
     --bottom\
     --no-overlap\
@@ -82,4 +90,6 @@ bemenu \
     --fb "$fb" --ff "$ff" \
     --nb "$nb" --nf "$nf" \
     --hb "$hb" --hf "$hf" \
-    $@
+    $argv
+
+# vim: ft=fish
