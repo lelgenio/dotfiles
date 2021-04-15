@@ -18,6 +18,7 @@ text/plain={{@@ editor @@}}.desktop
 inode/directory={{@@ file_manager @@}}.desktop
 
 application/pdf=org.pwmt.zathura.desktop
+application/epub+zip=org.pwmt.zathura.desktop
 
 text/html={{@@ web_browser @@}}
 x-scheme-handler/http={{@@ web_browser @@}}
