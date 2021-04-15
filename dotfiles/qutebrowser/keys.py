@@ -30,13 +30,17 @@ class key:
 ##########################################################
 
 config.bind(",d", "spawn --verbose youtube-dl -fbest[ext=mp4] {url}")
-config.bind(",m", "spawn --userscript view_in_mpv")
 config.bind(",r", "spawn --userscript readability")
 config.bind(";e", "hint links spawn deemix '{hint-url}'")
 
 mpvcom = "hint links spawn mpv --fs {hint-url} "
+mpvusc = "spawn --userscript view_in_mpv"
+mpvslowcom = " --ytdl-format='best[height<=360]'"
+
 config.bind(";m", mpvcom)
-config.bind(";M", mpvcom + "--ytdl-format='best[height<=360]'" )
+config.bind(";M", mpvcom + mpvslowcom)
+config.bind(",m", mpvusc)
+config.bind(",M", mpvusc + mpvslowcom)
 
 
 ##########################################################
