@@ -29,7 +29,7 @@ class key:
 # Usermode
 ##########################################################
 
-config.bind(",d", "spawn --verbose youtube-dl -fbest[ext=mp4] {url}")
+config.bind(",d", "spawn -o youtube-dl -fbest[ext=mp4] {url}")
 config.bind(",r", "spawn --userscript readability")
 config.bind(";e", "hint links spawn deemix '{hint-url}'")
 
