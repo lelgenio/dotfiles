@@ -22,7 +22,10 @@ down = {{@@ key.down    @@}}
 up   = {{@@ key.up      @@}}
 right= {{@@ key.right   @@}}
 
+{%@@ if key.layout @@%}
 new  = c
 today= g
+other = s
+{%@@ endif @@%}
 
 # vim: ft=toml
