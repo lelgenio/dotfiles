@@ -50,8 +50,8 @@ trap end EXIT
     nb="{{@@ color.bg       @@}}{{@@ opacity | clamp_to_hex @@}}"
     nf="{{@@ color.txt      @@}}"
 
-    hb="{{@@ color.bg_light @@}}"
-    hf="{{@@ accent_color   @@}}"
+    hb="{{@@ accent_color   @@}}"
+    hf="{{@@ accent_fg      @@}}"
 
 #{%@@ if False @@%}#
 # Hacks to allow runnning even if not templated
