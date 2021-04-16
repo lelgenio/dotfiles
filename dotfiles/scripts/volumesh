@@ -39,12 +39,7 @@ min() {
 
 # Pulse{{{
 get_vol_pulse() {
-    env LC_ALL=C pactl list sinks |
-        awk '/^\tVolume/ {
-                gsub(/%/,"");
-                printf $5;
-                exit;
-            }'
+    pamixer --get-volume
 }
 
 is_muted_pulse() {
