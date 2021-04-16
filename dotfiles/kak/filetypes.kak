@@ -73,7 +73,7 @@ hook global WinSetOption filetype=blade %[
 
     add-highlighter buffer/blade/expression region '\{\{ ' ' \}\}' ref php
     add-highlighter buffer/blade/statement  region -recurse '\(' '@(if|for|foreach|include)\s*\(' '\)' ref php
-    add-highlighter buffer/blade/base/      regex '@(if|else|endif|for|foreach|endfor|endforeach|include)' 1:keyword
+    add-highlighter buffer/blade/base/      regex '@(if|else|endif|for|foreach|endfor|endforeach|include|switch|endswitch|case|break)' 1:keyword
 
     add-highlighter buffer/blade/comment    region '\{\{--' '--\}\}' fill comment
     set-option buffer comment_block_begin '{{-- '
