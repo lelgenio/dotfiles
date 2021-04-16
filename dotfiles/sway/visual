@@ -84,7 +84,7 @@ set $gnome-schema org.gnome.desktop.interface
 exec_always {
     # In case of errors, kvantummanager opens a window
     # this is retarded
-    timeout 1s kvantummanager --set          '{{@@ kvantum_theme @@}}'
+    kvantummanager --set                     '{{@@ kvantum_theme @@}}'
     gsettings set $gnome-schema gtk-theme    '{{@@ gtk_theme     @@}}'
     gsettings set $gnome-schema icon-theme   '{{@@ icon_theme    @@}}'
     gsettings set $gnome-schema cursor-theme '{{@@ cursor_theme  @@}}'
