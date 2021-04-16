@@ -7,7 +7,7 @@ try %{
     declare-user-mode find
 }
 
-map global user 'w' ': write<ret>' -docstring 'write buffer'
+map global user 'w' ': wa<ret>' -docstring 'write buffer'
 map global user 'u' ': config-source<ret>' -docstring 'source configuration'
 map global user 'g' ': enter-user-mode lsp<ret>' -docstring 'lsp mode'
 map global user 'z' ':zoxide ' -docstring 'zoxide'
