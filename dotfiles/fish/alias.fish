@@ -87,6 +87,7 @@ command -qs khard &&
 ################################################################
 
 abbr -g g  'git'
+abbr -g ga 'git add'
 abbr -g gs 'git status'
 abbr -g gd 'git diff'
 abbr -g gp 'git pull; git push'
