@@ -144,7 +144,7 @@ dialogsSentIconFg:              windowFg ;
 dialogsUnreadBg:                {{@@ accent_color @@}} ;
 dialogsUnreadBgMuted:           {{@@ color.bg_dark @@}} ;
 dialogsUnreadFg:                windowFg ;
-dialogsBgOver:                  {{@@ color.bg_light @@}} ;
+dialogsBgOver:                  {{@@ color.bg_dark @@}} ;
 dialogsNameFgOver:              windowFg ;
 dialogsChatIconFgOver:          dialogsNameFgOver ;
 dialogsDateFgOver:              windowFg ;
