@@ -10,7 +10,7 @@ fi
 grim -g "$(slurp -b aabbcc00 -p)" - |
     convert - txt:- |
     grep -oE '#[0-9A-Fa-f]{6}' |
-    wl-copy
+    wl-copy -n
 
 notify-send "$(wl-paste)" "Copied to clipboard"
 
