@@ -11,26 +11,24 @@ bindsym --to-code {
 # Moving around
 ###############################################################
 
-{%@@ for dir in "Left,Up,Right,Down".split(',') @@%}
-    {%@@ set resize_cmd = "{} {} 20px".format(
-        ('shrink' if (loop.index0 < 2) else 'grow'),
-        ('height' if (loop.index0 % 2) else 'width'),
-    ) @@%}
-    # Move focus
-    $mod+${{@@         dir @@}} focus  {{@@ dir @@}}
-    $mod+{{@@          dir @@}} focus  {{@@ dir @@}}
-    # Move window
-    $mod+Shift+${{@@   dir @@}} move   {{@@ dir @@}}
-    $mod+Shift+{{@@    dir @@}} move   {{@@ dir @@}}
-    # Resize window
-    $mod+Control+${{@@ dir @@}} resize {{@@ resize_cmd @@}}
-    $mod+Control+{{@@  dir @@}} resize {{@@ resize_cmd @@}}
-    # focus output
-    $mod+mod1+{{@@         dir @@}} focus          output {{@@ dir @@}}
-    $mod+mod1+${{@@        dir @@}} focus          output {{@@ dir @@}}
-    # Move workspace to output
-    $mod+mod1+Shift+{{@@   dir @@}} move workspace output {{@@ dir @@}}
-    $mod+mod1+Shift+${{@@  dir @@}} move workspace output {{@@ dir @@}}
+{%@@ for prefix in ["","$"] @@%}
+    {%@@ for dir in "Left,Up,Right,Down".split(',') @@%}
+        {%@@ set resize_cmd = "{} {} 20px".format(
+            ('shrink' if (loop.index0 < 2) else 'grow'),
+            ('height' if (loop.index0 % 2) else 'width'),
+        ) @@%}
+        {%@@ set d = "{}{}".format(prefix,dir) @@%}
+        {#@@ Move focus @@#}
+        $mod+{{@@ d @@}} focus {{@@ dir @@}}
+        {#@@ Move window @@#}
+        $mod+Shift+{{@@ d @@}} move {{@@ dir @@}}
+        {#@@ Resize window @@#}
+        $mod+Control+{{@@ d @@}} resize {{@@ resize_cmd @@}}
+        {#@@ focus output @@#}
+        $mod+mod1+{{@@ d @@}} focus output {{@@ dir @@}}
+        {#@@ Move workspace to output @@#}
+        $mod+mod1+Shift+{{@@ d @@}} move workspace output {{@@ dir @@}}
+    {%@@ endfor @@%}
 {%@@ endfor @@%}
 
 
