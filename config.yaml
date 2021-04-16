@@ -204,7 +204,7 @@ actions:
       "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}" ||
       true
 
-  reload_sway: swaymsg reload
+  reload_sway: swaymsg reload & disown
   reload_mako: pkill -SIGHUP mako
   lesskey: lesskey
   reload_fish: pkill -SIGHUP fish
@@ -213,7 +213,7 @@ actions:
 
   vimplug: >
     nvim +PlugUpgrade +PlugInstall +PlugUpdate +qall
-    &> /dev/null & disown
+    &> /dev/null &
 
   reload_kakoune: >
     kak -l | xargs -r -n1
@@ -290,8 +290,6 @@ dotfiles: # Just a bunch of paths and action mappings
   waybar:
     src: waybar
     dst: ~/.config/waybar
-    actions:
-    - reload_sway
 
   kitty:
     src: kitty.conf
