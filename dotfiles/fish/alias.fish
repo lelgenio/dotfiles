@@ -71,12 +71,14 @@ end
 
 command -qs khard &&
     function fish_greeting
-        set -l khalList khal list now 10d --format " {title}"
-        $khalList &> /dev/null
+        command -qs khal
             or return
-        $khalList | grep '^No events$' &> /dev/null
+        set -l khalList (khal --color list now 10d --format "    {title}")
+        test -n "$khalList"
+            or return
+        echo $khalList | strip-escape | string match -qr '^No events$'
             and return
-        $khalList
+        printf "%s\n" $khalList
     end
 
 
