@@ -26,7 +26,7 @@ exec pidof syncthing || syncthing -no-browser
 ###############################################################
 
 # start dbusd just in case
-# exec pidof dbus-daemon || dbus-daemon --session --address=unix:path='$XDG_RUNTIME_DIR/bus'
+exec _start_dbus-daemon
 
 # pipewire and desktop-portal for screen sharing
 exec_always pidof pipewire || pipewire
