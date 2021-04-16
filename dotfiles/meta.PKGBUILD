@@ -34,7 +34,7 @@ depends=(
     vdirsyncer khal khard
 
     # Audio
-    pulseaudio pamixer
+    pulseaudio pamixer pulsemixer
 
     # Fonts
     inter-font
