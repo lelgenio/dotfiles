@@ -215,6 +215,10 @@ actions:
     nvim +PlugUpgrade +PlugInstall +PlugUpdate +qall
     &> /dev/null & disown
 
+  reload_kakoune: >
+    kak -l | xargs -r -n1
+    kak -e "config-source;quit" -ui dummy -c &
+
   crontab_install: |
     crontab -r
     crontab ~/.local/share/crontab
@@ -300,6 +304,12 @@ dotfiles: # Just a bunch of paths and action mappings
     dst: ~/.config/nvim/init.vim
     actions:
     - vimplug
+
+  kakoune:
+    src: kak
+    dst: ~/.config/kak
+    actions:
+    - reload_kakoune
 
   mutt:
     src: neomutt/
@@ -438,7 +448,6 @@ dotfiles: # Just a bunch of paths and action mappings
   fusuma:      { "src":"fusuma.yml",    "dst":"~/.config/fusuma/config.yml"  }
   git:         { "src":"git",           "dst":"~/.config/git"                }
   imv:         { "src":"imv.conf",      "dst":"~/.config/imv/config"         }
-  kakoune:     { "src":"kak",           "dst":"~/.config/kak"                }
   kanshi:      { "src":"kanshi",        "dst":"~/.config/kanshi/config"      }
   mpd:         { "src":"mpd.conf",      "dst":"~/.config/mpd/mpd.conf"       }
   pqivrc:      { "src":"pqiv.ini",      "dst":"~/.config/pqivrc"             }
