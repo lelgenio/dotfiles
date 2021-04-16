@@ -80,11 +80,11 @@ profiles:
 
       color:
         type: light
-        bg: '#FAFAFA'
-        bg_light: '#A0A0A0'
-        bg_dark: '#EAEAEA'
+        bg: '#EEEEEE'
+        bg_light: '#B0B0B0'
+        bg_dark: '#E0E0E0'
         txt: '#303030'
-        nontxt: '#E0E0E0'
+        nontxt: '#CCCCCC'
 
         normal:
           black: '#555555'

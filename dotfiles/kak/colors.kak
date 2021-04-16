@@ -64,10 +64,10 @@ face global MenuInfo cyan
 face global Information default,{{@@ bg_dark @@}}
 face global Error default
 
-face global StatusLine      default,{{@@ nontxt @@}}
-face global StatusLineMode  green,{{@@ nontxt @@}}
-face global StatusLineInfo  default,{{@@ nontxt @@}}
-face global StatusLineValue default,{{@@ nontxt @@}}
+face global StatusLine      default,{{@@ bg_dark @@}}
+face global StatusLineMode  green,{{@@ bg_dark @@}}
+face global StatusLineInfo  default,{{@@ bg_dark @@}}
+face global StatusLineValue default,{{@@ bg_dark @@}}
 face global StatusCursor    {{@@ accent_fg @@}},{{@@ accent_color @@}}
 
 face global Prompt yellow,default
