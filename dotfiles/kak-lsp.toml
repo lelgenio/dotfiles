@@ -60,6 +60,12 @@ roots = ["package.json"]
 command = "css-languageserver"
 args = ["--stdio"]
 
+[language.less]
+filetypes = ["less"]
+roots = ["package.json", ".git"]
+command = "css-languageserver"
+args = ["--stdio"]
+
 [language.d]
 filetypes = ["d", "di"]
 roots = [".git", "dub.sdl", "dub.json"]
