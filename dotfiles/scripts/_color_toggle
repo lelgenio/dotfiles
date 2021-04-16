@@ -1,0 +1,9 @@
+#!/bin/fish
+
+test "{{@@ color.type @@}}" = "dark"
+and set _COLOR_TYPE "light"
+or set _COLOR_TYPE "dark"
+
+dotdrop install -f
+
+# vim: ft=fish

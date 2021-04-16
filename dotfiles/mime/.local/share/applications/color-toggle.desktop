@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Toggle dark mode
+GenericName=Toggle Colors
+Comment=Edit text files
+Exec=_color_toggle %F
+Type=Application
+Icon=system.desktop
+Categories=Utility;
+StartupNotify=false
