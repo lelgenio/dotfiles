@@ -1,21 +1,21 @@
 #!/bin/sh
 
 opts="Fone\nSpeaker\nHDMI"
-out=$(printf $opts | wdmenu -p "Output")
+out=$(printf $opts | wdmenu -p "Output: ")
 vol=$(pamixer --get-volume)
 
-if [ "$out" = "HDMI" ]
-then
-    pacmd set-card-profile 0 output:hdmi-stereo+input:analog-stereo
-elif [ "$out" = "Speaker" ] || [ "$out" = "Fone" ]
-then
-    pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo
+case "$out" in
+    Fone)
+        pactl set-card-profile 0 output:analog-stereo+input:analog-stereo
+        pactl set-sink-port @DEFAULT_SINK@ analog-output-headphones
+        ;;
+    Speaker)
+        pactl set-card-profile 0 output:analog-stereo+input:analog-stereo
+        pactl set-sink-port @DEFAULT_SINK@ analog-output-speaker
+        ;;
+    HDMI)
+        pactl set-card-profile 0 output:hdmi-stereo+input:analog-stereo
+        ;;
+esac
 
-    if [ "$out" = "Speaker" ]
-    then
-        pacmd set-sink-port @DEFAULT_SINK@ analog-output-speaker
-    else
-        pacmd set-sink-port @DEFAULT_SINK@ analog-output-headphones
-    fi
-fi
 pamixer --set-volume "$vol"
