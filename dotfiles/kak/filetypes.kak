@@ -139,14 +139,18 @@ hook global WinSetOption filetype=less  %[
     add-highlighter buffer/less/single_string region ['] ['] fill string
 
     add-highlighter buffer/less/code/ regex ([A-Za-z][A-Za-z0-9_-]*)\h*: 1:keyword
-    add-highlighter buffer/less/code/ regex :(before|after) 0:attribute
+    add-highlighter buffer/less/code/ regex ::?(\w+) 0:attribute
     add-highlighter buffer/less/code/ regex !important 0:keyword
 
     add-highlighter buffer/less/code/selector   group
     add-highlighter buffer/less/code/selector/ regex         [A-Za-z][A-Za-z0-9_-]* 0:keyword
     add-highlighter buffer/less/code/selector/ regex [*]|[#.][A-Za-z][A-Za-z0-9_-]* 0:variable
+    add-highlighter buffer/less/code/selector/ regex &([A-Za-z0-9_-]*) 1:variable
+    add-highlighter buffer/less/code/selector/ regex & 0:operator
+    add-highlighter buffer/less/code/selector/ regex (\.?[A-Za-z][A-Za-z0-9_-]*)\s*\( 1:function
 
-    add-highlighter buffer/less/code/ regex (#[0-9A-Fa-f]{3,8})|(\b(\d*\.)?\d+(ch|cm|em|ex|mm|pc|pt|px|rem|vh|vmax|vmin|vw|%)?) 0:value 4:type
+    add-highlighter buffer/less/code/ regex (\b(\d*\.)?\d+(ch|cm|em|ex|mm|pc|pt|px|rem|vh|vmax|vmin|vw|%|s|ms)?) 0:value 3:type
+    add-highlighter buffer/less/code/ regex (#)[0-9A-Fa-f]{3}([0-9A-Fa-f]{3}([0-9A-Fa-f]{2})?)?\b 0:value 1:operator
 
     add-highlighter buffer/less/code/ regex (?i)\b(AliceBlue|AntiqueWhite|Aqua|Aquamarine|Azure|Beige|Bisque|Black|BlanchedAlmond|Blue|BlueViolet|Brown|BurlyWood|CadetBlue|Chartreuse|Chocolate|Coral|CornflowerBlue|Cornsilk|Crimson|Cyan|DarkBlue|DarkCyan|DarkGoldenRod|DarkGray|DarkGrey|DarkGreen|DarkKhaki|DarkMagenta|DarkOliveGreen|DarkOrange|DarkOrchid|DarkRed|DarkSalmon|DarkSeaGreen|DarkSlateBlue|DarkSlateGray|DarkSlateGrey|DarkTurquoise|DarkViolet|DeepPink|DeepSkyBlue|DimGray|DimGrey|DodgerBlue|FireBrick|FloralWhite|ForestGreen|Fuchsia|Gainsboro|GhostWhite|Gold|GoldenRod|Gray|Grey|Green|GreenYellow|HoneyDew|HotPink|IndianRed|Indigo|Ivory|Khaki|Lavender|LavenderBlush|LawnGreen|LemonChiffon|LightBlue|LightCoral|LightCyan|LightGoldenRodYellow|LightGray|LightGrey|LightGreen|LightPink|LightSalmon|LightSeaGreen|LightSkyBlue|LightSlateGray|LightSlateGrey|LightSteelBlue|LightYellow|Lime|LimeGreen|Linen|Magenta|Maroon|MediumAquaMarine|MediumBlue|MediumOrchid|MediumPurple|MediumSeaGreen|MediumSlateBlue|MediumSpringGreen|MediumTurquoise|MediumVioletRed|MidnightBlue|MintCream|MistyRose|Moccasin|NavajoWhite|Navy|OldLace|Olive|OliveDrab|Orange|OrangeRed|Orchid|PaleGoldenRod|PaleGreen|PaleTurquoise|PaleVioletRed|PapayaWhip|PeachPuff|Peru|Pink|Plum|PowderBlue|Purple|RebeccaPurple|Red|RosyBrown|RoyalBlue|SaddleBrown|Salmon|SandyBrown|SeaGreen|SeaShell|Sienna|Silver|SkyBlue|SlateBlue|SlateGray|SlateGrey|Snow|SpringGreen|SteelBlue|Tan|Teal|Thistle|Tomato|Turquoise|Violet|Wheat|White|WhiteSmoke|Yellow|YellowGreen)\b 0:value
 
