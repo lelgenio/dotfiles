@@ -46,10 +46,10 @@ function fish_git_prompt
     set git_branches (git branch --all 2> /dev/null)
         or return
 
-    set git_branch          (string replace -fr '\* (.*?)$'             '$1' $git_branches)
-    set git_detach_branch   (string replace -fr '.*detached at (.*?)\)' '$1' $git_branch )
-    set git_remote_branches (string replace -fr '  remotes/(.*?)$'      '$1' $git_branches)
-    set git_remotes         (string replace -fr '(.*?)/.*$'             '$1' $git_remote_branches | sort -u)
+    string match -qr '\* (?<git_branch>.*)' $git_branches
+    string match -qr 'detached at (?<git_detach_branch>.*)\)' $git_branch
+    string match -qr 'remotes/(?<git_remote_branches>.*)' $git_branches
+    string match -qr '(?<git_remotes>.*)/' $git_remote_branches
 
     set git_status_s (git status -s | string collect)
 
@@ -75,7 +75,7 @@ function fish_git_prompt
     end
 
     # print a "↑" if ahead of origin
-    for git_remote in $git_remotes
+    for git_remote in (echo $git_remotes | sort -u)
         # Remote has the current branch
         string match -qr "$git_remote"/"$git_branch" $git_remote_branches
         # Check if remote is different
