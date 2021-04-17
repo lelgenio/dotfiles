@@ -90,6 +90,8 @@ command -qs khard &&
 abbr -g g  'git'
 abbr -g ga 'git add'
 abbr -g gs 'git status'
+abbr -g gl 'git log'
+abbr -g gg 'git graph'
 abbr -g gd 'git diff'
 abbr -g gc 'git commit'
 abbr -g gr 'cd (git root)'

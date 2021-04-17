@@ -17,5 +17,5 @@ then
         set global scrolloff 10,0;
     '
 else
-    printf "%s\n" $input
+    cat "$f"
 fi
