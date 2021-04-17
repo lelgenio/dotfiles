@@ -74,7 +74,7 @@ face global Prompt yellow,default
 face global MatchingChar default,default+b
 
 # Goodies
-try %{add-highlighter global/ number-lines -relative -hlcursor}
+try %{add-highlighter global/number-lines number-lines -relative -hlcursor}
 face global LineNumbers         {{@@ bg_light @@}},default
 face global LineNumberCursor    default,{{@@ bg_dark @@}}
 face global LineNumbersWrapped  red,default

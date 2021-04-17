@@ -109,7 +109,11 @@ end
 ################################################################
 
 function man -w man
-    env COLUMNS=(math $COLUMNS - 2) man $argv
+    test "$COLUMNS" -lt 80
+    and set -x MANWIDTH "$COLUMNS"
+    or  set -x MANWIDTH 80
+
+    command man $argv
 end
 
 ################################################################

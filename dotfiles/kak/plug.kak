@@ -18,6 +18,8 @@ plug "robertmeta/plug.kak" noload config %{
     set-option global plug_install_dir %sh{ echo "${HOME}/.cache/kakoune_plugins" }
 }
 
+plug 'eraserhd/kak-ansi'
+
 plug 'alexherbo2/prelude.kak'
 plug 'alexherbo2/auto-pairs.kak' commit "fd735ec149ef0d9ca5f628a95b1e52858b5afbdc" config %{
     require-module 'prelude'

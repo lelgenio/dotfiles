@@ -26,7 +26,7 @@ set -x PAGER less
 set -x MANPAGER less
 
 if test "$EDITOR" = "kak"
-    # set -x PAGER kak-pager
+    set -x PAGER kak
     set -x MANPAGER kak-man-pager
 end
 

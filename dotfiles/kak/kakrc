@@ -6,7 +6,7 @@
 # |_|\_\__,_|_|\_\___/ \__,_|_| |_|\___|
 
 
-set global scrolloff 8,8
+set global scrolloff 10,20
 
 source "%val{config}/plug.kak"
 source "%val{config}/keys.kak"
