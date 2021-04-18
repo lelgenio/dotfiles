@@ -56,3 +56,12 @@ map global insert <c-w> "<a-;>b<a-;>d"
 ######################################################
 
 map global insert <a-k> "<esc>"
+
+
+######################################################
+# Objects
+######################################################
+
+map global object m %{c^[<lt>=|]{4\,}[^\n]*\n,^[<gt>=|]{4\,}[^\n]*\n<ret>} -docstring 'git conflict markers'
+map global object M %{c^<lt>{4\,}[^\n]*\n,^<gt>{4\,}[^\n]*\n<ret>} -docstring 'git conflict'
+
