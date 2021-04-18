@@ -11,6 +11,9 @@
 [pull]
     rebase = false
 
+[merge]
+    conflictStyle = diff3
+
 [pager]
     # differ is a program that shows word-by-word diff
     log  = diffr | less
