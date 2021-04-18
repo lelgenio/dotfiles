@@ -39,6 +39,7 @@ end
 
 
 function fish_git_prompt
+    pushd (string replace -r '/\.git/.*' '' "$PWD")
 
     ############################################################
     # Check if in a git repo and save branch and status
@@ -95,6 +96,8 @@ function fish_git_prompt
     _fish_prompt_git_status "$git_status_s" 'R.' '→' 'yellow'
     # Deletion staged
     _fish_prompt_git_status "$git_status_s" 'D.' '-' 'red'
+
+    popd
 end
 
 
