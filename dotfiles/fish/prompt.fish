@@ -65,6 +65,8 @@ function fish_git_prompt
     _fish_prompt_git_status "$git_status_s" '.D' '-' 'red'
     # Untraked files exist
     _fish_prompt_git_status "$git_status_s" '\?\?' '?' 'normal'
+    # Unmerged files exist
+    _fish_prompt_git_status "$git_status_s" 'UU' '!' 'yellow'
 
     # Print name of branch or checkedout commit
     if test -n "$git_detach_branch"
