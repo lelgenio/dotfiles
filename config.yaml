@@ -9,448 +9,448 @@
 variables:
 ###############################################################
 
-  username: lelgenio
-  cursor_size: 24
-  editor: kak
-  tabs: false
-  indent_width: 4
-  key_layout: colemak
-  launcher: bmenu
-  terminal: alacritty
-  file_manager: thunar
-  bar: waybar
-  bar_pos: top
-  tmux: false
+    username: lelgenio
+    cursor_size: 24
+    editor: kak
+    tabs: false
+    indent_width: 4
+    key_layout: colemak
+    launcher: bmenu
+    terminal: alacritty
+    file_manager: thunar
+    bar: waybar
+    bar_pos: top
+    tmux: false
 
-  accent_fg: '#ffffff'
+    accent_fg: '#ffffff'
 
-  font:
-    mono: Hack
-    interface: Inter
-    size:
-      small: 12
-      medium: 14
-      big: 16
+    font:
+        mono: Hack
+        interface: Inter
+        size:
+            small: 12
+            medium: 14
+            big: 16
 
-  mail:
-    personal:
-      user: lelgenio
-      mail: disroot.org
-    work:
-      user: leonardo
-      mail: wopus.com.br
+    mail:
+        personal:
+            user: lelgenio
+            mail: disroot.org
+        work:
+            user: leonardo
+            mail: wopus.com.br
 
 ###############################################################
 profiles:
 ###############################################################
 
-  dark:
-    variables:
-      background: ~/.local/share/backgrounds/assembly_dark.png
+    dark:
+        variables:
+            background: ~/.local/share/backgrounds/assembly_dark.png
 
-      opacity: 0.98
+            opacity: 0.98
 
-      color:
-        type: dark
-        bg: '#202020'
-        bg_light: '#404040'
-        bg_dark: '#191919'
-        txt: '#FFFFFF'
-        nontxt: '#252525'
+            color:
+                type: dark
+                bg: '#202020'
+                bg_light: '#404040'
+                bg_dark: '#191919'
+                txt: '#FFFFFF'
+                nontxt: '#252525'
 
-        normal:
-          black: '#404040'
-          red: '#AB4642'
-          green: '#A1B56C'
-          yellow: '#E6C547'
-          blue: '#6C99DA'
-          magenta: '#C397D8'
-          cyan: '#70C0BA'
-          white: '#EAEAEA'
+                normal:
+                    black: '#404040'
+                    red: '#AB4642'
+                    green: '#A1B56C'
+                    yellow: '#E6C547'
+                    blue: '#6C99DA'
+                    magenta: '#C397D8'
+                    cyan: '#70C0BA'
+                    white: '#EAEAEA'
 
-          #non standard
-          orange: '#FF7500'
-          brown: '#A07040'
+                    #non standard
+                    orange: '#FF7500'
+                    brown: '#A07040'
 
-  light:
-    variables:
-      background: ~/.local/share/backgrounds/assembly_light.png
+    light:
+        variables:
+            background: ~/.local/share/backgrounds/assembly_light.png
 
-      opacity: 0.95
+            opacity: 0.95
 
-      color:
-        type: light
-        bg: '#EEEEEE'
-        bg_light: '#B0B0B0'
-        bg_dark: '#E0E0E0'
-        txt: '#303030'
-        nontxt: '#CCCCCC'
+            color:
+                type: light
+                bg: '#EEEEEE'
+                bg_light: '#B0B0B0'
+                bg_dark: '#E0E0E0'
+                txt: '#303030'
+                nontxt: '#CCCCCC'
 
-        normal:
-          black: '#555555'
-          red: '#D54E53'
-          green: '#008800'
-          yellow: '#B3A400'
-          blue: '#0D68A8'
-          magenta: '#C397D8'
-          cyan: '#00A0A5'
-          white: '#999999'
+                normal:
+                    black: '#555555'
+                    red: '#D54E53'
+                    green: '#008800'
+                    yellow: '#B3A400'
+                    blue: '#0D68A8'
+                    magenta: '#C397D8'
+                    cyan: '#00A0A5'
+                    white: '#999999'
 
-          #non standard
-          orange: '#FF7500'
-          brown: '#A07040'
+                    #non standard
+                    orange: '#FF7500'
+                    brown: '#A07040'
 
 
 ###############################################################
 # Accents {{{
 ###############################################################
 
-  accent_red:     {variables: {accent_color: "#D9534F"}}
-  accent_green:   {variables: {accent_color: "#159828"}}
-  accent_blue:    {variables: {accent_color: "#3465A3"}}
-  accent_pink:    {variables: {accent_color: "#E91E63"}}
-  accent_teal:    {variables: {accent_color: "#16A085"}}
-  accent_magenta: {variables: {accent_color: "#9C27B0"}}
-  accent_orange:  {variables: {accent_color: "#D93200"}}
+    accent_red:     {variables: {accent_color: "#D9534F"}}
+    accent_green:   {variables: {accent_color: "#159828"}}
+    accent_blue:    {variables: {accent_color: "#3465A3"}}
+    accent_pink:    {variables: {accent_color: "#E91E63"}}
+    accent_teal:    {variables: {accent_color: "#16A085"}}
+    accent_magenta: {variables: {accent_color: "#9C27B0"}}
+    accent_orange:  {variables: {accent_color: "#D93200"}}
 
 ###############################################################
 # Keyboard Layouts
 ###############################################################
 
-  colemak:
-    variables:
-      key:
-        layout: colemak
-        left: n
-        down: e
-        up: i
-        right: o
-        next: l
-        tabL: U
-        tabR: Y
-        insertMode: s
-        insertQuit: kk
+    colemak:
+        variables:
+            key:
+                layout: colemak
+                left: n
+                down: e
+                up: i
+                right: o
+                next: l
+                tabL: U
+                tabR: Y
+                insertMode: s
+                insertQuit: kk
 
-  qwerty:
-    variables:
-      key:
-        layout: qwerty
-        left: h
-        down: j
-        up: k
-        right: l
-        next: l
-        tabL: I
-        tabR: O
-        insertMode: i
-        insertQuit: jj
+    qwerty:
+        variables:
+            key:
+                layout: qwerty
+                left: h
+                down: j
+                up: k
+                right: l
+                next: l
+                tabL: I
+                tabR: O
+                insertMode: i
+                insertQuit: jj
 
 
 ###############################################################
 # Main profile
 ###############################################################
 
-  main:
-    variables:
-      gtk_theme:      "materia-{{@@ env['USER'] @@}}-{{@@ accent_color_name @@}}-{{@@ color.type @@}}"
-      kvantum_theme:  "Materia{{@@ color.type.capitalize() @@}}"
-      icon_theme:     "Papirus-{{@@ color.type.capitalize() @@}}"
-      cursor_theme:   "capitaine-cursors{{@@ '-light' if color.type == 'light' @@}}"
-    dotfiles:
-    - ALL
-    include:
-    - "{{@@ key_layout @@}}"
-    - "{{@@ color_type @@}}"
-    - "accent_{{@@ accent_color_name @@}}"
+    main:
+        variables:
+            gtk_theme:      "materia-{{@@ env['USER'] @@}}-{{@@ accent_color_name @@}}-{{@@ color.type @@}}"
+            kvantum_theme:  "Materia{{@@ color.type.capitalize() @@}}"
+            icon_theme:     "Papirus-{{@@ color.type.capitalize() @@}}"
+            cursor_theme:   "capitaine-cursors{{@@ '-light' if color.type == 'light' @@}}"
+        dotfiles:
+        - ALL
+        include:
+        - "{{@@ key_layout @@}}"
+        - "{{@@ color_type @@}}"
+        - "accent_{{@@ accent_color_name @@}}"
 
 
 ###############################################################
 config:
 ###############################################################
 
-  backup: false
-  banner: false
-  keepdot: false
-  link_dotfile_default: nolink
-  link_on_import: nolink
-  longkey: false
-  default_actions:
-  - notify
-  func_file:
-  - funcs.py
-  filter_file:
-  - funcs.py
+    backup: false
+    banner: false
+    keepdot: false
+    link_dotfile_default: nolink
+    link_on_import: nolink
+    longkey: false
+    default_actions:
+    - notify
+    func_file:
+    - funcs.py
+    filter_file:
+    - funcs.py
 
 ###############################################################
 dynvariables:
 ###############################################################
 
-  color_type: test -n "$_COLOR_TYPE" && echo "$_COLOR_TYPE" || echo dark
-  accent_color_name: test -n "$_ACCENT_COLOR" && echo "$_ACCENT_COLOR" || echo red
-  firefox_profile: cat ~/.mozilla/firefox/profiles.ini | grep '^Default' | head -n1 | cut -d= -f2
-  blender_version: |
-    pacman -Qi blender | grep "^Version" | cut -d: -f3 | cut -d. -f1-2 ||
-    blender --version | head -n1 | sed -E 's|^Blender (.*)\..*|\1|g'
+    color_type: test -n "$_COLOR_TYPE" && echo "$_COLOR_TYPE" || echo dark
+    accent_color_name: test -n "$_ACCENT_COLOR" && echo "$_ACCENT_COLOR" || echo red
+    firefox_profile: cat ~/.mozilla/firefox/profiles.ini | grep '^Default' | head -n1 | cut -d= -f2
+    blender_version: |
+        pacman -Qi blender | grep "^Version" | cut -d: -f3 | cut -d. -f1-2 ||
+        blender --version | head -n1 | sed -E 's|^Blender (.*)\..*|\1|g'
 
 
 ###############################################################
 actions:
 ###############################################################
 
-  notify: >
-      test -n "$DISPLAY" &&
-      notify-send --app-name=dotdrop
-      "Updating dotfiles"
-      "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}" ||
-      true
+    notify: >
+        test -n "$DISPLAY" &&
+        notify-send --app-name=dotdrop
+        "Updating dotfiles"
+        "{{@@ _dotfile_abs_dst.lstrip(env['HOME']) @@}}" ||
+        true
 
-  reload_sway: swaymsg reload & disown
-  reload_mako: pkill -SIGHUP mako
-  lesskey: lesskey
-  reload_fish: pkill -SIGHUP fish
+    reload_sway: swaymsg reload & disown
+    reload_mako: pkill -SIGHUP mako
+    lesskey: lesskey
+    reload_fish: pkill -SIGHUP fish
 
-  reload_qutebrowser: qutemsg config-source & disown
+    reload_qutebrowser: qutemsg config-source & disown
 
-  vimplug: >
-    nvim +PlugUpgrade +PlugInstall +PlugUpdate +qall
-    &> /dev/null &
+    vimplug: >
+        nvim +PlugUpgrade +PlugInstall +PlugUpdate +qall
+        &> /dev/null &
 
-  reload_kakoune: >
-    kak -l | xargs -r -n1
-    kak -e "config-source;quit" -ui dummy -c &
+    reload_kakoune: >
+        kak -l | xargs -r -n1
+        kak -e "config-source;quit" -ui dummy -c &
 
-  crontab_install: |
-    crontab -r
-    crontab ~/.local/share/crontab
+    crontab_install: |
+        crontab -r
+        crontab ~/.local/share/crontab
 
-  vdirsyncer: |
-    yes | vdirsyncer discover & disown
+    vdirsyncer: |
+        yes | vdirsyncer discover & disown
 
-  lnMail: |
-    ln -fs ~/.config/neomutt/mbsyncrc ~/.mbsyncrc
-    ln -fs ~/.config/neomutt/urlview ~/.urlview
+    lnMail: |
+        ln -fs ~/.config/neomutt/mbsyncrc ~/.mbsyncrc
+        ln -fs ~/.config/neomutt/urlview ~/.urlview
 
-  sponsorblock: >
-    test -d ~/.config/mpv/scripts/sponsorblock_shared ||
-    git clone
-    https://github.com/po5/mpv_sponsorblock
-    ~/.config/mpv/scripts;
+    sponsorblock: >
+        test -d ~/.config/mpv/scripts/sponsorblock_shared ||
+        git clone
+        https://github.com/po5/mpv_sponsorblock
+        ~/.config/mpv/scripts;
 
-    rm -f
-    ~/.config/mpv/scripts/LICENSE
-    ~/.config/mpv/scripts/README.md
+        rm -f
+        ~/.config/mpv/scripts/LICENSE
+        ~/.config/mpv/scripts/README.md
 
-  ranger_icons:
-    git clone
-    https://github.com/alexanderjeurissen/ranger_devicons
-    ~/.config/ranger/plugins/ranger_devicons
+    ranger_icons:
+        git clone
+        https://github.com/alexanderjeurissen/ranger_devicons
+        ~/.config/ranger/plugins/ranger_devicons
 
-  greetd_install: |
-    sudo mkdir -p /etc/greetd/
-    sudo cp -r "{{@@ _dotfile_abs_dst @@}}"/* /etc/greetd/
-    sudo chown -R greeter:greeter /etc/greetd/
+    greetd_install: |
+        sudo mkdir -p /etc/greetd/
+        sudo cp -r "{{@@ _dotfile_abs_dst @@}}"/* /etc/greetd/
+        sudo chown -R greeter:greeter /etc/greetd/
 
 
-  # bootstrap scripts
-  pam_gpg: _pam-gpg-strap
-  make_theme: _make_theme
-  install_meta: install_meta
-  filter_backgrounds: _filter_backgrounds
+    # bootstrap scripts
+    pam_gpg: _pam-gpg-strap
+    make_theme: _make_theme
+    install_meta: install_meta
+    filter_backgrounds: _filter_backgrounds
 
 ###############################################################
 dotfiles: # Just a bunch of paths and action mappings
 ###############################################################
 
-  ###############################################################
-  # Regular programs
-  ###############################################################
+    ###############################################################
+    # Regular programs
+    ###############################################################
 
-  sway:
-    src: sway
-    dst: ~/.config/sway
-    actions:
-    - reload_sway
+    sway:
+        src: sway
+        dst: ~/.config/sway
+        actions:
+        - reload_sway
 
-  i3:
-    src: i3
-    dst: ~/.config/i3
+    i3:
+        src: i3
+        dst: ~/.config/i3
 
-  fish:
-    src: fish
-    dst: ~/.config/fish
-    actions:
-    - reload_fish
+    fish:
+        src: fish
+        dst: ~/.config/fish
+        actions:
+        - reload_fish
 
-  mako:
-    src: mako.conf
-    dst: ~/.config/mako/config
-    actions:
-    - reload_mako
+    mako:
+        src: mako.conf
+        dst: ~/.config/mako/config
+        actions:
+        - reload_mako
 
-  waybar:
-    src: waybar
-    dst: ~/.config/waybar
+    waybar:
+        src: waybar
+        dst: ~/.config/waybar
 
-  kitty:
-    src: kitty.conf
-    dst: ~/.config/kitty/kitty.conf
-    actions:
-    - reload_fish
+    kitty:
+        src: kitty.conf
+        dst: ~/.config/kitty/kitty.conf
+        actions:
+        - reload_fish
 
-  nvim:
-    src: nvim.vim
-    dst: ~/.config/nvim/init.vim
-    actions:
-    - vimplug
+    nvim:
+        src: nvim.vim
+        dst: ~/.config/nvim/init.vim
+        actions:
+        - vimplug
 
-  kakoune:
-    src: kak
-    dst: ~/.config/kak
-    actions:
-    - reload_kakoune
+    kakoune:
+        src: kak
+        dst: ~/.config/kak
+        actions:
+        - reload_kakoune
 
-  mutt:
-    src: neomutt/
-    dst: ~/.config/neomutt/
-    actions:
-    - lnMail
+    mutt:
+        src: neomutt/
+        dst: ~/.config/neomutt/
+        actions:
+        - lnMail
 
-  qutebrowser:
-    src: qutebrowser
-    dst: ~/.config/qutebrowser
-    actions:
-    - reload_qutebrowser
+    qutebrowser:
+        src: qutebrowser
+        dst: ~/.config/qutebrowser
+        actions:
+        - reload_qutebrowser
 
-  lesskey:
-    src: lesskey
-    dst: ~/.lesskey
-    actions:
-    - lesskey
+    lesskey:
+        src: lesskey
+        dst: ~/.lesskey
+        actions:
+        - lesskey
 
-  ranger:
-    src: ranger
-    dst: ~/.config/ranger
-    actions:
-    - ranger_icons
+    ranger:
+        src: ranger
+        dst: ~/.config/ranger
+        actions:
+        - ranger_icons
 
-  mpv:
-    src: mpv.conf
-    dst: ~/.config/mpv/mpv.conf
-    actions:
-    - sponsorblock
+    mpv:
+        src: mpv.conf
+        dst: ~/.config/mpv/mpv.conf
+        actions:
+        - sponsorblock
 
-  dav:
-    src: dav/
-    dst: ~/.config
-    actions:
-    - vdirsyncer
+    dav:
+        src: dav/
+        dst: ~/.config
+        actions:
+        - vdirsyncer
 
-  tmux:
-    src: tmux.conf
-    dst: ~/.tmux.conf
+    tmux:
+        src: tmux.conf
+        dst: ~/.tmux.conf
 
-  ###############################################################
-  # Other
-  ###############################################################
+    ###############################################################
+    # Other
+    ###############################################################
 
-  scripts:
-    src: scripts
-    dst: ~/.local/bin
-    actions:
-    - make_theme
+    scripts:
+        src: scripts
+        dst: ~/.local/bin
+        actions:
+        - make_theme
 
-  backgrounds:
-    src: backgrounds
-    dst: ~/.local/share/backgrounds/
-    actions:
-    - filter_backgrounds
+    backgrounds:
+        src: backgrounds
+        dst: ~/.local/share/backgrounds/
+        actions:
+        - filter_backgrounds
 
-  fonts:
-    src: fonts
-    dst: ~/.local/share/fonts/
+    fonts:
+        src: fonts
+        dst: ~/.local/share/fonts/
 
-  mime:
-    src: mime/
-    dst: ~/
+    mime:
+        src: mime/
+        dst: ~/
 
-  crontab:
-    src: crontab
-    dst: ~/.local/share/crontab
-    actions:
-    - crontab_install
+    crontab:
+        src: crontab
+        dst: ~/.local/share/crontab
+        actions:
+        - crontab_install
 
-  theme:
-    src: theme
-    dst: ~/
+    theme:
+        src: theme
+        dst: ~/
 
-  prettierrc:
-    src: prettierrc.toml
-    dst: ~/.prettierrc.toml
+    prettierrc:
+        src: prettierrc.toml
+        dst: ~/.prettierrc.toml
 
-  clang-format:
-    src: clang-format
-    dst: ~/.clang-format
+    clang-format:
+        src: clang-format
+        dst: ~/.clang-format
 
-  gpg-agent:
-    src: gpg-agent.conf
-    dst: ~/.gnupg/gpg-agent.conf
-    actions:
-    - pam_gpg
+    gpg-agent:
+        src: gpg-agent.conf
+        dst: ~/.gnupg/gpg-agent.conf
+        actions:
+        - pam_gpg
 
-  packages:
-    src: meta.PKGBUILD
-    dst: ~/.local/share/metapkg/PKGBUILD
-    actions:
-    - install_meta
+    packages:
+        src: meta.PKGBUILD
+        dst: ~/.local/share/metapkg/PKGBUILD
+        actions:
+        - install_meta
 
-  kak-lsp:
-    src: kak-lsp.toml
-    dst: ~/.config/kak-lsp/kak-lsp.toml
+    kak-lsp:
+        src: kak-lsp.toml
+        dst: ~/.config/kak-lsp/kak-lsp.toml
 
-  rustfmt:
-    src: rustfmt.toml
-    dst: ~/.rustfmt.toml
+    rustfmt:
+        src: rustfmt.toml
+        dst: ~/.rustfmt.toml
 
-  greetd:
-    src: greetd
-    dst: ~/.config/greetd
-    actions:
-    - greetd_install
+    greetd:
+        src: greetd
+        dst: ~/.config/greetd
+        actions:
+        - greetd_install
 
-  ###############################################################
-  # Big pahts
-  ###############################################################
+    ###############################################################
+    # Big pahts
+    ###############################################################
 
-  code-oss:
-    src: vscode.jsonc
-    dst: "~/.config/Code - OSS/User/settings.json"
+    code-oss:
+        src: vscode.jsonc
+        dst: "~/.config/Code - OSS/User/settings.json"
 
-  telegram-theme:
-    src: ./telegram.palette
-    dst: ~/.local/share/TelegramDesktop/theme.tdesktop-palette
+    telegram-theme:
+        src: ./telegram.palette
+        dst: ~/.local/share/TelegramDesktop/theme.tdesktop-palette
 
-  blender:
-    "src": blenderTheme.xml
-    "dst": "~/.config/blender/{{@@ blender_version @@}}/scripts/presets/interface_theme/blenderTheme.xml"
+    blender:
+        "src": blenderTheme.xml
+        "dst": "~/.config/blender/{{@@ blender_version @@}}/scripts/presets/interface_theme/blenderTheme.xml"
 
-  firefox:
-    src: firefox
-    dst: "~/.mozilla/firefox/{{@@ firefox_profile @@}}/"
+    firefox:
+        src: firefox
+        dst: "~/.mozilla/firefox/{{@@ firefox_profile @@}}/"
 
-  ###############################################################
-  # .config/, no actions
-  ###############################################################
+    ###############################################################
+    # .config/, no actions
+    ###############################################################
 
-  alacritty:   { "src":"alacritty.yml", "dst":"~/.config/alacritty.yml"      }
-  bat:         { "src":"bat",           "dst":"~/.config/bat/config"         }
-  fusuma:      { "src":"fusuma.yml",    "dst":"~/.config/fusuma/config.yml"  }
-  git:         { "src":"git",           "dst":"~/.config/git"                }
-  imv:         { "src":"imv.conf",      "dst":"~/.config/imv/config"         }
-  kanshi:      { "src":"kanshi",        "dst":"~/.config/kanshi/config"      }
-  mpd:         { "src":"mpd.conf",      "dst":"~/.config/mpd/mpd.conf"       }
-  pqivrc:      { "src":"pqiv.ini",      "dst":"~/.config/pqivrc"             }
-  rclone:      { "src":"rclone.conf",   "dst":"~/.config/rclone/rclone.conf" }
-  swaylock:    { "src":"sway/swaylock", "dst":"~/.config/swaylock/config"    }
-  wofi:        { "src":"wofi",          "dst":"~/.config/wofi"               }
-  zathura:     { "src":"zathura.conf",  "dst":"~/.config/zathura/zathurarc"  }
+    alacritty:   { "src":"alacritty.yml", "dst":"~/.config/alacritty.yml"      }
+    bat:         { "src":"bat",           "dst":"~/.config/bat/config"         }
+    fusuma:      { "src":"fusuma.yml",    "dst":"~/.config/fusuma/config.yml"  }
+    git:         { "src":"git",           "dst":"~/.config/git"                }
+    imv:         { "src":"imv.conf",      "dst":"~/.config/imv/config"         }
+    kanshi:      { "src":"kanshi",        "dst":"~/.config/kanshi/config"      }
+    mpd:         { "src":"mpd.conf",      "dst":"~/.config/mpd/mpd.conf"       }
+    pqivrc:      { "src":"pqiv.ini",      "dst":"~/.config/pqivrc"             }
+    rclone:      { "src":"rclone.conf",   "dst":"~/.config/rclone/rclone.conf" }
+    swaylock:    { "src":"sway/swaylock", "dst":"~/.config/swaylock/config"    }
+    wofi:        { "src":"wofi",          "dst":"~/.config/wofi"               }
+    zathura:     { "src":"zathura.conf",  "dst":"~/.config/zathura/zathurarc"  }
 
