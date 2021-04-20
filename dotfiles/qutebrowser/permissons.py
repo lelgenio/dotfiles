@@ -40,10 +40,15 @@ config.set('content.register_protocol_handler', False, '*')
 config.set("content.geolocation", True, "https://openweathermap.org")
 
 # Allow websites to record audio/video.
-bb_url = "https://*.bbcollab.com"
-config.set("content.media.audio_video_capture", True, bb_url)
-config.set("content.autoplay", True, bb_url)
-config.set("content.mute", False, bb_url)
+
+for url in [
+    "https://*.bbcollab.com",
+    "https://calls.disroot.org",
+    "https://meet.jit.si",
+]:
+    config.set("content.media.audio_video_capture", True, url)
+    config.set("content.autoplay", True, url)
+    config.set("content.mute", False, url)
 
 
 # Youtube
