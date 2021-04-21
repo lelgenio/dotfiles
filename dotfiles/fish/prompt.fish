@@ -37,21 +37,27 @@ function _fish_prompt_git_status -a git_status_s code symbol color
     and _fish_prompt_color "$color" "$symbol"
 end
 
+function _fish_prompt_git_detached
+    git symbolic-ref -q HEAD &> /dev/null
+        or git show --oneline -s |
+        string match -r '^\w+'
+end
+
+function _fish_prompt_git_remote_branches
+    git for-each-ref --format='%(refname:short)' refs/remotes
+end
 
 function fish_git_prompt
-    pushd (string replace -r '/\.git/.*' '' "$PWD")
+    pushd (string replace -r '/\.git(/.*)?$' '' "$PWD")
 
     ############################################################
     # Check if in a git repo and save branch and status
     ############################################################
-    set git_branches (git branch --all 2> /dev/null)
-        or return
 
-    string match -qr '\* (?<git_branch>.*)' $git_branches
-    string match -qr 'detached at (?<git_detach_branch>.*)\)' $git_branch
-    string match -qr 'remotes/(?<git_remote_branches>.*)' $git_branches
-    string match -qr '(?<git_remotes>.*)/' $git_remote_branches
-
+    set git_branch   (git branch --show-current 2> /dev/null);or return
+    set git_detach   (_fish_prompt_git_detached)
+    set git_remote   (_fish_prompt_git_remote_branches)
+    set git_remotes  (git remote)
     set git_status_s (git status -s | string collect)
 
     _fish_prompt_normal " on "
@@ -59,18 +65,15 @@ function fish_git_prompt
     ############################################################
     # Left side represents Index/Filesystem
     ############################################################
-    # Modified
-    _fish_prompt_git_status "$git_status_s" '.M' '~' 'yellow'
-    # Deleted
-    _fish_prompt_git_status "$git_status_s" '.D' '-' 'red'
-    # Untraked files exist
-    _fish_prompt_git_status "$git_status_s" '\?\?' '?' 'normal'
-    # Unmerged files exist
-    _fish_prompt_git_status "$git_status_s" 'UU' '!' 'yellow'
+
+    _fish_prompt_git_status "$git_status_s" '.M' '~' 'yellow'   # Modified
+    _fish_prompt_git_status "$git_status_s" '.D' '-' 'red'      # Deleted
+    _fish_prompt_git_status "$git_status_s" '\?\?' '?' 'normal' # Untraked files exist
+    _fish_prompt_git_status "$git_status_s" 'UU' '!' 'yellow'   # Unmerged files exist
 
     # Print name of branch or checkedout commit
-    if test -n "$git_detach_branch"
-       _fish_prompt_warn   "$git_detach_branch"
+    if test -n "$git_detach"
+       _fish_prompt_warn   "$git_detach"
     else if  test -n "$git_branch"
        _fish_prompt_accent "$git_branch"
     else
@@ -80,9 +83,9 @@ function fish_git_prompt
     # print a "↑" if ahead of origin
     for git_remote in (echo $git_remotes | sort -u)
         # Remote has the current branch
-        string match -qr "$git_remote"/"$git_branch" $git_remote_branches
+        string match -qr "$git_remote"/"$git_branch" $git_remote
         # Check if remote is different
-        and not git diff --quiet HEAD "$git_remote"/"$git_branch"
+        and not git diff --quiet "$git_branch" "$git_remote"/"$git_branch" --
         and _fish_prompt_normal '↑'
         and break
     end
@@ -90,14 +93,11 @@ function fish_git_prompt
     ############################################################
     # Right side represents WorkTree/Staged
     ############################################################
-    # New file
-    _fish_prompt_git_status "$git_status_s" 'A.' '+' 'green'
-    # Modified
-    _fish_prompt_git_status "$git_status_s" 'M.' '~' 'green'
-    # Moved
-    _fish_prompt_git_status "$git_status_s" 'R.' '→' 'yellow'
-    # Deletion staged
-    _fish_prompt_git_status "$git_status_s" 'D.' '-' 'red'
+
+    _fish_prompt_git_status "$git_status_s" 'A.' '+' 'green'  # New file
+    _fish_prompt_git_status "$git_status_s" 'M.' '~' 'green'  # Modified
+    _fish_prompt_git_status "$git_status_s" 'R.' '→' 'yellow' # Moved
+    _fish_prompt_git_status "$git_status_s" 'D.' '-' 'red'    # Deletion staged
 
     popd
 end
