@@ -126,6 +126,10 @@ depends=(
     # Gaming
     steam lutris lutris-wine-meta wine wine-mono winetricks
 
+    # File thumbnails
+    tumbler  ffmpegthumbnailer poppler-glib
+    libgsf libgepub libopenraw freetype2
+
 )
 
 # vim: ft=sh
