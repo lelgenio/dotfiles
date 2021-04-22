@@ -26,10 +26,10 @@ getnew() {
 
 OLD=$(getnew)
 
-if test "$1" = "update"; then
+if test "$1" = "update" && ! pidof mbsync; then
     mbsync -a ||
-        mbsync -a ||
-        mbsync -a
+    mbsync -a ||
+    mbsync -a
 fi
 
 NEW=$(getnew)

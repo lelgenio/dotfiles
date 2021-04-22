@@ -3,7 +3,7 @@ PATH={{@@ env['PATH'] @@}}
 
 # {%@@ if env['USER'] != 'root' @@%} #
 #minute hour day month day_week cmd
-*/5     *    *   *     *        forecast   json
+*/30    *    *   *     *        forecast   json
 */5     *    *   *     *        checkmail  update
 */5     *    *   *     *        vdirsyncer sync
 */30    *    *   *     *        savegame_backup
