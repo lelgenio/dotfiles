@@ -9,10 +9,14 @@
     verbose = true
 
 [pull]
-    rebase = false
+    rebase = true
 
 [merge]
     conflictStyle = diff3
+
+[rebase]
+    autoSquash = true
+    autoStash = true
 
 [pager]
     # differ is a program that shows word-by-word diff
