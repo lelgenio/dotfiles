@@ -62,7 +62,7 @@ face global MenuBackground default,{{@@ bg_dark @@}}
 face global MenuInfo cyan
 
 face global Information default,{{@@ bg_dark @@}}
-face global Error default
+face global Error default,red+g
 
 face global StatusLine      default,{{@@ bg_dark @@}}
 face global StatusLineMode  green,{{@@ bg_dark @@}}
@@ -71,7 +71,8 @@ face global StatusLineValue default,{{@@ bg_dark @@}}
 face global StatusCursor    {{@@ accent_fg @@}},{{@@ accent_color @@}}
 
 face global Prompt yellow,default
-face global MatchingChar default,default+b
+try %{add-highlighter global/ show-matching}
+face global MatchingChar {{@@ accent_color @@}},default+b
 
 # Goodies
 try %{add-highlighter global/number-lines number-lines -relative -hlcursor}
