@@ -9,7 +9,7 @@
 
 # {%@@ set image_viewer = 'pqiv.desktop' @@%}
 # {%@@ set video_player = 'mpv.desktop' @@%}
-# {%@@ set web_browser = 'org.qutebrowser.qutebrowser.desktop' @@%}
+# {%@@ set web_browser = 'any-browser.desktop' @@%}
 # {%@@ set email_client = 'neomutt.desktop' @@%}
 
 [Default Applications]
@@ -253,4 +253,4 @@ video/x-theora={{@@ video_player @@}}
 video/x-theora+ogg={{@@ video_player @@}}
 # }}}
 
-# vim: ft=dosini:fdm=marker:cms=#\ %s:
+# vim: ft=ini:fdm=marker:cms=#\ %s:
