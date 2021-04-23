@@ -68,8 +68,10 @@ window#waybar.solo {
 #custom-spigot,
 #custom-updates,
 #custom-weather,
-#custom-torrentD,
-#custom-torrentS,
+#custom-transmissionD,
+#custom-transmissionS,
+#custom-delugeD,
+#custom-delugeS,
 #custom-caffeine
 {
     margin: 0 7px;

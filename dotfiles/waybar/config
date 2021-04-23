@@ -17,8 +17,10 @@
         "custom/recording",
         "tray",
         "custom/mail",
-        "custom/torrentD",
-        "custom/torrentS",
+        "custom/transmissionD",
+        "custom/transmissionS",
+        "custom/delugeD",
+        "custom/delugeS",
         "custom/updates",
         "custom/caffeine",
         "pulseaudio",
@@ -141,16 +143,28 @@
         "interval":30,
         "on-click":"terminal spigot console"
     },
-    "custom/torrentD":{
+    "custom/transmissionD":{
         "format":" {} ",
         "exec":"transmission-remote -l | tail -n+2 | grep Down | wc -l | sed 's/^0$//'",
         "exec-if":"pidof transmission-daemon",
         "interval":180
     },
-    "custom/torrentS":{
+    "custom/transmissionS":{
         "format":" {} ",
         "exec":"transmission-remote -l | grep Seeding| wc -l | sed 's/^0$//'",
         "exec-if":"pidof transmission-daemon",
+        "interval":180
+    },
+    "custom/delugeD":{
+        "format":" {} ",
+        "exec":"deluge-console status | perl -ne 'print $1 if /Downloading: (\\d+)/'| sed 's/^0$//'",
+        "exec-if":"pidof -x deluged",
+        "interval":180
+    },
+    "custom/delugeS":{
+        "format":" {} ",
+        "exec":"deluge-console status | perl -ne 'print $1 if /Seeding: (\\d+)/'| sed 's/^0$//'",
+        "exec-if":"pidof -x deluged",
         "interval":180
     },
     "custom/caffeine":{
