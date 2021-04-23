@@ -20,9 +20,15 @@
 
 [pager]
     # differ is a program that shows word-by-word diff
+    #{%@@ if editor == "kak" @@%}#
+    log  = diffr | kak-pager
+    show = diffr | kak-pager
+    diff = diffr | kak-pager
+    #{%@@ else @@%}#
     log  = diffr | less
     show = diffr | less
     diff = diffr | less
+    #{%@@ endif @@%}#
 
 [alias]
     graph = log --graph --oneline --all
