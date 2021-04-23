@@ -6,17 +6,19 @@ hook global NormalIdle .* %{ try %{
     palette-status
 } }
 
-# enable flag-lines hl for git diff
-hook global WinCreate .* %{
-    add-highlighter window/git-diff flag-lines Default git_diff_flags
-}
-# trigger update diff if inside git dir
-hook global BufOpenFile .* %{
+define-command -hidden git-try-show-diff %{
     evaluate-commands -draft %sh{
+        test -f "$kak_buffile" || exit 0
         cd $(dirname "$kak_buffile")
-        git rev-parse --git-dir 2>/dev/null &&
-        printf "hook buffer -group git-update-diff NormalIdle .* 'git update-diff'\n"
+        git rev-parse --git-dir &> /dev/null &&
+        echo "git show-diff"
     }
+}
+
+evaluate-commands %sh{
+    for hook in NormalIdle FocusIn FocusOut BufWritePost BufOpenFile; do
+        printf "hook global %s .* 'git-try-show-diff'\n" "$hook"
+    done
 }
 
 hook global BufOpenFile .* %{
