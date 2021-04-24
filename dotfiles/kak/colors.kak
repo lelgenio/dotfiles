@@ -25,7 +25,7 @@ face global operator yellow
 face global attribute cyan
 face global comment {{@@ bg_light @@}}
 face global documentation comment
-face global meta function
+face global meta +i@function
 face global builtin blue
 
 # For markup
