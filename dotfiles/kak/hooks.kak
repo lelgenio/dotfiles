@@ -6,7 +6,7 @@ hook global NormalIdle .* %{ try %{
     palette-status
 } }
 
-define-command -hidden git-try-show-diff %{
+define-command -hidden -override git-try-show-diff %{
     evaluate-commands -draft %sh{
         test -f "$kak_buffile" || exit 0
         cd $(dirname "$kak_buffile")
