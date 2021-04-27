@@ -1,21 +1,14 @@
 #!/bin/sh
 
-f=$(mktemp)
-clean(){
-    rm "$f"
-}
-trap clean EXIT
+f=$(cat)
 
-cat > "$f"
-
-if test $(tput lines) -lt $(wc -l < "$f")
+if test $(tput lines) -lt $(printf "%s\n" "$f" | wc -l)
 then
-    cat "$f" |
-    kak -e '
+    printf "%s\n" "$f" | kak -e '
         map global normal q :q<ret>;
         rmhl global/number-lines;
         set global scrolloff 10,0;
     '
 else
-    cat "$f"
+    printf "%s\n" "$f"
 fi
