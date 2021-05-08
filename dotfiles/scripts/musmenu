@@ -16,16 +16,10 @@ search() {
 }
 
 get_current() {
-    test -n "$XDG_CONFIG_HOME" &&
-        config_root="$XDG_CONFIG_HOME" ||
-        config_root="${HOME}/.config"
-    music_root=$(awk '/^music_directory/ {
-                      gsub(/"/,"");
-                      gsub(/~/,"'$HOME'");
-                      print $2
-                    }' "${config_root}/mpd/mpd.conf")
+    music_root=$(xdg-user-dir MUSIC || echo "$HOME/Music")
+    current_file=$(mpc current -f %file%)
 
-    echo "${music_root}/$(mpc current -f %file%)"
+    echo "${music_root}/${current_file}"
 }
 
 delete() {
