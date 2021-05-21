@@ -1,0 +1,24 @@
+#!/bin/sh
+
+get_displays(){
+    swaymsg -t get_outputs |
+    jq -r 'map(.name)|join("\n")'
+}
+
+actions=(
+    enable
+    disable
+    brightness
+)
+
+action=$(printf "%s\n" "${actions[@]}" | wdmenu)
+case "$action" in
+    enable|disable)
+        output=$(get_displays | wdmenu -p "output")
+        swaymsg output "$output" "$action"
+        ;;
+    brightness)
+        brightness=$(seq 0 5 100 | wdmenu -p "Brightness")
+        light -S "$brightness"
+        ;;
+esac

@@ -19,6 +19,9 @@ $mod+Control+Return exec {{@@ file_manager @@}}
 # Insert special characters
 $mod+g exec emoji
 
+# Insert special characters
+$mod+d exec sway-displays
+
 # Kill focused window
 $mod+x kill
 
@@ -36,6 +39,9 @@ $mod+Shift+c reload
 
 # Exit sway
 Control+Alt+delete exit
+
+# Shutdown
+$mod+Alt+delete exec loginctl poweroff || systemctl poweroff
 
 }
 
