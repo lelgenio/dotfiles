@@ -115,18 +115,16 @@
     "custom/mail": {
         "tooltip":false,
         "format":"{} <b></b>",
-        "exec-if":"sleep 30s",
         "exec": "checkmail",
         "on-click": "terminal neomutt; pkill -SIGRTMIN+4 waybar",
         "signal": 4,
-        "interval": 10
+        "interval": 60
     },
     "custom/updates": {
         "tooltip":false,
         "format": "{} ",
-        "interval": 60,
-        "exec-if":"sleep 60s",
-        "exec": "pacman -Qqu | wc -l | sed 's/^0$//'",
+        "interval": 3600,
+        "exec": "checkupdates | wc -l | sed 's/^0$//'",
         "on-click": "terminal sh -c 'ping -qc1 archlinux.org >/dev/null && pacman -Syu || pacman -Su; pkill -SIGRTMIN+8 waybar; read'",
         "signal": 8
     },

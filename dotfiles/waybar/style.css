@@ -7,10 +7,6 @@
     transition-duration:0;
 }
 
-window#waybar.empty * {
-    color: {{@@ color.txt @@}};
-}
-
 window#waybar {
     /* background-color: rgba(30,30,30,.9); */
     transition-duration: .5s;
