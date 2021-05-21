@@ -21,6 +21,15 @@ evaluate-commands %sh{
     done
 }
 
+define-command diffr %{ try %{
+    execute-keys -draft 'ggxsdiff<ret>'
+    execute-keys -draft '%<a-;>J| diffr<ret>'
+    ansi-render
+} }
+
+hook global BufReadFifo .* diffr
+hook global BufOpenFile .* diffr
+
 hook global BufOpenFile .* %{
     modeline-parse
 }
