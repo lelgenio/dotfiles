@@ -80,6 +80,7 @@ trap clean_exit EXIT
 
 bemenu \
     $focused_output\
+    --grab\
     --ignorecase\
     --bottom\
     --no-overlap\
