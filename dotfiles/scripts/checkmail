@@ -1,7 +1,8 @@
 #!/bin/sh
 set -e
 
-if test -z "$SWAYSOCK" && pidof gnome-shell; then
+if test -z "$SWAYSOCK" && pidof gnome-shell &> /dev/null
+then
     exit 0
 fi
 
@@ -27,6 +28,10 @@ getnew() {
 OLD=$(getnew)
 
 if test "$1" = "update" && ! pidof mbsync; then
+    if ! ping -c3 {{@@ mail.personal.mail @@}} &> /dev/null
+    then
+        exit 0
+    fi
     mbsync -a ||
     mbsync -a ||
     mbsync -a
