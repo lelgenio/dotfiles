@@ -5,6 +5,7 @@ f=$(cat)
 if test $(tput lines) -lt $(printf "%s\n" "$f" | wc -l)
 then
     printf "%s\n" "$f" | kak -e '
+        exec <a-o>
         map global normal q :q<ret>;
         rmhl global/number-lines;
         set global scrolloff 10,0;
