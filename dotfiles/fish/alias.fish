@@ -47,6 +47,7 @@ abbr -g  crm command rm -i
 ################################################################
 
 calias ls 'exa --git'
+calias tree 'exa --git --tree --icons'
 calias cat 'bat -p'
 calias cp 'cp --reflink=auto'
 calias ip 'ip --color=auto'
