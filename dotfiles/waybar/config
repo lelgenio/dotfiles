@@ -9,6 +9,7 @@
     ],
     "modules-center": [
         "clock",
+        "custom/sleep",
         "custom/weather",
     ],
     "modules-right": [
@@ -175,6 +176,11 @@
     "custom/layout":{
         "exec":"_get-sway-layout",
         "interval": 1,
+        "tooltip":false
+    },
+    "custom/sleep":{
+        "exec":"test $(date +%H) -lt 5 && echo 'GO TO SLEEP' | trans -b",
+        "interval": 60,
         "tooltip":false
     }
 

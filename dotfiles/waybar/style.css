@@ -44,12 +44,12 @@ window#waybar.solo {
 }
 
 /*Window Title*/
-#window{
+#window {
     color: {{@@ color.txt @@}};
     margin:0 4px;
 }
 
-#mode{
+#mode {
     color: {{@@ accent_color @@}};
 }
 
@@ -118,4 +118,10 @@ window#waybar.solo {
 #custom-layout {
     font-size: {{@@ font.size.medium @@}}px;
     color: {{@@ color.bg_light @@}};
+}
+
+#custom-sleep {
+    color: {{@@ accent_color @@}};
+    font-size: {{@@ font.size.big @@}}px;
+    font-weight: bold;
 }
