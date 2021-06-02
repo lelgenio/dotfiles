@@ -108,6 +108,28 @@ end
 
 
 ################################################################
+# Copy files like graphical programs
+################################################################
+
+function wl-copy-f -w wl-copy
+    set -a file
+    for arg in (seq 1 (count $argv))
+        if test -f "$argv[$arg]"
+            set -a file (realpath $argv[$arg])
+            set -e argv[$arg]
+        end
+    end
+    if test -n "$file"
+        wl-copy $argv -t text/uri-list "file:///$file"
+    else
+        wl-copy $argv
+    end
+end
+
+abbr -g wcf 'wl-copy-f'
+
+
+################################################################
 # man
 ################################################################
 
