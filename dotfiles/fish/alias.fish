@@ -88,14 +88,40 @@ command -qs khard &&
 # Git
 ################################################################
 
-abbr -g g  'git'
-abbr -g ga 'git add'
-abbr -g gs 'git status'
-abbr -g gl 'git log'
-abbr -g gg 'git graph'
-abbr -g gd 'git diff'
-abbr -g gc 'git commit'
-abbr -g gr 'cd (git root)'
+abbr -g g   'git'
+abbr -g ga  'git add'
+abbr -g gs  'git status'
+abbr -g gsh 'git show'
+abbr -g gl  'git log'
+abbr -g gg  'git graph'
+abbr -g gd  'git diff'
+abbr -g gds 'git diff --staged'
+abbr -g gc  'git commit'
+abbr -g gca 'git commit --all'
+abbr -g gcf 'git commit --fixup'
+abbr -g gr  'cd (git root)'
+abbr -g gri 'git rebase --interactive FETCH_HEAD'
+
+
+################################################################
+# work stuff
+################################################################
+
+abbr svu sudo sv up apache mariadb
+abbr svd sudo sv down apache mariadb
+abbr svs sudo sv status apache mariadb
+abbr msv "\
+set db (basename (pwd | sd -- - _))
+set margs -v -u root --password=(_pass_get work_db)"
+abbr msc 'echo "CREATE DATABASE $db" | mysql $margs'
+abbr msl 'mysql $margs $db < dump/$db.sql'
+abbr msd 'mariadb-dump $margs $db | mysql_format > dump/$db.sql'
+abbr vw 'kak public/**.less resources/**.blade.php (fd -E \'*.min.js\' \'.js$\' public/)'
+abbr pl 'php7 artisan serve --host 0.0.0.0 & make watch'
+
+function mysql_format
+    sd "\),\(" "),\n\t(" | sd "VALUES \(" "VALUES\n\t("
+end
 
 
 ################################################################
