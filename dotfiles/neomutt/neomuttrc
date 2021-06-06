@@ -19,7 +19,7 @@ set ssl_force_tls = yes
 
 {%@@ for name, info in mail.items() | reverse @@%}
 set my_source_command = \
-  "_get-mutt-mail '{{@@ name @@}}' '{{@@ info.user @@}}' '{{@@ info.mail @@}}' |"
+  "_mutt_get-mail '{{@@ name @@}}' '{{@@ info.user @@}}' '{{@@ info.mail @@}}' |"
 
   folder-hook "$my_mailroot/{{@@ name @@}}/" \
     source "\"$my_source_command\""
@@ -28,7 +28,7 @@ set my_source_command = \
 
 {%@@ for name, info in mail.items() @@%}
   set my_source_command = \
-    "_get-mutt-mail '{{@@ name @@}}' '{{@@ info.user @@}}' '{{@@ info.mail @@}}' |"
+    "_mutt_get-mail '{{@@ name @@}}' '{{@@ info.user @@}}' '{{@@ info.mail @@}}' |"
   macro index,pager <f{{@@ loop.index @@}}> "<sync-mailbox><enter-command>source \"$my_source_command\"<enter><change-folder>!<enter>"
 {%@@ endfor @@%}
 

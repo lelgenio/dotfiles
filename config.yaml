@@ -255,7 +255,7 @@ actions:
     pam_gpg: _pam-gpg-strap
     make_theme: _make_theme
     install_meta: install_meta
-    filter_backgrounds: _filter_backgrounds
+    filter_backgrounds: _backgrouds_filter
 
 ###############################################################
 dotfiles: # Just a bunch of paths and action mappings

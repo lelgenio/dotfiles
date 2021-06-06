@@ -10,7 +10,7 @@ owm(){
     REGI=$(echo $INFO | jq -r '.region')
     COUN=$(echo $INFO | jq -r '.country')
     QUERY="$CITY, $REGI, $COUN"
-    APPID=`_get-pass OpenWeatherMapAPPID`
+    APPID=`_pass_get OpenWeatherMapAPPID`
     #{%@@ if False @@%}#
     notify-send "Get a free appid"
     xdg-open openweathermap.org &

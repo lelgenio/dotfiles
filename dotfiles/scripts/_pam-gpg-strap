@@ -2,7 +2,7 @@
 
 
 gpg --list-secret-keys --with-keygrip  \
-    "{{@@ username @@}}@{{@@ mail @@}}" |
+    "{{@@ username @@}}@{{@@ mail.personal.mail @@}}" |
 awk '
 /^ssb/ {
     ssb=1

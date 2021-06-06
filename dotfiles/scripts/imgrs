@@ -1,0 +1,16 @@
+#!/bin/sh
+
+
+set -x
+
+FILE="$1"
+
+SCALE="$2"
+test -z "$SCALE" &&
+    SCALE=`echo | wdmenu -p 'Scale'`
+
+OUTPUT="$3"
+test -z "$OUTPUT" &&
+    OUTPUT="${FILE}.resized.png"
+
+magick convert "$FILE" -scale "${SCALE}%" "$OUTPUT"

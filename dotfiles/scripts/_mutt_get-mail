@@ -3,7 +3,7 @@
 my_path="$1"
 my_user="$2"
 my_host="$3"
-my_pass=`_get-pass "$my_host"`
+my_pass=`_pass_get "$my_host"`
 
 cat <<EOF
 set realname = "$my_user"

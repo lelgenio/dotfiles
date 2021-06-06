@@ -4,7 +4,7 @@ IMAPStore {{@@ name @@}}-remote
 Host {{@@ info.mail @@}}
 Port  993
 User {{@@ info.user @@}}@{{@@ info.mail @@}}
-PassCmd "_get-pass {{@@ info.mail @@}}"
+PassCmd "_pass_get {{@@ info.mail @@}}"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 

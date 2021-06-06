@@ -80,14 +80,16 @@ gaps inner 5px
 # Themes
 ###############################################################
 
-set $gnome-schema org.gnome.desktop.interface
+set $gnome_schema org.gnome.desktop.interface
+set $no_desplay env DISPLAY="" WAYLAND_DISPLAY=""
+
 exec_always {
     # In case of errors, kvantummanager opens a window
     # this is retarded
-    kvantummanager --set                     '{{@@ kvantum_theme @@}}'
-    gsettings set $gnome-schema gtk-theme    '{{@@ gtk_theme     @@}}'
-    gsettings set $gnome-schema icon-theme   '{{@@ icon_theme    @@}}'
-    gsettings set $gnome-schema cursor-theme '{{@@ cursor_theme  @@}}'
+    $no_desplay kvantummanager --set         '{{@@ kvantum_theme @@}}'
+    gsettings set $gnome_schema gtk-theme    '{{@@ gtk_theme     @@}}'
+    gsettings set $gnome_schema icon-theme   '{{@@ icon_theme    @@}}'
+    gsettings set $gnome_schema cursor-theme '{{@@ cursor_theme  @@}}'
 }
 
 seat * xcursor_theme "{{@@ cursor_theme @@}}" "{{@@ cursor_size @@}}"

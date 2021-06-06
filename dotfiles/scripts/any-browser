@@ -1,0 +1,10 @@
+#!/bin/sh
+
+{
+    if pidof firefox
+    then
+        firefox $@
+    else
+        qutebrowser $@
+    fi
+} &> /dev/null < /dev/null & disown

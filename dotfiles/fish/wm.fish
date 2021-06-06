@@ -35,12 +35,12 @@ function esway
     set -x XDG_CURRENT_DESKTOP  sway
 
     # this should not be necessary, but whatever
-    pidof sway || exec sway
+    pidof sway &> /dev/null || exec sway
 
 end
 
 if test "$XDG_VTNR" = 1
-    and test -z "$DISPLAY"
+    and test -z "$DISPLAY$WAYLAND_DISPLAY"
 
     esway &| tee .swaylog
     # ei3 &> .i3log
