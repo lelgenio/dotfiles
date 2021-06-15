@@ -121,6 +121,7 @@ profiles:
         variables:
             key:
                 layout: colemak
+                hints: arstwfuyneio
                 left: n
                 down: e
                 up: i
@@ -135,6 +136,7 @@ profiles:
         variables:
             key:
                 layout: qwerty
+                hints: asdfwejklçio
                 left: h
                 down: j
                 up: k

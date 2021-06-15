@@ -47,6 +47,8 @@ config.bind(",M", mpvusc + mpvslowcom)
 # Layout specific
 ##########################################################
 
+c.hints.chars = "{{@@ key.hints @@}}"
+
 key_layout = "{{@@ key_layout @@}}"
 if key_layout == "colemak":
     config.bind("t", "hint all")
@@ -54,11 +56,6 @@ if key_layout == "colemak":
 
     config.bind("T".upper(), "hint all tab")
     config.bind("H".upper(), "set-cmd-text -s :open -t")
-
-    c.hints.chars = "arstwfuyneio"
-
-elif key_layout == "dvorak":
-    c.hints.chars = "aoeuidnths"
 
 
 ##########################################################
