@@ -1,5 +1,6 @@
 #!/bin/sh
 
+{%@@ if 'papirus' in "{{@@ icon_theme @@}}".lower() @@%}
 # Papirus Icon Theme
 {
     papirus-folders -l | grep "[^>] {{@@ accent_color_name @@}}"&&
@@ -9,6 +10,9 @@
         papirus-folders -uD
 
 } &
+{%@@ endif @@%}
+
+{%@@ if 'materia' in "{{@@ gtk_theme @@}}".lower() @@%}
 
 # Materia GTK Theme
 src_path="$HOME/.cache/materia-theme"
@@ -60,3 +64,5 @@ mkdir -p "${dst_path}/${theme_name}"
 
     notify-send "Finished generating theme"
 } &> /dev/null &
+
+{%@@ endif @@%}

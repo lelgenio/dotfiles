@@ -44,8 +44,9 @@ depends=(
     grim slurp swappy wl-clipboard imagemagick wf-recorder wshowkeys
 
     # Theme
-    materia-custom-accent papirus-icon-theme
-    papirus-folders capitaine-cursors
+    mint-themes mint-y-icons
+    papirus-icon-theme papirus-folders
+    capitaine-cursors
     # Make dependencies
     bc sassc inkscape
 

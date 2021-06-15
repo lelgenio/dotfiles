@@ -102,7 +102,7 @@ profiles:
 
 
 ###############################################################
-# Accents {{{
+# Accents
 ###############################################################
 
     accent_red:     {variables: {accent_color: "#D9534F"}}
@@ -154,8 +154,9 @@ profiles:
 
     main:
         variables:
-            gtk_theme:      "materia-{{@@ env['USER'] @@}}-{{@@ accent_color_name @@}}-{{@@ color.type @@}}"
+            gtk_theme:      "Mint-Y-{{@@ 'Dark' if color.type == 'dark' else 'Darker' @@}}-{{@@ accent_color_name.capitalize() @@}}"
             kvantum_theme:  "Materia{{@@ color.type.capitalize() @@}}"
+            # icon_theme:     "Mint-Y-{{@@ 'Dark' if color.type == 'dark' else 'Darker' @@}}-{{@@ accent_color_name.capitalize() @@}}"
             icon_theme:     "Papirus-{{@@ color.type.capitalize() @@}}"
             cursor_theme:   "capitaine-cursors{{@@ '-light' if color.type == 'light' @@}}"
         dotfiles:
