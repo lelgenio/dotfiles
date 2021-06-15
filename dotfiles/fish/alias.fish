@@ -116,7 +116,8 @@ set margs -v -u root --password=(_pass_get work_db)"
 abbr msc 'echo "CREATE DATABASE $db" | mysql $margs'
 abbr msl 'mysql $margs $db < dump/$db.sql'
 abbr msd 'mariadb-dump $margs $db | mysql_format > dump/$db.sql'
-abbr vw 'kak public/**.less resources/**.blade.php (fd -E \'*.min.js\' \'.js$\' public/)'
+abbr vw  'kak public/**.less resources/**.blade.php (fd -E \'*.min.js\' \'.js$\' public/)'
+abbr gdw 'git diff -- "*.less" "*.js" "*.blade.php"'
 abbr pl 'php7 artisan serve --host 0.0.0.0 & make watch'
 
 function mysql_format

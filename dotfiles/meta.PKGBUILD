@@ -124,6 +124,9 @@ depends=(
         python-mccabe python-rope python-pyflakes
         python-pycodestyle python-pydocstyle
 
+        # rust lsp
+        rust-analyzer
+
         # Compiled
         rust gcc gdb
 

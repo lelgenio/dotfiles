@@ -285,6 +285,12 @@ dotfiles: # Just a bunch of paths and action mappings
         actions:
         - reload_fish
 
+    git:
+        src: git
+        dst: ~/.config/git
+        actions:
+        - git_projects
+
     mako:
         src: mako.conf
         dst: ~/.config/mako/config
@@ -382,7 +388,6 @@ dotfiles: # Just a bunch of paths and action mappings
         dst: ~/.local/share/crontab
         actions:
         - crontab_install
-        - git_projects
 
     theme:
         src: theme
@@ -449,7 +454,6 @@ dotfiles: # Just a bunch of paths and action mappings
     alacritty:   { "src":"alacritty.yml", "dst":"~/.config/alacritty.yml"      }
     bat:         { "src":"bat",           "dst":"~/.config/bat/config"         }
     fusuma:      { "src":"fusuma.yml",    "dst":"~/.config/fusuma/config.yml"  }
-    git:         { "src":"git",           "dst":"~/.config/git"                }
     imv:         { "src":"imv.conf",      "dst":"~/.config/imv/config"         }
     kanshi:      { "src":"kanshi",        "dst":"~/.config/kanshi/config"      }
     mpd:         { "src":"mpd.conf",      "dst":"~/.config/mpd/mpd.conf"       }
