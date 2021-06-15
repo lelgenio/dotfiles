@@ -41,22 +41,25 @@ $mod+Shift+s exec grim - | swappy -f -
 ###############################################################
 # Audio
 ###############################################################
+--locked {
 
-# Volume controll, script in dotfiles
---locked    XF86AudioRaiseVolume exec  volumesh -i 10
---locked    XF86AudioLowerVolume exec  volumesh -d 10
---locked    XF86AudioMute        exec  volumesh -t
+    # Volume controll, script in dotfiles
+    XF86AudioRaiseVolume exec  volumesh -i 10
+    XF86AudioLowerVolume exec  volumesh -d 10
+    XF86AudioMute        exec  volumesh -t
 
-# Media player controls
-{%@@ if exists_in_path ( 'playerctl' ) @@%}
-    --locked XF86AudioPlay  exec playerctl play-pause
-    --locked XF86AudioNext  exec playerctl next
-    --locked XF86AudioPrev  exec playerctl previous
-{%@@ else @@%}
-    --locked XF86AudioPlay  exec mpc toggle
-    --locked XF86AudioNext  exec mpc next
-    --locked XF86AudioPrev  exec mpc prev
-{%@@ endif @@%}
+    # Media player controls
+    {%@@ if exists_in_path ( 'playerctl' ) @@%}
+        XF86AudioPlay  exec playerctl play-pause
+        XF86AudioNext  exec playerctl next
+        XF86AudioPrev  exec playerctl previous
+    {%@@ else @@%}
+        XF86AudioPlay  exec mpc toggle
+        XF86AudioNext  exec mpc next
+        XF86AudioPrev  exec mpc prev
+    {%@@ endif @@%}
+
+}
 
 ###############################################################
 # Backlight settings for laptops
