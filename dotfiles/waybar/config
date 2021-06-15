@@ -146,25 +146,25 @@
         "format":" {} ",
         "exec":"transmission-remote -l | tail -n+2 | grep Down | wc -l | sed 's/^0$//'",
         "exec-if":"pidof transmission-daemon",
-        "interval":180
+        "interval":30
     },
     "custom/transmissionS":{
         "format":" {} ",
         "exec":"transmission-remote -l | grep Seeding| wc -l | sed 's/^0$//'",
         "exec-if":"pidof transmission-daemon",
-        "interval":180
+        "interval":30
     },
     "custom/delugeD":{
         "format":" {} ",
         "exec":"deluge-console status | perl -ne 'print $1 if /Downloading: (\\d+)/'| sed 's/^0$//'",
         "exec-if":"pidof -x deluged",
-        "interval":180
+        "interval":30
     },
     "custom/delugeS":{
         "format":" {} ",
         "exec":"deluge-console status | perl -ne 'print $1 if /Seeding: (\\d+)/'| sed 's/^0$//'",
         "exec-if":"pidof -x deluged",
-        "interval":180
+        "interval":30
     },
     "custom/caffeine":{
         "format":"{} ",
