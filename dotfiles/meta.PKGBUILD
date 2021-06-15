@@ -34,28 +34,45 @@ depends=(
     vdirsyncer khal khard
 
     # Audio
-    pulseaudio pamixer pulsemixer
+    pulseaudio  pulseaudio-alsa pulseaudio-bluetooth
+    pamixer pulsemixer pavucontrol
 
     # Fonts
-    inter-font
-    otf-nerd-fonts-fira-code
+        inter-font ttf-ms-fonts
+        otf-nerd-fonts-fira-code
+
+        # Icons
+        otf-font-awesome ttf-font-awesome
+
+        # Emoji and stuff
+        noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
 
     # Screenshot
-    grim slurp swappy wl-clipboard imagemagick wf-recorder wshowkeys
+    grim slurp swappy wl-clipboard imagemagick wf-recorder
 
     # Theme
-    mint-themes mint-y-icons
-    papirus-icon-theme papirus-folders
-    capitaine-cursors
-    # Make dependencies
-    bc sassc inkscape
+    # {%@@ if 'papirus' in "{{@@ icon_theme @@}}".lower() @@%} #
+        papirus-icon-theme papirus-folders papirus-libreoffice-theme
+    # {%@@ elif 'mint' in "{{@@ icon_theme @@}}".lower() @@%} #
+        mint-y-icons mint-x-icons
+    # {%@@ endif @@%} #
+
+    # {%@@ if 'mint' in "{{@@ gtk_theme @@}}".lower() @@%} #
+        mint-themes
+    # {%@@ elif 'materia' in "{{@@ gtk_theme @@}}".lower() @@%} #
+        materia-custom-accent
+        bc sassc inkscape  # Make dependencies
+    # {%@@ endif @@%} #
+
+        capitaine-cursors
 
     # Terminal
         # Emulators
         kitty alacritty
         #Tools
-        ranger atool p7zip tree jq fzf
-        neofetch htop
+        tuxi  translate-shell
+        ranger atool p7zip jq fzf
+        neofetch htop bpytop
         # Replacements
         #ls cat rm -rf    grep    find sed diff  cd
         exa bat trash-cli ripgrep fd   sd  diffr zoxide
@@ -84,12 +101,13 @@ depends=(
 
     # Media
     pqiv mpv
-    mpd mpc ncmpcpp
+    mpd mpc ncmpcpp mpdris2
+    playerctl clyrics
     blender gimp kdenlive
     zathura zathura-pdf-mupdf
 
     # Office
-    libreoffice-fresh libreoffice-fresh-pt-br hunspell-pt-br papirus-libreoffice-theme
+    libreoffice-fresh libreoffice-fresh-pt-br hunspell-pt-br
 
     # Programing
         kakoune kak-lsp
@@ -110,13 +128,18 @@ depends=(
         rust gcc gdb
 
         # work
-        blade-formatter nodejs-less nodejs-less-plugin-clean-css
+        mariadb
+        php7 php7-apache
+        phpmyadmin
+        lipsum emmet-cli
+        blade-formatter prettier
+        nodejs-less nodejs-less-plugin-clean-css
 
     # Virt
     qemu
 
     # Gtk
-    gtk3-nocsd-git
+    gtk3-nocsd-legacy-git
 
     # Qt
     qt5-base qt5-wayland qt5ct kvantum-qt5
