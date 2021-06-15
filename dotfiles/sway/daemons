@@ -15,8 +15,8 @@ exec kdeconnect-indicator
 # Telegram
 exec telegram-desktop-bin || telegram-desktop
 # Music Player Daemon
-exec pidof mpd || mpd
-exec pidof -x mpDris2 || sleep 5s &&  mpDris2
+exec_always pidof mpd || mpd --no-daemon
+exec_always pidof -x mpDris2 || sleep 5s &&  mpDris2
 # Syncthing, sync folders between stuff
 exec pidof syncthing || syncthing -no-browser
 
