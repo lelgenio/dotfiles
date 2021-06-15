@@ -1,48 +1,74 @@
 #!/bin/sh
-# Simple two way game-save sync
-# NOTE: This will ALLWAYS replace the backups with local folders,
-# even if they are empty folders
+# Create symbolic links from game save folders to documents folder
+# Useful if you sync it with syncthing or something similar
 
-command -v xdg-user-dir &> /dev/null &&
+set -e
+
+function clean() {
+    if test $? -ne 0; then
+        notify-send "Could not sync ${GAME_NAME}"
+    fi
+}
+
+trap clean EXIT
+
+command -v xdg-user-dir &>/dev/null &&
     DOCUMETS="$(xdg-user-dir DOCUMENTS)" ||
-    DOCUMETS=~/Documents
+    DOCUMETS=$HOME/Documents
 
-SAVES_DIR="$DOCUMETS/GameSaves/"
+SAVES_DIR="$DOCUMETS/GameSaves"
 test -d "$SAVES_DIR" || exit 1
 
-test_rsync(){
-    test -d "$1" && {
-        mkdir -p $(dirname "$2")
-        cp --recursive --no-target-directory --reflink=always "$1" "$2"
-    }
+grep "^#include \.saves-ignore" "$DOCUMETS/.stignore" ||
+    echo "#include .saves-ignore" >"$DOCUMETS/.stignore"
+rm "$DOCUMETS/.saves-ignore"
+
+game_save() {
+    GAME_NAME="$1"
+    shift
+    INSTALL_DIR="$HOME/$1"
+    shift
+
+    BACKUP_DIR="$SAVES_DIR/$GAME_NAME"
+
+    mkdir -p "$BACKUP_DIR" "$(dirname '$INSTALL_DIR')"
+
+    if test -d "$INSTALL_DIR" -a ! -L "$INSTALL_DIR"; then
+        fd -H -d 1 . "$INSTALL_DIR" |
+            xargs -I{} mv "{}" "$BACKUP_DIR"
+        sync
+        rmdir "$INSTALL_DIR"
+    fi
+
+    if test ! -L "$INSTALL_DIR" -o ! -d "$INSTALL_DIR"; then
+        ln -sT "$BACKUP_DIR" "$INSTALL_DIR"
+    fi
+
+    if test -n "$1"; then
+        printf "GameSaves/${GAME_NAME}/%s\n" $@ >>"$DOCUMETS/.saves-ignore"
+    fi
 }
 
-game_save(){
-    GAME_NAME="$1"; shift
-    INSTALL_DIR="${1/"~"/$HOME}/"; shift
+game_save mindustry \
+    ".local/share/Mindustry" 'previews'
+game_save minecraft \
+    ".minecraft/saves"
+game_save factorio \
+    ".factorio" '_autosave*.zip' 'doc-html' 'temp' 'data' 'bin'
+game_save cuphead \
+    "Games/cuphead/drive_c/users/$USER/Application Data/Cuphead"
+game_save dusk \
+    "Games/dusk/game/saves"
+game_save ULTRAKILL-wine \
+    "Games/ultrakill/drive_c/Program Files/ULTRAKILL/Saves"
+game_save marioW \
+    "Games/super-mario-world"
 
-    BACKUP_DIR="$SAVES_DIR/$GAME_NAME/"
-
-    test_rsync "$INSTALL_DIR" "$BACKUP_DIR" ||
-    test_rsync "$BACKUP_DIR" "$INSTALL_DIR" ||
-    echo "Nothing to do for $GAME_NAME"
-
-    while test -n "$1"
-    do
-        find "$BACKUP_DIR" -name "$1" -exec rm -rf {} +
-        shift
-    done
-}
-
-game_save mindustry "~/.local/share/Mindustry" 'previews'
-game_save minecraft "~/.minecraft/saves"
-game_save factorio  "~/.factorio" '_autosave*.zip' '*.sync-conflict-*' 'doc-html' 'temp' 'data' 'bin'
-game_save cuphead   "~/Games/cuphead/drive_c/users/$USER/Application Data/Cuphead"
-game_save dusk      "~/Games/dusk/game/saves"
-game_save marioW    "~/Games/super-mario-world/"
-
-game_save hl1       "~/Games/HalfLife2Source/game/hl1/save/"
-game_save hl2       "~/Games/HalfLife2Source/game/hl2/save/"
-game_save hl2ep1    "~/Games/HalfLife2Source/game/episodic/save/"
-game_save hl2ep2    "~/Games/HalfLife2Source/game/ep2/save/"
-
+game_save hl1 \
+    "Games/HalfLife2Source/game/hl1/save"
+game_save hl2 \
+    "Games/HalfLife2Source/game/hl2/save"
+game_save hl2ep1 \
+    "Games/HalfLife2Source/game/episodic/save"
+game_save hl2ep2 \
+    "Games/HalfLife2Source/game/ep2/save"
