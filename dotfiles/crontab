@@ -7,6 +7,7 @@ PATH={{@@ env['PATH'] @@}}
 */5     *    *   *     *        checkmail  update
 */5     *    *   *     *        vdirsyncer sync
 */30    *    *   *     *        savegame_backup
+30      *    *   *     *        _git_projects
 # {%@@ endif @@%} #
 
 # vim: commentstring=#\ %s

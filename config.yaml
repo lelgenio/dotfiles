@@ -259,6 +259,7 @@ actions:
     make_theme: _make_theme
     install_meta: install_meta
     filter_backgrounds: _backgrouds_filter
+    git_projects: _git_projects
 
 ###############################################################
 dotfiles: # Just a bunch of paths and action mappings
@@ -381,6 +382,7 @@ dotfiles: # Just a bunch of paths and action mappings
         dst: ~/.local/share/crontab
         actions:
         - crontab_install
+        - git_projects
 
     theme:
         src: theme

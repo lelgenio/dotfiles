@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -x
+
+projdir="${HOME}/Projects"
+
+user="{{@@ mail.personal.user @@}}"
+host="git.{{@@ mail.personal.mail @@}}"
+
+#{%@@ if False @@%}#
+user="$USER"
+host="github.com"
+#{%@@ endif @@%}#
+
+if ! git -C "$projdir" rev-parse > /dev/null
+then
+    git clone "ssh://git@${host}:${user}/projects" "$projdir"
+
+    cd "$projdir"
+
+    git submodule update --init --recursive
+fi
+
+cd "$projdir"
+
+git submodule foreach --recursive sh -c 'git pull &'
