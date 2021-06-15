@@ -21,7 +21,7 @@ evaluate-commands %sh{
     done
 }
 
-define-command diffr %{ try %{
+define-command -override diffr %{ try %{
     execute-keys -draft 'ggxsdiff<ret>'
     execute-keys -draft '%<a-;>J| diffr<ret>'
     ansi-render
