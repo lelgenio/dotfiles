@@ -1,16 +1,9 @@
-exec "gtkgreet -l --command fish; swaymsg exit"
+exec "env GTK_THEME='{{@@ gtk_theme @@}}' CURSOR_THEME='{{@@ cursor_theme @@}}' gtkgreet -l --command fish; swaymsg exit"
 
 bindsym Mod4+control+z exec systemctl suspend || loginctl suspend
 bindsym Mod4+control+e exec systemctl poweroff || loginctl poweroff
 
-set $gnome-schema org.gnome.desktop.interface
-exec_always {
-    # In case of errors, kvantummanager opens a window
-    # this is retarded
-    gsettings set $gnome-schema gtk-theme    'materia-lelgenio-red-dark'
-    gsettings set $gnome-schema icon-theme   'Papirus-Dark'
-    gsettings set $gnome-schema cursor-theme 'capitaine-cursors'
-}
+{%@@ include _dotdrop_dotpath + '/sway/visual' @@%}
 
 {%@@ include _dotdrop_dotpath + '/sway/input' @@%}
 
