@@ -5,6 +5,7 @@
 # |  _| \__ \ | | |
 # |_| |_|___/_| |_|
 
+set -U fish_features stderr-nocaret qmark-noglob regex-easyesc
 
 source {$__fish_config_dir}/env.fish
 source {$__fish_config_dir}/alias.fish
@@ -17,7 +18,7 @@ source {$__fish_config_dir}/prompt.fish
 
 function _fish_autoreload --on-signal SIGHUP
     source {$__fish_config_dir}/config.fish
-    
+
     if test "$TERM" = "xterm-kitty"
         kitty @ set-colors -a ~/.config/kitty/kitty.conf
         kitty @ set-background-opacity "{{@@ opacity @@}}"
