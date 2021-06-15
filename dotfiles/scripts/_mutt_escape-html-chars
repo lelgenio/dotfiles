@@ -1,0 +1,18 @@
+#!/bin/sh
+
+while read line; do
+    sed_args=""
+    for html_code in $(echo "$line" | grep -E '&[a-zA-Z]*?;' -o); do
+        case "$html_code" in
+            "&nbsp;")
+                character="\n"
+                ;;
+            *)
+                character=$(echo "$html_code" | recode html)
+                ;;
+        esac
+        test -n "$character" &&
+            sed_args="$sed_args""s/$html_code/$character/g;"
+    done
+    echo "$line" | sed "$sed_args"
+done
