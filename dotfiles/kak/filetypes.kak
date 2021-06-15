@@ -58,6 +58,7 @@ hook global WinSetOption filetype=jsonc %[
 
 hook global WinSetOption filetype=blade %[
     set buffer formatcmd 'blade-formatter --stdin'
+    set-option buffer extra_word_chars '_' '-'
 
     hook window ModeChange pop:insert:.* -group blade-trim-indent  blade-trim-indent
     hook window InsertChar .* -group blade-indent blade-indent-on-char
@@ -79,8 +80,7 @@ hook global WinSetOption filetype=blade %[
     set-option buffer comment_block_begin '{{-- '
     set-option buffer comment_block_end   ' --}}'
 
-
-
+    map buffer user 'c' '_: comment-block<ret>' -docstring 'comment block'
 ]
 
 try %§

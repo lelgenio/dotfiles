@@ -18,7 +18,7 @@ map global user 'm' ': try format-buffer catch lsp-formatting<ret>' -docstring '
 map global user 'M' ': try format-selections catch lsp-range-formatting<ret>' -docstring 'format selection'
 
 map global user 'c' ': comment-line<ret>' -docstring 'comment line'
-map global user 'C' ': comment-block<ret>' -docstring 'comment block'
+map global user 'C' '_: comment-block<ret>' -docstring 'comment block'
 
 map global user 'p' '! wl-paste -n<ret>' -docstring 'clipboard paste'
 map global user 'P' '<a-o>j! wl-paste -n<ret>' -docstring 'clipboard paste on next line'
