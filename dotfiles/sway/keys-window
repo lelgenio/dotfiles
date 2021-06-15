@@ -67,7 +67,7 @@ $mod+v splitv
 # No splith since we can just mod+r
 
 # Layout styles
-$mod+t layout tabbed
+$mod+t layout toggle split tabbed stacking
 $mod+r layout toggle split
 
 # Make the current focus fullscreen
