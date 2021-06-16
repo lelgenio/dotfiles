@@ -1,3 +1,11 @@
+# {{@@ header() @@}}
+# __        __     __ _
+# \ \      / /__  / _(_)
+#  \ \ /\ / / _ \| |_| |
+#   \ V  V / (_) |  _| |
+#    \_/\_/ \___/|_| |_|
+
+
 show=drun
 prompt=Iniciar:
 allow_images=true
@@ -7,3 +15,5 @@ term=terminal
 insensitive=true
 width=800
 height=400
+
+# vim: ft=ini

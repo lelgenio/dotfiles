@@ -1,3 +1,5 @@
+# {{@@ header() @@}}
+
 image={{@@ background @@}}
 font={{@@ font.interface @@}}
 font-size={{@@ font.size.medium @@}}
@@ -23,3 +25,5 @@ line-wrong-color=#aabbcc00
 # line-uses-ring
 
 indicator-thickness=20
+
+# vim: ft=ini

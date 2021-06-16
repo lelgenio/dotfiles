@@ -1,4 +1,5 @@
 #!/bin/sh
+# {{@@ header() @@}}
 
 export XKB_DEFAULT_LAYOUT=us
 export XKB_DEFAULT_VARIANT=colemak

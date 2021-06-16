@@ -1,3 +1,5 @@
+# {{@@ header() @@}}
+
 exec "env GTK_THEME='{{@@ gtk_theme @@}}' CURSOR_THEME='{{@@ cursor_theme @@}}' gtkgreet -l --command fish; swaymsg exit"
 
 bindsym Mod4+control+z exec systemctl suspend || loginctl suspend

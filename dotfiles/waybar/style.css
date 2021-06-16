@@ -1,3 +1,4 @@
+/* {{@@ header() @@}} */
 /* {%@@ set bg_rgb = hex2rgb(color.bg) @@%} */
 * {
     font: {{@@ font.size.medium @@}}px {{@@ font.interface @@}}, Font Awesome, Fira Code Nerd Font;

@@ -1,3 +1,11 @@
+# {{@@ header() @@}}
+#   ___        _       _
+#  / _ \ _   _| |_ ___| |__  _ __ _____      _____  ___ _ __
+# | | | | | | | __/ _ \ '_ \| '__/ _ \ \ /\ / / __|/ _ \ '__|
+# | |_| | |_| | ||  __/ |_) | | | (_) \ V  V /\__ \  __/ |
+#  \__\_\\__,_|\__\___|_.__/|_|  \___/ \_/\_/ |___/\___|_|
+
+
 from qutebrowser.config.configfiles import ConfigAPI   # type: ignore
 from qutebrowser.config.config import ConfigContainer  # type: ignore
 
