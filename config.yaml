@@ -195,6 +195,7 @@ dynvariables:
         pacman -Qi blender | grep "^Version" | cut -d: -f3 | cut -d. -f1-2 ||
         blender --version | head -n1 | sed -E 's|^Blender (.*)\..*|\1|g'
     root_uuid: blkid /dev/sda2 -s UUID -o value
+    nproc: nproc
 
 
 ###############################################################

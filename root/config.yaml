@@ -21,9 +21,11 @@ config:
 actions:
 ###############################################################
 
-    greetd_install: |
-        sudo chown -R greeter:greeter /etc/greetd/
+    greetd_install: sudo chown -R greeter:greeter /etc/greetd/
     grub_install: update-grub
+    pacman_install: |
+        pacman-key --init
+        pacman-key --populate
     elogind_install: >
         {
             sv restart elogind ||
@@ -53,6 +55,12 @@ dotfiles:
         dst: /etc/default/grub
         actions:
         - grub_install
+
+    pacman:
+        src: pacman.conf
+        dst: /etc/pacman.conf
+        actions:
+        - pacman_install
 
 
 ###############################################################
