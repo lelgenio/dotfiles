@@ -23,6 +23,7 @@ actions:
 
     greetd_install: |
         sudo chown -R greeter:greeter /etc/greetd/
+    grub_install: update-grub
     elogind_install: >
         {
             sv restart elogind ||
@@ -46,6 +47,12 @@ dotfiles:
         dst: /etc/elogind/logind.conf
         actions:
         - elogind_install
+
+    grub:
+        src: grub
+        dst: /etc/default/grub
+        actions:
+        - grub_install
 
 
 ###############################################################
