@@ -23,10 +23,16 @@ actions:
 
     greetd_install: |
         sudo chown -R greeter:greeter /etc/greetd/
+    elogind_install: >
+        {
+            sv restart elogind ||
+            rc-service elogind restart
+        } < /dev/null & disown
+
 
 
 ###############################################################
-dotfiles: # Just a bunch of paths and action mappings
+dotfiles:
 ###############################################################
 
     greetd:
@@ -34,6 +40,12 @@ dotfiles: # Just a bunch of paths and action mappings
         dst: ~/greetd
         actions:
         - greetd_install
+
+    elogind:
+        src: elogind.conf
+        dst: /etc/elogind/logind.conf
+        actions:
+        - elogind_install
 
 
 ###############################################################
