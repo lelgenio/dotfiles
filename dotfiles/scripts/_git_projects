@@ -11,16 +11,11 @@ host="git.{{@@ mail.personal.mail @@}}"
 user="$USER"
 host="github.com"
 #{%@@ endif @@%}#
+git -C "$projdir" rev-parse >/dev/null &&
+    exit 0
 
-if ! git -C "$projdir" rev-parse > /dev/null
-then
-    git clone "ssh://git@${host}:${user}/projects" "$projdir"
-
-    cd "$projdir"
-
-    git submodule update --init --recursive
-fi
+git clone "ssh://git@${host}:${user}/projects" "$projdir"
 
 cd "$projdir"
 
-git submodule foreach --recursive sh -c 'git pull &'
+git submodule update --init --recursive
