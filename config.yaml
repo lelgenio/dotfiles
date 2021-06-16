@@ -253,6 +253,11 @@ actions:
         sudo cp -r "{{@@ _dotfile_abs_dst @@}}"/* /etc/greetd/
         sudo chown -R greeter:greeter /etc/greetd/
 
+    root_install: >
+        sudo dotdrop -f
+        -c "{{@@ _dotfile_abs_dst @@}}/config.yaml"
+        -p main
+        install
 
     # bootstrap scripts
     pam_gpg: _pam-gpg-strap
@@ -426,6 +431,13 @@ dotfiles: # Just a bunch of paths and action mappings
         dst: ~/.config/greetd
         actions:
         - greetd_install
+
+    root:
+        src: ../root
+        dst: ~/.local/share/root_files
+        actions:
+        - root_install
+
 
     ###############################################################
     # Big pahts
