@@ -23,6 +23,7 @@ actions:
 
     greetd_install: sudo chown -R greeter:greeter /etc/greetd/
     grub_install: update-grub
+    locale_install: locale-gen
     pacman_install: |
         pacman-key --init
         pacman-key --populate
@@ -61,6 +62,12 @@ dotfiles:
         dst: /etc/pacman.conf
         actions:
         - pacman_install
+
+    locale:
+        src: locale.gen
+        dst: /etc/locale.gen
+        actions:
+        - locale_install
 
 
 ###############################################################
