@@ -403,6 +403,10 @@ dotfiles: # Just a bunch of paths and action mappings
         src: clang-format
         dst: ~/.clang-format
 
+    mypy:
+        src: mypy
+        dst: ~/.config/mypy/config
+
     gpg-agent:
         src: gpg-agent.conf
         dst: ~/.gnupg/gpg-agent.conf
