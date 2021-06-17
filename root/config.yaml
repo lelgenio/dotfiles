@@ -27,11 +27,10 @@ actions:
     pacman_install: |
         pacman-key --init
         pacman-key --populate
-    elogind_install: >
-        {
-            sv restart elogind ||
-            rc-service elogind restart
-        } < /dev/null & disown
+    sv_update: |
+        {%@@ set key =  "{} _dotfile_key {}".format('{{@@', '@@}}') @@%}
+        sv restart {{@@ key @@}} ||
+        rc-service {{@@ key @@}} restart
 
 
 
@@ -49,7 +48,7 @@ dotfiles:
         src: elogind.conf
         dst: /etc/elogind/logind.conf
         actions:
-        - elogind_install
+        - sv_update
 
     grub:
         src: grub
