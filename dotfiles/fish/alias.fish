@@ -160,12 +160,14 @@ abbr -g wcf 'wl-copy-f'
 # man
 ################################################################
 
+functions -q _man
+or functions -c man _man
+
 function man -w man
     test "$COLUMNS" -lt 80
     and set -x MANWIDTH "$COLUMNS"
     or  set -x MANWIDTH 80
-
-    command man $argv
+    _man $argv
 end
 
 ################################################################
