@@ -464,6 +464,7 @@ dotfiles: # Just a bunch of paths and action mappings
     imv:         { "src":"imv.conf",      "dst":"~/.config/imv/config"         }
     kanshi:      { "src":"kanshi",        "dst":"~/.config/kanshi/config"      }
     mpd:         { "src":"mpd.conf",      "dst":"~/.config/mpd/mpd.conf"       }
+    paru:        { "src":"paru.conf",     "dst":"~/.config/paru/paru.conf"     }
     pqivrc:      { "src":"pqiv.ini",      "dst":"~/.config/pqivrc"             }
     rclone:      { "src":"rclone.conf",   "dst":"~/.config/rclone/rclone.conf" }
     swaylock:    { "src":"sway/swaylock", "dst":"~/.config/swaylock/config"    }
