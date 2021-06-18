@@ -107,9 +107,9 @@ abbr -g gri 'git rebase --interactive FETCH_HEAD'
 # work stuff
 ################################################################
 
-abbr svu sudo sv up apache mariadb
-abbr svd sudo sv down apache mariadb
-abbr svs sudo sv status apache mariadb
+abbr svu sv up apache mariadb
+abbr svd sv down apache mariadb
+abbr svs sv status apache mariadb
 abbr msv "\
 set db (basename (pwd | sd -- - _))
 set margs -v -u root --password=(_pass_get work_db)"
@@ -170,12 +170,24 @@ function man -w man
     _man $argv
 end
 
+
+################################################################
+# sv
+################################################################
+
+function sv -w sv
+    set -l o (command sv $argv 2> /dev/null )
+    and printf "%s\n" $o
+    or sudo sv $argv
+end
+
+
 ################################################################
 # quickly edit dotfiles
 ################################################################
 
 function edit-config
-    pushd "{{@@ parent_dir ( _dotdrop_dotpath ) @@}}"
+    pushd (dirname "$DOTDROP_CONFIG")
     set -l dotfile (fd -HE .git | wdmenu)
     test -n "$dotfile" || return 1
     {{@@ editor @@}} "$dotfile"
