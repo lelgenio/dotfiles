@@ -1,0 +1,5 @@
+#!/bin/sh
+
+for g in docker video input audio wheel; do
+    usermod "{{@@ env['USER'] @@}}" -aG "$g"
+done
