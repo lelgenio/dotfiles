@@ -31,7 +31,7 @@ if test $fish_key_bindings = fish_vi_key_bindings
 
 end
 
-bind \cy fish_clipboard_copy
+bind \cy 'commandline | wl-copy -n'
 
 # Enable fzf key bindings
 fzf_key_bindings
