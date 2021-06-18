@@ -1,0 +1,23 @@
+#!/bin/sh
+
+testz() {
+    if test -z "$1"; then
+        echo "$2" >&2
+        exit 1
+    fi
+}
+
+testz "$1" "No service name provided"
+
+pushd "/etc/runit/sv"
+
+sudo mkdir -p "$1"
+
+if ! test -f "$1/run"
+then
+    printf '#!/bin/sh\n' | sudo tee "$1/run" > /dev/null
+
+    sudo chmod u+x "$1/run"
+fi
+
+sudo kak "$1/run"

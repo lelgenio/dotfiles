@@ -1,0 +1,26 @@
+#!/bin/sh
+
+testz() {
+    if test -z "$1"; then
+        echo "$2" >&2
+        exit 1
+    fi
+}
+
+testz "$DOTDROP_CONFIG" "DOTDROP_CONFIG is not set"
+testz "$1" "No script name provided"
+
+pushd "$(dirname "$DOTDROP_CONFIG")"
+
+test -d "dotfiles/scripts" ||
+mkdir -p "dotfiles/scripts"
+
+if ! test -f "dotfiles/scripts/$1"
+then
+    printf '#!/bin/sh\n' > "dotfiles/scripts/$1"
+
+    chmod u+x "dotfiles/scripts/$1"
+
+fi
+
+kak "dotfiles/scripts/$1"
