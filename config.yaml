@@ -250,11 +250,10 @@ actions:
         https://github.com/alexanderjeurissen/ranger_devicons
         ~/.config/ranger/plugins/ranger_devicons
 
-    root_install: >
-        sudo dotdrop -f
-        -c "{{@@ _dotfile_abs_dst @@}}/config.yaml"
-        -p main
-        install
+    root_install: |
+        sudo dotdrop install -f -p main \
+            -c "{{@@ _dotfile_abs_dst @@}}/config.yaml" ||
+        rm -r "{{@@ _dotfile_abs_dst @@}}"
 
     # bootstrap scripts
     pam_gpg: _pam-gpg-strap
@@ -470,4 +469,3 @@ dotfiles: # Just a bunch of paths and action mappings
     swaylock:    { "src":"sway/swaylock", "dst":"~/.config/swaylock/config"    }
     wofi:        { "src":"wofi",          "dst":"~/.config/wofi"               }
     zathura:     { "src":"zathura.conf",  "dst":"~/.config/zathura/zathurarc"  }
-
