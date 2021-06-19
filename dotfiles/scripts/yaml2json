@@ -1,0 +1,18 @@
+#!/bin/python
+
+import json
+import yaml
+
+import sys
+
+in_f, out_f = sys.argv[0].split("/")[-1].split("2")
+
+if (in_f, out_f) == ('json', 'yaml'):
+    out_content = yaml.dump(json.load(sys.stdin), indent=4)
+elif (in_f, out_f) == ('yaml', 'json'):
+    out_content = json.dumps(yaml.unsafe_load(sys.stdin), indent=4)
+
+print(out_content)
+
+
+# vim: ft=python
