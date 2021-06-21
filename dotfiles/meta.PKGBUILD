@@ -95,7 +95,7 @@ depends=(
     neomutt urlview isync
 
     # Files
-    thunar
+    thunar thunar-archive-plugin engrampa
     syncthing xdg-user-dirs
     transmission-cli deemix
 
@@ -149,6 +149,7 @@ depends=(
 
     # Chat
     discord telegram-desktop
+    jitsi-meet-desktop-bin
 
     # Gaming
     steam lutris lutris-wine-meta wine wine-mono winetricks

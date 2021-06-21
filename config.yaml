@@ -344,6 +344,10 @@ dotfiles: # Just a bunch of paths and action mappings
         actions:
         - ranger_icons
 
+    thunar:
+        src: thunar
+        dst: ~/.config/Thunar
+
     mpv:
         src: mpv.conf
         dst: ~/.config/mpv/mpv.conf
