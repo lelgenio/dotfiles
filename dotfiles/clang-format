@@ -11,6 +11,8 @@ BasedOnStyle: LLVM
 IndentWidth: {{@@ indent_width @@}}
 TabWidth: {{@@ indent_width @@}}
 
+ColumnLimit: 80
+
 {%@@ if tabs @@%}
 UseTab: ForContinuationAndIndentation
 {%@@ endif @@%}
