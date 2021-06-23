@@ -473,15 +473,17 @@ dotfiles: # Just a bunch of paths and action mappings
     # .config/, no actions
     ###############################################################
 
-    alacritty:   { "src":"alacritty.yml", "dst":"~/.config/alacritty.yml"      }
-    bat:         { "src":"bat",           "dst":"~/.config/bat/config"         }
-    fusuma:      { "src":"fusuma.yml",    "dst":"~/.config/fusuma/config.yml"  }
-    imv:         { "src":"imv.conf",      "dst":"~/.config/imv/config"         }
-    kanshi:      { "src":"kanshi",        "dst":"~/.config/kanshi/config"      }
-    mpd:         { "src":"mpd.conf",      "dst":"~/.config/mpd/mpd.conf"       }
-    paru:        { "src":"paru.conf",     "dst":"~/.config/paru/paru.conf"     }
-    pqivrc:      { "src":"pqiv.ini",      "dst":"~/.config/pqivrc"             }
-    rclone:      { "src":"rclone.conf",   "dst":"~/.config/rclone/rclone.conf" }
-    swaylock:    { "src":"sway/swaylock", "dst":"~/.config/swaylock/config"    }
-    wofi:        { "src":"wofi",          "dst":"~/.config/wofi"               }
-    zathura:     { "src":"zathura.conf",  "dst":"~/.config/zathura/zathurarc"  }
+    alacritty:   { "src":"alacritty.yml", "dst":"~/.config/alacritty.yml"                 }
+    bat:         { "src":"bat",           "dst":"~/.config/bat/config"                    }
+    fusuma:      { "src":"fusuma.yml",    "dst":"~/.config/fusuma/config.yml"             }
+    imv:         { "src":"imv.conf",      "dst":"~/.config/imv/config"                    }
+    kanshi:      { "src":"kanshi",        "dst":"~/.config/kanshi/config"                 }
+    mpd:         { "src":"mpd.conf",      "dst":"~/.config/mpd/mpd.conf"                  }
+    paru:        { "src":"paru.conf",     "dst":"~/.config/paru/paru.conf"                }
+    pqivrc:      { "src":"pqiv.ini",      "dst":"~/.config/pqivrc"                        }
+    rclone:      { "src":"rclone.conf",   "dst":"~/.config/rclone/rclone.conf"            }
+    swaylock:    { "src":"sway/swaylock", "dst":"~/.config/swaylock/config"               }
+    wofi:        { "src":"wofi",          "dst":"~/.config/wofi"                          }
+    xdpw:        { "src":"xdpw.ini",      "dst":"~/.config/xdg-desktop-portal-wlr/config" }
+    zathura:     { "src":"zathura.conf",  "dst":"~/.config/zathura/zathurarc"             }
+
