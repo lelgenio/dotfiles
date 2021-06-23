@@ -208,6 +208,7 @@ dynvariables:
     boot_uuid: sudo blkid /dev/sda1 -s UUID -o value
     nproc: nproc
     memory_size: env LC_ALL=C free -b | awk '/^Mem:/ {print $2}'
+    deezer_arl: pass show Entertainment/Deezer | awk '/^arl:/ {print $2}'
 
 
 ###############################################################
@@ -385,6 +386,10 @@ dotfiles: # Just a bunch of paths and action mappings
         dst: ~/.local/bin
         actions:
         - make_theme
+
+    deemix:
+        src: deemix
+        dst: ~/.config/deemix
 
     backgrounds:
         src: backgrounds
