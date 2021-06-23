@@ -58,7 +58,7 @@ function fish_git_prompt
     set git_detach   (_fish_prompt_git_detached)
     set git_remote   (_fish_prompt_git_remote_branches)
     set git_remotes  (git remote)
-    set git_status_s (git status -s | string collect)
+    set git_status_s (timeout 1s git status -s | string collect)
 
     _fish_prompt_normal " on "
 
