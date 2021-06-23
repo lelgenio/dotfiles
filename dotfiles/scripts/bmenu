@@ -18,13 +18,11 @@ if test "$argv[1]" = "run"
         --no-generic
 end
 
-set fullscreen false
-
 if test -n "$SWAYSOCK"
     swaymsg -t get_tree |
         jq -je '..|select(.focused? and .fullscreen_mode? == 1)|""' &&
         swaymsg -q fullscreen off &&
-        set fullscreen true
+        set fullscreen
 
     swaymsg -t get_outputs |
         jq -r 'map(.focused)|reverse|index(true)' |
@@ -35,7 +33,8 @@ if test -n "$SWAYSOCK"
 end
 
 function clean_exit
-    "$fullscreen" && swaymsg -q fullscreen on
+    set -q fullscreen
+    and swaymsg -q fullscreen on &
 end
 
 trap clean_exit EXIT
@@ -78,6 +77,26 @@ trap clean_exit EXIT
     set hb "#404040"
 #{%@@ endif @@%}#
 
+set -l histfile "$HOME/.local/share/bmenu-hist"
+mkdir -p (dirname $histfile)
+touch $histfile
+
+function get_score -a query file
+    set -l escaped (string escape --style regex $query)
+    set -l score (string replace -rf "^(\d+) $escaped\$" '$1'  < $file)
+    test -z "$score"
+    and set -l score 0
+    echo $score
+end
+
+set -l estatus 1
+
+while read line
+    set -l score (get_score $line $histfile)
+    printf "%s %s\n" $score $line
+end |
+sort --reverse --numeric-sort |
+string replace -ar '^\d+ ' '' |
 bemenu \
     $focused_output\
     --grab\
@@ -91,6 +110,21 @@ bemenu \
     --fb "$fb" --ff "$ff" \
     --nb "$nb" --nf "$nf" \
     --hb "$hb" --hf "$hf" \
-    $argv
+    $argv |
+while read choice
+    printf "%s\n" $choice
+
+    set estatus 0
+
+    set -l escaped (string escape --style regex $choice)
+    set -l score (get_score $choice $histfile)
+    set -l replacement (printf "%s %s" (math $score + 1) $choice)
+
+    test $score = 0
+    and echo $replacement >> $histfile
+    or sd "\d+ $escaped" $replacement  $histfile &> /dev/null </dev/null
+end
+
+exit $estatus
 
 # vim: ft=fish
