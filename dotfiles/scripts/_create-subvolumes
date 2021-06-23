@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if ! mountpoint /mnt/btrfs-root
+then
+    mkdir /mnt/btrfs-root
+    mount /mnt/btrfs-root
+fi
+cd /mnt/btrfs-root
+
+{%@@ for name, path in filesystem.partitions.items() @@%}
+    test -e "./{{@@ name @@}}" ||
+        btrfs subvolume create "./{{@@ name @@}}"
+    test -d "{{@@ path @@}}" ||
+        mkdir -p "{{@@ path @@}}"
+    mountpoint "{{@@ path @@}}" ||
+        mount "{{@@ path @@}}"
+{%@@ endfor @@%}

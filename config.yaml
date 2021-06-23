@@ -40,6 +40,15 @@ variables:
             user: leonardo@wopus.com.br
             mail: wopus.com.br
 
+    zram: true
+    filesystem:
+        partitions:
+            "/": /btrfs
+            "/@root": /
+            "/@home": /home
+            "/@sql": /var/lib/mysql
+            "/@swap": /swap
+
 ###############################################################
 profiles:
 ###############################################################
@@ -194,8 +203,11 @@ dynvariables:
     blender_version: |
         pacman -Qi blender | grep "^Version" | cut -d: -f3 | cut -d. -f1-2 ||
         blender --version | head -n1 | sed -E 's|^Blender (.*)\..*|\1|g'
-    root_uuid: blkid /dev/sda2 -s UUID -o value
+    phisical_uuid: sudo blkid /dev/sda2 -s UUID -o value
+    decrypted_uuid: sudo blkid /dev/mapper/main -s UUID -o value
+    boot_uuid: sudo blkid /dev/sda1 -s UUID -o value
     nproc: nproc
+    memory_size: env LC_ALL=C free -b | awk '/^Mem:/ {print $2}'
 
 
 ###############################################################

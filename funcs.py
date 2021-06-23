@@ -24,6 +24,25 @@ def rclone_obscure(pass_name):
     return sh("rclone", "obscure", sh("_pass_get", pass_name))
 
 
+def var(to_escape: str):
+    return " ".join(["{{@@", to_escape, "@@}}"])
+
+
+def non_templated(path):
+    with open(path, "r") as f:
+        res = []
+        in_dotdrop = False
+        for line in f:
+            line = line.strip()
+            if line == "##### Dotdrop-start #####":
+                in_dotdrop = True
+            if line == "##### Dotdrop-end #####":
+                in_dotdrop = False
+            if not in_dotdrop:
+                res.append(line)
+    return "\n".join(res)
+
+
 ####################################################################
 # color
 ####################################################################
@@ -70,8 +89,10 @@ def darker(arg1, amount=0.5):
 def lighter(arg1, amount=1.25):
     return color_mult(arg1, amount)
 
+
 def as_hex(in_number):
     return hex(int(in_number))[2:]
+
 
 def clamp_to_hex(in_number):
     return as_hex(in_number * 255)

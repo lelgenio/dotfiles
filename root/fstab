@@ -1,0 +1,18 @@
+{{@@ 'non_templated(_dotfile_abs_dst)' | var @@}}
+##### Dotdrop-start #####
+
+UUID={{@@ boot_uuid @@}}    /boot vfat  rw,errors=remount-ro             0 2
+
+{%@@ for name, path in filesystem.partitions.items() @@%}
+    {#@@<filesystem>  <dir>        <type>  <options>    <dump> <pass> @@#}
+    {%@@ set options = "rw,noatime,compress=zstd:3,subvol={}".format(name) @@%}
+    UUID={{@@ decrypted_uuid @@}} {{@@ path @@}} btrfs   {{@@ options @@}} 0      {{@@ ("root" in name) | int@@}}
+{%@@ endfor @@%}
+
+/swap/swapfile    none  swap  defaults                         0 0
+
+{%@@ if zram @@%}
+/dev/zram0 none swap defaults 0 0
+{%@@ endif @@%}
+
+# vim: ft=etc-fstab

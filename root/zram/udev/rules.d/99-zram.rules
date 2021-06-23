@@ -1,0 +1,3 @@
+{%@@ if zram @@%}
+KERNEL=="zram0", ATTR{disksize}="{{@@ memory_size @@}}" RUN="/usr/bin/mkswap /dev/zram0""
+{%@@ endif @@%}

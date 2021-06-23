@@ -15,6 +15,10 @@ config:
     link_dotfile_default: nolink
     link_on_import: nolink
     dotpath: .
+    func_file:
+    - "{{@@ _dotdrop_dotpath @@}}/../funcs.py"
+    filter_file:
+    - "{{@@ _dotdrop_dotpath @@}}/../funcs.py"
 
 
 ###############################################################
@@ -29,9 +33,12 @@ actions:
         pacman-key --init
         pacman-key --populate
     sv_update: |
-        {%@@ set key =  "{} _dotfile_key {}".format('{{@@', '@@}}') @@%}
-        sv restart {{@@ key @@}} ||
-        rc-service {{@@ key @@}} restart
+        sv restart "{{@@ '_dotfile_key' | var @@}}" ||
+        rc-service "{{@@ '_dotfile_key' | var @@}}" restart
+
+    create_subvolumes: _create-subvolumes
+    create_swapfile: _create-swapfile
+    mount_partitions: mount -a
 
 
 ###############################################################
@@ -68,6 +75,17 @@ dotfiles:
         actions:
         - locale_install
 
+    fstab:
+        src: fstab
+        dst: /etc/fstab
+        actions:
+        - create_subvolumes
+        - create_swapfile
+        - mount_partitions
+
+    zram:
+        src: zram
+        dst: /etc/
 
     groups:
         src: groups
