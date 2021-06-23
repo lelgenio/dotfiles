@@ -1,9 +1,15 @@
 #!/bin/sh
 
+if test "$#" -ne 0; then
+    for i; do
+        cat "$i"
+    done | "$0"
+    exit 0
+fi
+
 f=$(cat)
 
-if test $(tput lines) -lt $(printf "%s\n" "$f" | wc -l)
-then
+if test $(tput lines) -lt $(printf "%s\n" "$f" | wc -l); then
     printf "%s\n" "$f" | kak -e '
         exec <a-o>
         map global normal q :q<ret>;
