@@ -1,17 +1,18 @@
 #!/bin/sh
 
-if which xdg-user-dir &> /dev/null
-then
+if which xdg-user-dir &>/dev/null; then
     DESTFOLDER=$(xdg-user-dir PICTURES)
 else
-    for i in Images Imagens Pictures Fotos ""
-    do
+    for i in Images Imagens Pictures Fotos ""; do
         DESTFOLDER=$HOME/$i
         test -d "$DESTFOLDER" &&
             break
     done
-    mkdir -p $DESTFOLDER
 fi
+
+DESTFOLDER="$DESTFOLDER/Screenshot"
+
+mkdir -p $DESTFOLDER
 
 DESTFILE=$DESTFOLDER/$(date +'%Y-%m-%d-%H%M%S_screenshot.png')
 case $1 in
@@ -34,7 +35,7 @@ case $1 in
     clip)
         # Focused monitor to clipboard
         cur_output=$(swaymsg -t get_outputs |
-                     jq -r '.[] | select(.focused) | .name')
+            jq -r '.[] | select(.focused) | .name')
 
         test -n "$cur_output" &&
             grim -o "$cur_output" - | wl-copy ||
