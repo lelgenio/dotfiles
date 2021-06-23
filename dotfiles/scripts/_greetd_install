@@ -1,0 +1,19 @@
+#!/bin/sh
+
+mybg="{{@@ env['HOME'] @@}}/.local/share/backgrounds"
+greetbg=/etc/greetd/.local/share/backgrounds
+
+mkdir -p $(dirname $greetbg)
+
+rm -rf $greetbg
+cp -rT "$mybg" $greetbg
+
+sudo chown -R greeter:greeter /etc/greetd/
+# Needed so greeter can write gsettings
+sudo usermod -d /etc/greetd/ greeter
+cd /usr/share/themes
+for darker in *Darker*; do
+    mix=$(echo "$darker" | sed s/Darker/Mix/g)
+    test -e "$mix" ||
+    ln -s "$darker" "$mix"
+done

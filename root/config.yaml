@@ -25,7 +25,7 @@ config:
 actions:
 ###############################################################
 
-    greetd_install: sudo chown -R greeter:greeter /etc/greetd/
+    greetd_install: _greetd_install
     grub_install: update-grub
     locale_install: locale-gen
     groups_install: sh ~/.local/share/groups
@@ -39,6 +39,7 @@ actions:
     create_subvolumes: _create-subvolumes
     create_swapfile: _create-swapfile
     mount_partitions: mount -a
+    dbus_uuidgen: dbus-uuidgen --ensure
 
 
 ###############################################################
@@ -56,6 +57,7 @@ dotfiles:
         dst: /etc/elogind/logind.conf
         actions:
         - sv_update
+        - dbus_uuidgen
 
     grub:
         src: grub
