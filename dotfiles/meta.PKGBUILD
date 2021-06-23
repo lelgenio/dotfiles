@@ -103,6 +103,7 @@ depends=(
     pqiv mpv
     mpd mpc ncmpcpp mpdris2
     playerctl clyrics
+    kdeconnect
     blender gimp kdenlive
     zathura zathura-pdf-mupdf
 
