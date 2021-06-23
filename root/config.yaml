@@ -95,6 +95,11 @@ dotfiles:
         actions:
         - groups_install
 
+    usr_scripts:
+        src: "{{@@ env['HOME'] @@}}/.local/bin"
+        dst: /usr/local/bin
+
+
 
 ###############################################################
 profiles:
