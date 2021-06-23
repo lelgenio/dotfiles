@@ -89,6 +89,10 @@ dotfiles:
         src: zram
         dst: /etc/
 
+    earlyoom:
+        src: earlyoom
+        dst: /etc/default/earlyoom
+
     groups:
         src: groups
         dst: ~/.local/share/groups
