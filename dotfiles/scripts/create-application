@@ -1,0 +1,24 @@
+#!/bin/sh
+
+testz() {
+    if test -z "$1"; then
+        echo "$2" >&2
+        exit 1
+    fi
+}
+
+testz "$DOTDROP_CONFIG" "DOTDROP_CONFIG is not set"
+testz "$1" "No application name provided"
+
+pushd "$(dirname "$DOTDROP_CONFIG")"
+
+cat > "dotfiles/scripts/$1.desktop" <<EOF
+[Desktop Entry]
+Name=$1
+Comment=Edit text files
+Exec=$1
+Type=Application
+Icon=system.desktop
+Categories=Utility;
+StartupNotify=false
+EOF

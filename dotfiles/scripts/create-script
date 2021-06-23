@@ -12,9 +12,6 @@ testz "$1" "No script name provided"
 
 pushd "$(dirname "$DOTDROP_CONFIG")"
 
-test -d "dotfiles/scripts" ||
-mkdir -p "dotfiles/scripts"
-
 if ! test -f "dotfiles/scripts/$1"
 then
     printf '#!/bin/sh\n' > "dotfiles/scripts/$1"
