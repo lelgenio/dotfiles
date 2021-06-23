@@ -34,6 +34,9 @@ exec_always pidof pipewire || pipewire
 exec_always pidof pipewire-media-session || pipewire-media-session
 exec_always pidof xdg-desktop-portal || /usr/lib/xdg-desktop-portal
 
+# Wake up pulseaudio
+exec_always pactl set-sink-volume @DEFAULT_SINK@ +0%
+
 #Notification Daemon
 exec_always pidof mako || mako
 

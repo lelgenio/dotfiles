@@ -17,7 +17,7 @@ set $bg_color   {{@@ color.bg_dark @@}}
 set $alert      #000000
 
 font {{@@ font.interface @@}}  {{@@ font.size.medium @@}}px
-output * bg "{{@@ background @@}}" fill
+output * bg "{{@@ background @@}}" fill "{{@@ color.bg @@}}"
 
 set $laptop eDP-1
 bindswitch --reload --locked lid:on output $laptop disable
@@ -43,9 +43,6 @@ client.urgent           $alert      $alert      $fg_color   $alert      $alert
 ###############################################################
 
 {%@@ if bar == "waybar" @@%}
-    # Wake up pulseaudio
-    exec pactl set-sink-volume @DEFAULT_SINK@ +0%
-
     bar swaybar_command waybar
 {%@@ else @@%}
     # I rarely use this
