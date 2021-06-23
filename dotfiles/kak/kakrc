@@ -7,6 +7,8 @@
 
 
 set global scrolloff 10,20
+set global autoreload yes
+set global startup_info_version 20200901
 
 source "%val{config}/plug.kak"
 source "%val{config}/keys.kak"
