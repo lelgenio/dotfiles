@@ -1,12 +1,18 @@
 #!/bin/sh
 
-if ! mountpoint /mnt/btrfs-root
-then
-    mkdir /mnt/btrfs-root
-    mount /mnt/btrfs-root
-fi
-cd /mnt/btrfs-root
+set -e
 
+BTRFS_ROOT="{{@@ filesystem.partitions['/'] @@}}"
+
+if ! mountpoint "$BTRFS_ROOT"
+then
+    mkdir -p "$BTRFS_ROOT"
+    mount "$BTRFS_ROOT"
+fi
+cd "$BTRFS_ROOT"
+
+
+{%@@ set new_partitions = filesystem.partitions.update({root_subvol: '/'}) @@%}
 {%@@ for name, path in filesystem.partitions.items() @@%}
     test -e "./{{@@ name @@}}" ||
         btrfs subvolume create "./{{@@ name @@}}"

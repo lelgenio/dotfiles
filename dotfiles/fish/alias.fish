@@ -18,7 +18,7 @@ abbr -g mpn ncmpcpp
 abbr -g dot "dotdrop install -f"
 
 set -l root_cfg (dirname $DOTDROP_CONFIG)/root
-alias rootdrop 'dotdrop install -f -c "$root_cfg"'
+alias rootdrop 'sudo dotdrop install -f -c "$root_cfg"'
 
 cabbr p emerge
 
