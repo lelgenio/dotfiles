@@ -80,7 +80,7 @@ hook global WinSetOption filetype=blade %[
     set-option buffer comment_block_begin '{{-- '
     set-option buffer comment_block_end   ' --}}'
 
-    map buffer user 'c' '_: comment-block<ret>' -docstring 'comment block'
+    map buffer user 'c' 'x_: comment-block<ret><a-;>;' -docstring 'comment block'
 ]
 
 try %§
