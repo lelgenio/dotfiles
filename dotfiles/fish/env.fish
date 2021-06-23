@@ -42,6 +42,9 @@ else
     set -e MYPY_CACHE_DIR
 end
 
+
+set -x CMAKE_EXPORT_COMPILE_COMMANDS 1
+
 ################################################################
 # Color man pages
 ################################################################
@@ -80,3 +83,5 @@ set -x _ACCENT_COLOR    "{{@@ accent_color_name @@}}"
 
 set -x DOTDROP_CONFIG   "{{@@ _dotdrop_cfgpath  @@}}"
 set -x DOTDROP_PROFILE  "{{@@ profile           @@}}"
+
+set -x DOTDROP_WORKERS  (math 2 \* (nproc))
