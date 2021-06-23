@@ -22,7 +22,7 @@ depends=(
         # Greeter
         greetd greetd-gtkgreet
         # Configuration manager
-        dotdrop
+        dotdrop gnome-settings-daemon
 
     # Packages
     pkgfile paru
