@@ -1,13 +1,12 @@
 # {{@@ header() @@}}
 
 try %{
-    declare-user-mode buffer
     declare-user-mode surround
     declare-user-mode git
     declare-user-mode find
 }
 
-map global user 'w' ': wa<ret>' -docstring 'write buffer'
+map global user 'w' ': w<ret>' -docstring 'write buffer'
 map global user 'u' ': config-source<ret>' -docstring 'source configuration'
 map global user 'g' ': enter-user-mode lsp<ret>' -docstring 'lsp mode'
 map global user 'z' ':zoxide ' -docstring 'zoxide'
@@ -24,10 +23,7 @@ map global user 'p' '! wl-paste -n<ret>' -docstring 'clipboard paste'
 map global user 'P' '<a-o>j! wl-paste -n<ret>' -docstring 'clipboard paste on next line'
 map global user 'R' '"_d! wl-paste -n <ret>' -docstring 'clipboard replace'
 
-map global user 'b' ': enter-user-mode buffer<ret>' -docstring 'buffer mode'
-map global buffer 'n' ':buffer-next<ret>' -docstring 'next'
-map global buffer 'p' ':buffer-previous<ret>' -docstring 'previous'
-map global buffer 'd' ':delete-buffer<ret>' -docstring 'delete'
+map global user 'b' ': find_buffer<ret>' -docstring 'switch buffer'
 
 map global user 's' ': enter-user-mode surround<ret>' -docstring 'surround mode'
 map global surround 's' ': surround<ret>' -docstring 'surround'
@@ -57,7 +53,6 @@ map global find 'f' ': find_file<ret>' -docstring 'file'
 map global find 'r' ': find_ripgrep<ret>' -docstring 'ripgrep all file'
 map global find 'g' ': find_git_file<ret>' -docstring 'git files'
 map global find 'c' ': find_dir<ret>' -docstring 'change dir'
-map global find 'b' ': find_buffer<ret>' -docstring 'find buffer'
 map global find 'd' ': find_delete<ret>' -docstring 'file to delete'
 
 try %{
