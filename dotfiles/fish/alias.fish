@@ -17,6 +17,9 @@ function calias
 abbr -g mpn ncmpcpp
 abbr -g dot "dotdrop install -f"
 
+set -l root_cfg (dirname $DOTDROP_CONFIG)/root
+alias rootdrop 'dotdrop install -f -c "$root_cfg"'
+
 cabbr p emerge
 
 cabbr p pacman
@@ -107,13 +110,19 @@ abbr -g gri 'git rebase --interactive FETCH_HEAD'
 # work stuff
 ################################################################
 
-abbr svu sv up apache mariadb
-abbr svd sv down apache mariadb
+abbr svu sv start apache mariadb
+abbr svd sv stop apache mariadb
 abbr svs sv status apache mariadb
+abbr pname "\
+set pname (basename (pwd | sd -- - _))
+sd 'DB_DATABASE=.*' DB_DATABASE=\$pname .env
+test (count dump/*) -eq 1
+and mv dump/* dump/\$pname.sql"
 abbr msv "\
-set db (basename (pwd | sd -- - _))
+string match -r 'DB_DATABASE=(?<db>.*)\$' < .env
 set margs -v -u root --password=(_pass_get work_db)"
 abbr msc 'echo "CREATE DATABASE $db" | mysql $margs'
+abbr msdrop 'echo "DROP DATABASE $db" | mysql $margs'
 abbr msl 'mysql $margs $db < dump/$db.sql'
 abbr msd 'mariadb-dump $margs $db | mysql_format > dump/$db.sql'
 abbr vw  'kak public/**.less resources/**.blade.php (fd -E \'*.min.js\' \'.js$\' public/)'
