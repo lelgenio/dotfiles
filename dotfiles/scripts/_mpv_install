@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -ex
+
+clean() {
+    rm -rf "$TMPDIR"
+    cd "$SCRIPT_DIR"
+    rm README.md LICENSE
+}
+trap clean EXIT
+
+SCRIPT_DIR="$HOME/.config/mpv/scripts"
+TMPDIR=(mktemp -d)
+
+mkdir -p "$SCRIPT_DIR"
+
+# Sponsorblock
+
+if ! test -f "$SCRIPT_DIR/sponsorblock.lua"; then
+    git clone https://github.com/po5/mpv_sponsorblock "$TMPDIR/sponsorblock"
+    mv "$TMPDIR/sponsorblock"/* "$SCRIPT_DIR"
+fi
+
+# mpris support, media notification and controll from kdeconnect
+if ! test -f "$SCRIPT_DIR/mpris.so"; then
+    git clone https://github.com/hoyon/mpv-mpris "$TMPDIR/mpris"
+    make -C "$TMPDIR/mpris" install
+fi
