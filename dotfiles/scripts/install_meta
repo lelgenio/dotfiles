@@ -2,10 +2,10 @@
 
 set -e
 
-command -v makepkg &> /dev/null ||
+command -v makepkg &>/dev/null ||
     exit 1
 
-install_pikaur(){
+install_pikaur() {
     PIKDIR="$HOME/.cache/pikaur/build/pikaur"
     test -d "$PIKDIR" ||
         git clone \
@@ -17,14 +17,32 @@ install_pikaur(){
     makepkg -si --noconfirm --needed
 }
 
-command -v pikaur &> /dev/null ||
+command -v pikaur &>/dev/null ||
     install_pikaur
 
 cd "$HOME/.local/share/metapkg/"
+
+source ./PKGBUILD
+
+all_pkgs=$(pacman -Sql)
+init_system=$(readlink /bin/init | cut -d- -f1)
 
 pikaur \
     --pkgbuild \
     --install \
     --rebuild \
     --noconfirm \
-    --keepbuilddep
+    --keepbuilddep ||
+    for depend in ${depends[@]}; do
+        pacman -S --needed --noconfirm $depend
+    done
+
+for depend in ${depends[@]}; do
+    if printf "%s\n" $all_pkgs |
+        grep "^$depend-$init_system\$"; then
+        sudo pacman -S \
+            --needed \
+            --noconfirm \
+            "$depend-$init_system"
+    fi
+done

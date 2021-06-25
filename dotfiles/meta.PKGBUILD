@@ -39,7 +39,7 @@ depends=(
 
     # Fonts
         inter-font ttf-ms-fonts
-        otf-nerd-fonts-fira-code
+        ttf-hack otf-nerd-fonts-fira-code
 
         # Icons
         otf-font-awesome ttf-font-awesome
@@ -115,6 +115,10 @@ depends=(
         neovim python-pynvim neovim-symlinks
 
         bash-language-server
+
+        # web lsp
+        vscode-css-languageserver-bin
+        vscode-html-languageserver
 
         # Python
         ipython bpython
