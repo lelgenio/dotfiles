@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -x
+
+source /etc/conf.d/preload
+
+exec preload --foreground $PRELOAD_OPTS

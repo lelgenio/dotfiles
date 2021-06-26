@@ -49,6 +49,10 @@ actions:
 dotfiles:
 ###############################################################
 
+    runit_sv:
+        src: runit_sv
+        dst: /etc/runit/sv
+
     greetd:
         src: greetd
         dst: /etc/greetd

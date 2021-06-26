@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# export XDG_RUNTIME_DIR=$(mktemp -d)
+
+while pgrep plymouthd >&2 2>/dev/null
+do
+    plymouth quit
+    sleep .5s
+done
+
+exec greetd
