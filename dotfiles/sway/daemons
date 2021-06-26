@@ -20,7 +20,7 @@ exec_always pidof -x mpDris2 || sleep 5s &&  mpDris2
 # Syncthing, sync folders between stuff
 exec pidof syncthing || syncthing -no-browser
 # Unlock gpg-agent
-exec_always _pam_unlock
+exec_always _gpg-unlock
 
 
 ###############################################################

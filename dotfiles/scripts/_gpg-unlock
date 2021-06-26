@@ -1,7 +1,10 @@
 #!/bin/sh
 
-pidof gpg-agent ||
+if ! pidof gpg-agent
+then
     gpg-agent --daemon
+    sleep 5s
+fi
 
 KEYGRIP=$(cat "$HOME/.pam-gnupg")
 
