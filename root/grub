@@ -10,8 +10,12 @@ GRUB_RECORDFAIL_TIMEOUT=$GRUB_HIDDEN_TIMEOUT
 GRUB_DISTRIBUTOR="Artix"
 
 GRUB_CMDLINE_LINUX_DEFAULT=""
-GRUB_CMDLINE_LINUX=" cryptdevice=UUID={{@@ phisical_uuid @@}}:main "
+GRUB_CMDLINE_LINUX=" cryptdevice=/dev/disk/by-uuid/{{@@ phisical_uuid @@}}:main "
 GRUB_CMDLINE_LINUX+=" root=/dev/mapper/main rootflags=rw,noatime,compress=zstd,subvol=/{{@@ root_subvol @@}} "
+
+{%@@ if plymouth @@%}
+GRUB_CMDLINE_LINUX+=" fbcon=nodefer splash quiet loglevel=3 rd.systemd.show_status=auto rd.udev.log_level=3 "
+{%@@ endif @@%}
 
 # Preload both GPT and MBR modules so that they are not missed
 GRUB_PRELOAD_MODULES="part_gpt part_msdos"

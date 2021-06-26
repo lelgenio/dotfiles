@@ -26,11 +26,14 @@ depends=(
         # Configuration manager
         dotdrop gnome-settings-daemon
 
+        # Boot logo
+        plymouth plymouth-theme-red-loader-git
+
     # Packages
     pkgfile paru
 
     # passwords and auth
-    pass gnupg pam-gnupg
+    pass gnupg
 
     # Dav
     vdirsyncer khal khard

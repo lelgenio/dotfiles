@@ -41,6 +41,8 @@ actions:
     mount_partitions: mount -a
     dbus_uuidgen: dbus-uuidgen --ensure
     passwd: chmod 600 /etc/.passwd
+    sysctl_apply: sysctl -a
+    mkinitcpio: mkinitcpio -P
 
 
 ###############################################################
@@ -72,6 +74,12 @@ dotfiles:
         actions:
         - grub_install
 
+    mkinitcpio:
+        src: mkinitcpio.conf
+        dst: /etc/mkinitcpio.conf
+        actions:
+        - mkinitcpio
+
     pacman:
         src: pacman.conf
         dst: /etc/pacman.conf
@@ -91,6 +99,12 @@ dotfiles:
         - create_subvolumes
         - create_swapfile
         - mount_partitions
+
+    sysctl:
+        src: sysctl
+        dst: /etc/sysctl.d
+        actions:
+        - sysctl_apply
 
     zram:
         src: zram

@@ -8,9 +8,9 @@
 set -U fish_features stderr-nocaret qmark-noglob regex-easyesc
 
 source {$__fish_config_dir}/env.fish
+source {$__fish_config_dir}/wm.fish
 source {$__fish_config_dir}/alias.fish
 source {$__fish_config_dir}/keys.fish
-source {$__fish_config_dir}/wm.fish
 source {$__fish_config_dir}/tmux.fish
 source {$__fish_config_dir}/colors.fish
 source {$__fish_config_dir}/prompt.fish
