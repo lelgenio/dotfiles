@@ -20,6 +20,6 @@ command = "sway --config /etc/greetd/sway-config"
 # in the `video` group.
 user = "greeter"
 
-# [initial_session]
-# command = "{{@@ env['SHELL'] @@}}"
-# user = "{{@@ env['USER'] @@}}"
+[initial_session]
+command = "{{@@ env['SHELL'] @@}}"
+user = "{{@@ env['USER'] @@}}"

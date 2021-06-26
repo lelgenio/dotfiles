@@ -209,6 +209,7 @@ dynvariables:
     nproc: nproc
     memory_size: env LC_ALL=C free -b | awk '/^Mem:/ {print $2}'
     deezer_arl: pass show Entertainment/Deezer | awk '/^arl:/ {print $2}'
+    main_password: _pass_get "{{@@ mail.personal.mail @@}}" | base64
 
 
 ###############################################################

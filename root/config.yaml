@@ -40,6 +40,7 @@ actions:
     create_swapfile: _create-swapfile
     mount_partitions: mount -a
     dbus_uuidgen: dbus-uuidgen --ensure
+    passwd: chmod 600 /etc/.passwd
 
 
 ###############################################################
@@ -51,6 +52,12 @@ dotfiles:
         dst: /etc/greetd
         actions:
         - greetd_install
+
+    passwd:
+        src: passwd
+        dst: /etc/.passwd
+        actions:
+        - passwd
 
     elogind:
         src: elogind.conf

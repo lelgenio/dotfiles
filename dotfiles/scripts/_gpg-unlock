@@ -1,0 +1,10 @@
+#!/bin/sh
+
+pidof gpg-agent ||
+    gpg-agent --daemon
+
+KEYGRIP=$(cat "$HOME/.pam-gnupg")
+
+sudo cat /etc/.passwd |
+    base64 -d |
+    /usr/lib/gnupg/gpg-preset-passphrase --preset "$KEYGRIP"
