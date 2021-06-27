@@ -34,7 +34,7 @@ pikaur \
     --noconfirm \
     --keepbuilddep ||
     for depend in ${depends[@]}; do
-        pacman -S --needed --noconfirm $depend
+        sudo pacman -S --needed --noconfirm $depend || true
     done
 
 init_deps=""
