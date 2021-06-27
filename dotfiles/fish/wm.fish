@@ -42,7 +42,7 @@ end
 if test "$XDG_VTNR" = 1
     and test -z "$DISPLAY$WAYLAND_DISPLAY"
 
-    esway &| tee .swaylog
+    esway &> tee .swaylog
     # ei3 &> .i3log
     # ebsp &> .bsplog
 
