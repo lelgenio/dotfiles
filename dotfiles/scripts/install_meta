@@ -41,15 +41,16 @@ init_deps=""
 for depend in ${depends[@]}; do
     if printf "%s\n" $all_pkgs |
         grep "^$depend-$init_system\$" >/dev/null &&
-        ! pacman -Qq "$depend-$init_system" > /dev/null ; then
+        ! pacman -Qq "$depend-$init_system" >/dev/null; then
         init_deps="$init_deps $depend-$init_system"
     fi
 done
 
-if test -n "$init_deps"
-then
-    sudo pacman -S \
+if test -n "$init_deps"; then
+    pikaur \
+        --sync \
         --needed \
         --noconfirm \
+        --keepbuilddep \
         $init_deps
 fi
