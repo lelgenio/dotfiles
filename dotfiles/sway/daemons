@@ -62,9 +62,6 @@ exec light -N 1
 # Idle
 ###############################################################
 
-# Prevent the screen from locking if fullscreen
-for_window [title=.*] inhibit_idle fullscreen
-
 # Idle daemon
 exec_always _sway_idle
 

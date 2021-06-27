@@ -21,6 +21,7 @@ variables:
     bar: waybar
     bar_pos: top
     tmux: false
+    supervisor: runit
 
     accent_fg: '#ffffff'
 
@@ -259,6 +260,16 @@ actions:
         sudo dotdrop install -f -p main \
             -c "{{@@ _dotfile_abs_dst @@}}/config.yaml" ||
         rm -r "{{@@ _dotfile_abs_dst @@}}"
+    start_services: >
+        _runit_config "{{@@ _dotfile_abs_dst @@}}"
+        dbus-daemon gsd-xsettings
+        fusuma gpg-agent
+        geoclue redshift light mako
+        mpd mpDris2 telegram
+        pipewire pipewire-media-session xdpw
+        pulseaudio kdeconnectd kdeconnect-indicator
+        kanshi swayidle waybar
+        syncthing udiskie
 
     # bootstrap scripts
     pam_gpg: _pam-gpg-strap
@@ -379,6 +390,12 @@ dotfiles: # Just a bunch of paths and action mappings
         dst: ~/.local/bin
         actions:
         - make_theme
+
+    services:
+        src: runit_sv
+        dst: ~/.config/runit/sv
+        actions:
+        - start_services
 
     deemix:
         src: deemix

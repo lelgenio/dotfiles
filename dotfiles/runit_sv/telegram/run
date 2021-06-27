@@ -1,0 +1,5 @@
+#!/bin/sh
+
+command -v telegram-desktop-bin &&
+    exec telegram-desktop-bin ||
+    exec telegram-desktop

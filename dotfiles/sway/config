@@ -40,8 +40,18 @@ include keys-special
 include modes
 
 include assigns
-include daemons
 
+{%@@ if supervisor == "scripts" @@%}
+include daemons
+{%@@ elif supervisor == "runit" @@%}
+set $user_svd "$HOME/.config/runit/runsvdir/default"
+exec runsvdir $user_svd
+exec_always env SVDIR=$user_svd sv hup kanshi
+exec_always _gpg-unlock
+{%@@ endif @@%}
+
+# Prevent the screen from locking if fullscreen
+for_window [title=.*] inhibit_idle fullscreen
 
 include /etc/sway/config.d/
 

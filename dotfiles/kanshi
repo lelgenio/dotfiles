@@ -7,7 +7,7 @@
 
 
 profile sedetary {
-    output eDP-1    position 1920,312
+    output eDP-1    disable position 1920,312
     output HDMI-A-1 position 0,0
 
     exec xrdb .Xresources

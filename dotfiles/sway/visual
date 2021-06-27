@@ -42,9 +42,10 @@ client.urgent           $alert      $alert      $fg_color   $alert      $alert
 # Bar configuration
 ###############################################################
 
-{%@@ if bar == "waybar" @@%}
+{%@@ if supervisor == "scripts" @@%}
+    {%@@ if bar == "waybar" @@%}
     bar swaybar_command waybar
-{%@@ else @@%}
+    {%@@ else @@%}
     # I rarely use this
     bar {
         position {{@@ bar_pos @@}}
@@ -61,7 +62,9 @@ client.urgent           $alert      $alert      $fg_color   $alert      $alert
             focused_workspace $accent $bg_color $fg_color
         }
     }
+    {%@@ endif @@%}
 {%@@ endif @@%}
+
 
 ###############################################################
 # Gaps
