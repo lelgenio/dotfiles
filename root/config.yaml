@@ -43,6 +43,20 @@ actions:
     passwd: chmod 600 /etc/.passwd
     sysctl_apply: sysctl -a
     mkinitcpio: mkinitcpio -P
+    start_services: >
+        _runit_config "{{@@ _dotfile_abs_dst @@}}"
+        apache
+        cronie
+        dbus
+        dhcpcd
+        docker
+        earlyoom
+        elogind
+        greetd
+        iwd
+        mariadb
+        preload
+        syslog-ng
 
 
 ###############################################################
@@ -128,6 +142,11 @@ dotfiles:
         src: "{{@@ env['HOME'] @@}}/.local/bin"
         dst: /usr/local/bin
 
+    services:
+        src: runit_sv
+        dst: /etc/runit/sv
+        actions:
+        - start_services
 
 
 ###############################################################

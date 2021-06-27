@@ -1,0 +1,42 @@
+#!/bin/sh
+
+set -ex
+
+
+cd "$(dirname $1)" && shift
+
+create_logger() {
+    pushd sv/
+    for svd in */; do
+        pushd "$svd"
+
+        if ! test -d log; then
+            mkdir -p log
+            ln -s "$(which _default_logger)" log/run
+        fi
+
+        popd
+    done
+    popd
+}
+
+enable_defaults() {
+
+    mkdir -p "runsvdir/default"
+    pushd "runsvdir/default"
+
+    svdir="$(readlink -f ../../sv)"
+
+    for sv; do
+        ln -fs "$svdir/$sv" .
+    done
+    popd
+}
+
+create_logger
+
+test -f .inited && exit 0
+
+enable_defaults "$@"
+
+touch .inited
