@@ -14,7 +14,7 @@ GRUB_CMDLINE_LINUX=" cryptdevice=/dev/disk/by-uuid/{{@@ phisical_uuid @@}}:main 
 GRUB_CMDLINE_LINUX+=" root=/dev/mapper/main rootflags=rw,noatime,compress=zstd,subvol=/{{@@ root_subvol @@}} "
 
 {%@@ if plymouth @@%}
-GRUB_CMDLINE_LINUX+=" fbcon=nodefer splash quiet loglevel=3 rd.systemd.show_status=auto rd.udev.log_level=3 "
+GRUB_CMDLINE_LINUX+=" fbcon=nodefer splash quiet loglevel=3 vt.global_cursor_default=0 rd.udev.log_level=3 "
 {%@@ endif @@%}
 
 # Preload both GPT and MBR modules so that they are not missed
@@ -25,13 +25,13 @@ GRUB_PRELOAD_MODULES="part_gpt part_msdos"
 
 # Set to 'countdown' or 'hidden' to change timeout behavior,
 # press ESC key to display menu.
-GRUB_TIMEOUT_STYLE=menu
+GRUB_TIMEOUT_STYLE=hidden
 
 # Uncomment to use basic console
-GRUB_TERMINAL_INPUT=console
+# GRUB_TERMINAL_INPUT=console
 
 # Uncomment to disable graphical terminal
-#GRUB_TERMINAL_OUTPUT=console
+GRUB_TERMINAL_OUTPUT=console
 
 # The resolution used on graphical terminal
 # note that you can use only modes which your graphic card supports via VBE
