@@ -227,6 +227,7 @@ actions:
 
     reload_sway: swaymsg reload & disown
     reload_mako: pkill -SIGHUP mako
+    reload_waybar: env SVDIR=$HOME/.config/runit/sv sv hup waybar
     lesskey: lesskey
     reload_fish: pkill -SIGHUP fish
 
@@ -318,6 +319,8 @@ dotfiles: # Just a bunch of paths and action mappings
     waybar:
         src: waybar
         dst: ~/.config/waybar
+        actions:
+        - reload_waybar
 
     kitty:
         src: kitty.conf

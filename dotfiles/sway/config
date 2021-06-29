@@ -47,6 +47,7 @@ include daemons
 set $user_svd "$HOME/.config/runit/runsvdir/default"
 exec runsvdir $user_svd
 exec_always env SVDIR=$user_svd sv hup kanshi
+exec_always env SVDIR=$user_svd sv hup waybar
 exec_always _gpg-unlock
 {%@@ endif @@%}
 
