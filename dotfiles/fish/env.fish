@@ -21,7 +21,7 @@ set -x ESCDELAY 0
 ################################################################
 set -x EDITOR {{@@ editor @@}}
 set -x VISUAL {{@@ editor @@}}
-set -x BROWSER qutebrowser
+set -x BROWSER any-browser
 set -x PAGER less
 set -x MANPAGER less
 
