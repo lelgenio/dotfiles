@@ -100,7 +100,8 @@ depends=(
     neomutt urlview isync
 
     # Files
-    thunar thunar-archive-plugin engrampa
+    thunar thunar-vcs-plugin thunar-volman
+    thunar-archive-plugin engrampa
     syncthing xdg-user-dirs
     transmission-cli deemix
 
