@@ -50,6 +50,7 @@ change_vol_pulse() {
     pactl set-sink-volume @DEFAULT_SINK@ "${1}$(min 120 $2)%"
     round_vol
     pactl set-sink-volume @DEFAULT_SINK@ "${newvol}%"
+    paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
 }
 
 toggle_mute_pulse() {
