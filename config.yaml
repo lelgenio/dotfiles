@@ -26,7 +26,7 @@ variables:
     accent_fg: '#ffffff'
 
     font:
-        mono: Hack
+        mono: Hack Nerd Font
         interface: Inter
         size:
             small: 12

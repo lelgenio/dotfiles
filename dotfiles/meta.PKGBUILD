@@ -44,7 +44,7 @@ depends=(
 
     # Fonts
         inter-font ttf-ms-fonts
-        ttf-hack otf-nerd-fonts-fira-code
+        nerd-fonts-hack nerd-fonts-fira-code
 
         # Icons
         otf-font-awesome ttf-font-awesome
