@@ -24,7 +24,7 @@ depends=(
         # Greeter
         greetd greetd-gtkgreet
         # Configuration manager
-        dotdrop gnome-settings-daemon
+        dotdrop xsettingsd
 
         # Boot logo
         plymouth plymouth-theme-red-loader-git

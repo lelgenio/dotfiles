@@ -228,6 +228,7 @@ actions:
     reload_sway: swaymsg reload & disown
     reload_mako: pkill -SIGHUP mako
     reload_waybar: env SVDIR=$HOME/.config/runit/sv sv hup waybar
+    reload_xsettingsd: env SVDIR=$HOME/.config/runit/sv sv hup xsettingsd
     lesskey: lesskey
     reload_fish: pkill -SIGHUP fish
 
@@ -263,7 +264,7 @@ actions:
         rm -r "{{@@ _dotfile_abs_dst @@}}"
     start_services: >
         _runit_config "{{@@ _dotfile_abs_dst @@}}"
-        dbus-daemon gsd-xsettings
+        dbus-daemon xsettingsd
         fusuma gpg-agent
         geoclue redshift light mako
         mpd mpDris2 telegram
@@ -427,6 +428,8 @@ dotfiles: # Just a bunch of paths and action mappings
     theme:
         src: theme
         dst: ~/
+        actions:
+        - reload_xsettingsd
 
     prettierrc:
         src: prettierrc.toml
