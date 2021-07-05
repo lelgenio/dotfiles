@@ -38,9 +38,8 @@ plug 'insipx/kak-crosshairs' config %{
 plug 'occivink/kakoune-find'
 
 plug 'kak-lsp/kak-lsp' config %{
-    # LSP
     set global lsp_hover_max_lines 10
-    # lsp-inlay-diagnostics-enable global
+    lsp-inlay-diagnostics-enable global
 
     hook global BufCreate   .* %{try lsp-enable}
     hook global WinSetOption filetype=(c|cpp|rust|python) %{
@@ -48,10 +47,30 @@ plug 'kak-lsp/kak-lsp' config %{
         hook buffer NormalIdle  .* %{try lsp-highlight-references}
     }
 
-    hook global WinSetOption filetype=rust %{
-        # hook window NormalIdle .* rust-analyzer-inlay-hints
+    hook global -group rust-inlay-hints-auto WinSetOption filetype=rust %{
+        hook window -group rust-inlay-hints BufReload .* rust-analyzer-inlay-hints
+        hook window -group rust-inlay-hints NormalIdle .* rust-analyzer-inlay-hints
+        hook window -group rust-inlay-hints InsertIdle .* rust-analyzer-inlay-hints
+        hook -once -always window WinSetOption filetype=.* %{
+            remove-hooks window rust-inlay-hints
+        }
     }
 
+    define-command -override -hidden lsp-enable-decals %{
+        lsp-inlay-diagnostics-enable global
+        try %{
+            add-highlighter global/rust_analyzer_inlay_hints replace-ranges rust_analyzer_inlay_hints
+        }
+    }
+
+    define-command -override -hidden lsp-disable-decals %{
+        lsp-inlay-diagnostics-disable global
+        remove-highlighter global/rust_analyzer_inlay_hints
+    }
+
+    hook global ModeChange '.*:insert:normal' %{lsp-enable-decals}
+    hook global ModeChange '.*:normal:insert' %{lsp-disable-decals}
+    lsp-enable-decals
 
     hook global WinSetOption filetype=(c|cpp|rust) %{
         hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
