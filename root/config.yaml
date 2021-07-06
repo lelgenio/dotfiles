@@ -54,6 +54,7 @@ actions:
         elogind
         greetd
         iwd
+        bluetoothd
         mariadb
         preload
         syslog-ng
@@ -103,6 +104,10 @@ dotfiles:
         dst: /etc/pacman.conf
         actions:
         - pacman_install
+
+    bluez:
+        src: bluetooth.conf
+        dst: /etc/bluetooth/main.conf
 
     locale:
         src: locale.gen

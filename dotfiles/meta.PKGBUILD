@@ -91,7 +91,7 @@ depends=(
         # ssh
         openssh sshfs fail2ban
         # Bluetooth
-        bluez bluez-utils
+        bluez bluez-utils bluez-plugins
 
     # Browser
     qutebrowser youtube-dl
