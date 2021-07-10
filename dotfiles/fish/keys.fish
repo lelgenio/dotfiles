@@ -36,3 +36,16 @@ bind \cy 'commandline | wl-copy -n'
 # Enable fzf key bindings
 fzf_key_bindings
 
+
+function rcd #{{{
+    set file (mktemp)
+
+    ranger --choosedir=$file
+    cd (cat $file)
+
+    rm $file
+    clear
+    ls
+    fish_prompt
+end
+bind \er rcd
