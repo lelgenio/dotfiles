@@ -41,7 +41,7 @@ $mod+Shift+c reload
 --locked $mod+Control+z exec loginctl suspend || systemctl suspend
 
 # Exit sway
-Control+Alt+delete exit
+Control+Alt+delete exec pkill -u "$USER" -HUP runsvdir ; exit
 
 # Shutdown
 $mod+Alt+delete exec loginctl poweroff || systemctl poweroff
