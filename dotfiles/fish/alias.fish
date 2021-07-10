@@ -199,14 +199,7 @@ function edit-config
     pushd (dirname "$DOTDROP_CONFIG")
     set -l dotfile (fd -HE .git | wdmenu)
     test -n "$dotfile" || return 1
-    switch $EDITOR
-        case kak
-            contains dotfiles (kak -l)
-            and eval kak -c dotfiles "$dotfile"
-            or eval kak -s dotfiles "$dotfile"
-        case '*'
-            eval $EDITOR "$dotfile"
-    end
+    {{@@ editor @@}} "$dotfile"
     popd
 end
 abbr -g ec edit-config
