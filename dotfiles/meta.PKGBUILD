@@ -20,7 +20,7 @@ depends=(
         ruby-fusuma light mako kanshi udiskie redshift-wayland-git
         wtype caffeinated
         # Screensharing
-        lib32-pipewire  xdg-desktop-portal-wlr pipewire pipewire-media-session libpipewire02
+        xdg-desktop-portal-wlr pipewire pipewire-media-session libpipewire02
         # Greeter
         greetd greetd-gtkgreet
         # Configuration manager
@@ -170,5 +170,8 @@ depends=(
     libgsf libgepub libopenraw freetype2
 
 )
+pkgver() {
+    date "+%Y%m%d.%H%M"
+}
 
 # vim: ft=sh
