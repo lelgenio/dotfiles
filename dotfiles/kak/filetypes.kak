@@ -70,17 +70,28 @@ hook global WinSetOption filetype=blade %[
 
     add-highlighter buffer/blade regions
     add-highlighter buffer/blade/base default-region group
+
+    add-highlighter buffer/blade/string region '"' '"' regions
+    add-highlighter buffer/blade/string/base default-region fill string
+    add-highlighter buffer/blade/string/expression region '\{\{(?!--)' '(?!--)\}\}' ref php
+    add-highlighter buffer/blade/string/raw-expression region '\{!!' '!!\}' ref php
+
     add-highlighter buffer/blade/base/ ref html
 
-    add-highlighter buffer/blade/expression region '\{\{ ' ' \}\}' ref php
+    add-highlighter buffer/blade/php  region '@php' '@endphp' group
+    add-highlighter buffer/blade/php/ ref php
+    add-highlighter buffer/blade/php/ regex '@((end)?php)' 1:block
+
+    add-highlighter buffer/blade/expression region '\{\{(?!--)' '(?!--)\}\}' ref php
     add-highlighter buffer/blade/statement  region -recurse '\(' '@(if|for|foreach|include)\s*\(' '\)' ref php
-    add-highlighter buffer/blade/base/      regex '@(if|else|endif|for|foreach|endfor|endforeach|include|switch|endswitch|case|break)' 1:keyword
+    add-highlighter buffer/blade/base/      regex '@(else(if)?|include|case|break)' 1:keyword
+    add-highlighter buffer/blade/base/      regex '@((end)?(if|isset|for|foreach|switch))' 1:keyword
 
     add-highlighter buffer/blade/comment    region '\{\{--' '--\}\}' fill comment
     set-option buffer comment_block_begin '{{-- '
     set-option buffer comment_block_end   ' --}}'
 
-    map buffer user 'c' 'x_: comment-block<ret><a-;>;' -docstring 'comment block'
+    map buffer user 'c' '<a-x>_: comment-block<ret><a-;>;' -docstring 'comment block'
 ]
 
 try %§
