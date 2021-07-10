@@ -5,5 +5,6 @@ pkill -9 swayidle
 exec swayidle -w \
    before-sleep 'pkill caffeinated; swaylock -f' \
    timeout 360 'pkill caffeinated; swaylock -f' \
-   timeout 1800 'swaymsg "output * dpms off"' \
+   timeout 1800 'mpc status | grep "^\[playing\]" > /dev/null ||
+                 swaymsg "output * dpms off"' \
         resume 'swaymsg "output * dpms on"' \
