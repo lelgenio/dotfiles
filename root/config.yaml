@@ -84,7 +84,6 @@ dotfiles:
         src: elogind.conf
         dst: /etc/elogind/logind.conf
         actions:
-        - sv_update
         - dbus_uuidgen
 
     grub:
