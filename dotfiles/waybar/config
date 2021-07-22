@@ -9,7 +9,6 @@
     ],
     "modules-center": [
         "clock",
-        "custom/sleep",
         "custom/weather",
     ],
     "modules-right": [
@@ -34,8 +33,8 @@
         "format-icons": {
             "1": "",
             "2": "",
-            "3": "",
-            "4": "",
+            "3": "",
+            "4": "",
             "5": "",
             "6": "",
             "7": "",
