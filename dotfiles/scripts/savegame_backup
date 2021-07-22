@@ -63,6 +63,8 @@ game_save ULTRAKILL-wine \
     "Games/ultrakill/drive_c/Program Files/ULTRAKILL/Saves"
 game_save marioW \
     "Games/super-mario-world"
+game_save gta_san_andreas \
+    "Games/grand-theft-auto-san-andreas/drive_c/users/$USER/Documents/GTA San Andreas User Files"
 
 game_save hl1 \
     "Games/HalfLife2Source/game/hl1/save"
