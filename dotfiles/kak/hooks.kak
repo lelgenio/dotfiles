@@ -27,7 +27,6 @@ define-command -override diffr %{ try %{
     ansi-render
 } }
 
-hook global BufReadFifo .* diffr
 hook global BufOpenFile .* diffr
 
 hook global BufOpenFile .* %{

@@ -1,21 +1,33 @@
-#!/bin/sh
+#!/bin/fish
 
-if test "$#" -ne 0; then
-    for i; do
+if test (count $argv) -ne 0
+    for i in $argv
         cat "$i"
-    done | "$0"
+    end | eval (status filename)
     exit 0
-fi
+end
 
-f=$(cat)
+set term_line_count (tput lines)
 
-if test $(tput lines) -lt $(printf "%s\n" "$f" | wc -l); then
-    printf "%s\n" "$f" | kak -e '
-        exec <a-o>
-        map global normal q :q<ret>;
-        rmhl global/number-lines;
-        set global scrolloff 10,0;
-    '
-else
-    printf "%s\n" "$f"
-fi
+while read line
+    set -a input_lines "$line"
+
+    set input_line_count (printf "%s\n" $input_lines | wc -l)
+
+    if test "$term_line_count" -lt "$input_line_count"
+        begin
+            printf "%s\n" $input_lines
+            cat
+        end | kak -e '
+            exec <a-o>
+            map global normal q :q<ret>;
+            rmhl global/number-lines;
+            set global scrolloff 10,0;
+        '
+
+        exit 0
+    end
+
+end
+
+printf "%s\n" $input_lines
