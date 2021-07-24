@@ -16,3 +16,6 @@
 *.png       -filter
 *.jpg       -filter
 {%@@ endif @@%}
+
+*.min.css binary
+*.min.js  binary
