@@ -10,7 +10,7 @@ else
     done
 fi
 
-DESTFOLDER="$DESTFOLDER/Screenshot"
+DESTFOLDER="$DESTFOLDER/Screenshots"
 
 mkdir -p $DESTFOLDER
 
