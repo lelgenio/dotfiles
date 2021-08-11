@@ -75,12 +75,13 @@ depends=(
         # Emulators
         kitty alacritty
         #Tools
-        tuxi  translate-shell
+        tuxi translate-shell tealdeer so
         ranger atool p7zip jq fzf
         neofetch htop bpytop
+        inxi entr
         # Replacements
-        #ls cat rm -rf    grep    find sed diff  cd
-        exa bat trash-cli ripgrep fd   sd  diffr zoxide
+        #ls cat rm -rf    grep    find sed diff  cd     fmt
+        exa bat trash-cli ripgrep fd   sd  diffr zoxide par
 
     # Network
         iwd dhcpcd
@@ -120,7 +121,7 @@ depends=(
         kakoune kak-lsp
         neovim python-pynvim neovim-symlinks
 
-        bash-language-server
+        shfmt bash-language-server
 
         # web lsp
         vscode-css-languageserver-bin
@@ -139,7 +140,7 @@ depends=(
         rust-analyzer
 
         # Compiled
-        rust gcc gdb
+        rust gcc gdb meson
 
         # work
         mariadb
@@ -148,6 +149,7 @@ depends=(
         lipsum emmet-cli
         blade-formatter prettier
         nodejs-less nodejs-less-plugin-clean-css
+        uglify-js
 
     # Virt
     qemu
