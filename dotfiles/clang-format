@@ -8,6 +8,7 @@
 
 
 BasedOnStyle: LLVM
+AllowShortFunctionsOnASingleLine: None
 IndentWidth: {{@@ indent_width @@}}
 TabWidth: {{@@ indent_width @@}}
 
