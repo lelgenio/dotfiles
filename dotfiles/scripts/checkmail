@@ -13,7 +13,7 @@ die() {
     test "$?" = 0 ||
         notify-send "Failed to sync mail" "try unlocking your gpg key"
 }
-trap die EXIT
+# trap die EXIT
 
 getnew() {
     pushd "$HOME/.local/share/mail/" >/dev/null
