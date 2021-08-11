@@ -8,8 +8,8 @@
 
 {%@@ if tabs @@%}
 *           filter=tabspace
-*.c         filter=tabspace_small
-*.cpp       filter=tabspace_small
+*.c         filter=tabspace
+*.cpp       filter=tabspace
 *.yml       -filter
 *.scd       -filter
 ?akefile    -filter

@@ -49,11 +49,6 @@
     smudge = unexpand --tabs={{@@ indent_width @@}} --first-only
     clean  = expand   --tabs={{@@ indent_width @@}} --initial
 
-[filter "tabspace_small"]
-    {%@@ set small_indent = [2, indent_width / 2] | max @@%}
-    smudge = unexpand --tabs={{@@ small_indent @@}} --first-only
-    clean  = expand   --tabs={{@@ small_indent @@}} --initial
-
 {%@@ endif @@%}
 
 [core]
