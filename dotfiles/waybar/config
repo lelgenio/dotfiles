@@ -98,7 +98,7 @@
         "format-bluetooth-muted": "",
         "format-muted": "ﱝ",
         "format-icons": {
-            "headphones": "",
+            "headphone": ["   奄", "   奔", "   墳"],
             "handsfree": "",
             "headset": "",
             "phone": "",
