@@ -25,6 +25,9 @@ map global user 'R' '"_d! wl-paste -n <ret>' -docstring 'clipboard replace'
 
 map global user 'b' ': find_buffer<ret>' -docstring 'switch buffer'
 
+map global user 'l' ': lsp-enable-decals<ret>' -docstring 'LSP enable decals'
+map global user 'L' ': lsp-disable-decals<ret>' -docstring 'LSP disable decals'
+
 map global user 's' ': enter-user-mode surround<ret>' -docstring 'surround mode'
 map global surround 's' ': surround<ret>' -docstring 'surround'
 map global surround 'c' ': change-surround<ret>' -docstring 'change'
