@@ -83,7 +83,7 @@ touch $histfile
 
 function get_score -a query file
     set -l escaped (string escape --style regex $query)
-    set -l score (string replace -rf "^(\d+) $escaped\$" '$1'  < $file)
+    set -l score (string replace -rf "^(\d+) $escaped\$" '$1' $hist)
     test -z "$score"
     and set -l score 0
     echo $score
@@ -91,8 +91,10 @@ end
 
 set -l estatus 1
 
+set hist (cat $histfile)
+
 while read line
-    set -l score (get_score $line $histfile)
+    set -l score (get_score $line $hist)
     printf "%s %s\n" $score $line
 end |
 sort --reverse --numeric-sort |
@@ -122,7 +124,8 @@ while read choice
 
     test $score = 0
     and echo $replacement >> $histfile
-    or sd "\d+ $escaped" $replacement  $histfile &> /dev/null </dev/null
+    or sd "\d+ $escaped" $replacement  $histfile &> /dev/null </dev/null &
+    disown
 end
 
 exit $estatus
