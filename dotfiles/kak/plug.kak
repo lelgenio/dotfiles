@@ -70,7 +70,6 @@ plug 'kak-lsp/kak-lsp' config %{
 
     hook global ModeChange '.*:insert:normal' %{lsp-enable-decals}
     hook global ModeChange '.*:normal:insert' %{lsp-disable-decals}
-    lsp-enable-decals
 
     hook global WinSetOption filetype=(c|cpp|rust) %{
         hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
