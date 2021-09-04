@@ -21,6 +21,7 @@ UUID={{@@ boot_uuid @@}}    /boot vfat  rw,errors=remount-ro             0 2
 {%@@ endfor @@%}
 
 /swap/swapfile    none  swap  defaults                         0 0
+tmpfs             /tmp  tmpfs rw,nodev,nosuid,size=2G          0 0
 
 {%@@ if zram @@%}
 /dev/zram0 none swap defaults,pri=100 0 0
