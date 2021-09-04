@@ -8,6 +8,9 @@ test "$1" = "-e" && shift
             exec alacritty -e $@ ||
             exec alacritty
     }
+# {%@@ elif terminal == "foot" @@%} #
+    command -v footclient > /dev/null &&
+        exec footclient -- $@
 # {%@@ elif terminal == "kitty" @@%} #
     command -v kitty > /dev/null &&
         exec kitty -- $@
