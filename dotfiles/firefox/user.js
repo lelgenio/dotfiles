@@ -63,3 +63,9 @@ user_pref("devtools.inspector.activeSidebar", "ruleview");
 user_pref("devtools.inspector.three-pane-enabled", false);
 user_pref("devtools.responsive.leftAlignViewport.enabled", true);
 user_pref("devtools.theme", "dark");
+
+// hardware acceleration
+user_pref("media.ffmpeg.vaapi.enabled", "true");
+user_pref("media.ffvpx.enabled", "false");
+user_pref("media.rdd-vpx.enabled", "false");
+user_pref("gfx.webrender.compositor.force-enabled", "true");
