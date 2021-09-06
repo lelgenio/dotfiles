@@ -51,13 +51,13 @@ autotype(){
     curWindow=`swaymsg -t get_tree | jq -r '.. | select(.focused? == true).app_id'`
     if test "$curWindow" = "org.qutebrowser.qutebrowser"
     then
-        wtype -k escape
-        wtype "$INSERTKEY"
+        wtype -s 100 -k escape
+        wtype -s 100 "$INSERTKEY"
     fi
 
-    wtype "$username"
-    wtype -k tab
-    wtype "$password"
+    wtype -s 100 "$username"
+    wtype -s 100 -k tab
+    wtype -s 100 "$password"
 
 }
 
