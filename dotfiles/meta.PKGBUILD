@@ -154,6 +154,9 @@ depends=(
     # Virt
     qemu
 
+    # Power manager
+    tlp
+
     # Gtk
     gtk3-nocsd-legacy-git
 
