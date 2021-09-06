@@ -10,10 +10,10 @@
     :root {
       --arrowpanel-menuitem-padding: 2px !important;
     }
-    .titlebar-color {
+    /* .titlebar-color {
       color: -moz-accent-color-foreground;
       background-color: -moz-accent-color;
-    }
+    } */
     .tab-background {
       border-radius: 0px 0px !important;
       margin-bottom: 0px !important;
