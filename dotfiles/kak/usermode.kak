@@ -63,7 +63,7 @@ try %{
 
     define-command -hidden find_file \
     %{ edit %sh{
-        fd -HE .git | wdmenu ||
+        fd -tf -HE .git | wdmenu ||
         echo "$kak_buffile"
     } }
 
