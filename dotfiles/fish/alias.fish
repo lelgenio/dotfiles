@@ -49,7 +49,7 @@ abbr -g  crm command rm -i
 # ls and cat
 ################################################################
 
-calias ls 'exa --git'
+calias ls 'exa --git --sort newest'
 calias tree 'exa --git --tree --icons'
 calias cat 'bat -p'
 calias cp 'cp --reflink=auto'
