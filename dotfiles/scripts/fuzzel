@@ -1,0 +1,17 @@
+#!/bin/sh
+
+exec /usr/bin/fuzzel \
+    --terminal=terminal \
+    --lines=30 \
+    --width=50 \
+    --font="{{@@ font.mono @@}}:size={{@@ font.size.medium * 1.6 @@}}" \
+    --icon-theme="{{@@ icon_theme @@}}" \
+    --border-radius=0 \
+    --border-width=2 \
+    --selection-color="{{@@ accent_color.replace('#','') @@}}ff" \
+    --selection-text-color="{{@@ accent_fg.replace('#','') @@}}ff" \
+    --background="{{@@ color.bg .replace('#','') @@}}ff" \
+    --text-color="{{@@ color.txt .replace('#','') @@}}ff" \
+    --match-color="{{@@ accent_color.replace('#','') @@}}ff" \
+    --border-color="{{@@ accent_color.replace('#','') @@}}ff" \
+    "$@"

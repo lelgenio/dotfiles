@@ -3,7 +3,7 @@
 set -e
 
 main(){
-    sym=$(bmenu  | grep -o '^.' )
+    sym=$(wdmenu | grep -o '^.' )
     wl-copy --trim-newline "$sym"
     notify-send "Copied:" "\"$sym\""
 }

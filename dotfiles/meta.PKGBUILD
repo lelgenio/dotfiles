@@ -15,7 +15,7 @@ depends=(
         # Sway
         sway swayidle swaylock waybar
         # Menu
-        bemenu-wlroots j4-dmenu-desktop
+        fuzzel bemenu-wlroots j4-dmenu-desktop
         # Utility
         ruby-fusuma light mako kanshi udiskie redshift-wayland-git
         wtype caffeinated

@@ -1,11 +1,14 @@
 #!/bin/sh
 
-# {%@@ if launcher == "wofi" @@%} #
+# {%@@ if launcher == "fuzzel" @@%} #
+command -v fuzzel > /dev/null &&
+    exec fuzzel --dmenu "$@"
+# {%@@ elif launcher == "wofi" @@%} #
 command -v wofi > /dev/null &&
-    exec wofi -d $@
-# {%@@ else @@%} #
+    exec wofi -d "$@"
+# {%@@ elif launcher == "bmenu" @@%} #
 command -v bemenu > /dev/null &&
-    exec bmenu $@
+    exec bmenu "$@"
 # {%@@ endif @@%} #
 
 notify-send "Error" "Launcher program missing"
