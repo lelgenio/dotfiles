@@ -42,7 +42,7 @@ variables:
             mail: wopus.com.br
 
     plymouth: true
-    zram: true
+    zram: false
     filesystem:
         partitions:
             "/": /mnt/btrfs-root
