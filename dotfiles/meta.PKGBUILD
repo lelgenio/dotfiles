@@ -79,6 +79,8 @@ depends=(
         ranger atool p7zip jq fzf
         neofetch htop bpytop
         inxi entr
+        #Prompt
+        starship
         # Replacements
         #ls cat rm -rf    grep    find sed diff  cd     fmt
         exa bat trash-cli ripgrep fd   sd  diffr zoxide par

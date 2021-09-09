@@ -21,6 +21,7 @@ variables:
     bar: waybar
     bar_pos: top
     tmux: false
+    starship: false
     supervisor: runit
 
     accent_fg: '#ffffff'
@@ -304,6 +305,10 @@ dotfiles: # Just a bunch of paths and action mappings
         dst: ~/.config/fish
         actions:
         - reload_fish
+
+    starship:
+        src: starship.toml
+        dst: ~/.config/starship.toml
 
     git:
         src: git
