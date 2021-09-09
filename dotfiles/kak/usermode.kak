@@ -59,91 +59,87 @@ map global find 'g' ': find_git_file<ret>' -docstring 'git files'
 map global find 'c' ': find_dir<ret>' -docstring 'change dir'
 map global find 'd' ': find_delete<ret>' -docstring 'file to delete'
 
-try %{
+define-command -override -hidden find_file \
+%{ edit %sh{
+    fd -tf -HE .git | wdmenu ||
+    echo "$kak_buffile"
+} }
 
-    define-command -hidden find_file \
-    %{ edit %sh{
-        fd -tf -HE .git | wdmenu ||
-        echo "$kak_buffile"
-    } }
+define-command -override -hidden find_delete \
+%{ nop %sh{
+    fd -H -E .git -t f | wdmenu | xargs -r trash
+} }
 
-    define-command -hidden find_delete \
-    %{ nop %sh{
-        fd -H -E .git -t f | wdmenu | xargs -r trash
-    } }
+define-command -override -hidden find_git_file \
+%{ edit -existing %sh{ git ls-files | wdmenu } }
 
-    define-command -hidden find_git_file \
-    %{ edit -existing %sh{ git ls-files | wdmenu } }
+define-command -override -hidden find_dir \
+%{ cd %sh{ fd -Htd | wdmenu } }
 
-    define-command -hidden find_dir \
-    %{ cd %sh{ fd -Htd | wdmenu } }
+define-command -override -hidden find_buffer \
+%{ buffer %sh{
+    printf "%s\n" $kak_buflist | wdmenu
+} }
 
-    define-command -hidden find_buffer \
-    %{ buffer %sh{
-        printf "%s\n" $kak_buflist | wdmenu
-    } }
-
-    define-command -hidden find_ripgrep \
-    %{ eval %sh{
-        patter=$( wdmenu -p "Regex")
-        rg --column -n "$patter" | wdmenu |
-            perl -ne 'print "edit \"$1\" \"$2\" \"$3\" " if /(.+):(\d+):(\d+):/'
-    } }
+define-command -override -hidden find_ripgrep \
+%{ eval %sh{
+    patter=$( wdmenu -p "Regex")
+    rg --column -n "$patter" | wdmenu |
+        perl -ne 'print "edit \"$1\" \"$2\" \"$3\" " if /(.+):(\d+):(\d+):/'
+} }
 
 
-    define-command -params .. \
-    -shell-script-candidates 'zoxide query -l' \
-    zoxide \
-    %{
-        cd %sh{ zoxide query -- "$@" || echo "$@" }
-        echo %sh{ pwd | sed "s|$HOME|~|" }
-    }
-
-    define-command  config-source \
-    %{
-        source "%val{config}/kakrc"
-    }
-
-    define-command git-merge-head %{
-        evaluate-commands -draft %{
-            # delete head marker
-            execute-keys <a-/>^<lt>{4,}<ret><a-x>d
-            try %{
-                # select original marker
-                execute-keys /^[|]{4,}<ret>
-                # extend to theirs marker
-                execute-keys ?^={4,}<ret><a-x>
-            } catch %{
-                # select theirs marker
-                execute-keys /^={4,}<ret><a-x>
-            }
-            # extend to end marker
-            execute-keys ?^<gt>{4,}<ret><a-x>d
-        }
-    } -docstring "merge using head"
-
-    define-command git-merge-original %{
-        evaluate-commands -draft %{
-            # select head marker
-            execute-keys <a-/>^<lt>{4,}<ret>
-            # select to middle of conflict
-            execute-keys ?^[|]{4,}<ret><a-x>d
-            # select theirs marker
-            execute-keys /^={4,}<ret>
-            # extend to end marker
-            execute-keys ?^<gt>{4,}<ret><a-x>d
-        }
-    } -docstring "merge using original"
-
-    define-command git-merge-new %{
-        evaluate-commands -draft %{
-            # select head marker
-            execute-keys <a-/>^<lt>{4,}<ret>
-            # extend to theirs marker
-            execute-keys ?^={4,}\n<ret>d
-            # delete end marker
-            execute-keys /^<gt>{4,}<ret><a-x>d
-        }
-    } -docstring "merge using new"
-
+define-command -override -params .. \
+-shell-script-candidates 'zoxide query -l' \
+zoxide \
+%{
+    cd %sh{ zoxide query -- "$@" || echo "$@" }
+    echo %sh{ pwd | sed "s|$HOME|~|" }
 }
+
+define-command -override  config-source \
+%{
+    source "%val{config}/kakrc"
+}
+
+define-command -override git-merge-head %{
+    evaluate-commands -draft %{
+        # delete head marker
+        execute-keys <a-/>^<lt>{4,}<ret><a-x>d
+        try %{
+            # select original marker
+            execute-keys /^[|]{4,}<ret>
+            # extend to theirs marker
+            execute-keys ?^={4,}<ret><a-x>
+        } catch %{
+            # select theirs marker
+            execute-keys /^={4,}<ret><a-x>
+        }
+        # extend to end marker
+        execute-keys ?^<gt>{4,}<ret><a-x>d
+    }
+} -docstring "merge using head"
+
+define-command -override git-merge-original %{
+    evaluate-commands -draft %{
+        # select head marker
+        execute-keys <a-/>^<lt>{4,}<ret>
+        # select to middle of conflict
+        execute-keys ?^[|]{4,}<ret><a-x>d
+        # select theirs marker
+        execute-keys /^={4,}<ret>
+        # extend to end marker
+        execute-keys ?^<gt>{4,}<ret><a-x>d
+    }
+} -docstring "merge using original"
+
+define-command -override git-merge-new %{
+    evaluate-commands -draft %{
+        # select head marker
+        execute-keys <a-/>^<lt>{4,}<ret>
+        # extend to theirs marker
+        execute-keys ?^={4,}\n<ret>d
+        # delete end marker
+        execute-keys /^<gt>{4,}<ret><a-x>d
+    }
+} -docstring "merge using new"
