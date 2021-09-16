@@ -48,14 +48,7 @@ face global SecondaryCursor    default,default+rfg
 face global SecondaryCursorEol SecondaryCursor
 face global SecondarySelection PrimarySelection
 
-hook global FocusIn .* %{
-    face window PrimaryCursor      {{@@ accent_fg @@}},{{@@ accent_color @@}}+fg
-    face window PrimaryCursorEol   PrimaryCursor
-}
-hook global FocusOut .* %{
-    face window PrimaryCursor      {{@@ accent_fg @@}},{{@@ bg_light @@}}+fg
-    face window PrimaryCursorEol   PrimaryCursor
-}
+face global InactiveCursor     {{@@ accent_fg @@}},{{@@ bg_light @@}}+fg
 
 face global MenuForeground {{@@ accent_fg @@}},{{@@ accent_color @@}}
 face global MenuBackground default,{{@@ bg_dark @@}}
@@ -94,11 +87,11 @@ face global BufferPadding {{@@ nontxt @@}},default
     'Hint':        'blue',
 }.items() @@%}
     face global HighlightDiagnostic{{@@ obj @@}} {{@@ col @@}},default+bu
-    face global Diagnostic{{@@          obj @@}} {{@@ col @@}},default+b
+    face global Diagnostic{{@@          obj @@}} {{@@ col @@}},default+bu
     face global TextDiagnostic{{@@      obj @@}} {{@@ col @@}},default+b
     face global InlayDiagnostic{{@@     obj @@}} {{@@ col @@}},default+br
 {%@@ endfor @@%}
 
 face global Reference default+bu
-face global InlayHint {{@@ bg_light @@}}
+face global InlayHint {{@@ bg_light @@}}+buif
 

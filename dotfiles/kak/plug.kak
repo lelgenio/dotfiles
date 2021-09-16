@@ -30,6 +30,7 @@ plug 'alexherbo2/auto-pairs.kak' commit "fd735ec149ef0d9ca5f628a95b1e52858b5afbd
 plug 'h-youhei/kakoune-surround'
 
 plug 'delapouite/kakoune-palette'
+plug 'greenfork/active-window.kak'
 plug 'insipx/kak-crosshairs' config %{
     crosshairs
 }
@@ -40,12 +41,9 @@ plug 'occivink/kakoune-find'
 plug 'kak-lsp/kak-lsp' config %{
     set global lsp_hover_max_lines 10
     lsp-inlay-diagnostics-enable global
+    set global lsp_auto_highlight_references true
 
     hook global BufCreate   .* %{try lsp-enable}
-    hook global WinSetOption filetype=(c|cpp|rust|python) %{
-        # lsp-auto-hover-enable
-        hook buffer NormalIdle  .* %{try lsp-highlight-references}
-    }
 
     hook global -group rust-inlay-hints-auto WinSetOption filetype=rust %{
         hook window -group rust-inlay-hints BufReload .* rust-analyzer-inlay-hints
@@ -79,6 +77,5 @@ plug 'kak-lsp/kak-lsp' config %{
             remove-hooks window semantic-tokens
         }
     }
-
 }
 
