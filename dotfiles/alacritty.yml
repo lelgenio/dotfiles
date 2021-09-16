@@ -86,6 +86,8 @@ hints:
               key: U
               mods: Control|Shift
 
+mouse:
+  hide_when_typing: true
 
 ############################################################
 key_bindings:
