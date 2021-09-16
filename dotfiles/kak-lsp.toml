@@ -156,14 +156,36 @@ args = ["stdio"]
 # [language.rust]
 # filetypes = ["rust"]
 # roots = ["Cargo.toml"]
-# command = "rls"
-# args = []
+# command = "sh"
+# args = [
+#     "-c",
+#     """
+#         if path=$(rustup which rls 2>/dev/null); then
+#             "$path"
+#         else
+#             rls
+#         fi
+#     """,
+# ]
 
 [language.rust]
 filetypes = ["rust"]
 roots = ["Cargo.toml"]
-command = "rust-analyzer"
-args = []
+command = "sh"
+args = [
+    "-c",
+    """
+        if path=$(rustup which rust-analyzer 2>/dev/null); then
+            "$path"
+        else
+            rust-analyzer
+        fi
+    """,
+]
+[language.rust.settings.rust-analyzer]
+hoverActions.enable = false # kak-lsp doesn't support this at the moment
+procMacro.enable = true
+cargo.loadOutDirsFromCheck = true
 
 [language.terraform]
 filetypes = ["terraform"]
