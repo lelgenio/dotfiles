@@ -57,7 +57,11 @@ hook global WinSetOption filetype=jsonc %[
 
 
 hook global WinSetOption filetype=blade %[
-    set buffer formatcmd 'blade-formatter --stdin'
+    set buffer formatcmd 'blade-formatter \
+            --end-with-newline \
+            --indent-size "4" \
+            --wrap-line-length "80" \
+            --stdin'
     set-option buffer extra_word_chars '_' '-'
 
     hook window ModeChange pop:insert:.* -group blade-trim-indent  blade-trim-indent
@@ -127,7 +131,10 @@ define-command -hidden blade-indent-on-new-line %<
 §
 
 hook global WinSetOption filetype=less  %[
-    set buffer formatcmd 'prettier --parser less'
+    set buffer formatcmd 'prettier \
+            --tab-width "4" \
+            --print-width "80" \
+        	--parser less'
 
     set-option buffer extra_word_chars '_' '-'
 
