@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /usr/lib/kdeconnectd
+exec /usr/lib/kdeconnectd --replace

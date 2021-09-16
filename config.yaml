@@ -267,7 +267,7 @@ actions:
         _runit_config "{{@@ _dotfile_abs_dst @@}}"
         dbus-daemon xsettingsd
         fusuma gpg-agent
-        geoclue redshift light mako
+        geoclue redshift mako
         mpd mpDris2 telegram
         pipewire pipewire-media-session xdpw
         pulseaudio kdeconnectd kdeconnect-indicator
