@@ -7,21 +7,24 @@
 
 set -U fish_features stderr-nocaret qmark-noglob regex-easyesc
 
-source {$__fish_config_dir}/env.fish
-source {$__fish_config_dir}/wm.fish
-source {$__fish_config_dir}/alias.fish
-source {$__fish_config_dir}/keys.fish
-source {$__fish_config_dir}/tmux.fish
-source {$__fish_config_dir}/colors.fish
+if status is-interactive
 
-{%@@ if starship @@%}
-    starship init fish | source
-    # Set cursor shape
-    printf '\e[5 q' # Bar
-{%@@ else @@%}
-    source {$__fish_config_dir}/prompt.fish
-{%@@ endif @@%}
+    source {$__fish_config_dir}/env.fish
+    source {$__fish_config_dir}/wm.fish
+    source {$__fish_config_dir}/alias.fish
+    source {$__fish_config_dir}/keys.fish
+    source {$__fish_config_dir}/tmux.fish
+    source {$__fish_config_dir}/colors.fish
 
+    {%@@ if starship @@%}
+        starship init fish | source
+        # Set cursor shape
+        printf '\e[5 q' # Bar
+    {%@@ else @@%}
+        source {$__fish_config_dir}/prompt.fish
+    {%@@ endif @@%}
+
+end
 
 function _fish_autoreload --on-signal SIGHUP
     source {$__fish_config_dir}/config.fish
