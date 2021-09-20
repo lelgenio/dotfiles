@@ -17,7 +17,8 @@ depends=(
         # Menu
         fuzzel bemenu-wlroots j4-dmenu-desktop
         # Utility
-        ruby-fusuma light mako kanshi udiskie redshift-wayland-git
+        ruby-fusuma light mako kanshi udiskie
+        gammastep
         wtype caffeinated
         # Screensharing
         xdg-desktop-portal-wlr pipewire pipewire-media-session libpipewire02

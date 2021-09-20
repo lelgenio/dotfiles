@@ -1,0 +1,6 @@
+#!/bin/sh
+
+loc=`curl ipinfo.io/loc | sed 's/,/:/'` ||
+loc="-30:-50"
+
+exec gammastep -l "$loc"
