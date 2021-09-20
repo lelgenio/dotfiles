@@ -54,6 +54,7 @@ map global git '<a-m>' ': git-merge-original <ret>' -docstring 'merge using orig
 
 map global user 'f' ': enter-user-mode find<ret>' -docstring 'find mode'
 map global find 'f' ': find_file<ret>' -docstring 'file'
+map global find 'l' ': find_line<ret>' -docstring 'jump to line'
 map global find 'r' ': find_ripgrep<ret>' -docstring 'ripgrep all file'
 map global find 'g' ': find_git_file<ret>' -docstring 'git files'
 map global find 'c' ': find_dir<ret>' -docstring 'change dir'
@@ -88,17 +89,29 @@ define-command -override -hidden find_ripgrep \
         perl -ne 'print "edit \"$1\" \"$2\" \"$3\" " if /(.+):(\d+):(\d+):/'
 } }
 
+define-command -override -hidden find_line \
+%{ evaluate-commands -save-regs a %{
+        execute-keys %{Z%"ayz}
+        execute-keys %sh{
+            line=$(
+                printf "%s\n" "$kak_reg_a" |
+                nl -ba -w1 |
+                wdmenu -p "Line" |
+                cut -f1
+            )
+            test -n "$line" && echo "${line}gx"
+        }
+} }
+
 
 define-command -override -params .. \
 -shell-script-candidates 'zoxide query -l' \
-zoxide \
-%{
+zoxide %{
     cd %sh{ zoxide query -- "$@" || echo "$@" }
     echo %sh{ pwd | sed "s|$HOME|~|" }
 }
 
-define-command -override  config-source \
-%{
+define-command -override  config-source %{
     source "%val{config}/kakrc"
 }
 
