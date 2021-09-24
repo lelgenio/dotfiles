@@ -77,28 +77,7 @@ trap clean_exit EXIT
     set hb "#404040"
 #{%@@ endif @@%}#
 
-set -l histfile "$HOME/.local/share/bmenu-hist"
-mkdir -p (dirname $histfile)
-touch $histfile
-
-function get_score -a query file
-    set -l escaped (string escape --style regex $query)
-    set -l score (string replace -rf "^(\d+) $escaped\$" '$1' $hist)
-    test -z "$score"
-    and set -l score 0
-    echo $score
-end
-
-set -l estatus 1
-
-set hist (cat $histfile)
-
-while read line
-    set -l score (get_score $line $hist)
-    printf "%s %s\n" $score $line
-end |
-sort --reverse --numeric-sort |
-string replace -ar '^\d+ ' '' |
+dhist sort |
 bemenu \
     $focused_output\
     --grab\
@@ -113,21 +92,6 @@ bemenu \
     --nb "$nb" --nf "$nf" \
     --hb "$hb" --hf "$hf" \
     $argv |
-while read choice
-    printf "%s\n" $choice
-
-    set estatus 0
-
-    set -l escaped (string escape --style regex $choice)
-    set -l score (get_score $choice $histfile)
-    set -l replacement (printf "%s %s" (math $score + 1) $choice)
-
-    test $score = 0
-    and echo $replacement >> $histfile
-    or sd "\d+ $escaped" $replacement  $histfile &> /dev/null </dev/null &
-    disown
-end
-
-exit $estatus
+    dhist increment
 
 # vim: ft=fish

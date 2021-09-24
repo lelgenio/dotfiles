@@ -10,7 +10,7 @@ clean() {
 
     set +e
     kill "$mpvPid"
-    rm -f $tmpf
+    rm -f "$tmpf"
 }
 
 trap clean EXIT
@@ -52,8 +52,8 @@ main() {
 }
 
 pick_song() {
-    choice=$(cat $tmpf | cut -d\| -f1 | wdmenu)
-    choice=$(grep "$choice" $tmpf | head -n 1)
+    choice=$(cat "$tmpf" | cut -d\| -f1 | wdmenu)
+    choice=$(grep "$choice" "$tmpf" | head -n 1)
     choiceId=$(printf "%s" "$choice" | cut -d\| -f2)
 
     case "$sType" in
@@ -131,9 +131,9 @@ common_preview() {
     )
 
     mpv --quiet --volume=50 --no-resume-playback "$choicePreview" &
-    mpvPid=$!
+    mpvPid="$!"
     choice=$(printf "$COMMON_CHOISES" | wdmenu -p 'Download?')
-    kill $mpvPid || true
+    kill "$mpvPid" || true
 }
 
 common_art() {
