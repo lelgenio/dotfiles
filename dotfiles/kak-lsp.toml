@@ -34,13 +34,13 @@ command = "scry"
 [language.css]
 filetypes = ["css"]
 roots = ["package.json"]
-command = "css-languageserver"
+command = "vscode-css-languageserver"
 args = ["--stdio"]
 
 [language.less]
 filetypes = ["less"]
 roots = ["package.json", ".git"]
-command = "css-languageserver"
+command = "vscode-css-languageserver"
 args = ["--stdio"]
 
 [language.d]
@@ -84,7 +84,7 @@ args = ["--lsp"]
 [language.html]
 filetypes = ["html"]
 roots = ["package.json"]
-command = "html-languageserver"
+command = "vscode-html-languageserver"
 args = ["--stdio"]
 
 [language.javascript]
@@ -102,7 +102,7 @@ args = ["--stdio"]
 [language.json]
 filetypes = ["json"]
 roots = ["package.json"]
-command = "json-languageserver"
+command = "vscode-json-languageserver"
 args = ["--stdio"]
 
 [language.latex]

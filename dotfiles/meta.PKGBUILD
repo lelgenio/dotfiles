@@ -114,7 +114,7 @@ depends=(
     mpd mpc ncmpcpp mpdris2
     playerctl clyrics
     kdeconnect
-    blender gimp kdenlive
+    blender gimp
     zathura zathura-pdf-mupdf
 
     # Office
@@ -127,8 +127,9 @@ depends=(
         shfmt bash-language-server
 
         # web lsp
-        vscode-css-languageserver-bin
         vscode-html-languageserver
+        vscode-css-languageserver
+        vscode-json-languageserver
 
         # Python
         ipython bpython

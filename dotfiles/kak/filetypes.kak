@@ -146,6 +146,8 @@ hook global WinSetOption filetype=less  %[
     hook window InsertChar \n -group less-indent less-indent-on-new-line
     hook window InsertChar \} -group less-indent less-indent-on-closing-curly-brace
 
+    map buffer insert <c-k> '<esc>xs\$\d+<ret>) c'
+
     hook -once -always window WinSetOption filetype=.* %{ remove-hooks window less-.+ }
 
     add-highlighter buffer/less regions
