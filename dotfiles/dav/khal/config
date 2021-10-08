@@ -7,14 +7,33 @@
 
 
 [default]
-default_calendar = calendar_local
+default_calendar = calendar_personal
+highlight_event_days = true
 
 [calendars]
-    [[calendar_local]]
-    path = ~/.local/share/calendars/personal
+    [[calendar_personal]]
+    path = ~/.local/share/calendars/personal/
+    color = 'dark magenta'
+
+    [[calendar_work]]
+    path = ~/.local/share/calendars/trabalho/
+    color = 'dark red'
+
+    [[calendar_uni]]
+    path = ~/.local/share/calendars/fsg/
+    color = 'dark blue'
+
+    [[calendar_birthdays]]
+    path = ~/.local/share/calendars/contact_birthdays/
+    color = 'yellow'
+
+    # [[calendar_local]]
+    # path = ~/.local/share/calendars/*/
+    # type = discover
+    # color = 'dark red'
 
     [[contacts_local]]
-    path = ~/.local/share/contacts/contacts
+    path = ~/.local/share/contacts/*/
     type = discover
 
 [locale]
@@ -35,5 +54,9 @@ new  = c
 today= g
 other = s
 {%@@ endif @@%}
+
+# [highlight_days]
+# # color = ''
+# default_color = 'light red'
 
 # vim: ft=toml
