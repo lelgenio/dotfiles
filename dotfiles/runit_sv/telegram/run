@@ -1,5 +1,12 @@
 #!/bin/sh
 
+while pidof telegram-desktop-bin telegram-desktop
+do
+    pkill  telegram-desktop
+    pkill telegram-desktop-bin
+    sleep 1s
+done
+
 command -v telegram-desktop-bin &&
     exec telegram-desktop-bin ||
     exec telegram-desktop
