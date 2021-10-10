@@ -59,6 +59,8 @@ game_save cuphead \
     "Games/cuphead/drive_c/users/$USER/Application Data/Cuphead"
 game_save dusk \
     "Games/dusk/game/saves"
+game_save hollow_knight \
+    ".config/unity3d/Team Cherry/Hollow Knight"
 game_save ULTRAKILL-wine \
     "Games/ultrakill/drive_c/Program Files/ULTRAKILL/Saves"
 game_save marioW \
