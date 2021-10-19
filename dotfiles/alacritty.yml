@@ -98,6 +98,7 @@ key_bindings:
   - { key: {{@@ key.right      | upper @@}},    mode: Vi|~Search, action: Right              }
   - { key: {{@@ key.insertMode | upper @@}},    mode: Vi|~Search, action: ScrollToBottom     }
   - { key: {{@@ key.insertMode | upper @@}},    mode: Vi|~Search, action: ToggleViMode       }
+  - { key: {{@@ key.next       | upper @@}},    mode: Vi|~Search, action: SearchNext         }
   - { key: Up,        mods: Control|Shift,      mode: ~Alt,       action: ScrollLineUp,      }
   - { key: Down,      mods: Control|Shift,      mode: ~Alt,       action: ScrollLineDown     }
   - { key: PageUp,    mods: Control|Shift,      mode: ~Alt,       action: ScrollHalfPageUp   }
