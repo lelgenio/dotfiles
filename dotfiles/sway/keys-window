@@ -47,8 +47,8 @@ bindsym --to-code {
 # button8,9 = Mouse next/prev button
 # Prior,Next = PageUp/Down
 {%@@ for targ, buttons in {
-    "prev_on_output": [ key.tabL, "bracketleft", "Prior", "button9", ],
-    "next_on_output": [ key.tabR, "bracketright", "Next", "button8", ],
+    "prev_on_output": [ key.tabL, "bracketleft", "Prior", "button9", "button4", ],
+    "next_on_output": [ key.tabR, "bracketright", "Next", "button8", "button5", ],
 }.items() @@%}
 {%@@ for button in buttons @@%}
     {%@@ set pref = ("--whole-window " if "button" in button) @@%}
