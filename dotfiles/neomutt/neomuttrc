@@ -35,10 +35,13 @@ set my_source_command = \
 # }}}
 # General {{{
 
+set use_threads = threads
+set sort = reverse-last-date
+set sort_aux = last-date
+
 set mail_check_stats = yes
 set mail_check_stats_interval = 60
 
-set sort = 'reverse-date'
 set mark_old = no  # Unread mail stay unread until read
 set mailcap_path = ~/.config/neomutt/mailcap
 auto_view text/html  # automatically show html
@@ -149,7 +152,7 @@ set help = false
 set markers = no
 
 set date_format="%m/%d %H:%M"
-set index_format="%2C %zs %?X?A& ? %D %-15.15F %s"
+set index_format="%3C %zs %?X?A& ? %D %-15.15F %s"
 
 set display_filter  = '_mutt_escape-html-chars'
 
