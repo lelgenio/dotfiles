@@ -8,7 +8,9 @@ try %{
 hook global WinSetOption filetype=sh %{
     set buffer formatcmd 'shfmt -s -ci -i "{{@@ indent_width @@}}"'
 }
-
+hook global WinSetOption filetype=c %{
+    set buffer formatcmd 'clang-format'
+}
 
 hook global BufCreate .*\.html %{
     set buffer formatcmd 'prettier --parser html'
