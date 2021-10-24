@@ -2,7 +2,7 @@
 # Create symbolic links from game save folders to documents folder
 # Useful if you sync it with syncthing or something similar
 
-set -e
+set -ex
 
 function clean() {
     if test $? -ne 0; then
@@ -31,7 +31,7 @@ game_save() {
 
     BACKUP_DIR="$SAVES_DIR/$GAME_NAME"
 
-    mkdir -p "$BACKUP_DIR" "$(dirname '$INSTALL_DIR')"
+    mkdir -p "$BACKUP_DIR" "$(dirname "$INSTALL_DIR")"
 
     if test -d "$INSTALL_DIR" -a ! -L "$INSTALL_DIR"; then
         fd -H -d 1 . "$INSTALL_DIR" |
