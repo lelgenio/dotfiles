@@ -5,7 +5,7 @@ set -ex
 clean() {
     rm -rf "$TMPDIR"
     cd "$SCRIPT_DIR"
-    rm README.md LICENSE
+    rm -f README.md LICENSE
 }
 trap clean EXIT
 

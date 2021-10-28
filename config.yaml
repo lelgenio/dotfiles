@@ -42,14 +42,6 @@ variables:
             user: leonardo@wopus.com.br
             mail: wopus.com.br
 
-    plymouth: true
-    zram: false
-    filesystem:
-        partitions:
-            "/": /mnt/btrfs-root
-            "/@home": /home
-            "/@sql": /var/lib/mysql
-            "/@swap": /swap
 
 ###############################################################
 profiles:
@@ -202,15 +194,8 @@ dynvariables:
     color_type: test -n "$_COLOR_TYPE" && echo "$_COLOR_TYPE" || echo dark
     accent_color_name: test -n "$_ACCENT_COLOR" && echo "$_ACCENT_COLOR" || echo red
     firefox_profile: cat ~/.mozilla/firefox/profiles.ini | grep '^Default' | head -n1 | cut -d= -f2
-    phisical_uuid: sudo blkid /dev/sda2 -s UUID -o value
-    decrypted_uuid: sudo blkid /dev/mapper/main -s UUID -o value
-    boot_uuid: sudo blkid /dev/sda1 -s UUID -o value
-    root_subvol: echo "/@$(lsb_release -i | cut -f 2)-root"
-    nproc: nproc
-    memory_size: env LC_ALL=C free -b | awk '/^Mem:/ {print $2}'
     deezer_arl: pass show Entertainment/Deezer | awk '/^arl:/ {print $2}'
     main_password: _pass_get "{{@@ mail.personal.mail @@}}" | base64
-
 
 ###############################################################
 actions:
@@ -256,10 +241,6 @@ actions:
         https://github.com/alexanderjeurissen/ranger_devicons
         ~/.config/ranger/plugins/ranger_devicons
 
-    root_install: |
-        sudo dotdrop install -f -p main \
-            -c "{{@@ _dotfile_abs_dst @@}}/config.yaml" ||
-        rm -r "{{@@ _dotfile_abs_dst @@}}"
     start_services: >
         _runit_config "{{@@ _dotfile_abs_dst @@}}"
         dbus-daemon xsettingsd
@@ -464,13 +445,6 @@ dotfiles: # Just a bunch of paths and action mappings
     rustfmt:
         src: rustfmt.toml
         dst: ~/.rustfmt.toml
-
-    root:
-        src: ../root
-        dst: ~/.local/share/root_files
-        actions:
-        - root_install
-
 
     ###############################################################
     # Big pahts
