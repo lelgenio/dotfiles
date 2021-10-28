@@ -76,7 +76,7 @@ depends=(
         # Emulators
         kitty alacritty
         #Tools
-        tuxi translate-shell tealdeer so
+        tuxi-git translate-shell tealdeer so
         ranger atool p7zip jq fzf
         neofetch htop bpytop
         inxi entr
@@ -92,6 +92,7 @@ depends=(
         wget curl rsync rclone nmap
         # Testing
         gnu-netcat tor mtr speedtest-cli
+        inetutils net-tools
         # ssh
         openssh sshfs fail2ban
         # Bluetooth
@@ -121,7 +122,7 @@ depends=(
     libreoffice-fresh libreoffice-fresh-pt-br hunspell-pt-br
 
     # Programing
-        kakoune kak-lsp
+        kakoune
         neovim python-pynvim neovim-symlinks
 
         shfmt bash-language-server
@@ -150,7 +151,7 @@ depends=(
         mariadb
         php7 php7-apache
         phpmyadmin
-        lipsum emmet-cli
+        lipsum-git emmet-cli
         blade-formatter prettier
         nodejs-less nodejs-less-plugin-clean-css
         uglify-js

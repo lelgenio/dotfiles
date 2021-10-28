@@ -2,7 +2,7 @@
 
 nop %sh{
     PLUG_DIR="${HOME}/.cache/kakoune_plugins"
-    REPO="https://github.com/robertmeta/plug.kak.git"
+    REPO="https://github.com/andreyorst/plug.kak.git"
 
     mkdir -p "$PLUG_DIR"
 
@@ -12,7 +12,7 @@ nop %sh{
 
 source %sh{ echo "${HOME}/.cache/kakoune_plugins/plug.kak/rc/plug.kak" }
 
-plug "robertmeta/plug.kak" noload config %{
+plug "andreyorst/plug.kak" noload config %{
     # Auto install every pluging
     set-option global plug_always_ensure true
     set-option global plug_install_dir %sh{ echo "${HOME}/.cache/kakoune_plugins" }
@@ -38,39 +38,42 @@ plug 'insipx/kak-crosshairs' config %{
 # Search and replace, for every buffer
 plug 'occivink/kakoune-find'
 
-plug 'kak-lsp/kak-lsp' config %{
+plug 'kak-lsp/kak-lsp' do %{
+    cargo install --locked --force --path .
+} config %{
     set global lsp_hover_max_lines 10
-    lsp-inlay-diagnostics-enable global
+    # lsp-inlay-diagnostics-enable global
     set global lsp_auto_highlight_references true
     set global lsp_inlay_diagnostic_sign x
 
-    hook global BufCreate   .* %{try lsp-enable}
+    # hook global BufCreate   .* %{try lsp-enable}
 
-    hook global -group rust-inlay-hints-auto WinSetOption filetype=rust %{
-        hook window -group rust-inlay-hints BufReload .* rust-analyzer-inlay-hints
-        hook window -group rust-inlay-hints NormalIdle .* rust-analyzer-inlay-hints
-        hook window -group rust-inlay-hints InsertIdle .* rust-analyzer-inlay-hints
-        hook -once -always window WinSetOption filetype=.* %{
-            remove-hooks window rust-inlay-hints
-        }
-    }
+    # hook global -group rust-inlay-hints-auto WinSetOption filetype=rust %{
+    #     hook window -group rust-inlay-hints BufReload .* rust-analyzer-inlay-hints
+    #     hook window -group rust-inlay-hints NormalIdle .* rust-analyzer-inlay-hints
+    #     hook window -group rust-inlay-hints InsertIdle .* rust-analyzer-inlay-hints
+    #     hook -once -always window WinSetOption filetype=.* %{
+    #         remove-hooks window rust-inlay-hints
+    #     }
+    # }
 
-    define-command -override -hidden lsp-enable-decals %{
-        lsp-inlay-diagnostics-enable global
-        try %{
-            add-highlighter global/rust_analyzer_inlay_hints replace-ranges rust_analyzer_inlay_hints
-        }
-    }
+    # define-command -override -hidden lsp-enable-decals %{
+    #     lsp-inlay-diagnostics-enable global
+    #     try %{
+    #         add-highlighter global/rust_analyzer_inlay_hints replace-ranges rust_analyzer_inlay_hints
+    #     }
+    # }
 
-    define-command -override -hidden lsp-disable-decals %{
-        lsp-inlay-diagnostics-disable global
-        remove-highlighter global/rust_analyzer_inlay_hints
-    }
+    # define-command -override -hidden lsp-disable-decals %{
+    #     lsp-inlay-diagnostics-disable global
+    #     remove-highlighter global/rust_analyzer_inlay_hints
+    # }
 
-    hook global ModeChange '.*:insert:normal' %{lsp-enable-decals}
-    hook global ModeChange '.*:normal:insert' %{lsp-disable-decals}
+    # hook global ModeChange '.*:insert:normal' %{lsp-enable-decals}
+    # hook global ModeChange '.*:normal:insert' %{lsp-disable-decals}
 
     hook global WinSetOption filetype=(c|cpp|rust) %{
+        lsp-enable
         hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
         hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
         hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
