@@ -79,13 +79,13 @@ profiles:
         variables:
             background: ~/.local/share/backgrounds/assembly_light.png
 
-            opacity: 0.95
+            opacity: 0.98
 
             color:
                 type: light
-                bg: '#EEEEEE'
+                bg: '#FFFFFF'
                 bg_light: '#A0A0A0'
-                bg_dark: '#E0E0E0'
+                bg_dark: '#EEEEEE'
                 txt: '#303030'
                 nontxt: '#D0D0D0'
 
