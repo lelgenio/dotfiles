@@ -16,10 +16,11 @@ config:
     link_on_import: nolink
     dotpath: .
     func_file:
-    - "{{@@ _dotdrop_dotpath @@}}/../funcs.py"
+    - "../funcs.py"
     filter_file:
-    - "{{@@ _dotdrop_dotpath @@}}/../funcs.py"
-
+    - "../funcs.py"
+    import_configs:
+    - ../config.yaml
 
 
 ###############################################################
@@ -53,19 +54,17 @@ actions:
     greetd_install: _greetd_install
     grub_install: update-grub
     locale_install: locale-gen
-    groups_install: sh ~/.local/share/groups
     pacman_install: |
         pacman-key --init
         pacman-key --populate
     sv_update: |
-        sv restart "{{@@ '_dotfile_key' | var @@}}" ||
-        rc-service "{{@@ '_dotfile_key' | var @@}}" restart
+        sv restart "{{@@ '_dotfile_key' @@}}" ||
+        rc-service "{{@@ '_dotfile_key' @@}}" restart
 
     create_subvolumes: _create-subvolumes
     create_swapfile: _create-swapfile
     mount_partitions: mount -a
     dbus_uuidgen: dbus-uuidgen --ensure
-    passwd: chmod 600 /etc/.passwd
     sysctl_apply: sysctl -a
     mkinitcpio: mkinitcpio -P
     start_services: >
@@ -99,12 +98,6 @@ dotfiles:
         dst: /etc/greetd
         actions:
         - greetd_install
-
-    passwd:
-        src: passwd
-        dst: /etc/.passwd
-        actions:
-        - passwd
 
     elogind:
         src: elogind.conf
@@ -161,16 +154,6 @@ dotfiles:
     earlyoom:
         src: earlyoom
         dst: /etc/default/earlyoom
-
-    groups:
-        src: groups
-        dst: ~/.local/share/groups
-        actions:
-        - groups_install
-
-    usr_scripts:
-        src: "{{@@ env['HOME'] @@}}/.local/bin"
-        dst: /usr/local/bin
 
     services:
         src: runit_sv

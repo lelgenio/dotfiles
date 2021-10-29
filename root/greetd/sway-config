@@ -5,10 +5,10 @@ exec "gtkgreet -l --command fish; swaymsg exit"
 bindsym Mod4+control+z exec systemctl suspend || loginctl suspend
 bindsym Mod4+control+e exec systemctl poweroff || loginctl poweroff
 
-{%@@ include _dotdrop_dotpath + '/sway/input' @@%}
-{%@@ include _dotdrop_dotpath + '/sway/visual' @@%}
+{%@@ include _dotdrop_dotpath + '/../dotfiles/sway/input' @@%}
+{%@@ include _dotdrop_dotpath + '/../dotfiles/sway/visual' @@%}
 bar swaybar_command true
-output * bg "{{@@ color.bg @@}}" solid_color
+output * bg "#000000" solid_color
 
 include /etc/sway/config.d/*
 

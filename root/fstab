@@ -1,4 +1,4 @@
-{{@@ 'non_templated(_dotfile_abs_dst)' | var @@}}
+{{@@ non_templated(_dotfile_abs_dst) @@}}
 ##### Dotdrop-start #####
 
 {#@@<filesystem> <dir> <type> <options> <dump> <pass> @@#}

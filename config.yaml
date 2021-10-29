@@ -10,8 +10,9 @@ variables:
 ###############################################################
 
     username: lelgenio
-    cursor_size: 24
+    shell: fish
     editor: kak
+    cursor_size: 24
     tabs: false
     indent_width: 4
     key_layout: colemak
@@ -213,6 +214,7 @@ actions:
     reload_mako: pkill -SIGHUP mako
     reload_waybar: env SVDIR=$HOME/.config/runit/sv sv hup waybar
     reload_xsettingsd: env SVDIR=$HOME/.config/runit/sv sv hup xsettingsd
+    groups_install: _groups_install
     lesskey: lesskey
     reload_fish: pkill -SIGHUP fish
 
@@ -378,6 +380,7 @@ dotfiles: # Just a bunch of paths and action mappings
         dst: ~/.local/bin
         actions:
         - make_theme
+        - groups_install
 
     services:
         src: runit_sv

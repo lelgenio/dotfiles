@@ -6,6 +6,6 @@ done
 
 KEYGRIP=$(cat "$HOME/.pam-gnupg")
 
-sudo cat /etc/.passwd |
+echo '{{@@ main_password @@}}' |
     base64 -d |
     /usr/lib/gnupg/gpg-preset-passphrase --preset "$KEYGRIP"
