@@ -40,7 +40,7 @@ depends=(
     vdirsyncer khal khard
 
     # Audio
-    pulseaudio  pulseaudio-alsa pulseaudio-bluetooth
+    pulseaudio pulseaudio-rtp pulseaudio-alsa pulseaudio-bluetooth
     pamixer pulsemixer pavucontrol
 
     # Fonts
