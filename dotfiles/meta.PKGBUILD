@@ -57,15 +57,18 @@ depends=(
     grim slurp swappy wl-clipboard imagemagick wf-recorder
 
     # Theme
-    # {%@@ if 'papirus' in "{{@@ icon_theme @@}}".lower() @@%} #
+    # {%@@ if 'papirus' in icon_theme.lower() @@%} #
         papirus-icon-theme papirus-folders papirus-libreoffice-theme
-    # {%@@ elif 'mint' in "{{@@ icon_theme @@}}".lower() @@%} #
+    # {%@@ elif 'mint' in icon_theme.lower() @@%} #
         mint-y-icons mint-x-icons
     # {%@@ endif @@%} #
 
-    # {%@@ if 'mint' in "{{@@ gtk_theme @@}}".lower() @@%} #
+    # {%@@ if 'mint' in gtk_theme.lower().lower() @@%} #
         mint-themes
-    # {%@@ elif 'materia' in "{{@@ gtk_theme @@}}".lower() @@%} #
+    # {%@@ elif 'orchis' in gtk_theme.lower().lower() @@%} #
+        orchis-kde-theme-git
+        orchis-theme-git
+    # {%@@ elif 'materia' in gtk_theme.lower().lower() @@%} #
         materia-custom-accent
         bc sassc inkscape  # Make dependencies
     # {%@@ endif @@%} #
@@ -167,6 +170,9 @@ depends=(
 
     # Qt
     qt5-base qt5-wayland qt5ct kvantum-qt5
+
+    # X11
+    xorg-xwayland
 
     # Chat
     discord telegram-desktop

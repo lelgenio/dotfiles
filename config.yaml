@@ -108,7 +108,7 @@ profiles:
 # Accents
 ###############################################################
 
-    accent_red:     {variables: {accent_color: "#D9534F"}}
+    accent_red:     {variables: {accent_color: "#F44336"}}
     accent_green:   {variables: {accent_color: "#159828"}}
     accent_blue:    {variables: {accent_color: "#3465A3"}}
     accent_pink:    {variables: {accent_color: "#E91E63"}}
@@ -157,7 +157,8 @@ profiles:
 
     main:
         variables:
-            gtk_theme:      "Mint-Y{{@@ '-Dark' if color.type == 'dark' else '' @@}}-{{@@ accent_color_name.capitalize() @@}}"
+            # gtk_theme:      "Mint-Y{{@@ '-Dark' if color.type == 'dark' else '' @@}}-{{@@ accent_color_name.capitalize() @@}}"
+            gtk_theme:      "Orchis-{{@@ accent_color_name.lower() @@}}-{{@@ 'dark' if color.type == 'dark' else 'light' @@}}"
             kvantum_theme:  "Materia{{@@ color.type.capitalize() @@}}"
             # icon_theme:     "Mint-Y-{{@@ 'Dark' if color.type == 'dark' else 'Darker' @@}}-{{@@ accent_color_name.capitalize() @@}}"
             icon_theme:     "Papirus-{{@@ color.type.capitalize() @@}}"
