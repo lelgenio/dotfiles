@@ -1,3 +1,5 @@
+# {{@@ header() @@}}
+
 {%@@ if zram @@%}
 KERNEL=="zram0", ATTR{disksize}="{{@@ memory_size | int // 4 // 1024 // 1024 @@}}M" RUN="/usr/bin/mkswap /dev/zram0"
 {%@@ endif @@%}

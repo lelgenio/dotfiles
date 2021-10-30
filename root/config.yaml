@@ -20,7 +20,7 @@ config:
     filter_file:
     - "../funcs.py"
     import_configs:
-    - ../config.yaml
+    - "../config.yaml"
 
 
 ###############################################################
