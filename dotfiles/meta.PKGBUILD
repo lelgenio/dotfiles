@@ -169,7 +169,7 @@ depends=(
     gtk3-nocsd-legacy-git
 
     # Qt
-    qt5-base qt5-wayland qt5ct kvantum-qt5
+    qt5-base qt5-wayland qt5ct kvantum-qt5 qt5-styleplugins
 
     # X11
     xorg-xwayland
