@@ -174,6 +174,10 @@ depends=(
     # X11
     xorg-xwayland
 
+    # Tray
+    libappindicator-gtk2 libappindicator-gtk3
+    lib32-libappindicator-gtk2 lib32-libappindicator-gtk3
+
     # Chat
     discord telegram-desktop
     jitsi-meet-desktop-bin

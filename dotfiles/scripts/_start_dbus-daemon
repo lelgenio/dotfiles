@@ -4,4 +4,4 @@ exec dbus-daemon \
     --syslog-only \
     --nofork \
     --session \
-    --address=unix:path=$XDG_RUNTIME_DIR/bus
+    --address="$DBUS_SESSION_BUS_ADDRESS"
