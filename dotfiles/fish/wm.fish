@@ -38,8 +38,8 @@ function esway
     set -x XDG_CURRENT_DESKTOP  sway
 
     # this should not be necessary, but whatever
-    pidof sway &> /dev/null || exec sway
-
+    pidof sway &> /dev/null ||
+    exec dbus-launch --exit-with-session sway
 end
 
 if test "$XDG_VTNR" = 1
