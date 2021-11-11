@@ -135,6 +135,9 @@ depends=(
         vscode-css-languageserver
         vscode-json-languageserver
 
+        # php lsp
+        nodejs-intelephense
+
         # Python
         ipython bpython
 
