@@ -6,7 +6,7 @@
 #                    |___/
 
 # Hide the mouse after 10 seconds
-seat * hide_cursor 10000
+# seat * hide_cursor 10000
 # seat * hide_cursor when-typing enable
 
 input "type:touchpad" {

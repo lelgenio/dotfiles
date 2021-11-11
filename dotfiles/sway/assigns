@@ -37,7 +37,8 @@ for_window [app_id=mpv]    workspace 8
 assign [class=Steam]        workspace 9
 assign [title="^[Ss]team"]       workspace 9
 assign [class=factorio]     workspace 9
-assign [class=DUSK\.x86_64] workspace 9
+assign [class=DUSK.*] workspace 9
+assign [class=StardewValley.*] workspace 9
 assign [title=Mindustry]    workspace 9
 assign [class="Hollow Knight"]   workspace 9
 

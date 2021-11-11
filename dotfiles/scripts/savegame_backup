@@ -55,6 +55,8 @@ game_save minecraft \
     ".minecraft/saves"
 game_save factorio \
     ".factorio" '_autosave*.zip' 'doc-html' 'temp' 'data' 'bin'
+game_save factorio \
+    "Games/factorio" '_autosave*.zip' 'doc-html' 'temp' 'data' 'bin'
 game_save cuphead \
     "Games/cuphead/drive_c/users/$USER/Application Data/Cuphead"
 game_save dusk \
