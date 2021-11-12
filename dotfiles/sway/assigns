@@ -41,6 +41,7 @@ assign [class=DUSK.*] workspace 9
 assign [class=StardewValley.*] workspace 9
 assign [title=Mindustry]    workspace 9
 assign [class="Hollow Knight"]   workspace 9
+assign [class=dishonored.exe]    workspace 9
 
 # Chats
 assign [app_id=telegram.?desktop] workspace 10
