@@ -44,7 +44,7 @@ depends=(
     pamixer pulsemixer pavucontrol
 
     # Fonts
-        inter-font ttf-ms-fonts
+        inter-font ttf-ms-fonts ttf-dejavu
         nerd-fonts-hack nerd-fonts-fira-code
 
         # Icons
