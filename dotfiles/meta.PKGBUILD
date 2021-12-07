@@ -102,7 +102,7 @@ depends=(
         bluez bluez-utils bluez-plugins
 
     # Browser
-    qutebrowser youtube-dl
+    qutebrowser yt-dlp
 
     # Email
     neomutt urlview isync
@@ -176,6 +176,9 @@ depends=(
 
     # X11
     xorg-xwayland
+
+    # codecs
+    gst-plugins-good gst-plugins-bad
 
     # Tray
     libappindicator-gtk2 libappindicator-gtk3
