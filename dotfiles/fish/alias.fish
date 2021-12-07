@@ -140,7 +140,9 @@ end
 ################################################################
 
 function open -w xdg-open
-    xdg-open $argv &> /dev/null & disown
+    for i in $argv
+        xdg-open $i &> /dev/null & disown
+    end
 end
 
 
@@ -198,7 +200,7 @@ end
 
 function edit-config
     pushd (dirname "$DOTDROP_CONFIG")
-    set -l dotfile (fd -HE .git | wdmenu)
+    set -l dotfile (fd --strip-cwd-prefix -HE .git | wdmenu)
     test -n "$dotfile" || return 1
     {{@@ editor @@}} "$dotfile"
     popd
