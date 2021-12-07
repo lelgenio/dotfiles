@@ -35,6 +35,7 @@ for_window [app_id=mpv]    workspace 8
 
 # Games
 assign [class=Steam]        workspace 9
+assign [app_id=lutris]    workspace 9
 assign [title="^[Ss]team"]       workspace 9
 assign [class=factorio]     workspace 9
 assign [class=DUSK.*] workspace 9
@@ -50,5 +51,7 @@ assign [class="Jitsi Meet"] workspace 10
 assign [class=discord] workspace 10
 assign [title=Discord] workspace 10
 
+for_window [app_id=file_picker] floating enable
+for_window [class=file_picker] floating enable
 
 # vim: ft=i3
