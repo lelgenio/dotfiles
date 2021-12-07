@@ -77,8 +77,10 @@ trap clean_exit EXIT
     set hb "#404040"
 #{%@@ endif @@%}#
 
-dhist sort |
-bemenu \
+command -qs dhist &&
+    set wraper dhist wrap
+
+env $wraper -- bemenu \
     $focused_output\
     --grab\
     --ignorecase\
@@ -91,7 +93,6 @@ bemenu \
     --fb "$fb" --ff "$ff" \
     --nb "$nb" --nf "$nf" \
     --hb "$hb" --hf "$hf" \
-    $argv |
-    dhist increment
+    $argv
 
 # vim: ft=fish
