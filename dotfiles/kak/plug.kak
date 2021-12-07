@@ -39,12 +39,13 @@ plug 'insipx/kak-crosshairs' config %{
 plug 'occivink/kakoune-find'
 
 plug 'kak-lsp/kak-lsp' do %{
-    cargo install --locked --force --path .
+    cargo install --features "no-lto" --locked --force --path .
 } config %{
     set global lsp_hover_max_lines 10
     # lsp-inlay-diagnostics-enable global
     set global lsp_auto_highlight_references true
-    set global lsp_inlay_diagnostic_sign x
+    # set global lsp_inlay_diagnostic_sign "●"
+    # set global lsp_diagnostic_line_error_sign "●"
 
     # hook global BufCreate   .* %{try lsp-enable}
 
