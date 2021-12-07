@@ -53,6 +53,7 @@ map global git 'M'     ': git-merge-new <ret>' -docstring 'merge using new'
 map global git '<a-m>' ': git-merge-original <ret>' -docstring 'merge using original'
 
 map global user 'f' ': enter-user-mode find<ret>' -docstring 'find mode'
+map global find 't' ': tree<ret>' -docstring 'file tree'
 map global find 'f' ': find_file<ret>' -docstring 'file'
 map global find 'l' ': find_line<ret>' -docstring 'jump to line'
 map global find 'r' ': find_ripgrep<ret>' -docstring 'ripgrep all file'
@@ -61,29 +62,40 @@ map global find 'c' ': find_dir<ret>' -docstring 'change dir'
 map global find 'd' ': find_delete<ret>' -docstring 'file to delete'
 
 define-command -override -hidden find_file \
-%{ edit %sh{
-    fd -tf -HE .git | wdmenu ||
-    echo "$kak_buffile"
+%{ evaluate-commands %sh{
+    for line in `fd --strip-cwd-prefix -tf -HE .git | wdmenu`; do
+        echo "edit '$line'"
+    done
 } }
 
 define-command -override -hidden find_delete \
 %{ nop %sh{
-    fd -H -E .git -t f | wdmenu | xargs -r trash
+    fd --strip-cwd-prefix -H -E .git -t f | wdmenu | xargs -r trash
 } }
 
 define-command -override -hidden find_git_file \
-%{ edit -existing %sh{ git ls-files | wdmenu } }
+%{ evaluate-commands -existing %sh{
+    for line in `git ls-files | wdmenu`; do
+        echo "edit '$line'"
+    done
+} }
 
 define-command -override -hidden find_dir \
-%{ cd %sh{ fd -Htd | wdmenu } }
+%{ cd %sh{
+    for line in `fd --strip-cwd-prefix -Htd | wdmenu`; do
+        echo "edit '$line'"
+    done
+} }
 
 define-command -override -hidden find_buffer \
-%{ buffer %sh{
-    printf "%s\n" $kak_buflist | wdmenu
+%{ evaluate-commands %sh{
+    for line in `printf "%s\n" $kak_buflist | wdmenu`; do
+        echo "buffer '$line'"
+    done
 } }
 
 define-command -override -hidden find_ripgrep \
-%{ eval %sh{
+%{ evaluate-commands %sh{
     patter=$( wdmenu -p "Regex")
     rg --column -n "$patter" | wdmenu |
         perl -ne 'print "edit \"$1\" \"$2\" \"$3\" " if /(.+):(\d+):(\d+):/'
@@ -101,6 +113,16 @@ define-command -override -hidden find_line \
             )
             test -n "$line" && echo "${line}gx"
         }
+} }
+
+define-command -override -hidden tree \
+%{ evaluate-commands %sh{
+    file=`mktemp`
+    terminal --class file_picker ranger --selectfile="$kak_buffile" --choosefiles="$file"
+    for line in `cat "$file"`; do
+        echo "edit '$line'"
+    done
+    rm "$file"
 } }
 
 
