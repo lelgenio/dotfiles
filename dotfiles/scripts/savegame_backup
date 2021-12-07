@@ -61,6 +61,10 @@ game_save cuphead \
     "Games/cuphead/drive_c/users/$USER/Application Data/Cuphead"
 game_save dusk \
     "Games/dusk/game/saves"
+game_save stardew_valley \
+    ".config/StardewValley"
+game_save dishonored \
+    "Games/dishonored/drive_c/users/lelgenio"
 game_save hollow_knight \
     ".config/unity3d/Team Cherry/Hollow Knight"
 game_save ULTRAKILL-wine \
