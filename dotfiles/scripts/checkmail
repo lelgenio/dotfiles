@@ -32,9 +32,9 @@ if test "$1" = "update" && ! pidof mbsync; then
     then
         exit 0
     fi
-    mbsync -a ||
-    mbsync -a ||
-    mbsync -a
+    timeout 120s mbsync -a ||
+    timeout 120s mbsync -a ||
+    timeout 120s mbsync -a
 fi
 
 NEW=$(getnew)
