@@ -49,7 +49,7 @@ user_pref("browser.proton.modals.enabled", false);
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 
 // Ui customization
-user_pref("browser.uiCustomization.state", "{\"placements\":{\"widget-overflow-fixed-list\":[\"ublock0_raymondhill_net-browser-action\",\"sponsorblocker_ajay_app-browser-action\",\"addon_darkreader_org-browser-action\",\"tab-session-manager_sienori-browser-action\",\"fxa-toolbar-menu-button\"],\"nav-bar\":[\"back-button\",\"forward-button\",\"stop-reload-button\",\"customizableui-special-spring1\",\"urlbar-container\",\"customizableui-special-spring2\",\"downloads-button\"],\"toolbar-menubar\":[\"menubar-items\"],\"TabsToolbar\":[\"tabbrowser-tabs\",\"new-tab-button\",\"alltabs-button\"],\"PersonalToolbar\":[\"import-button\",\"personal-bookmarks\"]},\"seen\":[\"save-to-pocket-button\",\"developer-button\",\"chrome-gnome-shell_gnome_org-browser-action\",\"_contain-facebook-browser-action\",\"sponsorblocker_ajay_app-browser-action\",\"ublock0_raymondhill_net-browser-action\",\"addon_darkreader_org-browser-action\",\"_e4a8a97b-f2ed-450b-b12d-ee082ba24781_-browser-action\",\"_48748554-4c01-49e8-94af-79662bf34d50_-browser-action\",\"tab-session-manager_sienori-browser-action\"],\"dirtyAreaCache\":[\"nav-bar\",\"PersonalToolbar\",\"toolbar-menubar\",\"TabsToolbar\",\"widget-overflow-fixed-list\"],\"currentVersion\":17,\"newElementCount\":5}");
+// user_pref("browser.uiCustomization.state", "{\"placements\":{\"widget-overflow-fixed-list\":[\"ublock0_raymondhill_net-browser-action\",\"sponsorblocker_ajay_app-browser-action\",\"addon_darkreader_org-browser-action\",\"tab-session-manager_sienori-browser-action\",\"fxa-toolbar-menu-button\"],\"nav-bar\":[\"back-button\",\"forward-button\",\"stop-reload-button\",\"customizableui-special-spring1\",\"urlbar-container\",\"customizableui-special-spring2\",\"downloads-button\"],\"toolbar-menubar\":[\"menubar-items\"],\"TabsToolbar\":[\"tabbrowser-tabs\",\"new-tab-button\",\"alltabs-button\"],\"PersonalToolbar\":[\"import-button\",\"personal-bookmarks\"]},\"seen\":[\"save-to-pocket-button\",\"developer-button\",\"chrome-gnome-shell_gnome_org-browser-action\",\"_contain-facebook-browser-action\",\"sponsorblocker_ajay_app-browser-action\",\"ublock0_raymondhill_net-browser-action\",\"addon_darkreader_org-browser-action\",\"_e4a8a97b-f2ed-450b-b12d-ee082ba24781_-browser-action\",\"_48748554-4c01-49e8-94af-79662bf34d50_-browser-action\",\"tab-session-manager_sienori-browser-action\"],\"dirtyAreaCache\":[\"nav-bar\",\"PersonalToolbar\",\"toolbar-menubar\",\"TabsToolbar\",\"widget-overflow-fixed-list\"],\"currentVersion\":17,\"newElementCount\":5}");
 user_pref("browser.tabs.drawInTitlebar", false);
 
 user_pref("devtools.chrome.enabled", true);
@@ -57,7 +57,7 @@ user_pref("devtools.command-button-measure.enabled", true);
 user_pref("devtools.command-button-rulers.enabled", true);
 user_pref("devtools.dom.enabled", true);
 
-user_pref("devtools.editor.keymap", "emacs");
+// user_pref("devtools.editor.keymap", "emacs");
 user_pref("devtools.editor.tabsize", 4);
 user_pref("devtools.inspector.activeSidebar", "ruleview");
 user_pref("devtools.inspector.three-pane-enabled", false);
