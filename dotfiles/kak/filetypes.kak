@@ -16,6 +16,10 @@ hook global BufCreate .*\.html %{
     set buffer formatcmd 'prettier --parser html'
 }
 
+hook global BufCreate .*\.js %{
+    set buffer formatcmd 'prettier --parser babel'
+}
+
 hook global BufCreate .*\.vue %{
     set buffer formatcmd 'prettier --parser vue'
     hook buffer InsertCompletionHide {
@@ -89,9 +93,9 @@ hook global WinSetOption filetype=blade %[
     add-highlighter buffer/blade/php/ regex '@((end)?php)' 1:block
 
     add-highlighter buffer/blade/expression region '\{\{(?!--)' '(?!--)\}\}' ref php
-    add-highlighter buffer/blade/statement  region -recurse '\(' '@(if|for|foreach|include)\s*\(' '\)' ref php
+    add-highlighter buffer/blade/statement  region -recurse '\(' '@(if|for|foreach|section|yield|include)\s*\(' '\)' ref php
     add-highlighter buffer/blade/base/      regex '@(else(if)?|include|case|break)' 1:keyword
-    add-highlighter buffer/blade/base/      regex '@((end)?(if|isset|for|foreach|switch))' 1:keyword
+    add-highlighter buffer/blade/base/      regex '@((end)?(if|isset|for|foreach|section|switch))' 1:keyword
 
     add-highlighter buffer/blade/comment    region '\{\{--' '--\}\}' fill comment
     set-option buffer comment_block_begin '{{-- '
