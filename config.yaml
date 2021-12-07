@@ -246,13 +246,9 @@ actions:
 
     start_services: >
         _runit_config "{{@@ _dotfile_abs_dst @@}}"
-        fusuma gpg-agent
-        gammastep mako xsettingsd
-        mpd mpDris2 telegram
-        pipewire pipewire-media-session xdpw
-        pulseaudio kdeconnectd kdeconnect-indicator
-        kanshi swayidle waybar
-        syncthing udiskie
+        fusuma gammastep mako xsettingsd mpd mpDris2 telegram pipewire
+        pipewire-media-session xdpw pulseaudio kdeconnectd kdeconnect-indicator
+        kanshi swayidle waybar syncthing udiskie
 
     # bootstrap scripts
     pam_gpg: _pam-gpg-strap

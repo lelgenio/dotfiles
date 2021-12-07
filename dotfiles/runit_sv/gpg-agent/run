@@ -1,2 +1,4 @@
 #!/bin/sh
+
+gpgconf --kill gpg-agent
 exec gpg-agent --server

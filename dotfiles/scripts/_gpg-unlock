@@ -1,11 +1,10 @@
 #!/bin/sh
 
-while ! pidof gpg-agent; do
-    sleep 5s
-done
+gpg-connect-agent reloadagent /bye
 
-KEYGRIP=$(cat "$HOME/.pam-gnupg")
+PATH="$PATH:/usr/lib:/usr/libexec"
+keygrip=$(cat "$HOME/.pam-gnupg")
 
 echo '{{@@ main_password @@}}' |
     base64 -d |
-    /usr/lib/gnupg/gpg-preset-passphrase --preset "$KEYGRIP"
+    gpg-preset-passphrase --preset "$keygrip"
