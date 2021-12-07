@@ -1,19 +1,32 @@
 #!/bin/sh
 
+while test $# -gt 0;do
+    case $1 in
+        -c|--class)
+            shift
+            CLASS=$1
+            shift
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
 test "$1" = "-e" && shift
 # {%@@ if terminal == "alacritty" @@%} #
     command -v alacritty > /dev/null &&
     {
         test $# -gt 0 &&
-            exec alacritty -e $@ ||
-            exec alacritty
+            exec alacritty --class "$CLASS" -e $@ ||
+            exec alacritty --class "$CLASS"
     }
 # {%@@ elif terminal == "foot" @@%} #
     command -v footclient > /dev/null &&
-        exec footclient -- $@
+        exec footclient --class "$CLASS" -- $@
 # {%@@ elif terminal == "kitty" @@%} #
     command -v kitty > /dev/null &&
-        exec kitty -- $@
+        exec kitty --class "$CLASS" -- $@
 # {%@@ endif @@%} #
 
 notify-send "Error" "Terminal program missing"
