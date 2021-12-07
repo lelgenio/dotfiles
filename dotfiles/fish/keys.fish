@@ -34,7 +34,8 @@ end
 bind \cy 'commandline | wl-copy -n'
 
 # Enable fzf key bindings
-fzf_key_bindings &> /dev/null
+command -qs fzf_key_bindings &&
+    fzf_key_bindings &> /dev/null
 
 
 function rcd #{{{
