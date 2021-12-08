@@ -10,7 +10,7 @@ clean() {
 trap clean EXIT
 
 SCRIPT_DIR="$HOME/.config/mpv/scripts"
-TMPDIR=(mktemp -d)
+TMPDIR=$(mktemp -d)
 
 mkdir -p "$SCRIPT_DIR"
 
