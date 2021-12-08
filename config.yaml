@@ -29,7 +29,7 @@ variables:
 
     font:
         mono: Hack Nerd Font
-        interface: Inter
+        interface: Liberation Sans
         size:
             small: 12
             medium: 14
@@ -225,7 +225,7 @@ actions:
 
     vimplug: >
         nvim +PlugUpgrade +PlugInstall +PlugUpdate +qall
-        &> /dev/null &
+        > /dev/null &
 
     reload_kakoune: >
         kak -l | xargs -r -n1

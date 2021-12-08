@@ -10,7 +10,7 @@ define-command -hidden -override git-try-show-diff %{
     evaluate-commands -draft %sh{
         test -f "$kak_buffile" || exit 0
         cd $(dirname "$kak_buffile")
-        git rev-parse --git-dir &> /dev/null &&
+        git rev-parse --git-dir > /dev/null &&
         echo "git show-diff"
     }
 }

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 testz() {
     if test -z "$1"; then
         echo "$2" >&2
@@ -10,14 +12,15 @@ testz() {
 testz "$DOTDROP_CONFIG" "DOTDROP_CONFIG is not set"
 testz "$1" "No script name provided"
 
-pushd "$(dirname "$DOTDROP_CONFIG")"
+DOTDIR="$(dirname "$DOTDROP_CONFIG")"
+cd "$DOTDIR/dotfiles/scripts"
 
-if ! test -f "dotfiles/scripts/$1"
+if ! test -f "$1"
 then
-    printf '#!/bin/sh\n' > "dotfiles/scripts/$1"
-
-    chmod u+x "dotfiles/scripts/$1"
-
+    pwd
+    touch "$1"
+    printf '#!/bin/sh\n' > "$1"
+    chmod u+x "$1"
 fi
 
-kak "dotfiles/scripts/$1"
+kak "$1"

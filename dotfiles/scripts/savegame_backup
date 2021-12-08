@@ -4,7 +4,7 @@
 
 set -ex
 
-function clean() {
+clean() {
     if test $? -ne 0; then
         notify-send "Could not sync ${GAME_NAME}"
     fi
