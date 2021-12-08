@@ -256,7 +256,6 @@ actions:
     install_meta: install_meta
     install_mpv: _mpv_install
     filter_backgrounds: _backgrouds_filter
-    git_projects: _git_projects
 
 ###############################################################
 dotfiles: # Just a bunch of paths and action mappings
@@ -289,8 +288,6 @@ dotfiles: # Just a bunch of paths and action mappings
     git:
         src: git
         dst: ~/.config/git
-        actions:
-        - git_projects
 
     mako:
         src: mako.conf
