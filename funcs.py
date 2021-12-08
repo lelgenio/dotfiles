@@ -21,7 +21,11 @@ def rclone_obscure(pass_name):
     def sh(*args):
         return check_output(args).decode().strip()
 
-    return sh("rclone", "obscure", sh("_pass_get", pass_name))
+    try:
+        return sh("rclone", "obscure", sh("_pass_get", pass_name))
+    except Exception:
+        print("Error obscuring rclone password")
+        return ""
 
 
 def var(to_escape: str):
