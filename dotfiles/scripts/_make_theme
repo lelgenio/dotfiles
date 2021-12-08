@@ -1,6 +1,6 @@
 #!/bin/sh
 
-{%@@ if 'papirus' in "{{@@ icon_theme @@}}".lower() @@%}
+{%@@ if 'papirus' in icon_theme.lower() @@%}
 # Papirus Icon Theme
 {
     papirus-folders -l | grep "[^>] {{@@ accent_color_name @@}}"&&
@@ -12,20 +12,20 @@
 } &
 {%@@ endif @@%}
 
-{%@@ if 'materia' in "{{@@ gtk_theme @@}}".lower() @@%}
+{%@@ if 'materia' in gtk_theme.lower() @@%}
 
 # Materia GTK Theme
-src_path="$HOME/.cache/materia-theme"
+TMPDIR="$HOME/.cache/materia-theme"
 
 theme_name="{{@@ gtk_theme @@}}"
-dst_path="${HOME}/.themes"
+dst_path="$HOME/.themes"
 
-test -d "$src_path" ||
+test -d "$TMPDIR" ||
     git clone\
     "https://github.com/nana-4/materia-theme"\
-    "$src_path"
+    "$TMPDIR"
 
-cd "$src_path"
+cd "$TMPDIR"
 
 # SEL = accent
 # BG = header-bar
@@ -65,4 +65,18 @@ mkdir -p "${dst_path}/${theme_name}"
     notify-send "Finished generating theme"
 } &> /dev/null &
 
+{%@@ endif @@%}
+
+{%@@ if 'Orchis' in gtk_theme.lower() @@%}
+    TMPDIR="$HOME/.cache/share/orchis"
+
+    mkdir -p "$TMPDIR" && cd "$TMPDIR"
+
+    test -d .git &&
+        git pull ||
+        git clone "https://github.com/vinceliuice/Orchis-theme" "$TMPDIR"
+
+    ./install.sh \
+        --theme "{{@@ accent_color_name.lower() @@}}" \
+        --tweaks "solid" --tweaks "compact"
 {%@@ endif @@%}

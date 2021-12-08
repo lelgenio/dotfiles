@@ -163,7 +163,10 @@ profiles:
             kvantum_theme:  "Materia{{@@ color.type.capitalize() @@}}"
             # icon_theme:     "Mint-Y-{{@@ 'Dark' if color.type == 'dark' else 'Darker' @@}}-{{@@ accent_color_name.capitalize() @@}}"
             icon_theme:     "Papirus-{{@@ color.type.capitalize() @@}}"
-            cursor_theme:   "capitaine-cursors"
+            cursor_theme:   "Breeze_Obsidian"
+            # cursor_theme:   "Breeze_Snow"
+            # cursor_theme:   "capitaine-cursors"
+
         dotfiles:
         - ALL
         include:
