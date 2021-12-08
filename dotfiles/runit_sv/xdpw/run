@@ -1,2 +1,5 @@
 #!/bin/sh
-exec /usr/lib/xdg-desktop-portal-wlr
+
+PATH="$PATH:/usr/lib:/usr/libexec"
+
+exec xdg-desktop-portal-wlr
