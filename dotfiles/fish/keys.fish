@@ -34,8 +34,10 @@ end
 bind \cy 'commandline | wl-copy -n'
 
 # Enable fzf key bindings
-command -qs fzf_key_bindings &&
-    fzf_key_bindings &> /dev/null
+if test -f /usr/share/fzf/key-bindings.fish
+    source /usr/share/fzf/key-bindings.fish
+    fzf_key_bindings
+end
 
 
 function rcd #{{{
