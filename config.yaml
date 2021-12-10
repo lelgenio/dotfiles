@@ -220,6 +220,13 @@ actions:
     groups_install: _groups_install
     lesskey: lesskey
     reload_fish: pkill -SIGHUP fish
+    dotdrop_completions: |
+        comp_path="$HOME/.config/fish/completions/dotdrop.fish"
+        comp_url="https://raw.githubusercontent.com/deadc0de6/dotdrop/master/completion/dotdrop.fish"
+        if ! test -f "$comp_path"; then
+            wget -qO "$comp_path" "$comp_url" ||
+            rm "$comp_path"
+        fi
 
     reload_qutebrowser: qutemsg config-source & disown
 
@@ -282,6 +289,7 @@ dotfiles: # Just a bunch of paths and action mappings
         src: fish
         dst: ~/.config/fish
         actions:
+        - dotdrop_completions
         - reload_fish
 
     starship:
