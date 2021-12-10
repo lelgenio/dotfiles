@@ -1,7 +1,7 @@
 #!/bin/sh
-set -e
+set -ex
 
-if test -z "$SWAYSOCK" && pidof gnome-shell &> /dev/null
+if test -z "$SWAYSOCK" && pidof gnome-shell > /dev/null
 then
     exit 0
 fi
@@ -15,26 +15,26 @@ die() {
 }
 # trap die EXIT
 
+{%@@ for name in mail | reverse @@%}
+    mkdir -p "$HOME/.local/share/mail/{{@@ name @@}}/"
+{%@@ endfor @@%}
+
 getnew() {
-    pushd "$HOME/.local/share/mail/" >/dev/null
+    cd "$HOME/.local/share/mail/" >/dev/null
 
     find */INBOX*/new -type f |
         sed -E '/Duolingo|LBRY/d' |
         wc -l
-
-    popd >/dev/null
 }
 
 OLD=$(getnew)
 
 if test "$1" = "update" && ! pidof mbsync; then
-    if ! ping -c3 {{@@ mail.personal.mail @@}} &> /dev/null
+    if ! ping -c3 {{@@ mail.personal.mail @@}} > /dev/null
     then
         exit 0
     fi
-    timeout 120s mbsync -a ||
-    timeout 120s mbsync -a ||
-    timeout 120s mbsync -a
+    mbsync -a
 fi
 
 NEW=$(getnew)

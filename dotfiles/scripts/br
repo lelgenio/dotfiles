@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Copyright Cédric Picard 2014 -- License WTFPL
 # Inspired by Ranger's -- See https://github.com/hut/ranger
 #

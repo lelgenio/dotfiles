@@ -7,4 +7,4 @@
     else
         qutebrowser $@
     fi
-} &> /dev/null < /dev/null & disown
+} > /dev/null 2>&1 &

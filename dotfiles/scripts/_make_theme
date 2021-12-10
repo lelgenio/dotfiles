@@ -9,7 +9,7 @@
     papirus-folders -uC "{{@@ accent_color_name @@}}" ||
         papirus-folders -uD
 
-} &
+} > /dev/null &
 {%@@ endif @@%}
 
 {%@@ if 'materia' in gtk_theme.lower() @@%}
