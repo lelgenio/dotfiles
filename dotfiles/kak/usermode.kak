@@ -1,7 +1,7 @@
 # {{@@ header() @@}}
 
 try %{
-    declare-user-mode surround
+    # declare-user-mode surround
     declare-user-mode git
     declare-user-mode find
 }
@@ -27,12 +27,6 @@ map global user 'b' ': find_buffer<ret>' -docstring 'switch buffer'
 
 map global user 'l' ': lsp-enable-decals<ret>' -docstring 'LSP enable decals'
 map global user 'L' ': lsp-disable-decals<ret>' -docstring 'LSP disable decals'
-
-map global user 's' ': enter-user-mode surround<ret>' -docstring 'surround mode'
-map global surround 's' ': surround<ret>' -docstring 'surround'
-map global surround 'c' ': change-surround<ret>' -docstring 'change'
-map global surround 'd' ': delete-surround<ret>' -docstring 'delete'
-map global surround 'x' ': select-surround<ret>' -docstring 'select surround'
 
 map global user 'v'    ': enter-user-mode git<ret>' -docstring 'git vcs mode'
 map global user 'V'    ': enter-user-mode -lock git<ret>' -docstring 'git vcs mode'

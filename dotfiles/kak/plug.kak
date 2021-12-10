@@ -27,7 +27,28 @@ plug 'alexherbo2/auto-pairs.kak' commit "fd735ec149ef0d9ca5f628a95b1e52858b5afbd
     auto-pairs-enable
 }
 
-plug 'h-youhei/kakoune-surround'
+# plug 'h-youhei/kakoune-surround' %{
+#     map global user 's' ': enter-user-mode surround<ret>' -docstring 'surround mode'
+#     map global surround 's' ': surround<ret>' -docstring 'surround'
+#     map global surround 'c' ': change-surround<ret>' -docstring 'change'
+#     map global surround 'd' ': delete-surround<ret>' -docstring 'delete'
+#     map global surround 'x' ': select-surround<ret>' -docstring 'select surround'
+# }
+
+plug 'delapouite/kakoune-mirror' %{
+    # Suggested mapping
+    map global user "s" ': enter-user-mode mirror<ret>' -docstring 'surround mode'
+    {%@@ for old, new in [
+       [ "h", key.left,  ],
+       [ "l", key.right, ],
+       [ "k", key.up,    ],
+       [ "j", key.down,  ],
+    ] @@%}
+        {%@@ set NEW, OLD = new.upper(), old.upper()@@%}
+        map global mirror    {{@@ new @@}}     {{@@ old @@}}
+        map global mirror    {{@@ NEW @@}}     {{@@ OLD @@}}
+    {%@@ endfor @@%}
+}
 
 plug 'delapouite/kakoune-palette'
 plug 'greenfork/active-window.kak'
@@ -39,7 +60,7 @@ plug 'insipx/kak-crosshairs' config %{
 plug 'occivink/kakoune-find'
 
 plug 'kak-lsp/kak-lsp' do %{
-    cargo install --features "no-lto" --locked --force --path .
+    cargo install --locked --force --path .
 } config %{
     set global lsp_hover_max_lines 10
     # lsp-inlay-diagnostics-enable global
