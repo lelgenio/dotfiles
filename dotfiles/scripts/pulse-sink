@@ -1,25 +1,25 @@
-#!/bin/sh
+#!/bin/fish
 
-opts="Fone\nSpeaker\nHDMI\nPhone"
-out=$(printf $opts | wdmenu -p "Output: ")
-vol=$(pamixer --get-volume)
+set opts "Fone\nSpeaker\nHDMI\nPhone"
+set out (printf $opts | wdmenu -p "Output: ")
+set vol (pamixer --get-volume)
 
-case "$out" in
-    Fone)
+switch "$out"
+    case Fone
         pactl set-card-profile 0 output:analog-stereo+input:analog-stereo
-        pactl set-default-sink $(pactl list sinks short | grep alsa | head -n1 | cut -f2)
+        pactl set-default-sink (pactl list sinks short | grep alsa | head -n1 | cut -f2)
         pactl set-sink-port @DEFAULT_SINK@ analog-output-headphones
-        ;;
-    Speaker)
+    case Speaker
         pactl set-card-profile 0 output:analog-stereo+input:analog-stereo
-        pactl set-default-sink $(pactl list sinks short | grep alsa | head -n1 | cut -f2)
+        pactl set-default-sink (pactl list sinks short | grep alsa | head -n1 | cut -f2:)
         pactl set-sink-port @DEFAULT_SINK@ analog-output-speaker
-        ;;
-    HDMI)
-        pactl set-card-profile 0 output:hdmi-stereo+input:analog-stereo
-        pactl set-default-sink $(pactl list sinks short | grep hdmi | head -n1 | cut -f2)
-        ;;
-    Phone)
+    case HDMI
+        pactl set-card-profile 0 (
+                env LC_ALL=C pactl  list cards |
+                string replace -raf '^\s*(output:hdmi-surround.*?input.*?): .*' '$1' |
+                head -n1 )
+        pactl set-default-sink (pactl list sinks short | grep hdmi | head -n1 | cut -f2)
+    case Phone
         pactl unload-module module-null-sink
         pactl unload-module module-rtp-send
 
@@ -27,7 +27,6 @@ case "$out" in
         pactl load-module module-rtp-send source=rtp.monitor destination=192.168.0.169 port=4010 mtu=320
 
         pactl set-default-sink rtp
-        ;;
-esac
+end
 
 pamixer --set-volume "$vol"
