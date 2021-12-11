@@ -24,6 +24,7 @@
         "custom/updates",
         "custom/caffeine",
         "pulseaudio",
+        "bluetooth",
         "network",
         "battery"
     ],
@@ -83,12 +84,23 @@
     },
     "network": {
         "tooltip":false,
-        "on-click": "terminal nmtui",
+        "on-click": "terminal iwd",
         "format-wifi": "{icon}",
         "format-icons":[ "", "", "", "", "" ],
         "format-ethernet": "",
         "format-linked": "",
         "format-disconnected": ""
+    },
+    "bluetooth": {
+        "tooltip":false,
+        "on-click": "terminal bluetoothctl",
+        "format": "{icon}",
+        "format-alt": "bluetooth: {status}",
+        "format-icons": {
+             "enabled": "  ",
+             "disabled": ""
+        },
+        "tooltip-format": "{}"
     },
     "pulseaudio": {
         "tooltip":false,
