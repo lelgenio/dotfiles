@@ -1,5 +1,5 @@
 #!/bin/sh
 
-PATH="$PATH:/usr/lib:/usr/libexec"
+PATH="$PATH:/usr/lib:/usr/libexec:/usr/lib/libexec"
 
 exec kdeconnectd --replace
