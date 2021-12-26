@@ -30,3 +30,5 @@ switch "$out"
 end
 
 pamixer --set-volume "$vol"
+
+# vim: ft=fish

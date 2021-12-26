@@ -97,7 +97,7 @@
         "format": "{icon}",
         "format-alt": "bluetooth: {status}",
         "format-icons": {
-             "enabled": "  ",
+             "enabled": "",
              "disabled": ""
         },
         "tooltip-format": "{}"
@@ -185,12 +185,12 @@
         "format":"{} ",
         "exec":"pidof caffeinated > /dev/null && echo  || echo 鈴",
         "on-click":"pidof caffeinated && pkill caffeinated || caffeinated -d",
-        "interval": 1,
+        "interval": 5,
         "tooltip":false
     },
     "custom/layout":{
         "exec":"_sway_get-layout",
-        "interval": 1,
+        "interval": 5,
         "tooltip":false
     },
     "custom/sleep":{
