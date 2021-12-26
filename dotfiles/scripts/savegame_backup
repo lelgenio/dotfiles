@@ -67,6 +67,8 @@ game_save dishonored \
     "Games/dishonored/drive_c/users/lelgenio"
 game_save hollow_knight \
     ".config/unity3d/Team Cherry/Hollow Knight"
+game_save carrion \
+    ".local/share/Phobia/Carrion"
 game_save ULTRAKILL-wine \
     "Games/ultrakill/drive_c/Program Files/ULTRAKILL/Saves"
 game_save marioW \
