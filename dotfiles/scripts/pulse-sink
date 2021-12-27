@@ -16,7 +16,7 @@ switch "$out"
     case HDMI
         pactl set-card-profile 0 (
                 env LC_ALL=C pactl  list cards |
-                string replace -raf '^\s*(output:hdmi-surround.*?input.*?): .*' '$1' |
+                string replace -raf '^\s*(output:hdmi-stereo.*?input.*?): .*' '$1' |
                 head -n1 )
         pactl set-default-sink (pactl list sinks short | grep hdmi | head -n1 | cut -f2)
     case Phone
