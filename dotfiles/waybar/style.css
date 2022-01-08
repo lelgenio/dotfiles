@@ -54,6 +54,7 @@ window#waybar.solo {
     color: {{@@ accent_color @@}};
 }
 
+#mpd,
 #custom-mpd,
 #tray,
 #clock,
@@ -107,17 +108,12 @@ window#waybar.solo {
     color: #ee4040;
 }
 
-#mpd.paused {
-    font-size: 0;
-    border: none;
-}
-
 #tray {
     padding: 0;
     margin: 0;
 }
 
-#custom-layout {
+#language {
     font-size: {{@@ font.size.medium @@}}px;
     color: {{@@ color.bg_light @@}};
 }

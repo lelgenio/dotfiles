@@ -12,8 +12,8 @@
         "custom/weather",
     ],
     "modules-right": [
-        "custom/layout",
-        "custom/mpd",
+        "sway/language",
+        "mpd",
         "custom/recording",
         "tray",
         "custom/mail",
@@ -50,14 +50,17 @@
     "sway/window":{
         "max-length":40
     },
-    "custom/mpd": {
+    "mpd": {
+        "format": "{stateIcon} {title} - {artist}",
+        "format-paused": "{stateIcon}",
+        "state-icons": {
+             "paused": "",
+             "playing": ""
+        },
         "tooltip":false,
-        "exec": "mpd-status",
-        "exec-if": "pidof mpd",
         "on-click": "mpc toggle",
         "on-scroll-up": "mpc vol +10",
         "on-scroll-down": "mpc vol -10",
-        "interval": 2
     },
     "tray": {
         "spacing": 7,
@@ -110,7 +113,7 @@
         "format-bluetooth-muted": "",
         "format-muted": "ﱝ",
         "format-icons": {
-            "headphone": ["   奄", "   奔", "   墳"],
+            "headphone": [" 奄", " 奔", " 墳"],
             "handsfree": "",
             "headset": "",
             "phone": "",
@@ -182,16 +185,14 @@
         "interval":30
     },
     "custom/caffeine":{
-        "format":"{} ",
+        "format":"{}",
         "exec":"pidof caffeinated > /dev/null && echo  || echo 鈴",
         "on-click":"pidof caffeinated && pkill caffeinated || caffeinated -d",
         "interval": 5,
         "tooltip":false
     },
-    "custom/layout":{
-        "exec":"_sway_get-layout",
-        "interval": 5,
-        "tooltip":false
+    "sway/language": {
+        "format": "{short} {variant}",
     },
     "custom/sleep":{
         "exec":"test $(date +%H) -lt 5 && echo 'GO TO SLEEP' | trans -b",

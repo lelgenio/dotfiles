@@ -82,7 +82,7 @@ owm_pango(){
 owm_json(){
     owm
 
-    tee > .forecast.json <<EOF
+    tee > "$HOME/.forecast.json" <<EOF
 {
     "min":"$MIN",
     "max":"$MAX",

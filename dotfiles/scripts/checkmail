@@ -1,5 +1,5 @@
 #!/bin/sh
-set -ex
+set -e
 
 if test -z "$SWAYSOCK" && pidof gnome-shell > /dev/null
 then
@@ -44,11 +44,5 @@ if test "$NEW" -gt "$OLD"; then
 fi
 
 echo $NEW | sed 's/^0$//'
-
-caller=$(ps -o comm= $PPID)
-if test "$caller" != "waybar"; then
-    pidof waybar >/dev/null &&
-        pkill -SIGRTMIN+4 waybar
-fi
 
 # vim:ft=sh
