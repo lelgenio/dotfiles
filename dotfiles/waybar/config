@@ -53,6 +53,7 @@
     "mpd": {
         "format": "{stateIcon} {title} - {artist}",
         "format-paused": "{stateIcon}",
+        "format-stopped": "",
         "state-icons": {
              "paused": "",
              "playing": ""
