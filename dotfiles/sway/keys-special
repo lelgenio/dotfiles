@@ -32,6 +32,9 @@ $mod+Alt+r exec sssway
 # Color picker
 $mod+c exec color-picker
 
+# Apply Optical character recognition to clipboard
+$mod+Control+v exec wl-paste | tesseract-ocr  -l por - -  | wl-copy
+
 # show keys being pressed
 $mod+k exec showkeys
 
