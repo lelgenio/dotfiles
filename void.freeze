@@ -20,7 +20,7 @@ clyrics-0.13_1
 cmatrix-2.0_1
 cronie-1.5.7_1
 cryptsetup-2.4.3_1
-curl-7.81.0_1
+curl-7.81.0_2
 dconf-0.40.0_1
 diffr-0.1.4_1
 docker-20.10.10_1
@@ -33,7 +33,7 @@ engrampa-1.26.0_1
 entr-5.1_1
 exa-0.10.1_1
 fail2ban-0.11.2_3
-fd-8.3.1_1
+fd-8.3.2_1
 firefox-96.0.2_1
 fish-shell-3.3.1_1
 flatpak-1.12.4_1
@@ -175,6 +175,7 @@ swaylock-1.5_1
 syncthing-1.18.6_1
 tealdeer-1.5.0_1
 telegram-desktop-3.4.8_1
+thefuck-3.31_2
 thunar-archive-plugin-0.4.0_2
 thunar-volman-4.16.0_2
 thunderbird-91.5.0_1
@@ -188,7 +189,7 @@ transmission-remote-gtk-1.4.1_1
 trash-cli-0.20.12.26_2
 tumbler-4.16.0_2
 udiskie-2.2.0_4
-unrar-6.1.3_2
+unrar-6.1.4_1
 urlview-0.9_2
 vdirsyncer-0.18.0_2
 void-repo-multilib-6_3
@@ -197,9 +198,9 @@ vscode-1.63.2_1
 wayland-devel-1.19.0_1
 wayland-protocols-1.24_1
 wget-1.21.2_1
-wine-7.0_1
-wine-32bit-7.0_1
-wine-mono-7.0.0_1
+wine-7.1_1
+wine-32bit-7.1_1
+wine-mono-7.1.1_1
 wl-clipboard-2.0.0_1
 wtype-0.4_1
 xdg-desktop-portal-wlr-0.5.0_1
