@@ -50,6 +50,10 @@ hook global WinCreate .* %{
 hook global BufCreate .*\.jsonc %[ set buffer filetype jsonc ]
 hook global BufCreate .*\.blade.php %[ set buffer filetype blade ]
 hook global BufCreate .*\.less %[ set buffer filetype less ]
+hook global BufCreate .*\.tera %[
+    require-module jinja
+    add-highlighter buffer/jinja ref jinja
+]
 
 hook global WinSetOption filetype=jsonc %[
     set buffer comment_line '//'
