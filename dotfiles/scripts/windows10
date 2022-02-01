@@ -2,7 +2,7 @@
 
 IMG="$HOME/.local/share/windows10.img"
 
-if ! which qemu-system-x86_64 &>/dev/null; then
+if ! which qemu-system-x86_64 >/dev/null; then
     echo qemu not installed
     exit 1
 fi
