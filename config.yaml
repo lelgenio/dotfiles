@@ -39,9 +39,11 @@ variables:
         personal:
             user: lelgenio
             mail: disroot.org
+            pass: disroot.org
         work:
             user: leonardo@wopus.com.br
             mail: wopus.com.br
+            pass: wopus_email
 
 
 ###############################################################

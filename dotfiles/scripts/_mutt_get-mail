@@ -4,7 +4,7 @@ my_path="$1"
 my_name="$2"
 my_user="$3"
 my_host="$4"
-my_pass=`_pass_get "$my_host"`
+my_pass="$5"
 
 cat <<EOF
 set realname = "$my_name"
