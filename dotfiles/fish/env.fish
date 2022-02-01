@@ -5,7 +5,7 @@
 # |  _| \__ \ | | |
 # |_| |_|___/_| |_|
 
-set -x QT_QPA_PLATFORMTHEME qt5ct
+set -x QT_QPA_PLATFORMTHEME gtk2
 # set -x QT_QPA_PLATFOR wayland
 set -x DESKTOP_APP_I_KNOW_ABOUT_GTK_INCOMPATIBILITY 1
 set -x SDL_GAMECONTROLLERCONFIG '050000004c0500006802000000800000,Sony PLAYSTATION(R)3 Controller,a:b0,b:b1,x:b3,y:b2,back:b8,guide:b10,start:b9,leftstick:b11,rightstick:b12,leftshoulder:b4,rightshoulder:b5,dpup:b13,dpdown:b14,dpleft:b15,dpright:b16,leftx:a0,lefty:a1,rightx:a3,righty:a4,lefttrigger:a2,righttrigger:a5,platform:Linux,'
@@ -15,7 +15,7 @@ set -x XDG_DATA_DIRS "$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share"
 set -x XDG_DATA_DIRS "$XDG_DATA_DIRS:/usr/share"
 set -x XDG_DATA_DIRS "$XDG_DATA_DIRS:$HOME/.local/share"
 
-for i in ~/.local/bin ~/.cargo/bin ~/.factorio/bin/*
+for i in ~/.local/bin ~/.cargo/bin ~/.yarn/bin ~/.factorio/bin/*
     test -d "$i";and fish_add_path "$i"
 end
 

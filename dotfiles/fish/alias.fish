@@ -22,10 +22,15 @@ alias rootdrop 'sudo dotdrop install -f -c "$root_cfg"'
 
 cabbr p emerge
 
+if command -qs xbps-install
+    cabbr p sudo xbps-install -y
+end
+
 cabbr p pacman
 cabbr p pikaur
 cabbr p yay
 cabbr p paru
+
 
 
 ################################################################
