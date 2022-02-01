@@ -168,7 +168,7 @@
         "interval":30
     },
     "custom/transmissionS":{
-        "format":" {} ",
+        "format":" {} ",
         "exec":"transmission-remote -l | grep Seeding| wc -l | sed 's/^0$//'",
         "exec-if":"pidof transmission-daemon",
         "interval":30
@@ -180,7 +180,7 @@
         "interval":30
     },
     "custom/delugeS":{
-        "format":" {} ",
+        "format":" {} ",
         "exec":"deluge-console status | perl -ne 'print $1 if /Seeding: (\\d+)/'| sed 's/^0$//'",
         "exec-if":"pidof -x deluged",
         "interval":30
