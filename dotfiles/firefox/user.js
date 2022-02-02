@@ -10,6 +10,7 @@
 user_pref("mousewheel.system_scroll_override_on_root_content.enabled", true);
 user_pref("mousewheel.with_alt.action", 1);
 user_pref("mousewheel.with_alt.delta_multiplier_y", 5);
+user_pref("middlemouse.paste", false);
 
 // don't show menu bar on Alt
 user_pref("ui.key.menuAccessKeyFocuses", false);
