@@ -1,2 +1,8 @@
 #!/bin/sh
+
+while pgrep mako; do
+    pkill mako
+    sleep .5s;
+done
+
 exec mako
