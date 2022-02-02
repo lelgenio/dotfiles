@@ -1,35 +1,37 @@
 #!/bin/sh
 
-if which xdg-user-dir &>/dev/null; then
-    DESTFOLDER=$(xdg-user-dir PICTURES)
+export XCURSOR_SIZE=40
+export XCURSOR_THEME='Breeze_Snow'
+
+if which xdg-user-dir >/dev/null 2>&1; then
+    DESTFOLDER="$(xdg-user-dir PICTURES)"
 else
     for i in Images Imagens Pictures Fotos ""; do
-        DESTFOLDER=$HOME/$i
+        DESTFOLDER="$HOME/$i"
         test -d "$DESTFOLDER" &&
             break
     done
 fi
 
 DESTFOLDER="$DESTFOLDER/Screenshots"
+mkdir -p "$DESTFOLDER"
+DESTFILE="$DESTFOLDER/$(date +'%Y-%m-%d-%H%M%S_screenshot.png')"
 
-mkdir -p $DESTFOLDER
-
-DESTFILE=$DESTFOLDER/$(date +'%Y-%m-%d-%H%M%S_screenshot.png')
 case $1 in
     def)
         # Screenshot to file
-        grim $DESTFILE
-        echo $DESTFILE
+        grim "$DESTFILE"
+        echo "$DESTFILE"
         ;;
 
     area)
         # Screen area to file
-        grim -g "$(slurp -d)" $DESTFILE
-        echo $DESTFILE
+        grim -g "$(slurp -d -b 30303088)" "$DESTFILE"
+        echo "$DESTFILE"
         ;;
     area-clip)
         # Screen area to clipboard
-        grim -g "$(slurp -d)" - | wl-copy
+        grim -g "$(slurp -d -b 30303088)" - | wl-copy
         ;;
 
     clip)
