@@ -1,16 +1,35 @@
 #!/bin/sh
 
-my_path="$1"
-my_name="$2"
-my_user="$3"
-my_host="$4"
-my_pass="$5"
+if test "$#" -ne "1"; then
+    echo "Incorrect number of arguments, expected 1, got $#" >&2
+fi
+
+case "$1" in
+    {%@@ for name, info in mail.items() @@%}
+
+        {{@@ name @@}})
+            my_path="{{@@ name @@}}"
+            my_name="{{@@ info.from @@}}"
+            my_user="{{@@ info.user @@}}"
+            # my_host="{{@@ info.imap @@}}"
+            my_pass=`_pass_get "{{@@ info.pass @@}}"`
+            ;;
+
+    {%@@ endfor @@%}
+    *)
+        echo "No valid account named $1" >&2
+        exit 1
+        ;;
+esac
 
 cat <<EOF
-set realname = "$my_name"
-set from = "${my_name}@${my_host}"
-set smtp_url = 'smtps://${my_user}@${my_host}'
-set smtp_pass = '$my_pass'
+set real_name = "$my_name"
+set from = "$my_name <$my_user>"
+
+set sendmail="/usr/bin/msmtp -a $my_path -- "
+
+# set smtp_url = 'smtps://$my_user'
+# set smtp_pass = '$my_pass'
 
 # set Mailboxes
 set folder = ~/.local/share/mail/${my_path}/
@@ -28,3 +47,4 @@ mailboxes \
     "=Trash" \
 
 EOF
+

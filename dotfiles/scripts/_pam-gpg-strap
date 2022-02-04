@@ -1,8 +1,7 @@
 #!/bin/sh
 
 
-gpg --list-secret-keys --with-keygrip  \
-    "{{@@ username @@}}@{{@@ mail.personal.mail @@}}" |
+gpg --list-secret-keys --with-keygrip |
 awk '
 /^ssb/ {
     ssb=1

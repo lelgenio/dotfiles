@@ -15,21 +15,17 @@ set header_cache = ~/.cache/mutt/
 set my_mailroot = ~/.local/share/mail
 
 set use_from = yes
-set ssl_force_tls = yes
+# set ssl_force_tls = yes
 
 {%@@ for name, info in mail.items() | reverse @@%}
-set my_source_command = \
-  "_mutt_get-mail '{{@@ name @@}}' '{{@@ info.user.split("@")[0] @@}}' '{{@@ info.user @@}}' '{{@@ info.mail @@}}' |"
-
-  folder-hook "$my_mailroot/{{@@ name @@}}/" \
-    source "\"$my_source_command\""
-  source "$my_source_command"
+    set my_source_command = "_mutt_get-mail '{{@@ name @@}}' |"
+    folder-hook "$my_mailroot/{{@@ name @@}}/" source "\"$my_source_command\""
+    source "$my_source_command"
 {%@@ endfor @@%}
 
 {%@@ for name, info in mail.items() @@%}
-  set my_source_command = \
-    "_mutt_get-mail '{{@@ name @@}}' '{{@@ info.user.split("@")[0] @@}}' '{{@@ info.user @@}}' '{{@@ info.mail @@}}' '{{@@ info.pass @@}}' |"
-  macro index,pager <f{{@@ loop.index @@}}> "<sync-mailbox><enter-command>source \"$my_source_command\"<enter><change-folder>!<enter>"
+    set my_source_command = "_mutt_get-mail '{{@@ name @@}}' |"
+    macro index,pager <f{{@@ loop.index @@}}> "<sync-mailbox><enter-command>source \"$my_source_command\"<enter><change-folder>!<enter>"
 {%@@ endfor @@%}
 
 # }}}
@@ -40,7 +36,7 @@ set sort = reverse-last-date
 set sort_aux = last-date
 
 set mail_check_stats = yes
-set mail_check_stats_interval = 60
+set mail_check_stats_interval = 10
 
 set mark_old = no  # Unread mail stay unread until read
 set mailcap_path = ~/.config/neomutt/mailcap

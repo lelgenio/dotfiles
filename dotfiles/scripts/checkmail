@@ -30,7 +30,7 @@ getnew() {
 OLD=$(getnew)
 
 if test "$1" = "update" && ! pidof mbsync; then
-    if ! ping -c3 {{@@ mail.personal.mail @@}} > /dev/null
+    if ! ping -c3 {{@@ mail.personal.imap  @@}} > /dev/null
     then
         exit 0
     fi

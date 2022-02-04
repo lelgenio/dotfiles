@@ -7,7 +7,7 @@
 
 
 [user]
-    name = {{@@ mail.work.user.split("@")[0] | capitalize @@}}
-    email = {{@@ mail.work.user.split("@")[0] @@}}@{{@@ mail.work.mail @@}}
+    name = {{@@ mail.work.from | capitalize @@}}
+    email = {{@@ mail.work.user.split("@")[0] @@}}
 
 # vim: ft=ini

@@ -1,9 +1,9 @@
 {%@@ for name, info in mail.items() | reverse @@%}
 
 IMAPStore {{@@ name @@}}-remote
-Host {{@@ info.mail @@}}
+Host {{@@ info.imap @@}}
 Port  993
-User {{@@ info.user.split("@")[0] @@}}@{{@@ info.mail @@}}
+User {{@@ info.user @@}}
 PassCmd "_pass_get {{@@ info.pass @@}}"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt

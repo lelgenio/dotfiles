@@ -8,7 +8,7 @@
 
 [user]
     name = {{@@ username @@}}
-    email = {{@@ mail.personal.user @@}}@{{@@ mail.personal.mail @@}}
+    email = {{@@ mail.personal.user @@}}
 
 [init]
     defaultBranch = main
