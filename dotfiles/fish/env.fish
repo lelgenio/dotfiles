@@ -90,3 +90,11 @@ set -x DOTDROP_CONFIG   "{{@@ _dotdrop_cfgpath  @@}}"
 set -x DOTDROP_PROFILE  "{{@@ profile           @@}}"
 
 set -x DOTDROP_WORKERS  (math 2 \* (nproc))
+
+
+################################################################
+# Source .env files
+################################################################
+
+command -qs direnv &&
+    direnv hook fish | source

@@ -55,6 +55,10 @@ hook global BufCreate .*\.tera %[
     add-highlighter buffer/jinja ref jinja
 ]
 
+hook global WinSetOption filetype=sql %[
+    set buffer comment_line '--'
+]
+
 hook global WinSetOption filetype=jsonc %[
     set buffer comment_line '//'
 
