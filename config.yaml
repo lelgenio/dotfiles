@@ -269,7 +269,7 @@ actions:
         _runit_config "{{@@ _dotfile_abs_dst @@}}"
         fusuma gammastep mako xsettingsd mpd mpDris2 telegram pipewire
         pipewire-media-session xdpw pulseaudio kdeconnectd kdeconnect-indicator
-        kanshi swayidle waybar syncthing udiskie
+        kanshi swayidle waybar syncthing udiskie notify-mail
 
     # bootstrap scripts
     pam_gpg: _pam-gpg-strap

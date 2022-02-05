@@ -6,9 +6,6 @@ then
     exit 0
 fi
 
-test -z "$XDG_RUNTIME_DIR" &&
-    export XDG_RUNTIME_DIR=/run/user/$(id -u)
-
 die() {
     test "$?" = 0 ||
         notify-send "Failed to sync mail" "try unlocking your gpg key"
@@ -19,16 +16,6 @@ die() {
     mkdir -p "$HOME/.local/share/mail/{{@@ name @@}}/"
 {%@@ endfor @@%}
 
-getnew() {
-    cd "$HOME/.local/share/mail/" >/dev/null
-
-    find */INBOX*/new -type f |
-        sed -E '/Duolingo|LBRY/d' |
-        wc -l
-}
-
-OLD=$(getnew)
-
 if test "$1" = "update" && ! pidof mbsync; then
     if ! ping -c3 {{@@ mail.personal.imap  @@}} > /dev/null
     then
@@ -37,12 +24,10 @@ if test "$1" = "update" && ! pidof mbsync; then
     mbsync -a
 fi
 
-NEW=$(getnew)
+cd "$HOME/.local/share/mail/" >/dev/null
 
-if test "$NEW" -gt "$OLD"; then
-    notify-send " New E-Mails!"
-fi
-
-echo $NEW | sed 's/^0$//'
+find */INBOX*/new -type f |
+    wc -l |
+    sed 's/^0$//'
 
 # vim:ft=sh

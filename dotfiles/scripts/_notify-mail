@@ -1,0 +1,54 @@
+#!/bin/fish
+
+set NEW_MAIL_PATH ~/.local/share/mail/*/*/new/
+set ICON "/usr/share/icons/{{@@ icon_theme @@}}/symbolic/status/mail-unread-symbolic.svg"
+
+inotifywait \
+    --monitor \
+    --quiet \
+    --format %w%f \
+    -e move -e create \
+    $NEW_MAIL_PATH |
+while read new_mail_file
+    # clear variables
+    set -e from
+    set -e subject
+    set -e headers_ended
+
+    test -f "$new_mail_file"
+        or continue
+
+    command cat "$new_mail_file" |
+    while read line
+        # End of headers
+        if string match -qr '^$' "$line"
+            set headers_ended
+            continue
+        end
+        if not set -q headers_ended
+            # capture header information
+            if string match -qr '^From: ' $line
+                set from $line
+            end
+            if string match -qr '^Subject: ' $line
+                set subject $line
+            end
+        else
+            # capture start of message, to maybe use as replacement of subject
+            set msg_head $line
+            break
+        end
+    end
+
+    # From may be formated as either "someone@example.com" or "Someone <someone@example.com>"
+    # Make for the seconde case, replace <.*> with nothing
+    set from (string replace -r '<.*>' '' $from)
+
+    # If a message lacks a subject, use the message head as one
+    if not test -n "$subject"
+        set subject "$msg_head"
+    end
+
+    notify-send --icon "$ICON" "$from" "$subject"
+
+end
