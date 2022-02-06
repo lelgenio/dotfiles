@@ -33,8 +33,8 @@ plug 'lelgenio/kakoune-mirror-colemak' config %{
 
 plug 'delapouite/kakoune-palette'
 plug 'greenfork/active-window.kak'
-plug 'insipx/kak-crosshairs' config %{
-    crosshairs
+plug 'lelgenio/kak-crosshairs' config %{
+    crosshairs-enable
 }
 
 # Search and replace, for every buffer
