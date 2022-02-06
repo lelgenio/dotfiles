@@ -50,6 +50,7 @@ variables:
             pass: Work/wopus_email
 
     nextcloud:
+        name: disroot
         user: lelgenio
         host: cloud.disroot.org
         pass: disroot.org
