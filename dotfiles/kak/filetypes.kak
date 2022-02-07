@@ -96,7 +96,7 @@ hook global WinSetOption filetype=blade %[
 
     add-highlighter buffer/blade/base/ ref html
 
-    add-highlighter buffer/blade/php  region '@php' '(@endphp|$)' group
+    add-highlighter buffer/blade/php  region '@php' '@endphp' group
     add-highlighter buffer/blade/php/ ref php
     add-highlighter buffer/blade/php/ regex '@((end)?php)' 1:block
 
