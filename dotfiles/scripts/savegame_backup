@@ -19,10 +19,6 @@ command -v xdg-user-dir &>/dev/null &&
 SAVES_DIR="$DOCUMETS/GameSaves"
 test -d "$SAVES_DIR" || exit 1
 
-grep "^#include \.saves-ignore" "$DOCUMETS/.stignore" ||
-    echo "#include .saves-ignore" >"$DOCUMETS/.stignore"
-rm "$DOCUMETS/.saves-ignore"
-
 game_save() {
     GAME_NAME="$1"
     shift
@@ -43,44 +39,22 @@ game_save() {
     if test ! -L "$INSTALL_DIR" -o ! -d "$INSTALL_DIR"; then
         ln -sT "$BACKUP_DIR" "$INSTALL_DIR"
     fi
-
-    if test -n "$1"; then
-        printf "GameSaves/${GAME_NAME}/%s\n" $@ >>"$DOCUMETS/.saves-ignore"
-    fi
 }
 
-game_save mindustry \
-    ".local/share/Mindustry" 'previews'
-game_save minecraft \
-    ".minecraft/saves"
-game_save factorio \
-    ".factorio" '_autosave*.zip' 'doc-html' 'temp' 'data' 'bin'
-game_save factorio \
-    "Games/factorio" '_autosave*.zip' 'doc-html' 'temp' 'data' 'bin'
-game_save cuphead \
-    "Games/cuphead/drive_c/users/$USER/Application Data/Cuphead"
-game_save dusk \
-    "Games/dusk/game/saves"
-game_save stardew_valley \
-    ".config/StardewValley"
-game_save dishonored \
-    "Games/dishonored/drive_c/users/lelgenio"
-game_save hollow_knight \
-    ".config/unity3d/Team Cherry/Hollow Knight"
-game_save carrion \
-    ".local/share/Phobia/Carrion"
-game_save ULTRAKILL-wine \
-    "Games/ultrakill/drive_c/Program Files/ULTRAKILL/Saves"
-game_save marioW \
-    "Games/super-mario-world"
-game_save gta_san_andreas \
-    "Games/grand-theft-auto-san-andreas/drive_c/users/$USER/Documents/GTA San Andreas User Files"
-
-game_save hl1 \
-    "Games/HalfLife2Source/game/hl1/save"
-game_save hl2 \
-    "Games/HalfLife2Source/game/hl2/save"
-game_save hl2ep1 \
-    "Games/HalfLife2Source/game/episodic/save"
-game_save hl2ep2 \
-    "Games/HalfLife2Source/game/ep2/save"
+game_save mindustry        ".local/share/Mindustry"
+game_save minecraft        ".minecraft/saves"
+game_save factorio         ".factorio"
+game_save factorio         "Games/factorio"
+game_save cuphead          "Games/cuphead/drive_c/users/$USER/Application Data/Cuphead"
+game_save dusk             "Games/dusk/game/saves"
+game_save stardew_valley   ".config/StardewValley"
+game_save dishonored       "Games/dishonored/drive_c/users/lelgenio"
+game_save hollow_knight    ".config/unity3d/Team Cherry/Hollow Knight"
+game_save carrion          ".local/share/Phobia/Carrion"
+game_save ULTRAKILL-wine   "Games/ultrakill/drive_c/Program Files/ULTRAKILL/Saves"
+game_save marioW           "Games/super-mario-world"
+game_save gta_san_andreas  "Games/grand-theft-auto-san-andreas/drive_c/users/$USER/Documents/GTA San Andreas User Files"
+game_save hl1              "Games/HalfLife2Source/game/hl1/save"
+game_save hl2              "Games/HalfLife2Source/game/hl2/save"
+game_save hl2ep1           "Games/HalfLife2Source/game/episodic/save"
+game_save hl2ep2           "Games/HalfLife2Source/game/ep2/save"
