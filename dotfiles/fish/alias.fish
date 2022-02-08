@@ -39,7 +39,7 @@ cabbr p paru
 
 cabbr v {{@@ editor @@}}
 
-cabbr rv sudo {{@@ editor @@}}
+cabbr rv sudoedit
 cabbr rv doas {{@@ editor @@}}
 
 
