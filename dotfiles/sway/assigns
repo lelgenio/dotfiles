@@ -30,8 +30,8 @@ assign [class=Chromium] workspace 2
 # assign [app_id=org.pwmt.zathura] workspace 8
 
 # Media
-assign [app_id=mpv]        workspace 8
-for_window [app_id=mpv]    workspace 8
+# assign [app_id=mpv]        workspace 8
+# for_window [app_id=mpv]    workspace 8
 
 # Games
 assign [class=Steam]        workspace 9
