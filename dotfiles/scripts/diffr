@@ -1,6 +1,6 @@
 #!/bin/sh
 
-/usr/bin/diffr \
+/usr/bin/env diffr \
     --colors 'refine-added:foreground:green:underline' \
     --colors 'refine-added:background:none' \
     --colors 'refine-removed:foreground:red:underline' \

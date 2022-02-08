@@ -1,4 +1,4 @@
-#!/bin/fish
+#!/usr/bin/env fish
 
 set opts "Fone\nSpeaker\nHDMI\nPhone"
 set out (printf $opts | wdmenu -p "Output: ")

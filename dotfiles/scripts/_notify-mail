@@ -1,4 +1,4 @@
-#!/bin/fish
+#!/usr/bin/env fish
 
 set NEW_MAIL_PATH ~/.local/share/mail/*/*/new/
 set ICON "/usr/share/icons/{{@@ icon_theme @@}}/symbolic/status/mail-unread-symbolic.svg"

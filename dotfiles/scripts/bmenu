@@ -1,4 +1,4 @@
-#!/bin/fish
+#!/usr/bin/env fish
 
 # wrapper around bemenu
 # bmenu *       - use as dmenu, -p for custom prompt (man bemenu)
