@@ -23,7 +23,7 @@ evaluate-commands %sh{
 
 define-command -override diffr %{ try %{
     execute-keys -draft 'ggxsdiff<ret>'
-    execute-keys -draft '%<a-;>J| diffr<ret>'
+    execute-keys -draft '%<a-;>J| _diffr<ret>'
     ansi-render
 } }
 
