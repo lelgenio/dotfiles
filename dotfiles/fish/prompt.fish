@@ -48,6 +48,9 @@ function _fish_prompt_git_remote_branches
 end
 
 function fish_git_prompt
+    command -qs git
+    or return
+
     pushd (string replace -r '/\.git(/.*)?$' '' "$PWD")
 
     ############################################################
