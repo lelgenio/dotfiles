@@ -1,0 +1,24 @@
+variables:
+    plymouth: false
+    zram: false
+
+    # set to false if root_uuid == phisical_uuid
+    phisical_uuid: ####RUN#### sudo blkid /dev/sda2 -s UUID -o value
+    root_uuid: ####RUN#### sudo blkid /dev/mapper/main -s UUID -o value
+    boot_uuid: ####RUN#### sudo blkid /dev/sda1 -s UUID -o value
+    # set to false if not using btrfs
+    root_subvol: ####RUN#### echo "/@$(lsb_release -i | cut -f 2)-root"
+    nproc: ####RUN#### nproc
+    memory_size: ####RUN#### env LC_ALL=C free -b | awk '/^Mem:/ {print $2}'
+
+    filesystem:
+        partition:
+        - type: vfat
+          uuid: ####RUN#### sudo blkid /dev/sda1 -s UUID -o value
+          path: /boot
+          options: rw
+        btrfs_subvolumes:
+            "/": /mnt/btrfs-root
+            "/@home": /home
+            "/@mysql": /var/lib/mysql
+            "/@swap": /swap

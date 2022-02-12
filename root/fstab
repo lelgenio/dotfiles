@@ -1,17 +1,26 @@
 {{@@ non_templated(_dotfile_abs_dst) @@}}
 ##### Dotdrop-start #####
 
-{#@@<filesystem> <dir> <type> <options> <dump> <pass> @@#}
+# <filesystem> <dir> <type> <options> <dump> <pass>
 
     {%@@ set btrfs_opt_t = "rw,noatime,compress=zstd:3,subvol={}" @@%}
     {%@@ set entry_t = "UUID={uuid} {path} {fs} {opts} {dump} {pass}" @@%}
 
-UUID={{@@ boot_uuid @@}}    /boot vfat  rw,errors=remount-ro             0 2
-
-{%@@ set new_partitions = filesystem.partitions.update({root_subvol: '/'}) @@%}
-{%@@ for name, path in filesystem.partitions.items() @@%}
+{%@@ for partition in filesystem.partition @@%}
     {{@@ entry_t.format(
-        uuid= decrypted_uuid ,
+        uuid= partition.uuid ,
+        path= partition.path ,
+        fs= partition.type,
+        opts= partition.options,
+        dump= "0",
+        pass= "0",
+    ) @@}}
+{%@@ endfor @@%}
+
+{%@@ set new_partitions = filesystem.btrfs_subvolumes.update({root_subvol: '/'}) @@%}
+{%@@ for name, path in filesystem.btrfs_subvolumes.items() @@%}
+    {{@@ entry_t.format(
+        uuid= root_uuid ,
         path= path ,
         fs= "btrfs",
         opts= btrfs_opt_t.format(name),

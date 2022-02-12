@@ -21,31 +21,8 @@ config:
     - "../funcs.py"
     # import_configs:
     # - "../config.yaml"
-
-
-# ###############################################################
-# variables:
-# ###############################################################
-
-#     plymouth: true
-#     zram: false
-#     filesystem:
-#         partitions:
-#             "/": /mnt/btrfs-root
-#             "/@home": /home
-#             "/@sql": /var/lib/mysql
-#             "/@swap": /swap
-
-###############################################################
-dynvariables:
-###############################################################
-
-    # phisical_uuid: sudo blkid /dev/sda2 -s UUID -o value
-    # decrypted_uuid: sudo blkid /dev/mapper/main -s UUID -o value
-    # boot_uuid: sudo blkid /dev/sda1 -s UUID -o value
-    # root_subvol: echo "/@$(lsb_release -i | cut -f 2)-root"
-    nproc: nproc
-    # memory_size: env LC_ALL=C free -b | awk '/^Mem:/ {print $2}'
+    import_variables:
+    - "hardware.yaml"
 
 ###############################################################
 actions:
@@ -61,43 +38,38 @@ actions:
         sv restart "{{@@ '_dotfile_key' @@}}" ||
         rc-service "{{@@ '_dotfile_key' @@}}" restart
 
-    create_subvolumes: _create-subvolumes
     create_swapfile: _create-swapfile
     mount_partitions: mount -a
     dbus_uuidgen: dbus-uuidgen --ensure
     sysctl_apply: sysctl -a
-    mkinitcpio: mkinitcpio -P
-    start_services: >
-        _runit_config "{{@@ _dotfile_abs_dst @@}}"
-        apache
-        cronie
-        dbus
-        dhcpcd
-        docker
-        earlyoom
-        elogind
-        greetd
-        iwd
-        bluetoothd
-        mariadb
-        preload
-        syslog-ng
-        tlp
+    # mkinitcpio: mkinitcpio -P
+    # start_services: >
+    #     _runit_config "{{@@ _dotfile_abs_dst @@}}"
+    #     apache
+    #     cronie
+    #     dbus
+    #     dhcpcd
+    #     docker
+    #     earlyoom
+    #     elogind
+    #     greetd
+    #     iwd
+    #     bluetoothd
+    #     mariadb
+    #     preload
+    #     syslog-ng
+    #     tlp
 
 
 ###############################################################
 dotfiles:
 ###############################################################
 
-    runit_sv:
-        src: runit_sv
-        dst: /etc/runit/sv
-
-    greetd:
-        src: greetd
-        dst: /etc/greetd
-        actions:
-        - greetd_install
+    # greetd:
+    #     src: greetd
+    #     dst: /etc/greetd
+    #     actions:
+    #     - greetd_install
 
     elogind:
         src: elogind.conf
@@ -105,11 +77,11 @@ dotfiles:
         actions:
         - dbus_uuidgen
 
-    # grub:
-    #     src: grub
-    #     dst: /etc/default/grub
-    #     actions:
-    #     - grub_install
+    grub:
+        src: grub
+        dst: /etc/default/grub
+        actions:
+        - grub_install
 
     # mkinitcpio:
     #     src: mkinitcpio.conf
@@ -117,11 +89,11 @@ dotfiles:
     #     actions:
     #     - mkinitcpio
 
-    pacman:
-        src: pacman.conf
-        dst: /etc/pacman.conf
-        actions:
-        - pacman_install
+    # pacman:
+    #     src: pacman.conf
+    #     dst: /etc/pacman.conf
+    #     actions:
+    #     - pacman_install
 
     bluez:
         src: bluetooth.conf
@@ -133,13 +105,12 @@ dotfiles:
         actions:
         - locale_install
 
-    # fstab:
-    #     src: fstab
-    #     dst: /etc/fstab
-    #     actions:
-    #     - create_subvolumes
-    #     - create_swapfile
-    #     - mount_partitions
+    fstab:
+        src: fstab
+        dst: /etc/fstab
+        actions:
+        - create_swapfile
+        - mount_partitions
 
     sysctl:
         src: sysctl
@@ -147,19 +118,19 @@ dotfiles:
         actions:
         - sysctl_apply
 
-    # zram:
-    #     src: zram
-    #     dst: /etc/
+    zram:
+        src: zram
+        dst: /etc/
 
     # earlyoom:
     #     src: earlyoom
     #     dst: /etc/default/earlyoom
 
-    services:
-        src: runit_sv
-        dst: /etc/runit/sv
-        actions:
-        - start_services
+    # services:
+    #     src: runit_sv
+    #     dst: /etc/runit/sv
+    #     actions:
+    #     - start_services
 
 
 ###############################################################

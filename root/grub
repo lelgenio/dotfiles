@@ -10,8 +10,15 @@ GRUB_RECORDFAIL_TIMEOUT=$GRUB_HIDDEN_TIMEOUT
 GRUB_DISTRIBUTOR="Artix"
 
 GRUB_CMDLINE_LINUX_DEFAULT=""
-GRUB_CMDLINE_LINUX=" cryptdevice=/dev/disk/by-uuid/{{@@ phisical_uuid @@}}:main "
-GRUB_CMDLINE_LINUX+=" root=/dev/mapper/main rootflags=rw,noatime,compress=zstd,subvol=/{{@@ root_subvol @@}} "
+GRUB_CMDLINE_LINUX="  \
+    {%@@ if phisical_uuid @@%}
+        rd.luks.uuid={{@@ phisical_uuid @@}} \
+        root=UUID={{@@ root_uuid @@}} \
+    {%@@ endif @@%}
+    {%@@ if root_subvol @@%}
+        rootflags=rw,noatime,compress=zstd,subvol=/{{@@ root_subvol @@}} \
+    {%@@ endif @@%}
+"
 
 {%@@ if plymouth @@%}
 GRUB_CMDLINE_LINUX+=" fbcon=nodefer splash quiet loglevel=3 vt.global_cursor_default=0 rd.udev.log_level=3 "
