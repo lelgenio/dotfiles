@@ -29,12 +29,6 @@ plug 'alexherbo2/auto-pairs.kak' commit "fd735ec149ef0d9ca5f628a95b1e52858b5afbd
 
 plug 'lelgenio/kakoune-mirror-colemak' config %{
     map global user "s" ': enter-user-mode mirror<ret>'
-
-    # declare-user-mode tag;
-
-    # map global user "t" ': enter-user-mode tag<ret>'
-    map global mirror "t" 'Za<lt>/<gt><esc>;"tZzi<lt><gt><esc>h"t<a-z>ai'
-    map global mirror " " 'a <esc>i <esc>'
 }
 
 plug 'delapouite/kakoune-palette'
@@ -44,7 +38,8 @@ plug 'lelgenio/kak-crosshairs' config %{
 }
 
 # Search and replace, for every buffer
-plug 'occivink/kakoune-find'
+# plug 'occivink/kakoune-find'
+plug "natasky/kakoune-multi-file"
 
 plug 'kak-lsp/kak-lsp' do %{
     cargo install --locked --force --path .
