@@ -1,5 +1,11 @@
 #!/bin/sh
 
-for g in docker video input audio wheel; do
-    sudo usermod "{{@@ env['USER'] @@}}" -aG "$g"
+for g in audio video input bluetooth wheel _seatd kvm docker; do
+    if
+        cat /etc/group | cut -d: -f1 | grep "^${g}\$"
+    then
+        sudo usermod "$USER" -aG "$g"
+    else
+        echo "warning: group $g does not exist"
+    fi
 done
