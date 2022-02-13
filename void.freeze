@@ -32,7 +32,6 @@ docker-20.10.12_1
 docker-compose-2.2.3_1
 dust-0.7.5_1
 efibootmgr-17_6
-elogind-246.9.2_3
 elogind-devel-246.9.2_3
 engrampa-1.26.0_1
 entr-5.1_1
@@ -168,7 +167,9 @@ ranger-1.9.3_3
 rclone-1.57.0_1
 recode-3.6_10
 ripgrep-13.0.0_1
+rofi-1.7.3_1
 rsync-3.2.3_3
+rundird-0.2.0_1
 rust-analyzer-2021.08.30_1
 rustup-1.24.3_1
 sassc-3.6.2_1

@@ -7,10 +7,12 @@ GRUB_TIMEOUT=1
 GRUB_HIDDEN_TIMEOUT=1
 GRUB_RECORDFAIL_TIMEOUT=$GRUB_HIDDEN_TIMEOUT
 
-GRUB_DISTRIBUTOR="Artix"
+GRUB_DISTRIBUTOR="Void"
 
 GRUB_CMDLINE_LINUX_DEFAULT=""
 GRUB_CMDLINE_LINUX="  \
+    quiet loglevel=3 rd.udev.log_level=3 \
+    rd.vconsole.keymap={{@@ key_layout @@}} \
     {%@@ if phisical_uuid @@%}
         rd.luks.uuid={{@@ phisical_uuid @@}} \
         root=UUID={{@@ root_uuid @@}} \

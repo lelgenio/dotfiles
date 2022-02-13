@@ -44,7 +44,7 @@ function esway
     end
 end
 
-if test "$XDG_VTNR" = 1
+if test (tty) = /dev/tty1
     and test -z "$DISPLAY$WAYLAND_DISPLAY"
 
     esway &> .swaylog

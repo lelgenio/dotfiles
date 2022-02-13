@@ -83,6 +83,10 @@ dotfiles:
         actions:
         - grub_install
 
+    pam:
+        src: pam-local-login
+        dst: /etc/pam.d/system-local-login
+
     # mkinitcpio:
     #     src: mkinitcpio.conf
     #     dst: /etc/mkinitcpio.conf

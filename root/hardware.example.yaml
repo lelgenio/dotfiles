@@ -2,6 +2,8 @@ variables:
     plymouth: false
     zram: false
 
+    key_layout: colemak
+
     # set to false if root_uuid == phisical_uuid
     phisical_uuid: ####RUN#### sudo blkid /dev/sda2 -s UUID -o value
     root_uuid: ####RUN#### sudo blkid /dev/mapper/main -s UUID -o value
