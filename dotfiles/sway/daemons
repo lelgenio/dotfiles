@@ -49,8 +49,8 @@ exec udiskie
 exec_always pidof -x fusuma || fusuma
 
 # Blue light filter
-exec /usr/lib/geoclue-2.0/demos/agent
-exec_always pidof redshift || redshift
+# exec /usr/lib/geoclue-2.0/demos/agent
+exec_always pidof gammastep || gammastep -l -30:-50
 
 # Screen manager
 exec_always _sway_displays
