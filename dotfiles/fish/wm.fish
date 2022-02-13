@@ -11,7 +11,7 @@
 function esway
 
     # You get a wayland, and you get a wayland. Everybody get's a wayland!
-    set -x MOZ_ENABLE_WAYLAND 1
+    # set -x MOZ_ENABLE_WAYLAND 1
     set -x CLUTTER_BACKEND wayland
     set -x QT_QPA_PLATFORM wayland-egl
     set -x ECORE_EVAS_ENGINE wayland-egl

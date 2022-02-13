@@ -1,0 +1,9 @@
+#!/bin/sh
+
+export SVDIR="$HOME/.config/runit/runsvdir/default/"
+
+if pidof swayidle; then
+    sv down swayidle
+else
+    sv up swayidle
+fi

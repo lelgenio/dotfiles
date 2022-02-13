@@ -187,9 +187,9 @@
     },
     "custom/caffeine":{
         "format":"{}",
-        "exec":"pidof caffeinated > /dev/null && echo  || echo 鈴",
-        "on-click":"pidof caffeinated && pkill caffeinated || caffeinated -d",
-        "interval": 5,
+        "exec":"pidof swayidle > /dev/null && echo 鈴 || echo ",
+        "on-click":"_sway_idle_toggle",
+        "interval": 1,
         "tooltip":false
     },
     "sway/language": {

@@ -23,7 +23,7 @@ $mod+g exec emoji
 $mod+d exec sway-displays
 
 # Insert special characters
-$mod+Alt+c exec pidof caffeinated && pkill caffeinated || caffeinated -d
+$mod+Alt+c exec _sway_idle_toggle
 
 # Kill focused window
 $mod+x kill
