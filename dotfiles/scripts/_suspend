@@ -1,0 +1,7 @@
+#!/bin/sh
+
+swaylock
+
+loginctl suspend
+systemctl suspend
+sudo -A zzz

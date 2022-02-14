@@ -38,7 +38,7 @@ $mod+p exec wpass
 $mod+Shift+c reload
 
 # Lock Sway and suspend
---locked $mod+Control+z exec loginctl suspend || systemctl suspend
+--locked $mod+Control+z exec _suspend
 
 # Exit sway
 Control+Alt+delete exec pkill -u "$USER" -HUP runsvdir ; exit
