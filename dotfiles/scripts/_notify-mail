@@ -3,6 +3,9 @@
 set NEW_MAIL_PATH ~/.local/share/mail/*/*/new/
 set ICON "/usr/share/icons/{{@@ icon_theme @@}}/symbolic/status/mail-unread-symbolic.svg"
 
+command -qs maildir-notify-daemon
+and exec maildir-notify-daemon $NEW_MAIL_PATH
+
 inotifywait \
     --monitor \
     --quiet \
