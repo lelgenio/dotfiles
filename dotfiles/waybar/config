@@ -87,6 +87,7 @@
         "format-icons": ["", "", "", "", "", ""]
     },
     "network": {
+        "interval": 5,
         "tooltip":false,
         "on-click": "terminal iwd",
         "format-wifi": "{icon}",
@@ -107,6 +108,7 @@
         "tooltip-format": "{}"
     },
     "pulseaudio": {
+        "interval": 5,
         "tooltip":false,
         "scroll-step": 10,
         "format": "{icon}",
