@@ -41,6 +41,8 @@ plug 'lelgenio/kak-crosshairs' config %{
 # plug 'occivink/kakoune-find'
 plug "natasky/kakoune-multi-file"
 
+plug "lelgenio/kakoune-colemak-neio"
+
 plug 'kak-lsp/kak-lsp' do %{
     cargo install --locked --force --path .
 } config %{
