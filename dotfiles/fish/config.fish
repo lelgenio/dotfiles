@@ -16,6 +16,13 @@ if status is-interactive
     source {$__fish_config_dir}/tmux.fish
     source {$__fish_config_dir}/colors.fish
 
+    if not functions -q fundle
+        eval (curl -sfL https://git.io/fundle-install)
+    end
+    fundle plugin 'FabioAntunes/fish-nvm'
+    fundle plugin 'edc/bass'
+    fundle init
+
     {%@@ if starship @@%}
         starship init fish | source
         # Set cursor shape
