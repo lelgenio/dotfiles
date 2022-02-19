@@ -12,6 +12,10 @@ hook global WinSetOption filetype=c %{
     set buffer formatcmd 'clang-format'
 }
 
+hook global BufCreate .*\.rs %{
+    set buffer formatcmd 'rustfmt'
+}
+
 hook global BufCreate .*\.html %{
     set buffer formatcmd 'prettier --parser html'
 }
