@@ -463,7 +463,7 @@ dotfiles: # Just a bunch of paths and action mappings
 
     rustfmt:
         src: rustfmt.toml
-        dst: ~/.rustfmt.toml
+        dst: ~/.config/rustfmt/rustfmt.toml
 
     ###############################################################
     # Big pahts

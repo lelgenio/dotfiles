@@ -14,7 +14,7 @@ set -x XDG_DATA_DIRS "$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share"
 set -x XDG_DATA_DIRS "$XDG_DATA_DIRS:/usr/share"
 set -x XDG_DATA_DIRS "$XDG_DATA_DIRS:$HOME/.local/share"
 
-for i in ~/.local/bin ~/.cargo/bin ~/.yarn/bin ~/.factorio/bin/*
+for i in ~/.local/bin ~/.local/share/cargo/bin ~/.yarn/bin ~/.factorio/bin/*
     test -d "$i";and fish_add_path "$i"
 end
 
@@ -42,9 +42,13 @@ end
 if test "$USER" != "root"
     set -x PYTHONPYCACHEPREFIX "$HOME/.cache/python"
     set -x MYPY_CACHE_DIR "$HOME/.cache/mypy"
+    set -x RUSTUP_HOME $HOME/.local/share/rustup
+    set -x CARGO_HOME $HOME/.local/share/cargo
 else
     set -e PYTHONPYCACHEPREFIX
     set -e MYPY_CACHE_DIR
+    set -e RUSTUP_HOME
+    set -e CARGO_HOME
 end
 
 
