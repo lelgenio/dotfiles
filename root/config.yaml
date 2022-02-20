@@ -126,6 +126,10 @@ dotfiles:
         src: zram
         dst: /etc/
 
+    vconsole:
+        src: vconsole.conf
+        dst: /etc/vconsole.conf
+
     # earlyoom:
     #     src: earlyoom
     #     dst: /etc/default/earlyoom
