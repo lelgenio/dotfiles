@@ -113,34 +113,6 @@ abbr -g gri 'git rebase --interactive FETCH_HEAD'
 
 
 ################################################################
-# work stuff
-################################################################
-
-abbr svu sv start apache mariadb
-abbr svd sv stop apache mariadb
-abbr svs sv status apache mariadb
-abbr pname "\
-set pname (basename (pwd | sd -- - _))
-sd 'DB_DATABASE=.*' DB_DATABASE=\$pname .env
-test (count dump/*) -eq 1
-and mv dump/* dump/\$pname.sql"
-abbr msv "\
-string match -r 'DB_DATABASE=(?<db>.*)\$' < .env
-set margs -v -u root --password=(_pass_get work_db)"
-abbr msc 'echo "CREATE DATABASE $db" | mysql $margs'
-abbr msdrop 'echo "DROP DATABASE $db" | mysql $margs'
-abbr msl 'mysql $margs $db < dump/$db.sql'
-abbr msd 'mariadb-dump $margs $db | mysql_format > dump/$db.sql'
-abbr vw  'kak (fd -E \'*.min.js\' \'.(php|less|js)$\' app/ public/assets/  resources/)'
-abbr gdw 'git diff -- "*.less" "*.js" "*.blade.php"'
-abbr pl 'php7 artisan serve --host 0.0.0.0 & make watch'
-
-function mysql_format
-    sd "\),\(" "),\n\t(" | sd "VALUES \(" "VALUES\n\t("
-end
-
-
-################################################################
 # open
 ################################################################
 
