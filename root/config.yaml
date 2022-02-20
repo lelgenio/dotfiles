@@ -31,6 +31,7 @@ actions:
     greetd_install: _greetd_install
     grub_install: update-grub
     locale_install: locale-gen
+    libc_locale_install: xbps-reconfigure -f glibc-locales
     pacman_install: |
         pacman-key --init
         pacman-key --populate
@@ -108,6 +109,12 @@ dotfiles:
         dst: /etc/locale.gen
         actions:
         - locale_install
+
+    libc_locales:
+        src: locale.gen
+        dst: /etc/default/libc-locales
+        actions:
+        - libc_locale_install
 
     fstab:
         src: fstab
