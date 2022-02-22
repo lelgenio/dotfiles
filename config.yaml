@@ -495,6 +495,7 @@ dotfiles: # Just a bunch of paths and action mappings
     fusuma:      { "src":"fusuma.yml",    "dst":"~/.config/fusuma/config.yml"             }
     imv:         { "src":"imv.conf",      "dst":"~/.config/imv/config"                    }
     kanshi:      { "src":"kanshi",        "dst":"~/.config/kanshi/config"                 }
+    mangohud:    { "src":"MangoHud.conf", "dst":"~/.config/MangoHud/MangoHud.conf"        }
     mpd:         { "src":"mpd.conf",      "dst":"~/.config/mpd/mpd.conf"                  }
     paru:        { "src":"paru.conf",     "dst":"~/.config/paru/paru.conf"                }
     pqivrc:      { "src":"pqiv.ini",      "dst":"~/.config/pqivrc"                        }
