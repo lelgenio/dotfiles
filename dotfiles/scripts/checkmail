@@ -21,7 +21,7 @@ if test "$1" = "update" && ! pidof mbsync; then
     then
         exit 0
     fi
-    mbsync -a
+    timeout 10m mbsync -a
 fi
 
 cd "$HOME/.local/share/mail/" >/dev/null
