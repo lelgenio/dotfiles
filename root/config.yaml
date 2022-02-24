@@ -129,9 +129,13 @@ dotfiles:
         actions:
         - sysctl_apply
 
-    zram:
-        src: zram
-        dst: /etc/
+    kernel_modules:
+        src: kernel-modules
+        dst: /etc/modules-load.d/
+
+    udev_rules:
+        src: udev-rules
+        dst: /etc/udev/rules.d/
 
     vconsole:
         src: vconsole.conf
