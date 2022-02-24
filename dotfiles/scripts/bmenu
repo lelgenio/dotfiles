@@ -82,7 +82,6 @@ command -qs dhist &&
 
 env $wraper -- bemenu \
     $focused_output\
-    --grab\
     --ignorecase\
     --bottom\
     --no-overlap\
