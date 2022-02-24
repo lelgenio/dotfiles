@@ -57,6 +57,9 @@ bindsym --to-code {
 {%@@ endfor @@%}
 {%@@ endfor @@%}
 
+$mod+Tab       workspace next_on_output
+$mod+Shift+Tab workspace prev_on_output
+
 
 ###############################################################
 # Layout
@@ -81,8 +84,8 @@ $mod+space focus mode_toggle
 $mod+equal focus parent
 $mod+minus focus child
 
-$mod+tab scratchpad show
-$mod+Shift+tab move container scratchpad
+# $mod+tab scratchpad show
+# $mod+Shift+tab move container scratchpad
 
 }
 
