@@ -51,14 +51,15 @@ profiles:
 
     common:
         dotfiles:
-            - grub
-            - pam
             - bluez
-            - iwd
-            - locale
             - fstab
-            - sysctl
+            - grub
+            - iwd
             - kernel_modules
+            - locale
+            - pam
+            - sudoers
+            - sysctl
             - udev_rules
             - vconsole
 
@@ -127,6 +128,10 @@ dotfiles:
     pam:
         src: pam-local-login
         dst: /etc/pam.d/system-local-login
+
+    sudoers:
+        src: sudoers
+        dst: /etc/sudoers.d/local
 
     mkinitcpio:
         src: mkinitcpio.conf
