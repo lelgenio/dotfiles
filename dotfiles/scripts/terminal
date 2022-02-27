@@ -24,8 +24,11 @@ test "$1" = "-e" && shift
             exec alacritty --class "$CLASS"
     }
 # {%@@ elif terminal == "foot" @@%} #
+    if ! pidof foot; then
+        foot --server 2> /dev/null &
+    fi
     command -v footclient > /dev/null &&
-        exec footclient --class "$CLASS" -- $@
+        exec footclient --app-id "$CLASS" -- $@
 # {%@@ elif terminal == "kitty" @@%} #
     command -v kitty > /dev/null &&
         exec kitty --class "$CLASS" -- $@
