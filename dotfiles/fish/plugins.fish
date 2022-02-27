@@ -1,11 +1,13 @@
 set -l NVM_URL "https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh"
 if not test -d "$NVM_DIR"
+    and test "$USER" != root
     set -e nvm_prefix
     mkdir -p "$NVM_DIR"
     curl -o- "$NVM_URL" | bash
 end
 
 if not functions -q fundle
+    and test "$USER" != root
     eval (curl -sfL https://git.io/fundle-install)
 end
 fundle plugin 'FabioAntunes/fish-nvm'

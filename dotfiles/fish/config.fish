@@ -15,9 +15,7 @@ if status is-interactive
     source {$__fish_config_dir}/keys.fish
     source {$__fish_config_dir}/tmux.fish
     source {$__fish_config_dir}/colors.fish
-    if test "$USER" != root
-        source {$__fish_config_dir}/plugins.fish
-    end
+    source {$__fish_config_dir}/plugins.fish
 
 end
 
