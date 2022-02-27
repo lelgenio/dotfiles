@@ -58,6 +58,10 @@ variables:
 profiles:
 ###############################################################
 
+###############################################################
+# Accents
+###############################################################
+
     dark:
         variables:
             background: ~/.local/share/backgrounds/assembly_dark.png
@@ -163,10 +167,8 @@ profiles:
 
 
 ###############################################################
-# Os profiles
-###############################################################
-
     common:
+###############################################################
         variables:
             # gtk_theme:      "Mint-Y{{@@ '-Dark' if color.type == 'dark' else '' @@}}-{{@@ accent_color_name.capitalize() @@}}"
             gtk_theme:      "Orchis-{{@@ accent_color_name.lower() @@}}-{{@@ 'dark' if color.type == 'dark' else 'light' @@}}"
@@ -231,33 +233,18 @@ profiles:
             - xdpw
             - zathura
 
+###############################################################
+# Os profiles
+###############################################################
+
     voidlinux:
         include:
             - "common"
         variables:
+            user_svdir: $HOME/.config/runit
             supervisor: runit
-            runit_enable:
-                - gammastep
-                - kanshi
-                - kdeconnect-indicator
-                - kdeconnectd
-                - libinput-gestures
-                - mako
-                - mpDris2
-                - mpd
-                - notify-mail
-                - pipewire
-                - pipewire-media-session
-                - pulseaudio
-                - swayidle
-                - syncthing
-                - telegram
-                - udiskie
-                - waybar
-                - xdpw
-                - xsettingsd
         dotfiles:
-            - services
+            - runit_services
 
     artixlinux:
         include:
@@ -357,8 +344,6 @@ actions:
         git clone
         https://github.com/alexanderjeurissen/ranger_devicons
         ~/.config/ranger/plugins/ranger_devicons
-
-    enable_runit_services: _runit_config "{{@@ _dotfile_abs_dst @@}}" {{@@ ' '.join(runit_enable) @@}}
 
     # bootstrap scripts
     pam_gpg: _pam-gpg-strap
@@ -485,11 +470,9 @@ dotfiles: # Just a bunch of paths and action mappings
         - make_theme
         - groups_install
 
-    services:
+    runit_services:
         src: runit_sv
-        dst: ~/.config/runit/sv
-        actions:
-        - enable_runit_services
+        dst: ~/.config/runit
 
     libinput-gestures:
         src: libinput-gestures.conf

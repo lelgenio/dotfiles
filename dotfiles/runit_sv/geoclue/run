@@ -1,5 +1,0 @@
-#!/bin/sh
-
-PATH="/usr/lib/geoclue-2.0/demos/:/usr/libexec/geoclue-2.0/demos/"
-
-exec agent

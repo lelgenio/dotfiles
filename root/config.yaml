@@ -43,7 +43,7 @@ actions:
     dbus_uuidgen: dbus-uuidgen --ensure
     sysctl_apply: sysctl -a
     mkinitcpio: mkinitcpio -P
-    enable_runit_services: _runit_config "{{@@ _dotfile_abs_dst @@}}" {{@@ ' '.join(runit_autostart) @@}}
+    enable_runit_services: ln -sf "{{@@ sys_services @@}}/{0}" "{{@@ sys_svdir @@}}/{0}"
 
 ###############################################################
 profiles:
@@ -63,25 +63,15 @@ profiles:
 
     voidlinux:
         variables:
-            runit_autostart:
-                - acpid
-                - bluetoothd
-                - crond
-                - dbus
-                - dhcpcd
-                - docker
-                - iwd
-                - ntpd
-                - rundird
-                - seatd
-                - socklog-unix
-                - tlp
+            sys_services: /etc/sv
+            sys_svdir: /etc/runit/runsvdir/default/
         include:
             - "common"
         dotfiles:
             - elogind
             - libc_locales
             - runit_services
+            - runit_services_enable
 
     artixlinux:
         include:
@@ -198,7 +188,20 @@ dotfiles:
     runit_services:
         src: runit_sv
         dst: /etc/runit/sv
+
+    runit_services_enable:
+        src:
+        dst:
         actions:
-        - enable_runit_services
-
-
+        - enable_runit_services acpid
+        - enable_runit_services bluetoothd
+        - enable_runit_services crond
+        - enable_runit_services dbus
+        - enable_runit_services dhcpcd
+        - enable_runit_services docker
+        - enable_runit_services iwd
+        - enable_runit_services ntpd
+        - enable_runit_services rundird
+        - enable_runit_services seatd
+        - enable_runit_services socklog-unix
+        - enable_runit_services tlp

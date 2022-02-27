@@ -42,7 +42,7 @@ include modes
 include assigns
 
 {%@@ if profile in ["voidlinux"] @@%}
-    set $user_svd "$HOME/.config/runit/runsvdir/default"
+    set $user_svd "{{@@ user_svdir @@}}"
     exec_always pgrep -u "$USER" "^runsvdir$" || runsvdir $user_svd
     exec_always env SVDIR=$user_svd sv hup kanshi
     exec_always env SVDIR=$user_svd sv hup waybar
@@ -51,6 +51,7 @@ include assigns
     include daemons
 {%@@ endif @@%}
 
+exec light -N 1
 exec dbus-update-activation-environment DISPLAY XAUTHORITY SWAYSOCK I3SOCK WAYLAND_DISPLAY
 
 # Prevent the screen from locking if fullscreen
