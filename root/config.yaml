@@ -54,6 +54,7 @@ profiles:
             - grub
             - pam
             - bluez
+            - iwd
             - locale
             - fstab
             - sysctl
@@ -106,6 +107,10 @@ dotfiles:
         dst: /etc/logind/logind.conf
         actions:
         - dbus_uuidgen
+
+    iwd:
+        src: iwd.conf
+        dst: /etc/iwd/main.conf
 
     elogind:
         src: elogind.conf
