@@ -23,7 +23,6 @@ variables:
     bar_pos: top
     tmux: false
     starship: false
-    supervisor: runit
 
     accent_fg: '#ffffff'
 
@@ -164,10 +163,10 @@ profiles:
 
 
 ###############################################################
-# Main profile
+# Os profiles
 ###############################################################
 
-    main:
+    common:
         variables:
             # gtk_theme:      "Mint-Y{{@@ '-Dark' if color.type == 'dark' else '' @@}}-{{@@ accent_color_name.capitalize() @@}}"
             gtk_theme:      "Orchis-{{@@ accent_color_name.lower() @@}}-{{@@ 'dark' if color.type == 'dark' else 'light' @@}}"
@@ -177,14 +176,106 @@ profiles:
             cursor_theme:   "Breeze_Obsidian"
             # cursor_theme:   "Breeze_Snow"
             # cursor_theme:   "capitaine-cursors"
-
-        dotfiles:
-        - ALL
         include:
         - "{{@@ key_layout @@}}"
         - "{{@@ color_type @@}}"
         - "accent_{{@@ accent_color_name @@}}"
+        dotfiles:
+            - alacritty
+            - backgrounds
+            - bat
+            - blender
+            - clang-format
+            - code-oss
+            - crontab
+            - dav
+            - deemix
+            - firefox
+            - fish
+            - fonts
+            - foot
+            - fusuma
+            - git
+            - gpg-agent
+            - i3
+            - imv
+            - kak-lsp
+            - kakoune
+            - kanshi
+            - kitty
+            - lesskey
+            - mako
+            - mangohud
+            - mime
+            - mpd
+            - mpv
+            - mutt
+            - mypy
+            - nvim
+            - pqivrc
+            - prettierrc
+            - qutebrowser
+            - ranger
+            - rclone
+            - rustfmt
+            - scripts
+            - starship
+            - sway
+            - swaylock
+            - telegram-theme
+            - theme
+            - thunar
+            - tmux
+            - waybar
+            - wofi
+            - xdpw
+            - zathura
 
+    voidlinux:
+        include:
+            - "common"
+        variables:
+            supervisor: runit
+            runit_enable:
+                - fusuma
+                - gammastep
+                - kanshi
+                - kdeconnect-indicator
+                - kdeconnectd
+                - mako
+                - mpDris2
+                - mpd
+                - notify-mail
+                - pipewire
+                - pipewire-media-session
+                - pulseaudio
+                - swayidle
+                - syncthing
+                - telegram
+                - udiskie
+                - waybar
+                - xdpw
+                - xsettingsd
+        dotfiles:
+            - services
+
+    artixlinux:
+        include:
+            - "common"
+        dotfiles:
+            - arch-packages
+            - paru
+        variables:
+            supervisor: runit
+
+    archlinux:
+        include:
+            - "common"
+        dotfiles:
+            - arch-packages
+            - paru
+        variables:
+            supervisor: scripts
 
 ###############################################################
 config:
@@ -266,16 +357,12 @@ actions:
         https://github.com/alexanderjeurissen/ranger_devicons
         ~/.config/ranger/plugins/ranger_devicons
 
-    start_services: >
-        _runit_config "{{@@ _dotfile_abs_dst @@}}"
-        fusuma gammastep mako xsettingsd mpd mpDris2 telegram pipewire
-        pipewire-media-session xdpw pulseaudio kdeconnectd kdeconnect-indicator
-        kanshi swayidle waybar syncthing udiskie notify-mail
+    enable_runit_services: _runit_config "{{@@ _dotfile_abs_dst @@}}" {{@@ ' '.join(runit_enable) @@}}
 
     # bootstrap scripts
     pam_gpg: _pam-gpg-strap
     make_theme: _make_theme
-    install_meta: install_meta
+    install_arch_meta: install_arch_meta
     install_mpv: _mpv_install
     filter_backgrounds: _backgrouds_filter
 
@@ -401,7 +488,7 @@ dotfiles: # Just a bunch of paths and action mappings
         src: runit_sv
         dst: ~/.config/runit/sv
         actions:
-        - start_services
+        - enable_runit_services
 
     deemix:
         src: deemix
@@ -451,11 +538,11 @@ dotfiles: # Just a bunch of paths and action mappings
         actions:
         - pam_gpg
 
-    packages:
+    arch-packages:
         src: meta.PKGBUILD
         dst: ~/.local/share/metapkg/PKGBUILD
         actions:
-        - install_meta
+        - install_arch_meta
 
     kak-lsp:
         src: kak-lsp.toml

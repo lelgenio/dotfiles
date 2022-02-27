@@ -41,14 +41,14 @@ include modes
 
 include assigns
 
-{%@@ if supervisor == "scripts" @@%}
-include daemons
-{%@@ elif supervisor == "runit" @@%}
-set $user_svd "$HOME/.config/runit/runsvdir/default"
-exec_always pgrep -u "$USER" "^runsvdir$" || runsvdir $user_svd
-exec_always env SVDIR=$user_svd sv hup kanshi
-exec_always env SVDIR=$user_svd sv hup waybar
-exec_always _gpg-unlock
+{%@@ if profile in ["voidlinux"] @@%}
+    set $user_svd "$HOME/.config/runit/runsvdir/default"
+    exec_always pgrep -u "$USER" "^runsvdir$" || runsvdir $user_svd
+    exec_always env SVDIR=$user_svd sv hup kanshi
+    exec_always env SVDIR=$user_svd sv hup waybar
+    exec_always _gpg-unlock
+{%@@ else @@%}
+    include daemons
 {%@@ endif @@%}
 
 exec dbus-update-activation-environment DISPLAY XAUTHORITY SWAYSOCK I3SOCK WAYLAND_DISPLAY

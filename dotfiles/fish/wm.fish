@@ -39,7 +39,9 @@ function esway
 
     # this should not be necessary, but whatever
     if not pidof sway &> /dev/null
+        {%@@ if profile in ["voidlinux"] @@%}
         pkill -HUP -u "$USER" runsvdir
+        {%@@ endif @@%}
         exec dbus-launch --exit-with-session sway
     end
 end

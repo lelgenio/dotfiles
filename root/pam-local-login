@@ -5,4 +5,6 @@ account   include   system-login
 password  include   system-login
 session   include   system-login
 
+{%@@ if profile in ["voidlinux"] @@%}
 -session   optional   pam_rundird.so
+{%@@ endif @@%}

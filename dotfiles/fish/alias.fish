@@ -17,9 +17,6 @@ function calias
 abbr -g mpn ncmpcpp
 abbr -g dot "dotdrop install -f"
 
-set -l root_cfg (dirname $DOTDROP_CONFIG)/root
-alias rootdrop 'sudo dotdrop install -f -c "$root_cfg"'
-
 cabbr p emerge
 
 if command -qs xbps-install
@@ -30,7 +27,6 @@ cabbr p pacman
 cabbr p pikaur
 cabbr p yay
 cabbr p paru
-
 
 
 ################################################################

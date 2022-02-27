@@ -28,7 +28,7 @@ config:
 actions:
 ###############################################################
 
-    greetd_install: _greetd_install
+    # greetd_install: _greetd_install
     grub_install: update-grub
     locale_install: locale-gen
     libc_locale_install: xbps-reconfigure -f glibc-locales
@@ -40,26 +40,65 @@ actions:
         rc-service "{{@@ '_dotfile_key' @@}}" restart
 
     create_swapfile: _create-swapfile
-    mount_partitions: mount -a
     dbus_uuidgen: dbus-uuidgen --ensure
     sysctl_apply: sysctl -a
-    # mkinitcpio: mkinitcpio -P
-    # start_services: >
-    #     _runit_config "{{@@ _dotfile_abs_dst @@}}"
-    #     apache
-    #     cronie
-    #     dbus
-    #     dhcpcd
-    #     docker
-    #     earlyoom
-    #     elogind
-    #     greetd
-    #     iwd
-    #     bluetoothd
-    #     mariadb
-    #     preload
-    #     syslog-ng
-    #     tlp
+    mkinitcpio: mkinitcpio -P
+    enable_runit_services: _runit_config "{{@@ _dotfile_abs_dst @@}}" {{@@ ' '.join(runit_autostart) @@}}
+
+###############################################################
+profiles:
+###############################################################
+
+    common:
+        dotfiles:
+            - grub
+            - pam
+            - bluez
+            - locale
+            - fstab
+            - sysctl
+            - kernel_modules
+            - udev_rules
+            - vconsole
+
+    voidlinux:
+        variables:
+            runit_autostart:
+                - acpid
+                - bluetoothd
+                - crond
+                - dbus
+                - dhcpcd
+                - docker
+                - iwd
+                - ntpd
+                - rundird
+                - seatd
+                - socklog-unix
+                - tlp
+        include:
+            - "common"
+        dotfiles:
+            - elogind
+            - libc_locales
+            - runit_services
+
+    artixlinux:
+        include:
+            - "common"
+        dotfiles:
+            - elogind
+            - mkinitcpio
+            - pacman-artix
+
+    archlinux:
+        include:
+            - "common"
+        dotfiles:
+            - logind
+            - mkinitcpio
+            - pacman-arch
+
 
 
 ###############################################################
@@ -71,6 +110,12 @@ dotfiles:
     #     dst: /etc/greetd
     #     actions:
     #     - greetd_install
+
+    logind:
+        src: elogind.conf
+        dst: /etc/logind/logind.conf
+        actions:
+        - dbus_uuidgen
 
     elogind:
         src: elogind.conf
@@ -88,17 +133,23 @@ dotfiles:
         src: pam-local-login
         dst: /etc/pam.d/system-local-login
 
-    # mkinitcpio:
-    #     src: mkinitcpio.conf
-    #     dst: /etc/mkinitcpio.conf
-    #     actions:
-    #     - mkinitcpio
+    mkinitcpio:
+        src: mkinitcpio.conf
+        dst: /etc/mkinitcpio.conf
+        actions:
+        - mkinitcpio
 
-    # pacman:
-    #     src: pacman.conf
-    #     dst: /etc/pacman.conf
-    #     actions:
-    #     - pacman_install
+    pacman-artix:
+        src: pacman-artix.conf
+        dst: /etc/pacman.conf
+        actions:
+        - pacman_install
+
+    pacman-arch:
+        src: pacman-arch.conf
+        dst: /etc/pacman.conf
+        actions:
+        - pacman_install
 
     bluez:
         src: bluetooth.conf
@@ -121,7 +172,6 @@ dotfiles:
         dst: /etc/fstab
         actions:
         - create_swapfile
-        - mount_partitions
 
     sysctl:
         src: sysctl
@@ -145,16 +195,10 @@ dotfiles:
     #     src: earlyoom
     #     dst: /etc/default/earlyoom
 
-    # services:
-    #     src: runit_sv
-    #     dst: /etc/runit/sv
-    #     actions:
-    #     - start_services
+    runit_services:
+        src: runit_sv
+        dst: /etc/runit/sv
+        actions:
+        - enable_runit_services
 
 
-###############################################################
-profiles:
-###############################################################
-    main:
-        dotfiles:
-        - ALL

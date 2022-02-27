@@ -4,6 +4,7 @@ Thunar
 Vulkan-Tools
 Waybar
 alacritty
+alsa-lib-devel
 apache
 atool
 bamf-devel
@@ -19,6 +20,7 @@ breeze-obsidian-cursor-theme
 caffeine-ng
 cargo-edit
 chromium
+clang
 clyrics
 cmake
 cmatrix
@@ -61,6 +63,8 @@ gst-plugins-ugly1
 gtk+-devel
 gtk+3-devel
 gtk3-nocsd
+gvfs
+gvfs-mtp
 htop
 inetutils
 inkscape
@@ -78,6 +82,7 @@ kak-lsp
 kakoune
 kanshi
 kdeconnect
+kdenlive
 khal
 khard
 kitty
@@ -92,6 +97,7 @@ libpipewire0.2
 libreoffice
 light
 linux
+lld
 lutris
 lxappearance
 lynx
