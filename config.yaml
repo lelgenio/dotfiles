@@ -194,7 +194,6 @@ profiles:
             - fish
             - fonts
             - foot
-            - fusuma
             - git
             - gpg-agent
             - i3
@@ -204,6 +203,7 @@ profiles:
             - kanshi
             - kitty
             - lesskey
+            - libinput-gestures
             - mako
             - mangohud
             - mime
@@ -237,11 +237,11 @@ profiles:
         variables:
             supervisor: runit
             runit_enable:
-                - fusuma
                 - gammastep
                 - kanshi
                 - kdeconnect-indicator
                 - kdeconnectd
+                - libinput-gestures
                 - mako
                 - mpDris2
                 - mpd
@@ -316,6 +316,7 @@ actions:
         true
 
     reload_sway: swaymsg reload & disown
+    reload_libinput_gestures: env SVDIR=$HOME/.config/runit/sv sv hup libinput-gestures
     reload_mako: pkill -SIGHUP mako
     reload_waybar: env SVDIR=$HOME/.config/runit/sv sv hup waybar
     reload_xsettingsd: env SVDIR=$HOME/.config/runit/sv sv hup xsettingsd
@@ -490,6 +491,12 @@ dotfiles: # Just a bunch of paths and action mappings
         actions:
         - enable_runit_services
 
+    libinput-gestures:
+        src: libinput-gestures.conf
+        dst: ~/.config/libinput-gestures.conf
+        actions:
+        - reload_libinput_gestures
+
     deemix:
         src: deemix
         dst: ~/.config/deemix
@@ -579,7 +586,6 @@ dotfiles: # Just a bunch of paths and action mappings
     alacritty:   { "src":"alacritty.yml", "dst":"~/.config/alacritty.yml"                 }
     bat:         { "src":"bat",           "dst":"~/.config/bat/config"                    }
     foot:        { "src": "foot.ini",     "dst": "~/.config/foot/foot.ini"                }
-    fusuma:      { "src":"fusuma.yml",    "dst":"~/.config/fusuma/config.yml"             }
     imv:         { "src":"imv.conf",      "dst":"~/.config/imv/config"                    }
     kanshi:      { "src":"kanshi",        "dst":"~/.config/kanshi/config"                 }
     mangohud:    { "src":"MangoHud.conf", "dst":"~/.config/MangoHud/MangoHud.conf"        }

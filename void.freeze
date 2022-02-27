@@ -45,6 +45,7 @@ firefox
 fish-shell
 flatpak
 font-hack-ttf
+foot
 fuse-sshfs
 fzf
 gammastep
@@ -92,6 +93,7 @@ libbsd-devel
 liberation-fonts-ttf
 libgee08-devel
 libgepub
+libinput-gestures
 libmariadbclient-devel
 libpipewire0.2
 libreoffice
@@ -159,6 +161,7 @@ playonlinux
 polkit
 powertop
 pqiv
+procs
 protontricks
 pulseaudio
 pulsemixer
