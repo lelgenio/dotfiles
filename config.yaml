@@ -303,10 +303,7 @@ actions:
         true
 
     reload_sway: swaymsg reload & disown
-    reload_libinput_gestures: env SVDIR=$HOME/.config/runit/sv sv hup libinput-gestures
-    reload_mako: pkill -SIGHUP mako
-    reload_waybar: env SVDIR=$HOME/.config/runit/sv sv hup waybar
-    reload_xsettingsd: env SVDIR=$HOME/.config/runit/sv sv hup xsettingsd
+    reload_runit_sv: env SVDIR="{{@@ user_svdir @@}}" sv reload "{0}"
     groups_install: _groups_install
     lesskey: lesskey
     reload_fish: pkill -SIGHUP fish
@@ -333,7 +330,7 @@ actions:
         crontab ~/.local/share/crontab
 
     vdirsyncer: |
-        yes | vdirsyncer discover & disown
+        yes | vdirsyncer discover &
 
     lnMail: |
         ln -fs ~/.config/neomutt/mbsyncrc ~/.mbsyncrc
@@ -389,13 +386,13 @@ dotfiles: # Just a bunch of paths and action mappings
         src: mako.conf
         dst: ~/.config/mako/config
         actions:
-        - reload_mako
+        - reload_runit_sv mako
 
     waybar:
         src: waybar
         dst: ~/.config/waybar
         actions:
-        - reload_waybar
+        - reload_runit_sv waybar
 
     kitty:
         src: kitty.conf
@@ -478,7 +475,7 @@ dotfiles: # Just a bunch of paths and action mappings
         src: libinput-gestures.conf
         dst: ~/.config/libinput-gestures.conf
         actions:
-        - reload_libinput_gestures
+        - reload_runit_sv libinput-gestures
 
     deemix:
         src: deemix
@@ -508,7 +505,7 @@ dotfiles: # Just a bunch of paths and action mappings
         src: theme
         dst: ~/
         actions:
-        - reload_xsettingsd
+        - reload_runit_sv xsettingsd
 
     prettierrc:
         src: prettierrc.toml
