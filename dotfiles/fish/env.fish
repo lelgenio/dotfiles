@@ -16,7 +16,7 @@ set -x XDG_DATA_DIRS "$XDG_DATA_DIRS:$HOME/.local/share"
 
 set -x XDG_CONFIG_HOME "$HOME/.config/"
 
-for i in ~/.local/bin ~/.local/share/cargo/bin ~/.yarn/bin ~/.factorio/bin/*
+for i in ~/.local/bin ~/.yarn/bin ~/.factorio/bin/*
     test -d "$i";and fish_add_path "$i"
 end
 
@@ -44,15 +44,9 @@ end
 if test "$USER" != "root"
     set -x PYTHONPYCACHEPREFIX "$HOME/.cache/python"
     set -x MYPY_CACHE_DIR "$HOME/.cache/mypy"
-    set -x RUSTUP_HOME "$HOME/.local/share/rustup"
-    set -x CARGO_HOME "$HOME/.local/share/cargo"
-    set -gx NVM_DIR "$HOME/.local/share/nvm"
 else
     set -e PYTHONPYCACHEPREFIX
     set -e MYPY_CACHE_DIR
-    set -e RUSTUP_HOME
-    set -e CARGO_HOME
-    set -ge NVM_DIR
 end
 
 
@@ -98,11 +92,3 @@ set -x DOTDROP_CONFIG   "{{@@ _dotdrop_cfgpath  @@}}"
 set -x DOTDROP_PROFILE  "{{@@ profile           @@}}"
 
 set -x DOTDROP_WORKERS  (math 2 \* (nproc))
-
-
-################################################################
-# Source .env files
-################################################################
-
-command -qs direnv &&
-    direnv hook fish | source
