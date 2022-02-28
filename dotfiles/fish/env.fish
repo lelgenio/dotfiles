@@ -16,7 +16,8 @@ set -x XDG_DATA_DIRS "$XDG_DATA_DIRS:$HOME/.local/share"
 
 set -x XDG_CONFIG_HOME "$HOME/.config/"
 
-for i in ~/.local/bin ~/.yarn/bin ~/.factorio/bin/*
+set __cargo_asdf_bin ~/.asdf/installs/rust/*/bin/
+for i in ~/.local/bin $__cargo_asdf_bin ~/.yarn/bin ~/.factorio/bin/*
     test -d "$i";and fish_add_path "$i"
 end
 

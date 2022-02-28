@@ -38,6 +38,7 @@ if not test -d ~/.asdf
     asdf install nodejs latest &> /dev/null
     asdf global nodejs latest &> /dev/null
 
+    asdf plugin add rust &> /dev/null
     asdf install rust nightly &> /dev/null
     asdf global rust nightly &> /dev/null
 end
