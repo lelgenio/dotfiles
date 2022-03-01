@@ -13,8 +13,8 @@ map global user 'z' ':zoxide ' -docstring 'zoxide'
 map global user 'n' ': new<ret>' -docstring 'new window'
 
 map global user 'e' 'x|emmet<ret>{{@@ "@" if not tabs @@}}' -docstring 'process line with emmet'
-map global user 'm' ': try lsp-formatting catch format-buffer<ret>' -docstring 'format document'
-map global user 'M' ': try lsp-range-formatting catch format-selections<ret>' -docstring 'format selection'
+map global user 'm' ': try lsp-formatting-sync catch format-buffer<ret>' -docstring 'format document'
+map global user 'M' ': try lsp-range-formatting-sync catch format-selections<ret>' -docstring 'format selection'
 
 map global user 'c' ': comment-line<ret>' -docstring 'comment line'
 map global user 'C' '_: comment-block<ret>' -docstring 'comment block'
