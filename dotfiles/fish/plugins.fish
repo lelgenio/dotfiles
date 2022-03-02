@@ -33,14 +33,19 @@ if not test -d ~/.asdf
 
     source ~/.asdf/asdf.fish
 
-    asdf plugin add nodejs &> /dev/null
-    asdf install nodejs 12.13.1 &> /dev/null
-    asdf install nodejs latest &> /dev/null
-    asdf global nodejs latest &> /dev/null
+    asdf plugin add nodejs
+    asdf install nodejs 12.13.1
+    asdf install nodejs latest
+    asdf global nodejs latest
 
-    asdf plugin add rust &> /dev/null
-    asdf install rust nightly &> /dev/null
-    asdf global rust nightly &> /dev/null
+    asdf plugin-add yarn
+    asdf install yarn latest
+    asdf global yarn latest
+
+    asdf plugin add rust
+    asdf install rust nightly
+    asdf global rust nightly
+
 end
 
 test -f ~/.asdf/asdf.fish
