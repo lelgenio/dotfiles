@@ -8,7 +8,7 @@ if not functions -q fundle
     and test "$USER" != root
     eval (curl -sfL https://git.io/fundle-install)
 end
-fundle plugin 'FabioAntunes/fish-nvm'
+# fundle plugin 'FabioAntunes/fish-nvm'
 fundle plugin 'edc/bass'
 fundle init
 
