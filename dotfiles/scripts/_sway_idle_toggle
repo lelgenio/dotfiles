@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export SVDIR="$HOME/.config/runit/runsvdir/default/"
+export SVDIR="{{@@ user_svdir @@}}"
 
 if pidof swayidle; then
     sv down swayidle
