@@ -2,7 +2,7 @@
 # Create symbolic links from game save folders to documents folder
 # Useful if you sync it with syncthing or something similar
 
-set -ex
+set -e
 
 clean() {
     if test $? -ne 0; then
