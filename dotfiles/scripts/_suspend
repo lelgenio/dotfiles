@@ -1,6 +1,6 @@
 #!/bin/sh
 
-swaylock -f
+_lock
 
 loginctl suspend &
 systemctl suspend &

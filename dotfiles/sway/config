@@ -22,9 +22,8 @@ set $Up         {{@@ key.up    @@}}
 set $Right      {{@@ key.right @@}}
 set $tabL       {{@@ key.tabL  @@}}
 set $tabR       {{@@ key.tabR  @@}}
-
-set $menu       s
-set $mus        r
+set $lock       {{@@ key.next  @@}}
+set $menu       {{@@ key.menu  @@}}
 
 ###############################################################
 # Includes

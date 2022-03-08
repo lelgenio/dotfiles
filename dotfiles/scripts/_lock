@@ -1,0 +1,5 @@
+#!/bin/sh
+
+swaylock -f
+
+env SVDIR="{{@@ user_svdir @@}}" sv up swayidle

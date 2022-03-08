@@ -149,6 +149,7 @@ profiles:
                 tabR: Y
                 insertMode: s
                 insertQuit: kk
+                menu: s
 
     qwerty:
         variables:
@@ -164,6 +165,7 @@ profiles:
                 tabR: O
                 insertMode: i
                 insertQuit: jj
+                menu: d
 
 
 ###############################################################

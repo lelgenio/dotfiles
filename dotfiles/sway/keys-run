@@ -37,6 +37,9 @@ $mod+p exec wpass
 # Reload the configuration file
 $mod+Shift+c reload
 
+# Lock Sway
+$mod+$lock exec _lock
+
 # Lock Sway and suspend
 --locked $mod+Control+z exec _suspend
 
