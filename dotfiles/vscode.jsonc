@@ -123,4 +123,5 @@
     "python.formatting.provider": "black",
     "python.linting.pylintUseMinimalCheckers": false,
     "python.linting.mypyEnabled": true,
+    "intelephense.format.braces": "k&r",
 }
