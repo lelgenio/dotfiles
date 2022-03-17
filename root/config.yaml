@@ -43,6 +43,7 @@ actions:
     dbus_uuidgen: dbus-uuidgen --ensure
     sysctl_apply: sysctl -a
     mkinitcpio: mkinitcpio -P
+    restart_runit_service: sv restart "{0}"
     enable_runit_services: ln -sf "{{@@ sys_services @@}}/{0}" "{{@@ sys_svdir @@}}/{0}"
 
 ###############################################################
@@ -71,6 +72,7 @@ profiles:
             - "common"
         dotfiles:
             - elogind
+            - acpid
             - libc_locales
             - runit_services
             - runit_services_enable
@@ -118,6 +120,12 @@ dotfiles:
         dst: /etc/elogind/logind.conf
         actions:
         - dbus_uuidgen
+
+    acpid:
+        src: acpi-handler.sh
+        dst: /etc/acpi/handler.sh
+        actions:
+        - restart_runit_service acpid
 
     grub:
         src: grub
