@@ -35,7 +35,7 @@
     "keyboard.dispatch": "keyCode",
     // Colors
     {%@@ if color.type == "dark" @@%}
-    "workbench.colorTheme": "Community Material Theme Darker",
+    "workbench.colorTheme": "Community Material Theme Darker High Contrast",
     {%@@ else @@%}
     "workbench.colorTheme": "GitHub Light",
     {%@@ endif @@%}
@@ -85,6 +85,7 @@
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
+    "editor.formatOnSaveMode": "modifications",
     "editor.suggestSelection": "first",
     "debug.allowBreakpointsEverywhere": true,
     "files.exclude": {
