@@ -58,9 +58,9 @@ face global Information default,{{@@ bg_dark @@}}
 face global Error default,red+g
 
 face global StatusLine      default,{{@@ bg_dark @@}}
-face global StatusLineMode  green,{{@@ bg_dark @@}}
-face global StatusLineInfo  default,{{@@ bg_dark @@}}
-face global StatusLineValue default,{{@@ bg_dark @@}}
+face global StatusLineMode  green
+face global StatusLineInfo  StatusLine
+face global StatusLineValue StatusLine
 face global StatusCursor    {{@@ accent_fg @@}},{{@@ accent_color @@}}
 
 face global Prompt yellow,default

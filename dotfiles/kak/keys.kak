@@ -1,6 +1,7 @@
 # {{@@ header() @@}}
 
-map global normal <F2> ': lsp-rename-prompt<ret>'
+# Case-insensitive search by default
+map global normal / '/(?i)'
 
 ######################################################
 # Emacs-like insert
