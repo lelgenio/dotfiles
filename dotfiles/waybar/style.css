@@ -67,6 +67,7 @@ window#waybar.solo {
 #custom-spigot,
 #custom-updates,
 #custom-weather,
+#custom-unpushed,
 #custom-transmissionD,
 #custom-transmissionS,
 #custom-delugeD,
@@ -103,6 +104,7 @@ window#waybar.solo {
 }
 
 
+#custom-unpushed,
 #custom-recording {
     min-width:15px;
     color: #ee4040;

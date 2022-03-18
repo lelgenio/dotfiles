@@ -1,0 +1,16 @@
+#!/bin/fish
+
+cd "$HOME/Projects"
+
+fd -H '^\.git$' |
+sd '\.git$' '' |
+while read repo
+    pushd "$repo"
+    if git cherry -v 2> /dev/null | wc -l | xargs -n1 test 0 -lt
+        echo Unpushed repos $repo
+        break
+    end
+    popd
+end
+
+# vim: ft=fish

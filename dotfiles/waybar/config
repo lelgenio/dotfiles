@@ -12,6 +12,7 @@
         "custom/weather",
     ],
     "modules-right": [
+        "custom/unpushed",
         "sway/language",
         "mpd",
         "custom/recording",
@@ -201,6 +202,11 @@
         "exec":"test $(date +%H) -lt 5 && echo 'GO TO SLEEP' | trans -b",
         "interval": 60,
         "tooltip":false
+    },
+    "custom/unpushed": {
+        "exec":"_git_check_unpushed",
+        "interval": 30,
+        "tooltip": false
     }
 
 }
