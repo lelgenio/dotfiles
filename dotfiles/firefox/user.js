@@ -63,7 +63,7 @@ user_pref("devtools.editor.tabsize", 4);
 user_pref("devtools.inspector.activeSidebar", "ruleview");
 user_pref("devtools.inspector.three-pane-enabled", false);
 user_pref("devtools.responsive.leftAlignViewport.enabled", true);
-user_pref("devtools.theme", "dark");
+user_pref("devtools.theme", "auto");
 
 // hardware acceleration
 user_pref("media.ffmpeg.vaapi.enabled", "true");
