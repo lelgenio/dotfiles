@@ -57,8 +57,15 @@ face global MenuInfo cyan
 face global Information default,{{@@ bg_dark @@}}
 face global Error default,red+g
 
-face global StatusLine      default,{{@@ bg_dark @@}}
-face global StatusLineMode  green
+face global StatusLine      %sh{
+    printf "rgb:"
+    head /dev/urandom |
+    base64 |
+    rg --text -o '{{@@ color.random_range @@}}' |
+    head -n 6 |
+    sd '\n' ''
+}
+face global StatusLineMode  StatusLine
 face global StatusLineInfo  StatusLine
 face global StatusLineValue StatusLine
 face global StatusCursor    {{@@ accent_fg @@}},{{@@ accent_color @@}}

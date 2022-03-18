@@ -76,6 +76,7 @@ profiles:
                 txt: '#FFFFFF'
                 nontxt: '#252525'
 
+                random_range: "[a-f]"
                 normal:
                     black: '#404040'
                     red: '#AB4642'
@@ -104,6 +105,7 @@ profiles:
                 txt: '#303030'
                 nontxt: '#D0D0D0'
 
+                random_range: "[0-4]"
                 normal:
                     black: '#555555'
                     red: '#D54E53'
