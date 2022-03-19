@@ -33,6 +33,26 @@ cabbr p paru
 # Editor
 ################################################################
 
+{%@@ if editor == "kak" @@%}
+function kak --wraps kak
+    if count $argv > /dev/null
+        command kak $argv
+        return
+    end
+    set -l session (
+        echo $PWD |
+        string replace -r "$HOME/?" '' |
+        string replace -a '/' '_'
+    )
+    if test $HOME = $PWD
+        set session (basename $PWD)
+    end
+    command kak -c $session 2> /dev/null
+    or command kak -s $session
+    or command kak $argv
+end
+{%@@ endif @@%}
+
 cabbr v {{@@ editor @@}}
 
 cabbr rv sudoedit
