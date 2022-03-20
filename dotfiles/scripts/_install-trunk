@@ -1,9 +1,14 @@
 #!/bin/sh
 
+set -ex
+
 REPO=https://github.com/thedodd/trunk
 VERSION=v0.14.0
+TARFILE="$HOME/.cache/trunk-$VERSION-x86_64-unknown-linux-gnu.tar.gz"
+BINDIR="$HOME/.local/bin"
 
-cd "$HOME/.local/bin"
+test -f "$TARFILE" ||
+    wget -qO "$TARFILE" "$REPO/releases/download/$VERSION/trunk-x86_64-unknown-linux-gnu.tar.gz"
 
-wget -qO- "$REPO/releases/download/$VERSION/trunk-x86_64-unknown-linux-gnu.tar.gz" |
-tar -xzf-
+tar -xf "$TARFILE" -C "$BINDIR" trunk
+chmod u+x "$BINDIR/trunk"

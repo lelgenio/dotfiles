@@ -170,22 +170,13 @@ args = ["stdio"]
 
 [language.rust]
 filetypes = ["rust"]
-roots = ["Cargo.toml"]
-command = "sh"
-args = [
-    "-c",
-    """
-        if path=$(rustup which rust-analyzer 2>/dev/null); then
-            "$path"
-        else
-            rust-analyzer
-        fi
-    """,
-]
+roots = ["rust-toolchain.toml", "rust-toolchain", "Cargo.toml"]
+command = "rust-analyzer"
 [language.rust.settings.rust-analyzer]
+checkOnSave.extraArgs = ["--target-dir", "./target/check"]
 hoverActions.enable = false # kak-lsp doesn't support this at the moment
-procMacro.enable = true
-cargo.loadOutDirsFromCheck = true
+# procMacro.enable = true
+# cargo.loadOutDirsFromCheck = true
 
 [language.terraform]
 filetypes = ["terraform"]

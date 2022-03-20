@@ -43,41 +43,41 @@ plug "natasky/kakoune-multi-file"
 
 plug "lelgenio/kakoune-colemak-neio"
 
-plug 'kak-lsp/kak-lsp' do %{
+plug 'kak-lsp/kak-lsp' tag 'v12.0.1' do %{
     cargo install --locked --force --path .
 } config %{
     map global normal <F2> ': lsp-rename-prompt<ret>'
     set global lsp_hover_max_lines 10
     # lsp-inlay-diagnostics-enable global
     set global lsp_auto_highlight_references true
-    # set global lsp_inlay_diagnostic_sign "●"
-    # set global lsp_diagnostic_line_error_sign "●"
+    set global lsp_inlay_diagnostic_sign "●"
+    set global lsp_diagnostic_line_error_sign "●"
 
-    # hook global BufCreate   .* %{try lsp-enable}
+    hook global BufCreate   .* %{try lsp-enable}
 
-    # hook global -group rust-inlay-hints-auto WinSetOption filetype=rust %{
-    #     hook window -group rust-inlay-hints BufReload .* rust-analyzer-inlay-hints
-    #     hook window -group rust-inlay-hints NormalIdle .* rust-analyzer-inlay-hints
-    #     hook window -group rust-inlay-hints InsertIdle .* rust-analyzer-inlay-hints
-    #     hook -once -always window WinSetOption filetype=.* %{
-    #         remove-hooks window rust-inlay-hints
-    #     }
-    # }
+    hook global -group rust-inlay-hints-auto WinSetOption filetype=rust %{
+        hook window -group rust-inlay-hints BufReload .* rust-analyzer-inlay-hints
+        hook window -group rust-inlay-hints NormalIdle .* rust-analyzer-inlay-hints
+        hook window -group rust-inlay-hints InsertIdle .* rust-analyzer-inlay-hints
+        hook -once -always window WinSetOption filetype=.* %{
+            remove-hooks window rust-inlay-hints
+        }
+    }
 
-    # define-command -override -hidden lsp-enable-decals %{
-    #     lsp-inlay-diagnostics-enable global
-    #     try %{
-    #         add-highlighter global/rust_analyzer_inlay_hints replace-ranges rust_analyzer_inlay_hints
-    #     }
-    # }
+    define-command -override -hidden lsp-enable-decals %{
+        lsp-inlay-diagnostics-enable global
+        try %{
+            add-highlighter global/rust_analyzer_inlay_hints replace-ranges rust_analyzer_inlay_hints
+        }
+    }
 
-    # define-command -override -hidden lsp-disable-decals %{
-    #     lsp-inlay-diagnostics-disable global
-    #     remove-highlighter global/rust_analyzer_inlay_hints
-    # }
+    define-command -override -hidden lsp-disable-decals %{
+        lsp-inlay-diagnostics-disable global
+        remove-highlighter global/rust_analyzer_inlay_hints
+    }
 
-    # hook global ModeChange '.*:insert:normal' %{lsp-enable-decals}
-    # hook global ModeChange '.*:normal:insert' %{lsp-disable-decals}
+    hook global ModeChange '.*:insert:normal' %{lsp-enable-decals}
+    hook global ModeChange '.*:normal:insert' %{lsp-disable-decals}
 
     hook global WinSetOption filetype=(c|cpp|rust) %{
         lsp-enable

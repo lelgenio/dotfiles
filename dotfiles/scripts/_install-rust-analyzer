@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -ex
+
+REPO="https://github.com/rust-analyzer/rust-analyzer"
+VERSION="2022-01-24"
+DLURL="$REPO/releases/download/$VERSION/rust-analyzer-x86_64-unknown-linux-gnu.gz"
+GZFILE="$HOME/.cache/rust-analyzer-$VERSION-x86_64-unknown-linux-gnu.gz"
+BINDIR="$HOME/.local/bin"
+
+test -f "$GZFILE" ||
+    wget -O "$GZFILE" "$DLURL"
+
+rm -f "$BINDIR/rust-analyzer"
+gunzip "$GZFILE" --stdout > "$BINDIR/rust-analyzer"
+chmod u+x "$BINDIR/rust-analyzer"

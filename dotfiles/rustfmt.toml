@@ -1,8 +1,8 @@
 # {{@@ header() @@}} #
 
-group_imports = "StdExternalCrate"
-imports_granularity = "Crate"
-imports_layout = "Vertical"
+# group_imports = "StdExternalCrate"
+# imports_granularity = "Crate"
+# imports_layout = "Vertical"
 tab_spaces = {{@@ indent_width @@}}
 max_width = 80
 

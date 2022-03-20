@@ -24,6 +24,7 @@ clang
 clyrics
 cmake
 cmatrix
+composer
 cool-retro-term
 cronie
 cryptsetup
@@ -100,6 +101,7 @@ libreoffice
 light
 linux
 lld
+lsof
 lutris
 lxappearance
 lynx
@@ -122,6 +124,7 @@ mpDris2
 mpc
 mpd
 mpv
+mpv-mpris
 msmtp
 mtr
 nano
@@ -148,6 +151,7 @@ pamixer
 papirus-folders
 par
 pass
+patch
 pavucontrol
 php-apache
 php-intl
@@ -159,8 +163,10 @@ plank-devel
 playerctl
 playonlinux
 polkit
+postgresql-client
 powertop
 pqiv
+preload
 procs
 protontricks
 pulseaudio
@@ -182,12 +188,12 @@ ripgrep
 rofi
 rsync
 rundird
-rust-analyzer
 rustup
 sassc
 sd
 seatd
 shfmt
+shotcut
 slurp
 so
 socklog

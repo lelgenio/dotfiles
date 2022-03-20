@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -ex
+
+REPO=https://github.com/mozilla/sccache
+VERSION=v0.2.15
+TARFILE="$HOME/.cache/sccache-$VERSION-x86_64-unknown-linux-musl.tar.gz"
+BINDIR="$HOME/.local/bin"
+
+test -f "$TARFILE" ||
+    wget -qO "$TARFILE" "$REPO/releases/download/$VERSION/$TARFILE.tar.gz"
+
+tar -xf "$TARFILE" -C "$BINDIR" --wildcards "*/sccache"
+chmod u+x "$BINDIR/sccache"

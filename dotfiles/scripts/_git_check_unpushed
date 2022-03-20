@@ -2,7 +2,7 @@
 
 cd "$HOME/Projects"
 
-fd -H '^\.git$' |
+fd -d5 -H '^\.git$' |
 sd '\.git$' '' |
 while read repo
     pushd "$repo"

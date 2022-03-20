@@ -53,6 +53,21 @@ and source ~/.asdf/asdf.fish
 
 
 ##################################################
+# Rust tools
+##################################################
+
+command -qs sccache
+or _install-sccache &> /dev/null &
+set -x RUSTC_WRAPPER sccache
+
+command -qs rust-analyzer
+or _install-rust-analyzer &> /dev/null &
+
+command -qs trunk
+or _install-trunk &> /dev/null &
+
+
+##################################################
 # Prompt
 ##################################################
 
