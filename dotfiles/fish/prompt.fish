@@ -57,11 +57,11 @@ function fish_git_prompt
     # Check if in a git repo and save branch and status
     ############################################################
 
-    set git_branch   (git branch --show-current 2> /dev/null);or return
-    set git_detach   (_fish_prompt_git_detached)
-    set git_remote   (_fish_prompt_git_remote_branches)
-    set git_remotes  (git remote)
-    set git_status_s (timeout 1s git status -s | string collect)
+    set -l git_branch   (git branch --show-current 2> /dev/null);or return
+    set -l git_detach   (_fish_prompt_git_detached)
+    set -l git_remote_branches   (_fish_prompt_git_remote_branches)
+    set -l git_remote  (git remote)
+    set -l git_status_s (timeout 1s git status -s | string collect)
 
     _fish_prompt_normal " on "
 
@@ -83,14 +83,24 @@ function fish_git_prompt
        _fish_prompt_warn "init"
     end
 
-    # print a "↑" if ahead of origin
-    for git_remote in (echo $git_remotes | sort -u)
-        # Remote has the current branch
-        string match -qr "$git_remote"/"$git_branch" $git_remote
-        # Check if remote is different
-        and not git diff --quiet "$git_branch" "$git_remote"/"$git_branch" --
-        and _fish_prompt_normal '↑'
-        and break
+    # Remote has the current branch
+    set -l remote_branch "$git_remote/$git_branch"
+    if string match -qr "$remote_branch" $git_remote_branches >/dev/null
+        # print a "↑" if ahead of origin
+        test 0 -ne (git log --oneline "$remote_branch"..HEAD | wc -l)
+        and set -l _git_sync_ahead '↑'
+
+        # print a "↓" if behind of origin
+        test 0 -lt (git log --oneline HEAD.."$remote_branch" | wc -l)
+        and set -l _git_sync_behind '↓'
+
+        if set -q _git_sync_ahead _git_sync_behind
+            _fish_prompt_normal '⇅'
+        else if set -q _git_sync_ahead
+            _fish_prompt_normal '↑'
+        else if set -q _git_sync_behind
+            _fish_prompt_normal '↓'
+        end
     end
 
     ############################################################
