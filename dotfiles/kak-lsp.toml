@@ -133,7 +133,25 @@ command = "intelephense"
 args = ["--stdio"]
 settings_section = "intelephense"
 [language.php.settings]
+intelephense.format.braces = "k&r"
 intelephense.storagePath = "/tmp/intelephense"
+intelephense.environment.includePaths = [
+    "./vendor",
+    "./vendor/autoload",
+    "./vendor/laravel/framework/",
+    "./vendor/laravel/framework/src/",
+    "./vendor/laravel/framework/src/Illuminate/"
+]
+intelephense.files.exclude = [
+    "**/.git/**",
+    "**/.svn/**",
+    "**/.hg/**",
+    "**/CVS/**",
+    "**/.DS_Store/**",
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/resources/views/**"
+]
 
 [language.python]
 filetypes = ["python"]
