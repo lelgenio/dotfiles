@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cargo install diesel_cli --no-default-features --features mysql,postgres

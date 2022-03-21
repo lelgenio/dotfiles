@@ -66,6 +66,8 @@ or _install-rust-analyzer &> /dev/null &
 command -qs trunk
 or _install-trunk &> /dev/null &
 
+command -qs diesel
+and diesel completions fish | source
 
 ##################################################
 # Prompt
