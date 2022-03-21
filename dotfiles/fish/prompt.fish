@@ -59,8 +59,7 @@ function fish_git_prompt
 
     set -l git_branch   (git branch --show-current 2> /dev/null);or return
     set -l git_detach   (_fish_prompt_git_detached)
-    set -l git_remote_branches   (_fish_prompt_git_remote_branches)
-    set -l git_remote  (git remote)
+    set -l git_remote_branch   (git rev-parse --abbrev-ref (git branch --show-current)@{u} 2> /dev/null)
     set -l git_status_s (timeout 1s git status -s | string collect)
 
     _fish_prompt_normal " on "
@@ -84,14 +83,13 @@ function fish_git_prompt
     end
 
     # Remote has the current branch
-    set -l remote_branch "$git_remote/$git_branch"
-    if string match -qr "$remote_branch" $git_remote_branches >/dev/null
+    if test -n "$git_remote_branch"
         # print a "↑" if ahead of origin
-        test 0 -ne (git log --oneline "$remote_branch"..HEAD | wc -l)
+        test 0 -ne (git log --oneline "$git_remote_branch"..HEAD | wc -l)
         and set -l _git_sync_ahead '↑'
 
         # print a "↓" if behind of origin
-        test 0 -lt (git log --oneline HEAD.."$remote_branch" | wc -l)
+        test 0 -lt (git log --oneline HEAD.."$git_remote_branch" | wc -l)
         and set -l _git_sync_behind '↓'
 
         if set -q _git_sync_ahead _git_sync_behind
