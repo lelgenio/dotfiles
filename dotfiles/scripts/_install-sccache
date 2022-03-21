@@ -4,11 +4,12 @@ set -ex
 
 REPO=https://github.com/mozilla/sccache
 VERSION=v0.2.15
-TARFILE="$HOME/.cache/sccache-$VERSION-x86_64-unknown-linux-musl.tar.gz"
+TARFILENAME="sccache-$VERSION-x86_64-unknown-linux-musl"
+TARFILEPATH="$HOME/.cache/$TARFILENAME.tar.gz"
 BINDIR="$HOME/.local/bin"
 
-test -f "$TARFILE" ||
-    wget -qO "$TARFILE" "$REPO/releases/download/$VERSION/$TARFILE.tar.gz"
+test -f "$TARFILEPATH" ||
+    wget -qO "$TARFILEPATH" "$REPO/releases/download/$VERSION/$TARFILENAME.tar.gz"
 
-tar -xf "$TARFILE" -C "$BINDIR" --wildcards "*/sccache"
+tar -xf "$TARFILEPATH" -C "$BINDIR" --wildcards "*/sccache" --strip-components=1
 chmod u+x "$BINDIR/sccache"
