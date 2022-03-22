@@ -124,6 +124,7 @@ abbr -g gds 'git diff --staged'
 abbr -g gc  'git commit'
 abbr -g gca 'git commit --all'
 abbr -g gcf 'git commit --fixup'
+abbr -g gp  'git push'
 abbr -g gr  'cd (git root)'
 abbr -g gri 'git rebase --interactive FETCH_HEAD'
 
