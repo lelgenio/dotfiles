@@ -52,6 +52,7 @@ map global find 'f' ': find_file<ret>' -docstring 'file'
 map global find 'l' ': find_line<ret>' -docstring 'jump to line'
 map global find 'r' ': find_ripgrep<ret>' -docstring 'ripgrep all file'
 map global find 'g' ': find_git_file<ret>' -docstring 'git files'
+map global find 'm' ': find_git_modified<ret>' -docstring 'git modified files'
 map global find 'c' ': find_dir<ret>' -docstring 'change dir'
 map global find 'd' ': find_delete<ret>' -docstring 'file to delete'
 
@@ -68,9 +69,16 @@ define-command -override -hidden find_delete \
 } }
 
 define-command -override -hidden find_git_file \
-%{ evaluate-commands -existing %sh{
+%{ evaluate-commands %sh{
     for line in `git ls-files | wdmenu`; do
-        echo "edit '$line'"
+        echo "edit -existing '$line'"
+    done
+} }
+
+define-command -override -hidden find_git_modified \
+%{ evaluate-commands %sh{
+    for line in `git status --porcelain | sd '^.. ' ''| wdmenu`; do
+        echo "edit -existing '$line'"
     done
 } }
 
