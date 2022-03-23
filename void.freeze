@@ -98,9 +98,11 @@ libinput-gestures
 libmariadbclient-devel
 libpipewire0.2
 libreoffice
+libva-utils
 light
 linux
 lld
+lldb
 lsof
 lutris
 lxappearance
@@ -230,6 +232,7 @@ unrar
 urlview
 vala
 vdirsyncer
+vdpauinfo
 void-repo-multilib
 void-repo-nonfree
 vscode
