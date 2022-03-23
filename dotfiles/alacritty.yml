@@ -4,6 +4,11 @@
 # Behaviour
 ############################################################
 
+shell:
+    program: /usr/bin/env
+    args:
+    - {{@@ shell @@}}
+
 selection:
   save_to_clipboard: true
 
