@@ -267,6 +267,7 @@ profiles:
             - paru
         variables:
             supervisor: scripts
+            cursor_theme: "capitaine-cursors"
 
 ###############################################################
 config:
@@ -353,6 +354,7 @@ actions:
     install_arch_meta: install_arch_meta
     install_mpv: _mpv_install
     filter_backgrounds: _backgrouds_filter
+    apply_gsetting_gnome: gsettings set org.gnome.desktop.interface {0} {1}
 
 ###############################################################
 dotfiles: # Just a bunch of paths and action mappings
@@ -511,6 +513,9 @@ dotfiles: # Just a bunch of paths and action mappings
         dst: ~/
         actions:
         - reload_runit_sv xsettingsd
+        - apply_gsetting_gnome gtk-theme    '{{@@ gtk_theme     @@}}'
+        - apply_gsetting_gnome icon-theme   '{{@@ icon_theme    @@}}'
+        - apply_gsetting_gnome cursor-theme '{{@@ cursor_theme  @@}}'
 
     prettierrc:
         src: prettierrc.toml
