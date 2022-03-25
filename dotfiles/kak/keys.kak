@@ -1,7 +1,7 @@
 # {{@@ header() @@}}
 
-# Case-insensitive search by default
-map global normal / '/(?i)'
+# alt i makes searches case insensitive
+map global prompt <a-i> '<c-a>(?i)<c-e>'
 
 ######################################################
 # Emacs-like insert
