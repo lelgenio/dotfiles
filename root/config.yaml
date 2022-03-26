@@ -45,6 +45,7 @@ actions:
     mkinitcpio: mkinitcpio -P
     restart_runit_service: sv restart "{0}"
     enable_runit_services: ln -sf "{{@@ sys_services @@}}/{0}" "{{@@ sys_svdir @@}}/{0}"
+    link_timezone: ln -sf "/usr/share/zoneinfo/{{@@ timezone @@}}" "/etc/localtime"
 
 ###############################################################
 profiles:
@@ -223,3 +224,9 @@ dotfiles:
         - enable_runit_services seatd
         - enable_runit_services socklog-unix
         - enable_runit_services tlp
+
+    timezone:
+        src:
+        dst:
+        actions:
+        - link_timezone
