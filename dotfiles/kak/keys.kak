@@ -1,5 +1,8 @@
 # {{@@ header() @@}}
 
+map global normal <c-d> 10j
+map global normal <c-u> 10k
+
 # alt i makes searches case insensitive
 map global prompt <a-i> '<c-a>(?i)<c-e>'
 
