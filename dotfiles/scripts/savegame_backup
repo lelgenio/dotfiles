@@ -43,8 +43,8 @@ game_save() {
 
 game_save mindustry        ".local/share/Mindustry"
 game_save minecraft        ".minecraft/saves"
-game_save factorio         ".factorio"
-game_save factorio         "Games/factorio"
+game_save factorio_saves   ".factorio/saves"
+game_save factorio_saves   "Games/factorio/saves"
 game_save cuphead          "Games/cuphead/drive_c/users/$USER/Application Data/Cuphead"
 game_save dusk             "Games/dusk/game/saves"
 game_save stardew_valley   ".config/StardewValley"
