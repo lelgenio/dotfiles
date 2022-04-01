@@ -85,11 +85,11 @@ function fish_git_prompt
     # Remote has the current branch
     if test -n "$git_remote_branch"
         # print a "↑" if ahead of origin
-        test 0 -ne (git log --oneline "$git_remote_branch"..HEAD | wc -l)
+        test 0 -ne (git log --oneline "$git_remote_branch"..HEAD -- | wc -l)
         and set -l _git_sync_ahead '↑'
 
         # print a "↓" if behind of origin
-        test 0 -lt (git log --oneline HEAD.."$git_remote_branch" | wc -l)
+        test 0 -lt (git log --oneline HEAD.."$git_remote_branch" -- | wc -l)
         and set -l _git_sync_behind '↓'
 
         if set -q _git_sync_ahead _git_sync_behind
