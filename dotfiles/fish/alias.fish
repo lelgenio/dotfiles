@@ -35,7 +35,8 @@ cabbr p paru
 
 {%@@ if editor == "kak" @@%}
 function kak --wraps kak
-    if count $argv > /dev/null
+    if contains -- -s $argv > /dev/null
+        or contains -- -c $argv > /dev/null
         command kak $argv
         return
     end
@@ -47,8 +48,8 @@ function kak --wraps kak
     if test $HOME = $PWD
         set session (basename $PWD)
     end
-    command kak -c $session 2> /dev/null
-    or command kak -s $session
+    command kak -c $session $argv 2> /dev/null
+    or command kak -s $session $argv
     or command kak $argv
 end
 {%@@ endif @@%}
