@@ -23,6 +23,7 @@ variables:
     bar_pos: top
     tmux: false
     starship: false
+    user_svdir: $HOME/.config/runit
 
     accent_fg: '#ffffff'
 
@@ -245,7 +246,6 @@ profiles:
         include:
             - "common"
         variables:
-            user_svdir: $HOME/.config/runit
             supervisor: runit
         dotfiles:
             - runit_services
