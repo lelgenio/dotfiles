@@ -7,7 +7,7 @@
 
 
 [user]
-    name = {{@@ mail.work.from | title @@}}
-    email = {{@@ mail.work.user @@}}
+    name = {{@@ username @@}}
+    email = {{@@ mail.personal.user @@}}
 
 # vim: ft=ini

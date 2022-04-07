@@ -5,11 +5,6 @@
 # | |_| | | |_
 #  \____|_|\__|
 
-
-[user]
-    name = {{@@ username @@}}
-    email = {{@@ mail.personal.user @@}}
-
 [init]
     defaultBranch = main
 
@@ -55,7 +50,10 @@
     excludesfile = {{@@ _dotfile_abs_dst @@}}/ignore
     ; hooksPath = {{@@ _dotfile_abs_dst @@}}/hooks/
 
-[includeIf "gitdir:~/Projects/work/"]
-  path = ~/.config/git/config-work
+[includeIf "gitdir:~/Projects/"]
+  path = {{@@ _dotfile_abs_dst @@}}/config-personal
+
+[includeIf "gitdir:~/Wopus/"]
+  path = {{@@ _dotfile_abs_dst @@}}/config-work
 
 # vim: ft=ini
