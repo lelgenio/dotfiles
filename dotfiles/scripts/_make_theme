@@ -67,7 +67,7 @@ mkdir -p "${dst_path}/${theme_name}"
 
 {%@@ endif @@%}
 
-{%@@ if 'Orchis' in gtk_theme.lower() @@%}
+{%@@ if 'orchis' in gtk_theme.lower() @@%}
     TMPDIR="$HOME/.cache/share/orchis"
 
     mkdir -p "$TMPDIR" && cd "$TMPDIR"
