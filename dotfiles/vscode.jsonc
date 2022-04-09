@@ -125,4 +125,12 @@
     "python.linting.pylintUseMinimalCheckers": false,
     "python.linting.mypyEnabled": true,
     "intelephense.format.braces": "k&r",
+    // copilot
+    "editor.inlineSuggest.enabled": true,
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": true,
+        "plaintext": false,
+        "markdown": false
+    },
 }

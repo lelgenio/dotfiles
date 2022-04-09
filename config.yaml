@@ -233,6 +233,7 @@ profiles:
             - theme
             - thunar
             - tmux
+            - vscode
             - waybar
             - wofi
             - xdpw
@@ -556,6 +557,10 @@ dotfiles: # Just a bunch of paths and action mappings
     code-oss:
         src: vscode.jsonc
         dst: "~/.config/Code - OSS/User/settings.json"
+
+    vscode:
+        src: vscode.jsonc
+        dst: "~/.config/Code/User/settings.json"
 
     telegram-theme:
         src: ./telegram.palette
