@@ -3,7 +3,7 @@
 set -ex
 
 REPO="https://github.com/rust-analyzer/rust-analyzer"
-VERSION="2022-01-24"
+VERSION="2022-04-04"
 DLURL="$REPO/releases/download/$VERSION/rust-analyzer-x86_64-unknown-linux-gnu.gz"
 GZFILE="$HOME/.cache/rust-analyzer-$VERSION-x86_64-unknown-linux-gnu.gz"
 BINDIR="$HOME/.local/bin"
