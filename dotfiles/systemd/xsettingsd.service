@@ -1,0 +1,13 @@
+# {{ header() }}
+
+[Unit]
+Description= X settings daemon
+Documentation=https://github.com/derat/xsettingsd
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/xsettingsd
+
+[Install]
+WantedBy=sway-session.target

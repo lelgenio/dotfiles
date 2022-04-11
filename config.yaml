@@ -266,8 +266,9 @@ profiles:
         dotfiles:
             - arch-packages
             - paru
+            - systemd
         variables:
-            supervisor: scripts
+            supervisor: systemd
             cursor_theme: "capitaine-cursors"
 
 ###############################################################
@@ -310,7 +311,14 @@ actions:
 
     reload_sway: swaymsg reload & disown
     reload_mako: makoctl reload
-    reload_runit_sv: env SVDIR="{{@@ user_svdir @@}}" sv reload "{0}"
+    reload_runit_sv:
+        which sv 2> /dev/null &&
+        env SVDIR="{{@@ user_svdir @@}}" sv reload "{0}" ||
+        true
+    reload_systemd_sv:
+        systemctl --user daemon-reload
+    enable_systemd_sv:
+        systemctl --user enable --now "{0}"
     groups_install: _groups_install
     lesskey: lesskey
     reload_fish: pkill -SIGHUP fish
@@ -352,6 +360,11 @@ actions:
     # bootstrap scripts
     pam_gpg: _pam-gpg-strap
     make_theme: _make_theme
+    qt6ct: |
+        cd "$HOME/.config"
+        rm -rf "qt6ct/"
+        cp -r "qt5ct/" "qt6ct"
+        mv "qt6ct/qt5ct.conf" "qt6ct/qt6ct.conf"
     install_arch_meta: install_arch_meta
     install_mpv: _mpv_install
     filter_backgrounds: _backgrouds_filter
@@ -479,6 +492,27 @@ dotfiles: # Just a bunch of paths and action mappings
         src: runit_sv
         dst: ~/.config/runit
 
+    systemd:
+        src: systemd
+        dst: ~/.config/systemd/user
+        actions:
+        - enable_systemd_sv caffeinated.service
+        - enable_systemd_sv firefox.service
+        - enable_systemd_sv gammastep.service
+        - enable_systemd_sv kanshi.service
+        - enable_systemd_sv mako.service
+        - enable_systemd_sv mpd.service
+        - enable_systemd_sv mpDris2.service
+        - enable_systemd_sv notify-mail.service
+        - enable_systemd_sv pipewire.service
+        - enable_systemd_sv pulseaudio.service
+        - enable_systemd_sv sway-idle.service
+        - enable_systemd_sv syncthing.service
+        - enable_systemd_sv telegram-desktop.service
+        - enable_systemd_sv waybar.service
+        - enable_systemd_sv xsettingsd.service
+        - enable_systemd_sv vdirsyncer.timer
+
     libinput-gestures:
         src: libinput-gestures.conf
         dst: ~/.config/libinput-gestures.conf
@@ -513,6 +547,7 @@ dotfiles: # Just a bunch of paths and action mappings
         src: theme
         dst: ~/
         actions:
+        - qt6ct
         - reload_runit_sv xsettingsd
         - apply_gsetting_gnome gtk-theme    '{{@@ gtk_theme     @@}}'
         - apply_gsetting_gnome icon-theme   '{{@@ icon_theme    @@}}'

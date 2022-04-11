@@ -2,7 +2,7 @@
 
 gpg-connect-agent reloadagent /bye
 
-PATH="$PATH:/usr/lib:/usr/libexec"
+PATH="$PATH:/usr/lib:/usr/libexec:/usr/lib/gnupg"
 keygrip=$(cat "$HOME/.pam-gnupg")
 
 echo '{{@@ main_password @@}}' |

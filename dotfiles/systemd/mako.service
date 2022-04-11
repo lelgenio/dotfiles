@@ -1,0 +1,13 @@
+# {{ header() }}
+
+[Unit]
+Description= Lightweight notification daemon for Wayland compositors.
+Documentation=https://github.com/emersion/mako/wiki
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/mako
+
+[Install]
+WantedBy=sway-session.target

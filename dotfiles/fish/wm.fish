@@ -39,10 +39,14 @@ function esway
 
     # this should not be necessary, but whatever
     if not pidof sway &> /dev/null
-        {%@@ if profile in ["voidlinux"] @@%}
+        {%@@ if supervisor == "runit" @@%}
         pkill -HUP -u "$USER" runsvdir
-        {%@@ endif @@%}
         exec dbus-launch --exit-with-session sway
+        {%@@ elif supervisor == "systemd" @@%}
+        exec systemd-cat --identifier=sway sway
+        {%@@ else @@%}
+        exec dbus-launch --exit-with-session sway
+        {%@@ endif @@%}
     end
 end
 

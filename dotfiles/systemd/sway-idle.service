@@ -1,0 +1,12 @@
+# {{ header() }}
+
+[Unit]
+Description= Send notification when maildir gets modified
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/bin/env _sway_idle
+
+[Install]
+WantedBy=sway-session.target
