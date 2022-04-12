@@ -5,6 +5,10 @@
 # | |_| | | |_
 #  \____|_|\__|
 
+[user]
+    name = {{@@ username @@}}
+    email = {{@@ mail.personal.user @@}}
+
 [init]
     defaultBranch = main
 
