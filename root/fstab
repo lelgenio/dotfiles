@@ -3,7 +3,7 @@
 
 # <filesystem> <dir> <type> <options> <dump> <pass>
 
-    {%@@ set btrfs_opt_t = "rw,noatime,compress=zstd:3,subvol={}" @@%}
+    {%@@ set btrfs_opt_t = "defaults,autodefrag,rw,noatime,compress=zstd:3,subvol={}" @@%}
     {%@@ set entry_t = "UUID={uuid} {path} {fs} {opts} {dump} {pass}" @@%}
 
 {%@@ for partition in filesystem.partition @@%}
