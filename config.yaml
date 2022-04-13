@@ -269,7 +269,6 @@ profiles:
             - systemd
         variables:
             supervisor: systemd
-            cursor_theme: "capitaine-cursors"
 
 ###############################################################
 config:
@@ -318,7 +317,7 @@ actions:
     reload_systemd_sv:
         systemctl --user daemon-reload
     enable_systemd_sv:
-        systemctl --user enable --now "{0}"
+        systemctl --user enable --now "{0}" &
     groups_install: _groups_install
     lesskey: lesskey
     reload_fish: pkill -SIGHUP fish
