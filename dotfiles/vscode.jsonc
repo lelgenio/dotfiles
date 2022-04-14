@@ -21,6 +21,10 @@
     "explorer.confirmDelete": false,
     "files.autoSave": "off",
     "window.closeWhenEmpty": true,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "gitlens.advanced.blame.customArguments": [
+        "-w",
+    ],
     // Rendering
     "terminal.integrated.rendererType": "dom",
     "editor.renderWhitespace": "none",
