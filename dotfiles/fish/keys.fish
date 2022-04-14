@@ -34,13 +34,14 @@ end
 bind \cy 'commandline | wl-copy -n'
 
 # Enable fzf key bindings
-if test -f /usr/share/fzf/key-bindings.fish
-    source /usr/share/fzf/key-bindings.fish
+if type -q fzf_key_bindings
     fzf_key_bindings
+else if test -f /usr/share/fzf/key-bindings.fish
+    source /usr/share/fzf/key-bindings.fish
 end
 
 
-function rcd #{{{
+function rcd
     set file (mktemp)
 
     ranger --choosedir=$file
