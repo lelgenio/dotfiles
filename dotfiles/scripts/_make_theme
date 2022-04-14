@@ -68,6 +68,11 @@ mkdir -p "${dst_path}/${theme_name}"
 {%@@ endif @@%}
 
 {%@@ if 'orchis' in gtk_theme.lower() @@%}
+    MARKER_FILE="$HOME/.themes/.orchis_installed"
+
+    test -f "$MARKER_FILE" &&
+    exit 0
+
     TMPDIR="$HOME/.cache/share/orchis"
 
     mkdir -p "$TMPDIR" && cd "$TMPDIR"
@@ -79,4 +84,6 @@ mkdir -p "${dst_path}/${theme_name}"
     ./install.sh \
         --theme "{{@@ accent_color_name.lower() @@}}" \
         --tweaks "solid" --tweaks "compact"
+
+    touch "$MARKER_FILE"
 {%@@ endif @@%}

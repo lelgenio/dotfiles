@@ -2,8 +2,15 @@
 
 export SVDIR="{{@@ user_svdir @@}}"
 
-if pidof swayidle; then
-    sv down swayidle
+maybe() {
+    command -v $1 > /dev/null &&
+    env "$@"
+}
+
+if pidof swayidle > /dev/null; then
+    maybe sv down swayidle
+    maybe systemctl --user stop sway-idle.service
 else
-    sv up swayidle
+    maybe sv up swayidle
+    maybe systemctl --user start sway-idle.service
 fi

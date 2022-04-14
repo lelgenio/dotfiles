@@ -2,9 +2,11 @@
 
 for g in audio video input bluetooth wheel _seatd kvm docker; do
     if
-        cat /etc/group | cut -d: -f1 | grep "^${g}\$"
+        cat /etc/group |
+        cut -d: -f1 |
+        grep "^${g}\$" > /dev/null
     then
-        sudo usermod "$USER" -aG "$g"
+        sudo usermod "$USER" -aG "$g" &
     else
         echo "warning: group $g does not exist"
     fi
