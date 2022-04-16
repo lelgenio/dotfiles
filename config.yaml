@@ -496,7 +496,6 @@ dotfiles: # Just a bunch of paths and action mappings
         dst: ~/.config/systemd/user
         actions:
         - enable_systemd_sv caffeinated.service
-        - enable_systemd_sv firefox.service
         - enable_systemd_sv gammastep.service
         - enable_systemd_sv kanshi.service
         - enable_systemd_sv mako.service
@@ -504,6 +503,8 @@ dotfiles: # Just a bunch of paths and action mappings
         - enable_systemd_sv mpDris2.service
         - enable_systemd_sv notify-mail.service
         - enable_systemd_sv pipewire.service
+        - enable_systemd_sv kdeconnectd.service
+        - enable_systemd_sv kdeconnect-indicator.service
         - enable_systemd_sv pulseaudio.service
         - enable_systemd_sv sway-idle.service
         - enable_systemd_sv syncthing.service
