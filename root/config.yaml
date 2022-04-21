@@ -69,6 +69,7 @@ profiles:
         variables:
             sys_services: /etc/sv
             sys_svdir: /etc/runit/runsvdir/default/
+            root_subvol: /@void
         include:
             - "common"
         dotfiles:
@@ -79,6 +80,8 @@ profiles:
             - runit_services_enable
 
     artixlinux:
+        variables:
+            root_subvol: /@artix
         include:
             - "common"
         dotfiles:
@@ -87,14 +90,15 @@ profiles:
             - pacman-artix
 
     archlinux:
+        variables:
+            root_subvol: /@arch
         include:
             - "common"
         dotfiles:
             - logind
             - mkinitcpio
             - pacman-arch
-
-
+            - systemd_services
 
 ###############################################################
 dotfiles:
@@ -224,6 +228,10 @@ dotfiles:
         - enable_runit_services seatd
         - enable_runit_services socklog-unix
         - enable_runit_services tlp
+
+    systemd_services:
+        src: systemd
+        dst: /etc/systemd/system/
 
     timezone:
         src:
