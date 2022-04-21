@@ -8,6 +8,7 @@ PartOf=graphical-session.target
 [Service]
 Type=simple
 ExecStart=/bin/env _kdeconnectd
+Restart=always
 
 [Install]
 WantedBy=sway-session.target

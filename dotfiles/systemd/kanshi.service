@@ -8,6 +8,7 @@ PartOf=graphical-session.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/kanshi
+Restart=always
 
 [Install]
 WantedBy=sway-session.target
