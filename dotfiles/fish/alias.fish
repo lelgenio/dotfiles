@@ -146,7 +146,7 @@ end
 # Copy files like graphical programs
 ################################################################
 
-function wl-copy-f -w wl-copy
+function wl-copy-f
     set -a file
     for arg in (seq 1 (count $argv))
         if test -f "$argv[$arg]"
