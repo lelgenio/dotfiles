@@ -112,8 +112,8 @@ dotfiles:
     #     - greetd_install
 
     logind:
-        src: elogind.conf
-        dst: /etc/logind/logind.conf
+        src: logind.conf
+        dst: /etc/systemd/logind.conf
         actions:
         - dbus_uuidgen
 
@@ -122,7 +122,7 @@ dotfiles:
         dst: /etc/iwd/main.conf
 
     elogind:
-        src: elogind.conf
+        src: logind.conf
         dst: /etc/elogind/logind.conf
         actions:
         - dbus_uuidgen
