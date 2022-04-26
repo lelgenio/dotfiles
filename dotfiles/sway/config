@@ -48,6 +48,7 @@ include assigns
     exec_always _gpg-unlock
 {%@@ elif supervisor == "systemd" @@%}
     exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+    exec_always systemctl --user restart waybar kanshi
 {%@@ else @@%}
     include daemons
 {%@@ endif @@%}
