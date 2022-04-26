@@ -34,10 +34,12 @@ end
 bind \cy 'commandline | wl-copy -n'
 
 # Enable fzf key bindings
+if not type -q fzf_key_bindings
+    and test -f /usr/share/fzf/key-bindings.fish
+    source /usr/share/fzf/key-bindings.fish
+end
 if type -q fzf_key_bindings
     fzf_key_bindings
-else if test -f /usr/share/fzf/key-bindings.fish
-    source /usr/share/fzf/key-bindings.fish
 end
 
 
