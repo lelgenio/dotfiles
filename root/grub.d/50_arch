@@ -1,0 +1,23 @@
+#!/bin/sh
+exec tail -n +3 $0
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+
+menuentry 'Arch Linux' --class arch --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-71dcad6d-3c93-473d-ad60-0cea0d6d379c' {
+	load_video
+	set gfxpayload=keep
+	insmod gzio
+	insmod part_gpt
+	insmod fat
+	set root='hd0,gpt1'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  5977-60ED
+	else
+	  search --no-floppy --fs-uuid --set=root 5977-60ED
+	fi
+	echo	'Loading Linux linux-zen ...'
+	linux	/vmlinuz-linux-zen root=UUID=71dcad6d-3c93-473d-ad60-0cea0d6d379c rw rootflags=subvol=@arch       quiet loglevel=3 rd.udev.log_level=3     rd.vconsole.keymap=colemak         cryptdevice=/dev/disk/by-label/CRYPTROOT:main         root=/dev/disk/by-label/ROOT         rootflags=rw,noatime,compress=zstd,subvol=//@arch
+	echo	'Loading initial ramdisk ...'
+	initrd	/intel-ucode.img /initramfs-linux-zen.img
+}

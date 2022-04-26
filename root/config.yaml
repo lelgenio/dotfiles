@@ -56,6 +56,7 @@ profiles:
             - bluez
             - fstab
             - grub
+            - grub_d
             - iwd
             - kernel_modules
             - locale
@@ -135,6 +136,12 @@ dotfiles:
     grub:
         src: grub
         dst: /etc/default/grub
+        actions:
+        - grub_install
+
+    grub_d:
+        src: grub.d
+        dst: /etc/grub.d
         actions:
         - grub_install
 
