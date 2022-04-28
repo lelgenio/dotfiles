@@ -9,6 +9,8 @@ PartOf=graphical-session.target
 Type=simple
 ExecStart=/usr/bin/mako
 Restart=always
+StartLimitBurst=2
+StartLimitInterval=1
 
 [Install]
 WantedBy=sway-session.target

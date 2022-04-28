@@ -7,6 +7,8 @@ PartOf=graphical-session.target
 Type=simple
 ExecStart=/usr/bin/telegram-desktop
 Restart=always
+StartLimitBurst=2
+StartLimitInterval=1
 
 [Install]
 WantedBy=sway-session.target
