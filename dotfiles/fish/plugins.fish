@@ -58,7 +58,7 @@ and source ~/.asdf/asdf.fish
 
 command -qs sccache
 or _install-sccache &> /dev/null &
-set -x RUSTC_WRAPPER sccache
+# set -x RUSTC_WRAPPER sccache
 
 command -qs rust-analyzer
 or _install-rust-analyzer &> /dev/null &
