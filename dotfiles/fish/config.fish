@@ -8,6 +8,9 @@
 set -U fish_features stderr-nocaret qmark-noglob regex-easyesc
 
 if status is-interactive
+    {%@@ if asdf @@%}
+    set asdf
+    {%@@ endif @@%}
 
     source {$__fish_config_dir}/env.fish
     source {$__fish_config_dir}/wm.fish

@@ -23,6 +23,7 @@ variables:
     bar_pos: top
     tmux: false
     starship: false
+    asdf: false
     user_svdir: $HOME/.config/runit
 
     accent_fg: '#ffffff'

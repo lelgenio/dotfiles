@@ -8,7 +8,9 @@ if not functions -q fundle
     and test "$USER" != root
     eval (curl -sfL https://git.io/fundle-install)
 end
-# fundle plugin 'FabioAntunes/fish-nvm'
+if not set -q asdf
+    fundle plugin 'FabioAntunes/fish-nvm'
+end
 fundle plugin 'edc/bass'
 fundle init
 
@@ -25,36 +27,41 @@ command -qs direnv &&
 # asdf Version manager
 ##################################################
 
-if not test -d ~/.asdf
-    and test "$USER" != root
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
-    mkdir -p ~/.config/fish/completions
-    and ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions
+if set -q asdf
+    if not test -d ~/.asdf
+        and test "$USER" != root
+        git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
+        mkdir -p ~/.config/fish/completions
+        and ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions
 
-    source ~/.asdf/asdf.fish
+        source ~/.asdf/asdf.fish
 
-    asdf plugin add nodejs
-    asdf install nodejs 12.13.1
-    asdf install nodejs latest
-    asdf global nodejs latest
+        asdf plugin add nodejs
+        asdf install nodejs 12.13.1
+        asdf install nodejs latest
+        asdf global nodejs latest
 
-    asdf plugin-add yarn
-    asdf install yarn latest
-    asdf global yarn latest
+        asdf plugin-add yarn
+        asdf install yarn latest
+        asdf global yarn latest
 
-    asdf plugin add rust
-    asdf install rust nightly
-    asdf global rust nightly
+        asdf plugin add rust
+        asdf install rust nightly
+        asdf global rust nightly
 
+    end
+
+    test -f ~/.asdf/asdf.fish
+    and source ~/.asdf/asdf.fish
 end
-
-test -f ~/.asdf/asdf.fish
-and source ~/.asdf/asdf.fish
 
 
 ##################################################
 # Rust tools
 ##################################################
+
+command -qs rustup
+or _install-rustup &> /dev/null &
 
 command -qs sccache
 or _install-sccache &> /dev/null &

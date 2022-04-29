@@ -17,11 +17,13 @@ set -x XDG_DATA_DIRS "$XDG_DATA_DIRS:$HOME/.local/share"
 
 set -x XDG_CONFIG_HOME "$HOME/.config/"
 
-set __cargo_asdf_bin ~/.asdf/installs/rust/*/bin/
-set __yarn_asdf_bin ~/.config/yarn/global/node_modules/.bin/
+if set -q asdf
+    set __cargo_asdf_bin ~/.asdf/installs/rust/*/bin/
+    set __yarn_asdf_bin ~/.config/yarn/global/node_modules/.bin/
+end
 
 for i in ~/.local/bin $__cargo_asdf_bin $__yarn_asdf_bin ~/.yarn/bin ~/.factorio/bin/*
-    test -d "$i";and fish_add_path "$i"
+    test -d "$i";and fish_add_path --global "$i"
 end
 
 # needed for tmux
