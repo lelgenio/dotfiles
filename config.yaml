@@ -311,6 +311,7 @@ actions:
 
     reload_sway: swaymsg reload & disown
     reload_mako: makoctl reload
+    reload_waybar: pkill -SIGUSR2 waybar
     reload_runit_sv:
         which sv 2> /dev/null &&
         env SVDIR="{{@@ user_svdir @@}}" sv reload "{0}" ||
@@ -413,7 +414,7 @@ dotfiles: # Just a bunch of paths and action mappings
         src: waybar
         dst: ~/.config/waybar
         actions:
-        - reload_runit_sv waybar
+        - reload_waybar
 
     kitty:
         src: kitty.conf

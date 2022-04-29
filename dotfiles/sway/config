@@ -44,11 +44,9 @@ include assigns
     set $user_svd "{{@@ user_svdir @@}}"
     exec_always pgrep -u "$USER" "^runsvdir$" || runsvdir $user_svd
     exec_always env SVDIR=$user_svd sv hup kanshi
-    exec_always env SVDIR=$user_svd sv hup waybar
     exec_always _gpg-unlock
 {%@@ elif supervisor == "systemd" @@%}
     exec "systemctl --user import-environment; systemctl --user start sway-session.target"
-    exec_always systemctl --user restart waybar kanshi
 {%@@ else @@%}
     include daemons
 {%@@ endif @@%}
