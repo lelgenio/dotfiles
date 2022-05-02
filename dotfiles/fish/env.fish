@@ -20,9 +20,12 @@ set -x XDG_CONFIG_HOME "$HOME/.config/"
 if set -q asdf
     set __cargo_asdf_bin ~/.asdf/installs/rust/*/bin/
     set __yarn_asdf_bin ~/.config/yarn/global/node_modules/.bin/
+else
+    set __cargo_bin ~/.cargo/bin/
+    set __yarn_bin ~/.yarn/bin/
 end
 
-for i in ~/.local/bin $__cargo_asdf_bin $__yarn_asdf_bin ~/.yarn/bin ~/.factorio/bin/*
+for i in ~/.local/bin $__cargo_bin $__cargo_asdf_bin $__yarn_asdf_bin ~/.yarn/bin ~/.factorio/bin/*
     test -d "$i";and fish_add_path --global "$i"
 end
 
