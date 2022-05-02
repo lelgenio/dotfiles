@@ -16,6 +16,7 @@ function calias
 
 abbr -g mpn ncmpcpp
 abbr -g dot "dotdrop install -f"
+cabbr ytd "yt-dlp --merge-output-format mp4"
 
 cabbr p emerge
 
