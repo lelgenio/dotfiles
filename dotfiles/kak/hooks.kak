@@ -39,8 +39,8 @@ hook global BufOpenFile .*/COMMIT_EDITMSG %{
 }
 
 hook global RegisterModified '"' %{ nop %sh{ {
-    printf %s "$kak_main_reg_dquote" | wl-copy -n
-    printf %s "$kak_main_reg_dquote" | xclip -i -selection clipboard
+    printf %s "$kak_reg_dquote" | wl-copy -n
+    printf %s "$kak_reg_dquote" | xclip -i -selection clipboard
 } > /dev/null 2>&1 < /dev/null & }}
 
 # Trim trailing whitespace
