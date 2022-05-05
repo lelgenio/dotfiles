@@ -55,13 +55,13 @@ plug 'kak-lsp/kak-lsp' do %{
     hook global BufCreate   .* %{try lsp-enable}
 
     define-command -override -hidden lsp-enable-decals %{
-        lsp-inlay-diagnostics-enable global
-        lsp-experimental-inlay-hints-enable global
+        try %{ lsp-inlay-diagnostics-enable global }
+        try %{ lsp-experimental-inlay-hints-enable global }
     }
 
     define-command -override -hidden lsp-disable-decals %{
-        lsp-inlay-diagnostics-disable global
-        lsp-experimental-inlay-hints-disable global
+        try %{ lsp-inlay-diagnostics-disable global }
+        try %{ lsp-experimental-inlay-hints-disable global }
     }
     lsp-enable-decals
 
