@@ -5,7 +5,7 @@ PATH={{@@ env['PATH'] @@}}
 #minute hour day month day_week cmd
 */30    *    *   *     *        forecast   json
 */5     *    *   *     *        checkmail  update
-*/5     *    *   *     *        vdirsyncer sync
+*/30    *    *   *     *        vdirsyncer sync
 0       */6  *   *     *        yes | vdirsyncer discover
 */30    *    *   *     *        savegame_backup
 */30    *    *   *     *        _gpg-unlock
