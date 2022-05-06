@@ -20,11 +20,8 @@ plug "andreyorst/plug.kak" noload config %{
 
 plug 'eraserhd/kak-ansi'
 
-plug 'alexherbo2/prelude.kak'
-plug 'alexherbo2/auto-pairs.kak' commit "fd735ec149ef0d9ca5f628a95b1e52858b5afbdc" config %{
-    require-module 'prelude'
-    require-module 'auto-pairs'
-    auto-pairs-enable
+plug 'alexherbo2/auto-pairs.kak' config %{
+    enable-auto-pairs
 }
 
 plug 'lelgenio/kakoune-mirror-colemak' config %{
@@ -38,12 +35,11 @@ plug 'lelgenio/kak-crosshairs' config %{
 }
 
 # Search and replace, for every buffer
-# plug 'occivink/kakoune-find'
 plug "natasky/kakoune-multi-file"
 
 plug "lelgenio/kakoune-colemak-neio"
 
-plug 'kak-lsp/kak-lsp' do %{
+plug 'kak-lsp/kak-lsp' tag 'v12.2.0' do %{
     cargo install --locked --force --path .
 } config %{
     map global normal <F2> ': lsp-rename-prompt<ret>'
@@ -55,13 +51,13 @@ plug 'kak-lsp/kak-lsp' do %{
     hook global BufCreate   .* %{try lsp-enable}
 
     define-command -override -hidden lsp-enable-decals %{
-        try %{ lsp-inlay-diagnostics-enable global }
-        try %{ lsp-experimental-inlay-hints-enable global }
+        lsp-inlay-diagnostics-enable global
+        lsp-inlay-hints-enable global
     }
 
     define-command -override -hidden lsp-disable-decals %{
-        try %{ lsp-inlay-diagnostics-disable global }
-        try %{ lsp-experimental-inlay-hints-disable global }
+        lsp-inlay-diagnostics-disable global
+        lsp-inlay-hints-disable global
     }
     lsp-enable-decals
 
