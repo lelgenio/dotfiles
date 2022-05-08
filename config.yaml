@@ -511,7 +511,6 @@ dotfiles: # Just a bunch of paths and action mappings
         - enable_systemd_sv telegram-desktop.service
         - enable_systemd_sv waybar.service
         - enable_systemd_sv xsettingsd.service
-        - enable_systemd_sv vdirsyncer.timer
 
     libinput-gestures:
         src: libinput-gestures.conf

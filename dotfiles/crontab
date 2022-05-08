@@ -6,6 +6,7 @@ PATH={{@@ env['PATH'] @@}}
 */30    *    *   *     *        forecast   json
 */5     *    *   *     *        checkmail  update
 */30    *    *   *     *        vdirsyncer sync
+*/30    *    *   *     *        pass git pull --rebase; pass git push
 0       */6  *   *     *        yes | vdirsyncer discover
 */30    *    *   *     *        savegame_backup
 */30    *    *   *     *        _gpg-unlock
