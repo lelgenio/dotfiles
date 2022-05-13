@@ -12,7 +12,6 @@
         "custom/weather",
     ],
     "modules-right": [
-        "custom/unpushed",
         "sway/language",
         "mpd",
         "custom/recording",
