@@ -21,6 +21,9 @@
 [merge]
     conflictStyle = diff3
 
+[rerere]
+	enabled = true
+
 [rebase]
     abbreviateCommands = true
     autoSquash = true
