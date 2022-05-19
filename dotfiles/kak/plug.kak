@@ -72,5 +72,16 @@ plug 'kak-lsp/kak-lsp' tag 'v12.2.0' do %{
             remove-hooks window semantic-tokens
         }
     }
+
+    declare-option -hidden str modeline_progress ""
+    define-command -hidden -params 6 -override lsp-handle-progress %{
+        set global modeline_progress %sh{
+            if ! "$6"; then
+                echo "$2${5:+" ($5%)"}${4:+": $4"}"
+            fi
+        }
+    }
+
+    set global modelinefmt "%%opt{modeline_progress} %opt{modelinefmt}"
 }
 
