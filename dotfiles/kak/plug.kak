@@ -39,7 +39,7 @@ plug "natasky/kakoune-multi-file"
 
 plug "lelgenio/kakoune-colemak-neio"
 
-plug 'kak-lsp/kak-lsp' tag 'v12.2.0' do %{
+plug 'kak-lsp/kak-lsp' do %{
     cargo install --locked --force --path .
 } config %{
     map global normal <F2> ': lsp-rename-prompt<ret>'
