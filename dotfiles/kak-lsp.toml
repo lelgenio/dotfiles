@@ -206,6 +206,12 @@ roots = ["project.godot", ".git/"]
 command = "nc"
 args = [ "localhost", "6008"]
 
+[language.clojure]
+filetypes = ["clojure"]
+roots = ["project.clj", ".git/"]
+command = "clojure-lsp"
+args = []
+
 
 
 
