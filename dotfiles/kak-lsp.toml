@@ -189,7 +189,8 @@ filetypes = ["rust"]
 roots = ["rust-toolchain.toml", "rust-toolchain", "Cargo.toml"]
 command = "rust-analyzer"
 [language.rust.settings.rust-analyzer]
-checkOnSave.extraArgs = ["--target-dir", "./target/check"]
+## this can use too much space and processing power
+# checkOnSave.extraArgs = ["--target-dir", "./target/check"]
 hoverActions.enable = false # kak-lsp doesn't support this at the moment
 # procMacro.enable = true
 # cargo.loadOutDirsFromCheck = true
