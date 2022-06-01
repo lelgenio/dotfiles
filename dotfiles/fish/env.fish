@@ -23,6 +23,7 @@ if set -q asdf
 else
     set __cargo_bin ~/.cargo/bin/
     set __yarn_bin ~/.yarn/bin/
+    set -x NVM_DIR ~/.local/share/nvm
 end
 
 for i in ~/.local/bin $__cargo_bin $__cargo_asdf_bin $__yarn_asdf_bin ~/.yarn/bin ~/.factorio/bin/*
