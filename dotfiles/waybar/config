@@ -24,7 +24,7 @@
         "custom/updates",
         "custom/caffeine",
         "pulseaudio",
-        "bluetooth",
+        // "bluetooth",
         "network",
         "battery"
     ],
