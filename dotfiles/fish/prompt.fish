@@ -51,7 +51,12 @@ function fish_git_prompt
     command -qs git
     or return
 
-    pushd (string replace -r '/\.git(/.*)?$' '' "$PWD")
+    set -l here (string replace -r '/\.git(/.*)?$' '' "$PWD")
+
+    test -d "$here"
+    or return
+
+    pushd "$here"
 
     ############################################################
     # Check if in a git repo and save branch and status
