@@ -1,10 +1,23 @@
 #!/bin/sh
+# Download and install rust analyzer to ~/.local/bin
 
 set -ex
 
-REPO="https://github.com/rust-analyzer/rust-analyzer"
-VERSION="2022-05-02"
-DLURL="$REPO/releases/download/$VERSION/rust-analyzer-x86_64-unknown-linux-gnu.gz"
+## Set this to get a fixed version
+# PIN_VERSION="2022-05-02"
+
+if [ -n "$PIN_VERSION" ]
+then
+    REPO="https://github.com/rust-analyzer/rust-analyzer"
+    VERSION="$PIN_VERSION"
+    DLURL="$REPO/releases/download/$VERSION/rust-analyzer-x86_64-unknown-linux-gnu.gz"
+else
+    API_URL="https://api.github.com/repos/rust-lang/rust-analyzer/releases/latest"
+    API_RESP="$(curl "$API_URL")"
+    VERSION=$(echo "$API_RESP" | jq -r '.tag_name')
+    DLURL=$(echo "$API_RESP" | jq -r '.assets[]|select(.name|match("x86_64.*gnu")).browser_download_url')
+fi
+
 GZFILE="$HOME/.cache/rust-analyzer-$VERSION-x86_64-unknown-linux-gnu.gz"
 BINDIR="$HOME/.local/bin"
 
