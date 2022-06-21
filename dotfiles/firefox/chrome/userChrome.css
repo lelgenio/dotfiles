@@ -80,3 +80,8 @@
   display: none;
 }
 /*** END Remove webRTC indicator ***/
+/*** BEGIN Remove title bar ***/
+#titlebar {
+    display: none;
+}
+/*** END Remove title bar ***/
