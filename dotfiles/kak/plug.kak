@@ -50,6 +50,13 @@ plug 'kak-lsp/kak-lsp' do %{
 
     hook global BufCreate   .* %{try lsp-enable}
 
+    define-command -override -hidden lsp-next-placeholder-bind %{
+        map global normal <tab> ': try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
+        map global insert <tab> '<a-;>: try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
+    }
+    lsp-next-placeholder-bind
+    map global insert <c-o> "<esc>: lsp-code-action-sync Fill<ret>"
+
     define-command -override -hidden lsp-enable-decals %{
         lsp-inlay-diagnostics-enable global
         lsp-inlay-hints-enable global

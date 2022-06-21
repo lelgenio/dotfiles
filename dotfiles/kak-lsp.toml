@@ -6,7 +6,7 @@
 # |_|\_\__,_|_|\_\ |_____|____/|_|
 
 
-snippet_support = false
+snippet_support = true
 verbosity = 2
 
 [server]
