@@ -45,6 +45,7 @@ actions:
     mkinitcpio: mkinitcpio -P
     restart_runit_service: sv restart "{0}"
     enable_runit_services: ln -sf "{{@@ sys_services @@}}/{0}" "{{@@ sys_svdir @@}}/{0}"
+    enable_systemd_services: systemctl enable --now "{0}"
     link_timezone: ln -sf "/usr/share/zoneinfo/{{@@ timezone @@}}" "/etc/localtime"
 
 ###############################################################
@@ -54,7 +55,7 @@ profiles:
     common:
         dotfiles:
             - bluez
-            - fstab
+            # - fstab
             - grub
             - grub_d
             - iwd
@@ -100,6 +101,7 @@ profiles:
             - mkinitcpio
             - pacman-arch
             - systemd_services
+            - systemd_services_enable
 
 ###############################################################
 dotfiles:
@@ -239,6 +241,18 @@ dotfiles:
     systemd_services:
         src: systemd
         dst: /etc/systemd/system/
+
+    systemd_services_enable:
+        src:
+        dst:
+        actions:
+        - enable_systemd_services bluetooth
+        - enable_systemd_services cronie
+        - enable_systemd_services docker
+        # - enable_systemd_services dhcpcd
+        # - enable_systemd_services iwd
+        - enable_systemd_services ntpd
+        - enable_systemd_services tlp
 
     timezone:
         src:

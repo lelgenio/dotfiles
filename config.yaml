@@ -177,7 +177,7 @@ profiles:
 ###############################################################
         variables:
             # gtk_theme:      "Mint-Y{{@@ '-Dark' if color.type == 'dark' else '' @@}}-{{@@ accent_color_name.capitalize() @@}}"
-            gtk_theme:      "Orchis-{{@@ accent_color_name.lower() @@}}-{{@@ 'dark' if color.type == 'dark' else 'light' @@}}"
+            gtk_theme:      "Orchis-{{@@ accent_color_name.capitalize() @@}}-{{@@ color.type.capitalize() @@}}"
             kvantum_theme:  "Materia{{@@ color.type.capitalize() @@}}"
             # icon_theme:     "Mint-Y-{{@@ 'Dark' if color.type == 'dark' else 'Darker' @@}}-{{@@ accent_color_name.capitalize() @@}}"
             icon_theme:     "Papirus-{{@@ color.type.capitalize() @@}}"
@@ -316,8 +316,8 @@ actions:
         which sv 2> /dev/null &&
         env SVDIR="{{@@ user_svdir @@}}" sv reload "{0}" ||
         true
-    reload_systemd_sv:
-        systemctl --user daemon-reload
+    restart_systemd_sv:
+        systemctl --user restart "${0}"
     enable_systemd_sv:
         systemctl --user enable --now "{0}" &
     groups_install: _groups_install
@@ -547,6 +547,7 @@ dotfiles: # Just a bunch of paths and action mappings
         dst: ~/
         actions:
         - qt6ct
+        - restart_systemd_sv xsettingsd
         - reload_runit_sv xsettingsd
         - apply_gsetting_gnome gtk-theme    '{{@@ gtk_theme     @@}}'
         - apply_gsetting_gnome icon-theme   '{{@@ icon_theme    @@}}'

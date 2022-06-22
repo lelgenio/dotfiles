@@ -1,7 +1,7 @@
 /* {{@@ header() @@}} */
 /* {%@@ set bg_rgb = hex2rgb(color.bg) @@%} */
 * {
-    font: {{@@ font.size.medium @@}}px "{{@@ font.interface @@}}", Font Awesome, Fira Code Nerd Font;
+    font: {{@@ font.size.medium @@}}px "{{@@ font.interface @@}}", Hack Nerd Font;
     border-radius:0;
     margin:0;
     padding: 0;
